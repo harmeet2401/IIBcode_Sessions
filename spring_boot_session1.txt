@@ -1,0 +1,512 @@
+Spring boot -------
+
+Download spring tool eclipse plugin for cntrl + space feature in application.yml files
+
+Web service app : The app or technique using which we can provide services using internet to allow app to app interaction and make the 
+				Service interoperability(platform in-dependent).
+				These service we can expose to other application to consumer the response . so a rest full api that is hosted on to a servers 
+				with Http protocol is an example of  it.
+				
+Parts of a web service (rest api )	:
+				Service Definition  : It contains the type of request and response required for the api (The format for it)
+				Request  : Will involve the sample request 
+				Response : Will involve the sample response 
+				Endpoint  : how to call the web service(api)
+
+Service provider : The web service which is exposed to the internet is the service provider.
+Service consumer : is the one which hitting that web service to get the response back 
+Transport : Is the medium using which the data (request and response) will be sent examepl : MQ , Kfka , HTTPs , HTTP.
+Message exchange format : The format of the request and response which is exchanged between consumer and provider.
+
+SOAP :---------- Its simple object access protocol
+
+Its a protocol that allow app to communicate using a defined message structure .
+		
+		--------------------------------
+		
+				SOAP ENVELOP
+				
+				-----------
+				 SOAP HEDER
+				-----------
+				
+				-----------
+				 SOAP BODY 		
+
+			
+			
+				 SOAP BODY 		
+				-----------
+				
+				
+				
+				SOAP ENVELOP
+		-------------------------------
+		
+
+Soap defines does not impose any restriction on the transport , we can use either http and mq 
+
+A WSDL is create web service definition language that  contains :
+
+	The End point 
+	the operation (delete employee , get employee , update employee data )
+	The request structure 
+	The response structure.
+
+Soap only involve XML as the message format to exchange request and response .
+
+	
+REST : --------- REpresentational State transfer. is developed to make best use of the HTTP protocol .
+
+The HTTP protocol is used to transfer HTML data from consumer to service provider .
+
+rest contains 
+	Message format  : The format of the message to exchange in between is Json , XML or any other format  
+	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP.)
+	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
+	
+Start.sring.io  : to initialize your restfull service by selecting the package and dependencies you need for building an api.	
+The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools 
+
+There are multiple methods for the rest api to send/retrive/update the data .
+
+get , put , post , delete : These methods will help in doing that 
+
+Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
+We need two things 
+
+DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
+	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request 
+	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get',Path="/hellow-world")
+	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
+	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
+	@PostMapping -- > We can also use this annotation  . no need to mention method as POST . @POstMapping(path="/hellow-world")
+	
+	testing uri : http://localhost:8080/hello
+Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
+Create a controller using start.spring.io to set up the projects for spring boot.
+in order to create spring controller mentions @RestController to the class other than the @SpringBootApplication class.
+
+Inside the controller class mention or define a @RequestMapper method that will take the incoming request on a HTTP get / post/  , put etc and return the message hello world.
+
+Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
+
+
+Lab 2 ----------------- Create a hello world rest api service to respond as a bean back to the user.
+How to return a BEan(A bean is a class with separate attributes(variables)) in which the constructor will require a string parameter and display it as 
+JSON (which will be done by spring mvc in the back end)
+
+Spring-boot-Auto-configuration : helps in configuring the dispatcher server and also initialize the Jackson bean that converts the Bean to Json while sending a response back.
+
+We can start the debug the level logs for spring boot started console .
+
+logging.level.org.springframework = debug
+
+
+Dispatcher servelet is the front end controller for spring mvc frame work who knows which controller to call after looking at the uri . when we hit the uri , the dispatcher servelet will take the uri call the controller run the method get the bean , call the jackson parser convert it to json and send the json response back to the browser or consumer.
+
+Complete uri : http://localhost:8080/hello
+in above uri : / is mapped to dispatcher servelet and then it looks at the uri hello and send the control to the controller method which it knows.
+Lab 2 ----------------- Create a hello world rest api service to respond as a bean back to the user.
+
+
+
+
+Lab 2 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
+for this lab we created an another GetMapping function in which we map the path to this path=/hellow-world/path-varable/{name}
+Now in above path the name variable will contains the value when we will hit the url 
+
+Example : http//:localhost:8080/hellow-world/path-varable/Harmeet 
+
+Then the GetMapping function named x() will receive the 'Harmeet' value in variable name and that can be used anywhere inside the proggram.
+Lab 2 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
+
+
+Lab 3 ----------------- Now create a service that will respond on three operations to get all users , to get specific user and to save user.
+For that we need a new Bean User 
+							
+							--- >id
+							--- >name
+							--- >date
+					Three methods to implement the operations in a service (Spring component)
+								findAllUsers() 
+								findUser(int id)
+								saveUsre(User)
+								Delete all users : need to clear the list created
+								Delete the specific user , get the id for which the user wants to be deleted. Use Iterator 
+										(what is an iterator?):	An Iterator is an object that can be used to loop through collections, like ArrayList and HashSet
+								
+Note : In order to Autowired the class object in to another class the class should either be annotated as a component or a service 								
+
+
+When you hit the post request : we will get below error
+
+{
+    "timestamp": "2021-04-18T18:03:47.649+00:00",
+    "status": 500,
+    "error": "Internal Server Error",
+    "trace": "org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class myproject.minlearning.startertestclass.users.Users]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:386)\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:342)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:186)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:158)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:131)\r\n\tat org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)\r\n\tat org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:170)\r\n\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)\r\n\tat org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)\r\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)\r\n\tat org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:652)\r\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:733)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)\r\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)\r\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)\r\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)\r\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\r\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)\r\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)\r\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)\r\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\r\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)\r\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)\r\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\r\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\r\n\tat java.base/java.lang.Thread.run(Thread.java:834)\r\nCaused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]\r\n\tat com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67)\r\n\tat com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1615)\r\n\tat com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400)\r\n\tat com.fasterxml.jackson.databind.DeserializationContext.handleMissingInstantiator(DeserializationContext.java:1077)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializerBase.deserializeFromObjectUsingNonDefault(BeanDeserializerBase.java:1332)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:331)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:164)\r\n\tat com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4526)\r\n\tat com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3521)\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:378)\r\n\t... 51 more\r\n",
+    "message": "Type definition error: [simple type, class myproject.minlearning.startertestclass.users.Users]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]",
+    "path": "/users"
+}
+
+This is because in current version of jackson we need a default constructor in the bean we are using .
+
+So add a protected default no arg constructor
+								
+I have also added the method to delete the user from the list using PUT methods in the controller.		
+
+For best HTTP REST api service : While creating an object you can send the Build uri back to the user in header .
+This can be achieved by using ServeletUriComponentbuilder class that helps in creating the uri which we can pass to the user in header 				
+
+URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(users.getId()).toUri();
+        ResponseEntity.created(location);
+		
+http status code : 201 : the object created
+					200 : get ok 
+					404 : not found 
+					
+Now if we need to handle the not found exceptions we can throw the runtimeexception under a certain conditions	
+
+Post that RUntimeexception we start getting exception 500 internal server error 
+
+We can make it more readable htppstatus by adding @ResponseStatus(HttpStatus.NOT_FOUND) to the UserNOtFoundException class.
+We can modify the http status code accordingly.
+
+*******NOTE : WHENEVER YOU WANT TO CUSTOMIZE ANY RESPONSE FROM REST API , CREATE A BEAN AND USE THAT BEAN AND THE ATTRIBUTES DEFINED IN IT AS A STRUCTURE FOR YOUR API RESPONSE.				
+
+But for the generic exception response to be sent to the user we need to use ResponseEntityExcpetionHandler class to be extend this class provide various functions to override so 
+that we can send an instance of our bean to the user when ever an exception comes around any controller
+
+For that we need to make that class A extend ResponseEntityExcpetionHandler to be a Restcontroller and with annotation @ControllerAdvicer (which is used to share the feature 
+across all the controller ).
+
+	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES  FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class
+	----------------------------------------------------------------
+    THATS COOL , I MEAN YOU JUST HAVE TO DEFINE THE @RestController AND @controllerAdviser to share the feature to all controllers .
+				You need to handle the exceptions whether it is generic or it is specific .
+				using @ExceptionHandler annotation on a function we can handle any kind of exceptions, whenever you throw an exception from anywhere  of the controllers , 
+				This handler will send a response in a generic structure defined in our bean.
+Lab 3 ----------------- Now create a service that will respond on three operations to get all users , to get specific user and to save user.
+
+
+Lab 4 ----------------- now for above created Rest api we are to perform validation 
+
+If you are making use of Spring Boot Release (> 2.3.0) make sure to add the following dependency to your pom.xml (We are going to implement validations in next step):
+
+<dependency>    
+    <groupId>org.springframework.boot</groupId>    
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+
+For the validation to work on the attributes of the bean , we need to use :
+		@valid along with the @RequestBody 
+		In bean class for each attibutes for which we need the validation to happen . use validation annotation like , @Size (which says the min or max lenght of the string )
+			or @Past to constraints the date to be in past 
+		
+			Now when you hit the api it will validate and send you bad request , but the respose body will be empty :(
+			So to bring something readable for user to read we need to add one more function in customexceptionresponseentityclass which is the override function of
+			ResponseEntityExcpetionHandler class named : handlemethodArgumentnotvalid
+
+
+*********CREATING A CUSTOMIZEEXCEPTIONHANLDER CLASS IS MUST , DON'T FORGET TO ADD THIS CLASS . EXTENDS ResponseEntityExcpetionHandler CLASS.			
+Lab 4 ----------------- now for above created Rest api we are to perform validation 
+
+
+HATEOAS : --------------------------------------------------------
+
+HATEOAS : Hyper media at the engine of application state . this is the feature using which we can provide more information aprt from the data we are returning bck to the consumer .
+For example: whenever we search for a repo in git , we got whole lot of other informations also , like number of stars , other links also .
+
+Soooooooooooooo in order to add more info or more links to your response you can use HATEOAS .
+
+Add a starter dependencies :
+
+<dependency>    
+    <groupId>org.springframework.boot</groupId>    
+    <artifactId>spring-boot-starter-hateoas</artifactId>
+</dependency>
+
+import static org.
+This spring feature treat other infor to be sent back as a response as Resource , so we need to use Resource java class for that . and return along with it 
+example : EntityModel<bean class >   resource = new EntityModel<user>();
+
+NOTE : WE ARE RETURNING DATA AS  WELL AS THE LINKS , BOTH ARE PART OF THE RESOURCE FIRST WE CREATED THE DATA RESOURCE USING ENTITY AND THEN LINK THE OTHER INFO TO IT.
+
+HATEOAS : --------------------------------------------------------
+
+
+INTERNATIONALIAION : ---------------------------------------
+This is the feature in which suppose you are getting data request or get request from different country or locale .
+So language is a barrier , in order to response with different data as per the locale we internationalize the response using property files.
+
+@Bean
+	LocaleResolver localeResolver(){
+		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.US);
+		return localeResolver;
+	}
+	in the getter method of the controller we have to pass the locale paramter in header .
+	
+In order to pick the properties value and send that as a resource back we will use 
+The Locale value the consumer will send that in the message header and we can get that using @RequestHeader Locale local.
+
+
+----------Simplify the internationalization -----------
+In order to add @RequestHeader Locale locale as a parameter for multiple get methods it would be a pain 
+ To remove that take the locale object from localeContext and change the SessionLocaleResolver to AcceptHeaderLocaleResolver
+ And we can also add the setBasename in application.properties.  spring.message.basename=messages
+
+INTERNATIONALIAION : ---------------------------------------
+
+
+Lab 5 --------------------As we know jackson is doing the conversion from object to json sofar , So in-order to receive the response in XML we can add jackson other dependencies for XMl data format ---------------
+
+Need to add jackson-dataformat-xml dependencies
+
+			<dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+            </dependency>
+and send the header explicitly as application\xml to receive the response in xml format 
+
+json : 
+[
+    {
+        "id": 1,
+        "name": "Harmeet",
+        "birthdate": "2021-04-26T11:37:01.480+00:00"
+    },
+    {
+        "id": 2,
+        "name": "Simran",
+        "birthdate": "2021-04-26T11:37:01.480+00:00"
+    },
+    {
+        "id": 3,
+        "name": "Harpreet",
+        "birthdate": "2021-04-26T11:37:01.480+00:00"
+    }
+]
+
+
+xml : 
+<List>
+    <item>
+        <id>1</id>
+        <name>Harmeet</name>
+        <birthdate>2021-04-26T11:37:01.480+00:00</birthdate>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Simran</name>
+        <birthdate>2021-04-26T11:37:01.480+00:00</birthdate>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Harpreet</name>
+        <birthdate>2021-04-26T11:37:01.480+00:00</birthdate>
+    </item>
+</List>
+
+Jackson do all the magic to it  this is called CONTENT NAGOTIATION 
+
+
+
+Lab 5 --------------------As we know jackson is doing the conversion from object to json sofar , So inorder to receive the response in XML we can add jackson other dependencies for XMl data format ---------------
+
+
+
+Lab 6 ---------------Auto swagger generation ---------------
+For rest full service we have swagger and for soap service we have WSDL .
+
+
+Step 1 : 
+
+Add below dependency instead of above two :
+
+<dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-boot-starter</artifactId>
+	<version>3.0.0</version>
+</dependency> 	
+	
+	
+Step 2 :	
+Now configure swagger : 
+	Create a configuration class SwaggerClass2.java use @Configuration  , @EnableSwagger2
+	Create a @Bean name Docker , which is part of the springfox documentation 
+
+
+Step 3 : 
+You will see below urls :
+
+		\v2\api-docs : - to get the entire swagger json 
+		NEW URL for SWAGGER UI - http://localhost:8080/swagger-ui/ or http://localhost:8080/swagger-ui/index.html
+
+A swagger contains  :
+			Swagger version : version 2.0 , 3.0
+			info : The info about the api , and the license
+			path  : the paths contains the various get-mapping  , put-mapping and post-mapping functions we have created .
+			tags 
+			definition : will contains the bean definition used .
+			host : the server host where it will be run..
+			base-path : the base path for the url
+
+Step 4 : To improve some things in swagger documentation like , validations we applied on some fields and Api info description and the consumption format and production format
+	For that we can make some changes in swagger config class we created .
+	
+	We can use class ApiInfo.java by importing it . This class will give the objects to be copied for the modification 
+	@ApiModel(Description = "") : to give description about the Api model we have like User.java class on class level we can annotate it.
+	@ApiModelProperty(Notes = "") : 	We can also use that on an attribute level .
+
+The docket function bean we have created we can use to modify different property of the swagger documents (NOTE : LOOK AT THE SWAGGER CREATED).
+ example :  return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(DOCKET_API_INFO).produces(produces)
+                .consumes(consumes);
+
+
+Lab 6 ---------------Auto swagger generation ---------------
+
+
+
+Lab 7 : ----------- Spring boot actuator -----------
+
+Please add the below dependency instead of spring-data-rest-hal-browser
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-hal-explorer</artifactId>     ---------------- this will launch a browser at localhost:8080 to hit the api using paths .
+		</dependency>
+		
+		The actuator works around hal : HyperText Application language  : 
+		
+Why we use Actuator   ?   Now as we know we have documented our application  , now i need some monitoring feature for my api to show it is up and running or to see the metrics , for that spring boot have provided actuator for it.		
+
+Url to launch Actuator : localhost:8080/applications
+							localhost:8080/actuator
+{
+	"_links": {
+		"self": {
+			"href": "http://localhost:8080/actuator",
+			"templated": false
+		},
+		"health": {
+			"href": "http://localhost:8080/actuator/health",
+			"templated": false
+		},
+		"health-path": {
+			"href": "http://localhost:8080/actuator/health/{*path}",
+			"templated": true
+		},
+		"info": {
+			"href": "http://localhost:8080/actuator/info",
+			"templated": false
+		}
+	}
+}
+
+
+
+Lab 7 : ----------- Spring boot actuator -----------
+
+
+
+Lab 8 : ----------- Spring boot filtering , in which we can filter out the fields we dont need from a bean ---
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+ 
+ Jackson provide two annotations for JsonIgnore on a field level that will help in removing the fields don't want to be in the response.
+ 
+ or 
+ JsonIgnoreProperties on class level and mention the fields to be removed .
+
+
+
+
+Lab 8 : ----------- Spring boot filtering , in which we can filter out the fields we dont need from a bean ---
+
+Lab 9 : ----------- Version rest api
+
+Example for versioning : The customer may ask to send the name as a single string and also to send name as two string as first name and last name .
+for that we can keep two @GetMapping mapped with two different urls and share those urls with customer to hit.
+
+There are four methods to implement versioning for your API :
+
+URI versioning : in which we can create two uri's for external user , but this will pollute the uri space .
+Param versioning : in which we can send the query parameters in uri , this will also pollute the uri space 
+header versioning : in which we can send different header values to be picked up for different version response , header are never meant for versioning.
+MIME versioning : in this by sending the Accept header value as different version we can send differnt response .
+Lab 9 : ----------- Version rest api
+
+
+Lab 10 : ----------- Authentication implement
+
+add below dependency : 
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		
+This will allow spring to add basic authentication to your rest api .
+fire up your api in logs you will get the password in alpha numeric value and default username will be : user
+
+this will add authentication for all controllers
+
+username : user 
+Using generated security password: 0812eff5-00c0-4390-8271-35c6f688512e
+
+Everytim you spun up the rest api it will create a new password to stop that 
+we can mention below two properties in application.yml file.
+spring.security.user.name=username
+spring.security.user.password=Gogi!1234
+
+Lab 10 : ----------- Authentication implement
+		
+Lab 11 :------------  JPA (java persistent api) for sql		
+JPA  is nothing but the in memory data base ,
+we can use @Entity for the bean we created to convert that bean into an entity in which the attibutes will be converted to each column and bean will be a table 
+1) H2 database name is randomly generated each time you restart the server. You can find the database name and URL from the console log.
+
+
+Step 1 : add below 
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+
+
+Step 2 : add below in app.yml
+2) To use data.sql, you need to add this to 
+spring.jpa.show-jpa=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.data.jpa.repositories.bootstrap-mode=default
+spring.jpa.defer-datasource-initialization=true
+
+http://localhost:8080//h2-console
+
+Step 3 : create an sql file and run three insert queries to insert data to h2 in memory db
+
+
+Step 4 : 
+	a. Create a different user(bean) controller
+	b. create a repository as an interface extending JPArepository<Users(bean) , Integer> , this repository is just like a daoservice that we used to get the value from Bean data.
+		Now this repository will get the data from in memory db (h2)
+
+Lab 11 :------------  JPA (java persistent api) for sql		
+
+
+
+
+
+
+

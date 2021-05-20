@@ -1,0 +1,13 @@
+IBM cloud -----------------------------
+install -- IBM cli
+INstall -- curl 
+Install docker 
+install IBM kuberneter cluster plugin  -- command to prefix (ibmcloud cs)
+instal IBM cloud registry to hold your personel image --- command prefix (ibmcloud cr)
+
+ibmcloud plugin list -------- list the plugins 
+kubectl -------- tool which allow to run command to kubernetes cluster 
+We can use kubectl to deploy applications, inspect and manage cluster resources, and view logs
+
+https://kubernetes.io/docs/tasks/tools/install-kubectl/#before-you-begin - to install kubeCTL
+kubectl cluster-info dump ---------- to get kubernetes cluster logs 

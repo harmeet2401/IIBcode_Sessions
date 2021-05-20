@@ -1,0 +1,362 @@
+Dockers ---------------
+
+Containers : --  running process in isolation under shared kernel using linux namespaces. Example of namespace is PID which allow each process to run in isolation on a host machine 
+
+linux namespaces :
+MNT : mount and unmounted dir 
+NET : containers have there own network stack 
+IPC : Messge queues
+User : isolated user view
+UTC : set host-name and domain name per container
+PID
+
+docker images : TAR file containing   + filesystem + metadata
+
+push images --- > docker registry (docker hub) 
+
+problem for containers : tooling for containers are lacking.
+Docker help in tooling containers that can be used by everyone.
+Many physical hardware
+then single machine multiple VMS
+Then single hardware single VM but multiple containers.
+Containers on windows machine sticks to windows container os
+Focus on linux which will have multiple containers of linux os using same Kernal of base linux machine .
+-----------------------------
+Docker image : Containers means we will 
+contains all resources and application to run and give 
+that image (packaged) to other guys.
+
+We need docker ENV to run this image.
+That image we need to run and walllaa we are up .
+The os level things will not be there.
+
+Lightweight 
+better resource utilization
+ecosystem and tooling
+-------------------------------
+Docker - C(community open source) and Docker - E(Enterprise purchases)
+
+Docker hub (registry) ---> docker engine ---> image ---> running images on docker env we get containers
+Docker container is a light weight softwares.
+DOcker file is used to automate the creation of docker image.
+Image name : username/imagename
+Base image : created from scratch(centos , ubuntu) 
+Child image : on top of base image we install new software.
+
+official image : owned by org
+user image : that we create.
+
+
+Link to install docker engine : https://docs.docker.com/install/linux/docker-ce/ubuntu/
+command :
+1. sudo service docker status
+2. sudo service docker stop
+3. sudo service docker start
+4. sudo service docker restart
+5. sudo docker info 
+
+To avoid sudo : - 
+add current user ubuntu to docker group 
+we will have same permission
+6. sudo usermod -aG docker ubuntu  :  docker is the group 
+then reload the shell (disconnect the session and connect again)
+press Q to get out the command
+7. Need to download image to create container.
+ command : docker pull ubuntu (ubuntu is image name. without version name it will download the latest one)
+		   docker pull ubuntu:16.04	
+8. command : docker images 	-- will show you all images 
+9. run an image (creating a container)
+ command : docker run hello-world (if image is not on docker local repo then it will download)	 run command will create a container  
+  OUTPUT :
+ 
+*************** 
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+***************
+docker run ubuntu
+docker run centos
+docker ps : show running containers
+docker ps -a : to get all containers
+docker run -it centos : start and connect to containers  -it means interactive mode 
+we will go inside container 
+do ls
+yum update
+cat /etc/system-release
+uname -a : to see the kernel container is using from the host OS
+exit : it will stop the container
+now we are on base machine 
+now to keep container running after exit use below command
+ docker run -itd ubuntu : (-itd : interactive mode in back ground. it means we are interacting with container without going inside it and stay on base machine)
+ docker cp : to copy a file 
+ docker exec -it 733ead002bf2 ls (id  we can get from docker ps)
+ docker exec -it 733ead002bf2 bash
+ uname -a ( to see kernel)
+ apt install apache2 
+ service apache2 start
+8. we want to save and snap of the container
+9. stop the container  :
+   docker stop containerID
+10. docker start containerID
+11. docker kill containerID (forcefully stop the container)	
+12. docker stop will stop the container but still uses the space and can be restarted.
+13. docker rm containerID (will remove the container and data completely)
+14. docker run it ubuntu
+15. docker container prune : to remove the stop container
+16. docker rmi imageid
+
+------------Docker file 
+creat a folder 
+create a html file
+create a Dockerfile : 
+FROM ubuntu
+RUN apt-get update
+RUN apt-get -y install apache2
+ADD .  /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Devops Intellipaat
+
+run command : 	
+docker build -t harmeet2401/mytestimage .
+docker run -itd -p 80:80 harmeet2401/mytestimage (-p is to expose )
+One image can be used to create as many container as we can 
+------------------------------------------------------------
+Docker storage:
+docker volume 
+Before docker saves the data at docker layer ,
+but if we use volume we get data saved n local.
+
+Means 
+volume name (pendrive)   path(laptop)	 
+my-vol 					 /opt/vol
+
+docker run -itd --mount source=my-vol,destination=/opt/test ubuntu
+docker run -it -v /home/ubuntu/myrepo:/var/dir ubuntu
+docker volume rm my-vol (delete a volume)
+
+DOcker compose : it is used to run or connect multiple containers using YAML file (intendation sensitive)
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version 
+
+yaml file :
+
+version: '3'
+services:
+  sample1:
+    image: httpd
+    ports:
+     - "80:80"
+  sample2:
+    image: nginx
+    ports:
+     - "81:80"
+------------------
+port "80:81"  (hostmachine:containerport)
+for tomcat the default port is 80 
+
+docker-compose up : (will search for docker-compose.yml) annd run it
+docker-compose up -d (background mode)
+docker-compose ps
+docker-compose stop
+docker-compose rm
+
+docker-compoase :
+version: '3.3'
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "80:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+    db_data:
+	--------------
+	docker-compose down : will stop and remove the compose
+	
+	docker swarm : 
+	Swarm is a group or cluster 
+	We will have one master and as many workers
+	
+	docker swarm init --advertise-addr=13.232.136.156
+	docker node ls
+	docker service create --name web --replicas 10 -p 80:80  nginx
+	docker service ps web
+	docker service scale web=15 (service name web) 2 containers will be deleted
+	
+	Docker network:
+	docker network ls
+	docker network create -d overlay my-overlay-1
+	docker service create --name website --replicas 3 --network my-overlay --publish 80:80 hshar/webapp
+	docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
+
+----------------------------------------------------------Practice-------------------------------------------------------- MESOS , DOCKER , RKT
+sudo service docker status ----------------------------------------------------- after installation  will tell the running docker engine service status 
+sudo service docker stop
+sudo service docker start
+sudo service docker restart
+docker info -------------------------------------------------------------------- will give permission denied . the ubuntu user is not in docker group
+sudo docker info --------------------------------------------------------------- will give docker installation info
+sudo usermod -aG docker ubuntu  ------------------------------------------------ Add ubuntu user id in docker group and reconnect linux 
+docker images ------------------------------------------------------------------ to see the images
+docker pull ubuntu ------------------------------------------------------------- will pull image ubuntu latest version(official image) .
+docker run --name myubuntu ubuntu----------------------------------------------- you can specify the name of the container
+docker pull ubuntu:16.04 ------------------------------------------------------- will pull ubuntu 16.04 version where 16.04 is a tag
+docker run hello-world --------------------------------------------------------- helloworld is an image and command will create a container on docker engine
+docker client told ---- docker daemon ---- downloaded image hello-world ---- creates a container --- docker daemon sends the output of running container to ------ docker client (shows message)
+docker run ubuntu -------------------------------------------------------------- ran the container and creats the container and existed by not showing  the container(empty container os / only bash program).
+docker ps ---------------------------------------------------------------------- will show you the list of running container
+docker ps -a ------------------------------------------------------------------- will show all container (stopped , running).
+docker run -it centos ---------------------------------------------------------- you will go into container in interactive mode(start and make connection).
+cat /etc/system-release -------------------------------------------------------- will open a file system-release shows the os (output : CentOS Linux release 7.6.1810 (Core))
+uname -a ----------------------------------------------------------------------- to see the kernel (centos container uses : Linux 7003536d015c 4.15.0-1044-aws #46-Ubuntu SMP Thu Jul 4 13:38:28 UTC 2019 x86_64 x86_64 x86_64).
+exit --------------------------------------------------------------------------- after -it if you exit the container stops
+docker run -itd centos---------------------------------------------------------- will send the running container to background and your cursor will on the base VM.
+docker exec -it container-id ls ------------------------------------------------ exec and -it will create an interactive tunnel to run shell command on container
+docker exec -it container-id bash----------------------------------------------- it will lead you to inside the container (container-id you will get after running image docker ps(will give container-Id) )
+apt install apache2 ------------------------------------------------------------ once you go inside of container using exec bash install apache2
+service apache2 status---------------------------------------------------------- get the status
+service apache2 start----------------------------------------------------------- start the apache service
+docker commit container-id New-Name -------------------------------------------- will create a new image out of running container. Not ideal way to create image . USE DOCKER FILE
+docker stop container-id-------------------------------------------------------- Its stop state but is not removed.
+docker start container-id------------------------------------------------------- It will start the same container which is in stop state
+docker run -it New-Nameimage---------------------------------------------------- it will create a container with apace2 installed already 
+docker rm container-id---------------------------------------------------------- it will remove the container but first stop it using docker ps -- > then docker stop container-id
+docker rm -f  $(docker ps -a -q)------------------------------------------------ it will remove all running docker 
+docker container prune---------------------------------------------------------- will remove all container in stopped state
+docker rmi image-id ------------------------------------------------------------ will remove the image with that image id.
+docker login ------------------------------------------------------------------- login to docker hub (user defined images always starts with username/imagename . docker push image-id will not work)
+docker tag imagename dockerhub-username/imagename ------------------------------ rename the image to preferred one
+docker push dockerhub-username/imagename---------------------------------------- push the image to docker hub
+docker pull reponame/imagename
+docker file:-------------------------------------------------------------------- all steps we did , we can write line by line in docker file and just run the yaml file(best way to create image)
+FROM ubuntu---------- -----------------------------------------------------------means we need base image
+RUN apt-get update
+RUN apt-get install apache2 ----------------------------------------------------- to run command on base image on which we will be installing apache2
+ADD . /var/www/Html ------------------------------------------------------------- to add a file. there is a dot(.) which shows current folder files will be add to html
+ENTRYPOINT apachectl -D FOREGROUND  or CMD apachectl -D FOREGROUND--------------- Run command on container initialize or  Run command on container starts
+ENV DEVOPS INTELLIPAAT----------------------------------------------------------- Create ENV variable
+copy / export ------------------------------------------------------------------- check what is it
+docker build -t harmeet2401/myimagefromdockerfile .  ---------------------------- command to run docker file to create image
+docker push harmeet2401/myimagefromdockerfile
+docker run -itd -p 80:80 harmeet2401/myimagefromdockerfile  --------------------- 80:80(host machine-port : container-port)
+docker create volume demo-vol---------------------------------------------------- create a volume (pendrive).
+docker volume ls ---------------------------------------------------------------- to check the number of pendrives(volumes)
+docker run -it --mount source=demo-vol,destination=/app/myspace/ -d unbuntu------ to attach the volume (pendrive) to you container . this command will creates a volume and attached to a folder /app/myspace/ inside new container
+docker exec -it container-id bash ----------------------------------------------- go inside new container to run commands do [ls] you will found /app/yspace folder create and file and share it with other container
+docker run -it --mount source=demo-vol,destination=/demo/ -d unbuntu------------- launch a new container mounted same volume(pendrive) attached to /demo/ folder 
+docker exec -it container-id bash -----------------------------------------------go inside of the container and do [ls] you will find demo folder containing same file present in old container folder /app/myspace/ 
+docker run -it -v /home/ubuntu/mount/:/app/ -d ubuntu --------------------------- this will mount the folder on you host machine [BIND MOUNT] be specific of your folder
+docker run -it -v /home/ubuntu/mount/:/myspace/ -d ubuntu ----------------------- this is another container (above and this conatiner will get the file present in /home/ubuntu/mount)[BIND MOUNT] be specfic of your folderdo
+docker volume rm demo-vol-------------------------------------------------------- to remove the volume
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose----------- to install docker compose (used to deploy application with multiple container(microservices))
+sudo chmod +x /usr/local/bin/docker-compose ------------------------------------- to make its access to execute 
+docker-compose version ---------------------------------------------------------- to get the version of docker compose (LEARN ABOUT YAML FILES WHICH CONSISTS OF (MAP AND LISTS))
+docker-compose.yml :
+version: '3'
+services:
+  sample1:
+    image: 'centos'
+  sample2:
+    image: 'ubuntu'
+  sample2:
+    image:  httpd
+    ports:
+      - "80:80"
+docker-compose up -d ------------------------------------------------------------- will download images run multiple containers	  
+docker-compose down  ------------------------------------------------------------- it will shutdown the service 
+docker run -it --name container1 -d ubuntu --------------------------------------- set the name of the container for linking the containers
+docker run -it --name container2 --link container1 -d ubuntu---------------------- linked with container1 on network
+docker exec -it container2-id bash ----------------------------------------------- do cat etc/hosts/ , you will find new entry of container1's IP
+root ==   apt-get update 
+		  apt-get install iputils-ping-------------------------------------------- install ping on container 2 for pinging container1 after linkage
+		  ping container1 -------------------------------------------------------- will send you reposne
+docker run -it --name container3 --link container2 -d ubuntu --------------------- linking 3rd to 2nd
+
+docker swarm init --advertise-addr=13.233.111.89 --------------------------------- launches a docker swarm master (if your node already part of swarm : docker swarm leave --force).
+docker swarm join --token SWMTKN-1-5tyc8iih06c97qflvt0x7pozvuda755ft514gykil7v3p00ctr-1bn8yczjl8n1zmyqfdq3oxmwc 13.233.111.89:2377 ----------------- go to any node , install docker and run this command . take an image of your AWS instance(docker swarm leave --force) to leave a swarm
+sudo apt-get install docker.io---------------------------------------------------- launch a new instance and install docker on slave instance
+docker node ls ------------------------------------------------------------------- will list the nodes with star or something run this on manager
+docker service create --name nam-of-service --replicas nummber-of-replicas 	-p (for port)  image-name ---------------------------------- creates a service
+docker service create --name nginx --replicas 3 -p 80:80 nginx
+docker service ls ----------------------------------------------------------------- list the service
+docker ps  ------------------------------------------------------------------------ on master you will see 1 or 2 containers of nginx
+docker ps ------------------------------------------------------------------------- on slave you will see one container of nginx
+docker stop container-id	------------------------------------------------------- on master , it will create a new container auto in other slave. thats what swram is
+docker network -------------------------------------------------------------------- now above swarm kept containers on different computers.. then we use docker network
+docker nework create -d overlay my-overlay----------------------------------------- create a netwrokd
+docker service create --name website --replicas 3 --network my-overlay --publish 80:80 hshar/webapp------------------- publishing network
+docker service rm service id  ----------------------------------------------------- docker service  ls to get the id 
+docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
+mysql -u root -p intelli
+
+---------------IBM-Docker-training----------------------------------------------
+docker run -t ubuntu top ------------------ to cerate a container and top command shows the conatiner PID on host machine
+docker container ls ----------------------- will allow to see the running containers (docker ps will also give tht)
+docker exec -it container-id bash --------- to go inside of the running containrs using container namespace
+ps -ef  ----------------------------------- will show only the top processes
+docker container run --detach --publish 8080:80 --name nginx nginx -------------- pull nginx and run and expose container port 80 to port 80 of host (hostmcahinepost : cintainerport)
+--detach -------------- runs the container in background
+--publish --------------- publish port
+docker container inspect nginx ------------------- will open the entire container details in JSON
+docker container run --detach --publish 8088:27017 --name mongo mongo:3.4 ---  to run a mongo db container on host machine
+docker cotainer ls - docker ps 
+docker system prune---------------------------------------------------------- to rm all sop containers
+docker image build -t python-hello-world . ---------------------------------- to run the docker file and -t will rename the image to python-hello-world.
+
+for creating an image holding a python app.
+
+We require to python ----------- so FROM python base image 
+We need to install flask ------- to run python program involing flask activity
+CMD command --------------------- to run the python program for flask 
+copy command 
+
+now above lines in dockerfile will be created in a image(TAR file) which we can push to docker hub and some one can pull and just run it to create a container for the python application
+docker run -p 5001:5000 -d python-hello-world ----------- to create the container .
+docker image build -------------------------------------- as part of the CI/CD pipeline
+docker diff
+docker image history imagename - ----------------------- willl show all history acivities
+docker container stop containerid ------------------------ stop the container 
+docker system prune ---------------------------------------- will remove all stopped containers
+sudo apt install python3-pip
+pip3 install Flask
+sudo apt install python-pip
+pip install Flask
+docker swarm is the inbuilt tool for docker orchestration no need to install again 
+docker swarm init --advertise-addr=192.168.0.53
+docker swarm join --token SWMTKN-1-4c7cmrxkc7oo947qeil41avx4oqg4xyz49tjh6z2dtog7fyphh-2ux5uz7jlxqznf4h3q9gm5ez5 13.232.130.173:2377   (open inbound port 2377 in master node) add ubuntu user in docker group using usermod command
+now swarm is created . We need to create a service which is an abstraction of multiple containers of same image deploy i ndistributed manner on different nodes
+docker service create --name nginx --replicas 20 -p 80:80 nginx
+docker service ps nginx 
+docker service logs nginx
+Now three replicas (three containers created) one on each node.
+Now we will scale it up 
+docker service update --replicas=20 --detach=true nginx -------------- this command will  add 5 more containers
+docker service update --image nginx:1.13 --detach=true nginx ------------- update the version of service
+now if any of the node goes down the swarm automatically detect the downtime and raise new container in other nodes in swarm.
+docker swarm leave-------------------------- command to leave the swarm
+if the node who left before rejoins , it doesn't get the container reallocated.

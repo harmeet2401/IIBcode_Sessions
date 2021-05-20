@@ -1,0 +1,1100 @@
+IIB Training session : ---------------- Go OON harmeet you can do it good in this 
+
+
+------NOTE  : THE VALUE THAT IIB READS IS BY DEFAULT STRING EVEN IF YOU ARE GIVING INTEGER VALUES.---------
+------NOTE : WE ALWAYS CREATE THE CHILD IN OutPutRoot TREE WHEN WE WANT TO DECALRE A REFERENCE FOR OutPutRoot
+
+It is used to connect through heterogenous systems and transform million bytes of data , operate and route the data to dufferent systems .
+
+Websphere message broker was depending upon the webshpere message queue 
+
+@IIB is independent of the webshpere MQ (which is a messaging protocol).
+
+@How to connect to applications using IIB :
+
+@Protocol : Communication happend upon a standard protocol : http , https , soap , ftp , sftp , 
+@Message format  : json , xml , hl7 , soap data ect 
+@message patterns : how we distribute the  data .
+
+@Integration engine : broker 
+@Integration servers : execution groups 
+
+@The integration servers are the isolated space in which our applications can run without 
+impacting the other apps on an integration engine.
+
+
+@A default integration engine will appear in the toolkit with the user name concatenated .
+
+@What is a broker schema ? i think it is top most pachage structure which contains the further aritifacts like the fucntions , esql etc 
+ 
+ for example inside the esql file created after you add the compute node 
+ 
+ this line will reflect on top of it BROKER SCHEMA demo.app
+@Integration console: its a IIB CLI to interact with the IIB .
+
+@Remember to share PI when exporting the projects.
+	We can export the project as a PI
+	we can import the project using a PI
+	
+for configurable services that you add by using the mqsicreateconfigurableservice command:
+Use the mqsireportproperties command to view the configurable services.
+Use the mqsichangeproperties command to modify the configurable services.
+Use the mqsideleteconfigurableservice command to delete configurable services.
+
+
+BLOB data is HEXADECIMAL data , and the data we have is ASCII data (human readable)
+####################### Environment Tree structure : 	#######################
+
+
+Parser is a program that create below tree for an in coming message .
+We have 4 tree in environment tree structure  
+
+	Message  -------------------------- This tree varies as per the message we are reading using File input node , http input node or MQ input node .
+						For example the message tree for MQinput contains , properties , MQMD headers , BLOB (the message payload)
+															FileInput node contains properties , BLOB 
+															http input node contains http headers , properties , blobs
+															
+						InputRoot to access the data , outputRoot to set the value for next node									
+						
+	LocalEnvironment ---- we store/access the information in/from immediate next node . The info is available through message  flow .
+						inputLocalEnvironment to access this and OutputLocalEnvironment for immediate next node
+						This tree always contains the value for the file  , message or request consumed from client .
+						We can use that to get the value about the message .
+						
+						
+	Environment    -------  we store/access the information in/from any node in message flow  . The info is available through message  flow .
+						 Environment is the keyword to access/set this tree .
+	ExceptionList     ----------- any exception comes in any node in message flow .
+								We have no control  , we can not modify this tree it is auto populated in case of exception generated .
+								InputExceptionList to acess and OutExceptionList to explicitly set this tree .
+								
+
+Domain name used most Commonly : 
+	DFDL  --- Data format descriptive language , will contain specific user defined structure for user defined data to be parsed.
+	BLOB ---- message format is unspecified and any kind of message can be converted to BLOB
+	XMLNSC -- for XML messages. it will contains (namespace aware , validation etc). if some space is there in your XML message it will not take that space memory . so low mem use.
+	XMLNS --- for XML message (only namespace aware) space in XML message will take mem.
+	JSON --- for rest api mostly : java object representation language .
+	MRM :--- it contains the similar structure as DFDL  , thiS MRM will contains message set to define the data format .
+	
+	The blob message is an hexadecimal representation which can be converted to ASCII value which is human readable format.
+	
+	
+
+XML message : 
+			Tags which contains more tags are complex tags 
+			tags that contains value are simple tags 
+ 
+Node properties : 
+
+File input node : 
+
+
+Input message parser : In which we can mention or select the parser from below list : 
+	DFDL  --- Data format descriptive language , will contain specific user defined structure for user defined data to be parsed.
+	BLOB ---- message format is unspecified and any kind of message can be converted to BLOB.
+	XMLNSC -- for XML messages. it will contains (namespace aware , validation etc). if some space is there in your XML message it will not take that space memory . so low mem use.
+	XMLNS --- for XML message (only namespace aware) space in XML message will take mem.
+	JSON --- for rest api mostly : java object representation language .
+	MRM :--- it contains the similar structure as DFDL  , thiS MRM will contains message set to define the data format .
+	
+	
+Parser option : 
+
+MQ input node : ---------------------------
+	Parse Timings : 	
+		a. On demand : Will parse  the message till it is correct rest it will show an error in debug mode till the point it is parsed correctly .
+		b. Complete  : It will parsed the message completely and throw an exception and will not proceed further . Then the exceptions and error will come through 	error and catch terminal.This is the important option and will tell you the place where the parse error is and populate the ExceptionList tree.
+		This parsing option will not only stop on first error , but will search for other errors in message and send that in exceptiopn list 
+        c. Immediate  : This is used only in case when we are using our wire-frames , message sets which will allow high end validation around the values Like the value length , data type etc. So this might be used mostly in case of MRM or DFDL parser.
+   
+    Opaque Elements :
+		This is used in the case when we want the Parser to ignore some of the tags , elements in my incoming message to not to be parsed and  push the performance to a better level,
+		
+    Transaction mode : 
+			yes  : In case of MQinput node , the original message in case of getting an unhand-led exception will go to back out queue for the input queue , and if backuot queue is not present then it will go to the dead letter queue which is on QM level.
+			No : In this case the message will get lost and will not reach any queue.
+			Automatic : In this case the MQ input queue properties should be persistent (which means Transaction mode is yes ) then the message will go to either Back out queues or Dead letter queue.
+		
+Note : when we connect the failure /catch terminal of the node , then we are handling the exception.		
+MQ input node : ---------------------------
+
+
+MQ Output node : ---------------------------
+	Advances setting : 
+			Destination Name  : Queue name  : This option will send the data to the queue name mentioned in input queue section
+								DestinationList : This will send the data to multiple queus using LocalEnvironment tree , we can set the names of the queus in this tree and send it to MQ out node.
+								Reply to Queues : This option will send the data to a local queue and we can pass that queue name as ReplyToQ properties od MQMD  headers .
+								
+								Use the Destination subtree to set up the target destinations that are used by output nodes, the HTTPRequest node, the SOAPRequest node, the SOAPAsyncRequest node, and the RouteToLabel node. The following examples show how you can create and use an ESQL procedure to perform the task of setting up values for each of these uses.
+								example : https://www.ibm.com/docs/en/integration-bus/9.0.0?topic=tree-populating-destination-in-local-environment	
+ 
+								SET OutputLocalEnvironment.Destination.MQ.DestinationData[1].queueName = newQueue;  ---------- for queues the MQ output queue Advance prop should have DestinationList.
+										SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebserviceUrl = "";
+												SET OutputLocalEnvironment.Destination.HTTP.RequestURL = "";
+														SET OutputLocalEnvironment.Destination.File.Directory = "";
+															SET OutputLocalEnvironment.Destination.File.Name = "";
+
+			Transaction Mode : If the transaction mode in MQOutput node is yes , it means it will hold for the entire process to complete before writing it to the queue.
+								This will help in pushing the message to queue prior to some processing is left which will give wrong  results.
+								
+								IF THE MODE IS NO , IT DOESN'T MATTER IT PROCESS COMPLETE , IT WILL WRITE THE MESSAGE TO QUEUE.
+	
+			
+
+
+MQ Output node : ---------------------------
+
+
+
+Lab 1 ------------ Creating message sets and validating input message.
+
+We can create a message set and message definition file inside it and give that Mset as a reference to APP and input message parser we can use that .
+In validation : 	
+			We have two options 
+					a. validate : 
+							none : no validation will occur.
+							content  : this will check the content of the message like the tags are ok.?
+							content and value : this will check the content as well as the value for that tags using the data types mentioned in mset file.
+
+							Steps to create message set : 
+									1. You can manually create a Message set  --- not recommended as  it will be tideous for large messages.
+											Add the tags manually for small messages 
+											save it and give reference to app , change the validation option to content and value and use it.
+											
+									2. You can automatically use the .xml(sample message bigger) 
+											Generate the XML schema file from sample message 
+												Then create message set using xml schema file you created 
+												save it and give reference to app , change the validation option to content and value and use it.
+                    b. Failure action : This shows what to do in case of validation fails : 
+										Create : 
+											ExceptionList : It will give all the exception for all the fields which are incorrect.
+											Exception : Only the first exception will be thrown , it means multiple values must be wrong but one will be validated the first one.
+											user trace logs  : this case the logs can be persist in a file on local path . no exception will be created .
+											Event logs : This can be seen in event viewer logs in event viewer . The message will not throw any exception 
+
+
+NOte : Some how the String validation is not working using content and value option .
+it means if the message set contains string type ad you send int it is not validating , reverse is working .
+Lab 1 ------------ Creating message sets and validating input message.
+
+
+
+Lab 2 ---------- ESQL code is used to read the  data from incoming data and out it in a file in different structure  
+	Compute node  ---- transformation occur only in compute node , rest of the below nodes  perform dff operations. 
+	database node
+	Mapping node 
+	filter node 
+
+We learned below things :
+
+Giving reference to correlation tree . just like DECLARE InpRef REFERENEC TO InputRoot.XMLNSC	
+Creating child of OutputRoot Tree using two methods 
+			1. CREATE FIELD OF OutputRoot.XMLNSC.Empdata
+			2. CREATE LASTCHILD OF OutPutRoot DOMAIN('XMLNSC') NAME 'XMLNSC'
+Accessing multiple tags using [] value and give statis index
+Accessing the first child by using [>]   and last child using [<]			
+	
+Lab 2 ---------- ESQL code is used in below nodes 
+
+
+Lab 3 : ------------- Conditional statements 
+If condition 
+
+IF () THEN 
+ELSEIF () Then
+ELSE
+END IF;
+
+A better approach instead of writing the IF  in which it will exEcute all statements . We can use CASE
+CASE value to be tested
+
+WHEN ''
+	run this loc
+	
+WHEN ''
+	run this loc
+
+WHEN ''
+	run this loc
+	
+END CASE;
+	
+------------------ better structure
+CASE 
+
+WHEN value to be tested
+	run this loc
+
+WHEN  a second different value to be tested
+	run this loc
+
+WHEN a thir different value to be tested
+	run this loc
+	
+END CASE;
+	
+
+We also learned some string functions 
+SUBSTRING (str from 0 for 7)
+CAST ( value to be cast AS CHARACTER FORMAT '')
+CARDINALITY (INPUTROOT.XMLNSC.Empdata.EMP[])  --- WILL GIVE YOU THE NUMBER OF EMPLOYEES
+
+Lab 3 : ------------- Conditional statements 
+
+
+Lab 4 : ------------- COMPARATOR OPERATORS ALL THESE WILL RETURN TRUE 
+
+=
+<>
+<
+>
+<=
+>=
+EXISTS ----  This operator works on list JUST TO CHECK IF ANY CHILD OR ANY NODE IS EXISTING IN THE TREE OR NOT? DECLARE boolVar boolean EXISTS(InRef.XMLNSC.EMPID[])
+IN ------ TO CHECK A PARTICULAR VALUE PICKED FROM INPUT TREE IS PART OF A LIST OF VALUES OR NOT ? DECLARE boolVar boolean  InRef.XMLNSC.EMPID IN (12,33,4,5,688)
+IS --- IT IS USED WITH (NONE , NULL , TRUE , FALSE , UNKNOWN VALUES)
+		IF(boolean IS TRUE) THEN 
+		END IF
+	But in my view don't use that we are again checking for the boolean to be true or false , but yes we can use it for NONE , NULL OR UNKNOWN VALUES.
+	
+LIKE : InpRef.Emp.EmpDep LIKE 'A_'(check for only 2 chars) OR 'A%'(check for any length of char which starts with A)   
+NOT  :---- JUST TO NEGATE THE BOOLEAN EXPRESSION 
+
+Lab 4 : ------------- COMPARATOR OPERATORS
+
+
+Lab 5 : ------------- LOGICAL OPERATORS
+
+AND , OR  , NOT
+
+Lab 5 : ------------- LOGICAL OPERATORS
+
+
+Lab 6 : ------------- STRING OPERATORS
+
+CONTAINS : --- This is used to check if a particular string is present in a source string given CONTAINS('HELLO WORLD','ORLD')
+ENDSWITH : -- this is used to check if the src string is ending with what we give ENDSWITH('HELLO WORLD' ,ORLD)   --- RETURN TRUE 
+STARTSWITH : -- this is used to check if the src string is STARTING with what we give ENDSWITH('HELLO WORLD' ,ORLD) --- RETURN FALSE
+RIGHT : -- THIS WILL GIVE THE RIGHT MOST STRING OF LENGTH WE PROVIDE RIGHT('HELLO WORLD' , 3) --- RETURNS RLD
+LEFT : --THIS WILL GIVE THE LEFT MOST STRING OF LENGTH WE PROVIDE LEFT('HELLO WORLD' , 3) --- RETURNS HEL
+LENGTH : -- THIS WILL RETURN THE LENGHT OF A STRING INCLUDING SPACE 
+LOWER / LCASE : -- CONVERT TO LOWER CASE 
+UPPER/ UCASE : -- CONVERT TO UPPER CASE 
+RTRIM : WILL TRIM THE SPACES FROM RIGHT 
+LTRIM : WILL TRIM THE SPACES FROM LEFT 
+TRIM : IT WILL REMOVE SPACES FROM BOTH ENDS and also can be used to trim strings 
+			TRIM(' HELLO WORLD ') -- RETUNR 'HELLO WORLD'
+			TRIM(TRAILING 'D' FROM'HELLO WORLD') -- RETUNR 'HELLO WORL'
+			TRIM(LEADING 'H' FROM 'HELLO WORLD') -- RETUNR 'ELLO WORLD'
+OVERLAY : -- THIS WILL REPLACE THE PART OF THE STRING WITH THE STRING WE GIVE 
+			OVERLAY ('HELLO WORLD' PLACING '1234' FROM 4 FOR 3) ---- RETURNS HEL1234WORLD 
+			IT MEANS IT STATRS FROM 4TH POSITION TOOK 1234 AND REPLACE LO_ 
+Lab 6 : ------------- STRING OPERATORS
+
+
+Lab 6 : ------------- Looping statements
+LOOP  --------------------------  WE HAve manually increment and se ITERATE AND LEAVE ALONG WITH LABEL FOR THE LOOP LIKE 'X:'
+	LOOP 
+	we can break in  between using LEAVE AND ITERATE KEYWORDS
+	END LOOP
+REPEAT : not recommended to be used .
+WHILE : we can break in  between using LEAVE AND ITERATE KEYWORDS
+FOR : we can  NOT break in  between using LEAVE AND ITERATE KEYWORDS
+
+Always try to use LASTMOVE  , MOVE keywords to iterate to another child or siblings of last node . this will help in removing the cardinality calculations and 
+help in maintaining the performance
+
+NOTE : CARDINALITY IS AN EXPENSIVE FUNCTIN
+Lab 6 : ------------- Looping statements
+
+
+
+Lab 7 : ------------- attaching and detach.
+This is used to detach a part of the tree and attach it somewhere in Inputroot only 
+This works on an existing tree just like an inputroot tree 
+
+DECLARE Inpref REFERENCE TO InputRoot.XMLNSC.root.Details.id;
+DETACH InpRef;  -------- This will remove the  id child from the input tree 
+ATTACH Inpref TO InputRoot.XMLNSC.root AS LASTCHILD;
+		or
+ATTACH Inpref TO InputRoot.XMLNSC.root.Details AS NEXTSIBLING; 		
+
+
+Lab 7 : ------------- attaching and detach.
+
+
+Lab 8 : ------------- CONCATENATE , COALESCE , CAST
+FOR CONCATENATE  TWO STRING :||
+COALESCE : IT IS USED TO GIVE DEFAULT VALUE FOR A PARTICULAR FIELD 
+			EXPLAINATIONS : 
+					COALESCE(A,B,C)  : -- IT MEANS COALESCE WILL CHECK IF A IS NULL RETURN B VALUE , IF B IS ALSO NULL , RETURN C OR If	
+					C IS ALSO NULL THEN RETURN NULL;
+CAST : IS USED TO CAST A VALUE TO CERTAIN FORMAT					
+Lab 8 : ------------- CONCATENATE , COALESCE , CAST
+
+Lab 9 : ------------- CREATE STATEMENTS
+create statements we can use two way 
+
+In order to give reference to outputroot we have to first create that field 
+
+example 
+CREATE LASTCHILD OF OUTPUTROOT.XMLNSC NAME 'DETAILS'
+DECLARE outref REFERENCE TO OUTPUTROOT.XMLNSC.DETAILS;
+
+OR 
+
+CREATE FIELD OUTPUTROOT.XMLNSC.DETAILS
+DECLARE outref REFERENCE TO OUTPUTROOT.XMLNSC.DETAILS;
+
+OR
+
+CREATE FIRSTCHILD OF OUTPUTROOT.XMLNSC NAME 'DETAILS'
+DECLARE outref REFERENCE TO OUTPUTROOT.XMLNSC.DETAILS;
+
+OR
+
+WE CAN CREATE SIBLINGS OF DETAILS 
+CREATE PREVIOUSSIBLING OF OUTPUTROOT.XMLNSC NAME 'DETAILS'
+CREATE NEXTSIBLING OF OUTPUTROOT.XMLNSC NAME 'DETAILS'
+
+OR
+
+DECLARE outref REFERENCE TO OUTPUTROOT --- JUST INITIALISING 
+CREATE LASTCHILD OF OUTPUTROOT.XMLNSC.DETAILS AS outref NAME 'empid' VALUE INPUTROOT.XMLNSC.EMPID[1].EMPID
+
+OR
+
+----------------
+DECLARE inpref REFERENCE TO INPUTROOT.XMLNSC.ROOT.DETAILS;
+DECLARE outref REFERENCE TO OUTPUTROOT;
+CREATE LASTCHILD OF OUTPUTROOT.XMLNSC.ROOT AS outref NAME 'DETAILS'
+SET outef.empid = inpref.empid;
+SET outef.empname = inpref.empname;
+SET outef.empage = inpref.empage;
+SET outef.empcontact = inpref.empcontact;
+----------------
+
+Lab 9 : ------------- CREATE STATEMENTS
+
+
+
+Lab 10 : ------------- FIELDVALUE , FIELDNAME AND NAMESPACE functions
+FIELDVALUE : THIS IS MOSTLY USED TO GET THE FIELD VALUE OF A TAG OR A FIELD () WHETHER THAT IS A SIMPLE TAG OR AN ATTRIBUTE 
+
+			SET outref.LANGUAGE_REL = UCASE(FIELDVALUE(inpref.RELIGION.langauge));
+			
+			OR  BELOW LOC will be used in case the language is an attribute of child 1 and is also the subling of child 1
+
+
+			SET outref.LANGUAGE_REL = UCASE(FIELDVALUE(inpref.RELIGION.(XMLNSC.Attribute)langauge));
+			SET outref.LANGUAGE_REL_OUT = UCASE(FIELDVALUE(inpref.RELIGION.(XMLNSC.Field)langauge));
+			
+
+
+FIELDNAME : 
+		THIS WILL RETURN THE FIELDNAME OF THE FILD 
+		FIELDNAME(inpref.RELIGION.langauge)  WILL RETURN language
+
+NAMESPACE   : While working in projects keep both the variable name in esql code and the namespace in soap message 
+		Namespaces are the attributes which helps in identifying the tags in a unique way 
+		for example 
+		
+			SET outref.TEAM_A.(XMLNSC.NamespaceDecl)xmlns:a = a;
+			SET outref.TEAM_A.a:TEAM_NO_MEMBERS =inpref.TEAM_A.a:TEAM_NO_MEMBERS; 
+			SET outref.TEAM_A.a:TEAM_NAME =inpref.TEAM_A.a:TEAM_NAME; 
+			
+			SET outref.TEAM_B.(XMLNSC.NamespaceDecl)xmlns:b = b;
+			SET outref.TEAM_B.b:TEAM_NO_MEMBERS =inpref.TEAM_B.b:TEAM_NO_MEMBERS; 
+			SET outref.TEAM_B.b:TEAM_NAME =inpref.TEAM_B.b:TEAM_NAME; 
+			
+			
+			--------------------------------------------------------------------------
+			In order to bring the namespace in top of the tag we assign the tag at context 
+				CREATE FIELD OutputRoot.SOAP.Body.soap:AddEmployeeDetailsResponse;
+			DECLARE outref REFERENCE TO OutputRoot.SOAP.Body.soap:AddEmployeeDetailsResponse;
+			
+			SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:soap = soap;
+			SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:soapenv = soapenv;
+			
+			SET outref.soap:AddEmployeeDetailsResponse.soap:Eid = inref.*:Eid;
+			SET outref.soap:AddEmployeeDetailsResponse.soap:Message = 'Employee Added Successfully';
+
+			
+			
+Lab 10 : ------------- FIELDVALUE , FIELDNAME AND NAMESPACE functions
+
+Lab 11 : ------------- select query on a tree structure just like we do on DB
+
+As we know the select query gives multiple records we have to store the select query data from a tree to a list variable 
+
+we can either use 
+
+DECARE A ROW ;
+A.Data[]
+or
+OutPutRoot.XMLNSC.Data.Output[]
+Data child to be present in outputroot is very important 
+Select * from Inpref.Details[] as R  -- select all values from details 
+Select R.EmpDetail , R.EmpName from Inpref.Details[] as R  --- select EmpDetail and EmpName
+THE(Select R.EmpDetail , R.EmpName from Inpref.Details[] as R ) -- Give only the first item of the results 
+ITEMS(Select R.EmpDetail , R.EmpName from Inpref.Details[] as R) -- Get only the values from the reslts 
+Select R.EmpDetail , R.EmpName AS output.A from Inpref.Details[] as R -- Change th out uput tree path for the selected values 
+
+Lab 11 : ------------- select query on a tree structure just like we do on DB
+
+
+Lab 12 : ------------- Propagation of messages 
+
+RETURN TRUE ;  WILL PROPAGATE THE MESSAGE FRO OUT TERMINAL BY DEFAULT
+RETURN FALSE ; WILL TERMINATE THE MESSAHE PROCESSING THERE.
+PROPAGATE  ; WILL PROPAGATE THE MESSAGE TO TERMINAL OUT BY DEFAULT.
+
+PROPAGETE TO TERMINAL 'out' ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+OR 
+PROPAGETE TO  TERMINAL 0 ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+
+
+PROPAGETE TO TERMINAL 'out1' ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+OR 
+PROPAGETE TO TERMINAL 1 ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+
+
+PROPAGETE TO TERMINAL 'out2' ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+OR 
+PROPAGETE TO TERMINAL 2 ; WILL PROPAGATE THE MESSAG TO OUT TERMINAL 1
+
+
+below Loc :  ---- THE FIRST ONE WILL PUSH THE OUTPUTROOT WE COOKED  , BUT FOR SECOND LOC OUTPUTROOT TREE WILL BE EMPTY AS IT DELETED
+PROPAGATE ;
+PROPAGATE TO TERMINAL 'out1';
+
+Solution for above problem : 
+PROPAGATE DELETE NONE;
+PROPAGATE TO TERMINAL 'out1';
+
+Lab 12 : ------------- Propagation of messages 
+
+Lab 13 : ------------- How to connect to Database from broker 
+Steps to connect to database 
+
+Steps 1 : create DSN 
+Control panel , administrative tool --> System DSN -- > create new dsn ---- > Select a driver (IBM integration tool ...oracle wire protocol)
+																				--> Enter the DSN name , DSN SID  , host (localhost if you are connecting to your local DB)
+																														in Advance setting check the SQLEnabledParam.
+																					-- > click apply and ok 
+
+Steps 2 : Associate DSN with integration Node .
+mqsisetdbparms Testing_IIB -n DSN NAME -u username -p password  - command to associate the DSN with Testing_IIB
+mqsicvp -n DSN NAME -u username -p password -- to check the connection of the DS or DB.
+This is ODBC connectivity 
+
+Step 3 : You can mention the DSN name we created in prop of compute name where we will run DB queries.
+
+Then for given xml 
+<details>
+<empid></empid>
+<empname></empname>
+<empaddress></empaddress>
+</detais>
+
+In DB SYSTEM  , table name is emp_details 
+	ID 				name 				Addresss
+	
+Esql query will be 
+
+	A. Declare inpref REFERENCE TO INPUTROOT.XMLNSC.details
+		query   : Insert into Database.SYSTEM.emp_details value (inpref.empid,inpref.empname,inpref.empaddress);
+
+		'Database' keyword is used and SYSTEM is the schema used to run the insert query to emp_details table
+
+	B. We can use PASSTHRU to write the query in string mode and allow faster execution of queries . No need to use 'Database' keyword .
+
+		DECLARE q1 , q2 , q3, q4 , q5 , finalquery CHAR ;
+		SET q1 = 'INSERT INTO SYSTEM.emp_details values (';
+		SET q2 = ''''||inpref.empid||''''
+		SET q3 = ''''||inpref.empname||''''
+		SET q4 = ''''||inpref.empaddress||''''
+		SET q5 = ')';
+		PASSTHRU (finalquery)
+		
+Lab 13 : ------------- How to connect to Database from broker 
+
+Lab 14 : -------------functions and procedure 
+
+function are mostly used for calculations 
+procedures are used to make the code re-usable and not to return any value  , that is why we use call keyword to call it 
+
+IN parameter : to get the input from calling env 
+OUT parameter  : once the control comes from called function to calling function the value of the variable declared inside called function is lost , so we can mention that variable as the output parameter (OUT) and use it 
+INOUT parameter : which is used as an input and as an output also 
+
+
+
+CREATE FUNCYION MAIN () RETURN BOOLEAN 
+BEGINS 
+
+DECLARE AREA DECIMAL ;
+DECALRE twiced INTEGER ''
+
+SET AREA =  test_function (12 ,2, 0);
+
+RETURN TRUE;
+END ;
+
+
+
+CREATE FUNCTION test_function (IN radius INTEGER ,IN fac INTEGER, OUT twicerad  INTEGER) RETURN DECIMAL
+BEGIN
+
+SET twicerad = factor* radius ;
+
+RETURN 3.14*radius*radius;
+
+
+END;
+
+
+
+If you create a procedure out of the esql file in a separate esql file in same schema or different , in order to call that procedure you have to use schema name dot. procedure name.
+OR WE CAN MENTION THE 
+
+PATH demo.app ;  -- this loc on top of the module 
+
+example : CALL demo.app.procedureexample(INPREF , OUTREF);
+
+Lab 14 : -------------functions and procedure 
+
+Lab 15 : -------------subflow , Liberaries (shared and static)  and local-environment tree 
+
+when we send or call the subflow the tree coming out from the calling node get deleted , 
+There are multiple ways we can retain that data or tree 
+	
+	1. ENV variable                            ----- MOST EFFECTIVE WAY TO WORK 
+	2. propagate to terminal 1 delete none   ------ THIS WILL NOT WORK FOR TREE TO BE AVAILABLE IN SUBFLOW . FOR ANY TREE TO COME OUT OF THE NODE YOU HAVE TO COPY IT IN OUTPUTROOT OR EITHER IN ENVIRONMENT TREE TO BE AVAILABLE FOR ALL COMPUTES 
+	3. set outputroot = Inputroot ------------------- THIS WILL WORK ALSO 
+
+
+Liberaries : we have two kind of lib in IIB 
+
+Lib can hold : Esql files  (procedure ), mset  , subflows  , message flow , message model , bar files etc .
+
+example : if we want to create a procedure which is getting used in all app then we can keep that in a lib and give that a reference to the app
+			Just like esql file , we can also keep subfow in it and use it .
+			We can also keep mset for validation .
+			We can also keep wsdl for soap validaions etc 
+
+
+Static : which is not deployable it is being set as a reference to the application , if we make any change to the lib artifacts , app need to rebuild and deploy 
+Shared : which is deployable just like application , We can make changes to Shared lib and deploy it directly without rebuilding the applications.
+																						
+													
+
+
+Lab 15 : -------------subflow , Liberaries (shared and static)  and local-environment tree 		
+
+
+Lab 16 : -------------shared and external variables : 
+
+1. shared variables , we can declare on schema and module level . The value once assigned to this variable it will retain that value till the execution group , message flow or application is restarted.
+
+DECLARE var CHARACTER SHARED ;
+We can override the value of shared variables from code .
+
+
+2. External Variables : We can override the value of external variable using broker override command and property file.
+we can not change the value of external variables using code . It is mostly used for specifying env specific values at runtime .
+ command use to override the values from properties file  : 
+ 
+	mqsiapplybaroverride -b barfilename -p propertyfilename -r     --- override the bar file
+	mqsideploy brokernode -e default -a "path of bar file"         --- deploy the bar file 
+	mqsideploy brokernode -e default -d applicationname            --- Delete the applications from the execution group 
+	
+3. Node properties can be override easliy no need to create any external variable for that .	
+
+Lab 16 : -------------shared and external variables : 
+
+
+
+Lab 17: -------------Promoting Node properties on flow level 
+
+When we promote the node property that property can be different for different application in case we promote the value in a subflow and that subflow is used in 10 apps.
+
+for example subflow 
+
+
+		input node ------------> compute node ----------> MQ output node 
+		
+		We can promote the queue name for Mq output node to flow level .
+		
+then this subflow wherever it is used will ask for queue new .
+		
+		
+Lab 17: -------------Promoting Node properties on flow level 	
+
+Lab 18: -------------DFDL
+DFLD : Data flow definition language: this is the message model we can used to define any kind of message format : like csv, cobol . pipe delimited etc.
+We can add patterns on the local elements which will ask for regular expression and some more validation .
+We can create the sample data out of the schema we created .
+
+We have created CSV model 
+We  can cerate record-oriented model which is used for tagged delimited file . By creating the DFDL and then change it one by one as per type record type 
+
+--		WHILE  LASTMOVE(inref) DO
+--			CREATE LASTCHILD of OutputRoot.XMLNSC.CoDetails AS outref NAME 'co';
+--			set outref.state = inref.Countstate;
+--			set outref.statepin = inref.Countrypin;
+--			set outref.statezipcode = inref.Countzipcode;
+--			set outref.statepopulation = inref.Countpopulation;
+--			MOVE inref NEXTSIBLING;
+--		END WHILE;
+		
+		FOR  COUNTRY AS InputRoot.DFDL.Country.CountryDetails[]   DO
+			CREATE LASTCHILD of OutputRoot.XMLNSC.CoDetails AS outref NAME 'co';
+			set outref.state = COUNTRY.Countstate;
+			set outref.statepin = COUNTRY.Countrypin;
+			set outref.statezipcode = COUNTRY.Countzipcode;
+			set outref.statepopulation = COUNTRY.Countpopulation;
+		END FOR;
+Lab 18: -------------DFDL
+
+
+Lab 19: -------------PUB SUB FEATURE
+This feature came into the picture when we need to push mssages to more that 100 + queues , so writing esql and using 100 + nodes is not a good idea.
+
+So we create one topic T1 and create 100 + queues and 100 + subscription each subscription will be holding one queue name and a single topic name T1
+
+In IIB 
+				
+				MQinput node  ---------------------------------- > Publish Subscription node (In routing pallet)
+				Under Properties 
+				in advanced enter the 
+				topic name 
+				
+Once one message in placed in MQinput node , that message will be posted to all 100+ queues by publish Subscription node.				
+				
+Lab 19: -------------PUB SUB FEATURE
+
+
+Lab 20: -------------Data Base node / FIlter node / Flow order node
+
+DataBase Node : This is similar to compute node but we can not transform anything in Database node as it doens't contain any OUTPUTROOT tree correlation 
+				We can Access any incoming tree using "Root" only  , no compute mode in Db node so no transformation .
+				DB node will send the same input coming Root message out from its terminal to destination node.
+
+Filter Node(ROUTING PALLET)  : This node contains 4 terminals : TRUE , FALSE , UNKNOWN , FAILURE 
+			    This node also understand only "Root" there is no inputroot , outputroot , so no transformation can takes place 
+				
+Flow Order node : This node will send the message one by one from two terminal (first and second).
+					It actually contains 3 terminals two terminal (first and second). and a failure . In construction pallet.
+
+
+Lab 20: -------------Data Base node / FIlter node / Flow order node
+
+
+Lab 21: -------------Timer nodes 
+
+for these nodes to be used , the IIB node where you will deploy it , should be associated with QM , as these node use System queues for time out operations . 
+
+NOTE : WE CAN NOT DEPLOY THE APP USIGN TIMER NODES TO NODE WHICH IS NOT ASSOCIATED WITH QM
+We have  
+1. TimeOUtNotification node  : This node is used to automatically trigger your flow after a fixed time period you mention in the property .
+							The first time it will trigger is when you deploy .
+							then it will trigger auto after X secs .
+							Think if customer says i need time interval to be change in production , So our timer app is already deployed in execution group in IIB node 
+							We can use 	below command to create a configurable service .:
+				
+				mqsicreateconfigurableservice Testing_IIB -c Timer -o (UniqueIdentifier in time node prop)  -n timeoutIntervalSeconds -v 50 
+				mqsireload Testing_IIB -e default(executiongroup)
+				
+				We can then use below command to change the property again 
+				mqsichangeproperties Testing_IIB -c Timer -o (UniqueIdentifier in time node prop)  -n timeoutIntervalSeconds -v 100
+		
+2. Time out control node :
+	This node we can use in combination with the timeoutnotification node to control the interval at which the actual flow will trigger .
+	
+	timeoutnotification 1 ---------> Compute1   ------------> timeoutcontrol 1
+																
+	
+	
+	timeoutnotification 2 ----------> Compute 2 -------------> fileoutput1 node
+	
+	
+	
+	fileinputnode1(picks from fileoutput1 location) ------> filternode(filter the incoming message)----> fieoutputnode2
+	
+
+timeoutcontrol 1 and timeoutnotification 2 both have the same unique identifier 
+
+the operationmode for timeoutnotification 2 will be controlled in this case 
+
+in compute 1 we will be overriding the properties for timeoutnotification 2 through timeoutcontrol 1 node as it recievs the overriden properties.
+
+
+Code in Compute 1 which is overriding :
+	SET OutputLocalEnvironment.TimeoutRequest.Action='SET';
+		SET OutputLocalEnvironment.TimeoutRequest.Identifier='TIMEOUT_NOTIFICATION_01';
+		SET OutputLocalEnvironment.TimeoutRequest.StateDate=CURRENT_DATE; --OR 'TODAY' ; -- DATE ISIN FORMAT YYYY-DD-MM 
+		SET OutputLocalEnvironment.TimeoutRequest.StartTime='00:12:00'; --OR 'NOW' TIME IS HH:MM:SS FORMAT 
+		SET OutputLocalEnvironment.TimeoutRequest.Count=3;
+		SET OutputLocalEnvironment.TimeoutRequest.Interval=20;
+		SET OutputLocalEnvironment.TimeoutRequest.IgnoreMissed=TRUE;
+		SET OutputLocalEnvironment.TimeoutRequest.AlowOverWrite=TRUE;
+		
+Also mention the InputLocalEnvironment.Request in request parameter in timeoutcontrol 1 node		
+
+Lab 21: -------------Timer nodes 
+
+
+Lab 22: -------------File outputnode : 
+
+FILE OUTPUT DIRE
+FILE OUTPUT FILE NAME 
+1. ACTION IF FILE EXISTS ()-
+						FAILS
+						REEPLACE WITH THE NEW ONE AND ARCHIVE THE OLD ONE (mqsiarchive will contains the old file )
+						APPEND TO THE OLD ONE .
+						REEPLACE WITH THE NEW ONE AND ARCHIVE THE OLD ONE with time stamp appended (mqsiarchive will contains the old file )
+						
+						NOTE : IN THE PROPERTY ALWAYS USING MOVE FILE TO SUBDIRECTORY IN CASE OF FAILURE(mqsifailure folder will be created automatically)
+2. Record and elements : 
+					Record  as file as a whole
+					
+			FOr all other option from below list we need to connect Finish terminal of file output node to input one which is reading the file or data 		
+					Record delimited
+					fixed length  records
+					record is unmodifications
+
+		Q1 .How to convert from XML to CSV or any other TDS format (which is not a defined parser in IIB )
+			
+			DECLARE inref REFERENCE TO InputRoot.XMLNSC.EmployeeData.Emp;
+			DECLARE outstring CHARACTER '';
+			set outstring = inref.EmpId||','||inref.EmpName||','|| inref.EmpDep ||','||inref.EmpAge;
+			Set OutputRoot.BLOB.BLOB = CAST(outstring AS BLOB CCSID 1208);
+		
+		Q2. How to set the DFDL on output root 	using a DFDL set ?
+			SET OutputRoot.Properties.MessageSet = '{DFDL_TDM}';
+			SET OutputRoot.Properties.MessageType = '{}:Country';
+			DECLARE outref REFERENCE to OutputRoot;
+			CREATE LASTCHILD OF OutputRoot.DFDL.Country as outref NAME 'CountryDetails';
+			SET outref.Countstate = inref.CoState;
+			SET outref.Countrypin = inref.Countrypin;
+			SET outref.Countzipcode = inref.Cozip;
+			SET outref.Countpopulation = inref.Copop;
+			
+			We can also set the validation in compute node for above DFDL to go out and get validated as pert the rules we set 
+			
+
+3. For Record and elements  : in file out node , we have to connect finish terminal and need to propagate the message to that terminal in order to finish the processing .
+							till the finish terminal get the message the file will be in mqsitransit folder .
+							
+							a. Record Delmited : This option the records will be writen to the outfile using a delimiter , defulat delimiter is broker line feed (Next line) 			,we 		can 	also mention the custom character 
+							b. Fixed Length Record : in this we can mention the record lenght we are printing and if we are giving the lenght more than then record lenght then 
+								we can padd soe character to fill the complete lenght . That char we need to mentionas an hex value . 
+							c. Record Unmodification  : Will print multiple record with out any padding .	
+
+4. An image file can also be pushed from out to input , easy way to copy incoming to output message .							
+5. FTP the file using ftp setting : enter the hostname and user name and password.
+			Details to enter : 
+					Hostname : 
+					secureID : This is a keyword we can create using below command : 
+						Case 1 : Initial set up :	
+						FOR FTP : 
+							mqsisetdbparms Testing_IIB -n ftp::secureID -u hsingh82 -p Gogi!123
+							mqsireload Testing_IIB -e default
+							
+						FOR SFTP : 
+						mqsisetdbparms Testing_IIB -n sftp::secureId -u hsingh82 -p Gogi!123
+						mqsireload Testing_IIB -e default
+							
+							
+						Case 2 : When you want to change the server name  , no need to change the node value and redeploy : just create a configurable service .
+								
+								FOR FTP : 
+								
+									mqsicreateconfigurableservice Testing_IIB -c FtpServer -o FILEOUT_CS  -n servername,securityIdentity -v wmqm8053.uhc.com,secureID
+									mqsisetdbparms Testing_IIB -n ftp::secureID -u username -p password
+									mqsireload Testing_IIB -e default(executiongroup)
+									
+									Then in node property in place of servername and port enter 'FILEOUT_CS'
+									
+								FOR SFTP : 
+								
+									mqsicreateconfigurableservice Testing_IIB -c SFTPServer -o FILEOUT_CS  -n servername,securityIdentity -v wmqm8053.uhc.com,secureID
+									mqsisetdbparms Testing_IIB -n sftp::secureID -u username -p password
+									mqsireload Testing_IIB -e default(executiongroup)
+									
+									Then in node property in place of servername and port enter 'FILEOUT_CS'
+									
+								Once we create a confgurable properties we can change the property if more changes comes in future 
+								
+								NOte : mqsichangeproperties nodename -c FtpServer -o FILEOUT_CS -n servername  -v wmqm8054.uhc.com
+
+
+								After configurable servers creation if you want to want if those are set 
+								
+								Use the mqsireportproperties command to view the configurable services.
+								Use the mqsichangeproperties command to modify the configurable services.
+								Use the mqsideleteconfigurableservice command to delete configurable services.
+								
+								mqsireportproperties Testing_IIB -c FtpServer -o FILEOUT_CS -r 
+								
+Lab 22: -------------File outputnode : 
+
+
+Lab 23: -------------File input node : 
+
+a. Record and elements : 
+							We have 
+								a. For these option we have to connect end of data terminal to further node 
+									- Fixed length : A user defined length byte of the record is retrieved  , it will read byte by byte 
+									
+									- delimited   : It will read the file line by line , bcase the default delimiter is Line Feed ('\n')
+									
+									 - Parsed record sequence  : This is used to parsed XML file with wrong parsing 
+									 
+												for example below file is a wrong XML as per parsing but above feature will help in reading h1 first and then h2 first 
+													<h1>
+														<h2></h2>
+													</h1>
+													<h1>
+														<h2></h2>
+													</h1>
+									 for above three options in order to check if the file read has ended , the end if data terminal will give message with local-environment.file.isEmpty = true and inputroot.Blob.Blob is also empty 
+								
+								b. NO need to connect end of terminal 
+
+								As a whole 
+								
+								
+							
+								
+b. FTP option   to read from ftp server. 
+
+c. Polling  its important the polling tells after how much time it will pick the file from input folder .
+
+	Files moves to the back out folder only when any exception comes.
+
+d. Retry : This option will create a mqsibackout folder and will send the file to it in case of failure 								
+								
+e. FTP server option , : 
+CREATE A CONFIGURABLE SERVICE AND 
+THEN RUN MQSISETDBPARMS 
+RELOAD THE EXECUTION GROUP 
+
+		mqsicreateconfigurableservice Testing_IIB -c SFtpServer -o FILEIN_CS -n servername,securityIdentity,scandelay -v wmqm8053.uhc.com,secureID,20
+		mqsisetdbparms Testing_IIB -n sftp::scind -u hsingh82 -p Gogi!123
+		mqsireload Testing_IIB -e default
+									
+
+f. Retry  : 
+	This will allow you to retry the processing in lemn terms it will pick up the file 2 times if the retry threashold is 2 and short retry interval is 10 sec .
+	
+	We have  :
+		short retry 
+		long retry 
+		
+FIle read node  : This is used to read the file in middle of the flaw 
+MQget node : This is used to read the data from a Queue in middle of the flow .
+			
+Lab 23: -------------File input node : 
+
+Lab 24: -------------Exception handling 
+
+ !!1!! VERRY IMPORTANT NOTE : THE FAILURE TRAVELS FROM LOWER NODE TO THE HIGHER NODE IN MESSAGE FLOW UNTILL IT FOUNDS THE CATCH TERMINAL .!!!
+
+
+a. The upstream noade always have two terminals like : 
+	Failure : failure will throw the exception that occurs in the first node itself , as we saw in giving wrong XML file to fileinput node expecting correct XML.
+	Catch :    This terminal will cacth all the exception that will occur in downstream nodes or flow .
+	
+b. Now above we mentioned about the node level exception handling .
+   How to throw an exception from the code as user defined 
+		
+		esql code : throw user exception message errorcode values('message you want to convey to out user ')
+c. The node level errors like file input path is wrong , queue name is wrong , parsign error , soap url is incorrect , these are sent throough the failure terminal .
+	The downstream level erors in any other node will be propagted to the upstream searching for the cacth terminal and olaa !!! we conect the catch terminal of upstream node and handle it 
+		
+
+d. Throw node which is similar to the throw statement we wrote in compute node , its just that we are throwing the exception using a node 
+e. try catch node : it is just that we will try the processing of node connected downstream  trycatchnode----- > node1 , If node 1 sends any exception then try catch will handle that using the catch terminal it has and call the exception handling block you have simple .
+
+					trycatchnode   (try terminal ) ---------------------------> node 1
+									catch terminal -----|
+														|
+														---------------------------------------Exceptionhandling subflow to handling and log it 
+
+	for Try catch node both the terminals must be used , or else if catch is not connect to subflow for handling it will simply terminate the flow and will not log the exceptions
+
+Lab 24: -------------Exception handling 
+
+
+
+Lab 25: -------------trace 
+
+------------------------------ Usertrace ------------------------------ 
+The trace on the broker is off by default : to make the user trace active  we have to	run below command : 
+
+mqsichangetrace TESTNODE_hsingh82 -u -e default -l debug -r -c 1000 
+
+then run your message fllow or process any file or message then stop the trace 
+
+mqsichangetrace TESTNODE_hsingh82 -u -e default -l none
+
+to  read the logs we have to get the dumps in a readable format 
+got to this flder : C:\ProgramData\IBM\MQSI\common\log
+mqsireadlog TESTNODE_hsingh82 -u -e default -f -o user_trace.txt
+
+
+------------------------------ Usertrace ------------------------------ 
+
+------------------------------ service trace (more info then user trace will give more details about liberary or subflow ) ------------------------------ 
+To makee he serfvice tarce active command just use -t instead of -u
+
+mqsichangetrace TESTNODE_hsingh82 -t -e default -l debug -r -c 1000 
+
+then run your app and then stop the trace 
+
+mqsichangetrace TESTNODE_hsingh82 -t -e default -l none
+
+Now to read same command s
+
+mqsireadlog TESTNODE_hsingh82 -t -e default -f -o user_trace_service.txt
+
+------------------------------ service trace  ------------------------------ 
+
+
+
+Lab 25: -------------trace 
+
+Lab 26 : ---------------------- SOAP wsdl creation using IIB ---------
+
+SOAP : simaple object access protocol : this protocol allow  data to be transported over HHTP in a secure manner 
+
+Components of Soap :
+Envelop : this is the outer shell which contains the header and body 
+header : this will contains some header values 
+Body : This will contain the request and response aling with the fields we are exchanging .
+
+This was very informative . We have to create message set first and then in that message set create the definition and add the operations in type and the fields that you want to send or put as a response of request in elements and attributes.
+
+Steps to create : 
+1. Create a message set 
+2. Right click on message set and Generate --- > then create the WSDL definition  (We already created XML schema from an XML file earlier in old chapters )
+3. Add the types : which includes the operations and Add the fields that you are exchanging in ELements and Attribute .
+4. Also add the Types in ELements and attribute 
+
+Very important : To see the Generate option to generate WSDL fro xsd , go to Windows Preferences  , search message set , check the option given to unhide Generate
+
+Lab 26 : ---------------------- SOAP wsdl creation using IIB ---------
+
+Lab 27 : ---------------------- EXposing IIB webservice to client using SOAP wsdl we created ---------
+
+We are going to use below things : 
+
+Soap input node 
+soap reply node 
+soap wsdl we created 
+
+We need below details for a service : if we are hosting the service on out local then 
+
+To generate the destinationSLit tree out of soap input node we need to check the box in its property .
+This tree will help in getting the labels to use it further . The labels may contains the operation name used by the client to hit the IIB soap service .
+It is always checked by default
+
+Parsing options : as we know we have three kinds : 
+				On Demand : This will also create an error but not an exception list .
+				Immediate : this is for MRM or DFDL validation purpose  
+				complete : It will generat the excpetion list telling the excpetion where it occurs while validating 
+
+server : localhost 
+port : will be the port number of the execution group on which the app is running .
+		to find the port numbder : 
+			mqsireportproperties TESTNODE_hsingh82 -e default -o HTTPConnector -r
+			http://localhost:7800/custom/
+Gateway mode is to hit the api without Soap wsdl.
+We can check the Question mark in Soap input node property which will allow client to get the wsdl by adding ?
+	like this : http://localhost:7800/custom?wsdl
+
+
+Trees coming out of Soap input node : --------------
+LocalEnvironment
+	Destination
+			SOAP
+					Reply
+							ReplyIdentifier:BLOB:[B@4f22b4d5
+			RouterList
+					DestinationData
+							labelName:CHARACTER:AddEmployeeDetails
+	SOAP
+			Input
+					Transport
+							HTTP
+									MaxClientWaitTime:INTEGER:180
+									
+Trees coming out of Soap input node : 	----------------------
+Message
+	Properties
+			MessageSet:CHARACTER:WsdlEmployeeService
+			MessageType:CHARACTER:
+			MessageFormat:CHARACTER:
+			Encoding:INTEGER:546
+			CodedCharSetId:INTEGER:1208
+			Transactional:BOOLEAN:false
+			Persistence:BOOLEAN:false
+			CreationTime:TIMESTAMP:java.util.GregorianCalendar[time=1621488778029,areFieldsSet=true,areAllFieldsSet=false,lenient=true,zone=sun.util.calendar.ZoneInfo[id="Asia/Calcutta",offset=19800000,dstSavings=0,useDaylight=false,transitions=6,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=?,YEAR=2021,MONTH=4,WEEK_OF_YEAR=?,WEEK_OF_MONTH=?,DAY_OF_MONTH=20,DAY_OF_YEAR=?,DAY_OF_WEEK=?,DAY_OF_WEEK_IN_MONTH=?,AM_PM=0,HOUR=11,HOUR_OF_DAY=11,MINUTE=2,SECOND=58,MILLISECOND=29,ZONE_OFFSET=?,DST_OFFSET=?]
+			ExpirationTime:INTEGER:-1
+			Priority:INTEGER:0
+			ReplyIdentifier:BLOB:[B@bef70037
+			ReplyProtocol:CHARACTER:SOAP-AXIS2
+			Topic:UNKNOWN:null
+			ContentType:CHARACTER:text/xml;charset=UTF-8
+			IdentitySourceType:CHARACTER:
+			IdentitySourceToken:CHARACTER:
+			IdentitySourcePassword:CHARACTER:
+			IdentitySourceIssuedBy:CHARACTER:
+			IdentityMappedType:CHARACTER:
+			IdentityMappedToken:CHARACTER:
+			IdentityMappedPassword:CHARACTER:
+			IdentityMappedIssuedBy:CHARACTER:
+	HTTPInputHeader
+			X-Original-HTTP-Command:CHARACTER:POST http://localhost:7800/EmployeeDetails HTTP/1.1
+			Accept-Encoding:CHARACTER:gzip,deflate
+			Content-Type:CHARACTER:text/xml;charset=UTF-8
+			SOAPAction:CHARACTER:""
+			Content-Length:CHARACTER:475
+			Host:CHARACTER:localhost:7800
+			Connection:CHARACTER:Keep-Alive
+			User-Agent:CHARACTER:Apache-HttpClient/4.1.1 (java 1.5)
+			X-Remote-Addr:CHARACTER:127.0.0.1
+			X-Remote-Host:CHARACTER:127.0.0.1
+			X-Server-Name:CHARACTER:localhost
+			X-Server-Port:CHARACTER:7800
+			X-Scheme:CHARACTER:http
+	SOAP
+			Context
+					operation:CHARACTER:AddEmployeeDetails
+					operationType:CHARACTER:REQUEST_RESPONSE
+					portType:CHARACTER:Soap_MsgSet_CustomerPortType
+					portTypeNamespace:CHARACTER:http://tempuri.org/Soap_MsgSet_Customer
+					port:CHARACTER:Soap_MsgSet_CustomerSOAP_HTTP_Port
+					service:CHARACTER:Soap_MsgSet_CustomerSOAP_HTTP_Service
+					fileName:CHARACTER:C:\ProgramData\IBM\MQSI\components\TESTNODE_hsingh82\d1f9af09-7905-4612-921e-ce034cc5a7f8\config\abb2795e-a444-4bad-bfc4-4b862eb50ee3\XSD\WsdlEmployeeService/org/tempuri/soapmsgsetcustomer/Soap_MsgSet_CustomerService.wsdl
+					SOAP_Version:CHARACTER:1.1
+					Namespace
+							soapenv:CHARACTER:http://schemas.xmlsoap.org/soap/envelope/
+							soap:CHARACTER:http://tempuri.org/Soap_MsgSet_Customer
+			Header
+			Body
+					AddEmployeeDetailsRequest
+							Eaddress:CHARACTER:?
+							Edep:CHARACTER:?
+							Eid:CHARACTER:?
+							Ename:CHARACTER:?
+							Essn:CHARACTER:?								
+									
+
+
+
+
+ 

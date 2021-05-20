@@ -1,0 +1,49 @@
+Continuous Integration--------------------------------------------------------------------------------------
+Many tools are there :
+Jenkins and etc
+--------------------Jenkins--------------------------------------
+Is an open source auomation server writtern in java 
+Installing jenkins on AWS : -------
+sudo apt install openjdk-8-jdk -------------------- install java  jdk
+Install jenkins on master machine only , but we need java on slave .
+
+
+Reply with a private chat messageAshutosh ..
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get install jenkins
+sudo service jenkins start
+sudo service jenkins service
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword--- some id comes
+http://localhost:8080/login?from=%2F ----- use windows meanwhile
+gmail smtp settings --- on google
+java -jar jenkins-cli.jar -s http://192.168.13.104:8080/ help ---------- for jenkins CLI
+https://github.com/devopsguru91/MavenCounterWebApp
+http://52.23.253.19:8080/github-webhook/
+Trigger by git hub hook book 
+POLL SCM ------------- crontab.guru -- for crontab pattern for POLL SCM option in jenkins
+https://github.com/devopsguru91/pipeline-demo
+
+Practise --------------------------------------------------------------------------------------------------------------------
+Jenkins AWS login : http://13.234.18.147:8080/
+hsingh82
+Mumy@1234
+
+SMTP setting ---------------------------------------------------- Will give you the config required.
+LDAP : light weight active directory protocol -------------------- for that a separate LDAP server will be there holding accounts and need IT team authorization to do any process.
+Outbound agent and inbound agent 
+1. Outbound agents are those slave where jenkin's server connects to slave using SSH. [jenkins master connacting ---------------> slave]
+2. Inbound agents are those slave where jenkin's server receive connection request from slave using ssh. [jenkins master  <--------------- slave connacting]
+echo java_home -------------------------------- /usr/lib/jvm/java-8-openjdk-amd64
+which git ------------------------------------- /usr/bin/git (command to get the git executable path)
+sudo apt install maven ------------------------ tool to built and test java files
+var/lib/jenkins ------------------------------- config.xml  (reload configuration tool ) to reload the config.xml without restarting the service of jenkins
+tail -100f /var/log/jenkins/jenkins.log -------- to see the logs on jenkins servers
+/var/lib/jenkins/workspace---------------------- path where the workapace created
+gitwebhook(when a push happens) and pollscm(for triggering regular interval to check for a change )
+
+
+
+
+

@@ -1,0 +1,131 @@
+Ansible :------------------------------------------------- No master --> client approach is there
+It is a push based configuration tool.
+PUsh based means we can push the changes to host servers using ansible.
+where as chef and puppet are pull based.
+
+pull based is used in puppet and chef(in which the target machine(server) ask the master(server) if  master wants to install or update on target)
+
+*CONTROLLER* ---------> does all the things 
+
+Arch of ansible 
+
+playbook ------------------> ansible engine[inventory(host file) , modules(command or functions to be run)]--------------> config on target host 
+
+--------------------------------------------- Commands---------------
+*****************
+* config file = /etc/ansible/ansible.cfg : important file consists of default values.
+*#inventory      = /etc/ansible/hosts
+*  configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+* ansible python module location = /usr/lib/python2.7/dist-packages/ansible
+*executable location = /usr/bin/ansible
+*python version = 2.7.15+ (default, Nov 27 2018, 23:36:35) [GCC 7.3.0]
+*****************
+
+sudo apt update
+sudo apt install software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible (python will be install along with that)
+ansible adhoc command : we can run these commands directly.
+ansible -i hosts controller -m ping -------------------- controller is group name in hosts file We are telling ansible to use this host file.(host file , group name and then module pop an error while connecting SSH) FORCEFULLY OVERWRITTING THE hosts FILE FOR ANSIBLE USING adhoc COMMAND using -i 
+add this line --->  [ ansible_connection=local ] method changed in host file . our ansible used SSH method to connect . ssh not recommended in ansible
+sudo nano /etc/ansible/hosts ----------------------> change the file create one group and then run :[ansible  controller -m ping  ]
+ansible -i hosts all -m ping ----- for unique hosts 
+ansible -i hosts machines -m ping ---- give a diff name of group
+ ------------------------------- 
+ansible -i hosts controller -m command -a 'df -h' ---- in order to run other command
+ansible -i hosts controller -m command -a 'ls -ltr'
+--------------------------------
+create a target machine and chck for python and install
+Now create a connection between controller and target 
+ssh-keygen -t rsa -b 4096 -C "Ansible Controller" -- on controller
+cat /home/ubuntu/.ssh/id_rsa.pub -- on controller (copy and paste on target at below location file)
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCfZNsVfTyCD68B3FW9vdZYrIAzhqz/YVge+9JkzNS/pOrJFvTxphWvACSTYkpnz3Km6TH7rpKL1KlmSbni8llggSFpZoy+bwWcJbLbhX8NGjkSeQOlBledFp4vIpw06W0ZIjNjoeQEX/JdrFMGj+lnSmdD3rfOUUs6DSJ6d3pbHh8oCJB5BNDgYF2aqB/B9YYq4zkEpQNJf+AC9WvyPHj4gkk4Uoy8me5XvIHS71xe1cSXM+Y9AwGR1h1vLinmENFVwvo53s846ibzvI/tEwLryGimb0AsW8hOx14ud1L0101llNQOQaxbGsD7RESSwZUFHH8GB06Q4q4ZQGOu/s1ySa6jc3vLaa4klBoGPjk5o5AS483GfTRp10wsWtIMfXrom+FfksiGc50DX7sY1cSkaTRg9iWBVWXXlePHziQwyzEkeDKO3ogY/UzxK4UKGYqmLGRYNNb7AxsUAu/NfAd/N98/+W/AaYfvs3YgWnB6SDJxLD6XkR2qmTgQmZQEG5X7Ase6QZywoBdUyk/a0be5gyPekaVhLO1WRAGo8EOYldcup5igge41QkUNdMtcXTzlTtty1v5jHSlgQy6zb8jauZmIQVsorNWVDxbEz3nSBw94cGLXUjIgUs5iMeiuYTF+fVgO2JP3TDmFAEKlrvETwUEJKKFGIhDlgminb7yXSQ== Ansible Controller
+
+vi .ssh/authorized_keys  --- on target
+ssh ubuntu@ipaddoftarget ----- from controller(cntrl + D to exit) 
+NOw connaction is made now update the host file
+-------------------------------------------------------
+---
+
+- hosts: controller
+  sudo: yes
+  name: Play 1
+  tasks:
+     - name: Execute command ‘Date’
+       command: date
+     - name: Execute script on server
+       script: test_script.sh
+
+
+- hosts: remotehost
+  name: Play 2
+  sudo: yes
+  tasks:
+     - name: Execute script on server
+       script: test_script.sh
+     - name: Install nginx
+       apt: name=nginx state=latest
+-----------------------------------------------------
+ansible-playbook -i hosts myplaybook.yml  --------------------- to run the playbook conaining 
+
+Host file is the important , we created our own host file and giving it in command
+-----------------------------
+Ansible roles 
+Create a plybook 
+then call the roles.
+Ansible Galaxy -- to find roles . It will show the command to get role 
+Create a new roles folder other then default folder . so that our playbook search our roles folder
+ansible-galaxy init apache --offline
+
+---------------------------------------------Practise------------------------------------------------------------------------------------------------------------------------------------------------------
+sudo apt update --------------------------------------------------------------------------------- get an update 
+sudo apt install software-properties-common------------------------------------------------------ install common software
+sudo apt-add-repository --yes --update ppa:ansible/ansible--------------------------------------- Tell repo about the ansible
+sudo apt install ansible (python will be install along with that)-------------------------------- install ansible.
+sudo nano /etc/ansible/hosts -------------------------------------------------------------------- change the default hosts file
+vi hosts ---------------------------------------------------------------------------------------- add group and IP where to run / install.
+ansible -i hosts controller -m ping ------------------------------------------------------------- to run ping command on controller group containing local IP address.
+ansible -i hosts controller -m command -a 'ls -ltr'------------------------------------------------- to run any command 
+ssh-keygen -t rsa -b 4096 -C "Ansible Controller" ----------------------------------------------- create a private /public key on controller
+cat /home/ubuntu/.ssh/id_rsa.pub ---------------------------------------------------------------- get the key copy it from controller
+vi .ssh/authorized_keys  ------------------------------------------------------------------------ paste on target
+ssh ubuntu@ipaddoftarget ------------------------------------------------------------------------ from controller(cntrl + D to exit) 
+
+hosts file example :----
+[controller]
+13.127.110.246 ansible_connection=local
+52.66.246.77
+[remote]
+52.66.246.77 ansible_user=ubuntu
+
+---  <------------------------------------------------------------------------------------------- three dashes 
+
+- hosts: controller <---------------------------------------------------------------------------- host1
+  sudo: yes       	<---------------------------------------------------------------------------- command will run with sudo
+  name: Play 1      <----------------------------------------------------------------------------play1
+  tasks:             
+     - name: Execute command ‘Date’    <--------------------------------------------------------- task 1
+       command: date
+     - name: Execute script on server  <--------------------------------------------------------- task 2
+       script: test_script.sh          <--------------------------------------------------------- will search for the script where yaml file is
+
+
+- hosts: remotehost
+  name: Play 2
+  sudo: yes
+  tasks:
+     - name: Execute script on server
+       script: test_script.sh
+     - name: Install nginx
+       apt: name=nginx state=latest/absent
+
+ansible-playbook -i hosts myplaybook.yml -vv --------------------------------------------------------- to run the playbook conaining 
+cd /etc/ansible/roles/ ------------------------------------------------------------------------------- create roles in this 	[create your own roles folder to supress default]   
+ansible-galaxy init apache --offline ----------------------------------------------------------------- this will create a role names apache
+sudo apt install tree -------------------------------------------------------------------------------- intall tree to view in tree srcttre
+tree apache ------------------------------------------------------------------------------------------ to view a folder strcture
+see video from here --------- after creating role ------------- create a playbook to call role from. roles folder should be parallel to yml files
+sudo apt remove nginx -------------------------------------------------------------------------------- to remove a package
+when you download the role from ansible galaxy then you can create files.yml , othere file in each folder as per the design you need
+ansible-playbook -i hosts ABC.yml -------------------------------------------------------------------- to run the playbook calling role in it
+	   

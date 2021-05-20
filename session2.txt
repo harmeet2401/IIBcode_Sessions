@@ -1,0 +1,192 @@
+VERSION CONTROLS : ---------------------------------
+
+
+ my repo to take anything https://github.com/harmeet2401/myrepo.git
+git push origin master 
+username : harmeet2401
+password : Gogi!321
+
+
+
+Just to resolve the conflicts between multiple developers.
+Resolve manual version creation.
+Time consuming for multiple developers. Error prone .
+We cannot access older version .
+
+advantage : 
+Easy access to older versions.
+Less error prone . 
+Quick code sharing.
+Automated code merging and easy work out.
+
+The centralized server has a limitation of confined space that the subscriber 
+can have after signing in.
+
+---------------------------------
+Distributed VCS and centralized VCS 
+
+Distributed VCS we have a local repo . We need internet only when we push and pull. not recommended for binary files. versions are maintained. 
+centralized VCS we need internet in all cases. 
+
+DVCS : In this system each system or client communicating with the Server repository will have a separate server and a repo to work . It doesn't directly 
+communicate with the master servers . Need more space . easy to maintain history and version , help in finding bug merge and revert is available . git is one of the example 
+CVCS: In this all the client have a single copy of the code in master server. so the client A has to pull the code before commit
+
+---------------------------------------
+APACHE SVN(subversion) and HelixCode tool for VCS are example of centralized VCS 
+Need INTERNET constantly for any actions. As no local repo is generated for each client 
+
+perforce , git and mercurial are example of Distributed VCS
+GIT hub is a web based repository.
+Is A service that we have a hosted installed on cloud servers.
+Git is a system and git hub is an implementation of that.
+GIT HUB and GIT LAB are example.
+for eg : SMTP server is a software installed with different interface line gmail , outlook etc.
+git hub is owned by  microsoft and bitbucket is owned by atlassian.
+ 
+https://mobaxterm.mobatek.net/download.html
+https://git-scm.com/downloads
+
+Private IP is for private network ssh connect 
+Public IP is used in case we are on public network.
+sudo ssh -i C:\Users\hsingh82\Documents\GitHub\Devops-WS-August.pem harmeet2401@ec2-13-233-233-71.ap-south-1.compute.amazonaws.com
+
+sudo ssh harmeet2401@13.233.233.71  -p 22 -i Devops-WS-August.pem 
+
+Git commands :
+Create a folder .
+git init : it will create a repo
+touch config.xml
+git add  config.xml : add a file to repo to staging
+git commit -m "initial commit" : commit  with a message "initial commit"
+git config --global user.name "Harmeet"
+git config --global user.email "Harmeet@gmail.com"
+git status 
+touch test.txt 
+git add . 
+git commit -m "new file"  : new  file is a message
+git status 
+git log
+
+
+-----Now we can create our repo public ---
+ Login to git hub account
+echo "# myrepo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/harmeet2401/myrepo.git
+git push -u origin master
+
+-------------------------------------
+our local repo doesn't know the rmote repo. Then 
+we need to deal with REMOTE OBJECT
+git remote add origin https://github.com/harmeet2401/myrepo.git
+git push origin master 
+username : harmeet2401
+password : *********
+
+----------------------------------------
+git branch  ---- this will show you the branch currently on
+output : * master
+git branch develop_Harmeet    -- will create a branch locally 
+git branch
+output : * master
+			develop_Harmeet
+git checkout develop_Harmeet ---- will switch the branch 
+ls
+touch dev_test_Harmeet
+git add .
+git commit -m "dev_test"
+git config --global user.name "name"
+git config --global user.email "name@gmail.com"
+git remote add origin https://github.com/harmeet2401/myrepo.git
+git push origin develop_Harmeet
+output : *[new branch] master -> master
+----------------------------------------- merge above branch in master
+git checkout master : switch the branch
+git pull origin master 
+git merge develop_Harmeet
+
+ask for a merge message 
+cntrl + X
+yes
+enter
+git push origin master 
+git branch -d develop_Harmeet : delete the local branch
+git push --delete origin develop_Harmeet
+git pull origin master
+git push origin master
+-----------------
+cloning the repo :
+git clone url : you can pull the entire repo
+git pull origin master : If you dont have the repo files in you folder , then you have to create origin object (git remote add origin url) and then do pull
+
+-------------------------------------------Practice-------------------------------------------------------------------------------------------------
+git init --------- initialize the folder as a repo
+git status --------- to show the status (ryt now the files in repo folder local has not assigned any  version)
+git add filename --- (will move the file to staging area under track) if you do [git add .] --> will add all file dot . means current dir
+git commit -m "Message for the commit" ----- Will move all files from staging to local repo(will commit all files) for specific file give filename. it will auto take the host info  Ubuntu <ubuntu@ip-172-31-40-217.ap-south-1.compute.internal>
+git config --global user.name "harmeet2401" [ Now when ever you do a commit it will use these name and email to show the developer's name ] commit id :d5d30e8
+git config --global user.email "harmeet2401@gmail.com"
+git log ------------- will show you commit logs 
+git remote add origin gitrepourl-------------------- will create an object that will allow you to tell local where to push
+git push origin master ------------------------------- using this origin object to push 
+.gitignore ----------------------------------------- help ignore add or commit or pushing of file to repo in remote
+git clone http://github.com/devopsguru91/DevOpsDemo.git ----------------------------------- clone the repo on local drive / 
+touch testfile.txt
+git add . ----------------------------------------------- will move file (new or modified)to staging area 
+git commit -m "message"
+git push origin master ---------------------------------- No need to create origin object as we cloned a remote repo and it knows where to push
+collaborator tab in git hub : you can add the username and give access to that user in your repo
+git pull orign master -------------------------------------- do pull first 
+git push origin master ------------------------------------- then push
+git pull origin Branch-22.08 -------------------------------- if new branch you create on remote then pull it first 
+git checkout Branch-22.08 ------------------------------------- Then switch the branch for same repo
+git branch Branch-22.08_1-------------------------------------- this will create a new branch 
+git checkout master ------------------------------------------- (first switch to the branch in which you want to merge)
+git merge Branch-22.08_1 ----------------------------------------(Merge data from Branch-22.08_1 into master as we switched to master in above command)
+git push origin master - ----------------------------------------(Now push the master to remote repo master)
+git branch -d Branch-22.08_1 ------------------------------------- delete branch from local branch
+git push --delete origin Branch-22.08_1---------------------------- Delete from remote
+git stash --------------------------------------------------------- use to save the files added but not committed . in case you want to switch branches these files will hide in local
+git stash -u ------------------------------------------------------- use to save the files touched / cat but not git added . these files will hide in local
+git stash pop ------------------------------------------------------ to get the hidden files back 
+git revert commit-id ---------------------------------------------- commit-id you can get it from : ---- git log
+git diff commit-id1 commit-id2-------------------------------------- difference between to branches
+git rebase --------------------------------------------------------- Getting all changes form the remote and getting in your branch
+git pull --rebase master-------------------------------------------- will get all the changes from the remote and then bring it into you master
+git mergtool ------------------------------------------------------- to resolve the merge conflicts
+we can remove the access of developer to commit to master 
+git fork is used to get the copy of some other's project 
+git config --list ------------------------------------------------- will give you config set values(email etc)
+git clone url ----------------------------------------------------- will clone the entire repo and version history
+git branch -a ----------------------------------------------------- to see the branch on local and remote
+git branch sep-rel------------------------------------------------ a new branch will created
+git checkout sep-rel---------------------------------------------- switch the branch
+change the file in your new branch -------------------------------
+git add filechanged----------------------------------------------- move to stage
+git commit -m "Messages" ----------------------------------------- commit it 
+git remote  -v --------------------------------------------------- show you the origin object value
+git push origin master ------------------------------------------- pusdh the changes
+if the branch is not there then git will create i 
+
+link one :https://github.com/harmeet2401/ZendrixRepo.git
+link  two :   https://github.com/harmeet2401/merge-conflict.git
+
+mkdir dev-a 
+mkdir dev-b
+git init -------------------------------------------------- in both above folders
+git remote add origin https://github.com/devops-intellipaat/merge-conflict.git -- in both folders
+git pull origin master --------------------------------------------in both folder
+git pull --rebase origin branchname ------------------------------- in case of merge conflicts
+git mergetool ----------------------------------------------------- if above rebase is in progress
+git rebase --continue---------------------------------------------- to continue rebase after deleting or resolving conflicts
+git push origin branchname
+git config merge.tool -------------------------- https://www.intertech.com/Blog/git-mergetool-specifying-which-merge-tool-git-should-use/
+
+
+ 
+ 
+
+

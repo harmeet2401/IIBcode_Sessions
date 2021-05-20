@@ -1,0 +1,13 @@
+Spring boot interview questions :--------- 
+
+what is the difference between @controller and @restcontroller ?
+what is the difference between @RequestBody and @ResponseBody.?
+What is the @RequestMapping , @GetMapping , @putMapping , @postmapping etc ?
+what is Serveleturiresponsebuilder class ?
+what is ResponseEntityExcpetionHandler class and is the use of it ?
+what is the @ControllerAdvicer ?
+What is the @ExceptionHanlder?
+what is @valid annotation ?
+what is HATEOAS : Hyper media at the engine of application state .
+
+

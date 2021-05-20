@@ -1,0 +1,99 @@
+Need to learn : Chef, Puppet, Ansible, SaltStack
+Intellipaat --------------------------------------------------Devops
+waterfall 
+Agile 
+Lean Modal 
+-------------
+What is software development  :
+
+Requirements
+Design
+Implementation (code)
+Verification 
+Maintenance
+--------------------
+Waterfall :
+Stage to stage model . Each stage should complete to go to next stage .
+It is unidirectional.
+It can not broken in order to speed up the process.
+The requirements are fixed and no ambiguous requirements.
+Well understood deadlines and know the deadline date .
+Documentation is done on design stage .
+
+Cons :
+We get the product out at the end.
+Can take much longer time.
+As everything is fixed , The requirements will change after long time and  will need to be added in the applications.
+-------------------
+
+Agile model : 
+We believe in shorter release cycle .
+Priority request : prioritize the cycle . (Work on important feature .)
+Requirements change we can accommodate 
+Less planning is required for less number of feature.
+In Agile we release feature by feature after getting feedback from the customer.
+The feature are dependent on other features then the dependencies will impose a problem for a complex model .
+knowledge transfer is less effective . Not much Documentations is not there.
+----------------------------------
+Lean model : 
+is same as agile .
+focus on better quality of software. and em-powering the employee to a better learning scope.
+eliminate the unused code .
+assign the developer to a domain
+later decision. less wastage in planning.
+Focus in delivering.
+
+------------------------------------
+Why devops : Issue is different systems used by developers and OPS team 
+Devops is a methodology or an idea that could solve the problem between Dev and ops team .
+
+Devops take advantage of lean or agile method . Devops shortens the release cycle to a day rather then a month .
+--------------------------------------------
+What is devops?
+
+Its a methodology or an idea for solving the problem between the developers and the operations team by automating the task .
+
+Means the dev guy do know how to run the applications and when give it manually to the ops . 
+But the env setup to run the similar application is pretty difficult to create it for the ops team.
+
+Devops will automate the above process
+--------------------------------------------
+Devops Tools ,
+
+Docker is used for containerization, virtualisation and puppet , ansible for configuration .
+Container will wrap with all software required and we can run container anywhere.
+Puppet and ensible : we can install software using these softwares.
+Selenium is used for automation testing suit.
+Nagios : shows dashboard that shows all services(applications) which are on different servers running.
+
+
+Docker : containerization and virtual availability of the containers that will wrap up the app and the os required for it.
+Kubernetes : used to orchestration : which will manage the containers deployed and handles the scaling and elastic . if one pod goes down and another comes up.
+puppet/ansible : used for configuration and installing software .
+selenium : will help in creating automation test suit.
+nagios : it will show the dashboard for monitoring 
+jenkins : for CI/CD pipelines for automating the process of building the app  , deploying the app and testing it in the environment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
