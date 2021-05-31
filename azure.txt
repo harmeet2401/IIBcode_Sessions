@@ -1,0 +1,3281 @@
+AZURE -------------------------------------
+
+https://www.examtopics.com/exams/microsoft/az-900/view/10/
+
+Microsoft azure account :
+harmeet2401@gmail.com  ------------ Deactivated
+harmeet24011992@gmail.com ----- Start on 22 June to 22 july  Deactivated : Badge obtained here
+harmeet.singh24011992@gmail.com ----- Start on 03 August to 3 september Deactivated
+meet1992jan@gmail.com ----------- starts 21 Jan 2021 to 21 feb 2021
+
+------------------------
+meet14764@gmail.com ---- mobile number : 9999374349 will expire on 9th april
+Pass: Gogi!1234
+------------------------
+
+Gog@1234
+
+
+Azure VM : AzureUser
+AzureUser
+Gog@12345678910
+
+Azure Data warehouse
+sqladminuser
+
+
+AZURE FUNDAMENTAL AZ - 900 : Its the tech which provide the platform for users to build, deploy and run their apps using the service provided by azure (IAAS, PAAS)
+-------------------------------------------------------
+
+Cloud computing :
+Service which will provide the resources(Infra , software , platform) required for running our software.
+
+The cloud computing you don't need to mange those data centers and no need to buy physical servers 
+The cloud computing provides , servers , storage , networks, security and then allow the capabilities increase all these as you demand .
+
+Azure Services : The VM  , SQL  data base are all the azure services on the cloud . The Axure provide he platform
+
+Azure platform provide us resources/services to build , manage and deploy the applications and bring it up and running in small amount of time. 
+and will allow users to pay only for what is being used.
+
+A resource is a unit of service / Product that azure provide which will be part of a resource group.
+
+Resource : is anything that we create out of the service and product provided by the azure .
+Resource group will logically collects the resources we create.
+
+Resource locations : data centers (big rooms all around the world regions(central us , west us etc)).
+
+
+when you create the resource following fields are filled :
+
+		name 
+		type
+		resource group name 
+		resource location 
+		resource subscription : ---- that will allow you see the billing of the resource used 
+Always create Resources closer to ur users. Resource availability and costing varies from region to region. 
+
+
+Virtual machine : os disk is already a disk attached to it while creating , and you can add the data disk for storage of the data .
+resource created :: 
+			VM , 
+			VN
+			NSG
+			NIC
+			Storage
+Boot diagnostics ON : will store the information of the VM while booting in a storage account .
+
+usage & quotas :  in this we can see the amount of resources (vCPUs are allowed by azure to allocate) this helps in deciding the size of the VM while creating it .
+
+Gen1 & Gen2 : 
+The cost is same .
+The key major difference : The azure os disk in gen1 is less that 2Tb , where as in gen2 it can be more that 2 TB but no encryptions
+
+Server Manager :
+			
+
+IIS install on windows VM in azure and then copy the public ip address from azure VM configuration and try to hit to IIS it will not open . The IIS listnes at port 80
+
+Types of VM : 
+A series is for dev and test ing 
+B
+C
+D
+E
+G - SERIES  : IS BEST IN PERFORMANCE , STORAGE AND NETWORKING
+
+Pricing Calculator : We can choose the resourcse/Service and the price calc will show you the prize on the basis of some factors(os , region etc) 
+Then open port 80 from Networking options in azure VM information and  then try to hit again here you go !!!!!!!!
+
+state of VM:
+IF you stop the VM from AZURE the Public ip address will be de-allocated keep in mind . To stop that to happen after stopping the VM from AZURE go to public ip Address and change the option to static.
+Even if we stop the VM from inside the VM itself. The azure will show the start and stop button.
+
+vm(linux) :
+
+AZURE MARKET PLACE : BELOW SERVICES WILL BE INSTALLED ON THE VM AND THERE YOU GO SERVICE UP AND RUNNING. This will allows automatic install of software 
+
+WE CAN START UP WORDPRESS APP 
+MICROSOFT WINDOWS.
+
+
+Availability sets  : Create an availability set to provide redundancy for your application. Create two or more virtual machines in the availability set to distribute their placement across Azure hardware clusters.
+
+Now availability setts contains two things fault domain and update domain 
+Fault domain helps in case is hardware failure : for example our vm is deploy to two fault domain in a hardware machine one Fdomain goes down the other comes up
+update domains are used in case of patching or if the comp wants to update the software on machines then our VMS deployed to 2 UDomains will be rebooted sequentially checking 
+the previous one comes up.
+
+Availability Zone : sla 99.99% while creating a VM we can mention the availability zone for redundancy.
+This option shows the the backup when the entire Data center goes down .
+Note  : Availability Zone can be a single DC or a collection of DCs . And availability set works under a single DC (using fault domain and update domain ).
+
+REGION --------> Availability ZONE(collection of DCs or a single DC) ----- >>> Availability SETS(a single DC(update and fault domains)) --------- DC( multiple VMS(on fault domain and update domain)) ------ 1 Vm (app deployed)
+
+Azure Dedicated Host : Will allow you deploy or spun up many VMs only for your organization and no other client can use that host or Physical machine . We can also control the maintenance activities that azure will do and we can tell them to schedule those . This is for large customers for large usage in an organization
+
+For our app to be highly available its our responsibility to spin up the similar vm to other Availability Zone(Azure DC)
+
+WorkLoad : unit of function which can be a app or a service.  Anything that results in a function execution and compute something calls a workload .
+
+In case of a VM : 
+Public IP address are the one which external users uses to access the app deployed in a virtual network 
+Private IP address are the one which are used by resources to communicate with each other with in the Virtual Network.
+
+Azure Virtual Network : 
+We can create a AZURE Virtual Network and keep  the Azure VM in it under a subnet .
+
+You can spun up the VM (linux / windows )
+Virtual network ------> Subnet ------> Each Subnet contains the individual machines (example : VMs)
+
+How to create new VM and put it in other subnet or same Virtual network.
+Add a new subnet.
+
+NSG : Network security group is a resource : Its like a firewall which allow traffic coming in or going out of the virtual machine.
+
+NSG is attach to Network Interface card of single VM or is link to the subnet. If the NSG is link to the entire subnet then all VMs under the subnet will be impacted .
+
+NSG have inbound security rule and outbound security rules.
+
+Default rule for VM : 
+
+Inbound port rules
+AllowVnetInbound : This allow communication between VM with in VN
+AllowAzureLoadBalancerInBound: from Load balancer 
+DenyAllInBound  : 
+
+OutboundPOrt Rules:
+AllowVnetOutBound : This allow communication between VM with in VN
+AllowInternetOutBound: Connection to external machine 
+
+Network security group is a  resources deployed along with the VM which can be linked to the network interface card or to the entire Subnt.
+If the NSG is connected to NI card then only that VM is effected and If NSG is connected to Subnet then all VMS inside that VM effected .
+
+The information required to create the NSG :
+
+Port 
+Priority 
+Protocol
+Source and destination
+
+
+By using the inbound network security rule :
+
+We can allow or disallow the incoming traffic from outside world
+We can add new rules using service tag : Internet for source and then see the reaction from VM
+
+By using the outbound network security rule :
+
+We can allow or disallow the data going out of the VM .
+We can add the outbound rule to block the internet service (internet like google or any site hitting from VM inside).
+
+By Default :
+
+The inbound NSG rules are :
+
+RDP 
+AlloVNET
+Alowload balancer
+Last rule to deny rest 
+
+The Outbound NSG rules :
+
+INternet out rule
+Vnet connection between VMs.
+
+
+Application Security group:  This is also a resource deployed separately which involves the logically grouping of type of servers you have in your VNet 
+
+For example your VNet have two Webservers and and two Database servers We can assign Webservers and data base servers in application group 1 and data base severs in application group 2 .
+
+Now in you virtual NET we can mention the application group instead of NSG .
+
+
+virtual network peering  :  VPN connections 
+
+There are three types of connections :
+
+Azure Virtual network 1 <---> Azure Virtual network 2 in this the two VN will communicate to each other over private IP addresses of each VM for more security we can use Virtual network peering.
+
+point to site vpn connection : This connection happens on internet . So we need a VPN Gateway on azure side which is connected to VN on azure . this is way  `the desktop machine and laptop connects to the Azure virtual netw. In VPN gateway resource we can configure the P2S Configuration. The Public ip address of the laptops should be expose on internet and is contained in VPN gateway to send the traffic back to the Laptop
+
+Site to Site vpn connection  : This connection happens on internet in which the entire DC wants to connect to the azure virtual network. We need similar VPN gateway on azure VN and a router on the DC . The above S2S will allow the on premises DC machine public IP address should be expose on internet which will allow the VPN gateway to send the traffic back to the DCS.
+
+Note  : The communication over private IP address is more secure.
+
+Azure Express Route : 
+
+Storage Account :  Are the azure resources we can use to store data for high availability and backed up in case of the 
+VM failed or go down so the data your hosted app is running on one of your machine will get that data from the storage account 
+when it comes up again .
+
+Blob storage service(account) is used to store object level data .
+
+
+Services in storage account : -- It is IAAS infra as a service
+
+Blob storage service(account): is used to store object level data . Used to store disk file data for VM.
+Table services : Used to store the data for your app which is requesting some user data and write that data to that table service in azure storage account.
+File service : File shares can be accessed by VMs and connect to it using SMB
+Queue service : Queue  can hold the data and used by two apps.
+
+Creating storage account : done 
+
+Types if storage account : 
+GENERAL PURPOSE V2  : This is recommended by Microsoft azure
+GENERAL PURPOSE V1 : old version 
+BLOCKBLOB : If you want to get the premium performance for the block blob or append as we use it in case of logs.
+FILESTORRAGE :  If you want to get the premium performance for the file data access .
+BLOBSTORAGE ACCOUNT : THIS IS A LEGACY ACCOUNT FOR BLOB STORAGE 
+
+Types of blobs : 
+
+Block blobs : Used for images , videos
+Append blobs : Used for logging data 
+Page blobs  : Used for storing the VM disk data
+
+Type of  Access tiers :
+
+Hot :  Frequently used data and higher cost 
+cool : Less frequently used data for atlast 30 days and have less cost then hot tier.
+Archive : This is for data which is rerely used for atleast 180 days.
+		In case if accessing data from archive we have to rehydrate the blob data and access it.
+The storage cost is least in archive tier 
+
+Ascending order of storage cost archive ---> cool  ----> Hot		
+
+Replication(Redundancy) :  Replicating the VMs on different DCs or different zones. Zone is like a single DC or a collections of DCs   and collections of zones is a region
+
+1.Locally  redundancy :  The data is replicated 3 times with in one DC(one physical location) of primary region .
+2.Zone redundancy  : The data is replicated 3 times on Different DCs(zones) . This is used in case of handling DC failure happen in above.
+3.Geo(region) redundancy  : The data is replicated 3 times on different regions (like central US , east india etc). This is used 
+incase if disaster recovery , but the data will be copied to secondary region only if primary goes down.
+4. Read access Geo redundancy  : It is similar to GEO redun but here the similar data is copied to diff region even if the 
+									primary region is up and running in read access mode not wrote .
+5. Geo-zone redundancy :  Data is replicated 3 times in different DCs(Availability Zones) and synchron on secondary regions in case of disaster failure.
+6. read access geo zone redundancy : Data is replicated 3 times in different DCs(Availability Zones) and synchron on secondary regions in read access mode .
+
+
+
+File service :
+
+Azure allow file shares to be access using SMB protocol(server message block protocol)
+The share point we can replace the physical machine with the Azure cloud and remove the headache of company to increase and maintain the servers.
+
+go to connect after adding the file and use below command to add the credentials and map the file share to your local drive and use it :
+
+$connectTestResult = Test-NetConnection -ComputerName datastorage2020.file.core.windows.net -Port 445
+if ($connectTestResult.TcpTestSucceeded) {
+    # Save the password so the drive will persist on reboot
+    cmd.exe /C "cmdkey /add:`"datastorage2020.file.core.windows.net`" /user:`"Azure\datastorage2020`" /pass:`"Y0EIkooz8+qPlNw1858HmAyz4rAcjmUg+heplrumAHELUO1d5mW75Twptg+kVvUZGZHRQfYKhDbgyjkAVi4t1w==`""
+    # Mount the drive
+    New-PSDrive -Name Z -PSProvider FileSystem -Root "\\datastorage2020.file.core.windows.net\demodata" -Persist
+} else {
+    Write-Error -Message "Unable to reach the Azure storage account via port 445. Check to make sure your organization or ISP is not blocking port 445, or use Azure P2S VPN, Azure S2S VPN, or Express Route to tunnel SMB traffic over a different port."
+}
+
+Azure table  service : 
+
+Use storage explorer in azure portal to insert or modify the data in table.
+
+Azure SQL Database :	IPS (IAAS , PAAS , SAAS) The ability of azure to manage the resources increase from IAAS to SAAS.
+	Single data base : In order to create one instance of DB which is PAAS . doesn't have any infra to be managed by the users. The infra and corresponding os will be managed by the Microsoft.
+	Managed instance offers  : It is a IAAS : in which the infra is managed by the users
+		Easy migration from on premises data base to azure DB 
+		100% compatibility with the latest version os SQL data base availability.
+		Also provide VPN which will allow high security by using private ip for communication .
+
+	Elastic pool : In which we collect all the DBs and put it in azure service under shared resources.
+	
+	
+	we have two options of 
+1. IAAS(sql data base on VM) 
+	Install SQL data on the VM you created .
+	Manage the sql version 
+	patch and manage the version 
+	Private ip are there more security.
+	Migration from on premised db to azure is easy .
+	
+2. PAAS (completely managed by azure which can be ) 99.99 % availability.
+	Patching and installing is managed by azure .
+	Migration from on premised db to azure is difficult
+	Have to manage the security using firewall as no Virtual network setting are there .
+	
+Purchasing model : 
+
+	DTU(Data base transaction units ): 
+		Blended version of CPU , memory and IO read write access.
+		Different Service tier.
+	Vcore based : used for prod level.
+		Independently scale the compute storage.
+		Replicas for hgh availability
+
+Basic(cheapest) , standard and premium 	
+
+Implement Azure sql databases : This was an example of PAAS (where we spin up the SQL server hosting SQL database)
+
+Azure provides the SQL azure databases . Each DB has to be hosted on to a DB servers that runs on an IP address .
+We can easily create the sql db service and use the sample database
+
+After creating the azure sql db service :  A default firewall will be installed on sql DB server
+Two resources will be created :
+	1. sql data base 
+	2. Sql db servers hosting the sql Data Base
+
+Query editor(Inbuilt ) : We can open that in our DB in azure and run all the queries we want 
+
+IAAS : Infra as a service 
+
+1. In which we have full control of the infra and the version of SQL data base we will be nstalling
+2. We can create our own Network securiity rules for data transmission 
+3. Easy migration from on premises to Azure managed version sql DB 
+
+Disad :
+1. Need to manage the infra completely 
+2. in order to scale the instances we have to manage that 
+
+
+PAAS : plat form as a service 
+
+1. No need to manage the infra , Azure will full manage that 
+2. High availability with 99.99% sla
+3. No need to worry about scaling up and down , it will be managed by azure 
+
+Disad :
+1. Difficult to migrate the on premise DB with specific version as we dont have the full control
+2. Security can not be manage as it is not part of user maintanable options
+
+
+Azure  sql datawarehouse: relational database services
+
+The data warehouses are used to store data for Analysis purpose . 
+FOr example : if the comp wants to know what the pattern or the data that shows which tab of the webservice the org have is visited most by the user .
+The anaylisis performed will help in improving the webservices on a better level .
+
+
+We can use 
+AZure data factory  : This will help in copying the data from Sql db to sql db warehouse.
+AZure data warehouses : example of Azure data wahehouse is Azure Synapse Analytics.
+
+
+Azure CosmosDB : 
+
+It is Multi model data base which allow user to create multi api data in-side cosmosDB.
+High availability of 99.999% .
+Its a serverLess DB no need to spun up the servers to host the DB 
+Just mention the account and the type of data you need to access fro the database.
+The response time of less than 10ms and very low latency.
+The high availability is achieved by region replication which shows the data copied to different regions.
+
+The costing is done by RU(Request unit)(amount of throughput) which is the blend of memory , space , IOPS .
+The RU we can mention at the time of creating the cosmos DB . Which includes the number of Insert , delete , insert and other operation on Database.
+
+Types of the account : 
+
+Core(sql)  :the data will be in json 
+MongoDB  : The data for mongo will be json or will allow on premises DB to be  migrated 
+Cassandra
+Azure table : similar to the one we saw in azure storage account with one partition key and row key and then add more columns . It require the partition key and row key and it will add the timestamp all by itself.
+Gremlin  : the Graph realted data 
+
+
+As summary the azure cosmosDB provides : 
+
+high availability  99.999%
+Low latency 
+Can host multiple APIs data on to azure.
+Its serverless , its doesn't required any servere to host the database  . We just a need a accouont for that the account types are , table , monngo Api , core sql , gremin and cassandra
+
+
+Azure webapp services :  which we can use to host our web app easily in an PAAS architecture which will not required to maintain the infrastructure or any VM 
+
+
+Common features of cloud platform services :
+
+High availability : that is achieved by means of redundancy in different zones , regions
+High Scalebility : Azure virtual machine scale sets is an example of service .That allow Auto scaling of the storage or the service under different scale set rules . for better performance in case of load balancing and in case of storing data. 
+Cost effective features  : which shows pay for what you use . not more then that .
+Disasters recovery : Which is similar to high availability by replicating the data on different regions. Azure recovery services vault is an resource example that will save the backup point of the data or VM at different time zones whic can be backed up easily . and while doing disaster recovery we can copy from the cache location to the destination location during the disaster.
+Elasticity : which is the feature in which the size of the VM can be changed manually/Automatically using scale sets from azre portal or automatically when a monitoring tool alarms the threshhold breach.
+
+Fault tolerance : It means how well your architecture will response over the fault inject on the infra level .
+So azure VM for example provide high fault tolerance which can be achieved by Availability zones in which the Multiple VM will be deployed to multiple zones (DCs ) and when one Vm goes down the other comes up .
+And the availability sets in which the single VM is divided or arranged under different fault(If One fault domani goes down) and update domains (patch fixing , new installation etc)
+
+Core differn :  IAAS , PAAS and SAAS
+
+IAAS : This structure shows that the use don't have to manage the virtualisation or the server for the hosting . The user have to mainatin the OS and platform level runtime envrironment for the app he is going to deploy  . So plenty of things to be managed by the use for example : Azure VM
+PAAS: This shows the user doen not have to worry about  virtualisation , OS and runtime region , it just have to deploy the applicatio and start processin . for exemple : AZure sql database . The azure will in back end spun u the VM for you install the os required for Azure sql DB and the user just have to host the data in it.
+SAAS: This shows the user doesn't hav to manage anything . for  example gmail , Microsoft office 365 , just use the functionality and configure it 
+
+
+Types of cloud models :
+
+Public cloud : which shows how the service is hosted on the public internet on somebody's DCs 
+This might be a reason that some business is not happy with the structure and ask data to be hosted on the private network 
+But public cloud like   AZURE platform provide many benefits  :
+						--- Auto scalability 
+						--- High Availability
+						--- No need to maintain the infra 
+						--- just need to focus on the spinnng up the app on the infra managed by the Azure platform 
+						--- No need to worry about extedning the resources as you will be paying as you go prtotocol , no need of initial investment
+						--- involves operational cost for example monthly.
+Private	Coud : Which shows how the service will be hosted on the 100%business maintained DCs on these private network . On premises DCs
+						--- More secure than the public cloud hosting 
+						---Need to maintain the infra , storage  , and other resource s required for the computing app
+						--- intial nivestment of the infra is  required 
+						---  involves capital cost
+Hybrid : 
+
+Combination of both :
+						example : the business can ask to host the data on their private cloud and spun up the other computing resource on private cloud which might Auto 
+						scalability or elasticity for the resource as the usage 
+						
+Economics of Scale :
+					The prcess to accomplish task efficiently and under less amount of money or low cost per unit  :
+					
+					Infra products for which we need to buy in case of private set up on private network which involves capEx
+				
+				Network servers 
+				storage  servers
+				Backup and archive servers
+				srvers cost
+				Data centers cost 
+				software license cost
+
+Azure web app service  :
+
+So we have two things IAAS : in which we have to spun up a server (or a VM on azure or on any cloud service ) and then deploy our app after maintaiing the underlying runtime like webserver for the app (tomcat , jboss etc ) to run the app 
+
+Second thing we have is PAAS in which AZURE privides us the service and that service will maintain the underlying VM or ifra strcutre / runtime webs servers for you and you just have to deploy you web app on it .
+
+Deployment Sets : This defines in AZure web app services we can deploy the web app on two different services one is on stage and other is on prod .
+Keep two diff url for example for test and prod domain for the testing to  take place
+
+BEFORE YOU CREATE A AZURE WEB APP SERVICE , WE NEED A APP SERVICE PLAN BELOW WHICH WE CAN CREATE WHILE CREATING THE AZURE APP SERVICE
+
+Pricing very IMPORTANT : https://azure.microsoft.com/en-us/pricing/details/app-service/plans/
+free  : clause of app will run 60 mins a day and will shutdown 60 
+shared  : clause of app will run 240 mins a day and will shutdown 100
+
+basic  
+standar 
+premier
+isolated
+linux 
+				
+Note : There is a limitation for how much time our app will keep on running in case of free it is 60 mins and in case of shared it is 240 mins
+When we swIcth to basic and standard plans the running availability time is unlimited and the SLA got included but the cost per unit also increases .
+
+This azure web app service is pretty cool to deploy and go as a serice to the azure which provide PAAS and no need to handl the server requred for you wen app runs.
+				
+
+Steps to create a sample web app using powershell on azure and then create a azure app service and then deploy the sample app to azure app service using below lin commands
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-java
+
+mvn package windowsapp202:deploy
+
+Azure Virtual machines scale sets : This architecture helps in increasing and decreasing the number of VM in you architecture under certains threshhold set in scale set rules 
+We can easily scale in(for eg : CPU >60%) and scale out( CPU <60%) the VM on different rules which helps  in achieving cost effective computation and remove the certainty of letting unwanted resource sitting idel and adding up to the billing cost
+This scale set is an exaple of elasticity.
+
+Lab vritual machine scale sets : We can actually create it ni azure portal 
+
+
+
+Load Balancer : Used in case of distributing the load from external users to diff VM or servsr :
+
+Important terms :
+
+Balanced pool : Which contains all VM and each VM is associated o each others and that pool is known by the LB.
+Front end Ip : which is the ip used by the LB exposed to the users to hit .
+Health prob  : Is the continues health ping sent by the lB to each VM to check if VM is up or not .
+LB rules : Using which it will decide that load will be sent to which VM .
+
+Create VM 1  and VM2
+: In network section need to select create new IP and then select Standard SKU which will privide public ip more available in zone 
+
+Then create standard azure load balancer add BOth vms , Health probe , LB rules and balanced pool
+
+ARM templates (Template deployment (deploy using custom templates)):  Azure Resource  Manager template will allow you to deploy teh resources to azure portal using JSON templates in automated mode .
+We can directly create the template deployemt for any resources in azure and deploy it and create it instead of the portal manually .
+Benefits of template is we can deploy the changes in the json template and deploy .
+
+Azure load balancer VS azure traffic manager 
+Load balancer is the network router using the IP address . 
+Load balancer routes the requests inside the same region.
+Load balancer doesn't have many routing method
+Azure traffic manager profile service is a global service is independently works across regions.
+Azure traffic Manager profile  work using the DNS of the external user . Its also a service in azure portal
+Azure traffic manager profile as its region independent it can connect to the service/app to your on premises app and also to the azure service in parallel .
+ATM requires a azure traffic manager profle which will contains the two web apps services end point . just like we add the VMs in balanced pool in LOad balancer
+Azure traffic manager can connect or send the traffic across multiple region bcse of DNS bases configuration.
+Azure traffic manager have Many routing methods :
+		1. Priority 
+		2. Weightage 
+1. Priority : means the ATM will send the traffic to the priority one connection in the pool of connections 
+			Once the priority one connection goes down the next priority connection comes up and starts reacting.
+2. Weightage : Means if the user wants to distribute the traffic load evenly over the connections (30% , 30% and 40% ).
+We can do that in case of ATM.			
+				
+example you can create two azure web apps services in azure just need to spun up the srevice and then from visual studio you can change and publish the apps to each web app service on azure portal 
+
+AZURE SERVICE EDITOR IS A NICE TOOL IN WHICH YOU CAN MAKE CHANGES TO THE WEB APP SERVICE DEFAULT PAGE AND GO FOR ATM AND LOAD BALANCER DEMO.
+
+POWER SHELL :  Need windows machine powershell command prompt
+commands 
+Set-ExecutionPolicy RemoteSigned : install remotely signed packages
+Install-Module -Name Az -AllowClobber -Scope CurrentUser : install all azure module for current user.
+Import-Module Az -verbose : Imprt all the azure modules after the install
+Connect-AzAccount : It will pop up a microsoft sign box you can enter the email and sign in 
+Get-AzResourceGroup -Location central-US : to get all the resourc groups in central us
+Get-AzStorageAccount -ResourceGroupName webappsRG : to list down all the storage in that resoure group
+Get-AzWebApp -ResourceGroupName webappsRG  : to list down all the web apps in that RG
+
+Azure CLI :  Specific tools with different command syntax . Need to install it using MSI set up  . Need storage account and file share to activate the cloud shell in azure portal 
+commands 
+az login : to login to azure portal 
+az group list --query "[?location=='centralus']" : will list all the resource group from central us
+az storage account list : list all storage account 				
+				
+				
+Azure cloud shell : which is available on azure portal itself 
+We can run both the CLI commands and the power shell command in azure cloud shell mentioned in above section
+
+
+NOTE : Azure mostly provides the services as PAAS which doesn't required to maintain the underlying runtime OS for the app , db , functions to run. we just have to host these service up 
+Azure Functions : Function app resource
+Small piece of code that we can develop and push it to the azure functions as a service 
+A web app can trigger these functions accordingly 
+Cost effective architecture as for azure functions you have to pay only when they are triggered or run.
+runtime stack means (code language)
+
+Triggers :
+
+Http trigger  : when a get , post request comes
+Blob storage trigger  : when a blob image is stored on to a blob storage account
+queues storage trigger : when a message is stored in a quueeu
+Event Hub trigger  : when ever there is a push of the code to git repo in all above cases we can trigger the AZURE functions.
+
+Service plans for Azure functions :
+consumption plan : as per the consumption
+app service plan : linked to existing app service plan 
+premium plans : high function excutions
+
+
+AZURE Logic apps service : Logic app
+
+This app service will provide you the way to create a work flow using an event driven process .
+We can design the azure logic app with in azure itself.
+We can trigger the logic app by below means : 
+		By http call 
+		by capturing the event on a resource group 
+		By capturing the event on the resources/services
+
+So EVENT GRID is the resource in AZURE which capture  all the event activity happening on the resource group and the resources across azure account .
+
+We can use the event grid to capture the events and run / trigger the workflow as possible.
+
+Monitoring : 
+In Monitoring we can set up or see the metrics of the resources , check the activity log and set alerts on the basis of the threashold and on the basis of the activity happend on a particular resources or resources group or on a subscriptions
+
+
+Azure Log analytics : Log Analytics workspace service
+This is the workspace to which multiple resuorces can send log data to it for centralised the log availability and analyze it in a common workapace.
+First conect the resourcse to the workspace like(a vm)
+Then specify the data which needs to be sent to this workspace .
+Not only the Azure resources but the on premises resourcse or system can also connects to this workspace for sending log data
+
+
+Docker and Container : 
+
+So first we have a collaborated app system where the bonding of application are quite depending. if one app goes down the dependdeny for it may effect the other.
+So then came the VM where each VM contain one app with the same dependency installed on each VM and each app talking to each other with less cohesiveness.
+So then came the containers , now those each app along with the runtime dependencies can be wrapped up in a container and can be run on a single VM . No need of separate VM for each app. Docker engine is also installed on VM which helps in running container .
+
+Kubernetes :
+Its an open source tool which is used for the orchastration(deploying containers , increase decreasing the conainer instances , load balancing of container etc).
+KubeCTL is the command line interface which is used to deploye the container on the VM and brings those VM as part of the kubernetes cluster .
+Kubernetes works on master and slave architecture in which the master node managing the slave nodes by maintaining the container instances.
+
+Azure kubernetes service : Is the azure service which provide kuberentes as a serfvice (PAAS) which eliminates the need of infrastructure required for kubernetes deployement , you can directly bring service up and use it with preparig the ifra for it.
+
+
+
+Azure container instances service  : This service will help you to spun up a container without the need of installing docker and pulling the image and run it on VM.
+This service will do these steps (install docker , pull image and run image) for you .  :)
+
+Docker spun up Two options : 
+IAAS : Spun up an AZURE VM install the docker engine and pull the image run the image create a container
+PAAS: Azure Container service : in which you can select the image name from docker hub while filling up the details and here you go got the container running
+
+
+Azure content delivery network :
+
+This service is for allowing users to access the web service or any app hosted on azure across the globe with low latency or high quality video accessibility. 
+
+
+user ----------------------->  Edge servers ----------------------------> Origin (azure web app) central us
+	 <----------------------- cache the response<------------------------ 										
+east asia							  Under the profile 	
+							  will try to connect
+								the user to the 
+							  nearest region app deployed	
+							  amd get the reponse
+
+Cache happend  in edge servers will then help the users to get a much faster response in case the request is same for which the response is stored in cache.
+Lab for azure content delivery netwrok 
+:
+The end point can be sett for webapp , customer orgin , storage , etc 
+We may need : 
+	CDN profile 
+	That profile will have the url which will be pointing to the url of the hosted app/storage account etc.
+	Whenever some one hit the CDN url which will be exposed to the user instead of the staorage account url.
+	Then the user will be be able to access stirage account file using the CDN
+	This helps in accessing the storage account across the world with actually using the actual url
+	
+	In order to create this CDN profile, please ensure that Microsoft.CDN is listed as a registered Resource Provider in your Azure subscription for this error :
+	We can directly go to the storage account /web app etc to create a new end point and use that 
+
+Azure Adviser : 
+This tool of azure will give you the recommendation based on the categories like , cost , high availability , performance , operational excellence etc for  your running deployed resources.
+
+
+
+Application insights :l==
+
+ Helps the developer to improve the application as per the feedback given by the App insights :
+ 
+ Which shows how the apps is use 
+ How many exceptions are there 
+ For how much time the user stayed on your web paage and on which web paeg 
+ What is request rate  , response rate and failure rates 
+ Trace logs from Web app to app insights 
+ perfromance check for the apps running on windows and linu VM.
+ 
+Two techniques :
+	Funnel technique : in which we can see how the user navigate from one page to another 
+	User flows : 
+			This will ask the question .
+			How the user navigate 
+			How much time user spent on that webpage 
+			Which page is visited by  the user the most 
+	Impact  : This will shows if the page have an impact on your application . If that page is receiving a nice feedback by the users or not
+	retention: how many user retunred to your apps 
+
+We can create an app insights 
+We can send the matrix data from azure resource webapp or from our own premises app to that app insight resource on azure .
+We can turn on the app insight on the azure web app service 
+We can then see the live streaming . : That will shows incoming request and may other stats
+
+Azure devops : A set of tools
+This tool have the follwong resource in it : 
+	Azure repos : to store the code base in remote repos like git etc
+	Azure Pipelines  This will help in building , deploying the app
+	Azure Boards : This will helps in tracking the team work 
+	Azure Test Plans : This will helps in running the testng performance
+	Azure Artifacte  : This will allow team to share maven package , Nuget package  through public and private sources 
+
+Create a azure devops account to see the different stages and resources.
+
+
+
+Azure Devtestlabs : 
+
+Using this resources we can create or spun up multiple VMs inside it and left these running under the policies for the developer to claim and use it for testing purpose .
+Its a quick way for the organizations to prepare a Test lab for new developers to use these VMs for testing of their apps .
+
+Azure machine learning: Which will allow machines to learn on the basics of existing data by analyzing and test the machine learning app modules
+ Azure privide the cloud bases environments to prepare the data , train the data for the machine learning modeules to get deployed and analyse the test data that azure machine learing service also provides . The tool have prebuilt machine learning algorythm 
+Azure HDinsights :For hadoop based modules . Used for big data processing such as data warehouses , batch processing and data science , provides host for progamming languages like , python , java and .net etc
+
+
+Azure cognitive services : This cognitive service api will allow user to extract text , color info , face info and speech info from the data pushed to the cognitive service.
+Compuer vision api : help in identifying the colour
+Face api : face recognition 
+speech api  : for speeech recognition
+
+For Computer vision we can have a small program in visual studio to connect to the cognitive service and and extract the text out of the images form example .
+
+
+Azure IOT hub : this azure service is to take the data signals from IOT enabled devices and stream it to an storage service (storage account , sql database etc).
+This may required :
+ 1. IOT enable device 
+ 2. Azure IOT hub serfvice which will recived the signal after registrying device to IOT hub 
+ 3. Use any stream resources to take the input data from iot hub and out it to other azure service like SQL data base . storage account types(container , queueu , etc) for analysis and improve the performance of your device .
+
+
+Azure active directory : this azure service is responsible to maintain the data base of the users , group and service principles to allow other users to get authenticated and get access to the resource deployed on owners subscriptions in azure .
+users  : : this is for the users 
+groups : this is for the group of ppl which gets auth on the azure subscription and access the resources on azure 
+service principle  : ths will allow users to register their apps in service principles so that they can get auth their app and access the resources
+
+MFA (multi - factor auth) : This techique will allow owner to create an another authetication layer for the users so that aprt from entring the user name and password it will also enter the text or code that sent by microsoft on their mobile devices .
+For that we can go into the active directoty or our account and add a user and enable the MFA and try to log in with that  users.
+
+This MFA feature is avaialbe in security part of Azure AD and then MFA
+New user  :
+User1@harmeet24011992gmail.onmicrosoft.com
+Botu2020	
+
+For multifactor requires emails set by me :
+harmeet.singh24011992@gmail.com
+
+
+Conditional access policies : We need premium p2 to use this features. You can get Azure premiun P2 free trial licanse valid for 30 days 
+Just like MFA we applied above on one user/cloud app . if you wish to apply a policy that ask for MFA for all users then you can create condition access policy srevice in azure .
+
+This option s also present in azure AD
+
+Role based access control : In this feature we have three level of access as follow :
+		1. Access control at subscription level : it means if you add a role based access for a user on subscription level then all resource group and resources under this sunscrition will get impacted 
+		2. Access control at resource group level : Which will impact all the resources under that RG
+		3. Resource level Access control : Which will impact the particular resource (VM , web app, sql data etc).			
+
+Important Different types of roles : https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
+
+
+Azure key vaults : 
+
+Azure key vaults service will allow user to quickly provision , deploy and store the password , keys, certificates and api keys in azure key vaults without the headache to maintain the underlying infrastructure for the service .
+We don't need to buy the software for generating the encrypting software to create an encryption key to encode your data .
+
+following things can be achieved : keys , secrets , certificates
+
+Generate your encryption key to encrypt your data and store it in stirage account 
+Provision , deploy and store the ssl/TSL certificates which are used by your api to do the actions .
+All the keys are maintained  and safeguarded by the azure which are redirected to stirage account .
+
+
+
+Azure policies : 
+
+This service we can use to put some policies and governance i.e means we can put a clause that all the resource group that will be created in the account starts with a tag and all the VM which will be created should be in central us or part of a particular SKU.
+We can create new policy that will not only applicable to existing resources but also to the resource which will be created in future .
+
+
+Locking resources : This will ensure that an accidental deletion of the resources should not take place for ant resource in azure 
+
+Two types of lock :
+	DonotDelete 
+	readOnly
+We Can apply the lck on resource group , subscription and on resource level .
+
+Azure Security Center : 
+
+This is the azure feature that in increasing' the security of the resource on azure and for the apps present on your on -premises (for that you have to install the azure monitring agent) .
+This feature of azure not only check how secure our resource it but also provide the recommendation of how we can make our resource more secure .
+For free trial we get continuos monitoring check for vm only , for standards for we other resource monitoring , (VM , SQL server , app servic e, storage account etc)
+
+
+Azure AD identify protection : 
+
+This service actually helps in flag an unusual activity for User identity . Means the user we gave previledge to this service can actually track the unusual activites .
+
+So it can track below  :
+		Unusual acces from anonymus IP address 
+		Access from infected devices 
+		Users with leaked credentials
+		Access requests from unidentifed location / unfamilier locations 
+		
+Azure AD previledge Identity management  : 		
+This service will allow owner to track the acces for important resources : 
+	Like If we have to give access to a user in  a VM , instead of giving him the access from VM we can give him a time deriven(just in time ) previledge access under a time period set for revoking the access automatically.
+	set MFA for it 
+	Get notification when a prevelidgae acces is given.
+	Condust access review if that access is still required by the users.
+	
+Azure blueprints :
+Blueprints enable quick creation of governed subscriptions. This allows Cloud Architects to design environments that comply with organizational standards and best practices – enabling your app teams to get to production faster.
+oooohk That shows the complete design or drwaing of the template that allow designers to create a complate subscription quickly.
+
+
+Azure Firewall  : That helps from malacious data or request from internet or on premises .
+These request will be filtered . Get scale out automatically when the traffic increases
+Azure Firewall is a managed cloud-based network security service that protects your Azure Virtual Network resources. It is a fully stateful firewall as a service with built-in high availability and unrestricted cloud scalability. You can centrally create, enforce, and log application and network connectivity policies across subscriptions and virtual networks. Azure Firewall uses a static public IP address for your virtual network resources allowing outside firewalls to identify traffic originating from your virtual network. The service is fully integrated with Azure Monitor for logging and analytics. Learn more.
+Project details
+
+Azure DDos Protection  : Distributed Denial of service attack.
+This service will help in the case when the malacious attacked floud the app with network traffic and make the app denial of providing services to exteran trusted users
+Basic and standard plan
+
+Azure Information protection :
+
+To protect the information or emails for the organisation using azure . That includes applying LABELS that azure apply automtically tells that its a trusted one .
+
+
+Azure Advance thread protections :  
+protect the identity on premises active directory AND MONITOR threats by using sensors .
+
+
+GDPR(General Data Protection Regulation) : set of rules that helps in protecting data in the app which is intaking personal data from End users and help it from misuse and exploitation
+ISO(International Organisation of Standardisation ) : This is the internal standard  not government org
+NIST (National institue of standard and Technology) : undertake from measurement from science and technology .
+
+
+Service trust portal :  This portal is not specific to azure . Any framework like Microsoft 365's ausit reports can also be downloaded from there 
+This is the portal from which we can download the azure resource reports that tells that is the resources are upto the mark as per aboce GDPR , ISO or NIST organisations.
+
+
+Azure updates : This page shows the aleady existing resource on azure platform and in preview mode .
+
+If the resource in azure platform is labeled as preview there is less chances that microsoft will provide 100% SLA on it .
+So it is best practise to be up to date with the  upcoming resources and alreayd existing one on azure portal page.
+
+
+Azure support : which will help user to check on microsoft Q and A , stack overflow and other options to question them or get the support in order to know how some resorce work .
+In service health option you can check if any plans are ther , check you reource health and can also create alerts for your resources.
+
+
+Factors that effect the cost : 
+For storage :
+  volume of the data
+  Data redundancy
+  How frequently we are accessing the data 
+  
+For data transfer :
+	Cross region data transfer between resource outbound data is chargeable 
+	Cross region data transfer inbound is free 
+	Data transfer in same region bbetween resource inbound and outbound is free .
+	
+Azure service level agreements :   SLA
+go to the page once .
+<99.99% -- 10 %
+<99% ----- 25 %
+<95% ----- 100%
+
+
+Azure support plans : 
+bsic
+developer
+standard
+professional direct 
+
+Total COst of ownership calculator: 
+This helps in case we move on premise workload to azure and will give you the total cost estimation while moving your project to azure .
+You can add evrything step by step such as ifra , storage etc to calculate the cost you will incure for moving you project from local to azure .
+
+
+How to create a budget in azure :
+We can set the budget in azure for the resources and we can set alert if the budget crosses a threahold we can set .
+
+
+Working with resource tags :
+	Tags helps in managing resources 
+	We can also retrive the resource using tags in filter or something .
+	We can pull billing reports using the tags.
+
+
+Azure Data lake : The Azure Data Lake Analytics service was architected from the ground up for cloud scale and performance. It takes away the complexities normally associated with big data in the cloud and ensures that Data Lake Analytics will meet your current and future business needs. Learn more
+Data lake can help in getting data from million of devices for analytics.
+
+For example azure Iot can take all the sensor information from Iot devices and use azure data lake to store that huge data from million of devices
+
+
+Azure platform is a cloud share platform where multiple companies take portion of there cloud and deploy there services 
+
+For general purpose V2 storage account : will chareg for the ammount of data stored and also on the number of each read and write happened on data
+
+Trust center  : to see how azure platform complies with various standards
+
+
+Azure Management Groups :Using management groups helps you manage access, policy, and compliance by grouping multiple subscriptions together. Learn more.
+
+Azure resource manager :  The azure resource manager is responsible for deploying the resources to azure .
+
+
+Cost and billing : We can set budget alerts for the resources if they crosses a defined limit
+
+Azure Security center  : We can download the regularoty and complience report from Azure Security Center.
+
+Microsoft Online Services privacy statement : Shows that what data is processed and how data is processed and purpose of processing the data .
+
+
+Azure Resource Explorer : 
+Azure Resource Explorer is a new web site where you can easily:
+Discover the Azure Resource Management APIs
+Get API documentation
+Make actual API calls directly in your own subscriptions
+
+Azure Advance threat protection : Is used to secure the the networf hosted on your on premises  using sensors
+
+	
+	
+Need to see the below link on google  : 
+
+Azure web apps subscriptions
+Role based access 
+SLA summary for azure services	
+Azure support plan : 
+			Basic 
+			Developer 
+			standard 
+			Professional direct 
+			
+
+RBAC : Check with all the roles based access 
+Azure web apps  : the sunscription tiers check that ,which include : basic , standard , premium , developer , isolated 			
+	
+	
+
+
+
+
+AZURE Administrator  AZ - 104
+-------------------------------------------------------
+
+Virtual machines : Infra as a service . No need to maintain the underlying infrastructure as the physical hardware is maintained by  azure in different Data centers 
+
+
+How to spun up a virtual : There is a direct VM blade in azure portal 
+
+Info to provide :
+
+subscription
+RG
+region
+Availability zone in case of Zone availability.
+Image name 
+Username and Password
+Default port 
+VN info 
+tagname
+
+
+Resources deployed along with the virtual machine :
+	Virtual network : this is the virtual network in which the machine and disk will reside 
+	Network interface card  : all the traffic flows through this card in and out and get filtered out by the NSG (Network security group)
+	Virtual machine : This is the underlying virtual machine with operating system 
+	NSG  : Network security group that filtered out the data on the basis of the rules mentioned in it 
+	OS Data Disk : For storing the OS files. (premiun SSD is a high performance and data is encrypted when stored in Azure DC)
+	We can also attach an additional data disk .
+	By default all traffic coming inside a VM is blocked . We have to add the NSG rules to allow the incoming traffic.
+	VN and VM will be created in the same region
+	Subnet is a logical separation or the subset of the VN
+	Public IP address is used to connect to VM from internet .
+	And private IP to connect VM with in VN.
+
+Common issue while deploying the VM : 
+	1.Unavailibility of the size in a particular region . Go to subscription -- > usage  and quata -- > you can see the limit or capacity of the resource you allowed as part of the subscription .
+	2. incorrect username and password while connecting to VM : you can use the ip address along with the username and hit the connect 
+
+Connect to VM  : 	
+		Need public IP address of the VM for connecting from internet 
+		OS level disk C: drive is provided
+		Temprary storage disk Any name  of 4 GB is allocated which is removed in case VM is restarted in Azure portal 
+		
+		
+		
+Dealocation of the Vm when stop : 
+
+The temprary storage is lost when restart from azure portal.
+
+
+		
+		
+		
+Generation 1 and Generation 2(latest)  types of VM : 
+https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2
+
+
+
+
+Install IIS : 
+	Connect to the windows VM using RDP port 3389 .
+	Server manager : Add roles and features --> install IIS -- >  role : web server : add feature : next : next : install
+	Browse for localhost IIS will come up .
+	Now take the PUblic IP of VM and hit it from out side  should bring the IIS page up . But NSG doesn't have the rule for port 80 
+	Go to Networking section of VM ,  : fill the details and add a rule for Allow port 80
+	Now when you will hit the public ip of VM it will bring IIS on the browser.
+
+State of the VM : 
+		Shutdown  azure VM  from azure portal , this will deallocate the VM from physical storage in Azure DC and starting it again will assign the same or diff physical storage with diff public ip . 
+		To avoid the public ip change bcse of above , use a static IP address.
+		And also the restart of the VM will remove all data from the temprary disk
+		Shutwodn from with the VM after login , then it will not deallocate the VM but the status of the VM as stopped and public ip will be intact. We can start the VM from azure portal itself.
+	
+
+We can assign a Permament disk to VM while creating the VM in azure. That disk space is  persistent.
+
+Deallocated the VM from physical hardware from Azure it will assign a new public ip .
+But we can control that by changing the property of the ip to static that results in no changing ip in case of VM restarted from azure.
+
+We can build and deploy the window vm , install the IIS on windows machine and that listens on port 80 . RDP can be used to connect .
+
+We can build and deploy the linux vm , install the ngnix on windows machine and that listens on port 80 . SSH port 22 can be used to connect .
+
+Setting up power shell on windows : We can run following command from your local to interact with the resources in azure 
+
+FOr below to set up ru nthe powershell on administration mode
+
+//allow remote singed scripts to run
+Set-ExecutionPolicy RemoteSigned
+
+//installing the azure powershell modules  downloaded
+Install-Module  -Name Az - AllowClobber - Scope CurrentUser
+
+//import all the azure module  : then import
+import-Module Az-Verbose
+
+//connect to your azure account
+Connect-AzAccount
+
+//Get all resource groups 
+Get-AzResourceGroup -Location centralUS
+
+
+Azure CLI in windows : Dedicated CLI we can download from google and is used to work with azure based resources.
+Download MSI.
+then run command cmd / powershell 
+
+az login --- to log in 
+
+az group list --query"[?location=='westus']"
+
+Azure Cloud shell :
+
+	We can run both command (powershell and CLI commands).
+	
+
+Azure Virtual Machines os Disk :
+
+Managed Disk and Unmanaged Disk :
+Un-Managed Disk :  These disk allowed user to store the data in storage account which will be connect to the VM .  In this case you have to maintain the availability all by 
+your self to keep VM activ 
+Managed Disk : These Disks allowed 99.999% availability that azure provides and these are following disk avaiable :
+
+
+4 types of diskstype (managed or unmaged as per the performance required ): 
+
+Standard HDD : storing infrequent access5ble data and non-critical data , storing infrequent access5ble data and non-critical data 
+Standard SSD : Storing data for webservers and lightly used enterprise app data , Storing data for webservers and lightly used enterprise app data 
+Premium : used for Production based perfromance . used for Production based perfromance . 
+Ultra disk: which is the most expensive one and is not avaiable in all regions in world  . IO intensive workload. which is the most expensive one and is not avaiable in all regions in world  . IO intensive workload
+	
+Cost increase  		  : Stan HDD --- > Stan ssd -- > Permium ssd -- > ultra 
+performanec decreases : Stan HDD --- > Stan ssd -- > Permium ssd -- > ultra 
+disk size increase 	  : Stan HDD --- > Stan ssd -- > Permium ssd -- > ultra 
+	
+Adding Data disk to VM : Go to Vm --- > Disk blade 
+Adding a disk will ask you out of the option (storage / snapshot / none) select none for managed disk
+
+When you were creating the  VM , you must have selected the size if the VM for exampe : D2S_v3 or B1ms , B2ms etc . Each size of VM have restriction of adding number of data disk
+to your VM .
+OS Disk is one 
+Number of Data disk added depends on the size of the VM you choose .ook gotcha!!!!!
+
+In case if windows VM , after adding the data disk in VM , connect to your WINDOWS vm and open server manager and click on file storage and share and there you will see the new disk 
+available which we can first initialize and then create new volume out of it.
+
+Ephemeral disk are the os disk  : which doesn't guaranteed no-data loss . Fer ephemeral os disk we got charegd for VM even if the VM is shutdown.
+
+
+Azure cloud shell command :------------
+Azure CLI commands :
+https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest
+
+az vm create --resource-group demogroup --name demovmcli1 --image win2016datacenter --admin-username demouser --admin-password demo@1234567
+az vm create --resource-group demogroup --name demovmcli2 --image win2016datacenter --admin-username demouser --admin-password demo@1234567
+az vm create --resource-group testgroup --name testvm  --image win2016datacenter --admin-username demoouser --admin-password demouser@12344
+az vm create --resource-group demogrp --name demovm22 --image win2016datacenter --admin-username demouser --admin-password demo@Password
+
+Azure powershell commands :
+
+New-AzVm -ResourceGroupName demogroup -Name  demovmpower -Location CentralUS -Image win2016datacenter -Credential (Get-Credential)
+
+this command Credential (Get-Credential)  :will prompt for the username and password.
+
+Powerehll commands to attach a data disk to existing VM : managed disk attachment
+PowerShell command for creating and adding a data disk to a vm 
+
+steps :
+Declare the variable using $
+create a data disk config 
+create the data disk using the config 
+get handle onto Vm to which the disk need to be attached 
+Add the disk 
+update the vm ,,,,,, walllaa disk attached 
+
+$resourcegroup = 'resourceGrp'
+$machinename = 'demovm'
+$location = 'South Central US'
+$storageType = 'Premium_LRS'
+$dataDiskName = 'newdisk04'
+$dataDiskSize = 10
+
+$datadiskConfig = New-AzDiskConfig -SkuName $storageType -Location $location -CreateOption Empty -DiskSizeGB $dataDiskSize
+
+$dataDisk01 = New-AzDisk -DiskName $dataDiskName -Disk $datadiskConfig -ResourceGroupName $resourcegroup
+
+$vm = Get-AzVM -Name $machinename -ResourceGroupName $resourcegroup
+
+$vm = Add-AzVMDataDisk -VM $vm -Name $dataDiskName -CreateOption Attach -ManagedDiskId $dataDisk01.Id -Lun 1
+or
+$vm = Add-AzVMDataDisk -VM $vm -Name $dataDiskName -CreateOption Attach -ManagedDiskId $dataDisk01.Id
+
+Update-AzVM -VM $vm -ResourceGroupName $resourcegroup
+
+
+Disk Snapshot: go to vm -- > disk blade --- create snapshot .it will create a separate resource as a snapshot
+
+Read only copy of the existing disk for trouble shooting .
+The above snapshot can be added as an attached disk to another VM and use that data . as we know while adding the data disk we have three options (storage / snapshot / none ). We can 
+sleect the snapshot .
+This is an easy way to copy the disk from one VM to another. (irrespective of OS )
+Data copy can happen in cross platform OS.
+
+
+Difference between managed and unmanaged disk :
+
+Managed disk :
+Provides 99.999 % availability and azure microsoft will maintain the high availability
+We have to pay the cost for entire size of the disk . As we know we selct the disk  size : 8 gb , 16 gb and 32 gb and so onnn.... We have to pay as for whole space.
+
+Unmanaged  disk :
+The user itself have to maintain the availability of the storage account .
+Where as in this case we have to pay as much as you use protocol.
+Pay as how much you consumed  . exampl e: Storage account 
+
+
+How to create unmanaged disk .
+
+First create a storage account as standard or premium . Need to decide it first . As per this while creating the Vm disk section select os disk type as per you disk you created .
+Then you can create the VM with disk as standard or premium 
+Click the unmanaged disk usage as yes and select you storage account .
+
+How to attach the network interface card to your VM which holds the NSG rules.
+ for that you have to stop the VM or deallocate the vm from network and then click on attach network interface card
+After stopping the vm while ataching the NIC you have to create the NIC as part of the subnet and attach it . 
+
+
+Extensions blade in VM windows : -----------------------------------
+
+1. Custom script extensions for windows :
+
+This tool  are used to download scripts on windows virtual machines .
+These custom scripts extensions will be allowed 90 mins to complete its execution
+Dont place reboot in scripts , as after reboot the extension will not resume.
+These scripts downloaded using the tool can reside in azure storage account or in Git.
+We can create the storage account and save the script below to be run by the custom script extencion
+
+Sample COMMAND to install IIS :
+
+import-module servermanager
+add-windowsfeature Web-Server -includeallsubfeature
+
+Go to the extension blade of Vm , add custom extesion option search for storage account search for container where you uploaded the sctipt for installing IIS and hit run .
+then tak eth public ip of VM and hit and see walllaaa IIS up on port 80 ..
+
+In Extension tab of VM we can download or add any extension software / script needed for windows servers operations.
+As Custom script extention is one of the extensions.
+
+
+2. Powershell desired state configuration :
+	This is also an extension that requires the configuration powershell script in a zip file that shows the command to install IIS .
+	The data file that shows the nodes where to install IIS.
+We can go to extensions and select Powershell desired state extenions and use that to run the deployment to VM
+
+Extensions blade in VM windows : -----------------------------------
+
+
+
+Custom script extensions for linux : In this case we will be using Git hub where the script to install a software is present . We can add a custom sctip extension option here also 
+as we did above but we will use CLI command to apply/run the Git available script to instal the software on linux VM
+
+FOr linux we will be installing ngnix web server .
+
+FOr that we have a 
+1. .sh file in git   use the raw url of git lcation of script to be used 
+2. customextension-configuration file for custom script extension , just like a config file in json format noo need to do that manually. That script will contains the 
+	url for the .sh file download from git and a commantoexecute the .sh script.
+3. In Cloud shell : just import the customextension-configuration file json that contains the url and script name for install nginx.
+4. Then We have to run Azure cli command :
+		az vm extenions-set   command to run above extension 
+	
+git hub :  
+ username : meetbob-web
+ pass : Gog@12345
+ 
+
+CLOUD INIT file : You can see it in advanced tab while creating linux VM
+This a yaml file you can directly mention the package / software you want to install while creating the VM linux
+ 
+#cloud-config
+package_upgrade : true
+packages:
+  - ngnix 
+  
+  
+Other ways tool run Scripts on Virtual machines : 
+1. Serial console is a  text based console to run the scripts .Bring the boot diagnostics on using boot diagnostics blade.
+Step to run  serial console for windows  : easy way to go inside the windows machine and run command
+ press esc + tab
+ enter username an pass for VM 
+ start using commands
+ now you can directly connected to VM remotely
+ 
+2. Go to Run command blade :
+	Directly run the nelow pwershell command for nstallin IIS for windows VM or bash commands for linux Vm
+
+import-module servermanager
+add-windowsfeature Web-Server -includeallsubfeature
+	
+
+
+Azure Backup Service :
+
+This service helps in taking back up of the disk allocated to the virtual machines.
+For that 	
+		 Vm 
+		 Azure back up service 	
+				----  Recovery service vault  is also a resource service
+						--recovery points are created as per the schedule set  in back up policy(daily / weekly or monthly )
+							
+							What you want to recover ? see optiion below 
+							- Recover disk : using a particular snapshot.
+							- Recover VM after the crash happend , duplicate VM 
+							- Recover Files .
+
+						
+				---- Backup policy : schedule for backing up the data and retention of the data to keep .
+				
+
+When ever you go into the backup blade option of Virtual machine you actually back up the vm data in RECOVERY SERVICES VAULT.
+
+
+For that an extension is installed on the VM depends upon the OS(windows or linux ).
+That extension(Shadow script ) that will take application consistent snapshots(Disk snapshots) of the VM.
+The extension (script) that will take the file consistent snapshot of VM.
+ 
+Type of Snapshots/RESTORE POINT 
+	Application Consistent : Disk snapshots , MEMORY , PENDING I/O .
+	File Consistent : file snapshots of all the file at that point present in the disk .
+	Crash consistent : VM snapshot
+
+
+Post backup : In Recovery service vault you will see two options as below .
+
+File recovery  : click on it and then azure will provide you the script which will create the mount point (OS disk and temprary disk) of VM to your local system . You can 
+Unmount the same from azure steps shown .
+
+Restore VM :  Click and you will get the steps to restore from the restore points.We can create a new Vm from the restore point which will copy the data OS from restore point to 
+a storage account (which is the staging area ) and then to newly  created VM , . OOOOOOr we can replace the existing disk data from this restore point for an existing VM 
+ 
+Lab : Use the backup blade of VM 
+
+Go to backup blade 
+enable backup : if you have already existing service recovery vault in the same region as VM select that pr select new .
+Now we can click on backup now to backup the disk , vm or file .
+once it is completed you can recover the file one by one by making mount points on your local that will show two more drives which included the VM os level disk snapshot and the 
+other would be the temp disk snapshot 
+Then you can also recover the VM and select the snap shot from it and get that disk out and attach that to other VM.
+
+Soft delete feature :
+
+This feature happens only in case of azure backup service in which vault is created
+This is the feature of the service recovery vault . If some one by mistake deleted the backup data from the vault , due to the soft delete feature of the valult it will retain 
+that data for 14 days to be undelete.
+For the vault to be deleted couple of things to make sure : go to property of service recovery vault
+			-- in security setting of vault disable the soft delete feature 
+			-- delete the backed up vms data 
+			-- then you can delete the vault
+
+
+
+
+Azure backup -- MAARS AGENT or azure backup agent or azure recovery service agent : see this again 
+
+Really good tool to backed up data not only from the VM in azure but also from the machine running on your on premises.
+
+So steps to start backup :	
+	First download the azure backup agent on you machine 
+	install that .
+	Use/download vault creds file downloading it from the steps to connect to the vault 
+	open the azure backup recovery tool 
+	set up the schedule of backup
+	then click on back up now 
+	select the file or folder or drive that you want to back up 
+	click ok 
+	 
+	 Now you can recover the file backedup on the same machine or on the differnt virtual mchine or On premises system.
+	 Need to download and install the same MAARS agent on that machine 
+	 Connect to the vault using the creds 
+	 Click on recover that 
+	 Select the file backed up in above VM or on-premises system
+	 Here you go the data from another VM on new VM and sys
+			
+Recovery services Vault : 
+	1. This is the azure service that contains the back up data of the service and also provides the soft delete feature due to which the if some mistakenly delete the backed up data 
+	in RSV it will be there in vault present for 14 days with in which we can undelete the backed up data .
+	
+	2. In order to delete the vault the vault should be empty and no service backup should be there .
+	3. For example if you backed up a vm in vault in order to delete the backed up service data completely you have to first disable the soft delete feature and then delete the 
+	Vm backed up data and then delete the empty vault
+
+
+
+Azure to Azure Disaster Recovery : site recovery : use the disaster recovery blade of VM
+you can replicate your virtual machines to another Azure region for business continuity and disaster recovery needs
+Disaster recovery : which involve when an infra for an vm running in a virtual network goes down then the entire set up for the virtual machine is send to the target system . Before it is send to the target system  , it is first replicated to a cache storage and is transferred in case of failover.
+Now for example 
+
+
+Source system 					   																Target system 
+
+								replicated
+		Storage VM1(unmanaged) -------------------------->   cache storage account ------------------------------->Storage account , resource group
+	-------------------------------VN--------------------                                  --------------------------VN----------------------
+															Spun up a new Under Failover
+		VM2                                       vm1--------------------------------------------------->VM1
+	
+	-------------------------------VN--------------------								    --------------------------VN----------------------
+
+For above thing to happen:
+	Site recovery Mobility Service extension is installed on the VM for which we want the disaster recovery to happen. 
+	After continuous replication start happening on the cache storage for the unmanaged disk for the VM to be recover.
+	When the data is processed in target region , crash consistent recovery points are generated from where the VM can be recover
+
+Lab : site recovery  : Region replication:
+
+In this technique a new VM is spun from the data replicated on the recovery service vault when we click on disaster recovery and enable it after choosing the region to replicate on.
+Keep in mind when the replication happen only the data is copied to the target region .
+When a failover happend azure will create a new VM from the recovery points created while backing it up in the target region..
+When the new VM comes up the public ip address will be empty we have to set the public ip to make it operational 
+In above diagram we are looking that only the data from storage account to cache account and then to target storage account happened . Only at the point of failover the VM comes up in target region.
+Then we can go and clean up the failover in side the VM from source region
+
+
+----When you click on disaster starts and it will creates following : 		
+			1. Subscription
+			2. Resource group 
+			3. Virtual Network 
+			4. Availability set 
+			5. And if the VM was part of the availability zone it will be assign a zone number in target region
+			6. Cache storage account which will get the data from source data storage so that it will be replicated to target storage account .
+			7. Replication setting 
+					- Replication policy 
+					- Recovery services vault
+					- Vault resource group
+			8. Extension script : that get install on source VM 		
+			
+After replication completes then go to the new recovery Service vault and then go to replication item blade and then click on test fail over. Once the failover is done azure will create a new virtual machine in target region with similar data backed up in site recovery service vault . So if you had an html file in old vm then aloing with that all data os backed up in target VM , once you verified it , click on clear failover to delete the newly created VM..		
+
+
+Redeploying blade in Virtual machine : As we know our VM is spun up on a host box in a azure DC . In order to deploy the VM to a different host .
+	1. By this feature we can redeploy the VM to a different physical host . This might remove the temprary data loss.
+	2. This technique is help full in case the VM which is hosted on a physical machine on azure Data center. Then it might be difficult to access the virtual machines and we can spun up the VM by re-deploying the VM to a different host.
+	3. We can also get this option on resource group deployment sections which shows all the deployment happened so far and we can re-deploy from there as well.
+	
+	Try redeploying your virtual machine, which will migrate it to a new Azure host. If you continue, the virtual machine will be restarted and you will lose any data on the temporary drive. While the redeployment is in progress, the virtual machine will be unavailable.
+	
+	
+Availability Sets : To increase the availability in case the underlying Physical server goes down because of a fault (network , storage or cooling systems) or by mean of the update(which azure carry out time to time as part of their upgrade task)
+		1. This service provide the benefits to provide 99.95 % availability by spreading the VM machine instances running on different fault and update domains
+		2. The fault domain : helps in deploying Vms on different fault domain on a single physical server which will keep Vm avialable in case of the First fault domain containing VM goes down bcse of cooling failure , network failure or storage failure.
+		2. The update domain will be part of the fault domain  itself which comes into the picture when azure want to upgrade the underlying system .
+			The vm get deployed to the diff upgrade domains 1, 2, or 3 so that the upgrade starts from 0 once its complete then the other vm in other fault domain goes down
+			
+When you host your virtual machines in Azure, you sometimes need to cater to the following
+	An unplanned event wherein the underlying infrastructure fails unexpectedly. The failures could be attributed to network failures , local disk failures or even rack failures.
+	Planned maintenance events , wherein Microsoft needs to make planned updates to the underlying physical environment. In such cases , a reboot might be required on your virtual machine.
+	You can increase the availability of your application by making use of availability sets. Each virtual machine that is assigned to the availability set is assigned a separate fault and update domain.
+
+Fault domains are used to define the group of virtual machines that share a common source and network switch. You can have up to 3 fault domains.
+
+Update domains are used to group virtual machines and physical hardware that can be rebooted at the same time. You can have up to 20 update domains.
+
+Virtual machine scale sets :  In scaling blade go and do the custom scaling to scale up and down rule to set 
+				This is a separate resource that allow user to increase and decrease the identical instances of the VM machine under various conditions
+					First for example if the CPU on one VM increase or > 70% for example then scale out
+					Then if the cpu < 30 % then scale in (decreases) the instances for that virtual machine .
+					
+Proximity placement group : if you want to place your VM as part of the proximity group for faster communication					
+Creating virtual machine scale set using VMSS command 	:
+// Creating a new virtual machine scale set
+az vmss create -n appvmset -g azuredemo --instance-count 1 --image Win2016Datacenter --data-disk-sizes-gb 10 --vnet-name azuredemo-vnet --subnet default --public-ip-per-vm --admin-username demousr
+
+
+// Using custom script extensions for a scale set
+az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-group azuredemo --vmss-name appvmset --settings "appconfig.json" --name CustomScriptExtension
+
+
+The appconfig.json file will contains the url of git where the pwershell command is placed to download from and the powershell commsn to to run the script.
+
+
+This chapter has the configuration file attached as a resource. Please ensure you have a GitHub account and attach the URL for your account. Ensure to have the config file named as appconfig.json
+In the GitHub account , create a repository and add a file named InstallIIS.ps1 that has the following contents
+import-module servermanager
+add-windowsfeature web-server -includeallsubfeature
+
+
+
+lab commands to create virtual machine scale sets 
+// Creating a new virtual machine scale set
+
+az vmss create -n appvmset -g india-test-grp --instance-count 1 --image Win2016Datacenter --data-disk-sizes-gb 10 --vnet-name azuredemo-vnet --subnet default --public-ip-per-vm --admin-username demousr
+
+// Using custom script extensions for a scale set
+
+az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-group azuredemo --vmss-name appvmset --settings "appconfig.json" --name CustomScriptExtension
+
+This chapter has the configuration file attached as a resource. Please ensure you have a GitHub account and attach the URL for your account. Ensure to have the config file named as appconfig.json
+
+In the GitHub account , create a repository and add a file named InstallIIS.ps1 that has the following contents
+
+import-module servermanager
+add-windowsfeature web-server -includeallsubfeature
+
+We can also attach a load balancer in VMSS . Create a Load balancer resource and complete below blades of LOB
+	front end up 
+	backend pool (VMSS)
+	probe health 
+	loadb balancing rule 
+
+Availability Zones : Will help users to provide 99.99 % availability of your applications in case when a complete Datacenter goes down .
+this might happens in case of the physical hardware failure that results in complete zone failure (A zone is a single DC or a collection of DCs)			
+					
+This availability zone option is available while creating a single Vm or while creating the vm scale set . In VM scale we can select multiple availability zones for the intial or increased instances to be part of .
+
+Creatin  vm  image : 	
+Using the capture button of VM we can create an image out of it so that we can create new VM using that image which will contains all the software preinstalled as we did for th vm out of which we created the images.
+
+Note : Before creating  linux based VM images 
+Before creating an image, use "waagent -deprovision+user" to prepare the Linux guest OS on the virtual machine. If you create an image from a virtual machine that hasn't been generalized, any virtual machines created from that image won't start. Click here to learn more.
+
+Note  before creating Windows based Image:
+Before creating an image, use "sysprep /generalize" to prepare the Windows guest OS on the virtual machine. If you create an image from a virtual machine that hasn't been generalized, any virtual machines created from that image won't start. Click here to learn more.
+
+Resizing your VM : 
+
+Two ways to resize :
+1.  By direclty go to the VM size blade and and choose the size of the VM you want to select . if the Size you want is not reflecting then you can stop your VM and se if the size is reflecting or not .
+
+2.  By using power shell :	commands
+		get handle to your VM
+		Assign the new size to the VM
+		Then update the vm with new size configuration.
+You can use the following sample PowerShell commands to change the size of a virtual machine
+
+$vm = Get-AzVM -ResourceGroupName azuredemo -VMName newvm
+$vm.HardwareProfile.VmSize ="Standard_DS1_v2"
+Update-AzVM -VM $vm -ResourceGroupName azuredemo
+
+
+Service Quota and limit :
+			Under s subscription we have limited amount of quota and limit of resources we can create .
+			Go to your subscription and then goto usage + quota blade and then check you quota and you can also increase the quota you want from the blade itself
+
+
+Proximity Placement group :Proximity placement groups allow you to group Azure resources physically closer together in the same region. 
+Proximity (How close the location of fallow vms are present)
+In order to overcome the latency occurence between different virtual machines and let the communication happen quickly .
+This azure service will help users to create all virtual machines in a single proximity groups and worked accordingly.
+Proximity gourp AND vms region should be same 
+
+
+Encryption of disk in VM :
+1. As we know the the data disk os or other on azure vm can be encrypted for hight security .
+2. Tool used to encrypt that data is key vault and the VM  tries to connect to keyvault to use the key to encrypt the data .
+3. The feature of Azure Disk Encryption for volume encryption should be enable while creating the key vault .
+4. As i am the admin we will be seeing couple of permission on keys , secrets and certificates . That we can enable as per our needs.
+
+The virtual machine itself will go to the keyvault check for the feature Azure Disk Encryption for volume encryption enable or not , then create the key iside key vault and then use that key to encrypt the data disk .
+keyvault AND vms region should be same 
+command : az vm encryption enable -g demorg --name proxgrpVM --disk-encryption-keyvault keyvaultdemo0908
+
+Azure app/web app service:
+
+Now there are two ways to deploy your app on azure 
+1. IAAS : in which spun up a  VM and deploy your app there and maintain the lib and all dependencies.
+2. PAAS : in which we just need to spun up the azure app service and publish our application to the service .
+			Benefits of PAAS : Autoscaling is there 
+								No need to maintain underlying infra
+								lib and all dependencies will already be there 
+
+Azure WebApp/App service plan :
+		We have : free ,      			shared ,             basic , 		standard , 			permium , 			isolated  , 		linux ..
+                  60 Mins  				240 Mins 
+				compute everyday		compute everyday	unlimited		unlimited			unlimited			unlimited			unlimited	
+				 		
+Number of app     10					100         		 unlimited       unlimited			unlimited			unlimited		    unlimited
+
+
+Two resource deployed for azure web apps :
+1. web app resource 
+2. app service plan
+
+Azure web app using azure CLI:
+ commands :	
+		Lab - Azure Web App - CLI - Resources
+// First go ahead and create the App Service Plan
+
+az appservice plan create --name webappplan7000 --resource-group azuredemo --sku B1
+
+// Then go ahead and create the Azure Web App
+
+az webapp create --name webapp9000 --plan webappplan7000 --resource-group azuredemo
+
+App service logs : 
+
+The logs can be pushed to a file system and storage account 
+
+Deployment slots : The deployment slots are required to create two slots in azure web app service so that if a change need to be push to the web app , we can push the changes to 
+the new slot keeping the old slot open for the user without any downtime . Once the slot 2 is test with new url then we can swap the slots and provide new changes available for the 
+users.
+
+Lab - Azure Web App - Azure Virtual Network Integration - Resources
+You can use the following resources as a reference for the Azure Web App and Virtual Network Integration
+
+Azure Web app auto scaling : This is one of the feature of azure web app which allo auto or manual scale up of web app instances .
+
+Azure web app integration to Azure VN :
+
+
+1. Use the following SQL statement to create a table in the SQL Server database
+
+create table Course
+(id int,
+name varchar(1000)
+)
+2. Use the following SQL statement to add rows to the Course table
+
+insert into Course(id,name) values (1,'AZ-104');
+insert into Course(id,name) values (2,'AZ-204');
+insert into Course(id,name) values (3,'AZ-304');
+3. You can download the .Net solution which is attached as a resource to this chapter
+
+Ensure to go to the Web.config file in the project and change the connection string.
+
+Azure Custom Domain name for azure web app : This is like creating a user defined name for the azure web app service.
+
+Azure SSL apply on the application in web apps : We can add our own certificate and bind it with the custom domain we added before . That certificate can be self signed or the one we purchased from the cert authority.
+
+Azure Web app backup : service plan should be standard , premium or the isolated. The back up for app service takes place in storage account and that back up will create the restore points and let user to restore the app to existing or new app creation from the restore point.
+
+
+Docker containerization(open source tool)_ : The docker is the tool for containerization in order to run  multiple applications in a single VM running on docker engine .
+A container is a light weight process or a thread that runs in isolation and make use of all the resource in a shared mode.
+
+Three ways to run docker images :
+1. IAAS : where we can spun up the VM linux , install the docker engine and then pull and the image and run the image to create a container
+2. PAAS : container instances : Using this azure services we can spun up the service that will automatically install the OS and docker engine for the users and run the 
+image to create container .
+3. Container Group : This service is used to run the yaml file using az commands and create multiple containers on a single VM , just like a docker compose.
+
+Lab - Azure Container Groups - Resources
+You can use the following resources as reference for Container Groups
+
+1. You can use the below deployment.yml file for the deployment of the container in the container group/instance. Create a file , add the following content and save it as a deployment.yml file.
+
+apiVersion: 2019-12-01
+location: eastus
+name: demogroup
+properties:
+  containers:
+  - name: demoapp
+    properties:
+      image: nginx
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 80
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 80
+type: Microsoft.ContainerInstance/containerGroups
+2. Then execute the following command in Azure cloud shell to deploy the container group
+
+az container create --resource-group test-grp --file deployment.yml
+
+In the connection string, change the server name , user name and password to match your settings.
+
+Azure Kubernetes :
+Before kubernetes we have a term named containers :
+1. In initial times we have all apps running tightly coupled with each other using common dependencies on a single physical host .Because of that if any of the app requires any change in the common dependencies it results in impacting the other apps as well.
+2. So then came the term Virtual machines . In which using a tool like VM WARE/VIRTUAL BOX etc to run the VM and install each of you app on a separate VM
+3. Then some the term named as contaier . So instead of spinning up multiple VM on a VM WARE . We can install DOCKER engine on one VM and spun up container for each of our apps running in isolated workspace. Now containers are very ligtweight processes that uses the OS essential modules provided by the under lying Virtual machine on which the container is running .
+
+Docker installation on Azure VM : Spun up a linux vm connect to port 22 ssh and go inside the VM and follow below steps : IAAS
+		
+install docker using docker install documentation:
+https://docs.docker.com/engine/install/ubuntu/
+You can use the following commands to work with Docker on an Ubuntu Linux virtual machine
+OR
+You can also refer to Docker documentation - https://docs.docker.com/
+// Update the package index
+sudo apt-get update
+// Install packages to allow apt to use the repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+// Add Docker's official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+// Setup a stable repository
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+// Update the package index
+sudo apt-get update
+// Install docker, containerd
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+// Pull the nginx image
+sudo docker pull nginx:1.17.0
+// Create a container out of the image
+sudo docker run --name sampleapp -p 80:80 -d nginx:1.17.0
+
+
+Azure container instance : PAAS 
+This is the azure service that provide you to quick spun up a container on a VM .
+The Vm infra in this service is maitained by azure . No need to install docker engine , pulling images and all.
+You just have to mention the image name in the configuration and then let the azure container instance service to pull the image , install docker maintain the ifra and create a container .
+
+Vanilla Kubernetes :  Orchestration tools - open source 
+
+1. This is an open source platform that will help in maintaining containers.
+2. Maintenance means scaling up and scaling down the containers .
+3. It can also help to store the credentials .
+4. Replace the container or kill the container.
+
+
+For this architecture to work 
+
+We need a master node(VM master) on which the kubernetes is deployed and then spun up new Vm1 and Vm2 .
+On these two child VMs we need to deploy the kuberentes and then use kubetctl(command line tool for kubernetes) to  connect these two VMs with master to create a cluster and start working in a cluster architecture .
+
+Azure Kubernetes Service: PAAS ,
+
+In this service the underlying VM acting as a node is maintained by Azure and the kubernetes tool or serice will help in  maintaining the number of number of nodes in a cluster  and the number of the containers(pods) running .
+
+
+Note : The cluster means collection os VMs which azure maitains when we use Azure Kuberentes
+	   On Each node (VM) we can spun up multiple containers(Pods) for example : image of nginx pulled on one node in cluster and then run to create a pod (container). Just like that Each node can have multiple container instances of diff or same app.
+	   
+	   Cluster(collection of VMs) ---------------- > Node(VM)----------------> Containers(Pods)
+Lab - Deploying to an Azure Kubernetes cluster - Resources
+
+You can use the following resources as a reference for deploying nginx to a Kubernetes cluster
+
+1. Create an app.yml file and enter the following content
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-image
+        image: nginx
+        ports:
+        - containerPort: 80
+2. Create a service.yml file and enter the following content
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: my-app	   
+
+The app.yml and service.yml file are added to a zip file added as a resource to this chapter
+You can use the below commands to work with Azure Kubernetes
+// Create a new resource group
+az group create --name kubernetes --location eastus
+// Create a new Kubernetes cluster
+az aks create --resource-group kubernetes --name companycluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+// Install the kubectl tool
+az aks install-cli --install-location=./kubectl
+// Get the credentials of the cluster
+az aks get-credentials --resource-group kubernetes --name companycluster
+// Get the nodes running in the cluster
+kubectl get nodes
+// Apply the application configuration file
+kubectl apply -f app.yml
+// Apply the sercive configuration file
+kubectl apply -f service.yml
+// Get the list of services running in Kubernetes
+kubectl get services
+
+
+app.yml : ------------------------------
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+
+app.yml : ------------------------------
+
+service.yaml :---------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-svc
+  labels:
+    app: nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: nginx
+service.yaml :---------------------	
+		
+
+
+Azure Kubernete plugin : This is a simple plugin that allows node of the clusters to take the IP address from the azure virtual network or the subnet part of it . The pods running on each node takes the IP address from a different local address space .Network IP translation happens which will allow indirect reachable path for the pods.
+
+
+Azure container network interface plugin : (CNI)
+  This plugin will allow all the pods running on a node in a kubernetes cluster to take the private IP address from the azure virtual network and provides direct access to the pods.
+
+Azure container registry : it is the similar process as we do in case of docker hub , when we push the image post tagging it . Here in azure we can create the azure container registry similar to docker hub and we can push the images we create/tag to the container registry.
+
+This service will allow users to store the images in the similar way we store the images in docker hub .
+Now we will do following steps :
+	apt-get update 
+	apt-get install azure-cli
+	az login 
+	We will pull the nginx images from docker and retag it on a Linux VM where docker is installed .
+	Then push that image to azure container regitsry.
+
+
+
+Below labs will help in attaching or mounting the Disk and file share for persistent storage to the kuberenetes pods as a deployments .
+
+####################################################################################################################################
+Lab 1 - Azure Kubernetes - Configuring storage - Disks - Resources
+The following resources can be used for the previous chapter
+
+1. Ensure to first get the credentials of your cluster in Azure Cloud Shell
+
+az aks get-credentials --resource-group india-test-grp --name democluster900
+
+2. Get the resource group which holds the nodes of your Azure Kubernetes cluster
+
+az aks show --resource-group india-test-grp --name democluster900 --query nodeResourceGroup -o tsv
+
+3. Then create a disk. Ensure to change the resource group details accordingly
+
+az disk create --resource-group MC_india-test-grp_democluster900_centralus --name clusterdisk --size-gb 20 --query id --output tsv
+
+4. Use the following app.yml file as a reference for the deployment of a pod with the use of the disk
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-image
+        volumeMounts:
+          - name: storage
+            mountPath: /mnt/disk1
+        image: nginx
+        ports:
+        - containerPort: 80
+      volumes:
+          - name: storage
+            azureDisk:
+              kind: Managed
+              diskName: clusterdisk
+              diskURI: /subscriptions/fb8df7dc-9736-4272-b4ef-fc1d0928731c/resourceGroups/MC_india-test-grp_democluster900_centralus/providers/Microsoft.Compute/disks/clusterdisk
+			  
+LAB 2 -- Lab-Azure Kubernetes - Configuring storage - Azure File shares - Resources
+The following resources can be used for the previous chapter
+
+1. Set variables for the storage account name and the access key
+
+$AKS_STORAGE_ACCOUNT_NAME="kubestorage9000"
+
+$STORAGE_KEY="sDhvWh3CMRdhfkqFw9Jc4dSpo/AuDWpEJhZsxTDvgfvA8nvY4wYmUfg7NmmrbXqWGYvNl7tYMiFAXUe1zqPTgQ=="
+
+2. Then create a secret in the Kubernetes cluster
+
+kubectl create secret generic azure-secret --from-literal=azurestorageaccountname=$AKS_STORAGE_ACCOUNT_NAME --from-literal=azurestorageaccountkey=$STORAGE_KEY
+
+3. Use the following app.yml file as a reference for the deployment of a pod with the use of the file share
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment-file-share
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-image
+        volumeMounts:
+          - name: storage
+            mountPath: /mnt/share
+        image: nginx
+        ports:
+        - containerPort: 80
+      volumes:
+          - name: storage
+            azureFile:
+              secretName: azure-secret
+              shareName: newshare
+              readOnly: false			  
+####################################################################################################################################
+
+			  
+LAB 3 --Second task is to make the kubernetes cluster to pull the image from container registry and spun up a pod on a node in cluster of 1 nodes.
+	
+Steps takes place : -------------------------------------------------------------------
+
+Use the following commands to practice working with the Azure container registry
+Install the Azure command line interface on the vm 
+curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
+    gpg --dearmor | \
+    sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+// Setup the repository
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+// Update the package index
+sudo apt-get update
+// Install the Azure command line interface
+sudo apt-get install azure-cli
+// Login into Azure
+sudo az login
+// Login in your repository
+sudo az acr login --name appregistry9090
+// Tag your repository
+sudo docker tag nginx:1.17.0 appregistry9090.azurecr.io/nginx
+// Push the image to the repository
+sudo docker push appregistry9090.azurecr.io/nginx
+
+// Update the Kubernetes cluster to access the repository
+az aks update -n companycluster -g kubernetes --attach-acr appregistry9090
+// Delete the existing deployments and services
+kubectl delete services my-nginx-svc
+kubectl delete deployment my-nginx
+
+2. Use the following commands to give Kubernetes the permissions to pull images from Azure Container registry
+
+$AKS_RESOURCE_GROUP="test-grp"
+
+$AKS_CLUSTER_NAME="appcluster"
+
+$ACR_RESOURCE_GROUP="test-grp"
+
+$ACR_NAME="appregistry1000"
+
+$CLIENT_ID=$(az aks show --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
+
+$ACR_ID=$(az acr show --name $ACR_NAME --resource-group $ACR_RESOURCE_GROUP --query "id" --output tsv)
+
+az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID 
+
+
+Steps takes place : ------------------------------------------------------------------- 
+
+
+
+
+Azure Virtual Network : ---------------------------------------
+
+		Virtual Network  <---VN-->
+		----------------------------------
+			  Subnet1       	 Subnet2
+			-----------     	----------
+			VM1(DB)	        VM2(HOsting WEB APP)
+			Private Ip			Private IP
+			-----------     	----------
+			
+			NIC1     			NIC2
+			######				######
+					
+			######				###### ---- > Public ID (10.1.2.24)
+			
+			No Public 
+			IP
+			
+		-----------------------------------
+
+From above diagram we can see that  VM1 have the public ip address which is assigned to the VM1 from the azure pool of public IP to expose that VM to the outside world to access on internet .
+
+NOte :  Public IP : To be used for communications to happen on internet which is assigned to NIC(Network interface card) attached to VM
+		Private IP : To be used for communication to happen between VMs inside a virtual networks or VMs presnet on two or more diff Subnets in a virtual networks.
+
+FOr better architecture we can make the DB srevice hidden to outside world to not assigning the public ip to it and allo web app host to be access to other using its public ip
+
+On the basis of public IP address there are two types of SKU'sL
+
+
+Basic SKU :
+	1. In which the ip address can be static or dynamic
+	2. No support for availability zones rudendency
+	3. NSG network security group can be used operationally to allow or disallow the traffic
+
+Standard SKU 
+	1. In which the ip address should be static . So that in case of zone recovery we can maintain the old ips.
+    2. NSG has to be used
+	3. Zone redundancy is allowed for this.		
+	
+
+
+IP Address : 128 64 32 16 8 4 2 1 --- IP address is of 32 bits 
+
+what is meant by 10.0.0.0/24 It means that first three  10.0.0 is used for network interface and will be fixed and the last digit can very from 0 ...255
+ so it means that the ip address ranges for above value are 		
+				
+10.0.0.0/24  =				10.0.0.1 ----------- >10.0.0.255  (10.0.0 are fixed bcse of first 3 bytes fixed )
+				
+10.0.0.0/16  =              10.0.1.0 ----------- 10.0.255.0  (First 2 bytes will be fixed)				
+				
+							10.0.0.1 -----------> 10.0.0.255
+							
+							10.0.1.1 -----------> 10.0.255.255
+
+
+Azure Virtual Network :
+									
+				This virtual netwrok will contains different subnets that subnets will contains the IP address space out of the addres space that Virtual network have.
+				
+For example : Virtual network : A 
+						Address Space : 10.0.0.0/16  : ----- its means the first 16 bits will remain same and will not take part in the network Id .
+						Subnets address spaces could from below 
+				subnet A		1. 10.0.1.0/24  -------- That says the first 24 bits will same and the ips assigned to VM attached to this subnet can get the IP as follow :
+															10.0.1.12 for example as a private address
+				subnet B		2. 10.0.2.0/24 	 -------- That says the first 24 bits will same and the ips assigned to VM attached to this subnet can get the IP as follow :
+															10.0.2.26 for example as a private address		
+											
+When a virtual machine is attached to any on the sbnet from above virtual network that we wont be able to change any property of the subnet 
+
+You can also add a new address space of you choice in Virtual Network property and use that instead .
+						Address Space : 20.0.0.0/16  : ----- its means the first 16 bits will remain same and will not take part in the network Id .					
+Subnets address spaces could from below 
+				subnet A		1. 20.0.1.0/24  -------- That says the first 24 bits will same and the ips assigned to VM attached to this subnet can get the IP as follow :
+															10.0.1.12 for example as a private address
+				subnet B		2. 20.0.2.0/24 	 -------- That says the first 24 bits will same and the ips assigned to VM attached to this subnet can get the IP as follow :
+															10.0.2.26 for example as a private address		
+							
+Note : The default subnet will take the default first address space for example : 10.0.0.0/24 : The 24 represnt that this subnet took the (10.0.0).0 space for all VM in it.
+
+We can make a VM to not have a public ip addres : This can be achieved by going in to the VM Networking section and click on your network interface card and go to IPconfig and then disassociate the IP address you have for you VM .
+
+FOr making the Public IP address for your vm to be static and to nullify the impact of deallocation the VM and changing the IP address , we can make the Public IP address static by clicking on the Public ip address and change it to static.
+
+
+NSG (Network security Group ) it can be attached to network interface card of a single VM or the subnet
+ : This is a resource thats got attached to the network interface card created along with the virtual machine .
+ : it acts as a firewall for the incoming and outgoing data from the VM .
+ : Some default rules are already addedd to this NSG group --
+		1. inbound rules 
+			a. The  data between VMs with in the virtual network 
+			b. From a azureloadbalancer 
+			c. Denyallinbound from internet
+		2. Outbound rules :
+			a. The  data between VMs with in the virtual network 
+			b. From a azureloadbalancer 
+			c. all data going from VM to the internet
+			
+You can not delete this default rules. 
+You can add your own rules to allow data or traffic to come on a specific port inside VM for your Web apps or any app listening to a port number .	
+
+Source : Can be :
+				Service tag : that can be any of the azure service listed in this service tag list.
+				Any 
+				IP address 
+				App security group .
+Priority : This option tells the NSG to execute the rules as per the priority number . Smaller the number higher the priority and execute first .				
+In case of windows VM you can restrict the login (RDP) to the VM by selecting the IP address in source option.
+
+
+NSG assigned to the Subnet : We can go into the NSG resource and go into the subnet blade and associate the subnet where you want to attach the subnet.
+We can have one NSG_2 attached to the VM NIC and a another NSG_1 on a subnet level.
+
+So the traffic will cross through NSG_1 if it crossed then it will go for the NSG_2.
+
+One more example : one VN contain one subnet named  default and we can attach the NSG to the default subnet which contains two VMs .
+
+Now in the attached NSG we can filter the traffic by adding the inbound port rule and mention the Destination tag to the private IP address of either VM1 or VM2 , so  that the traffic will go to one of the VM and not the other just as an example
+
+Azure Public IP address : 
+1. We can create a new public ip address and attach this to the VM .
+2. But if the above newly created public IP address is of SKU standard then it will requires a NSG group attached to the network interface of the VM to allow any kind of communication to take place .
+3. So When you first deleted the NSG for a VM from its Network Interface card it allows all the network . But when you change the public ip address(basic) with the one you created of standard SKU it will block everything so for that we have to attach the NSG again back to th NIC.
+					
+
+NOte : any kind of IP related changes you want to do go to network blade and click you NIC and here yo go play.!!!!
+
+
+
+NSG on Subnet level :
+1. This NSG on a subnet level will have the highest priority as compared to the NSG attached to the Network interface card of the VM.
+2. Then if a denyallrule is present in the NSG at subnet level , then all VMs communication from outside world will be stopped.	
+
+This attachement to subnet can be done in the subnet blade of NSG created or NSG available.
+
+
+Allowing ICMP Traffic :
+Let' say you want to test the ping request onto a virtual machine from your workstation. Remember a ping request is based on the ICMP protocol.
+As an example let' say you wanted to ping an Azure Windows virtual machine via its public IP address
+ 
+From the command prompt , let's try to ping the machine
+You will actually get a Request time out reply
+ 
+Let's implement the following steps to allow the ping request
+1) Firstly log onto the Azure Windows virtual machine and go to Windows Firewall with Advanced Security
+ 
+2) In Windows Firewall with Advanced Security , go to Inbound Rules and search for the rule "File and Printer Sharing (Echo Request - ICMPv4-In)"
+Right click on the rule and enable the rule
+ 
+
+3) Once the rule is enabled , go to the Network Security Groups for the virtual machine
+Go ahead and add an Inbound port rule
+ 
+In the Inbound security rule add the following details
+ 
+1. Here i am giving the source IP address of my workstation
+2. I am allowing ICMP traffic anywhere on the virtual network
+3. Mention the protocol as ICMP
+4. Place the Action a Allow
+5. Give a name for the rule
+6. Add the rule
+Now if you ping the virtual machine, you should get a response
+ 
+**************For you to connect to the VM you have to add the SSH inbound rule on port 22 for linux VM and port 3389  for RDP for the WINDOWS server . Fr that keep ANy in source and any in destination.**
+
+
+Application  security  groups :
+This azure resource works as a group / collection of web servers that can be a part of the app security Group and then group name can be used as a source name to connect to any VM by adding ASG name in the source section of new inbound port rule .
+
+So its a direct priveledge to all collection of web servers to be a part of a group and get access to a machine as a whole.
+
+Powershell to create vm using user defined subnet ,NSG and NIC
+------------------------------------------------------------------------------------------------------
+Power shell commands to create a subnet , IP address ,virtual network , NSG , NIC and then VM using these NIC.
+
+First : create config for subnet $demosubnetconfig 
+Second : use $demosubnetConfig  to virtual network $vnet
+Third :  create an $demoip address .
+Forth : create $rulesconfig which contains the port number , priority , allow access.
+Fifth :  create $networksecuritygroup using $rulesconfig.
+Sixth : create $NIC using above $networksecuritygroup and $vnet.
+seventh : get-credentials
+eight : create $vmconfig using above configs variable ($NIC) as attachment
+
+// You can use the below PowerShell commands as a reference for creating virtual networks and virtual machines
+
+1. Create a subnet configuration
+$demosubnetConfig = New-AzVirtualNetworkSubnetConfig -Name default -AddressPrefix 10.3.0.0/24
+2. Create a new virtual network
+$vnet = New-AzVirtualNetwork -ResourceGroupName eastgroup -Location EastUS -Name demonetworknew -AddressPrefix 10.3.0.0/16 -Subnet $demosubnetConfig
+3. Create a public IP address
+$demoip = New-AzPublicIpAddress -ResourceGroupName eastgroup -Location EastUS -Name "demo-ip" -AllocationMethod Dynamic
+4. Create a Network Security Group rule
+$RuleConfig = New-AzNetworkSecurityRuleConfig -Name RuleRDP -Protocol Tcp -Direction Inbound -Priority 300 -SourceAddressPrefix "2.49.112.48" -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389 -Access Allow
+5. Create a Network Security Group
+$securitygroup = New-AzNetworkSecurityGroup -ResourceGroupName eastgroup -Location EastUS -Name demonsg -SecurityRules $RuleConfig
+6. Create the network interface
+$nic = New-AzNetworkInterface -Name demonetworkcard123 -ResourceGroupName eastgroup -Location EastUS -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $demoip.Id -NetworkSecurityGroupId $securitygroup.Id
+7. Prompt for the Account credentials for the virtual machine
+$cred = Get-Credential
+8. Create the virtual machine configuration
+$vmConfig = New-AzVMConfig -VMName demovm -VMSize Standard_D2s_v3 | Set-AzVMOperatingSystem -Windows -ComputerName demovm -Credential $cred | Set-AzVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2016-Datacenter -Version latest | Add-AzVMNetworkInterface -Id $nic.Id
+9. Create the virtual machine
+New-AzVM -ResourceGroupName eastgroup -Location EastUS -VM $vmConfig
+
+------------------------------------------------------------------------------------------------------
+Azure Resource Manager Templates : 
+ These are the json files that helps in creating the resources and the configuration required to create a resource .
+ 
+ It conains :
+	Resources : which defines the type of resource to be created : VM , VN , storage account , sql server , kuberneteres , docket container instance .
+	variables
+	Paramters 
+	Output
+
+
+JSONfie 								Azure Resource manager (That helps in deploying that template and creating that resource)
+-------       Submitted it to 			--------
+		------------------------------> 
+-------									--------
+
+
+LAB for ARM templates : Azure Resource Manager Templates (Template deployment is a sevice provided by the azure )
+In Order to learn how the template code looks like. Open the template deployement click on create custom deployment . click on build your own template , then select the resource you want to add from the drop down and click yes , on the right hand side you will get the code syntax added for that particular resource added to ARM template
+
+
+How to use variables in template deployment : 
+ "variables": {
+        "vnetexamplePrefix": "10.0.0.0/16",
+        "vnetexampleSubnet1Name": "Subnet-1",
+        "vnetexampleSubnet1Prefix": "10.0.0.0/24",
+        "vnetexampleSubnet2Name": "Subnet-2",
+        "vnetexampleSubnet2Prefix": "10.0.1.0/24"
+    }
+Just like we have variables in all programming languages we have variable in azure ARM templates which we can use any where using syntax : 
+			"name": "[variables('vnetexampleSubnet2Name')]",	
+
+How to use parameters in template Deployment :
+
+"parameters": {
+        "virtualMachines_demovm_name": {
+            "defaultValue": "demovm",
+            "type": "String"
+        },
+        "disks_demovm_disk1_df5438b821804cf6ad7b961587cb8d9a_externalid": {
+            "defaultValue": "/subscriptions/56634e3a-3910-4046-a224-edf8b695170e/resourceGroups/EASTGROUP/providers/Microsoft.Compute/disks/demovm_disk1_df5438b821804cf6ad7b961587cb8d9a",
+            "type": "String"
+        },
+        "networkInterfaces_demonetworkcard123_externalid": {
+            "defaultValue": "/subscriptions/56634e3a-3910-4046-a224-edf8b695170e/resourceGroups/eastgroup/providers/Microsoft.Network/networkInterfaces/demonetworkcard123",
+            "type": "String"
+        }
+    }
+
+The paramters helps the users to select from the values in a drop down/text box at run time .Just like above example of parameters.
+Three drop downs will be there named as  virtualMachines_demovm_name ,disks_demovm_disk1_df5438b821804cf6ad7b961587cb8d9a_externalid, networkInterfaces_demonetworkcard123_externalid
+
+
+Azure LoadBalancer :Four things to keep in mind for azure load balancer service :
+
+LoadBalancer back end pool : that contains the VMs
+Frontend ip : exposed to the users 
+Health Probe : A regular interval request sending to VMs in back end pool
+LoadBalancer Rules : Under which condition to map the request from the user to the backend pool.
+
+Types of loadb Balancer on the basis of the SKU's Size :
+	Basic LB 
+	Which provides : single vm behind 
+	Availability set 
+	scale set  
+	
+	Standard Load Balancer :
+	Which provides : Multiple vm behind 
+	Availability set 
+	scale set
+	
+
+Types of Load balancer dependning upon the usage of LB
+									<--> VN
+        user1                    -------------------------------------------------------------------------------------
+		                                          ----------------                          -------------------
+									LB1  ------- 	VM 1 WEB app	------------LB2  -------  VM 3 DB 
+		user2 -------------------
+													VM 2 WEB app							  VM 4 DB	
+												  -----------------						     -------------------		
+		user3					 ---------------------------------------------------------------------------------------
+
+
+LB1 is the external LoadBalancer
+LB2 is the internal LoadBalancer
+
+
+Lab LoadBalancer Basic Load balancer:
+The vms should be part of the availability set or a scale set present in same virtual network .
+Need :
+ Two VM windows as  part of the availability set in same VN and is part of the availability set
+ Install IIS on both the VMS 
+ PLace html file in WWW folder on windows each VM
+ disassociate the public IP address for both the VMs as we do not need ip address for VM behind the loadbalancer.
+ create a new public IP address for the load balancer , You can create it as a seperate resource.
+ Create Load balancer resource 
+				-- public
+				-- same region as the vms
+				-- use the public ip created
+				
+				set fronthead ip blade 
+				set backend pool :
+							- add 
+							- select vn 
+							- select vms
+				set health probe 
+							- name 
+							- protocol 
+							- port at which to send  health probe request.
+				set rule :
+							-frontheadip
+							- port front
+							- port backend port
+							-backend  pool
+							-health probe 
+Inbound NAT rules : This is the property of the load balancer that allows user to map the port of the load balancer to any port of the target VMs present in the back end pool .
+This Inbound NAT rules can be used to RDP to the VMs using the public IP address of the load balancer as we know the vms in backend  poll doesn't contains any public ip address of their own .
+
+so for example : 
+
+Load balancer public ip address : 178.0.2.78 
+
+Then we can add two rules for two VMs as follwo 
+
+Rule1  : Send the request to public ipd address : 178.0.2.78:4000 which is then mapped to the 178.0.2.78:3389 port of VM (where 3389 is the port for RDP connaction ) 							
+Rule2  : Send the request to public ipd address : 178.0.2.78:4001 which is then mapped to the 178.0.2.78:3389 port of VM (where 3389 is the port for RDP connaction ) 		
+
+In order to create a load balancer for the webapps you can spun up two VM as IAAS and then run you apps onto the VMs and then bring these two vms in the backend pool of the loadb balancer 
+
+For the inbound NAT rules to work bring the port rule up in NSg for each VM and then go forward					
+
+
+Lab : standard Load balancer : 
+1. In case of basic load balancer the VMs should be part of availability set or scale set , Where as for the standard load balancer the vms are not required to be  part of the availability set or scale set , but all the vms should be part of the same virtual network .
+2. The NSG group for each vms should be attached in order to make them as part of the back end pool.
+3. Ip address attached to the Load balancer should also be of SKU standard.
+4. In case of the VMs in case of standard lB keep both the Vms in same Vnet
+Do as follow :
+ Two VM windows as  part of the availability set in same VN 
+ Install IIS on both the VMS 
+ PLace html file in WWW folder on windows each VM
+ disassociate the public IP address for both the VMs as we do not need ip address for VM behind the loadbalancer. and keep private ip address static
+ create a new public IP address for the load balancer , You can create it as a seperate resource.
+ Create Load balancer resource 
+				-- public
+				-- same region as the vms
+				-- use the public ip created
+				
+				set fronthead ip blade 
+				set backend pool : In case of standard LB it will ask you to select the VN
+							- add 
+							- select vn 
+							- select vms
+				set health probe 
+							- name 
+							- protocol 
+							- port at which to send  health probe request.
+				set rule :
+							-frontheadip
+							- port front
+							- port backend port
+							-backend  pool
+							-health probe 
+
+######################################################################################
+Lab - Basic Load Balancer-Scale Set - Setting up the scale set - Resources
+The following can be used as a reference to the last chapter
+
+1. Add the following to the install.ps1 file
+
+Add-WindowsFeature Web-Server
+Set-Content -Path "C:\inetpub\wwwroot\Default.html" -Value "This is the server $($env:computername) !"
+2. Execute the following commands for custom script extensions
+
+$config = @{
+  "fileUris" = (,"https://webstorelog1000.blob.core.windows.net/script/install.ps1");
+  "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File install.ps1"
+}
+ 
+$set = Get-AzVmss -ResourceGroupName "test-grp" -VMScaleSetName "demoscaleset"
+$set = Add-AzVmssExtension -VirtualMachineScaleSet $set -Name "customScript" -Publisher "Microsoft.Compute" -Type "CustomScriptExtension" -TypeHandlerVersion 1.9 -Setting $config
+Update-AzVmss -ResourceGroupName "test-grp" -Name "demoscaleset" -VirtualMachineScaleSet $set
+######################################################################################
+
+Note : The region is verry important in load balancer public ip , load balancer and all vms should be in the same region.	
+
+** why can't we add a new VM in existing backend pool and allow the same LB rule to hit the third 
+
+Source Network address transaltion : SNAT : As we know the backend VMs don't have the public ips so outbound traffic from them is stopped .In order to achieve the outbound connections from VM which is present in back end poll of LB We can use SNAT which will rewrite the IP address of the Backend pool VM to the public IP address of the load balancer .
+FOr that we have to add the outbound rule in load balancer .
+
+As we know that the health probe is TCP hit on port 80 to the Vms in backend pool . We can also set up or add an HTTP health probe which will hit the App hosted in the Vms in backend pool to get 200 ok response .
+
+
+Load Balancer diagnostics Logs : only for basic lb
+There are two types of logs that got generated only when there is some issue with the backend pool VMs.
+Types of logs : 
+	LBAlertEventLogs
+	LBHealthProbeLogs
+We can stream the logs generated to a storage account , event hub or log analytics 
+You can not able to see metrics  for Basic LB SKU 
+
+Load Balancer Metrics : This visible only in case of the standard LB .
+You can not able to see diagnostics logs for standard LB SKU 
+
+Load Balancer Insight :
+Its an inbuilt feature.
+Is provided as part of the azure monitor
+Can be used to visualize the design 
+Can see details metrics of LB :
+	Availability
+	Data Throughput
+	Flow Distribution
+	Connection Latency.
+
+LoadBalancer Insight : you can see the details metrics and the design of your Load balancer set up	
+
+IN order t delete the AZure LB : First delete as per the sequence  , Azure rule -> health probe , back end pool and the refersh /upgarde the availability set/VMSS to get the updated model and then delete the LB.
+
+Azure Application gateway Service:
+This servce helps in communication and  (routing the traffic to different apps / servers)managing web traffic on OSI layer 7 means at the application layer.
+Provides the technique for maintaining a secure SSL connections.
+The app can reside on Vm , servers .
+Layer 7 Load balancer .
+The request to AGS can be secured using SSL protocol.
+Decryption is done b AGS(Application gateway resource .)
+Autoscalling can be made up so that AGS scale up on the basis of load 
+Enable AGS firewall feature
+Basic points to keep in mind for AGS:
+	Front end ip Address
+	Http listners : logic entity chckkkkkkks for 
+		- basic : lisnten to single domain sites
+		- multi : lisnten to multiple domain sites
+	Routing logic rule :
+		- Basic : directlty send the message to the backend pool
+		- Url based : send the message to the backend pool on the basis of url 
+	backend poolS : contains the apps , webservers or vmS , in this we have to create seperate backend pool for each VM or service . 
+	health probe : the health check done by the LB(AGS)
+
+Lab AGS  : 	Follow the session
+    AGS should be looking for an EMPTY subnet means it will be part of the same VN as the backend pool servers , but it requires empty subnet for himself to work in .
+	
+OSI explain : todo	
+
+The key difference between Azure Load Balancer and the Azure Application Gateways ;
+		The Azure loadbalancer routes the data on the basis of the TCP packet at layer 4 (transport layer )
+		The Azure application Gateways Routes the data on the basis of the application layer data (which contains all the readable header and other values)
+		That header values help the azure application gateways to use the url path and route .
+		The Load balancer is much faster way to route the request as it routes by only looking at the data at transport layer which is lower layer then the application layers.
+		
+Azure appliaction  gateway  can be used for routing the request to different systems in back end pool under path based or DNS name based routing 		
+
+Virtual Network Peering  :
+In order to allow all Vms in different isolated Virtual networks to communicate with each other virtual network peering is used to do that 
+Using virtual network peering we can also allow the VM from VN1 to connect to VM in VN2 and use the application gateways transit to allow the connections to go on to the On premises Servers. 
+There will be two VN peering connections one from VM1 and other from VM2.
+This VPN connections will use the private IP address of the machines present in the VN1 AND VN2.
+This virtual network peering will allow the VMs to communicate via their private address in internet . 		
+	
+Lab Virtual Network peering :
+		Need two Virtua networks
+		Each contans one VM
+		In order to communicate via private address to make a azure backbone connection we can go to any of the VN and configure the peering blade.
+		Gateway transit will allow the traffic from one  VN to VN2 to the on premises servers.
+		When the VPN connections established , there is noneed to add the inbound port rule for the VMs , As a default rule to allowVNETTraffic means all communications between VMs in a vnet will be permitterd . And post VPN both VMs communicate in azure backbone using private ip.
+
+
+Point to Site VPN connections : When you laptop or any other client want to connect to a virtual network using the private IP address to make it secure as possible .
+We can Establish a point to site connection for that.
+Set up required  : Just to simulate we are using below config
+			
+			A virtual Private Network  vn1
+			A Vm1 in vn1
+			Gateway Subnet in vn1
+			A virtual Network gateway : That contains the pool of the ip address out of which the connection will occur . Holds the Root certificate for all the 
+			client certficates to be Authenticated.
+			A client VM vm2 that is on a different Virtual network vn2 which will connect to the vm in vn1 using virtual network gateway.
+			
+	Steps to do the connection :
+			First Create a root certificate on client machine using base 64 encoding 
+			Then Create a client  certificate out of that root certificate 
+			That client certificate and VPN client tool will be used by all the machines which wants to connect to the Machine in the Virtial netwrok VN1
+			Then download the Virtal network conenction installer from virtual network gateway on the client machine and make the connections
+			
+Point to site VPN : is just like our work laptop is getting connected to the optum VNet using anyconnect client tool and we already have the certificate installed on our machines.			
+			
+Site to site VPN connection :
+	This is used mostly in case of routing all the traffic from your own premises data canter to the VM or machine on a virtua network using the private ip addrress for high security reason.
+	All these VN peering , point to site and site to site connections are techinques to make a connection between two isoltaed machine using their private ip addresses. 
+	
+	Wht is required for S to S connection 
+			A virtual Private Network  vn1
+			A Vm1 in vn1
+			Gateway Subnet in vn1
+			A virtual Network gateway : 
+			A Local gateway which will act as a routing device for you On premises VM and contains the public IP address of the VM from whee we need to connect .
+			A client VM vm2 that is on a different Vtirtual network vn2 which will connect to the vm in vn1 using virtual network gateway.
+			
+	
+Application gateway transit : This option allows two virtual networks connected using virtual network peering to communicate to an another machine on premises network with site to site VPN connection 
+
+
+		VN1                                                    VN2    						  VN3
+	----------				Site to Site VPN 				--------   Virtual Net Peering	--------
+				---------------------------------------				<---------------------->		
+    ----------												--------  						--------		
+		/\																						|
+		|																						|	
+		|																						|	
+		|																						|
+		----------------------------------------------------------------------------------------	
+		   In order to connect to the VN1 from VN3 the application Gateway transit option
+		   need to be active on VN2 and the application router option should be active on
+		   VN3 
+		   Also on VN1 the static route should be added for the VN1 to know where to send the 
+		   response back.
+		   
+
+		   
+
+
+Forced tunnelling : This is service or feature in which the traffic from a machine in a virtal network is forced to go through the virtual network before it is sent to the internet . This is the similar thing that happens on our laptops . Where our laptop outbound traffic connected to the optum premises network via VPN forcefully before it is sent to the internet . Some of the blocks of sites happens because of that.
+
+Types of routes :
+
+local vnet routes : in which the VM can send the traffic to the other VM directly with in the same VN
+on premise routes : Inwhich the traffic will go through a routing device that contains the on premises location to route the traffic to the premises network
+default routes  : in which  the traffic is directly sent to the internet .
+
+
+Azure VPN Gateway  :
+
+The Vpn gateway is used for creating site to site VPN connection .
+There are always 2 instances running for VPN gateway that is :
+				Active 
+				Standby
+
+Azure Virtual WAN :
+This azure sevice will allow different data centers in different region  to be connected to all virtual networks across different region .
+
+Azure Express Route circuits : This will results the data flow through the dedicated line between the company network and the azure resources and services.
+This is used by the large companies to allow backbone pipe connections between the company network and the azure resources .
+There are two methods to connect using express route srevice 
+	- Direct connection to the azure global network 
+	- Connect to the serviec provide 
+
+Network Watcher tool : This tool is used to monitor , diagnose and turn on or off the analytic logs for the resource provided as IAAS in azure virtual network .This tool os nt meant for PAAS in azure .
+
+Different tools presnet in network watcher: 
+		Connection monitor : 
+				It supports connection issue using HTTP , ICMP and TCP 
+				It checks end to end connection in azure virtual network .
+				It support both azure and hybrid setup.
+		IP flow control :  Detecting IP traffic filtering problems. Which is done by NSG
+				NSG is involve in it. and this tool helps in checking the data packet flow in and out of the VM and other azure resources 
+				To check if the traffic flow is blocked and is not commuting properly we can use this tool for the purpose.
+		Next Hop tool : Detecting the routing problem of the vMS , Which is done by NIC rules.
+				To check the next stop where the traffic will go and many other things.
+		Connection troubleshoot tool: Diagnose connectivity.
+				To check the connection between the VMs or the vm connecting to the outside world or fully qualified domain name sites .
+				Many things can hinder the connection which includes NSG , firewall etc this tool helps in giving the insight of it 
+		VPN troubleshoot tool:
+				This helps in diagnosing the connction between on-premises to VMs in azure network .
+		Packet Capture tool:Help to capture traffic in or from a VM.
+		NSG flow tool: Give more info about the ingress and egress IP flowing traffic .
+		Traffic analysis: More insight into traffic flow .
+
+Network Security group  logs :  it is part of the network watcher . We can create a new storage account and let the storage accont keep on storing the data or logs for the inbound or outbound data which is flowing from the NSG we have selected.
+
+
+Jump server : It is an another VM Will allow you to connect to the other servers using an intermediate servers .
+Below diagram shows you the VM2 machine as a jump server that can use to RDP into the VM3 and VM1 and for that we dont have to use the public IP address of the 
+VM1 and VM3 machines.
+We will be using the Public IP address of VM2 and VM1 and VM3 will be more secure using private address
+
+					Vnet1
+    ---------------------------------------------
+   |											 | 
+   |       Subnet 1          Subnet 2            |
+   |  ------------------- ------------------     |
+   |  ------------------- ------------------     |
+   |         VM1                      VM3        |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                 Subnet 3                    |
+   |           ---------------------             |
+   |           ---------------------             |
+   |                  VM2                        |
+   |                                             |
+   |                                             |
+   |                                             |
+   |                                             |
+    ---------------------------------------------
+	
+Azure Bastion service  : will be the similar tech and acrhitecture that will act as a jump servers and will receive the  connections for the actual VM which is hosting the 
+Applications . It will maintain the jump servers it will create and Azure will maintain it this is the only difference between jump and bastion service.
+Bastion service will be deployed to a separate network and is PAAS solution upon jump servers
+Need one subnet named AzureBastionService in which the bastion servuce will launch the VM as a jump server.
+
+Azure Firewall : 
+
+We can filter trafic having fullly qualified domain name which we can not do in NSG.
+high built - availability.
+We can also filter the traffic using source IP and target IPs which we can also do in NSG
+Its state full in nature so it knows which packet data to allow 
+It can also send alerts depending upon the IP address and domain name .
+It can be linked to Vnet only . where as the NSG can be attached to VM's NIC and Subnet 
+Need AzureFirewallSubnet because azure firewall service will launch a compute service in that subnet to do the magic traffic route.
+
+Storage account Access technique  :
+
+We can either use 
+	Access keys : which contain two keys initially we can use these keys to connect to the storage account using  Azure storage explorer 
+	SAS: shared access signature at blob level : that will generate a signature url to access the object in container .
+	SAS : we can also generate that in account level : that will open up an options telling about the access to be granted to the queue , table , blob and what will be the access (read , write
+	) and the expiration date. That we can use that SAS URI generated for the account to connect using Azure Storage Explotrer . Once connected that will show you the selected service from 
+	storage account under selected access.
+	Access Policy :  This policy we can create on the container (blob) level such that we can associate that policy to the SAS of the container. This will allow us to maintain the
+	access levels of SAS for the container .
+
+Adding user to active directoty : 
+		Add user user@momo.com
+		Give the read access of storage account to user 
+		Give the blob read access of container(blob) to user .
+		
+Access tier : 
+			On storage account level we have only two options hot and cool
+			On individual blob level we can see all three level of access tiers : hot cool and acrchive
+	Storage acount life cycle management rules which when added will contain some if else conditions for example to delete the blob if not used for sometime or to change the access tier
+    for the blob under other conditions .
+	Object replication : this feature will allow users to copy the blob objects from  one storage account in one region to other storage account in same region or dff region.
+	
+	Azure file shares : this is other service that storage account provide you can create a file share and access and store the files using SMB protocol and also place a mount point
+	on your local machine or other machine to get the file shared.
+		two ways to back up file shares :
+				Manual back : to take a snap shot of the files in the fie share 
+				Recorvery services vault : In this we hav to create a recorvery services vault from azure and create a back up policy for the file share and trigger a manual backup 
+					and then recovery the back up from the backup point created . You will see another folder in the same storage account as a _restore name suffix to it 
+					
+Azure service end point : Problem statment : if one VM1 in VNet1 have storage exploer and wants to connect to a storage account using storage explorer and also the storage account network is not allowing any network 
+to access it , then you wont be able to connect to the storage account from VM1	.
+For that we have to enable a service end point in VM1 and select the Microsoft.storage account as a service end point and click on save 
+					Also add the VNet1 to the network rule for storage account to allow access to happen.
+					
+Azure private end points  : just like service end points we have private ends points which can be created in storage account allowing the vnet1 and VM1 to have authorized connection 
+with the storage account . This private end point is maintained at the blob level. we can do it for othwr service level also (file , table etc)					
+
+Azure File Sync service : 
+
+
+						  Storage account 
+						        | 
+						        |
+						        |
+						 Azure file share (a cloud end point wll also be created.)
+								|
+						        |
+						        |
+			|---------->Azure Fie sync service <----------| 
+			|			this service will create a 		  |
+			|           sync group adding the file share  |
+			|			in it                             |
+			|			                                  |
+			|			                                  |
+			|			                                  |
+			|			                                  |
+			VM1											  VM2 (File sync agenet installed on both the VMs )
+			
+			
+			
+In order to mount the file share on to the VMs , we have to add the server end points onto the azure file sync service where you will see one cloud end point in place .
+The server end points are the VM1 and VM2 folder where we need to map the file share .
+The file added to the servers end points i meant the VMs will be distributed across the servers and the cloud end point(file share). 
+ Note  : if you add a file in file share directly you will not be able to see the file in server end points .
+
+
+Lab ############################################## To upload blob from local using powershell , AzCopy and Azure Click
+
+Transfering blobs to a storage account - commands
+One can use the following practice commands for the prior chapter
+
+1. Using the Azure CLI to create a storage container
+
+az storage container create --name newcontainer --account-name "demostore2090" --account-key "Dbrn8TduNojZrzlKZSLHS8lHC1Yv6BDpG6XfeVBaJ9oKOzZmIBdczNo6vvThVHI4VikW1SqXkhaDr52tNDLxew=="
+
+2. Using the Azure CLI to upload a blob
+
+az storage blob upload --container-name newcontainer --name customrole.json --file customrole.json --account-name "demostore2090" --account-key "Dbrn8TduNojZrzlKZSLHS8lHC1Yv6BDpG6XfeVBaJ9oKOzZmIBdczNo6vvThVHI4VikW1SqXkhaDr52tNDLxew=="
+
+3. Using the AzCopy tool to upload a blob
+
+Download link for AzCopy - https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+
+.\azcopy.exe copy Contents.txt "https://demostore2090.blob.core.windows.net/newcontainer/Contents.txt?sv=2019-02-02&ss=b&srt=sco&sp=rwlac&se=2020-02-26T15:28:04Z&st=2020-02-26T07:28:04Z&spr=https&sig=%2BgDC3AF0hVmzi%2Ff3TN1TwZpOQyojwBbqCng2OyZQOLs%3D"
+
+Lab ############################################## To upload blob from local using powershell , AzCopy and Azure Click
+
+
+Azure AD and Identity Management
+
+Three level of access roles 
+
+Azure Ad ---- > In Which we can create the User IDs , groups , etc for the access to be granted 
+Subscription level ---> this access is on Account level , which can manage the login and logout process and also manage/create multiple subscriptions in a single account.
+RBAC --- > This is the fine grain / granular level access given to user on resource and resource group level .
+
+
+Azure License Purchasing ,
+
+For License purchase the 
+	First Create  a custom domain . exmaple cloud-hub.com
+	second use that custom domain to create  a user that will be part of the Azure AD .
+	Then sign in to the portal for purchasing the license and then license will be applied to that user and that user will be able to use all features provided by that license purchase.
+	
+Dynamic groups in Azure Ad : This is the feature using which we can create a dynamic group with a rule in place that have a query to traverse through the list of the users in the Azure AD and if for example the condition says that add only if the "city" of the user is 'Miami'. Then it will pick up those users and place is as part of the dynaimc group.
+	
+Azure Subscription / Administrator 
+
+Account Admin : That will handle all billing for all subscriptions
+Subscription Admin : 1 per subscription and can will handle the resources under one subscription.
+Co-Admin : which are 200 per subscription : Can add user to co admin role but can not modify anything in above two admin roles.
+
+Manage Azure Subscription : 
+We can create multiple subscription in a single account 
+
+
+
+Management group ----- > Subscriptions ----- > resource groups --- > resources 
+
+
+Management group is a collection of subscriptions 
+Subscription is a collectio of resources groupa 
+resource groups is a collection of resources.
+
+Azure AD tenant : It is created when an azure account is created , it a defaut inatance of azure Ad
+Azure AD : The default Drirectory will be created for the azure AD tenant. We can create multiple directories  in an azure account and under single Azure AD tenant.
+
+A single subscription can be attach to only one Directory at a time .
+
+
+
+Azure Account -->
+
+	Azure AD tenant--> 									   Management Group 
+
+		Azure AD Default (Users/group)   ------------------> Subscription 1 --- > resource Group 1
+		
+		
+		Azure AD Company1 (Users/group)  ------------------> Subscription 2 ---- > resource Group 2
+
+	
+	
+Azure AD Roles : -- 
+
+These are specifically for the Azure AD resources :
+
+Global Admin : Can handle everything from adding the user giving access  assign admin roles to other users .
+User Admin : Can maintain the user level access , manage support tickets , change password for users 
+Billing Admin : manage purchase . subscriptions , support tickets .
+
+
+Go to the Azure AD , go to users , select any user -- > Directoty role ---  > select any role from above .
+
+I guess the account admin is the global admin ? i guess yes
+
+Customr domains for Azure AD : 
+
+This is blade in Azure AD default / Your created Directoty : then add the record or the domain name that you bought from domain provider eg : godaddy.com.
+Now As we know while creating users you can select the default domain name or the custom domain name i addedd.
+
+
+How to join a device to Azure AD : 
+We can spun up the VM and go to that VM and search for join and then click on join to azure AD and enter the user for default directory and join it.
+Then go to the azure portal in azure AD all devices you can see the VM in place.
+
+
+
+Azure Ad device join : we can allow onpremise devices or the azure devices , appliances (VMs) to join the Azure AD.
+
+
+Azure Ad Dynamic group  : This will allow users to join an Azure AD group under a dynaMIC RULE LIKE , city is delhi or regio nis north east etc this we did for addign the users 
+ Dynamically . 
+	Just like adding a user dynamically to the group under a condition , we can also add a device or Machine to the group dynamically under a condition like if the DeviceOstype is windows
+	 then add that device to the group.
+	 
+Password Reset Self service : For this the user need to be part of a group first and then in password rest blade of Azure AD make that group as part of it.
+								Next we need to select the authentication method for the user to receive a reset link , a code or something to get it verified.
+								Need Premium License for Azure AD to utilize above reset feature. For that keep a usage location fo the user for which license need to buy.
+
+RBAC : Role based access control : This will allow specfic user to get the access to specific resource , resource group or to a subscription.
+					
+					Go to Resource --- > go to IAM Access control ---- > Add role and user for it 
+					Go to resource group --- > go to IAM Access control ---- > Add role and user for it
+					Go to subscription --- > go to IAM Access control ---- > Add role and user for it
+			Custome roles : 
+			
+				for example : if you want to assign both the access for compute resources , storage account and the availability sets.
+					Go to subscription --- > go to IAM Access control ---- > Add customr role 
+																				--------> select the roles to be added 
+																					----------> Then save
+																	  -----> Select the customr role name reflecting in the list				
+
+INvite Guest user : for some time we can add a guest user insead of creatig a new user. By entering the email and go to that email and accept the initation.
+			We can also assign a role to the user to invite the guest user , by default the role for the user is anyone can invite the guest user. we can change that , by going in role and administration and select the role for the user.
+			
+Azure monitoring service : Azure Monitor will provide below services :
+				Activity logs : this will contains all the activities that occured on a particular resource 
+				Log analytics workspace : using this we can send all logs from our application and from the resources to a centralized log repo.
+						In this feature we have to create a new resource named log analystics workspace in a region and as its a global resource it took the VMs which can be connectd to it .
+							We can connnect VM from the Analytics workspace or by downloading the analystics workapace agent onto the Machine to manually connect it .
+							 We can run queries to get the data out of it . Schema is defined inside Analytics workapace.
+							  We can also sett an alert in the query section to send an email , SMS etc using the result count from a query .
+					    Custom logs : This will allow user to select the sample file for the logs for which the VM need to send logs to the Analytics workspace , There you can also mention the folder path from where you can pick up 
+						the log files.
+				Alerts using metrics: We can also setup alerts on the basis of capacity usage and threashold sett for a resource .
+				Application insight : This will help the developers or the azure service consumer to enhance the performance of their apps.
+
+Event Hub : This is an data ingestin service provided by azure to ingest data from  various apps.
+Azure Stream analytics jobs : This will create a namespace and in that namespace we can create an Event hub .
+Azure Dashborad : The front page vigits that shows the resources . 
+				
+				
+Blling : ------------
+				
+Log analytics : in which the workspace will hold the data for analysis purpose , will be charged on the basis of data ingestion and data retention period.
+				for pay as you go subscription : free units
+				The data ingestion is 5GB per month
+				The data retention is for 31 days 
+
+
+Application insight is where the data will give feedback about the performance of the webapp running for the developers.
+for pay as you go subscription :  free units 
+				The data ingestion is 5GB per month
+				The data retention is for 90 days 
+
+Metrics : 
+					Standard metrics are free 
+					custom metrics 150 mb per months for genertaing the metrics .
+
+Alret rules	
+Notification 
+
+Blling : ------------	
+
+Azure backup reports : For this one you meant to get the reports for the acure back ip  resource which includes Backup recovery vault /  recovery services vault. for that you need to create Log analytics workspace for the recovery services vault to get all logs to be streamed from the recovery services vault to either Log analytics/storage account/event hub .
+ 			
+Application insight : This resource is used to get the metrics logged from an app running (web app on a VM , azure web app ,etc). 
+
+		For that we can use a VM 
+			That VM an app is rnning on it 
+				Now create a resource named appliaction insight 
+					Get the connection string from appliaction insight 
+						Use that connection string in custom extension option of VM --- > application insight ---> enter connection string .
+							Hit save 
+							Now the VM is direclty connected to the appliaction insight for sending logs to a metics
+							
+Moving a resource from one resource group to another or from one subscription to another 
+
+Note : the location of the resource will remain same when it is moved to a different resource group 
+				There are no such restriction for the resource to be moved 
+				   Some list of the resources which can not be moved 
+					example : the VM which is ujder recovery services vault setted up for back up can not be moved
+For the movement from one subscriptipn to another all the dependent resources must be moved along with it 
+						for example for a vm 
+						: NSG
+						:NIC
+						IP address 
+						Disk 
+						Virtual network 
+						
+Azure Policy  : for governance .Can be assign at subscription , management level , resources gourp level 
+
+ for exmaple : all resource groups should have tags 
+				all VM which will be spun should have tags and have anti malware software install on it .
+				
+Azure Remediation 				 : This is the option in azure policy whicle creating a policy we can mention a remediation that if that particular softwre or missing thing is not there on the resources on which we are applying the policy then the remediation will go ahead and assign/ install that software .
+-----------------------------------------------------------------------
+Microsoft Certified: DevOps Engineer Expert AZ-400	
+
+
+
+-----------------------------------------------------------------------
+Microsoft Certified: Azure AI Engineer Associate : AZ-102
+
+
+
+
+AZURE Developer solutions AZ - 204
+-------------------------------------------------------
+
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-powershell-quickstart
+
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
+
+We can use ARM template from microsoft azure portal while creating the VM 
+
+Template : Its a json file that contains paramters , resoursce and variables
+
+Paramters are the values that we entered while creating the VM which will get pass onto the Template so that it can be deployed to the region and used further
+
+We can also download the template and change it and deploy it in a automated way.
+
+Bitlocker 
+
+Key vault is used to encrypt the disk inside a VM 
+Both the key vault and VM should be in the same region
+
+1. how to encrypt a OS disk inside a VM using key vault : https://docs.microsoft.com/en-us/azure//virtual-machines/windows/disk-encryption-powershell-quickstart
+
+We need  to create a key vault and a VM for that 
+
+A key vault contains : keys , secrets and certificates
+
+Key valut : az1newVmkeyvault
+key : az1newdiskencrytpion
+
+commands : 	
+ * $keyVault = Get-AzKeyVault -VaultName az1newVmkeyvault -ResourceGroupName az1newVm
+ * Assign the keyvaulut uri :	$diskEncryptionKeyVaultUrl = $keyVault.VaultUri
+ * $keyVaultResourceId = $keyVault.ResourceId;
+ * command to encrypt after getting all variables above : Set-AzVMDiskEncryptionExtension -ResourceGroupName az1newVm -VMName az1newVm -DiskEncryptionKeyVaultUrl $keyVault.VaultUri -DiskEncryptionKeyVaultId $keyVault.ResourceId
+ 
+ 
+ 
+2. How to create a VM using powershell
+New-AzResourceGroup -Name myResourceGroup -Location CentralUS
+
+New-AzVm `
+    -ResourceGroupName "myResourceGroup" `
+    -Name "myVM" `
+    -Location "East US" `
+    -VirtualNetworkName "myVnet" `
+    -SubnetName "mySubnet" `
+    -SecurityGroupName "myNetworkSecurityGroup" `
+    -PublicIpAddressName "myPublicIpAddress" `
+    -OpenPorts 80,3389
+
+to see the public ip = Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select "168.62.175.54"	
+	
+command to install windows servers : Install-WindowsFeature -name Web-Server -IncludeManagementTools	
+It will ask for the username and paasword :
+
+hsingh82
+Gog@1234	
+----------------------Batch account--------------
+We can create a batch account which can help us to add batch job to run parallely 
+
+Pre-requisite :
+Batchacount
+storageaccount
+visualstudio 2019
+azure-sample git to download a program and compile it on visual studio and run it .
+
+
+we ran a sample helloworld program to load the batch jobs to azure portal and try to look that using Batch explorer.
+------------------------------Azure container service ------------
+Kuberneted service:
+
+1. To connect to our kubernetes clusters : az aks get-credentials --resource-group kuberesources --name kubeclus1
+2. command to get the node : kubectl get nodes
+3. Then get the yaml file from link : https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
+4. nano azure-vote.yaml
+5. paste the yaml file content
+6. kubectl apply -f azure-vote.yaml :: Deploy the application using the kubectl apply command and specify the name of your YAML manifest:
+7. To monitor progress, use the kubectl get service command with the --watch argument :  -- kubectl get service azure-vote-front --watch
+8. kubectl get service : to see the service up and running
+
+
+How to open kubernetes dashboard :-----
+
+1. Azure cli install : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
+2. command to install kubectl in your CLI : az aks install-cli
+C:\Users\hsingh82\.azure-kubectl
+az login --tenant 1b16b52c-3e35-45b1-abba-d9df01b18fe2  -----> this id you can copy from azure portal active directory --> Manage --> properties--> DirectoryID
+3. get the credentials for azure : az aks get-credentials --resource-group kuberesources --name kubeclus1
+4. to run the kubernetes dashboard : az aks browse --resource-group kuberesources --name kubeclus1
+
+-----------------------------------------------------Docker toolbox to install on azure / Container registry-----------------------
+Create a VM on AWS cloud and install docker onit or install docker tool box on your system .
+Then after install clone : git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
+install docker compose to run the docker-compose command to build a docker-compose file : https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+then run the command : sudo docker-compose up 
+Container registry : its is storage where the running containers we can push to on azure portal
+Create container registry in azure portal and use below comamnd to push the image to azure container registry
+		docker images ls
+		docker tag imagename containerregistryservername/imagename:v1  ------> here you can get authentication error
+		docker push containerregistryservername/imagename:v1
+here you can get authentication error do below
+install azure cli : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?view=azure-cli-latest
+run this command  : apt-get update && apt-get install -y libssl-dev libffi-dev python3-dev build-essential"
+run command : curl https://azurecliprod.blob.core.windows.net/install | bash
+run command : az login
+run command : az acr login --n ContainerRegistryMay
+run command : docker push containerregistryservername/imagename:v1
+run commonad to pull the image back from azure container registry on any other server : docker pull containerregistrymay.azurecr.io/azure-vote-front:v1
+
+--------------------------App-service-----------------------		
+First we created a web app resource under a new resource group 
+then it will create two resources : app service and app service plan
+then we did create a webjob that will run under a cronjob.
+now we are bringing up the logs for app service logs 
+for that we need storage accound
+Now in that storage account : two containers we create one for app and one for IIS.
+--------------------Notification hub --------------------
+we can create notification hub to start sending notification
+
+------------------API app--------------
+it acts as a web app and looks like a web.
+Application programming interfaces which dont have a gui or interface .
+These are web apps to send a respinse back in the for of data 
+
+
+CORES:  Cross Origin resource sharing  . Cross-Origin Resource Sharing (CORS) allows JavaScript code running in a browser on an external host to interact with your backend
+
+
+https://github.com/Azure-Samples/app-service-api-dotnet-todo-list.git
+
+download an API project that is a dotnet todo list project.
+
+Swagger documentation from our api we can post it in : API Definition in azure portal under API app
+
+
+---------------------Function app---------------------
+Create a function app, which lets you group functions as a logical unit for easier management, deployment and sharing of resources. Functions lets you execute your code in a serverless environment without having to first create a VM or publish a web application.
+
+
+choose the .NET option to get the inportal tool
+
+three options:
+
+Webhook url : Will contains a public url , if any one hits that url the function will run
+Timer : RUns under the cron job
+Integrate : input : to read a incoming file when the time trigger happend.
+			output : to generate out when the time trigger happend.
+			
+Durable fucntions :
+					- HTTP starts and call orchastrator below
+					- Durable orchastrator which in turn pass function name and string as a paramters
+					- Durable activity
+---------------------Functions in visual studio : You can create a function project create a template function and publish compiled .dll it to azure. For that you should have Function app already created in azure portal and then publish from studio.
+
+-----------------------------Storage account ------------
+Can store blob, queues , tables and file etc
+Used for VM  for storage hard disk and space allocated to it .
+used for functions app.
+We can directly create a storage account and use it further for various resources.
+We can create tables , queues , files and blob files in the storage account .
+We can keep html files in storage account .
+
+We can connect to azure and tables using cloud tables and do the operation to that tables
+
+https://www.codeproject.com/Articles/1109980/Working-with-Azure-Storage-Tables-using-Csharp
+
+We can connect to the storage as below : 
+		Cloudstorageobject using connection string 
+		  cloudtable client using cloud storageobject 
+			cloudtable using clountclient object 
+			  create a table operation which can be anything(insert , delete , retrieve , update)
+				using cloudtable object execute the query to performa the operation
+
+
+-----------------------------Cosmos DB------------ Multi modelled data DB 
+Azure Cosmos DB was built from the ground up with global distribution and horizontal scale at its core - it offers turn-key global distribution across any number of Azure regions by transparently scaling and replicating your data wherever your users are. You can elastically scale throughput and storage worldwide and pay only for the throughput and storage you nee
+
+Azure Cosmos DB is truly schema-agnostic - it automatically indexes all the data without requiring you to deal with schema and index management. Azure Cosmos DB is multi-model - it natively supports document, key-value, graph and columnar data models. With Azure Cosmos DB, you can access your data using NoSQL APIs of your choice. Azure Cosmos DB is a fully managed, enterprise ready and trustworthy service. All your data is fully and transparently encrypted and secure by default. Azure Cosmos DB is ISO, FedRAMP, EU, HIPAA, and PCI compliant as well
+
+Steps : 
+
+			Need resource grp 
+			account name 
+COSMOS DB  is not free .  0.275 dollar/GB per month 
+			
+advantages of cosmos over table storage :
+
+	Geo redundacny 
+	high response time
+	Enterprise level 
+	Each record added as a document each document is a storage of unstrcture data as json
+Example : https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-get-started#CreateColl	
+	
+Consistency : is one of the proeprty of COSMOS DB.
+
+
+-------------------------------------------------Azure SQL data base------------------------
+DATAbase as a service
+
+SQL data base :
+
+SQL server : 
+mynewdbserver
+username : mynewdbserver
+pass: Gog@1234
+
+Server : mynewdbserverbackup 
+username : mynewdbserver
+pass: Gog@1234
+
+
+
+Geo -replication : is the term or feature used to replicate the DB from one location to another location server 
+under failover conditions
+
+Database name : mynewDB
+
+
+An sql server will host the Databases
+---------------------------------------------------Blob in storage account ---------------------
+Install AZcopy : it is command line to move or copy files in blob storage account withint
+Command :--
+AzCopy /Source : https://Sourcecontainerurl/first  /Dest:https://Sourcecontainerurl/first/images/ /Pattern:filenametobecopied /Sourekey:"key from source container" /DestKey: "Key from destination key"
+
+Copy the file in local memory : 		
+AzCopy /Source : https://Sourcecontainerurl/first  /Dest:https://Sourcecontainerurl/first/images/ /Pattern:filenametobecopied /Sourekey:"key from source container" /DestKey: "Key from destination key" /SyncCopy
+
+---------------------------------------------------Acees and break leases ---------------------
+Aquiring the lease is to acquire the lock on the file ni blob storage .
+We can also break the  lease from the portal or use the lease ID to do the manipulation .
+
+Blob
+Lease ID
+template.zip
+e3a08a37-4d36-4914
+
+---------------------------------------------------Storage Access Tier ---------------------
+hot 
+cool
+archive
+
+The ease of access decreases as we go from hot to archive . You may have to raise a request and azure will let you know.
+The cost of accessing the files from hot to archive also increases.
+
+-----------------------------------------------------------Authentication in Azure----------------------
+
+Azure active Driectory account . Active dir services act as a centralised storage which holds all informations of user from diff domains with in the organisation 
+that provides quick single sign on , easy effective usage of resources , high security with global restrictions , individual profiles. Serves as a platform for services like sharepoint , exchaneg etc .
+
+How to create active directory in AZURE:---------- A new account will be created using azure active Directory
+
+
+Clone from AzureADQuickstarts/AppModelv2-webapp-OpenIDConnect-Dotnet
+
+now we will create a web app that will login to the Active directory we created for single sign :
+Steps:
+Create a test azure active directory 
+Switch to new Directory 
+Clone the above app Clone from AzureADQuickstarts/AppModelv2-webapp-OpenIDConnect-Dotnet and open it in visual studio.
+Create a web app in azure portal
+Publish the web app from you visual studio to azure .
+Then register the published app in new Azure Active directory   app url : https://testingactivedir.azurewebsites.net
+After register the app you will get the app id (client id ) which you have to paste it in web.config file of above code along with redirect url.
+You can then publsh the code web app again to azure portal web app.
+create a new user in another directory 
+username : meet@azjdactivedirectory.onmicrosoft.com
+pass:Qobu4838
+Then refresh the url  https://testingactivedir.azurewebsites.net , sign in using another account 
+Enter john user name and password and sign in wallaaaa!
+Check the 
+Access token 
+ID token options in Another AD  -> App registration -> Authentication
+Then check the claim token wallaaa ! done
+
+
+OWIN is used in the program 
+
+
+---------------------Multi factor Authentication -----------------
+This authentication will allow the user to use something like want a text message with a code or to call you for a code so that you can login..
+
+----------------------------RBAC Role based access control------------
+This access control we can limit the access for a user to the owner subscription resources.
+
+FOr example a new user can be blocked from getting access to other resources from the resource group and just keep it restricted to the access that i need him to be part of.
+
+		
+------------------------------------------Shared access signature..------------
+Anyone who has the access key for a resource like storage account can have full access to it .
+And in shared access signature we can generate the SAS(Shared access signature) key and other options to give read , write or read , write access to the users
+
+A shared access signature (SAS) is a URI that grants restricted access rights to Azure Storage resources. You can provide a shared access signature to clients who should not be trusted with your storage account key but whom you wish to delegate access to certain storage account resources. By distributing a shared access signature URI to these clients, you grant them access to a resource for a specified period of time.
+
+----------------------------Storage acc Encryption ------------------
+Storage service encryption protects your data at rest. Azure Storage encrypts your data as it's written in our datacenters, and automatically decrypts it for you as you access it.
+By default, data in the storage account is encrypted using Microsoft-managed keys. You may choose to bring your own key
+		
+Encryption in transient : In order to get the file managed by microsoft which containd the key for you app. Then you have to configure your storage account to be Secure Transfer required which make the file encrypted to be transfered to you app
+
+--------------------------Azure database encryption ------------------------------------
+Transparent data encryption : It says whenever we insert the data to Azure db it seemslessly encrupt the data and enter it and when ever some select the data it decrypt the data and send it back to user . That encryption and decryption is transparent to us.
+
+We can set the TDE on two level :
+	One is on DBserver level which provide us to choose microsoft managed encrypt or customer level encryption.
+	Second is on DB level which we can turn on or off depending upon the requirements.
+	
+In resource group you can click on unhide and results in showing the master DB for which you can not change the TDE.
+
+------------------------Azure Key valut-----------------
+Key vaults contains :
+	Keys  : 
+	Secrets : Works it like , url and secrets that you saved . the client can use that url to know the secrets and use it further.
+	Certificates : used for signing in using ssl or https
+
+---------------------------Scaling------------------
+Scale up and down will help is saving money.
+For a web app , we did just scale up by selecting the tier from F1 to B1 . B1 tier allow  manual scaling up the instances.
+We can then scale out which gives the options to scale up manually . Auto scaling is not supported in B1 tier. 
+
+For Autoscaling we can select the S1 production tier that helps in autoscaling upto 10 instances and work accordingly.
+
+Relative measure of performance is shown by ACU : Azure computing units.
+
+For autocancel we sett the rules like cpu % >60 % that scale the instance by 1 to max instance of 7
+We can add multiple rules : We can add like cpu %<20 % then scale down the instance by 1 to default values
+
+--------------------------Scaling a virtual machines-------------------------
+VM scale set	: if your app is running inside the VM. The similar rule can be applied to it and increase and decrease the instances
+
+Load balancer : we can create a resource Load Balancer 
+First you have to create a VM under a resource grooup and then create a LB and then add the VM into the Backend pool of Load balancer
+
+----------------------------------Transient faults ---------
+Transienft faults : network failure or some tiny failure . As a devloper you have to do retry after waiting for sometime . After max retry you have to roll over the updated records or update the records that how many completed .
+
+Tightly coupled applications .
+
+As a developer we have to handle the error such that retry , put it in queue and even after max retry it doesn't work then there should be the concept of dead letter queue or poison queue to hold that records and tell ther support agent about it 
+
+Advantaged :
+
+	Manual/Auto sclaing for peek period traffic . getting rid of the waste in case of cooling period.
+
+Disadvantages : 
+	Some down time or faults 
+	
+Scaling up/down : changes configurations.
+		
+
+
+---------------------------redis Caching(Back end caching) ---------------------
+In Memory caching . Much better than SQL DB or other Db with low latency in response time .
+
+We can create redis cache in Azure portal
+zure Cache for Redis helps your application stay responsive even as user load increases. It does so by leveraging the low latency, high-throughput capabilities of the Redis engine. This separate distributed cache layer allows your data tier to scale independently for more efficient use of compute resources in your application layer.
+		
+	
+--------------------------Front end caching----------------
+CDN - Content Delivery Network  .
+
+The Azure Content Delivery Network (CDN) is designed to send audio, video, images, and other files faster and more reliably to customers using servers that are closest to the users. This dramatically increases speed and availability, resulting in significant user experience improvements.
+
+Better performance for your apps and services
+Global distributed network
+Highly scalable infrastructure
+Active redundancy and failover
+High reliability
+Robust security
+
+Three companies that provide pricing tier :
+Microsoft
+verizon
+akamai --- this is much better than other
+
+Before cretaing the CDN profile you have to create a storage account with active azure CDN https://docs.microsoft.com/en-us/azure/cdn/cdn-create-a-storage-account-with-cdn
+
+
+-----------------VM logging.----------
+
+Monitor : centralised way to monitor all services running in your portal . We can run query on that centralised data in monitor.
+
+We have to enable the guest-level monitoring from VM or any other resource so that it goes to monitor
+
+FUnction app	
+		
+		timer trigger :
+Go to monitor tab of functions :
+	- Create an application insight.
+When you enable the insight you can see the graphs reports
+
+How to actually investigation/reports on logs files. ?
+	----- Go to the insight sections of Azure Monitor
+	------ go to diagnostics setting : will show all the resources(VM or functions app for example) are eligibile for monitoring.
+			-- click on turn on diagnostiics to collect the data or logs . 
+	-- go to metrics to manipulate the fields and get the graph accordingly based on traffic.		
+			 
+			
+
+--------------------------------------------------------
+We can directly go into monitor of azure :
+
+Click on diagnostics settings in monitor and create a monitor card by enabling the diagnostics for the resource like a VM .
+Then go to the VM and go to insight and enable it .
+then go to metrics in monitor and select the resouces from the drop down .
+
+--------------------------------------------------------
+How to get the logs from the VM to monitor : just need to enable the logs in VM by creating a new workspace and save it .
+Then go to monitor and select Virtual machine under insight and then preview.
+---------------------------------------------------------
+
+---------------------Internet connectivity with in apps on azure ---------------------
+Very interested
+1. Logic app : 
+	great way to create flow diagramatic apps one of the example is to create a response app with 200 ok which is getting post request from the client
+
+-----------------Azure search ------------------
+
+----------------------------------------API Management  : ------ to modify or make our api secure from outside world and api management will help in making our api more secure .
+this is more sort of an api front end  that connects to our api in the back end in more cotrolled way .
+
+Create an API gateway and developer portal in minutes.
+
+Turnkey solution for publishing APIs to external and internal consumers. Quickly create consistent and modern API gateways for existing backend services hosted anywhere.
+
+Provide API documentation and an interactive console
+Throttle, rate limit and quota your APIs
+Monitor health of your APIs and quickly identify errors
+Bring modern formats like JSON and REST to existing APIs
+Connect to APIs hosted anywhere on the Internet or on-premises and publish globally
+Gain analytic insights on how your APIs are being used
+Manage your service via the Azure portal, REST API, PowerShell, or Git repository
+			
+Gateway before the actual api.
+
+We can give the api management uri to other companies as a front end and let them use that instead of actuall api uri.
+
+CORES : to allow access to the api from all or to restrict to certain users.
+----------------------------------------------------------------------
+Below options allow applications to communicate with each other or to integarte .
+	
+Service bus 
+storage accont 
+IBM MQ queues v8.0
+events grid and event hub 
+------------------events grid and event hub 
+https://docs.microsoft.com/en-us/azure/event-grid/overview
+
+Event grid :  keeps on listening to the resorces and when a trigger from the source it catch that and send to the dest resources inside the azure.
+Event hub : keeps on listening to the external resorces and when a trigger from the source it catch that and send to the dest external resources inside the azure.
+
+		
+		
