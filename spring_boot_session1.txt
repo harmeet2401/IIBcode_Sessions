@@ -8,17 +8,17 @@ Web service app : The app or technique using which we can provide services using
 				with Http protocol is an example of  it.
 				
 Parts of a web service (rest api )	:
-				Service Definition  : It contains the type of request and response required for the api (The format for it)
+				Service Definition  : It contains the type of request and response required for the api (The format for it) can be a swagger 
 				Request  : Will involve the sample request 
 				Response : Will involve the sample response 
 				Endpoint  : how to call the web service(api)
 
 Service provider : The web service which is exposed to the internet is the service provider.
-Service consumer : is the one which hitting that web service to get the response back 
-Transport : Is the medium using which the data (request and response) will be sent examepl : MQ , Kfka , HTTPs , HTTP.
+Service consumer : is the one which hitting that web service to get the response back. 
+Transport : Is the medium using which the data (request and response) will be sent example : MQ , kafka , HTTPs , HTTP.
 Message exchange format : The format of the request and response which is exchanged between consumer and provider.
 
-SOAP :---------- Its simple object access protocol
+SOAP :---------- Its simple object access protocol it works on top of the HTTP protoocol which more security and wrapped the message in to a soap envelop and send it across with the soap headers , for soap we need a wsdl to define the defination file which will contains the sample request , response and url at which we need to trigger the request for 
 
 Its a protocol that allow app to communicate using a defined message structure .
 		
@@ -65,7 +65,7 @@ rest contains
 	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP.)
 	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
 	
-Start.sring.io  : to initialize your restfull service by selecting the package and dependencies you need for building an api.	
+start.sring.io  : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
 The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools 
 
 There are multiple methods for the rest api to send/retrive/update the data .
@@ -76,13 +76,14 @@ Lab 1 ----------------- Create a hello world rest api service to respond as hell
 We need two things 
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
-	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request 
+	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions 
 	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get',Path="/hellow-world")
 	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
 	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
 	@PostMapping -- > We can also use this annotation  . no need to mention method as POST . @POstMapping(path="/hellow-world")
 	
-	testing uri : http://localhost:8080/hello
+	testing uri : http://localhost:8080/hello : because spring boot run contains an inbuilt tomcat server which starts on localhost 8080 port by default .
+	http://localhost:8080/hello-employee
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 Create a controller using start.spring.io to set up the projects for spring boot.
 in order to create spring controller mentions @RestController to the class other than the @SpringBootApplication class.
@@ -107,22 +108,31 @@ Dispatcher servelet is the front end controller for spring mvc frame work who kn
 
 Complete uri : http://localhost:8080/hello
 in above uri : / is mapped to dispatcher servelet and then it looks at the uri hello and send the control to the controller method which it knows.
+
+Need below classes :
+@SpringBootApplication class 
+@Component which we use for service classes to manipulate the data coming from bean 
+@Controller : which will contain the request mapping functions for incoming requests.
+NOte : The controller and Component should be in same package 
+
 Lab 2 ----------------- Create a hello world rest api service to respond as a bean back to the user.
 
 
 
 
-Lab 2 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
+Lab 3 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
 for this lab we created an another GetMapping function in which we map the path to this path=/hellow-world/path-varable/{name}
 Now in above path the name variable will contains the value when we will hit the url 
 
 Example : http//:localhost:8080/hellow-world/path-varable/Harmeet 
 
-Then the GetMapping function named x() will receive the 'Harmeet' value in variable name and that can be used anywhere inside the proggram.
-Lab 2 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
+Then the GetMapping function named x() will receive the 'Harmeet' value in variable name and that can be used anywhere inside the program.
+
+for postmapping function we can map the incoming request to the objectmodel by mentioning @RequestBody
+Lab 3 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
 
 
-Lab 3 ----------------- Now create a service that will respond on three operations to get all users , to get specific user and to save user.
+Lab 4 ----------------- Now create a service that will respond on three operations to get all users , to get specific user and to save user.
 For that we need a new Bean User 
 							
 							--- >id
@@ -138,6 +148,7 @@ For that we need a new Bean User
 								
 Note : In order to Autowired the class object in to another class the class should either be annotated as a component or a service 								
 
+IN ORDER TO AUTO GENERATE THE ID VALUE : WE CAN USE @GeneratedValue annotation so that sending null in creating an object will not throw null pointer exception 
 
 When you hit the post request : we will get below error
 
@@ -148,7 +159,7 @@ When you hit the post request : we will get below error
     "trace": "org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class myproject.minlearning.startertestclass.users.Users]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:386)\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:342)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:186)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:158)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:131)\r\n\tat org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121)\r\n\tat org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:170)\r\n\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)\r\n\tat org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)\r\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)\r\n\tat org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:652)\r\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:733)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)\r\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)\r\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)\r\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)\r\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\r\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)\r\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)\r\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)\r\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\r\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)\r\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)\r\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\r\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\r\n\tat java.base/java.lang.Thread.run(Thread.java:834)\r\nCaused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]\r\n\tat com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67)\r\n\tat com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1615)\r\n\tat com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400)\r\n\tat com.fasterxml.jackson.databind.DeserializationContext.handleMissingInstantiator(DeserializationContext.java:1077)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializerBase.deserializeFromObjectUsingNonDefault(BeanDeserializerBase.java:1332)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:331)\r\n\tat com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:164)\r\n\tat com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4526)\r\n\tat com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3521)\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:378)\r\n\t... 51 more\r\n",
     "message": "Type definition error: [simple type, class myproject.minlearning.startertestclass.users.Users]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `myproject.minlearning.startertestclass.users.Users` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)\n at [Source: (PushbackInputStream); line: 3, column: 3]",
     "path": "/users"
-}
+}	
 
 This is because in current version of jackson we need a default constructor in the bean we are using .
 
@@ -166,7 +177,20 @@ http status code : 201 : the object created
 					200 : get ok 
 					404 : not found 
 					
-Now if we need to handle the not found exceptions we can throw the runtimeexception under a certain conditions	
+Now if we need to handle the not found exceptions we can throw the runtimeexception under a certain conditions	. By creating a class exception class 
+
+package myproject.minlearning.startertestclass.users;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class UserNotFouncException extends RuntimeException {
+    public UserNotFouncException(String message) {
+        super(message);
+    }
+}
+
+
 
 Post that RUntimeexception we start getting exception 500 internal server error 
 
