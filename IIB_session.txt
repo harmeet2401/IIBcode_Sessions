@@ -1483,4 +1483,28 @@ code to call java from esql :
 Lab 38 :----------------------------------------- -------------------- --------------------  Global Cache 
 
 
+Lab 39 : -‐------------------ Collector node 
+using this node qe can collect multiple messages .
+right click on the collector node we can add the in terminals
+and add correlation name which will help in creating the collections
+.
+
+Till we send the message to control terminal of collector node
+it wont send the collected message out.
+
+in debug mode we can see the output tree contains below 
+
+collectors
+   collectorname 
+      xmlmessage
+   collectorname
+      jsonmessage 
+      
+      
+      
+       
+
+
+
+
 
