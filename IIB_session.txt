@@ -1500,7 +1500,13 @@ collectors
    collectorname
       jsonmessage 
       
-      
+Lab 39 : ------------------ collector node.
+
+Lab 40 : ------------------- Aggregate nodes
+we can use aggregate nodes in case when we want ro send 
+multiple requests and wait for each request to get complete or
+i. other words wait for each response to comr back before send
+the control further.
       
        
 
