@@ -1507,10 +1507,18 @@ we can use aggregate nodes in case when we want ro send
 multiple requests and wait for each request to get complete or
 i. other words wait for each response to comr back before send
 the control further.
-      
+      the below structure is called FANOUT means sending multiple request out
+       Aggregate control node out term -------- compute node ----- aggregate request node 1
+                              out term -------- compute node ----- aggregate request node 2
+                              out term -------- compute node ----- aggregate request node 3
+			 control terminal
+			      |
+			      |
+			      |
+	control terminal of below reply node
+       Aggregate reply node ------ compite nodr ------ mq outputnodf
        
-
-
+       aggregate reply node will send an aggregated reply message .
 
 
 
