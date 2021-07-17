@@ -528,32 +528,129 @@ Step 4 :
 
 Lab 11 :------------  JPA (java persistent api) for sql		
 
-For setting up auto complete of config properties in applicaiton.yml file -----------------------------------------
-Make sure Enable annotation processing is checked under Settings > Build, Execution & Deployment > Compiler > Annotation Processors
-Make sure you add the following changes to to your project
-For Maven
-Add the following dependency
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-configuration-processor</artifactId>
-    <optional>true</optional>
-</dependency>
-For Gradle
-Add the following build configuration. You can use the propdeps-plugin for optional scope (as we dont need spring-boot-configuration-processor as a dependency in the generated jar/war)
-dependencies {
-    optional "org.springframework.boot:spring-boot-configuration-processor"
-}
+Lab 12 ----- Spring cloud
+challanges  for monolithic approach 
+1. cloud config 
+2. Elasticity 
+3. Failt tolerance 
+4. tracebility
+5. auto - cloud configuration
+5. Bounderies -- this shows what a single microservice is doing 
+6. load balancing 
 
-compileJava.dependsOn(processResources)
-(OPTIONAL) If intellij is generating build artfacts to output directory instead of gradle's default build directory, then you may need to File | Settings | Build, Execution, Deployment | Build Tools | Gradle | Runner => Delegate IDE build/run actions to gradle & restart the IDE. This will ensure that gradle plugin generates metadata & Intellij is pointing to it
-If you want to look at a sample project, look inside samples directory where the above setup is done. These samples allow properties from @ConfigurationProperties to be shown as suggesti
+
+Spring Cloud Config : just like we can save all configs properties in one place in in git repo
+Centralized external configuration management backed by a git repository. The configuration resources map directly to Spring Environment but could be used by non-Spring applications if desired.
+Which will have Spring cloud client and spring cloud server dependenciesto be used .
 
 
 
+Spring Cloud Netflix - for load balancing process.
+This can be use to add the new instances .
+Integration with various Netflix OSS components (Eureka, Hystrix, Zuul, Archaius, etc.).
+Eureka(Naming server) : two feature : 
+				Registry 
+				instance discovery
 
-For setting up auto complete of config properties in applicaiton.yml file -----------------------------------------
+
+Spring Cloud Sleuth is used for tracing along with zipkin
+Distributed tracing for Spring Cloud applications, compatible with Zipkin, HTrace and log-based (e.g. ELK) tracing.
+
+spring cloud api gateway : which is used to hold many common fetaure which involved authentication  , logging etc.
+ 
+
+
+Lab 12 ----- Spring cloud
+
+lab 13 ----------------------Spring cloud config
+
+microservice 1 				microservice 2
+Spring 						Spring 
+cloud client 			 	cloud client 
+    |							|
+	|							|
+	|							|
+	|connects to 				|connect to the 
+	|							|spring cloud server
+	|server						|
+	|--------|			|-------|
+			 |	        |
+			 |          |
+			 |          |
+			 |          |
+			Sprig cloud server 
+			  Microservice 	3
+					|
+                    |
+                    |connects to Git repo
+                    |
+                    |
+				Git Repository
+				
+@application.yml for spring cloud server app :
+spring.application.name = spring-cloud-config-server
+server.port = 8888
+spring.cloud.config.server.git.uri=https://github.com/harmeet2401/serviceconfigcenter
+                                   #https://github.com:harmeet2401/serviceconfigcenter.git
+spring.cloud.config.server.git.search-paths=sprincloud-config
+spring.cloud.config.server.git.force-pull=true
+spring.cloud.config.server.git.username=harmeet2401
+spring.cloud.config.server.git.password=Gogi!321
+spring.cloud.config.server.git.default-label=main
+
+
+@application.yml for microservice1 connecting to spring cloud srever
+spring.application.name= limits-service
+spring.config.import= optional:configserver:http://localhost:8888
+limits-service.minimum=9
+limits-service.maximum=800			
+
+@application.yml for microservice2 connecting to spring cloud srever
+server.port=8081
+spring.application.name= startertestclass
+spring.config.import= optional:configserver:http://localhost:8888/
+startertestclass.username=harmeet singh
+startertestclass.address= Plot no-988
+startertestclass.id= 0023N7744
+startertestclass.dept= IT
+
+application.yml for microservice3
+spring.application.name=micro-service2
+spring.config.import=optional:configserver:http://localhost:8888
+micro-service2.username=testname
+micro-service2.password=testpass
+micro-service2.dept=testdept
+micro-service2.address=testaddress
+server.port=8082
+				
+				
+Now for the different region and single microservice how we will maintain the config files ?
+By adding belwo two props we can call for the specific file
+
+spring.profile.active=dev
+spring.cloud.config.profile=dev
+
+Then the complete yaml file will be 
+spring.application.name=micro-service2
+spring.config.import=optional:configserver:http://localhost:8888
+micro-service2.username=testname
+micro-service2.password=testpass
+micro-service2.dept=testdept
+micro-service2.address=testaddress
+spring.profile.active=dev
+spring.cloud.config.profile=dev
+server.port=8081
 
 
 
 
-
+				
+For spring boot  Auto yml assists add below dependencies : 
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>				
+				
+				
