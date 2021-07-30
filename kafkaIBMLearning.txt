@@ -1,0 +1,387 @@
+1) Start Zoo Keeper  : as we know that zookeeper is the co-ordinator and will decide which topic goes to which broker.
+ zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+
+2)Start Kafka server or broker or node::
+
+kafka-server-start.bat ..\..\config\server.properties
+
+
+3) create a Topic
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic
+
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3 --replication-factor 2
+
+as we know that we have only one broker than its obvious that we can have only one replica factor
+
+*****************************************
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3 --replication-factor 1
+
+
+
+4)  Listig all Topics::
+kafka-topics.bat --zookeeper 127.0.0.1:2181 --list
+
+
+
+5) Start Producer: to  start producing/publishing  the messages to the topic partitions
+kafka-console-producer --broker-list 127.0.0.1:9092 --topic first_topic
+
+
+
+6) Start  Consumer
+
+kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning  
+
+--from-beginning : will read all the old messages.
+
+
+
+kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic --partition 0
+
+
+
+7) 
+
+Old messages read along with new one also 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 0
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 1
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 2
+
+
+New message read :
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 0
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 1
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 2
+
+
+So if you want to check which partition got which messages do below :
+
+	1. open one producer , spun up the broker and zookeeper
+	2. open three consumer one for each partition and publish messages from the producer to the topics
+
+8) kafka-topics --zookeeper 127.0.0.1:2181 --topic first_topic --describe
+
+
+
+9) How to Increse No of Partition::
+
+kafka-topics --alter --zookeeper localhost:2181 --topic first_topic --partitions 5
+
+
+10) kafka-topics --zookeeper 127.0.0.1:2181 --topic first_topic --describe
+
+
+
+11)  ACKS : there are three types of acks : 
+(ack 0 ) : In which the producer does not wait for the ack from the leader broker in kafka cluster 
+(ack 1) : In which the producer does wait for the ack from the leader node / broker in kafka cluster 
+(ack all) : in this when producer waits for the ack from the leader , leader node in turn waits for the ack from the follower  nodes to certify that the
+replication is done or else will not send the ack to the producer and leader will keep on retry as producer keep on retry after certain time interval.
+
+
+Kafka-console-producer --broker-list localhost:9092 --topic first_topic --producer-property acks=all
+
+
+
+10 ) *****************************
+Publishing DATA with Key::
+
+**********
+kafka-console-producer --broker-list localhost:9092 --topic first_topic --property "parse.key=true" --property "key.separator=:"
+
+>
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning 
+
+
+
+
+
+
+IF YOU WANT TO PRINT THE KEY ::
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 1
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 2
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 3
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 4
+
+>kafka-console-consumer.bat  --bootstrap-server localhost:9092 --topic second_topic --property print.key=true --property key.separator=":" --from-beginning
+
+The default separator is space and we can also set the separator using code.
+
+
+11) CONSUMER group :: Consumer group always start reading from where it left , i mean if we shutdown the consumer group then it will read from the message 
+from topic which comes after it got shutdown , no need to use from-beginning
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --group mygroup 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic forth_topic --group pheonix 
+ 
+
+
+12 ) DEscribe ::
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group mygroup
+
+
+
+13 ) RESET OFFEST::::
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --to-earliest --execute --topic first_topic
+Kafka-consumer-groups –bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic:0
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic:0,1 
+
+
+
+
+
+pushes the current-offset value to LAG(unred) : kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --to-earliest --execute --topic fifth_topic 
+Will minus 2 from current offset and assign it to LAG : kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic fifth_topic
+											kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic
+											kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -3 --execute --topic sixth_topic
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0,1
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0,1,2 
+
+
+shift means : 
+
+Current-offset = Current-offset-shift value 
+Lag value = shift value
+
+---------------------------
+kafka producer api is used for all trouble shooting.
+
+Kafka-producer in java need below things : 
+	properties objesct
+	prooducerconfig object
+	kafkaproducerobject
+	producerrecord object
+kafkaconsumer is similar which 
+	properties objesct
+	consumerconfig object
+	kafkaconsumerobject
+	consumerrecord object
+	
+Now how to read the topic partition from a specfic offset:
+	properties objesct
+	consumerconfig object
+	consumer.seek is
+	kafkaconsumerobject
+	consumerrecord object
+	
+------------------------------kafka connect 
+
+kafka connect is a third party tool /api to connect to other tools from kafka cluster.
+Kafka connectors are there to allow kafka connect to take the data from external app to push to kafka servere or take the data out of the kafka server to external App likes Mysql  , mongo db 
+
+kafka Sink connector : To get the data from kafka server to external source 
+kfka source connector : to send the data from external source to kafka server
+
+
+			pushes							pull
+Producer --------------->Kafka cluster <--------------------consumer 
+							|  /\
+							|  | 
+							|  |
+							|  |
+						    \/ |
+						kafka Connectors()	
+							|   /\
+						    |   |
+                            |   |
+                            |   |
+                            \/  |
+						Hadoop
+						elastic search 
+						Mysql
+						Mongo DB
+						
+
+Lab example : if we want to publish the log files generating on a server and send it to kafka 
+We need to use file source connectors (to send the data from external source to kafka server topics)
+
+We have following prop files in config folder : 
+	: connect-standalone.properties  ----- runs on a single machine ( sys goes down the setup goes down)
+		(this prop file will contain the message convertor for your message to be converted before sending it to kafka)
+		(this prop file contains the offsets where i need to maintain the data upto)
+		(this prop file contains the plugin path for the connector you will download for you external source (file connector plugin in pur case)
+		(if we want to connect to mysql then download the plugin for mysql and give path of that connector in this prop file)
+	
+	: connect-distributed.properties ------ Runs on distributed systems machine (one gos down other comes up.)
+
+For file source connector the prop file is already there in config folder .
+	
+	
+Lab # 1 : source connector 
+
+1. change the connector-file-source.properties file as per the file location.
+2.command to run :  C:\KafkaSetup\demo\kafka_2.13-2.4.0\bin\windows>kafka-console-consumer --bootstrap-server 127.0.0.1:9092, 127.0.0.1:9092,127.0.0.1:9094 --group demo --topic connect-test --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true
+3.command to consume : connect-standalone.bat ..\..\config\connect-standalone.properties ..\..\config\connect-file-source.properties	
+
+
+Lab # 2 : Sink - connector
+Now for the file sink connector : ------- means to send the data from kafka server to our system
+as we are sending the data from kafka(topic from where we want the data) server to our local system then we just need to run the app 
+
+1.change the connector-file-sink-properties
+2. create a file on your system to consume the data into from the topic .
+3. command : connect-standalone.bat ..\..\config\connect-standalone.properties ..\..\config\connect-file-sink.properties		
+
+
+convertor changed to string :
+#key.converter=org.apache.kafka.connect.json.JsonConverter
+#value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+
+NOTE  : The point is the sink connector will download the data is similar formatt and show it in file as it was pushed to the topic from file-source-connector.
+
+As shown below 
+
+C:\kafka_2.12-2.6.0\kafka_2.12-2.6.0\bin\windows>kafka-console-consumer --bootstrap-server localhost:9092 --group demo --topic connect-Topic --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true
+null    {"schema":{"type":"string","optional":false},"payload":"**********Samepl logs from Microservice"}
+null    ##################### end of logs
+null    **********Samepl logs from Microservice
+null    {"schema":{"type":"string","optional":false},"payload":"**********Samepl logs from Microser"}
+null    **********Samepl logs from Microser233
+
+lab TBD : ---- Run The mysql connector '
+
+Confluent kafka download 
+Then download connector
+
+
+Producer api ----------------------- -------------------------------------------------->   kafka server (TOPIC) <------------------------------------------------------------------------------- Consumer api
+																								/\			    |
+																								|			    |
+																								|			    |
+																								|			    \/
+									(File source connector , mysql source conn , mongo source )Connect api	    Connect api (for example : file sink connector , mysql sink connector , hadoop sink connector)
+																								 /\			    |
+																								 |			    |
+																								 |			    |
+																								 |			    \/
+																				Mysql db , mongo db , file 	    Hadoop , mysql db , file storage etc (then use that data for filter it )
+																				
+																				
+KAFKA STREAM API : the microservices that we created to use the topic names frm the app.yml and use  @StreamChannel annotation to act as a consumer and then send the data to next topic using @output stream use further .
+
+																			
+Producer api ----------------------- -------------------------------------------------->   kafka server (TOPIC) ------------------------------------------------------------------------- Consumer api																					(TOPIC B) 	Topic A			
+																						   |		/\			  
+																						   |		|			  
+																						   |		|			  
+																						   \/		|			  
+																						 					
+																						   |		 /\			  
+																						   |		 |			  
+																						   |		 |			  
+																						   \/		 |			  
+																						   KAfka Stream 
+
+command : 
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic streams-plaintext-input
+
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic streams-wordcount-output
+
+Strat Console Consumer 
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 ^    --topic streams-wordcount-output ^    --from-beginning ^    --formatter kafka.tools.DefaultMessageFormatter ^    --property print.key=true ^    --property print.value=true ^    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer ^    --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer																						   
+
+
+Kafka producer api for java : 
+https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html
+
+kafka consumer api : 
+https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
+
+Documents : 
+https://drive.google.com/drive/u/2/folders/1O_iJZU4gAsn4hblytoK32oNFb5PwTqr6
+
+kafka connectors : 
+https://www.confluent.io/hub/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.rmkt_tgt.kafka-connectors_mt.xct_rgn.india_lng.eng_dv.all_con.kafka-connectors&utm_term=kafka%20connectors&creative=&device=c&placement=&gclid=CjwKCAjwgISIBhBfEiwALE19SRtZcMlwCVv0djOo7B0o_ONVAh8jvI_qliK99Kp7CcCyYraoNzvqjRoC8nEQAvD_BwE
+
+
+Word count program : 
+https://github.com/apache/kafka/blob/0.10.2/streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java
+
+
+KStream api : 
+https://kafka.apache.org/23/javadoc/org/apache/kafka/streams/kstream/KStream.html
+
+filter feature for kafka
+:
+https://kafka.apache.org/20/javadoc/org/apache/kafka/streams/kstream/KStream.html
+
+
+so when we use the kstream it will pck the data from topic and update the Ktable in (key , value) format as we did saw in java program .
+
+Operations can be stateless (like filter as it doesn't depend upon the previous messages )and statefull(as it depends upon the old data like operations like join , exclusive etc) .
+ if the stream is the object name holding one record ('harmeet', 'engg')
+ Mapvalues --
+	effects the values only 
+	can be applied both on kstream and ktable 
+	output : ('harmeet','ENGG')
+	
+ Map ----
+	effects the key and value both 
+	is applied only using kstream.
+
+ Filter -
+	will filter using a predicate will filter all the records one by one if predicate is true
+ FilterNot -
+	It will do the opposite of above 
+	if the record contains a char do not filter or else filter others
+	
+	
+ FlatmapValues 
+	words = sentesnce.flatmapvalues(values ->Arrays.asList(value.split()))
+for example using above code: 
+		(meet , is an engg) ------ flatmapvalues -----> meet  , is
+														meet , an
+														meet , engg 
+														
+														
+sample data produced : 
+															
+				meet,red
+				meet,yellow
+				raj,red
+				raj,red
+				pinki,pink
