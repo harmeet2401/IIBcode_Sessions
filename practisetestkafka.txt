@@ -1,0 +1,191 @@
+1. Temporary znodes are called
+temp nodes
+fleeting nodes
+ephemeral nodes
+terminating nodes
+Explanations:
+Answer: (c) Ephemeral nodes are temporary znodes
+
+2. The znodes that continue to exist even after the creator of the znode dies are called:
+ephemeral nodes
+persistent nodes
+sequential nodes
+pure nodes
+Explanations:
+Answer: (b) Unlike ephemeral nodes, persistent znodes continue to exist unless explicitly deleted
+
+3. What property of znodes can be used to order znodes?
+counter property
+sequential property
+ascending property
+hierarchical property
+Explanations:
+Answer: (b)Sequential property can be used to order znodes
+
+4. Which feature of znodes are used for leader election?
+Ephmeral feature
+Persistent feature
+watch feature
+sequential feature
+Explanations:
+Answer: (d) Sequential feature is used to order the nodes and select the leader
+
+5. What does ZooKeeper provide to programmatically handle znodes?
+server hookups
+client APIs
+property files
+Classes
+Explanations:
+Answer: (b) Client APIs are provided by ZooKeeper to process znodes
+
+6. Which is the configuration file for setting up ZooKeeper properties in Kafka?
+zookeeper.xml
+zookeeper.properties
+zk.yaml
+kafka.zk.properties
+Explanations:
+Answer: (b) zookeeper.properties file contains the configuration setting for ZooKeeper
+
+7. Which command is used to start Kafka broker?
+kafka-broker-start.sh
+kafka-producer-start.sh
+kafka-server-start.sh
+kafka-consumer-start.sh
+Explanations:
+Answer: (c ) This command is used to start the Kafka broker
+
+8. Which server should be started before starting Kafka server?
+Kafka producer
+Kafka consumer
+Kafka topic
+ZooKeeper server
+Explanations:
+Answer: (d) Zoookeeper should be started before the Kafka server
+
+9. Which is the command to create a topic in Kafka?
+create-topic.sh
+kafka-topics.sh
+kafka-cli.sh
+kafka-producer.sh
+Explanations:
+Answer: (b)This command is used to create and modify topics in Kafka
+
+10. Which command is used in Kafka to add messages to a topic?
+kafka-create-message.sh
+kafka-add-message.sh
+kafka-console-producer.sh
+kafka-producer.sh
+Explanations:
+Answer: (c ) Console producer is used to create messages from the command line
+
+11. Which command is used in Kafka to retrieve messages from a topic?
+kafka-get-message.sh
+kafka-console-consumer.sh
+kafka-read-message.sh
+kafka-consumer.sh
+Explanations:
+Answer: (b) Console consumer is used to read messages from Kafka topic
+
+12. Which consumer side API is used to retrieve the messages as a stream?
+consumerMap.read()
+consumerMap.get()
+consumerMap.retrieve()
+consumerMap.consume(
+Explanations:
+Answer: (b) get() API is used to retrieve the messages from the server
+
+13. A Kafka topic is setup with a replication factor of 5. Out of these, 2 nodes in the cluster have failed. Business users are concerned that they may lose messages. What do you tell them?
+They need to stop sending messages till you bring up the 2 servers
+They need to stop sending messages till you bring up at least one server
+They can continue to send messages as there is fault tolerance of 4 server failures.
+They can continue to send messages as you are keeping a tape back up of all the messages
+Explanations:
+Answer: (c ) Fault tolerance is n - 1, so they don't have to worry about losing messages
+
+14. A kafka cluster has 20 nodes. There are 5 topics created, each with 6 partitions. How many total number of broker processes will be running?
+20 processes, one on each node
+100 processes, one process for each topic on each node.
+30 processes, one process for each topic and partition.
+120 processes, one process for each partition on each node
+Explanations:
+Answer: (a)There is one broker process on each node. It does not depend on number of topics or number of partitions.
+
+15. You have tested that a Kafka cluster with five nodes is able to handle ten million messages per minute. Your input is likely to increase to twenty five million messages per minute. How many more nodes should be added to the cluster?
+15
+13
+8
+5
+Explanations:
+Answer: (c ) Since Kafka is horizontally scalable, handling 25 million messages per minute will need 13 machines or 8 more machines.
+
+16. How many brokers will be marked as leaders for a partition?
+Zero
+Any number of brokers
+One
+All the brokers
+Explanations:
+Answer: (c ) One broker is marked as leader and all other brokers are followers
+
+17. Which of the following is guaranteed by Kafka?
+A consumer instance gets the messages in the same order as they are produced from a particular partition in a topic.
+A consumer instance is guaranteed to get all the messages produced.
+No two consumer instances will get the same message
+All consumer instances will get all the messages
+Explanations:
+Answer: (a) Message order is guaranteed by Kafka but instances get all are same messages, which are controlled by the consumer groups.
+
+18. The replication model in Kafka is
+Quorum based
+primary-backup method
+multi-primary method
+Journal based
+Explanations:
+Answer: (b) Kafka chooses a leader as primary and followers as backup for replication
+
+19. When messages passes from producer to broker to consumer, the data modification is minimized by using:
+Message compression
+Message sets
+Binary message format
+Partitions
+Explanations:
+Answer: (c ) Binary message format ensures that consistent format is used by all three processes
+
+20. What happens in Kafka, if a machine to be written data is down?
+The write fails
+The machine is bypassed till it comes back up
+The write waits till the machine comes back up
+Data is lost as a machine has failed
+Explanations:
+Answer: (b) The leader skips the machine that is down and will try again once it comes back. The write will not fail.
+
+21. A common problem in a distributed system is
+Complete shutdown
+Partial failures
+Network latency
+Power failures
+Explanations:
+Answer: (b) Partial failures are a common problem in distributed systems
+
+22. Which of the following best describes the relationship between ZooKeeper and partial failures?
+ZooKeeper eliminates partial failures
+ZooKeeper causes partial failures
+ZooKeeper detects partial failures
+ZooKeeper provides a mechanism for handling partial failures
+Explanations:
+Answer: (d) ZooKeeper only provides a mechanism to handle partial failures
+
+23. Replication of data can result in improved fault tolerance. Which of the following is a disadvantage of replication?
+Inconsistent states
+Loss of data
+Deadlocks
+Partial failures
+Explanations:
+Answer: (a) When multiple copies of data exist, it can result in two copies not having same data during updates.
+
+24. ZooKeeper data model consists of:
+A graph of znodes
+A tree of znodes
+A directed acyclic graph of znodes
+A list of znodes
+Explanations:
+Answer: (b) ZooKeeper ensemble includes a Tree of znodes
