@@ -224,7 +224,7 @@ If you are making use of Spring Boot Release (> 2.3.0) make sure to add the foll
 </dependency>
 
 For the validation to work on the attributes of the bean , we need to use :
-		@valid along with the @RequestBody 
+		@validate along with the @RequestBody 
 		In bean class for each attibutes for which we need the validation to happen . use validation annotation like , @Size (which says the min or max lenght of the string )
 			or @Past to constraints the date to be in past 
 		
@@ -238,8 +238,8 @@ Lab 4 ----------------- now for above created Rest api we are to perform validat
 
 
 HATEOAS : --------------------------------------------------------
-
-HATEOAS : Hyper media at the engine of application state . this is the feature using which we can provide more information aprt from the data we are returning bck to the consumer .
+https://www.programcreek.com/java-api-examples/?api=org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
+HATEOAS : Hyper media as the engine of application state . this is the feature using which we can provide more information aprt from the data we are returning bck to the consumer .
 For example: whenever we search for a repo in git , we got whole lot of other informations also , like number of stars , other links also .
 
 Soooooooooooooo in order to add more info or more links to your response you can use HATEOAS .
@@ -275,6 +275,7 @@ So language is a barrier , in order to response with different data as per the l
 In order to pick the properties value and send that as a resource back we will use 
 The Locale value the consumer will send that in the message header and we can get that using @RequestHeader Locale local.
 
+We can send the locale value in postman using Accept-language which says in which language you want the response to be in .
 
 ----------Simplify the internationalization -----------
 In order to add @RequestHeader Locale locale as a parameter for multiple get methods it would be a pain 
@@ -288,7 +289,7 @@ Lab 5 --------------------As we know jackson is doing the conversion from object
 
 Need to add jackson-dataformat-xml dependencies
 
-			<dependency>
+	<dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
             </dependency>
@@ -342,8 +343,26 @@ Lab 5 --------------------As we know jackson is doing the conversion from object
 
 
 Lab 6 ---------------Auto swagger generation ---------------
-For rest full service we have swagger and for soap service we have WSDL .
 
+-----------------------------OPen API-------------------------
+
+For rest full service we have swagger and for soap service we have WSDL .
+spring doc open api :  https://springdoc.org/
+For the integration between spring-boot and swagger-ui, add the library to the list of your project dependencies (No additional configuration is needed)
+<dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.5.10</version>
+   </dependency>
+
+We can provide the swagger ui : http://localhost:8080/swagger-ui.html (a UI)
+And to get the Swagger Documentation give this link : http://localhost:8080/v3/api-docs in below steps we will be customize this doc using java code 
+
+-----------------------------OPen API-------------------------
+
+
+--------------------------Swagger -----------------
+Now Below stps are to customize the swagger document that we created above using java code below .
 
 Step 1 : 
 
@@ -389,6 +408,7 @@ The docket function bean we have created we can use to modify different property
                 .apiInfo(DOCKET_API_INFO).produces(produces)
                 .consumes(consumes);
 
+--------------------------Swagger--------------------------
 
 Lab 6 ---------------Auto swagger generation ---------------
 
