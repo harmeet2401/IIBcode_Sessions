@@ -18,7 +18,7 @@ Service consumer : is the one which hitting that web service to get the response
 Transport : Is the medium using which the data (request and response) will be sent example : MQ , kafka , HTTPs , HTTP.
 Message exchange format : The format of the request and response which is exchanged between consumer and provider.
 
-SOAP :---------- Its simple object access protocol it works on top of the HTTP protoocol which more security and wrapped the message in to a soap envelop and send it across with the soap headers , for soap we need a wsdl to define the defination file which will contains the sample request , response and url at which we need to trigger the request for 
+SOAP :---------- Its simple object access protocol it works on top of the HTTP protoocol which is more secure and wrapped the message in to a soap envelop and send it along with the soap headers , for soap we need a wsdl to define the defination file which will contains the sample request , response and url at which we need to trigger the request for 
 
 Its a protocol that allow app to communicate using a defined message structure .
 		
@@ -56,7 +56,7 @@ A WSDL is create web service definition language that  contains :
 Soap only involve XML as the message format to exchange request and response .
 
 	
-REST : --------- REpresentational State transfer. is developed to make best use of the HTTP protocol .
+REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol .
 
 The HTTP protocol is used to transfer HTML data from consumer to service provider .
 
@@ -110,14 +110,16 @@ Complete uri : http://localhost:8080/hello
 in above uri : / is mapped to dispatcher servelet and then it looks at the uri hello and send the control to the controller method which it knows.
 
 Need below classes :
-@SpringBootApplication class 
-@Component which we use for service classes to manipulate the data coming from bean 
+@SpringBootApplication class : starter class 
+@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 @Controller : which will contain the request mapping functions for incoming requests.
 NOte : The controller and Component should be in same package 
 
 Lab 2 ----------------- Create a hello world rest api service to respond as a bean back to the user.
 
 
+NOte  : Change the log level for the spring boot aapp to debug mode is by adding below line in app.yml
+logging.level.org.springframework = debug
 
 
 Lab 3 ----------------- Create an another GetMapping method that will receive a Path variable and use that path variable to do more operations.
@@ -183,6 +185,7 @@ package myproject.minlearning.startertestclass.users;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFouncException extends RuntimeException {
     public UserNotFouncException(String message) {
@@ -224,7 +227,7 @@ If you are making use of Spring Boot Release (> 2.3.0) make sure to add the foll
 </dependency>
 
 For the validation to work on the attributes of the bean , we need to use :
-		@validate along with the @RequestBody 
+		@valid along with the @RequestBody 
 		In bean class for each attibutes for which we need the validation to happen . use validation annotation like , @Size (which says the min or max lenght of the string )
 			or @Past to constraints the date to be in past 
 		
@@ -238,8 +241,8 @@ Lab 4 ----------------- now for above created Rest api we are to perform validat
 
 
 HATEOAS : --------------------------------------------------------
-https://www.programcreek.com/java-api-examples/?api=org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
-HATEOAS : Hyper media as the engine of application state . this is the feature using which we can provide more information aprt from the data we are returning bck to the consumer .
+
+HATEOAS : Hyper media at the engine of application state . this is the feature using which we can provide more information apart from the data we are returning bck to the consumer .
 For example: whenever we search for a repo in git , we got whole lot of other informations also , like number of stars , other links also .
 
 Soooooooooooooo in order to add more info or more links to your response you can use HATEOAS .
@@ -275,7 +278,6 @@ So language is a barrier , in order to response with different data as per the l
 In order to pick the properties value and send that as a resource back we will use 
 The Locale value the consumer will send that in the message header and we can get that using @RequestHeader Locale local.
 
-We can send the locale value in postman using Accept-language which says in which language you want the response to be in .
 
 ----------Simplify the internationalization -----------
 In order to add @RequestHeader Locale locale as a parameter for multiple get methods it would be a pain 
@@ -289,7 +291,7 @@ Lab 5 --------------------As we know jackson is doing the conversion from object
 
 Need to add jackson-dataformat-xml dependencies
 
-	<dependency>
+			<dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
             </dependency>
@@ -343,26 +345,22 @@ Lab 5 --------------------As we know jackson is doing the conversion from object
 
 
 Lab 6 ---------------Auto swagger generation ---------------
-
------------------------------OPen API-------------------------
-
 For rest full service we have swagger and for soap service we have WSDL .
-spring doc open api :  https://springdoc.org/
-For the integration between spring-boot and swagger-ui, add the library to the list of your project dependencies (No additional configuration is needed)
+
+For Auto generate the Swagger for an api we can use below dep 
 <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
       <version>1.5.10</version>
    </dependency>
+   
+ http://localhost:8081/swagger-ui/index.html is the url we can use to see the ui documentation
+ 
+ http://localhost:8081/v3/api-docs : to get the json file out 
+   
 
-We can provide the swagger ui : http://localhost:8080/swagger-ui.html (a UI)
-And to get the Swagger Documentation give this link : http://localhost:8080/v3/api-docs in below steps we will be customize this doc using java code 
+below steps are used to modify the swagger as per our needs.
 
------------------------------OPen API-------------------------
-
-
---------------------------Swagger -----------------
-Now Below stps are to customize the swagger document that we created above using java code below .
 
 Step 1 : 
 
@@ -408,7 +406,6 @@ The docket function bean we have created we can use to modify different property
                 .apiInfo(DOCKET_API_INFO).produces(produces)
                 .consumes(consumes);
 
---------------------------Swagger--------------------------
 
 Lab 6 ---------------Auto swagger generation ---------------
 
@@ -476,12 +473,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 Lab 8 : ----------- Spring boot filtering , in which we can filter out the fields we dont need from a bean ---
 
+Lab :------------------- Dynamic filtering 
+
+We can use mappingjacksonValue is the class that help is sending a filtered bean value back as a response.
+
+MappingjacksonValue mapping = new mappingjacksonValue(bean)
+mapping.setfiltering(filter);
+return mapping;
+
+
+Verry important point always mention the @JsonFlter on top of the bean class to implement the dynamic filter occuring from controller.
+
+
+
+Lab :------------------- Dynamic filtering 
+
+
+
+
 Lab 9 : ----------- Version rest api
 
 Example for versioning : The customer may ask to send the name as a single string and also to send name as two string as first name and last name .
 for that we can keep two @GetMapping mapped with two different urls and share those urls with customer to hit.
 
-There are four methods to implement versioning for your API :
+There are four methods to implement versioning for your API : in all below methods we update the path in get/post mapping 
 
 URI versioning : in which we can create two uri's for external user , but this will pollute the uri space .
 Param versioning : in which we can send the query parameters in uri , this will also pollute the uri space 
@@ -496,7 +511,7 @@ add below dependency :
 	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+	</dependency>
 		
 		
 This will allow spring to add basic authentication to your rest api .
@@ -515,13 +530,13 @@ spring.security.user.password=Gogi!1234
 Lab 10 : ----------- Authentication implement
 		
 Lab 11 :------------  JPA (java persistent api) for sql		
-JPA  is nothing but the in memory data base ,
+The Java Persistence API (JPA) is a specification of Java. It is used to persist data between Java object and relational database. JPA acts as a bridge between object-oriented domain models and relational database systems.
 we can use @Entity for the bean we created to convert that bean into an entity in which the attibutes will be converted to each column and bean will be a table 
 1) H2 database name is randomly generated each time you restart the server. You can find the database name and URL from the console log.
 
 
 Step 1 : add below 
-<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -660,10 +675,6 @@ micro-service2.address=testaddress
 spring.profile.active=dev
 spring.cloud.config.profile=dev
 server.port=8081
-
-
-
-
 				
 For spring boot  Auto yml assists add below dependencies : 
 <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
@@ -673,4 +684,111 @@ For spring boot  Auto yml assists add below dependencies :
 			<optional>true</optional>
 		</dependency>				
 				
-				
+lab 13 ----------------------Spring cloud config
+
+lab 14 ----------------------currency conversion/exchange microservices
+
+1. Currency exchange microservice : This microservice will contains the exchange rate for a Dollar to Ruppess .
+It means it will send a response in which the value of 1 dollar is given as 65 ruppess.
+
+2. Currency conversion  microservice : This will convert the currency from Dollar to ruppees . Now this MICRO will call the exchange service to get the excange rate and use that to multiply it will input dollar and send it back as a response.
+
+						call(getexchange value)
+Currency exchange MICRO -------------------------> Currency Conversion MICRO 
+											|
+											|
+											|
+											|
+											|
+											database to save the value .
+											
+----------------------------MICRO1-------------
+	group id : com.in28minutes.microservices
+	artifact id : currency-exchange-service
+	dependencies : Actuator , devtools  , spring cloud client , web(to make it as an api)											
+	
+	URL
+	http://localhost:8000/currency-exchange/from/USD/to/INR
+	
+spring.application.name=currency-exchnage
+server.port=8000
+spring.config.import=optional:configserver:http://localhost:8888
+spring.jpa.show-sql=true # this will show all the sqls running 
+spring.datasource.url=jdbc:h2:mem:testdb
+h2.console.enabled=true #need to see the details of the data in Data base.
+spring.jpa.defer-datasource-initialization=true # this will help in not runing the insert data.sql file before the table is created whenevr the app get started.	
+	
+	Response Structure
+	{
+	"id":10001,
+	"from":"USD",
+	"to":"INR",
+	"conversionMultiple":65.00,
+	"environment":"8000 instance-id"
+	}
+	
+Now connect it to the in memory data base H2 hibernate using JPA framework 
+dependencies : h2 and spring boot starter-data-jpa
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+
+In the bean below imports are important :
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
+url to chck jpa : http://localhost:8000/h2-console
+
+the bean we  created will be annotated as @Entity  and Id as @Id so that the JPA will create a table out of that .
+we know that 'from' is a keyword in sql query so using an attribute in entity as from is a syntax error.
+so change those .
+Now create a data.sql(specific name) in src.main.resources folder. whenever the app starts it will run this file to insert the data into the table .
+	
+Now create a iterface  (@repository)	extending jparepository to connect to the h2 database.
+	
+	
+	
+	
+	
+	
+----------------------------MICRO1-------------
+	
+----------------------------MICRO2-------------
+	
+	URL
+http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+
+
+
+Response Structure
+{
+  "id": 10001,
+  "from": "USD",
+  "to": "INR",
+  "conversionMultiple": 65.00,
+  "quantity": 10,
+  "totalCalculatedAmount": 650.00,
+  "environment": "8000 instance-id"
+}
+ 
+
+
+----------------------------MICRO2-------------
+
+
+
+
+
+	
+lab 14 ----------------------currency conversion/exchange microservices
+	
