@@ -561,6 +561,7 @@ Step 4 :
 	b. create a repository as an interface extending JPArepository<Users(bean) , Integer> , this repository is just like a daoservice that we used to get the value from Bean data.
 		Now this repository will get the data from in memory db (h2)
 
+Keep track of the function we use for the DAO service while intercating with the h2 database.
 Lab 11 :------------  JPA (java persistent api) for sql		
 
 Lab 12 ----- Spring cloud
@@ -593,7 +594,20 @@ Distributed tracing for Spring Cloud applications, compatible with Zipkin, HTrac
 
 spring cloud api gateway : which is used to hold many common fetaure which involved authentication  , logging etc.
  
+LAB : ----------Configuration load from app.yml file --------------------
 
+We have two techniques to load properties from app.yml file 
+
+1. Create a class with value which will hold the values from app.yml file.
+	and annotate it with @Value("${key.value}")  where key.value =90 is in app.yml file .
+	 annotate the class as component as it is to be autowired in function class.
+
+2. Create a class annotate it with @Component and @ConfigirationProperties(prefix= "word.something to load")
+		Then autowired and use that .
+
+
+
+LAB : ----------Configuration load from app.yml file --------------------
 
 Lab 12 ----- Spring cloud
 
@@ -621,6 +635,8 @@ cloud client 			 	cloud client
                     |
                     |
 				Git Repository
+
+Annotate the spring cloud config app  as @EnableConfigServer				
 				
 @application.yml for spring cloud server app :
 spring.application.name = spring-cloud-config-server
@@ -660,7 +676,7 @@ server.port=8082
 				
 				
 Now for the different region and single microservice how we will maintain the config files ?
-By adding belwo two props we can call for the specific file
+By adding below two props we can call for the specific file
 
 spring.profile.active=dev
 spring.cloud.config.profile=dev
@@ -675,6 +691,8 @@ micro-service2.address=testaddress
 spring.profile.active=dev
 spring.cloud.config.profile=dev
 server.port=8081
+
+NOTE********** : ALWAYS BOUNCE THE APP ONCE CHNAGE THE VALUE IN GIT FILE , DON'T BOUNCE THE SPRING CLOUS SERVER .
 				
 For spring boot  Auto yml assists add below dependencies : 
 <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
@@ -683,6 +701,7 @@ For spring boot  Auto yml assists add below dependencies :
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>				
+		
 				
 lab 13 ----------------------Spring cloud config
 
@@ -691,10 +710,10 @@ lab 14 ----------------------currency conversion/exchange microservices
 1. Currency exchange microservice : This microservice will contains the exchange rate for a Dollar to Ruppess .
 It means it will send a response in which the value of 1 dollar is given as 65 ruppess.
 
-2. Currency conversion  microservice : This will convert the currency from Dollar to ruppees . Now this MICRO will call the exchange service to get the excange rate and use that to multiply it will input dollar and send it back as a response.
+2. Currency conversion  microservice : This will convert the currency from Dollar to ruppees . Now this MICRO will call the exchange service to get the exchange rate and use that to multiply it will input dollar and send it back as a response.
 
 						call(getexchange value)
-Currency exchange MICRO -------------------------> Currency Conversion MICRO 
+Currency Conversion MICRO -------------------------> Currency exchange MICRO 
 											|
 											|
 											|
@@ -729,7 +748,7 @@ spring.jpa.defer-datasource-initialization=true # this will help in not runing t
 	
 Now connect it to the in memory data base H2 hibernate using JPA framework 
 dependencies : h2 and spring boot starter-data-jpa
-	<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
