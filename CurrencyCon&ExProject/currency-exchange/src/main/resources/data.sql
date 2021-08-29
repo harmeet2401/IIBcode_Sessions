@@ -1,4 +1,0 @@
-insert into CURRENCY_EXCHANGE values(100L,75.00,'8000','USD','INR')
-insert into CURRENCY_EXCHANGE values(200L,70.00,'8000','USD','YEN')
-insert into CURRENCY_EXCHANGE values(300L,65.00,'8000','USD','DIN')
-insert into CURRENCY_EXCHANGE values(400L,190.00,'8000','USD','EUR')
