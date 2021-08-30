@@ -77,6 +77,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--this config below help in creating the image for this app  -->
+				<configuration>
+					<image>
+						<name>harmeet24011992/mmv2-${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
+				<!--this config below help in creating the image for this app  -->
 			</plugin>
 		</plugins>
 	</build>
