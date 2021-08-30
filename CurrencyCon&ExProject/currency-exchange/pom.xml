@@ -100,11 +100,19 @@
 				<!--this config below help in creating the image for this app  -->
 				<configuration>
 					<image>
-						<name>harmeet24011992/mmv2-${project.artifactId}:${project.version}</name>
+						<name>in28min/mmv2-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
 				<!--this config below help in creating the image for this app  -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
