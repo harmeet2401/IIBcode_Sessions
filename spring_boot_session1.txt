@@ -774,7 +774,8 @@ so change those .
 Now create a data.sql(specific name) in src.main.resources folder. whenever the app starts it will run this file to insert the data into the table .
 	
 Now create a iterface  (@repository)	extending jparepository to connect to the h2 database.
-	
+
+NOTE**** : WHENEVR WE WANT ANY QUERY TO BE RUN ON DB USING THE INTERFACE  , WE CAN SIMPLY ADD THE METHOD AND PASS IN THE PARAMETERS , THEN JPA WILL CREATE A SQL QUERY OUT OF IT AND FETCH THE DATA FROM YOU .	
 	
 	
 	
@@ -800,14 +801,549 @@ Response Structure
   "environment": "8000 instance-id"
 }
  
+ server.port=8100
+spring.application.name=currency-conversion
 
 
+We will call the currency-exchange-service from currency-conversion using RestTemplate class 
+      HashMap<String,String> uriVariables = new HashMap<>();
+        uriVariables.put("from",from);
+        uriVariables.put("to",to);
+            ResponseEntity<CurrencyConversion> forEntity = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversion.class,
+                    uriVariables);
+        CurrencyConversion currencyConversion = forEntity.getBody();
+		
+		
+Now the bean model of currency-exchange-service is subset of bean model of currency-conversion , so the response coming from currency-exchange-service will get mapped to values to bean model of currency-conversion and we used that to create (multiple) whatever to create new currency-conversion object to return .
+
+
+FEIGN : --- MAKES IT REALLY EASY TO MAKE A REST CALL TO THE API  This is much easier then the resttemplate 
+
+Steps : to do in Currency-conversion service from where the service to be called .
+
+1. Add the dep : 
+<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>3.0.3</version>
+</dependency>
+
+2. Just like we created an interface for the DB using JPA or mongo or any other , we need to create a interface(act as a proxy) Annotating it as @FeignClient(name , url : localhost:8000)
+3. Also annotate the Currency-conversion main class as @EnableFeignClient
+4. Add the method in the interface for @Getmapping.
+		
 ----------------------------MICRO2-------------
 
+Both of our service is connected where the currency-conversion -----------------. calling ------> currency-exchange-service
+																										|
+																										|
+																										|
+																										|
+																								Which is calling DB(h2) to get the values .
+lab 14 ----------------------currency conversion/exchange microservices
+	
+	
+Lab 15 : -------------- naming srever (Eureka netflix server ) at port 8761-------------	
+Steps : 
+
+1. Add dep : Eureak server  , devtools , actuater 
+	<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+2. Annotate main class with @EnableEurekaserver  , this i just like when we created the config server we annotate it as @EnableConfigServer .
+		@EnableFeignClient is annotated the main class from where we are using the proxy .
+3.	Add name of the app 
+	eureka.client.register-with-eureak = false
+	eureka.client.fetch-registry = false
+
+
+Now just we added the config client dep in all other micro , we will be adding the naming eureka client in all micro which wants to register them to the naming server .
 
 
 
+Lab 15 : -------------- naming srever (Eureka netflix server )-------------	
+
+lab16 : -------now connect micro to naming server------------
+1. Add client dependencies to all micro to be register
+
+	<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		
+2. Add prop in app.yml file of all micro.
+	eureka.client.servieUrl.defaultZone=http://localhost:871/eureka
+
+lab16 : -------now connect micro to naming server------------
+	
+	
+LAB 17 : ------------- load balancing the currency-exchange-service ----------------- using naming server ----------
+Steps : 
+
+1. We will use already set up feign to talk to eureka and for that we need to remove the localhost url we gave in @FeignClient(name , url)
+	ex : @FeignClient(name="currency-exchange")   ---- > this is enough for the load balancer to work using naming server .
+		Note : we already set up the mandate eureak server for this in above steps .
+		The eureka.client jar contains 
+			spring - cloud -strater -Load balancer code which is doing the switch. use dby feign
+
+LAB 17 : ------------- load balancing the currency-exchange-service ----------------- using naming server ----------	
+
+LAB 18 : ---------------Api gateway :------ 
+to contain the common features like authentication , authorization , logging etc.
+so all the api hit will go through this api gateway containing the common feature .
+
+Steps : 
+1. Add the dep 
+	DevTools
+Actuator
+Config Client
+Eureka Discovery Client
+Gateway (Spring Cloud Routing)
+2. now how it works ?
+		Apigatewayurl/micro registered name on naming server / url of the micro to hit 
+		
+		example : http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/{from}/to/{to}
+		
+		This will tell the api gateway to talk to eureka client with name CURRENCY-EXCHANGE find it and hit it with currency-exchange/from/{from}/to/{to} url
+		
+			for that add :  spring.cloud.gateway.discovery.locator.enabled=true=true
+							spring.cloud.gateway.discovery.locator.lowerCaseServiceID=true # to make the CURRENCY-EXCHANGE in lowercase 
+	
+
+3. app.yml 
+spring.application.name=api-gateway
+server.port=8765
+spring.config.import=optional:configserver:http://localhost:8888/
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+spring.cloud.gateway.discovery.locator.enabled=true
+eureka.instance.hostname=localhost
+spring.cloud.discovery.enabled=true
+spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
+
+
+VERRRY VERRRY IMPORTANT 
+	eureka.instance.hostname=localhost	  ADDD THIS TO ALL THE MICRO WHICH ARE REGISTERED TO EUREKA 
+---------------------ROUTING THING IT --- uRLS ------------------------	
+	Initial
+
+- http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/USD/to/INR
+
+- http://localhost:8765/CURRENCY-CONVERSION/currency-conversion/from/USD/to/INR/quantity/10
+
+- http://localhost:8765/CURRENCY-CONVERSION/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+
+
+Lower Case  : BCSE OF spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
+
+- http://localhost:8765/currency-exchange/currency-exchange/from/USD/to/INR
+
+- http://localhost:8765/currency-conversion/currency-conversion/from/USD/to/INR/quantity/10
+
+- http://localhost:8765/currency-conversion/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+
+
+
+LAB 18 : ---------------Api gateway :------ 
+
+
+
+LAB 18 : ---------------Api gateway CUSTOM ROUTES MEANS USE URL AS PER YOUR NEED . THE API GATEWAY WILL MAPP IT TO THE RIGHT ONE IN BACK END  :------ 
+
+@Configuration
+public class ApiRouteConfiguration {
+
+    /**
+     * this function will help us to map a url for path parameter.
+     * @param routeLocatorBuilder
+     * @return
+     */
+    @Bean
+    public RouteLocator gatewayRouter(RouteLocatorBuilder routeLocatorBuilder)
+    {
+        return routeLocatorBuilder.routes().
+                route(p -> p.path("/get")
+                        .filters(f -> f.addRequestHeader("MYheadre","Header")
+                                .addRequestParameter("FirstParm","myparam"))
+                                .uri("http://httpbin.org:80"))
+                .route(p -> p.path("/currency-exchange/**")
+                .uri("lb://currency-exchange"))
+                .route(p -> p.path("/currency-conversion/**")
+                        .uri("lb://currency-conversion"))
+                .route(p -> p.path("/currency-conversion-feign/**")
+                        .uri("lb://currency-conversion"))
+                .route(p -> p.path("/currency-conversion-new/**")
+                        .filters(f ->f.rewritePath("/currency-conversion-new/(?<segment>.*)",
+                                "/currency-conversion-feign/${segment}"))
+                        .uri("lb://currency-conversion"))
+                .build();
+    }
+}
+
+Custom Routes
+
+- http://localhost:8765/currency-exchange/from/USD/to/INR
+
+- http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/10
+
+- http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+- http://localhost:8765/currency-conversion-new/from/USD/to/INR/quantity/10
+
+
+LAB 18 : ---------------Api gateway CUSTOM ROUTES MEANS USE URL AS PER YOUR NEED . THE API GATEWAY WILL MAPP IT TO THE RIGHT ONE IN BACK END  :------ 
+
+
+LAB 19 : --------------------------------------Global filters :
+Logging framework
+
+LAB 19 : --------------------------------------Global filters :
+
+LAB 20 : -----------Circuit breaker/failover/retry/rate limit  ----------------
+
+		M1-----------> M2----------> M3-----------> M4-------------> M5
+		
+		
+resilience4j.bulkhead.instances.default.maxConcurrentCall=10
+resilience4j.ratelimiter.instances.default.limitForPeriod=2
+resilience4j.ratelimiter.instances.default.limitRefreshedPeriod=10s
+resilience4j.retry.instances.sample-api.maxRetryAttempts=4
+resilience4j.retry.instances.sample-api.waitDuration=1s
+resilience4j.retry.instances.sample-api.enableExponentialBackoff=true		
+
+1. Resilience4j is the tool for circuit break and failover condition to recover from.
+It is an open-source resilience library by Netflix. It provides latency and fault tolerance in a distributed system. It improves the overall resilience of the system by isolating the failing services and stopping the cascading effect of failures. It provides features like circuit break and fallback.
+
+steps : 
+1. dep to add 
+	AOP 
+	resilience4j
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+		</dependency>
+2. Create a controller which have a get mapping function 
+		write a failed rest call from it 
+3. We can use @Retry (name="sample-api",fallBackMethod="methodname")
+4. Add below prop in app.yml
+
+
+retry ---------------------------
+
+@Retry (name="sample-api",fallBackMethod="methodname")
+
+# will go for max retry of 4 the default is 3 
+resilience4j.retry.instances.sample-api.maxRetryAttempts=4  
+# The wait time between each retry 
+resilience4j.retry.instances.sample-api.waitDuration=1s
+# the wait time increase exponentially .
+resilience4j.retry.instances.sample-api.enableExponentialBackoff=true
+retry ---------------------------
+
+Circuit breaker : ----------------
+IF the M4 IS DOWN then the resilience ciscuit breaker feature will know that oops M4 is down so why loading more request to it .
+Lets break the circuit and send a default response back .
+
+@CiscuitBreaker(name="sample-api",fallBackMethod="methodname")
+
+There are three states of circuit breaker 
+
+		closed(will send all requests to Micro) ----------------------> open (will not send any request to dead Micro)
+						   /\														|
+							|                                                       |
+							|                                                       |
+							|                                                       |
+							-----------------half_open (kuch % req will send)<-------
+
+
+Circuit breaker : ----------------
+
+
+		
+Rate limiter : ----------------
+
+To limit the number of calls to come in 
+resilience4j.ratelimiter.instances.default.limitForPeriod=2
+
+resilience4j.ratelimiter.instances.default.limitRefreshedPeriod=10s
+
+@RateLimiter(name="default")
+
+
+
+Rate limiter : ----------------
+
+Bulkhead: ----------------
+
+@Bulkhead(name="default")
+
+resilience4j.bulkhead.instances.default.maxConcurrentCall=10
+
+Bulkhead : ----------------
+
+LAB 20 : -----------Circuit breaker/failover/retry/rate limit  ----------------
+
+
+-----------------Docker -------------------------------
+1. container : an isolated space or a process which runs your application which is dynamic version
+2. image : that contain the jar file for a java code , the runtime (jdk ) and run on top of the os stack . its a set of bytes .
+3. registry container hub.docker.com 
+4. docker engine : manage the images , registry and running containers and also help in cretaing the images and pushing it to docker registry.. It receives the command from docker client for all these activities.
+		when we run docker run , the engine check the images availability on system and then go forward for run or to download from registry .
+
+commands : 
+1. docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE : ------------------ to run the image to create a container .
+	When you run the image , its a separate system(isolated from base machine) so you need to map the port to access it.
+	-p is the argumemt to map the port of base machine to the port of container which is a seperate isolated system .
+		-p (hostport/basemachine):containerport
+sudo service docker status ----------------------------------------------------- after installation  will tell the running docker engine service status 
+sudo service docker stop
+sudo service docker start
+sudo service docker restart
+docker events ------------------------------------------------------------------ will shw the events (create stop etc )
+docker stats : ---------------------------------------------------------------- will show the mem use
+docker system df  : ------------------------------------------------------------ how much container , volumens et 
+docker info -------------------------------------------------------------------- will give permission denied . the ubuntu user is not in docker group
+sudo docker info --------------------------------------------------------------- will give docker installation info
+sudo usermod -aG docker ubuntu  ------------------------------------------------ Add ubuntu user id in docker group and reconnect linux 
+docker images ------------------------------------------------------------------ to see the images
+docker pull ubuntu ------------------------------------------------------------- will pull image ubuntu latest version(official image) .
+docker run --name myubuntu ubuntu----------------------------------------------- you can specify the name of the container
+docker pull ubuntu:16.04 ------------------------------------------------------- will pull ubuntu 16.04 version where 16.04 is a tag
+docker run hello-world --------------------------------------------------------- helloworld is an image and command will create a container on docker engine
+docker logs -f imageid : -------------------------------------------------------- to tail te logs of the container app
+docker client told ---- docker daemon/engine ---- downloaded image hello-world ---- creates a container --- docker daemon sends the output of running container to ------ docker client (shows message)
+docker run ubuntu -------------------------------------------------------------- ran the container and creats the container and existed by not showing  the container(empty container os / only bash program).
+docker 
+docker ps(docker container ls) ---------------------------------------------------------------------- will show you the list of running container
+docker ps -a (docker container ls -a )------------------------------------------------------------------- will show all container (stopped , running).
+docker run -it centos ---------------------------------------------------------- you will go into container in interactive mode(start and make connection).
+cat /etc/system-release -------------------------------------------------------- will open a file system-release shows the os (output : CentOS Linux release 7.6.1810 (Core))
+uname -a ----------------------------------------------------------------------- to see the kernel (centos container uses : Linux 7003536d015c 4.15.0-1044-aws #46-Ubuntu SMP Thu Jul 4 13:38:28 UTC 2019 x86_64 x86_64 x86_64).
+exit --------------------------------------------------------------------------- after -it if you exit the container stops
+docker run -itd centos---------------------------------------------------------- will send the running container to background and your cursor will on the base VM.
+docker run -p 5000:5000 -d -restart=always imagename : ------------------------- This will restart the container once the engine restart 
+docker run -p 5000:5000 -d -restart=always  -m 512m imagename : ------------------------- -m how much of mem to allow  
+docker run -p 5000:5000 -d -restart=always -m 512m --cpu-quota 5000 imagename : ------------------------- --cpu-quota how much cpu 
+
+docker exec -it container-id ls ------------------------------------------------ exec and -it will create an interactive tunnel to run shell command on container
+docker exec -it container-id bash----------------------------------------------- it will lead you to inside the container (container-id you will get after running image docker ps(will give container-Id) )
+apt install apache2 ------------------------------------------------------------ once you go inside of container using exec bash install apache2
+service apache2 status---------------------------------------------------------- get the status
+service apache2 start----------------------------------------------------------- start the apache service
+docker commit container-id New-Name -------------------------------------------- will create a new image out of running container. Not ideal way to create image . USE DOCKER FILE
+docker stop container-id-------------------------------------------------------- Its stop state but is not removed.
+docker kill container-id :------------------------------------------------------ it will kill the container at once .
+docker start container-id------------------------------------------------------- It will start the same container which is in stop state
+docker run -it New-Nameimage---------------------------------------------------- it will create a container with apace2 installed already 
+docker rm container-id---------------------------------------------------------- it will remove the container but first stop it using docker ps -- > then docker stop container-id
+docker rm -f  $(docker ps -a -q)------------------------------------------------ it will remove all running container 
+docker container prune---------------------------------------------------------- will remove all container in stopped state
+docker  image prune -a --------------------------------------------------------- will remove all images 
+docker rmi image-id ------------------------------------------------------------ will remove the image with that image id.
+docker image history imagename-------------------------------------------------- to check the layer COPY , CMD command level .
+docker inspect imagename : -----------------------------------------------------json view of images (env , java home  all that stuff , folder strc)
+docker login ------------------------------------------------------------------- login to docker hub (user defined images always starts with username/imagename . docker push image-id will not work)
+docker tag imagename dockerhub-username/imagename ------------------------------ rename the image to preferred one
+docker push dockerhub-userid or dockerid/repo:imagename---------------------------------------- push the image to docker hub(docker push harmeet24011992/myrepo:imagename)
+example : docker image push harmeet24011992/myrepo:firstimage_1.0.2.RELEASE   
+docker cotainer unpause/pause containerid :------------------------------------------------------------------------- will pause/unpause the app.
+docker container inspect :------------------------------------------------------------------------------------------ info about the container (status , port binding , volume )
+docker pull reponame/imagename
+docker file:-------------------------------------------------------------------- all steps we did , we can write line by line in docker file and just run the yaml file(best way to create image)
+FROM ubuntu---------- -----------------------------------------------------------means we need base image
+RUN apt-get update
+RUN apt-get install apache2 ----------------------------------------------------- to run command on base image on which we will be installing apache2
+ADD . /var/www/Html ------------------------------------------------------------- to add a file. there is a dot(.) which shows current folder files will be add to html
+ENTRYPOINT apachectl -D FOREGROUND  or CMD apachectl -D FOREGROUND--------------- Run command on container initialize or  Run command on container starts
+ENV DEVOPS INTELLIPAAT----------------------------------------------------------- Create ENV variable
+copy / export ------------------------------------------------------------------- check what is it
+docker build -t harmeet2401/myimagefromdockerfile .  ---------------------------- command to run docker file to create image
+docker push harmeet2401/myimagefromdockerfile
+docker run -itd -p 80:80 harmeet2401/myimagefromdockerfile  --------------------- 80:80(host machine-port : container-port)
+docker create volume demo-vol---------------------------------------------------- create a volume (pendrive).
+docker volume ls ---------------------------------------------------------------- to check the number of pendrives(volumes)
+docker run -it --mount source=demo-vol,destination=/app/myspace/ -d unbuntu------ to attach the volume (pendrive) to you container . this command will creates a volume and attached to a folder /app/myspace/ inside new container
+docker exec -it container-id bash ----------------------------------------------- go inside new container to run commands do [ls] you will found /app/yspace folder create and file and share it with other container
+docker run -it --mount source=demo-vol,destination=/demo/ -d unbuntu------------- launch a new container mounted same volume(pendrive) attached to /demo/ folder 
+docker exec -it container-id bash -----------------------------------------------go inside of the container and do [ls] you will find demo folder containing same file present in old container folder /app/myspace/ 
+docker run -it -v /home/ubuntu/mount/:/app/ -d ubuntu --------------------------- this will mount the folder on you host machine [BIND MOUNT] be specific of your folder
+docker run -it -v /home/ubuntu/mount/:/myspace/ -d ubuntu ----------------------- this is another container (above and this conatiner will get the file present in /home/ubuntu/mount)[BIND MOUNT] be specfic of your folderdo
+docker volume rm demo-vol-------------------------------------------------------- to remove the volume
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose----------- to install docker compose (used to deploy application with multiple container(microservices))
+sudo chmod +x /usr/local/bin/docker-compose ------------------------------------- to make its access to execute 
+docker-compose version ---------------------------------------------------------- to get the version of docker compose (LEARN ABOUT YAML FILES WHICH CONSISTS OF (MAP AND LISTS))
+docker-compose.yml :
+version: '3'
+services:
+  sample1:
+    image: 'centos'
+  sample2:
+    image: 'ubuntu'
+  sample2:
+    image:  httpd
+    ports:
+      - "80:80"
+docker-compose up -d ------------------------------------------------------------- will download images run multiple containers	  
+docker-compose down  ------------------------------------------------------------- it will shutdown the service 
+docker run -it --name container1 -d ubuntu --------------------------------------- set the name of the container for linking the containers
+docker run -it --name container2 --link container1 -d ubuntu---------------------- linked with container1 on network
+docker exec -it container2-id bash ----------------------------------------------- do cat etc/hosts/ , you will find new entry of container1's IP
+root ==   apt-get update 
+		  apt-get install iputils-ping-------------------------------------------- install ping on container 2 for pinging container1 after linkage
+		  ping container1 -------------------------------------------------------- will send you reposne
+docker run -it --name container3 --link container2 -d ubuntu --------------------- linking 3rd to 2nd
+
+docker swarm init --advertise-addr=13.233.111.89 --------------------------------- launches a docker swarm master (if your node already part of swarm : docker swarm leave --force).
+docker swarm join --token SWMTKN-1-5tyc8iih06c97qflvt0x7pozvuda755ft514gykil7v3p00ctr-1bn8yczjl8n1zmyqfdq3oxmwc 13.233.111.89:2377 ----------------- go to any node , install docker and run this command . take an image of your AWS instance(docker swarm leave --force) to leave a swarm
+sudo apt-get install docker.io---------------------------------------------------- launch a new instance and install docker on slave instance
+docker node ls ------------------------------------------------------------------- will list the nodes with star or something run this on manager
+docker service create --name nam-of-service --replicas nummber-of-replicas 	-p (for port)  image-name ---------------------------------- creates a service
+docker service create --name nginx --replicas 3 -p 80:80 nginx
+docker service ls ----------------------------------------------------------------- list the service
+docker ps  ------------------------------------------------------------------------ on master you will see 1 or 2 containers of nginx
+docker ps ------------------------------------------------------------------------- on slave you will see one container of nginx
+docker stop container-id	------------------------------------------------------- on master , it will create a new container auto in other slave. thats what swram is
+docker network -------------------------------------------------------------------- now above swarm kept containers on different computers.. then we use docker network
+docker nework create -d overlay my-overlay----------------------------------------- create a netwrokd
+docker service create --name website --replicas 3 --network my-overlay --publish 80:80 hshar/webapp------------------- publishing network
+docker service rm service id  ----------------------------------------------------- docker service  ls to get the id 
+docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
+mysql -u root -p intelli
+
+-------------------docker command -----------------------------------
+
+------------------docker images ---------in java microservices -------------------
+
+
+steps 
+
+------------------------zipkin distributed tracing system  server using docker ------------------
+1. docker run -p 9411:9411 openzipkin/zipkin:2.23
+
+
+
+
+2.  connect all micro to zipkin 
+	Add dep 
+		sleuth : to generate a unique id for a single transaction 
+		sleuth-zipkin
+		spring rabbit MQ : to get the message in Queue its a queing framework 
+3. sample configuration : to sample small % of request , sampling all req will be performance issue .
+	spring.sleuth.sampler.probability=1.0
+4. run ur app post that and run a get req and refresh zipkin and run query 
+
+------------------------zipkin db server------------------
 
 	
-lab 14 ----------------------currency conversion/exchange microservices
+
+
+
+
+---------------------------------images creating using pom for java -----------------https://github.com/in28minutes/spring-microservices-v2/tree/main/04.docker
+steps : 
+
+1. use maven plugin alrady in pom of yours spring >2.3
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--this config below help in creating the image for this app  -->
+				<configuration>
+					<image>
+						<name>harmeet24011992/mmv2-${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
+				<!--this config below help in creating the image for this app  -->
+			</plugin>
+
+2. Now right click on project -------> maven build -----> goal = spring-boot:build-image -dskipTests
+		In intellij you can directly run from plugin and run spring-boot:build-image 
+
+3. do above steps for all 4 apps 
+	a. docker run -p 8000:8000 meet14764/mmv2-currency-exchange-service:0.0.1-SNAPSHOT
+	b. docker run -p 8100:8100 meet14764/mmv2-currency-conversion-service:0.0.1-SNAPSHOT
+	c. docker run -p 8765:8765 meet14764/mmv2-api-gateway:0.0.1-SNAPSHOT
+	d. docker run -p 8761:8761 meet14764/mmv2-naming-server:0.0.1-SNAPSHOT
+	
+	meet14764 is the docker id , need to create that as old images are not getting updated.
+
+
+---------------------------------images creating using pom for java -----------------
+
+
+-------------------------docker compose -------------------------------------
+docker-compose up 
+
+----------compose file 
+
+Some terms :
+
+1. environment variable : we can set the environment variable in yaml file to inject the value to the application.properties file of the service.
+2. network : for theentire arch to be connected 
+3. -ports : to map the port of hostmachine to container pod 
+4. -mem_limits : to set the mem limit for the container to run 
+5. services : the very first tag for the services/Microservice to be part of 
+6. depends_on : we can mention the service on which the patent service depends on 
+
+
+
+-------------------------docker compose -------------------------------------
+
+
+
+------------------docker images ---------in java microservices -------------------
+
+
+----------------------Kuberenetes----------------------------------------
+
+Kubernetes is a container orchestation tool . Which helps in monitoring and managing the container instances running on a host machine.
+
+The features include : 
+	scaling up /down
+	load balancing
+	Maintain the instances running .
+
+There are three services available in the market : 
+	AKS : azure kubernetes service (Azure platform )
+	EKS : Elastic kubernetes service(AWS platform)
+	GKS : Google Kubernetes service(Google) provided by the google cloud platform (GCP)
+
+We will be using GKS by creating the account that will give us free tier to practice kubernetes .
+
+Small example of :
+create a dep
+run the dep 
+autoscale the dep
+delete one pod and get other up immediately
+create new release version out of the running dep without bringing current one down.
+
+GCP ACCOUNT  : login to it
+
+meet14764
+Gogi@12345
+
+
+----------------cluster------------------
+Manager : manage the nodes , one or more master nodes are managers  , typically one is there .
+Cluster consists of nodes 
+K8S is KUBERNETES
+
+
+in GCP : we can search for KUBERNETES engine -----> enable -----> clusetr -----> create ----> default (3 nodes)
+
+STEPS : 
+1. First connect to the cluster 
+2. kubectl : kube controller is an (CLI)command to interact with the cluster .
+	fetaure it does : eployment ,	increase instance  and many other things 
+	command : 
+			a. 
 	
