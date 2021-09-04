@@ -1276,6 +1276,10 @@ steps :
 	
 	meet14764 is the docker id , need to create that as old images are not getting updated.
 
+4. We can directly push the image to docke hub 
+
+	docker login 
+	docker push meet14764/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
 
 ---------------------------------images creating using pom for java -----------------
 
@@ -1303,7 +1307,7 @@ Some terms :
 ------------------docker images ---------in java microservices -------------------
 
 
-----------------------Kuberenetes----------------------------------------
+----------------------Kuberenetes-------------------------------------------------------------------
 
 Kubernetes is a container orchestation tool . Which helps in monitoring and managing the container instances running on a host machine.
 
@@ -1332,18 +1336,293 @@ meet14764
 Gogi@12345
 
 
-----------------cluster------------------
+----------------Kubernetes cluster------------------
 Manager : manage the nodes , one or more master nodes are managers  , typically one is there .
 Cluster consists of nodes 
 K8S is KUBERNETES
 
 
+Node :  Node is a worker node in Kubernetes. Each node will have a unique
+     identifier in the cache (i.e. in etcd).
+	 
+Pod : Pod is a collection of containers that can run on a host. This resource is
+     created by clients and scheduled onto hosts.each pod have its own Ip address
+			 
+CLUSTER 	contain many  	NODE  	contain many      PODS   	contain many       CONTAINERS
+        ----------------->        ----------------->         ----------------->
+		
+Replica set :
+     ReplicaSet ensures that a specified number of pod replicas are running at
+     any given time.	
+		
+		
+		
 in GCP : we can search for KUBERNETES engine -----> enable -----> clusetr -----> create ----> default (3 nodes)
 
-STEPS : 
-1. First connect to the cluster 
+Cluster IP : This will be a private address and doens't have any external IP or public IP address .
+
+
+Master node : does not contain any app container running on it .
+	a. etcd : distributed DB .
+	b. kubernetes api server : We were using kubectl ryt ? that is working as we were communicate with KUBERNETESapi server using it .
+	c. Scheduler : Is responsible for assigning the container to a pod . randonmly
+	d. controller : manage the overall health of cluster . It make sure state of the cluster.
+	
+Worker node : 
+		Kubelet : monitor whats happening on the pod and reports it to master controller .
+		kubeproxy : helps in exposing services .
+		container runtime : Docker is th emost common runtime to run the container using image .
+		
+question : 
+	we can only run docker container on kubernetes ? Node
+	what happn if master goes down ? The app will keep on running .
+	
+			
+
+STEPS :  
+1. First connect to the cluster  : gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-c --project proud-portfolio-324718
 2. kubectl : kube controller is an (CLI)command to interact with the cluster .
 	fetaure it does : eployment ,	increase instance  and many other things 
 	command : 
-			a. 
+			a. create dep : kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE 
+			b. expose dep : kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080			
+			
+----------------Lubernetes cluster------------------
+
+
+----------------Deployments-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+----------------Deployments-----------------------------------------
+	
+	
+---------------------Commands--------------------------------------------------------------------------------------
+docker run -p 8080:8080 in28min/hello-world-rest-api:0.0.1.RELEASE
+ 
+kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE---------------------------------- created pod , deployment .
+kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080----------------------------------------------------- created a service 
+	And a load balancer is also created which exposed a front end IP and on the back end we have pods .
+kubectl scale deployment hello-world-rest-api --replicas=3 ------------------------------------------------------------------------increase the replicaset for deployment to 3 pods (and will make sure 3 keeps in running)
+kubectl delete pod hello-world-rest-api-58ff5dd898-62l9d
+kubectl autoscale deployment hello-world-rest-api --max=10 --cpu-percent=70
+kubectl edit deployment hello-world-rest-api #minReadySeconds: 15
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+ 
+gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-a --project solid-course-258105
+kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE
+kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=DUMMY_IMAGE:TEST
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+command : kubectl get componentstatuses
+
+Output : 
+
+NAME                 STATUS    MESSAGE             ERROR
+scheduler            Healthy   ok
+controller-manager   Healthy   ok
+etcd-1               Healthy   {"health":"true"}
+etcd-0               Healthy   {"health":"true"}
+
+
+
+kubectl get pods --all-namespaces
+ 
+kubectl get events
+kubectl get pods
+kubectl get replicaset
+kubectl get deployment
+kubectl get service
+ 
+kubectl get pods -o wide
+ 
+kubectl explain pods
+kubectl get pods -o wide
+ 
+kubectl describe pod hello-world-rest-api-58ff5dd898-9trh2
+ 
+kubectl get replicasets
+kubectl get replicaset
+ 
+kubectl scale deployment hello-world-rest-api --replicas=3
+kubectl get pods
+kubectl get replicaset
+kubectl get events
+kubectl get events --sort.by=.metadata.creationTimestamp
+ 
+kubectl get rs
+kubectl get rs -o wide
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=DUMMY_IMAGE:TEST
+kubectl get rs -o wide
+kubectl get pods
+kubectl describe pod hello-world-rest-api-85995ddd5c-msjsm
+kubectl get events --sort-by=.metadata.creationTimestamp
+ 
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl get pods -o wide
+kubectl delete pod hello-world-rest-api-67c79fd44f-n6c7l
+kubectl get pods -o wide
+kubectl delete pod hello-world-rest-api-67c79fd44f-8bhdt
+ 
+gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-c --project solid-course-258105
+docker login
+docker push in28min/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+docker push in28min/mmv2-currency-conversion-service:0.0.11-SNAPSHOT
+ 
+kubectl create deployment currency-exchange --image=in28min/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+kubectl expose deployment currency-exchange --type=LoadBalancer --port=8000
+kubectl get svc
+kubectl get services
+kubectl get pods
+kubectl get po
+kubectl get replicaset
+kubectl get rs
+kubectl get all
+ 
+kubectl create deployment currency-conversion --image=in28min/mmv2-currency-conversion-service:0.0.11-SNAPSHOT
+kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
+ 
+kubectl get svc --watch
+ 
+kubectl get deployments
+ 
+kubectl get deployment currency-exchange -o yaml >> deployment.yaml 
+kubectl get service currency-exchange -o yaml >> service.yaml 
+ 
+kubectl diff -f deployment.yaml
+kubectl apply -f deployment.yaml
+ 
+kubectl delete all -l app=currency-exchange
+kubectl delete all -l app=currency-conversion
+ 
+kubectl rollout history deployment currency-conversion
+kubectl rollout history deployment currency-exchange
+kubectl rollout undo deployment currency-exchange --to-revision=1
+ 
+kubectl logs currency-exchange-9fc6f979b-2gmn8
+kubectl logs -f currency-exchange-9fc6f979b-2gmn8 
+ 
+kubectl autoscale deployment currency-exchange --min=1 --max=3 --cpu-percent=5 
+kubectl get hpa
+ 
+kubectl top pod
+kubectl top nodes
+kubectl get hpa
+kubectl delete hpa currency-exchange
+ 
+kubectl create configmap currency-conversion --from-literal=CURRENCY_EXCHANGE_URI=http://currency-exchange
+kubectl get configmap
+ 
+kubectl get configmap currency-conversion -o yaml >> configmap.yaml
+ 
+watch -n 0.1 curl http://34.66.241.150:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+ 
+docker push meet14764/mmv2-currency-conversion-service:0.0.11-SNAPSHOT
+docker push meet14764/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+---------------------Commands--------------------------------------------------------------------------------------
+	
+	
+We can install below CLI to  practice the kubernete on google cloud.
+GCloud 
+kubectl 	
+	
+	
+Now after installation we can use GCloud to connect to our kubernetes cluster . By copying the command from Google cloud UI 
+command  : gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-c --project proud-portfolio-324718
+
+Now use java Api to deploy to kubernetes :
+https://github.com/in28minutes/spring-microservices-v2/tree/main/05.kubernetes
+
+
+Lab 1 : ------------- create a deploymeny using image of an API -----------
+Steps : 
+1. We have commented out the spring cloud config , eureka netflix (naming server join ) , zipkin(tracing ui) and rabbit MQ (queue framework )
+2. all above features are diabled as these are provided by the kbernetes.
+3. Connect to the cluster of GCP using GCloud command .
+4. build the images of api using spring-boot-image:builder for docker 
+5. then push the images to docker hub using 
+	docker login 
+	docker push dockerid/imagename:tag
+	
+3. KUBERNETES commands to pull the images and create a deployment
+	kubectl create deployment currency-exchange --image=meet14764/currency-exchange-service:0.0.11-SNAPSHOT
+	kubectl expose deployment currency-exchange --type=LoadBalancer --port=8000
+	kubectl get svc --watch 
+	kubectl get pods
+	kubectl get replicasets
+	kubectl get services 
+	
+	kubectl create deployment currency-conversion --image=meet14764/currency-conversion-service:0.0.11-SNAPSHOT
+	kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
+	kubectl get svc --watch 
+	kubectl get pods
+	kubectl get replicasets
+	kubectl get services 
+	
+4. Once it is done 
+	use the loadbalancer IP 
+	Currency Exchange Service kubernetes
+- http://loadbalancerIp:8000/currency-exchange/from/USD/to/INR
+
+Currency Conversion Service kubernetes
+- http://loadbalancerIp:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+Lab 1 : ------------- create a deploymeny using image of an API -----------
+
+
+lab 2 : ------------- Declarative approach : Update the deployment of running dpeloyment --------------------
+
+steps : 
+1. get the deployment in a deployment.yaml file 
+	kubectl get deployment currency-exchange -o deployment.yml
+2. get the service deployment in a service.yml file
+	kubectl get service currency-exchange -o service.yml
+3. Merge both the yamls in a common file separated by    ---
+4. check the diff after changing the replica value for example  ,kubectl diff -f  deployment.yml
+5. Then apply the updated yaml : kubeclt apply -f deployment.yml
+6. post applying the yaml we will get the new desired state with changed replica for currency-exchange pods.
+
+
+
+
+lab 2 : ------------- Update the deployment of running dpeloyment --------------------	
+
+
+Lab 3 : ------------- Clean up yaml for kubernetes-----------
+
+
+Rolling update : one pod update at a time.
+Lab 3 : ------------- Clean up yaml for kubernetes-----------
+
+Lab 4 : -------------Tracing logs and api actvation on GCP ----------
+
+steps : 
+
+1. Search for Api and Services on GCP. ------ > Enable apis and services .----> logging ---> cloud logging api ----> enable it .
+																	   ----> stackdriver ---> enable all driver api 															   
+2. kubectl delete all -l app=hello-world-rest-api
+3. kubectl get all : --- to get all the artefacts of the deplyment if any 
+4. kubectl apply -f deployment.yml : ------- > create a deployment and srevice using the yaml . As we created using the create and expose command 
+5. now change anything in the yaml file and run : kubectl apply -f deployment.yml .
+
+			NICEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+																   
+
+Lab 4 : -------------Tracing logs and api actvation on GCP ----------
+	
+	
+----------------------Kuberenetes-------------------------------------------------------------------	
 	

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  creationTimestamp: "2021-09-01T19:16:22Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: hello-world-rest-api
+  name: hello-world-rest-api
+  namespace: default
+  resourceVersion: "8334"
+  uid: 01aa56ef-65cc-4cb4-b312-b8e3f7ac7915
+spec:
+  clusterIP: 10.100.7.39
+  clusterIPs:
+  - 10.100.7.39
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31295
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello-world-rest-api
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.135.227.0
