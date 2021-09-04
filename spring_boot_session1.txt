@@ -1330,7 +1330,7 @@ autoscale the dep
 delete one pod and get other up immediately
 create new release version out of the running dep without bringing current one down.
 
-GCP ACCOUNT  : login to it
+GCP ACCOUNT  : login to it : https://console.cloud.google.com/kubernetes/deployment/us-central1-c/in28minutes-cluster/default/hello-world-rest-api/overview?project=proud-portfolio-324718
 
 meet14764
 Gogi@12345
@@ -1623,6 +1623,21 @@ steps :
 
 Lab 4 : -------------Tracing logs and api actvation on GCP ----------
 	
+	
+
+Lab 5 : -------------Custom Environment variables ---------------------
+
+As we know when the currency-exchange pod comes up kubernete will create some env variables . 
+which also include  : CURRENCY_EXCHANGE_SERVICE_HOST  , HOSTNAME(pod name )
+
+The env var is used by the currency-conversion for feign hit .
+
+
+
+
+
+
+Lab 5 : -------------Custom Environment variables ---------------------
 	
 ----------------------Kuberenetes-------------------------------------------------------------------	
 	
