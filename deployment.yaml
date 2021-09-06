@@ -26,6 +26,12 @@ spec:
       - image: in28min/hello-world-rest-api:0.0.2.RELEASE
         imagePullPolicy: IfNotPresent
         name: hello-world-rest-api
+        envFrom:
+          - configMapRef:
+              name: hello-world-rest-api
+#        env:
+#          - name : HELLOW-WORLD-STRING-MESSAGE
+#            value : OLA !! BOM DIA
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -46,3 +52,11 @@ spec:
     app: hello-world-rest-api
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+data:
+  MESSAGE_STRING: BOMDIA
+kind: ConfigMap
+metadata:
+  name: hello-world-rest-api
+  namespace: default  

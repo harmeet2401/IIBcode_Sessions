@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  MESSAGE_STRING: BOMDIA
+kind: ConfigMap
+metadata:
+  name: hello-world-rest-api
+  namespace: default
