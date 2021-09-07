@@ -26,14 +26,6 @@ spec:
       - image: in28min/hello-world-rest-api:0.0.2.RELEASE
         imagePullPolicy: IfNotPresent
         name: hello-world-rest-api
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health/readiness
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health/liveness    
         envFrom:
           - configMapRef:
               name: hello-world-rest-api

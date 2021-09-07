@@ -23,17 +23,9 @@ spec:
         app: hello-world-rest-api
     spec:
       containers:
-      - image: in28min/hello-world-rest-api:0.0.2.RELEASE
+      - image: hello-world
         imagePullPolicy: IfNotPresent
         name: hello-world-rest-api
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health/readiness
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health/liveness    
         envFrom:
           - configMapRef:
               name: hello-world-rest-api

@@ -1,0 +1,59 @@
+Spring boot -------springboottutorial.com
+
+. Its a greate framework that provide embedded process with the Tomcat or Jetty 
+. no code generation at all
+. its neither an  integration/application server nor a was server 
+
+Spring boot Auto configuration : 
+
+. @SpringBootApplication 
+It tell its the spring context to be load
+It will enable the Autoconfiguration and ComponentScanner
+
+1. ComponentScanner : Will scan all folders of the project to start registering the classes as a component 
+		And the annotation will provide the registeration .
+			example : @Controller , @RestController , @Component , @Service , @Repository , @EnableConfigServer ,@Entity etc 
+2.	Autoconfiguration : it will look over the class path and start creating beans on the basis of it .
+	We can turn on the debug level logs using 
+	
+		logging.level.org.springframework = DEBUG
+		
+
+Evolution from spring --------------> spring mvc -------------------> spring boot 
+
+each tech is solving it own prob :
+spring : it removes the issue of dependencies injection 
+spring mvc : it provides better connection with embedded system 
+sprig boot : it helps by using sping and spring mvc under it and allow auto configure to auto create all beans required for creating dispatcher servelet , injecting dependencies and giving an embedded web server to deploy a web service 		
+
+
+starter dependencies : docs.spring.io
+
+spring-boot-starter-web-service : Soap web services 
+spring-boot-starter-web : Res web services 
+spring-boot-starter-test : unit test cases 
+spring-boot-starter-jdbc : traditional JDBC connection to DB
+spring-boot-starter-hateaos : Add hateaos feature to it .
+spring-boot-starter-security : this will add Basic auth to ur project and you can set the usrname and pass in app.yml file.
+spring-boot-starter-data-jpa : The interface between the java object entity to the Db connection mostlty H2
+spring-boot-starter-cache : enables spring framework cache's feature
+spring-boot-starter-data-rest : expose simple rest services using spring data Rest
+spring-boot-starter-actuater : advance features like monitoring , tracing etc 
+spring-boot-starter-logging : for logging using logback 
+spring-boot-starter-log4j2 : logging using log4j2
+
+Spring boot actuater : 
+	its a verry good feeature which will help in creating testing url s, health probes etc .
+	it will give you separate ui to test your rest api or soap api .
+	urls , how many times service is called . metadata 
+	
+	management.endpoints.web.exposure.include=*
+	
+Hal browser : 
+		will give info like swgger UI 
+		
+Spring boot developer Tools : devtools dep to auto load the change 
+			
+		
+
+
