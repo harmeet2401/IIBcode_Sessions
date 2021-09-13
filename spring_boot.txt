@@ -1,13 +1,30 @@
 Spring boot -------springboottutorial.com
 
+lab 1 : ------------ Web app using spring boot framework -------------
+Creating using below dependencies
+
+1. Web 
+2. Thymleaf : 
+	A modern server-side Java template engine for both web and standalone environments. Allows HTML to be correctly displayed in browsers and as static prototypes.
+
 . Its a greate framework that provide embedded process with the Tomcat or Jetty 
 . no code generation at all
 . its neither an  integration/application server nor a was server 
+. when we use thymleaf , it is specifically used to utilize the thymleaf templace to view html page easily on browser.
+. Once controller is done , add the sample html file in template folder .
+. Model class provide the view which helps in binding the value to the html page .
+. Model allow the users to add the attributes in map fashion. key and value
 
-Spring boot Auto configuration : 
+
+lab 1 : ------------ Web app using spring boot framework -------------
+
+
+----------------------------------------------------------------------------------
+Spring boot main class : 
 
 . @SpringBootApplication 
 It tell its the spring context to be load
+It also enables the autoconfiguration annotation that will start configuring the beans or jar present on the classpath .
 It will enable the Autoconfiguration and ComponentScanner
 
 1. ComponentScanner : Will scan all folders of the project to start registering the classes as a component 
@@ -17,6 +34,30 @@ It will enable the Autoconfiguration and ComponentScanner
 	We can turn on the debug level logs using 
 	
 		logging.level.org.springframework = DEBUG
+		
+----------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------
+. @Controller 
+a controller is  a class whose job is to receive HTTP request.
+
+. @RestController : 
+a controller class which in turn is annotated as @controller and @ResponseBOdy if we check the documentation of @RestController.
+The @ResponseBOdy will tell the class to convert it to json object and sends it back to tthe usrs.
+
+. @Component 
+spring boot will scan all the beans or classes which are annotated as @Components or either other annotations like @Services , @Repository which in turn when you go inside it are annotated as @Component 
+ 
+There are two types of testing techniques in Spring boot 
+1. Junit test 
+2. Spring MVC mok test : which is basically for spring boot controller testing if its working fine or not .
+
+
+NOte  : always check the documentation of the annotation to see the parent annotation for better understandings.
+. 
+----------------------------------------------------------------------------------
+		
 		
 
 Evolution from spring --------------> spring mvc -------------------> spring boot 
@@ -53,7 +94,96 @@ Hal browser :
 		will give info like swgger UI 
 		
 Spring boot developer Tools : devtools dep to auto load the change 
+
+Spring boot JPA : javax persistence api  : javax.persistence.* which contains all the annotation
+
+JPA is connected to the H2 hibernate in memory database .
+jpa is like the interface which contains the classes as an interface and hibernate is the implementation of JPA interface .
+H2 will be able to understand once you create the entity bean and allow to create columns or table in H2 db easily.
+
+HIBERNATE is one of the popular ORM framework .
+
+Jpa defines the specification . its an api . So below are the ways JPA tells ok these are the way you define the : 
+
+	how do you define entity ?
+	how do you map attributes to the column of the h2 db?
+	how to manage the entity.?
+
+Make the database URL a constant by configuring this in application.properties.
+
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.data.jpa.repositories.bootstrap-mode=default	
+
+Project : JPA : --------------- 
+steps : 
+1. create a simple bean user 
+User : annotation as @Entity 
+	id annotation as @id @Generated
+	name
+	address
+2. Create a UserDaoService to manage the entity to insert data 
+		annotation as @Repository and @Transactional for each methodto be transactional
+    user EntityManager entityManager class which is annotation as @PersistenceContext 
+	and ad a function 
+		public long insert (User user){
+		entityManager.persist(user);
+		return user.getId();
+		
+		}
+3. create a command line runner class instead of a controller tat we did for an rest api 
+		command line runner will run once the spring boot project starts .
+		
+	class : UserDaoCommandLineRunner annotation as @Component implements CommanLineRunner interface 
+	@Autowired : UserDaoService userdaoservices
+	method : ovveride : run (String .... arg0 ){
+	User user = userdaoservices.insert(new user(jack , 9889))
+	}
 			
 		
 
+Questions : 
+where is the Db created  ?
+h2 in mem db 
+
+what schema is used to create the table ?
+created based on the user bean entityt.
+
+where we can see the h2 database ?
+localhost:8080/h2-console
+
+where is h2 is coming fro m ?
+as h2 is the implementation of JPA . it is handling that .
+
+
+
+Spring data jpa is the feature which allow you to create a repository and mention your method and spring jpa will provide you the implementationfor it 
+and also configure the entity for it.
+	In which we create an interface and extend JPArepository<primary key , data type for it >
+	
+-----------------------------------------------------------------------------------------------------------
+
+1.Java EE 8 Microservices
+Build microservices-based enterprise applications with the latest version of Java EE
+Key Features
+Create microservices in Spring and deploy them with Docker and Mesos
+Examine a number of real-world use cases and hands-on code examples
+Develop distributed applications based on microservices architecture 
+https://yourlearning.ibm.com/activity/SAFARI-9781788475143
+13 Hours 50 Min
+
+
+2.Mastering Microservices with Java
+Build smaller, lighter, and faster services that can be implemented easily in a Java production environment
+About This Video
+Build, deploy, and test microservices from scratch with ease Design
+Implement sample projects using domain-driven design
+Confidently resolve the issues faced during development and deployment
+https://yourlearning.ibm.com/activity/SAFARI-9781787284364 ---------------------------------NOt available 
+2 Hours 24 Min
+
+
+3.	Spring and Spring Boot Fundamentals	Fundamental details of  Spring are and Spring Boots	https://learning.oreilly.com/learning-paths/learning-path-spring/9781492055334/	7 Hours 20 Min	
+
+
+-----------------------------------------------------------------------------------------------------------
 
