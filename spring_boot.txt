@@ -51,9 +51,124 @@ spring boot will scan all the beans or classes which are annotated as @Component
  
 There are two types of testing techniques in Spring boot 
 1. Junit test 
-2. Spring MVC mok test : which is basically for spring boot controller testing if its working fine or not .
+2. Spring MVC mock test : which is basically for spring boot controller testing if its working fine or not .
 
 
+. ApplicationContext : is the set of beans spring instantiated while componentscan of all the classes on the class path .
+  We can use 
+  
+  @Autowired
+  ApplicationContext cf;
+  
+  
+  cf.getbean("nameofthebean",typeofthebean(string , int , Bigdecimal , numberformat etc))
+  
+  
+ forexample : 
+
+1.
+	@springbootapplication
+	public class springstart(){
+	
+			psvm(){
+			
+			
+			}
+			
+			@Bean
+			public NUmberFormat defaultCurrencyBean(){
+			return NUmberFormat.getCurrency();
+			}
+			
+			@Bean
+			public NUmberFormat geremanyCurrencyBean(){
+			
+			return numberformat.getCurrency(locale.GEremany)
+			}
+	
+	}
+  
+  
+  
+ 2.  In test class  :
+ 
+ @RunsWith(SpringRunner.class)
+ @@Sprigboottester
+ public class testrun(){
+ 
+ @Autorired @Qualifier("defaultCurrencyBean")  ------------------> this we have to mention as two beans with same types were declared which makes a compile issue 
+ ApplicationContext stx;
+ 
+ @test
+ public void defaulcurr(){
+ 
+ stx.getNumberFormat();
+ 
+ }
+ 
+ 
+ 
+ }
+ 
+ 
+So in nutshell we can either get the bean by autowire it or by using getbean function of ApplicationContext.
+
+
+. RestTemplate  : its the class we can use to call other Api or services 
+
+
+1. @Service
+	public class JokesService{
+	
+		public RestTemplate resstTempplate;
+		
+		@Autorired
+		public JokesService(RestTemplateBuilder builder) 
+		{
+			resstTempplate = builder.build(); ---------------------------- just to instantiate the resstTempplate object RestTemplateBuilder will get autowired
+		
+		}
+		
+		public String getJokes(String name)
+		{
+			String url = String.format(base , %s );
+			ResponseEntity foren = resstTempplate.getForObject(url , Joke.class);
+			foren.getJokename();
+		
+		}
+
+	}
+	
+2.  Bean or a POJO for the Jokes 
+	
+	public class Joke{
+	String ID
+	String name
+	String jokename
+	
+	//getter setter 
+	
+	}
+
+3. Unit test clas 
+
+	@SprigbootTest
+	@ExtendWith(SpringExtention.class)
+	public class demoJokeUnitRunner{
+	
+		@Autowored
+		JokesService JokesService
+		
+		@Test
+		public void getjoke(){
+		String jokename = JokesService.getJokes("craig");
+		assertTrue(jokename.contains("craig"));
+		
+		}
+	
+	
+	}
+  
 NOte  : always check the documentation of the annotation to see the parent annotation for better understandings.
 . 
 ----------------------------------------------------------------------------------
