@@ -1,4 +1,4 @@
-Spring boot -------
+Spring boot --------------------------------------------------------------------------------------- UDEMY ------------------------------------------------------------------------
 
 Download spring tool eclipse plugin for cntrl + space feature in application.yml files
 
@@ -81,8 +81,28 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
 	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
 	@PostMapping -- > We can also use this annotation  . no need to mention method as POST . @POstMapping(path="/hellow-world")
+	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
+	@ResponseEntity ----- > to modulate the outgoing response from the controller function 
+	@RequestBody ----- > to map the incoming request to the bean wrote .
+	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
+	@RequestMapping ----> its a class level annotation or can also be applied to the function to receive request eith post , get , delete etc.
+	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
+	@ExtendWith ------>is a repeatable annotation that is used to register extensions for the annotated test class or test method. Is used for JUNIT test => 5 
+	@Runwith  -------- is used for junit test < version 5 
+	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
 	
-	testing uri : http://localhost:8080/hello : because spring boot run contains an inbuilt tomcat server which starts on localhost 8080 port by default .
+	
+
+--------------------------------------	
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
+public class testclas{
+
+}
+-------------------------------------
+
+testing uri : http://localhost:8080/hello : because spring boot run contains an inbuilt tomcat server which starts on localhost 8080 port by default .
 	http://localhost:8080/hello-employee
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 Create a controller using start.spring.io to set up the projects for spring boot.

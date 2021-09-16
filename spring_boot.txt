@@ -255,6 +255,7 @@ User : annotation as @Entity
 	}
 			
 		
+		
 
 Questions : 
 where is the Db created  ?
@@ -286,16 +287,7 @@ Develop distributed applications based on microservices architecture
 https://yourlearning.ibm.com/activity/SAFARI-9781788475143
 13 Hours 50 Min
 
-
-2.Mastering Microservices with Java
-Build smaller, lighter, and faster services that can be implemented easily in a Java production environment
-About This Video
-Build, deploy, and test microservices from scratch with ease Design
-Implement sample projects using domain-driven design
-Confidently resolve the issues faced during development and deployment
-https://yourlearning.ibm.com/activity/SAFARI-9781787284364 ---------------------------------NOt available 
-2 Hours 24 Min
-
+2. https://learning.oreilly.com/library/view/mastering-microservices-with/9781789530728/?sso_link=yes&sso_link_from=IBM-Prod
 
 3.	Spring and Spring Boot Fundamentals	Fundamental details of  Spring are and Spring Boots	https://learning.oreilly.com/learning-paths/learning-path-spring/9781492055334/	7 Hours 20 Min	
 

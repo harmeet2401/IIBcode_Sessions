@@ -1,0 +1,26 @@
+java hackerrank test--------------------------
+
+Q : What is the expected results ?-------------------- MULTI CHOICE
+Q : WHAT IS THE RIGHT ANSWER TO THE FOLLOWING ?-------------------- MULTI CHOICE
+Q : WHAT WILL BE THE OUTPUT OF THE PROGRAM ? -------------------- MULTI CHOICE
+Q : JAVA-------------------- MULTI CHOICE
+Q : JAVA 8-------------------- MULTI CHOICE
+Q : APIS :COMPONENT FUNCTIONALITY TESTING-------------------- MULTI CHOICE
+Q : REST API REPRESENTATIONS FOR RESOURCES.-------------------- MULTI CHOICE
+Q : HTTP POST METHOD -------------------- MULTI CHOICE
+Q : CROSS-ORIGIN RESOURCE SHARING (CORES)  IN REST -------------------- MULTI CHOICE
+Q : READ ONLY HTTP METHODS -------------------- MULTI CHOICE
+Q : REST BASICS -------------------- MULTI CHOICE
+Q : FETCH API -------------------- MULTI CHOICE
+Q : VALID URI FORMAT -------------------- MULTI CHOICE
+Q : GOOD URI DESIGN JAVA REST -------------------- MULTI CHOICE
+Q : REST API-------------------- MULTI CHOICE
+Q : SPRING DATA -------------------- MULTI CHOICE
+Q : SPRING ANNOTATION -------------------- MULTI CHOICE
+Q : SPRING REST -------------------- MULTI CHOICE
+Q : MONGO -------------------- MULTI CHOICE
+Q : SPRING -------------------- MULTI CHOICE
+Q : OAUTH2-------------------- MULTI CHOICE
+Q : FAULT TOLERANCE -------------------- MULTI CHOICE
+Q : SPRING BOOT  -------------------- MULTI CHOICE
+Q : JAVA -SIMPLE CIPHER  ------------- CODING QS
