@@ -275,7 +275,12 @@ as h2 is the implementation of JPA . it is handling that .
 Spring data jpa is the feature which allow you to create a repository and mention your method and spring jpa will provide you the implementationfor it 
 and also configure the entity for it.
 	In which we create an interface and extend JPArepository<primary key , data type for it >
-	
+
+
+Q : What sre JSON annotation in springs 
+		@JsonIgnore : --------- to ignore the mapping of the variable in bean 
+		@JsonProperty : ------- to assign the name of the variable when it comes out as json 
+		jacksonparserconfiguration jar file on classpath tells to serialize and deserialize the java objects 
 -----------------------------------------------------------------------------------------------------------
 
 1.Java EE 8 Microservices

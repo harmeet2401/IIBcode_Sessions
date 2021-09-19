@@ -85,11 +85,15 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function 
 	@RequestBody ----- > to map the incoming request to the bean wrote .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
-	@RequestMapping ----> its a class level annotation or can also be applied to the function to receive request eith post , get , delete etc.
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
 	@ExtendWith ------>is a repeatable annotation that is used to register extensions for the annotated test class or test method. Is used for JUNIT test => 5 
 	@Runwith  -------- is used for junit test < version 5 
 	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
+	@Autowired : ---- > When we autowired any class instance into another class , that another class should get scanned by the ComponentScanner , it means that another class should be a bean and for that it should be annotated as @Component or @Service , @Repository etc .. in nutt shell it should be annotated as component
+	@JsonIgnore : --------- to ignore the mapping of the variable in bean 
+	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
+		
+	
 	
 	
 
@@ -852,6 +856,9 @@ Steps : to do in Currency-conversion service from where the service to be called
 2. Just like we created an interface for the DB using JPA or mongo or any other , we need to create a interface(act as a proxy) Annotating it as @FeignClient(name , url : localhost:8000)
 3. Also annotate the Currency-conversion main class as @EnableFeignClient
 4. Add the method in the interface for @Getmapping.
+		
+
+Convenient alternative of RestTemplate that is suitable for integration tests. TestRestTemplate is fault tolerant. This means that 4xx and 5xx do not result in an exception being thrown and can instead be detected via the response entity and its status code.
 		
 ----------------------------MICRO2-------------
 
