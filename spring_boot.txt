@@ -289,7 +289,7 @@ Key Features
 Create microservices in Spring and deploy them with Docker and Mesos
 Examine a number of real-world use cases and hands-on code examples
 Develop distributed applications based on microservices architecture 
-https://yourlearning.ibm.com/activity/SAFARI-9781788475143
+https://yourlearning.ibm.com/activity/SAFARI-9781788475143 -------------- complete
 13 Hours 50 Min
 
 2. https://learning.oreilly.com/library/view/mastering-microservices-with/9781789530728/?sso_link=yes&sso_link_from=IBM-Prod

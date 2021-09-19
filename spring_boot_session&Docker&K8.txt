@@ -1,5 +1,8 @@
 Spring boot --------------------------------------------------------------------------------------- UDEMY ------------------------------------------------------------------------
 
+START.SPRING.IO ----- TO CREATE PROJECTS 
+DOCS.SPRING.IO ----- TO TAKE REFERENCE FOR ANY FEATURE THAT SPRING / SPRING BOOT PROVIDES.
+
 Download spring tool eclipse plugin for cntrl + space feature in application.yml files
 
 Web service app : The app or technique using which we can provide services using internet to allow app to app interaction and make the 
@@ -94,7 +97,33 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
 		
 	
+Jdbc Template : So just like Resttemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
+
+Code for above templates : 
+a. 		new RestTemplate.getForEntity("http:localhost:8080/users",user.class)
+b.		new JDBCTemplate().queryForObjects("Select * from users", user.class)
+c.		new JmsTemplate.convertAndSend(orderNumber, messagePostProcessor -> {
+			message.set(messagePostProcessor);
+				return messagePostProcessor;
+					});
+d.		new KafkaTemplate().send("topicname ", message);
+
+
+We can Autowire in Spring boot instead of creating an object or instantiate its objects .
+
+examples : 
 	
+1.	JDBCTemplate jdbctemplate
+	
+	@Autowired
+	public constructor (JDBCTemplate jdbctemplate)
+	{
+	 this.jdbctemplate = jdbctemplate;
+	}
+	
+	
+	
+		
 	
 
 --------------------------------------	
