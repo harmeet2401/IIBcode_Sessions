@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CustomerDAO implements DbFunction{
+public class CustomerDAOJdbcTemplate implements DbFunction{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -38,12 +38,17 @@ public class CustomerDAO implements DbFunction{
     }
 
     @Override
-    public void delete() {
+    public void delete(Customer customer) {
 
     }
 
     @Override
     public int count() {
         return 0;
+    }
+
+    @Override
+    public void save(Customer customer) {
+
     }
 }

@@ -1,9 +1,9 @@
 package com.orielly.jpapersistence.jpamicroservice.controller;
 
-import com.orielly.jpapersistence.jpamicroservice.daoservice.CustomerDAO;
+import com.orielly.jpapersistence.jpamicroservice.daoservice.CustomerDAOEntityManager;
+import com.orielly.jpapersistence.jpamicroservice.daoservice.CustomerDAOJdbcTemplate;
 import com.orielly.jpapersistence.jpamicroservice.daoservice.CustomerRepoNewApp;
 import com.orielly.jpapersistence.jpamicroservice.entity.Customer;
-import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +14,13 @@ import java.util.List;
 @RestController
 public class JPAController {
 
-    //Old Approach
+    //Old Approach -1
     @Autowired
-    CustomerDAO customerDAO;
+    CustomerDAOJdbcTemplate customerDAO;
+
+    //old approach -2
+    @Autowired
+    CustomerDAOEntityManager customerDAOEntityManager;
 
     //New Approach
     @Autowired
@@ -39,5 +43,10 @@ public class JPAController {
     public Customer getById(@PathVariable int id){
         return customerDAO.findById(id);
 
+    }
+
+    @GetMapping(path = "/getcust/{id}")
+    public  Customer findByid(@PathVariable int id){
+       return customerDAOEntityManager.findById(id);
     }
 }

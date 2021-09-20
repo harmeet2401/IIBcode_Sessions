@@ -95,7 +95,8 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@Autowired : ---- > When we autowired any class instance into another class , that another class should get scanned by the ComponentScanner , it means that another class should be a bean and for that it should be annotated as @Component or @Service , @Repository etc .. in nutt shell it should be annotated as component
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
-		
+	@Transactional ------- it i used in test class , and it will rollback the trransactions happaned on DB after each @test
+	@PersistenceContext ---------- which is the collection os managed beans just like application context 
 	
 Jdbc Template : So just like Resttemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
 
@@ -135,8 +136,13 @@ public class testclas{
 }
 -------------------------------------
 
+
 testing uri : http://localhost:8080/hello : because spring boot run contains an inbuilt tomcat server which starts on localhost 8080 port by default .
 	http://localhost:8080/hello-employee
+	
+	
+. Spring Data : 	
+	
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 Create a controller using start.spring.io to set up the projects for spring boot.
 in order to create spring controller mentions @RestController to the class other than the @SpringBootApplication class.
@@ -631,9 +637,19 @@ In this approach , the table we created using the schema.sql and insertted the d
 
 Where as the other technique we annotated the bean class as the @Entity of javax.persistence which will automatically create the table and then use the data.sql class to insert the data . Also we created only one interface which will extends JPArepository<Customer,long> and we can directly autowired this interface annotaed as @Repository and use all db fucntions . Which is the best approach .
 
+
+or
+
+we have an another approach ,
+1. we will create an entityt class the bean class for which the table and column will be created .
+2. in the DAO (annotated as @Repository)class we can inject EntityManager class annotated as @PersistenceContext.
+3. Then we can direclt use the functions like entitymanager.persist() , entitymanager.remove(), entitymanager.update() etc which will directly communicate to hibernate inmemory DB to do all the data manipulation stuff.
+
+
+
 Lab 11 :------------  JPA (java persistent api) for sql		
 
-Lab 12 ----- Spring cloud
+Lab 12 ----- Spring cloud-----------------------------------------------------------
 challanges  for monolithic approach 
 1. cloud config 
 2. Elasticity 
