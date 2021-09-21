@@ -10,4 +10,7 @@ public class JpaMicroserviceApplication {
 		SpringApplication.run(JpaMicroserviceApplication.class, args);
 	}
 
+	{
+		System.out.println("----testing the instance block ----");
+	}
 }

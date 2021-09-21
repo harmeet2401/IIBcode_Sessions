@@ -281,6 +281,47 @@ Q : What sre JSON annotation in springs
 		@JsonIgnore : --------- to ignore the mapping of the variable in bean 
 		@JsonProperty : ------- to assign the name of the variable when it comes out as json 
 		jacksonparserconfiguration jar file on classpath tells to serialize and deserialize the java objects 
+
+Repository
+
+Spring Data Commons
+
+Provides the core abstraction for Spring Data repositories
+
+----
+CrudRepository
+
+Spring Data Commons
+
+Extends Repository and adds utility for basic CRUD operations
+
+---
+PagingAndSortingRepository
+
+Spring Data Commons
+
+Extends CrudRepository and adds utility for paging and sorting records
+
+---
+JpaRepository
+
+Spring Data JPA
+
+Extends PagingAndSortingRepository and adds utility for JPA and RDBMS database models
+
+---
+MongoRepository
+
+Spring Data MongoDB
+
+Extends PagingAndSortingRepository and adds utility for managing MongoDB documents
+
+---
+CouchbaseRepository
+
+Spring Data Couchbase
+
+Extends CrudRepository and adds utility for managing Couchbase documents		
 -----------------------------------------------------------------------------------------------------------
 
 1.Java EE 8 Microservices

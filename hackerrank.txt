@@ -33,3 +33,29 @@ A lambda expression is a short block of code which takes in parameters and retur
 example : 
 
 (n) -> { System.out.println(n); }     -------- its like a function without name and fnction body is writtern after -> in curly braces .
+
+1. The static block will execute whenever the class is loaded by JVM.
+Instance block will execute whenever an object is created, and they are invoked before the constructors. For example, if there are two objects, the instance block will execute two times for each object.
+The constructor will execute after the instance block, and it also execute every time the object is created.
+A method is always executed at the end.
+
+2. The \u0021 article referred to as a Unicode escape sequence
+
+3. In Java, the return type of hashCode() method is an integer, as it returns a hash code value for the object.
+
+4.  For every long literal to be recognized by Java, we need to add L character at the end of the expression
+
+5. if we divide 1/0 will give positive infinity, -1/0 will give negative infinity, and 0/0 will give NaN.
+
+6. if  x = 1 
+
+to find the output of ++x  if x = 1
+	result = ++x   ------------------------ out put will be 2 as ++ is the closer or higher precedence operator and will get increment first
+	result = x++ ------------------------- output will be 3 bcse the '=' has a pre operator closer to X and will execute first and assign the value of x to result , post that x will be incremented
+7.The Javadoc is a tool that is used to generate API documentation in HTML format from the Java source files. In other words, it is a program (tool) that reads a collection of source files into an internal form	
+---------------------------------imp links   :
+
+java questions : google.co.in
+
+
+---------------------------------imp links   :

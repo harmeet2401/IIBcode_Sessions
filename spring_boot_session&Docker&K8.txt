@@ -141,7 +141,7 @@ testing uri : http://localhost:8080/hello : because spring boot run contains an 
 	http://localhost:8080/hello-employee
 	
 	
-. Spring Data : 	
+. Spring Data : --- provide solution for  data access 	for example , JDBC , JPA persisttence .
 	
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 Create a controller using start.spring.io to set up the projects for spring boot.
