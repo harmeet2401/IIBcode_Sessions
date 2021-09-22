@@ -1,5 +1,67 @@
 java hackerrank test--------------------------
+Q : Rest Defination
+Q : Rest operations 
+Q : Fetch api or Api 
+		So fetch api is just an another javascript tool to invoke an existing rest api to get the data back and process it .
+		fetch("url to hit " , method.put/post/get)
 
+Q : Circuit breaker : This is another feature that spring boot provide , Resilience is one of the example . to provide circuit braker and same we can define the fallback function
+Q : Spring Actuator : It will be used to provide health check feature to the api you create . 
+Q : Difference between Abstract class and interface .
+
+		Interface and both abstract classes are same abstract classes . Both the classes chave method names declard without body defination .
+		A single class can implements multiple interfaces in one go . 
+		A single class can extends only one abstract class or class in one go .
+		Interfaces only abtract methods are present in it.
+		Abstract contains both abstract fuction and non abstractfunction.
+		Both interface and abstract class can not be instantiated , means we can not create object of it , but we an use the class which implements to generate the instance of it.
+		All functios in interface are abstracts . Mixed fucntion are present in abstract classes 
+Q : Fault Tolerance in spring boot		
+Q ; Primitive data types .
+Primitive data types - includes byte, short, int, long, float, double, boolean and char
+Non-primitive data types - such as String, Arrays and Classes (you will learn more about these in a later chapter)
+
+Note  : Float end with F  , doubel ends with D , Long ends with L
+Q : Completeable future : A CompltableFuture is used for asynchronous programming. Asynchronous programming means writing non-blocking code. It runs a task on a separate thread than the main application thread and notifies the main thread about its progress, completion or failure.
+
+Q : Checked and unchecked exceptions : 
+Checked exception are those which can be checked by the compiler at the verry first stage of writting the code and ask for report it using try catch . There are some specific java classes which help in checking the compile time or checked exception .
+Unchecked exception are those which the compiler usually ignore and occured at runtime . There are other java classes which can catch the unchecked exceptions which are ignored by checked exceptions .
+
+
+
+Q : Static inner class :
+class A {
+
+static class b{
+		public void innerfunction(){
+			SOUT("static inner class");
+		}
+	}
+	
+	psvm(){
+			A.b objectb = new A.b();
+			objectb.innerfunction();
+	}
+}
+
+
+Q : Super() function . Whenever we call a constructor of base class by cretaing the object for it  , the compiler will add a super( )function in default constructor of base class which in turn call the default constructor of super class. coooool , even if you mention of not super() will be there .
+We can add a parameterized constructor and then call it by giving value and use the super()function accordingly.
+
+Q : Mongo Db : session is really nce 
+	We have mongodb collection schema also to validate the collections data . Documents will fail on validation 
+	use dbname : -------- to use the db name or switch to it
+	MongoImport  : to import the data.
+	mongoExport : To export the data in json
+	mongodump : to get the data in BSON (back end stored data in mongo db )
+	db.states.find() : to run the query just like the where clause
+			db.states.find({"states":"Delhi"})
+	db.states.find({"states":"Delhi","District":"south delhi"}) ---- comma , is for and 
+    db.states.count() --- to count the documents 	
+	db.democollection.insert([{"_id":1,"firstname":"Harmeet","lastname":"singh"}]) --------- to insert the dcument in collection name example : democollection
+	
+	If the db and collection (table) name is not there then while running insert and use command it will auto create those for us.
 Q : What is the expected results ?-------------------- MULTI CHOICE
 Q : WHAT IS THE RIGHT ANSWER TO THE FOLLOWING ?-------------------- MULTI CHOICE
 Q : WHAT WILL BE THE OUTPUT OF THE PROGRAM ? -------------------- MULTI CHOICE
@@ -24,6 +86,7 @@ Q : OAUTH2-------------------- MULTI CHOICE
 Q : FAULT TOLERANCE -------------------- MULTI CHOICE
 Q : SPRING BOOT  -------------------- MULTI CHOICE
 Q : JAVA -SIMPLE CIPHER  ------------- CODING QS
+
 --------------------------------------------------------------------------------
 Lambda Expression : 
 Lambda Expressions were added in Java 8.
@@ -33,6 +96,11 @@ A lambda expression is a short block of code which takes in parameters and retur
 example : 
 
 (n) -> { System.out.println(n); }     -------- its like a function without name and fnction body is writtern after -> in curly braces .
+
+We can use consumer interface to store the lambda expression .
+Consumer<Integer> method = (n) -> { System.out.println(n); };
+    numbers.forEach( method );
+
 
 1. The static block will execute whenever the class is loaded by JVM.
 Instance block will execute whenever an object is created, and they are invoked before the constructors. For example, if there are two objects, the instance block will execute two times for each object.

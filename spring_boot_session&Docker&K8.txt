@@ -1119,7 +1119,7 @@ steps :
 		</dependency>
 2. Create a controller which have a get mapping function 
 		write a failed rest call from it 
-3. We can use @Retry (name="sample-api",fallBackMethod="methodname")
+3. We can use @Retry (name="sample-api",fallBackMethod="methodname") , @Retry is provided by resilience
 4. Add below prop in app.yml
 
 
@@ -1136,7 +1136,7 @@ resilience4j.retry.instances.sample-api.enableExponentialBackoff=true
 retry ---------------------------
 
 Circuit breaker : ----------------
-IF the M4 IS DOWN then the resilience ciscuit breaker feature will know that oops M4 is down so why loading more request to it .
+IF the M4 IS DOWN then the resilience circuit breaker feature will know that oops M4 is down so why loading more request to it .
 Lets break the circuit and send a default response back .
 
 @CiscuitBreaker(name="sample-api",fallBackMethod="methodname")
