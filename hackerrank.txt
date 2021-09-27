@@ -171,13 +171,13 @@ Q. Wrapper classes : 	 In collections we use wrapper classes as we can not use p
 Q : Java Spring bean scope : The spring context container holds all the components which are on the classpath or annotated or configured . So if we create a bean class or entity .
 	Asking the getBean method from spring context for that bean class. We can get the hashcode of that class object which make the scope categories as below.
 	We have 5 scopes : 
-		singleton  :  The hascode of the object using getBean from spring context will give the same hashcode 
-		prototype : The hashcode of the objects using the getBean from spring context will give different hashcode. We can use @Scope("prototype")
-		request 
-		session
-		globalsession
+		singleton  :  The hascode of the object using getBean from spring context will give the same hashcode. When we do GetBean the spring context will gve the reference copy of the object to you . 
+		prototype : The hashcode of the objects using the getBean from spring context will give different hashcode. We can use @Scope("prototype").
+		request  : This helps in rest api.
+		session : this is also used in rest api .
+		globalsession.
 Q : Spring container : 
-Q : Spring condig : 
+Q : Spring config : 
 Q : Spring transaction : 
 Q : Microservices : 
 
