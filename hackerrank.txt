@@ -1,22 +1,31 @@
 java hackerrank test--------------------------
-Q : Rest Defination
-Q : Rest operations 
+Q : Rest Defination : Representation state transfer is the protocol to allow best use f HTTP protocol and help in trasferring data across net using HTTP/Https protocol.
+Q : Rest operations  : 
+HTTP GET : To get the request on a path . Its idempotent , means it will keep on sending the same data back to client untill the data is changed by other PUT and post methods.
+HTTP POST : To create and post new  data from client to the api. It is applied on the collections of data . example : http put ; http://localhost:8080/user
+HTTP PUT :  Should only be used if you’re replacing a resource in its entirety. It is applied on a single item  example : http put ; http://localhost:8080/user/1
+HTTP DELETE : To delete the data from the api server .DELETE operations are idempotent
+HTTP PATCH : is the correct choice for partially updating an existing resource.The PATCH method is not a replacement for the POST or PUT methods. It applies a delta (diff) rather than replacing the entire resource. Means it is used to change the partiall value of an object  , example : the user have : email  , add , name . so changing the name only can be done using the patch operations
+
 Q : Fetch api or Api 
 		So fetch api is just an another javascript tool to invoke an existing rest api to get the data back and process it .
 		fetch("url to hit " , method.put/post/get)
 
-Q : Circuit breaker : This is another feature that spring boot provide , Resilience is one of the example . to provide circuit braker and same we can define the fallback function
+Q : Circuit breaker : This is another feature that spring boot provide , Resilience is one of the example . To provide circuit braker and same we can define the fallback function
 Q : Spring Actuator : It will be used to provide health check feature to the api you create . 
 Q : Difference between Abstract class and interface .
 
-		Interface and both abstract classes are same abstract classes . Both the classes chave method names declard without body defination .
+		Interface and both abstract classes are same abstract classes . Both the classes have method names declard without body defination .
 		A single class can implements multiple interfaces in one go . 
 		A single class can extends only one abstract class or class in one go .
 		Interfaces only abtract methods are present in it.
-		Abstract contains both abstract fuction and non abstractfunction.
+		Abstract contains both abstract fuction and non abstract function.
 		Both interface and abstract class can not be instantiated , means we can not create object of it , but we an use the class which implements to generate the instance of it.
-		All functios in interface are abstracts . Mixed fucntion are present in abstract classes 
-Q : Fault Tolerance in spring boot		
+		All functions in interface are abstracts . Mixed fucntion are present in abstract classes .
+		We can use interfcae when we knew all features of an entityt have different values .
+		We can use abstract class in case we know some features of entityt have diff values and some have constant , remember the WWE example.
+		And both above provides and advantage of not writting the function in the implemented class if 1000 of functions are required to be writtern 
+Q : Fault Tolerance in spring boot : Resilience4j is one of the tool opensource provided by Netflix to add feature of retry (when app is down) , cirtcuit breaker (when in a chain of microservice  , one of the microservice is down ) , Rate limiter ( to controler the outgoing request to downstream Micro)  and bulkload.
 Q ; Primitive data types .
 Primitive data types - includes byte, short, int, long, float, double, boolean and char
 Non-primitive data types - such as String, Arrays and Classes (you will learn more about these in a later chapter)
@@ -46,10 +55,10 @@ static class b{
 }
 
 
-Q : Super() function . Whenever we call a constructor of base class by cretaing the object for it  , the compiler will add a super( )function in default constructor of base class which in turn call the default constructor of super class. coooool , even if you mention of not super() will be there .
+Q : Super() function . Whenever we call a constructor of base class by cretaing the object for it  , the compiler will add a super( )function in default constructor of base class which in turn call the default constructor of super class. coooool , even if you dont mention  super() will be there .
 We can add a parameterized constructor and then call it by giving value and use the super()function accordingly.
 
-Q : Mongo Db : session is really nce 
+Q : Mongo Db : session is really nce , it works using collections (tables) and documents (Rows of table) structure.
 	We have mongodb collection schema also to validate the collections data . Documents will fail on validation 
 	use dbname : -------- to use the db name or switch to it
 	MongoImport  : to import the data.
@@ -68,24 +77,120 @@ Q : WHAT WILL BE THE OUTPUT OF THE PROGRAM ? -------------------- MULTI CHOICE
 Q : JAVA-------------------- MULTI CHOICE
 Q : JAVA 8-------------------- MULTI CHOICE
 Q : APIS :COMPONENT FUNCTIONALITY TESTING-------------------- MULTI CHOICE
+		Component Testing is also referred to as Unit Testing, Program Testing or Module Testing.
+		
+		
 Q : REST API REPRESENTATIONS FOR RESOURCES.-------------------- MULTI CHOICE
-Q : HTTP POST METHOD -------------------- MULTI CHOICE
+		The Resource in a REST api is the data which is sent in the response . When we finalize the resource then we will decide the format of the resource (Entity) to be sent in .
+		REST does not impose any restriction on Format  : so we can send data in XML , HTML , JSON etc .
+		
+Q : HTTP POST METHOD -------------------- MULTI CHOICE : To create new objects in the api servers .
+
 Q : CROSS-ORIGIN RESOURCE SHARING (CORES)  IN REST -------------------- MULTI CHOICE
-Q : READ ONLY HTTP METHODS -------------------- MULTI CHOICE
+		Its the feature to alllow cross orgin communication to the Api we are hitting From api client .
+		Origin is nothis but the combination of protocol(scheme) , host and port the api is listening on .
+		for example : http://org.com/800 and https://org.net/900 is not same origin .
+		So when the api client to access the api from a wrong origin hit on te browser and reached the Api , it blocks those request and send ooops srry 
+		
+		exmaple : 
+		
+		harmeet ----------------------------> browser (using http://ibm.com/9090 (valid origin)) -----------req reached -------> IBM api checkd the origin which is allowed send ok !.
+		
+		harmeet ----------------------------> broswer (using http://ibm.net/9090) (invalid origin )--------req reached -----> IBM api checks its invalid/not same origin will reject he request and say srrryyyy
+		
+
+Q : READ ONLY HTTP METHODS -------------------- MULTI CHOICE   : GET − Provides a read only access to a resource
 Q : REST BASICS -------------------- MULTI CHOICE
 Q : FETCH API -------------------- MULTI CHOICE
 Q : VALID URI FORMAT -------------------- MULTI CHOICE
+	Rule #1: A trailing forward slash (/) should not be included in URIs
+	Rule #2: Forward slash separator (/) must be used to indicate a hierarchical relationship For example:
+http://api.canvas.com/shapes/polygons/quadrilaterals/squares
+
+	Rule #3: Hyphens (-) should be used to improve the readability of URIs exmaple : http://api.example.com/blogs/guy-levin/posts/this-is-my-first-post
+	Rule #4: Underscores (_) should not be used in URIs.
+	Rule #5: Lowercase letters should be preferred in URI paths
+	Rule #6: File extensions should not be included in URIs
+
 Q : GOOD URI DESIGN JAVA REST -------------------- MULTI CHOICE
-Q : REST API-------------------- MULTI CHOICE
-Q : SPRING DATA -------------------- MULTI CHOICE
-Q : SPRING ANNOTATION -------------------- MULTI CHOICE
-Q : SPRING REST -------------------- MULTI CHOICE
-Q : MONGO -------------------- MULTI CHOICE
-Q : SPRING -------------------- MULTI CHOICE
-Q : OAUTH2-------------------- MULTI CHOICE
-Q : FAULT TOLERANCE -------------------- MULTI CHOICE
-Q : SPRING BOOT  -------------------- MULTI CHOICE
-Q : JAVA -SIMPLE CIPHER  ------------- CODING QS
+Q : SPRING DATA -------------------- MULTI CHOICE :  Its the feature of spring which we can find in docs.spring.io . We can download or refer spring data to bring data access features into our projects like , JDBCtemplate , MongoTemplate etc.
+
+Q : OAUTH2-------------------- MULTI CHOICE : 
+
+OAuth is an authentication protocol that allows you to approve one application interacting with another on your behalf without giving away your password.
+OAuth2(Open Authorization) is an authorization framework that enables the application Web Security to access the resources from the client. To build an OAuth2 application, we need to focus on the Grant Type (Authorization code), Client ID and Client secret.
+
+			Example 
+						client id and client secret is given by the bank detail showing app to the kotak Auth server ,when it got registered to the kotak mahindras authorization api.
+						kotak mahindras authorization api gives the client id and client secret .
+	 
+		
+		Harmeet using 
+	Bank Details Showing app
+			|
+			|----------------------- Using app send an authorization request (client id and client secret)access to ------> Kotak Authorization service(api) This can be a class
+			|
+			|<------------------------send an authorization approval ---------------------------------------------------
+			|
+			|------------------------Authorization grant code request -------------------------------------------------->
+			|
+			|<------------------------get a token back ------------------------------------------------------------------
+			|
+			|
+			|---------------------------------using that token -----------------------------access the ------------------> Kotak mahindras api for harmeet's bank details using the Resource lke controller
+			
+			
+So we can do like this in spring boot api 
+
+				A controller class
+				A user bean entity class for response message 
+				An AuthorizationServer java class which extends authorizationServerConfigureAdapter. Annotated as @Configuration , @EnableAuthorizationServer.
+				
+				
+				
+
+
+
+Q : java Collections : java.util
+	Collections : 
+	  @. ArrayList  : Its class in java.util and helps in holding the collection of data . Like collection of string , integer  ,LOg , Decimal etc , ex : ArrayList<String> li = new  ArrayList<>();. ArrayList data is dynamic means we can increase the size or dec the size accordingly.
+	  @. LinkedLIst : LinkedLIst is almost similar to ArrayList holds a type of data collections LinkedLIst<String> linklist = new LinkedLIst<>(). But the elements are placed in container in LinkedLIst which are connected where as the elements are placed in array in ArrayList. LinkedLIst have more function like AddFirst , addLast , getAdd , getLast , removelast , removeFirst.
+	  @. hashmap : It stores the data in Key:Value pair , key and value can be of diff type or of same type as well.
+	  @. Collections : Its an class in java.util package and helps in sorting the words alphabetically  , Sorting can happen on both integer and string in ascending order 
+	  @. HasSet : A HashSet is a collection of items where every item is UNIQUE, and it is found in the java.util package. if you add a duplicate element it will store only the unique ones and remove one copy of duplicate(same size , same caps or lower) for example HashSet = BMW , BMW , bmw  , it will store as hashset = [BMW , bmw]
+	  @. Iterator : so we studied collections , now to loop through these collections we use Iterator.
+		
+	We can use Lambda expression on all above collection java.util classes verry easily .	
+	
+Q. Wrapper classes : 	 In collections we use wrapper classes as we can not use primitive data types in collections to store data .
+		ArrayList<in> alist = new ArrayList<int>(); // invalid
+		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
+		
+		Where Integer is the wrapper class.
+
+Q : Java Spring bean scope : The spring context container holds all the components which are on the classpath or annotated or configured . So if we create a bean class or entity .
+	Asking the getBean method from spring context for that bean class. We can get the hashcode of that class object which make the scope categories as below.
+	We have 5 scopes : 
+		singleton  :  The hascode of the object using getBean from spring context will give the same hashcode 
+		prototype : The hashcode of the objects using the getBean from spring context will give different hashcode. We can use @Scope("prototype")
+		request 
+		session
+		globalsession
+Q : Spring container : 
+Q : Spring condig : 
+Q : Spring transaction : 
+Q : Microservices : 
+
+Q : Coding challlenge 
+
+ Java exception program  : name validate if yes then reverse it , make cap alphabets to lower and then return that string , if validate fails then exceptions
+ JAVA -SIMPLE CIPHER  ------------- CODING QS
+ JAVA ARRAY Challenge : 
+ JAVA Count Duplicate Elements : 
+ JAVA ANAGRAMS CODE : ANAGRAMS means for example : CODE and DECO are anagrams of eachother it means , they have same size and exact chars.
+ JAVA HOW MANY WORDS : 
+
+
 
 --------------------------------------------------------------------------------
 Lambda Expression : 

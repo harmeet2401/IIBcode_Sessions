@@ -97,6 +97,7 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
 	@Transactional ------- it i used in test class , and it will rollback the trransactions happaned on DB after each @test
 	@PersistenceContext ---------- which is the collection os managed beans just like application context 
+	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	
 Jdbc Template : So just like Resttemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
 
@@ -1118,7 +1119,7 @@ steps :
 			<artifactId>resilience4j-spring-boot2</artifactId>
 		</dependency>
 2. Create a controller which have a get mapping function 
-		write a failed rest call from it 
+		write a failed restTemplate call in that get method of controller to a wrong uri.
 3. We can use @Retry (name="sample-api",fallBackMethod="methodname") , @Retry is provided by resilience
 4. Add below prop in app.yml
 

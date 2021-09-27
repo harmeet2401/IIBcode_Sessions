@@ -1,12 +1,16 @@
 package com.orielly.jpapersistence.jpamicroservice.entity;
 
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+
+@Entity(name = "Test")
 public class Customer {
 
     @GeneratedValue
