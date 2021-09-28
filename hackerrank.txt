@@ -176,12 +176,31 @@ Q : Java Spring bean scope : The spring context container holds all the componen
 		request  : This helps in rest api.
 		session : this is also used in rest api .
 		globalsession.
-Q : Spring container : 
-Q : Spring config : 
-Q : Spring transaction : 
-Q : Microservices : 
-
+Q : Spring container : Spring IOC container maintain the entire lifecycle of the objects from the creation of the objects till destruction of it . It also help in inject the dependency . The only thing we need to give it is the beans(POJO) and the config for it. Its just like a separate program like for example a garbage collector .
+ApplicationContext is the container that loads and traverse through the classpath create the objects , inject the dependency and add all the components to it .
+So whenever we want to see the components in it we can easily do 
+		ApplicationContext app = new ApplicationContext();
+		Test test = app.getBean("ob",Test.class);
+ApplicationContext is a corner stone of a Spring Boot application. It represents the Spring IoC container and is responsible for instantiating, configuring, and assembling the beans.
+ApplicationContext is implemented in AnnotationConfigApplicationcontext  ,FilesystemXmlApplicationcontext , classpathXmlApplicationcontext. etc 
+		
+		
+		
+Q : Spring config server  : its one of the spring boot feature which helps in externalise the data our app is using which can be confidential ina centralized repository .
+							for this feature we can use spring cloud config server in one Micro and spring cloud client in other Micro who wants to join server.
+							
+							
 Q : Coding challlenge 
+----------------------------------------------------------
+NOtes : Importanat : 
+str.toCharArray() can break down the string to character and we can store it in char[]
+StringBuilder Class we ca use to reverse a string easily.
+CHaracter class we can use to convert a char to uppercase or lower case and can also check if its in upper case or lower case.
+ Scanner sc=new Scanner(System.in);
+        name = sc.nextLine(); to read the string 
+		       sc.nextint(); to read the integer.
+
+-----------------------------
 
  Java exception program  : name validate if yes then reverse it , make cap alphabets to lower and then return that string , if validate fails then exceptions
  JAVA -SIMPLE CIPHER  ------------- CODING QS
