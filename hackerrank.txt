@@ -190,15 +190,24 @@ Q : Spring config server  : its one of the spring boot feature which helps in ex
 							for this feature we can use spring cloud config server in one Micro and spring cloud client in other Micro who wants to join server.
 							
 							
+
+##########################################################################################################							
 Q : Coding challlenge 
 ----------------------------------------------------------
 NOtes : Importanat : 
-str.toCharArray() can break down the string to character and we can store it in char[]
-StringBuilder Class we ca use to reverse a string easily.
-CHaracter class we can use to convert a char to uppercase or lower case and can also check if its in upper case or lower case.
+1.str.toCharArray() can break down the string to character and we can store it in char[]
+2.StringBuilder Class we ca use to reverse a string easily.
+3.CHaracter class we can use to convert a char to uppercase or lower case and can also check if its in upper case or lower case.
  Scanner sc=new Scanner(System.in);
         name = sc.nextLine(); to read the string 
 		       sc.nextint(); to read the integer.
+4. We can use collection as much as we can . it provides remove function and collections class help in sorting the collection classes (arraylist , linkedlist ,hashmap,hashset , etc)			   
+5. We can use String str = ""
+					str.split(regex:"\\s")  ; --- > this regex is for space . and will divide the sentence or a long string into set of words.
+					str.matched(regex:"([a-zA-Z]+[.,?!\-]*)+"). to check its a string.
+6. A char is actually just stored as a number (its code point value). We have syntax to represent characters like char c = 'A';, but it's equivalent to char c = 65; and 'A' == 65 is true.  https://www.asciitable.com/  . The int code for A is diff then small a
+
+So in your code, the chars are being represented by their decimal values to do arithmetic (whole numbers from 0 to 65,535).					
 
 -----------------------------
 
@@ -210,6 +219,8 @@ CHaracter class we can use to convert a char to uppercase or lower case and can 
  JAVA HOW MANY WORDS : 
 
 
+
+##########################################################################################################
 
 --------------------------------------------------------------------------------
 Lambda Expression : 
