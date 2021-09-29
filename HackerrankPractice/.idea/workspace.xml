@@ -5,12 +5,12 @@
       <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Anagrams.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/ArrayDifference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HackerRank.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/MyCypherWheel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/MyDuplicateCheck.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Words.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EncryptionName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HackerRank.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Validate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Encryption.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hackerrank.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../hackerrank.txt" afterDir="false" />
     </list>
@@ -141,11 +141,6 @@
           <url>file://$PROJECT_DIR$/src/MyDuplicateCheck.java</url>
           <line>26</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/HackerRank.java</url>
-          <line>14</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
