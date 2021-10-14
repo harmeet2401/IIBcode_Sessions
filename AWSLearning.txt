@@ -1,0 +1,207 @@
+**************************************************************************************************************************************
+Udemy Course : Neal Davis
+Detailed + Exam Cram 
+**************************************************************************************************************************************
+
+**************************************************************************************************************************************
+Domain 1: Cloud Concepts		28%
+Domain 2: Security			24%
+Domain 3: Technology			36%
+Domain 4: Billing and Pricing		12%
+				TOTAL	100%
+
+**************************************************************************************************************************************
+Domain 1: Cloud Concepts
+1.1	Define the AWS Cloud and its value proposition.
+1.2	Identify aspects of AWS Cloud economics.
+1.3	List the different cloud architecture design principles.
+
+Domain 2: Security
+
+2.1	Define the AWS Shared Responsibility model.
+2.2	Define AWS Cloud security and compliance concepts.
+2.3	Identify AWS access management capabilities.
+2.4	Identify resources for security supportDomain. 
+
+3: Technology
+3.1	Define methodsof deploying and operating in the AWS Cloud.
+3.2	Define the AWS global infrastructure.
+3.3	Identify the core AWS services.
+3.4	Identify resources for technology supportDomain. 
+
+4: Billing and Pricing
+4.1	Compare and contrast the various pricing models for AWS.
+4.2	Recognize the various account structures in relation to AWS billing and pricing.
+4.3	Identify resources available for billing supp.
+
+
+
+WhitePapers
+
+https://d1.awsstatic.com/training-and-certification/Docs%20-%20Cloud%20Practitioner/AWS%20Certified%20Cloud%20Practitioner_Exam_Guide_v1.4_FINAL.PDF
+https://d0.awsstatic.com/whitepapers/aws-overview.pdf
+https://d0.awsstatic.com/whitepapers/aws_pricing_overview.pdf
+https://aws.amazon.com/premiumsupport/plans/
+
+**************************************************************************************************************************************
+Mainly topics were asked from :
+
+    Shared responsibility Model (around 6–7 questions)
+    S3 : permissions, policy , storage classes and good understanding of basic.
+    EC2 : good understanding of reserved instances and spot instances , about pricing and which one to use when.
+    RDS , Dynamodb and Aurora.
+
+Some Sample Ques :
+
+1. Size of S3 bucket.
+2. 3 Questions on Artifact (on demand Complaince Service).
+3. 2-3 Ques on AWS Pricing Models.
+4. Direct Questions on AWS services.
+5. 2-3 Ques on IAM services.
+6. Basics of clouds - Benefits of AWS cloud.
+7. 2 Ques on TCO tool.
+8. AWS architecture, Instance stypes, Shared Responsibility model, etc.
+
+	
+**************************************************************************************************************************************
+Practice Questions
+
+https://free-braindumps.com/amazon/free-aws-certified-cloud-practitioner-braindumps.html
+https://www.certification-questions.com/amazon-dumps/aws-certified-cloud-practitioner.html
+https://aws-certified-cloud-practitioner.fandom.com/wiki/AWS_Certified_Cloud_Practitioner_Wiki
+https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner/view/
+https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner/view/ most Imp.
+
+**************************************************************************************************************************************
+some questions that I remember are:
+
+    SOC1 report is find were?(Artifact)
+    Parameters of Trusted Advisor
+    Direct questions on glacier
+    2,3 Qs on Artifact
+    Use Cases of AWS Services (Direct Ques.)
+
+**************************************************************************************************************************************
+1. AWS(Amazon web services) is the similar cloud platform provided by Amazon to allow user to build /deploy/manage their App or service and use the existing service that AWS have to host the app and make it available to the user , just like we did it in Microsoft Azure .
+2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
+olaa the app is up for the user.
+
+Free tier account in AWS : 
+harmeet24011992@gmail.com
+Gogi@12345
+
+---------------------------------------------------------------------------------
+
+Multiple cloud services are provided by AWS : 
+
+For example : 
+
+1. Compute : compute service provides services to provision spinning up the vritual machine etc 
+
+EC2
+Lightsail
+Lambda
+Batch
+Elastic Beanstalk
+Serverless Application Repository
+AWS Outposts
+EC2 Image Builder
+AWS App Runner
+
+
+2. Storage
+S3
+EFS
+FSx
+S3 Glacier
+Storage Gateway
+AWS Backup
+
+3. Database
+RDS
+DynamoDB
+ElastiCache
+Neptune
+Amazon QLDB
+Amazon DocumentDB
+Amazon Keyspaces
+Amazon Timestream
+Amazon MemoryDB for Redis
+
+---------------------------------------------------------------------------------
+
+We are going to cover Amazon VPC(virtual private cloud network)  and EC2 
+
+1. Global Infra : It means the wide spread of AWS datacenters across the globe . This data center spread will allow users to choose the DC for hosting their application to give best (low latency) experience to their users who will access that app.
+
+2. CloudPing.info : its a AWS tool that will go and ping all AWS DCs to show the HTTP ping response time back to your location. That will help you choose the DCs you want. for me its Asia Pacific (Mumbai)	39 ms is the best Dc to choose.
+
+3. Price : The pricing tier also changes from region to region . Ex of regions Asia Pacific (Mumbai), Asia Pacific (Behrain) etc 
+
+4. AWS VPC	: AWS Virtual private cloud network : Its similar to what we study in Azure as Azure VPN in azure cloud space.
+		AWS VPC : will be a separate isolated space with IP range in AWS cloud. Now in AWS VPC we can spin up the Virtual machines with allocated private IP Addresses so that these machines can communicate with eachother .
+		
+		Private IPaddress :  will allow VMs in AWS /AZURE VPN to talk to each other .
+		Public IPaddress : will allow VMs from AWS / Azure VPN to talk to the internet.
+		Subnets : A AZURE / AWS VPN contains subnets which will further have there own address space of private or public IP .
+		Default VPC : it is created Automatically by AWS once account is active . IP address apce : 172.31.0.0/16
+		
+		
+
+					-----------										Companies DC 
+																		--------------
+					INternet											--------------			
+					-----------
+				
+		-------------------------------------------------------------------------------------------
+		AWS Cloud
+			
+			-------------------------------------------------------------------------------
+			AWS VPC (10.0.0.0/16) --- 16 means first 16 bits means 10.0 will remain constant.
+			
+						EC2 Instancesubnet1						EC2 Instancesubnet2
+					--------------------			-----------------------
+					priv IP : 10.0.0.5				priv IP : 10.0.1.5
+		
+					public ip : 148.90.9.0			public ip : 148.90.9.1
+		
+					
+					--------------------			-----------------------
+					
+		
+			-------------------------------------------------------------------------------
+		
+		--------------------------------------------------------------------------------------------
+
+		
+5. EC2(Amazon Elastic Compute) : this will allow user to spin up the VMs on cloud without worrying about the underlying infra (storage , operation system , cooling system , network etc ). We can terminate and respin the VM once needed.		
+		
+a. Each virtual server that you create via this service is known as an instance.
+
+b. You can choose from various configurations of CPU, memory, storage for the instance.
+
+c. You can choose from a set of Preconfigured templates known as Amazon Machine Images(linux(ubuntu , centos etc ) or windows(windows 2016 , windows 2019 etc )). These templates will determine what is the underlying operating system for your machine.
+
+d. You can allocate volumes to the instance
+
+e. You can set firewall rules via Security Groups
+		
+		Steps to create an EC2 instances : 
+			Select the region 
+			select the Amazon machine image (linux or windows )
+			Select the instance type (usually ask for cpu count and memmory)
+			select the VPC , the default or create a new one 
+			select the storage 0amount 
+			select configuring security group ,just like a firewall. Just like we have NSG in azure that contains the inbound and outbound rule , same in this we have inbound and outbound rule.
+			create a key pair which we will use to login . 
+f. we can then use the login key to get decrypt and generate the password for RDP to windows VM or ssh to linux VM .
+	We can do 
+		First use putty key generater to use the .pem file to create a .ppk file 
+		Then use putty to enter the host and in SSH --- > auth ---> give that .ppk file .
+		login using user name : ubuntu and enter the passphrase you gave while cretaing the .ppk file .
+		sudo apt-get update 
+		sudo apt-get install ngnix
+	then hit localhost:80 to check the web server is running or not ?
+
+g. VOlume attached to VM is separate resource that will be chargeable.	
+			
