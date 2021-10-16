@@ -205,3 +205,63 @@ f. we can then use the login key to get decrypt and generate the password for RD
 
 g. VOlume attached to VM is separate resource that will be chargeable.	
 			
+6. EC2 pricing : 
+			instance type  : medium  , large , x.large 
+			memory : price increase as it increases 
+			OS : price also changes as the os changes .
+			Region : the price of changes as the regions changes .
+		Pricing for the EBS volume or disk is seperate 
+
+NOTE  : EVEN IF YOU SHUTDOWN THE VM , YOU WILL NOT BE CHARGED FOR COMPUTE PROCESSING BUT WILL BE CHARGED FOR THE EBS VOLUME YOU HAVE AS IT IS STILL INTACT.		
+
+7. INSTANCE TYPES : ON THE BASIS OF OS , MEMORY AND OTHER PARAMETERS FOLLOWING ARE THE CATEGORIES WE HAVE .
+EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
+
+	a. General Purpose 
+	b. Compute optimized 
+	c. Memory optimized 
+	d. Accelerated computing 
+	e. Storage Optimized 
+	f. Instance fetaure 
+	g. measuring instance performance.
+	
+8. INSTANCE PURCHASING OPTIONS : 
+		
+	a. spot instance : 
+		-here we can get an EC2 component at much lower cost  then on-demand pricing.
+		-the EC2 component will be provided on the basis of EC2 capacity
+		-here if the capacity from AWS become less then that spot instance will be shutdown and taken away from usr.
+		-If the instance is taken form us , then it can be restarted or the app which also running on that instance can be brought up again when spot instance is given back to you . Used for data analysis , batch processing.
+		-these spot instance can't be stop and start , it can only be restart and terminated .
+	
+	b. 	Reserved instances 
+		- As the name says , you are willing to reserve an instance for a year or so , then only you will get a billing discount.
+		- this is a billing discount fetaure on the bsis of the reservation of instance.
+		- we can pay , partial , entire or no payment at the starting. But obviousely giving an upfront payment will provide a better discount.
+		- Offering classes of instances in reserved category 
+			: standard - here we can change the size of the instance with in the term commited 
+			: convertible - here we can change the instance family , instance type , platform , scope and 	tenancy.
+		- depends upon the 
+			: os 
+			: tenancy
+			: instance type , t2.micro etc 
+			: term 
+			: offering class 
+			: payment options 
+
+9. Dedicated Infrastructure for EC2.
+
+a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on 
+the same physical machine in Amazon data centers or on different .
+So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine .
+
+b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
+
+10. Elastic Block storage  (EBS volume) : 
+
+-Its a separate resource created when we spin up the EC2 VM instances.
+-You will get charged separately for this seperate resource 
+-when you terminate the EC2 instance , make sure to delete the attached EBS volumes .
+-We can attach or detach a new EBS volume disk at any point of time .
+-we can increase the size of the volume any time .
+-both the EC2 instance and EBS volumes should be in same region.
