@@ -251,12 +251,12 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 
 9. Dedicated Infrastructure for EC2.
 
-a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on 
-the same physical machine in Amazon data centers or on different .
-So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine .
-
-b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
-
+	a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on 
+	the same physical machine in Amazon data centers or on different .
+	So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine .
+	
+	b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
+	
 10. Elastic Block storage  (EBS volume) : 
 
 -Its a separate resource created when we spin up the EC2 VM instances.
@@ -265,3 +265,85 @@ b. Amazon EC2 dedicated instances : In this case the VM instance will be assign 
 -We can attach or detach a new EBS volume disk at any point of time .
 -we can increase the size of the volume any time .
 -both the EC2 instance and EBS volumes should be in same region.
+-the EBS volumes is replicated with in same availability zone for future hardware failure 
+-even post detaching the volumes the data can persist for longer period of time.
+
+availability region ---------contains 1 or many ---------> availability zones (data centers)
+south-mumbai -----------------------------------> Data centers ---------------> many physical machine 
+
+
+CATEGORIES of volumes types : 
+	-General purpose SSD(solid state drive ) : 16000 IOPS per vol
+	-Provisioned SSD : for business critical  : 64000 IOPS per vol
+	-Throughput HDD (hard disk device ): for highly or frequently accessible data . Low cost HD volumes .
+	-COLD HDD : for less frequent accessible data . used to store archive data.
+
+11. Attaching additional vol to instance.
+		- Create volume in same availability zone as the instance is runing .
+		- Go to volumes  ---- > enter the details and ollaa the volume created .
+		- In volumes --- > Actions --- > Attach --- > search ofr instance.	
+		- Login to your instance windows -- > server manger -- > file storage -- > Disks -- > new disk see --> bring it online ---> initialize the disk ---> create new volume out of the disk.
+
+12. EBS snapshot : 
+			-Its a fetaure to take the backup of the EC2 instance. Just like creating an static image of the VM or instance .
+			-Once you take the snapshot of the instance , we can create a volume out of it 
+			-The volume created out of the snapshot can be attached to the other EC2 instances.
+			-Steps :	
+				.Go to actions --> click on create snapshot , choose the region --> done.
+				. to create a volument : go to the snapshot created ---> click on action ---> click on create volume and done.
+				
+				
+				
+Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TYPE 				
+13. Instance Store Volume : 
+	-An instance store volume is attachable volume which resides on the same  host machine where your instance is running .
+	-allow more faster and frequent access to the data.
+	-disadvantage of data getting lost under below scenarios:
+		.if the instance restarted.
+		.if the instance terminated.
+		.if the instance stop.
+	-So if you need a volume to persist the data go for the EBS storage which resides on a separate host machine in data center.
+	
+	
+	a. EBS architectue :----------------
+	
+	
+	instance EC2				EBS storage volume   ##
+	-----------					-----------------
+	Host machine1				HOst machine 2
+	-----------					-----------------
+
+
+	b. Instance store volume  architectue :---------------- on same host in which instance is running.
+	
+	instance EC2				
+	--------------					
+	
+	Host machine1			
+	
+	--------------					
+	instance store Volune @@
+	
+14. Availability Zones : 
+		
+		1 availability region -----> multiple availability zones -----> each availability zone will have multiple data centers 
+		AR = Availability Region 
+		AZ = Availability Zones
+		DC = data centers 
+									
+										1 AR(south - mumbai )
+											|
+											|
+											|
+					------------------------------------------------------
+					|						|							 |
+					|						|							 |
+					|						|							 |
+				   AZ1						AZ2							AZ3 ...........AZ4 ... AZN something
+			   	   |						   |					       |
+				   |                           |                           |
+				   |                           |                           |
+			   ----------                   ----------                  ----------
+			   |		|                   |		|                   |		|
+			  DC1      DC2...DCn			DC1    DC2..Dcn				DC1      DC2.....DCn
+			  
