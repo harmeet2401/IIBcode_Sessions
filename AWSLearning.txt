@@ -384,4 +384,71 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 	-We  can create a budget in which we can add the budget amount limited to that ruppees 
 	-Then we can configure our alert by adding the threshold value in % then , if it cross the budget it will alert me in my email.
 				
+19. IAM : Identity and Access management 
+		-In this feature we can create new users apart from the root user just like we did in azure IAM.
+		-In this we can also attach the policies or permissions to the users.
+		-In we can also create IAM groups and add that user as part of the group.
+		
+20. AWS command line interface : the CLI tool to interact with the AWS console to do all those things that we did using the management console.
+			-download the installerand run it
+			-then use command : aws configure 
+			-then enter the access key ID and secret access key 
+			-Then you can run any AWS command to interact with management console.
 	
+	Authentication : The way AWS ask for the Access key ID and secret access key to allow user to get into the managementconsole is called Authentication 
+	Authorization : Now the user get autheticated and logged in to console , now to acccess any service in AWS the user must be authorized to access it .
+					For that the policies/permission Root user gave to the sub-user will authorize it further.
+					
+21. AWS simple storage service(Amazon S3) : Its is similar to what storage account is in Azure .
+		-AWS simple storage service is used to store any data in the form of an object and that object can be access using the object key .
+		-Simple Storage service to one level down holds a bucket and this bucket(similar to storage account name in Azure example: demo2020).This is bucket will further holds a folder structure that will further contains the file or data file we added.
+		-To access the file we will get a url to access example url : https://demo2020.e2-south-asia/images/context.jpeg
+		-bydefault the security guidlines for Simple storage service is restricted from public access.
+		-to make it enable we have to uncheck the guidlines for bucket and make it public .
+		
+		
+											demo2020	   images					  file or image or data file 	
+		AWS simple storage service -------> Bucket------> Folder structure----------> context.jpeg
+
+22. Simple Storage service classes :  Post creating the S3 we can set the storage class as per below list.		
+	1. General purpose (S3 standard) : 
+		-used for frequently accessed data , provide high durability , low latency and high throughput .Mostly used in data analysis , data extraction and report generating applications on a daily basis.
+		-higher storage/retrieval cost of data from the bucket in AWS storage .
+		-higher availability of 100% as data is available is multiple availability Zones .
+		
+	2. Standard infrequent access(S3 standard -IA) : 
+		-used for infrequent accessed data .provide high durability , low latency and high throughput. 
+		-used for backup of data and create data lake kind of storage for year end access and report generations. This might be used mostly for apps working on the large chunk of data after longer period of time.
+		-Less cost of storage/retrieval from the storage service as compared with S3 standard.
+		-Less availability of 99.9% as data is available is multiple availability Zones .
+	
+	3. Standard infrequent one Zone (S3-one Zone IA)
+		-used for infrequent accessed data .provide high durability , low latency and high throughput. 
+		-used for backup of data and create data lake kind of storage for year end access and report generations. This might be used mostly for apps working on the large chunk of data after longer period of time.
+		-Less cost of storage/retrieval from the storage service as compared with S3 standard.
+		-LOW AVAILABILITY AS TEH DATA IS AVAILABLE IN ONLY ONE AVAILABILITY ZONE. So the data become unavailabe if the Zone goes down as only one zone is available. 
+   						
+					
+	4. S3 glacier : 
+		-user for archival of data 
+		-no such retrieval of data at all.
+		-lower cost of retrieval / storage in this 
+		-no availability %
+		-higher time to retrieval as soon as we raised a request for it.
+	
+	5. S3 Glacier Deep Archive : 
+		-used to store data for 7-10 years
+		-only to access once or twice a year.
+		-storage cost is even lower than s3 glacier.
+		-The retrieval time is nearly 12 hours
+	
+	6. S3 Intelligent -tiering :
+		-used when we arenot sure about the class to choose.
+		-once we set the class to this AWS will monitor the data for a while and automatically assign it for S3 infrequent or frequent access data class.
+		-There is a monthly monitoring fees .
+		-there are no retrival fees.
+
+23. AWS S3 pricing :
+			-the cost varies as you go from one region to another or from one class to another .
+			-the data going inside of S3 from the intrnet is free of cost 
+			-the data going out og the S3 is costed as per the class specified.
