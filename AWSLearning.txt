@@ -225,6 +225,10 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	f. Instance fetaure 
 	g. measuring instance performance.
 	
+	
+NOte : On demand instances : 
+If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances. With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
+	
 8. INSTANCE PURCHASING OPTIONS : 
 		
 	a. spot instance : 
@@ -232,7 +236,10 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 		-the EC2 component will be provided on the basis of EC2 capacity
 		-here if the capacity from AWS become less then that spot instance will be shutdown and taken away from usr.
 		-If the instance is taken form us , then it can be restarted or the app which also running on that instance can be brought up again when spot instance is given back to you . Used for data analysis , batch processing.
-		-these spot instance can't be stop and start , it can only be restart and terminated .
+		-these spot instance can't be stop and start , even if you try to terminate the instance AWS will bring one up instantly to meet the instance count.
+			Target capacity shows the count.
+		-to stop that go to - spot request and cancel the request.
+		
 	
 	b. 	Reserved instances 
 		- As the name says , you are willing to reserve an instance for a year or so , then only you will get a billing discount.
@@ -346,4 +353,35 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			   ----------                   ----------                  ----------
 			   |		|                   |		|                   |		|
 			  DC1      DC2...DCn			DC1    DC2..Dcn				DC1      DC2.....DCn
-			  
+
+15. AWS Market Place : just like Azure market place 
+	Kind of store where we can search and spin up the already created solutions and bring that instance as part of our architecture.
+	Example : wordpress solutions , windows server SQL , mongoDb server on windows etc .
+	
+	a. for wordpress if we chooose then all the ports for incoming traffic will be already there. As we don't need to choose the AMI.
+	
+16. Security Group : 
+		Its kind of firewall that will allow the traffic to flow in or out of the instance .
+		
+		It has inbound and outbound rule 
+			- it contains 
+				: type
+				: port range 
+				: type of data (HTTP , ftp  , ssh , RDp ..) protocol specifically.
+				: target or source ip address , example : 0.0.0.0/0 ipv4 means from anywhere  and ::/0 means anywhere in ipv6
+				
+17. Network access control list :  Just the security group , NACL is also a kind of firewall that is applied on the subnet .
+			-It also contains the inbound and outbound rules for incoming or outgoing data.
+			-Similar property : 	
+				 - type
+				 - protocol
+				 - portrange 
+				 -source or target 
+				 - ONE ADDITION PROPERT IS WE CAN SAY ALLOW AND DENY IN NACL FOR INCOMING AND OUTGOING  DATA.
+			- Keep in mind if you apply a rule on the NACL level then all the instances inside the subnet will be impacted by that rule.
+
+18. Budgets : 
+	-We  can create a budget in which we can add the budget amount limited to that ruppees 
+	-Then we can configure our alert by adding the threshold value in % then , if it cross the budget it will alert me in my email.
+				
+	
