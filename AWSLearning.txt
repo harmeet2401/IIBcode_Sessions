@@ -3,6 +3,9 @@ Udemy Course : Neal Davis
 Detailed + Exam Cram 
 **************************************************************************************************************************************
 
+Free tier account in AWS : 
+harmeet24011992@gmail.com
+Gogi@12345
 **************************************************************************************************************************************
 Domain 1: Cloud Concepts		28%
 Domain 2: Security			24%
@@ -86,9 +89,6 @@ some questions that I remember are:
 2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
 olaa the app is up for the user.
 
-Free tier account in AWS : 
-harmeet24011992@gmail.com
-Gogi@12345
 
 ---------------------------------------------------------------------------------
 
@@ -452,3 +452,57 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			-the cost varies as you go from one region to another or from one class to another .
 			-the data going inside of S3 from the intrnet is free of cost 
 			-the data going out og the S3 is costed as per the class specified.
+
+24 Some other features of AWS S3 			:
+		1. versioning : 
+						If we enable the verisoning on the S3 objects its just like code presnt in git .
+						We can retrieve diff versioned data object from it
+						It also helps the user to recover from the accedental delete of the objects by maintaining the versions
+						Once versioning enables we can not stop it . It can only be suspended.
+		2. Encryption : 
+					clients need the data to be stored in an encrypted form in AWS data centers .
+		
+		3. Server Access logging : 
+					We can enable this feature and allow the user to start saving the steps happening whie accessing the object from the bucket 
+					we can save these logs in same bucket or in diff bucket.
+        
+		4.	Cross Region Replication : 
+					Region replication of data in diff location arround the globe.
+					versioning should be enabled.
+25. We can host a static website in S3 (simple storage service).
+						We need to create the bucket (just like storage account in azure) and store the static code for the website 
+							Then make the bucket as public 
+								then go to propeties of bucket .
+									then select host static website 
+										mention the index.html file and default redirectiong when you hit the URL provided by AWS in it.
+
+26. S3 -lifecycle policy
+	We can explain this by using a example : 
+	1. First we created a standard S3 and a bucket holding some objects . Now as it is standard class it will allow frequent access usage and cost is applied accordingly .
+	2. second after some time 50% of the objects are not getting acessed for a longer period of time so paying the same bill for only 50% objects accessible doesn't make sense.
+	3. We can now create a lifecycle for the objects inside the bucket to transitioned to a new class of standard -IA or any other class while monitoring the life of the objects access inside the bucket .
+	
+	The above feature usually depicts the lifecycle rule and policy for S3.
+
+27. IAM(Identity and access management policy ) to access the s3 bucket.
+		This feature usually talks about giving access to users using 
+			AWS account or giving access only to the bucket level .
+		
+	-For this one upload an object in the bucket and don't make it public 
+		-Now create a user in IAM feature 
+			-Now create a policy for this user to get the objects form the bucket from User service in AWS. Policy option is on the left hand side.fill in the details
+				-now go back to the user you created , Add permission and attach the policy by searching its name and attach it to this user.
+				
+	run below command : 
+		aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt
+
+28. Resource base access control to access S3 bucket 
+	For this feature do follow : 
+		-go to your bucket 
+			-go to your bucket policy option
+				- enter the details like : policy type , pricipal : user name (full arn) , Actions (same like get the bucket object , list and etc), copy the arn for bucket 
+					-Add statement 
+						-generate policy : copy the policy code and go back to s3 bucket window paste it there .	
+							
+				
+	
