@@ -392,7 +392,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 20. AWS command line interface : the CLI tool to interact with the AWS console to do all those things that we did using the management console.
 			-download the installerand run it
 			-then use command : aws configure 
-			-then enter the access key ID and secret access key 
+			-then enter the access key ID and secret access key  we downloade using the clouduser 
 			-Then you can run any AWS command to interact with management console.
 	
 	Authentication : The way AWS ask for the Access key ID and secret access key to allow user to get into the managementconsole is called Authentication 
@@ -494,7 +494,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 				-now go back to the user you created , Add permission and attach the policy by searching its name and attach it to this user.
 				
 	run below command : 
-		aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt
+		aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt  ----- this command is using clouduser as the user  , because we already configured the AWS using command : aws configure and provided the access key id and secret access key for this user on our system .
 
 28. Resource base access control to access S3 bucket 
 	For this feature do follow : 
@@ -504,5 +504,19 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 					-Add statement 
 						-generate policy : copy the policy code and go back to s3 bucket window paste it there .	
 							
-				
+29. IAM roles 
+			1.Now we have seen that we can create user , a policy and attach that policy to that user and access the bucket objects
+			2.we have also seen that we can create bucket level policy , mentioning our user in it and access the bucket objects.
+			ABOVE TWO FEATURE HAPPENS ONLY BECAUSE WE CONFIGURED THE USER using : aws configure command and provided the access keyid and secret access key.
+			
+		
+	-Now We are going to see how we can access the services without configuring the user on the system and without giving the access key id and secret access key for the configuration .
+	-For that do the following : 
+		a. Go to the IAM --> select roles on left hand side 
+		b. create a role ---> select the use case 
+		c. we will select the EC2 as the use case.
+		d. We can create our own policy , but we will select it from the list provided ---> AmazonS3ReadOnlyAccess.
+		e. go to the Ec2 instance from where you want to access the bucket --> In Actions ---> attach role --> search for the role and done 
+		f. run this command : aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt  ollaaaaaaaaaa its working .
+	
 	
