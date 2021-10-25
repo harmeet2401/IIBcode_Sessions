@@ -92,6 +92,17 @@ olaa the app is up for the user.
 
 ---------------------------------------------------------------------------------
 
+Important point : 	infra as a service ----- > platform as a service -- > software as a service 
+
+				Eg: EC2 instance 	   ------> RDS service           -- > Mail boxes , softwares which you can install and use as per need.
+				
+				
+IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that 
+
+PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
+
+SAAS : Its a software as a service in which the vendor will give you the setup and service to just use . eg: gmail , FB , etc 
+
 Multiple cloud services are provided by AWS : 
 
 For example : 
@@ -519,4 +530,35 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		e. go to the Ec2 instance from where you want to access the bucket --> In Actions ---> attach role --> search for the role and done 
 		f. run this command : aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt  ollaaaaaaaaaa its working .
 	
+30. Amazon Galcier : 		
+	-low cost storage 
+	-underlying hardaware is maintained by the AWS.
+	-used to store data for longer period of time may be months .
+	-The retrieval of data take more time as compared ot Amazon S3 service.
+	-AGlacier cotains vaults insteda of bucket(in s3) and contains archives instead of objects .
+	-We can not upload data using amazone web console , we have to use amazons sdk and amazon CLI for the same . And this apply to retrieval of data also .
 	
+	Amazone S3 --------------> bucket --------------------> Object1
+									  --------------------> Object2
+	
+	Amazone Glacier --------------> vault --------------------> Archive1
+									  --------------------> Archive2
+									  
+									  Archive are also objects such as file , videos , images etc
+
+	-three ways by which we can retrieve data from amazon glacier are : 		
+		:Standard - in this way we have to raise a request using the Amazon CLI or SDK and will take 3-5 hours .
+		:Expedited -- For quick retriv
+		:Bulk -- for retrival of large amount of data.
+	
+31. Advantage of using Amazon S3 storage service over EBS volumes .
+	-Amazon S3 service is highly availabl , durable pand scalable on its own . So no need to worry about increasing the size if the storage site for increasing data in future.
+	-S3 is available globally all instance of app present on different region hosted can access these.Where as EBS volumes are local to the EC2 instances.
+32. Relational database Service (RDS Service) : Its a platform as a service 
+		- this service will allow user to host a data base and no need to worry about the underlying infra and database installation 
+		-there are some databases allowed by the Amazon in RDB service you can choose from 
+			-Mysql 
+			-microsoft sql service
+			-oracle 
+			...etc
+		-Just search RDB fill in all details and connect it using the workbench or local connector.	
