@@ -97,12 +97,15 @@ Important point : 	infra as a service ----- > platform as a service -- > softwar
 				Eg: EC2 instance 	   ------> RDS service           -- > Mail boxes , softwares which you can install and use as per need.
 				
 				
-IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that 
+IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that . Maintain the backups and availability.
 
 PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
+No Need to Maintain the backups and availability.
 
 SAAS : Its a software as a service in which the vendor will give you the setup and service to just use . eg: gmail , FB , etc 
 
+
+----------------------------------------------------------
 Multiple cloud services are provided by AWS : 
 
 For example : 
@@ -554,11 +557,105 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 31. Advantage of using Amazon S3 storage service over EBS volumes .
 	-Amazon S3 service is highly availabl , durable pand scalable on its own . So no need to worry about increasing the size if the storage site for increasing data in future.
 	-S3 is available globally all instance of app present on different region hosted can access these.Where as EBS volumes are local to the EC2 instances.
+	
 32. Relational database Service (RDS Service) : Its a platform as a service 
-		- this service will allow user to host a data base and no need to worry about the underlying infra and database installation 
+		-this service will allow user to host a data base and no need to worry about the underlying infra and database installation 
 		-there are some databases allowed by the Amazon in RDB service you can choose from 
 			-Mysql 
 			-microsoft sql service
 			-oracle 
+			-Amazon Aurora
 			...etc
 		-Just search RDB fill in all details and connect it using the workbench or local connector.	
+		
+	Amazon Aurora Service : 			
+		-Its a sql data base compatible relational dB.
+		-it means we can also migrate the on -premises DB to Amazon aurora which is either Mysql or postgre Dd.
+		-It provides 5 time faster speed then Mysql and 3 times faster speed then postgre Db.
+		-its is cluster based architecture.
+		-once you create Aurora db it will create a cluster and Db under  it.
+
+		
+33. DynamoDB its a nosql database and as its no sql so its json schema based.
+		- its just like the mongoDb service in which the tables or collections are not schema dependent . its a PAAS
+		- Works in combination of the collections and documents which is in json . in dynamoDb the table and item combination is there .
+		- Each table/collection will have a partition key 
+		- A sort key can also be created with the partition key which can be used to retrieval.
+		
+		In the past, AWS has focused on providing infrastructure-as-a-service (IaaS), but the addition of DynamoDB sees it move further into platform-as-a-service (PaaS) as it is offering to manage the back-end technology as well as rent it out. ... "It is right in the heart of platform-as-a-service.
+
+34. AWS pricing calculator. its the tool in which you can estimate the cost you will incur while creating or spinning up a service in Amazon.
+
+35. TCO (total cost of ownership) calculator : This tool will help the comp architect to migrate it own premiss setup of servers to Amazon.
+				-you can mention the number of servers required to be migrate 
+				-Underlying infrastructure or OS
+			This tool will give you the comparable table of cost saving done between onpremises setup VS migrated setup on AWS for three years .
+			
+36. AWS support pans : 	This includes three categories of support plans 
+	The cost of support from developer to enterprise increases.
+	
+	
+		-Developers : Recommended if you are experimenting or testing in AWS.
+		   AWS Trusted Advisor Best Practice Checks : 7 checks are done 
+		   Enhanced Technical Support : business hours support and email support unlimited cases./ 1 primary contact , General guidance: < 24 hours**,System impaired: < 12 hours**
+		   Architectural Guidance : General 
+		   Programmatic Case Management : no
+		   Third-Party Software Support : no 
+		   Proactive Programs and Self Service : Access to Support Automation Workflows with prefixes AWSSupport
+		   Technical Account Management	  : no 
+		   Training : no 
+		   Account Assistance : no 
+		   Pricing : Greater of $29 / month*** - or - 3% of monthly AWS usage
+			
+		-Business : Recommended if you have production workloads in AWS.
+		   AWS Trusted Advisor Best Practice Checks : full set of check 
+		   Enhanced Technical Support : 24x7 phone, email, and chat access to Cloud Support Engineers hours**,System impaired: < 12 hours**,Unlimited cases / unlimited contacts (IAM supported)
+		   Architectural Guidance : 	Contextual to your use-cases 
+		   Programmatic Case Management : AWS Support API
+		   Third-Party Software Support : Interoperability and configuration guidance and troubleshooting 
+		   Proactive Programs and Self Service : Access to Infrastructure Event Management for additional fee , Access to Support Automation Workflows with prefixes AWSSupport and AWSPremiumSupport
+		   Technical Account Management	  : no 
+		   Training : no 
+		   Account Assistance : no 
+		   Pricing : Greater then developer 
+		   
+		-Enterprise : Recommended if you have business and/or mission critical workloads in AWS.
+		   AWS Trusted Advisor Best Practice Checks : full set of check 
+		   Enhanced Technical Support : 24x7 phone, email, and chat access to Cloud Support Engineers hours**,System impaired: < 12 hours**,Unlimited cases / unlimited contacts (IAM supported)
+		   Architectural Guidance : Consultative review and guidance based on your applications
+		   Programmatic Case Management : AWS Support API
+		   Third-Party Software Support : Interoperability and configuration guidance and troubleshooting 
+		   Proactive Programs and Self Service : Infrastructure Event Management,Access to proactive reviews, workshops, and deep dives,Access to Support Automation Workflows with prefixes AWSSupport and AWSPremiumSupport
+		   Technical Account Management	  : 	Designated Technical Account Manager (TAM) to proactively monitor your environment and assist with optimization and coordinate access to programs and AWS experts 
+		   Training : 	Access to online self-paced labs 
+		   Account Assistance : Concierge Support Team 
+		   Pricing : Greater then business
+
+37. Elastic load balancer : 
+	This is the service to route the requests coming to the service to the backend pool target EC2 machines running with same web api or app etc .
+	-This service will autoscale 
+	-Provide high availability
+	-Load balancer contains a listener that will receive the requests from the users 
+	-Targets (backend pool) are the group of EC2 machines 
+	-Types of Load balancer : 
+		: Classic LB - Old verion of lb
+		: Application LB - that works on the application layer
+		: network LB - that works on the network layer.
+38. Autoscaling : 
+			-set the lauch configuration - AMI ID , security group , intance type etc 
+			-Autoscaling group - Will contains the Min , max number of EC2 instances to be maintained.
+			-Autoscaling condition : CPU % , memory usage etc 
+			-we can also create a scaling policy using a time schedule like for eg :  autoscale to some instance at 9:00 am in the morning .
+
+NOte : cloud watch service in AWS :  check this out .			
+
+39. Route 53 service : This service will help in routing the request from the client which uses a url and need DNS resolver to map the destination IP and get the destination 
+			-Route 53 service contains Hosted Zone which can hold the naming servers that contains the url and corresponding ip for it.
+			
+			
+			
+	Usual normal flow : 
+			client request ---hits a url ---->DNS Resolver ---> naming server -----> map the ip and ---> then reach the request to the destination 
+			
+	Using Route 53 : 
+			Client request --->hits a url ----> Route 53 Service --> Hosted Zone in 53 service ---> map the ip ---> make the request reach the destination .
