@@ -651,7 +651,11 @@ NOte : cloud watch service in AWS :  check this out .
 
 39. Route 53 service : This service will help in routing the request from the client which uses a url and need DNS resolver to map the destination IP and get the destination 
 			-Route 53 service contains Hosted Zone which can hold the naming servers that contains the url and corresponding ip for it.
-			
+			-Need to buy a domain name provider like from godaddy.com , we can get the domain name 
+			-go to AWS route 53 service ,
+			-create a hosted zone , add the domain name you have purchased 
+			-copy the name servers form the hosted zone to the godaddy domain name , naming server list .
+			-now create the record set that will get trigger when some hit your domain name you purchased.
 			
 			
 	Usual normal flow : 
@@ -659,3 +663,41 @@ NOte : cloud watch service in AWS :  check this out .
 			
 	Using Route 53 : 
 			Client request --->hits a url ----> Route 53 Service --> Hosted Zone in 53 service ---> map the ip ---> make the request reach the destination .
+
+40. Amazon Cloudfront service :
+	-its a web service that will help is distributing the static or dynamic web data across the globe.
+	-It will help is providing the response data to the user using the Data centers which actually known as the clound edge locations.
+	-there can be many edge locations.
+	
+	Example 
+			
+			Case 1 : 
+			
+			(Mumbai Region )
+			Client ---send a request for a web data ------------------------------------------------>   EC2 instance 
+																										(ohio region)
+					
+					<-----------------------------------Response with higher latency --------------																				
+														because of the cross location 
+														request mumbai to ohio
+														
+            Case 2 : Using Amazon Cloudfront service 
+				
+				Request one : -----
+				
+				(Mumbai)
+				Client ----sends a request----------->Cloudfront --------------------------------------------> EC2 instance (ohio region)
+																			
+					   <---------response back--------Cloudfront <----save the response to -------------------
+													edge location
+													(kind of cache)
+													
+								
+				Request two : -----
+				
+				Mumbai
+				client------sends a request again----->cloudfront------------------------------------------->Took it from Mumbai edge loaction and will not go to  EC2 instance.
+				      
+					  <----------------------------------------------------Response--------------------------
+
+41. 					  
