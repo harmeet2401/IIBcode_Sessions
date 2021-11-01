@@ -146,7 +146,7 @@ Amazon MemoryDB for Redis
 
 We are going to cover Amazon VPC(virtual private cloud network)  and EC2 
 
-1. Global Infra : It means the wide spread of AWS datacenters across the globe . This data center spread will allow users to choose the DC for hosting their application to give best (low latency) experience to their users who will access that app.
+1. Global Infrastructure : It means the wide spread of AWS datacenters across the globe . This data center spread will allow users to choose the DC for hosting their application to give best (low latency) experience to their users who will access that app.
 
 2. CloudPing.info : its a AWS tool that will go and ping all AWS DCs to show the HTTP ping response time back to your location. That will help you choose the DCs you want. for me its Asia Pacific (Mumbai)	39 ms is the best Dc to choose.
 
@@ -155,14 +155,14 @@ We are going to cover Amazon VPC(virtual private cloud network)  and EC2
 4. AWS VPC	: AWS Virtual private cloud network : Its similar to what we study in Azure as Azure VPN in azure cloud space.
 		AWS VPC : will be a separate isolated space with IP range in AWS cloud. Now in AWS VPC we can spin up the Virtual machines with allocated private IP Addresses so that these machines can communicate with eachother .
 		
-		Private IPaddress :  will allow VMs in AWS /AZURE VPN to talk to each other .
-		Public IPaddress : will allow VMs from AWS / Azure VPN to talk to the internet.
-		Subnets : A AZURE / AWS VPN contains subnets which will further have there own address space of private or public IP .
+		Private IPaddress :  will allow VMs in AWS VPC/AZURE VPN to talk to each other .
+		Public IPaddress : will allow VMs from AWS VPC / Azure VPN to talk to the internet.
+		Subnets : AN AZURE / AWS VPN contains subnets which will further have there own address space of private or public IP .
 		Default VPC : it is created Automatically by AWS once account is active . IP address apce : 172.31.0.0/16
 		
 		
 
-					-----------										Companies DC 
+					-----------											Companies DC 
 																		--------------
 					INternet											--------------			
 					-----------
@@ -173,7 +173,7 @@ We are going to cover Amazon VPC(virtual private cloud network)  and EC2
 			-------------------------------------------------------------------------------
 			AWS VPC (10.0.0.0/16) --- 16 means first 16 bits means 10.0 will remain constant.
 			
-						EC2 Instancesubnet1						EC2 Instancesubnet2
+					EC2 Instance1subnet1			EC2 Instance2subnet2
 					--------------------			-----------------------
 					priv IP : 10.0.0.5				priv IP : 10.0.1.5
 		
@@ -205,7 +205,7 @@ e. You can set firewall rules via Security Groups
 			select the Amazon machine image (linux or windows )
 			Select the instance type (usually ask for cpu count and memmory)
 			select the VPC , the default or create a new one 
-			select the storage 0amount 
+			select the storage amount 
 			select configuring security group ,just like a firewall. Just like we have NSG in azure that contains the inbound and outbound rule , same in this we have inbound and outbound rule.
 			create a key pair which we will use to login . 
 f. we can then use the login key to get decrypt and generate the password for RDP to windows VM or ssh to linux VM .
@@ -236,8 +236,8 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	c. Memory optimized 
 	d. Accelerated computing 
 	e. Storage Optimized 
-	f. Instance fetaure 
-	g. measuring instance performance.
+	f. Instance feature 
+	g. Measuring instance performance.
 	
 	
 NOte : On demand instances : 
@@ -247,7 +247,7 @@ If you just need to have EC2 Instances running for a short duration of time, con
 		
 	a. spot instance : 
 		-here we can get an EC2 component at much lower cost  then on-demand pricing.
-		-the EC2 component will be provided on the basis of EC2 capacity
+		-the EC2 component will be provided on the basis of EC2 capacity.
 		-here if the capacity from AWS become less then that spot instance will be shutdown and taken away from usr.
 		-If the instance is taken form us , then it can be restarted or the app which also running on that instance can be brought up again when spot instance is given back to you . Used for data analysis , batch processing.
 		-these spot instance can't be stop and start , even if you try to terminate the instance AWS will bring one up instantly to meet the instance count.
@@ -647,7 +647,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			-Autoscaling condition : CPU % , memory usage etc 
 			-we can also create a scaling policy using a time schedule like for eg :  autoscale to some instance at 9:00 am in the morning .
 
-NOte : cloud watch service in AWS :  check this out .			
+NOte : cloud watch service in AWS :  this service is used to store logging data .		
 
 39. Route 53 service : This service will help in routing the request from the client which uses a url and need DNS resolver to map the destination IP and get the destination 
 			-Route 53 service contains Hosted Zone which can hold the naming servers that contains the url and corresponding ip for it.
@@ -700,4 +700,130 @@ NOte : cloud watch service in AWS :  check this out .
 				      
 					  <----------------------------------------------------Response--------------------------
 
-41. 					  
+41. Queue Service : 
+		-secure 
+		-durable 
+		-high availability
+		-scale automatically
+		-serverless service 
+		-decoupled the services.
+		-two types : 
+			FIFO queus : works using FIFO algo , one copy of message is delivered , 300 message transaction per secs
+			Standard queue : multiple copies of message might get delivered. Multiple transaction per sec
+
+42. Simple Notification Service : 
+		-this web service will sends notification to all the subscribers.
+		- Topic to be created 
+		- create subscription Endpoint to be added which will be subscribe to the Topic .
+		- Once the SNS to be triggered , topic will sends Notification to all endpoints.
+		- endpoints may include : 
+			lambda expression
+			email
+			SMS
+			SQS queue 
+			Http or Https endpoints.
+
+43. Elastic Beanstalk : This service will provide you to provision Environments on the go .
+				-for example : We can direclty bring an ENV with tomcat running and sample app of java running on it .
+					: under this process it will automatically spin up the EC2 instance 
+						: it will create a S3 service and will create a bucket for you.
+				
+			-In nuthsell this service will take care of evrything which includes setting up the software dependencies , web server required to run the app etc .
+			-For example : if we want to run a docker image , just go to AWS beanstalk and provision an ENV using dockr option. Amazon will spin up the EC2 instance with dockr already installed on it. 
+			-You just have to upload the code and run it .
+
+44. AWS lambda : This AWS service is just like the Azure function we learned.
+				-Its serverless service and no need to spin up the server for running the code.
+				-The user will get charged only when the function or the code is running .
+				-If the code running idl and is not running then no charge is raised.
+				-supported languages : 
+						java
+						python
+						ruby
+						.net
+						nodejs
+						Go 1.x
+				
+												DATA
+												|
+												|
+												|
+											    \/
+		AWSlambda -----------------------> Aws functions ------------> Generate output.
+											|
+									        |
+                                            |
+                                            \/
+										Logging data to Aws cloud watch service 
+
+45. API gateway : 
+	Using this aws service we can create an api like structure in it.
+	-we can create multiple resources like /customer and the method for it (Get)
+	-then we can integrate above resource customer for Get method to a Mock service , lambda function call, HTTP api call etc 
+	In nutshel API gateway helps in creating a Rest api like structure using which we can even call the http service in the back end and also the serverless lambda function.
+
+46. AWS CloudFormation : IAAC.	Its similar to what we did in Azure templates . in which we wrote the json file or the templates to create pr setup the entire architecture of our applicatin system.
+				-Then we can submit and run the AWS template to the AWS CloudFormation
+				-AWS CloudFormation will run the template and create the ENV for us 
+				-Its usefull for quickly bringing up the ENV (which may contains multiple AWS Services like VPC , EC2 and RDS service using mysql).
+				-For repitidely deploying the service we can use the template for it.
+				-we can simply go to the CloudFormation designer view where you can find the service on the left.
+				-stack is also created that will create the services up.
+				-once you delete the stack all the related services will be deleted.
+
+47. Elastic Container service : So as we know we need an orchestration service to manage the containers like stop , start , bring u pnew instance , rolling ou t, patch it etc .
+				-Polpular tools for orchestration is kubernetes
+				-AWS also provide a service to manage the containers known as Elastic container service .
+				-It Elastic container service architecture contains below two things : 
+							1. Task defination : which contains the infomation about the memory needed etc  and type of container to run .
+								a. Cotainer defination : about the image name and all. This defination is part of the task deifnation .
+								
+							2. Service defination : which will contains the service related info like how many instances of the conatainer need to be keep on running .
+							
+48. shared responsibility for AWS and Customer :
+	1. Shared responsibility for AWS : 	
+		-ensure oS patching in RDS service.
+		-control the entire global infra.
+		-Secure disposal of data and storage devices
+		-Secure access to DC 
+		-Ensure firmware is updated on hardaware in which the App or data is hosted.
+		-Maintaining Environmental control in DCs.
+		-Awareness and training.
+	2. Shared responsibility of Customer.:
+		-encryption of the data at rest 
+		-encryption  of the data in transit 
+		-patching of EC2 instances 
+		-patching of guest OS , database and liberaries in EC2 instances 
+		-Awareness and training.
+							
+49. AWS organisation : 
+	1. Central management for multiple AWS accounts
+	2. AWS Organizations enables you to centrally manage and consolidate all of your AWS accounts in the AWS Cloud.
+	3. For example : 
+		in an organisation we have different depeartments : 
+				IT 
+				OPERATIONS
+				HR
+		So ech of the depeartment will create the AWS account under a single organisation which will allow to collate the billing , utilization of the entire organisation .
+		We can also use AWS organisation to pull the billing of any of the AWS account using an AWS organisation.
+	4. The architecture of Master and member account is there .
+			I meant first we will create an arganisation which will be associated with the master email 
+			Then from that master account we will invite the other AWS account to join the master account(organisation).
+	5. We can also apply the service control policy on the account level and organisation level , that will be apply to all the AWS account.
+	example , we can apply the policy to the AWS account to unauthorized to all except the EC2 instances.
+	6. the default access to all the AWS account is cllaed AllAccess something.
+	
+50. Key management Service : 
+		-So this service is all about creating a key encrypt it and using it.
+		-In this service we have a master key using which we generate the data key and using that data key to encrypt the data forward.
+		-Now we have key management services to manage the encrypted keys .
+		-keys defined in one region , can not be used in another regions.
+		
+60. Moitoring and logging : This can be achieved by AWS cloud watch service .		
+	-used for below purposes to monitor our AWS resource and our application hosted on it.: 
+		: alaram : such as we can generate an alarm on the basis of EC2 instance CPU utilization for example , CPU_uti>70% send an enable
+		: log  : We can configure ours AWS services to send the logs to the Cloudwatch to create a centralized logging framework.We can do that by installing an cloudwatch agent on theEC2 instances .
+		: events : We can also config cloud watch to response on some event generated, for example , we might or can run a lambda function that could get triggered by the Cloudwatch whic his capturing the events . Events like someone stops an EC2 instaces , terminate or done any other actions , then we can configure cloud watch for the same.
+		: metrics  : We can also pull the metrics of an EC2 instance or service to see the metrocs value in the form of charts .
+		
+			
