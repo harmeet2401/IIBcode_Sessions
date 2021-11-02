@@ -825,5 +825,57 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 		: log  : We can configure ours AWS services to send the logs to the Cloudwatch to create a centralized logging framework.We can do that by installing an cloudwatch agent on theEC2 instances .
 		: events : We can also config cloud watch to response on some event generated, for example , we might or can run a lambda function that could get triggered by the Cloudwatch whic his capturing the events . Events like someone stops an EC2 instaces , terminate or done any other actions , then we can configure cloud watch for the same.
 		: metrics  : We can also pull the metrics of an EC2 instance or service to see the metrocs value in the form of charts .
+		: dashboard : this will show you different options for diff services metrics captured.
+
+61. AWS Cloudtrail services : 		
+	-So this service purpose is to store the events occured by any identity to any resoure if AWS.
+	-This service will nt only record the source of the events but also records the , time and the identity that trigered the events .
+	-These events by default are stored for 90 days 
+	-these events persistency cana be increase and may allow the events to live upto longer period of time in S3 buckets or in log.
+	-The source of events can be anything : 
+		for example 
+				AWS console ------------->		
+				AWS SDK ----------------->			
+												AWS ACCount --------------> will be recorded in CloudWatch
+				AWS CLI ----------------->
+				AWS API ----------------->
+
+62. AWS Config Service :  Track resource inventory and changes.
+	-The sole purpose this service is to provide a details veiw of all the service in your account.
+	-This service can also detect the config changes or any change in the service example : change in security group , added new folder to the S3 service et.
+
+63. Protecting Web Apps : Do one more time . its pretty imp and act as a firewall for our resources. Just like we have security group , we can also add the WAF and with its rule to block or allow or sends a default response .
+		1. WAF(Web application firewall):  We cam create rules or sleect rule from the availability and use those by subscribing it.
+		THIS IS ON THE GLOBAL LEVEL CONFIGURATION .
+		
+64. Penetration testing : 
+	-This testing will help in simulating the testing scenarios to see how vulnerable our system is to attackers
+	-For that companies will hire ethical hackers who will Simulate the scenarios to test the system and try to check the vulnerablility.
+	-Testing Tools present as per below for penetration testing : 
+		Nmap
+		Kali linux
+		Metaspoilt
+	-For penetration testing to be applied to the Aws services we need authorization from AWS post filling a form for it.
+	
+65. Trusted Advisor Tool : 
+		-This will advise about the service based on below paramters : 
+			C ost Optumization
+			P erformance 
+			S ecurity
+			F ault tolerance 
+			S ervice limits
+		-it shows red flags on some configuration we done on the services/resources .
+			This will alert to use the best practices and give advice . example : to not open the EC2 to outside world for all , meant to change the IP range in security group 
+66. AWS inspector service : 
+				-This will help in suggesting and generate report for SECURITY VULNERABILITY and help in using best practices for services such as EC2 instances .
+				-limited to certain regions.
+				-For this we have to install a inspector agent on EC2 instances .
+				-First define the target 
+				-set up the assessment
+				-a service role will be established 
+				-Run the assessment 
+				-see the report
+				
+			
 		
 			
