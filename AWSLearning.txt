@@ -522,6 +522,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			1.Now we have seen that we can create user , a policy and attach that policy to that user and access the bucket objects
 			2.we have also seen that we can create bucket level policy , mentioning our user in it and access the bucket objects.
 			ABOVE TWO FEATURE HAPPENS ONLY BECAUSE WE CONFIGURED THE USER using : aws configure command and provided the access keyid and secret access key.
+			3. You can use roles to delegate access to users, applications, or services that don't normally have access to your AWS resources.
 			
 		
 	-Now We are going to see how we can access the services without configuring the user on the system and without giving the access key id and secret access key for the configuration .
@@ -866,15 +867,88 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 			S ervice limits
 		-it shows red flags on some configuration we done on the services/resources .
 			This will alert to use the best practices and give advice . example : to not open the EC2 to outside world for all , meant to change the IP range in security group 
-66. AWS inspector service : 
+66. AWS inspector service :  https://docs.aws.amazon.com/inspector/latest/userguide/inspector_installing-uninstalling-agents.html
 				-This will help in suggesting and generate report for SECURITY VULNERABILITY and help in using best practices for services such as EC2 instances .
 				-limited to certain regions.
+				-Need tag to be added to the service so that we can search the resource . Or either go for all services.
 				-For this we have to install a inspector agent on EC2 instances .
 				-First define the target 
 				-set up the assessment
 				-a service role will be established 
 				-Run the assessment 
 				-see the report
+				-Rules packages	 with which it will run the assessment and generate the report and show you the failed and passed marks 
+Security Best Practices-1.0
+CIS Operating System Security Configuration Benchmarks-1.0
+Common Vulnerabilities and Exposures-1.1
+Network Reachability-1.1
+
+67. Fault tolerance and high availability : 
+		-Fault tolerance meant if in an architecture the AWS resource goes down and to keep the process running and handle the situation 
+		-High availability is the process of keeping the instances running in case of an failuer
+		example : 
+			
+			Design  1 
+			
+			EC2 instance -----------------------gets data from -------------------> Database instance 
+			
+			
+			Design 2 
+			
+			1.what if the EC2 instance goes down ?
+				a.two technique to keep high availability
+					.Added a ELASTIC load balancer in front of two EC2 instances each present in two different Availability Zones. as we know the load can be distributed with multiple instances in same region and not in cross region .
+					.We can spin up multiple replicaes of EC2 instance on different zones and also in region for fault tolerance and disaster recovery .
+			
+			2. what if the DB instance is down ?
+				b. technique is two create multiple instances 
+					.its AWS responsibility to bring the other instance up 
+			
+			3. what is we deploy the app in EC2 instance ? then App goes down 
+				c. For that also multiple instances will help in balancing the load and failure.
+				
+68. Disaster Recovery :  Is for region goes down .
+
+		Disaster Recovery technique :
+				1. Backup and restore
+					-Take backup of teh EBS volumes as a different snapshot.
+					-Keep AMI's ready. So that it can be given as an OS.
+					-Store the backup in a scheduled intervals in an S3 bucket in a different region . Cross region replication 
+					-This process will take some time to create a backup and use that snapshot for cross region replications.
+				
+				2. Pilot Light : 
+						-In this we are running one complete set up in one region A
+						-and another setup with less instances in Region B (in which all main components reside as a non-running state.)
+						-Whenever the Region A goes down , we can bring the region B components up and bring the system active.
+						-Route53 is a DNS service for Domain name resolvee. This is used to route all traffic from region A to Region B once the disaster occurs.
+						-low cost solution.
+				
+				3. Warm standby : 	
+						-In this we are running one complete set up in one region A
+						-and another setup with less instances in Region B (in which all main components reside as a running state.)
+						-Whenever the Region A goes down , it will use Route53 is a DNS service for Domain name resolver and This is used to route all traffic from region A to Region B once the disaster occurs.
+						-high cost solution. as all component in another region is also running.
+						-quick failover.
+				4. Multi -site scenarios.
+						-In this also both the region A and region B have running components
+						-And both the regions are  getting access by the using in shared mode example : 50% each.
+						-Once the disaster occurs in region A , it will use Route53 service to send the traffic of region A 50 % also to the region B,making region B consuming 100% traffic .
+						-High cost 
+						
+						
+		Replications technique : For data replications in case we have used Db service like DynamoDb , RDS , etc .
+				
+				1. Synchronous This is used mostly in between availability zones
+				2. Asynchronous.This is used mostly in between availability region
+
+69. AWS Kinesis : This AWS Service is used to stream variety of data as follow use case scenarios
+		1. IOTenable devices : in order to get the data out of the IOT enabled devices we can use above service to stream the data.
+		2. Log ingestion : now this service can ingest the log data coming from not only the AWS services but also from the on-premises service or outside of AWS network or DCs.
+		3. Websites click or user interaction : we ca use this service to monitor the data in which we can create a  data sheet to see how much time user spends on which portion or my site and clicked which features how many times.
+		
+						
+						
+					
 				
 			
 		
