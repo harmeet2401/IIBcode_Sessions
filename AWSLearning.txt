@@ -270,7 +270,7 @@ If you just need to have EC2 Instances running for a short duration of time, con
 		- this is a billing discount fetaure on the bsis of the reservation of instance.
 		- we can pay , partial , entire or no payment at the starting. But obviousely giving an upfront payment will provide a better discount.
 		- Offering classes of instances in reserved category 
-			: standard - here we can change the size of the instance with in the term commited 
+			: standard - here we can change the size of the instance with in the term commited .
 			: convertible - here we can change the instance family , instance type , platform , scope and 	tenancy.
 		- depends upon the 
 			: os 
@@ -1086,3 +1086,5 @@ NOte : for any db we can load the data from S3 service that bucket can contains 
 			Use case can be anything .		
 
 74. AWS support plans	 : Important 
+AWS EFS : elastic file system 
+AWS KMS : Key management system .
