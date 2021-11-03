@@ -85,6 +85,16 @@ some questions that I remember are:
     Use Cases of AWS Services (Direct Ques.)
 
 **************************************************************************************************************************************
+
+Open the AWS Console to get the access keyid and access key.
+Click on your username near the top right and select My Security Credentials
+Click on Users in the sidebar
+Click on your username
+Click on the Security Credentials tab
+Click Create Access Key
+Click Show User Security Credentials
+
+
 1. AWS(Amazon web services) is the similar cloud platform provided by Amazon to allow user to build /deploy/manage their App or service and use the existing service that AWS have to host the app and make it available to the user , just like we did it in Microsoft Azure .
 2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
 olaa the app is up for the user.
@@ -552,8 +562,8 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 
 	-three ways by which we can retrieve data from amazon glacier are : 		
 		:Standard - in this way we have to raise a request using the Amazon CLI or SDK and will take 3-5 hours .
-		:Expedited -- For quick retriv
-		:Bulk -- for retrival of large amount of data.
+		:Expedited -- For quick retrival
+		:Bulk -- for retrival of large amount of data.	
 	
 31. Advantage of using Amazon S3 storage service over EBS volumes .
 	-Amazon S3 service is highly availabl , durable pand scalable on its own . So no need to worry about increasing the size if the storage site for increasing data in future.
@@ -592,7 +602,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 				-Underlying infrastructure or OS
 			This tool will give you the comparable table of cost saving done between onpremises setup VS migrated setup on AWS for three years .
 			
-36. AWS support pans : 	This includes three categories of support plans 
+36. AWS support pans : 	This includes three categories of support plans  : https://www.bing.com/search?q=aws+support+plans&cvid=ebd7552c391e42b3819eb43d1a82b91c&aqs=edge.0.0j69i57j0l7.3533j0j9&FORM=ANAB01&PC=U531
 	The cost of support from developer to enterprise increases.
 	
 	
@@ -829,7 +839,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 		: dashboard : this will show you different options for diff services metrics captured.
 
 61. AWS Cloudtrail services : 		
-	-So this service purpose is to store the events occured by any identity to any resoure if AWS.
+	-So this service purpose is to store the events occured by any identity to any resoure in AWS.
 	-This service will nt only record the source of the events but also records the , time and the identity that trigered the events .
 	-These events by default are stored for 90 days 
 	-these events persistency cana be increase and may allow the events to live upto longer period of time in S3 buckets or in log.
@@ -941,15 +951,138 @@ Network Reachability-1.1
 				1. Synchronous This is used mostly in between availability zones
 				2. Asynchronous.This is used mostly in between availability region
 
-69. AWS Kinesis : This AWS Service is used to stream variety of data as follow use case scenarios
-		1. IOTenable devices : in order to get the data out of the IOT enabled devices we can use above service to stream the data.
-		2. Log ingestion : now this service can ingest the log data coming from not only the AWS services but also from the on-premises service or outside of AWS network or DCs.
-		3. Websites click or user interaction : we ca use this service to monitor the data in which we can create a  data sheet to see how much time user spends on which portion or my site and clicked which features how many times.
-		
-						
-						
+69. AWS Kinesis :  just like kafka streams 
+			This AWS Service is used to stream variety of data as follow use case scenarios
+				1. IOTenable devices : in order to get the data out of the IOT enabled devices we can use above service to stream the data.
+				2. Log ingestion : now this service can ingest the log data coming from not only the AWS services but also from the on-premises service or outside of AWS network or DCs.
+				3. Websites click or user interaction : we ca use this service to monitor the data in which we can create a  data sheet to see how much time user spends on which portion or my site and clicked which features how many times.
+				
+		Sub categories :
+																										using 
+																										kinesis api
+																										to push data 
+																										to kinesis.
+																										or use consumer libs
+																										You can write a code 
+																										or program java to 
+																										do that .
+			-AWS kinesis data Streams  
+						producers 
+					IOT enabled devices --------------> Kinesis Shard or storage just like kafka topics --------------------> Consumers (apis , apps)
+											using 														
+											kinesis api
+											to push data 
+											to kinesis.
+											or use producers libs
+											You can write a code 
+											or program java to 
+											do that 
+			
+			-AWS kinesis video Streams
+			-AWS kinesis Firehose  : Just to read and write the data directly to the storage service , we can use kinesis firehose. No need to write the program and code.
+			-AWS kinesis data analytics
+			
+			
+Note : Whenever we place a record to the shard using kinessis api and lib we get shard id and sequence id .
+					We can iterate the shard ID to get the first , second , or last record just like we have offsets in kafka topic.
+								
+Command to produce data to kinesis shard :
+		1. Put the record : aws kinesis put-record --cli-binary-format raw-in-base64-out --stream-name datastream --partition-key testkey --data sampledata
 					
+		2. Get the iterator means to get the sharrd id : aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name datastream
+
+			out put of above command : 
+			{
+			"ShardIterator": "AAAAAAAAAAHBLDjKupIOaisYVCgLG/BB02Pia90sFjMXA92p7REKQ/16xc6XU2yGEHT22i5Xrt2uLNYTPRQA+BvGosg+Uhed0YOrFPWlGzcbqr15K+blfhPzQ8p/B7vQZ3WhO9hSYE/zUOJu7/A7ju3HGNPo+Clbrbqgup/rhUFPO/LpfEYRUqL6haPfweta/zMoB/9cGv4BwoWh41ewcp0n48WuUjNttVRy2RrGfsjQvzexjrNePA=="
+					}
+					
+		3. Now command using above ShardIterator to get the shard data and details 
+				: aws kinesis get-records --shard-iterator AAAAAAAAAAHBLDjKupIOaisYVCgLG/BB02Pia90sFjMXA92p7REKQ/16xc6XU2yGEHT22i5Xrt2uLNYTPRQA+BvGosg+Uhed0YOrFPWlGzcbqr15K+blfhPzQ8p/B7vQZ3WhO9hSYE/zUOJu7/A7ju3HGNPo+Clbrbqgup/rhUFPO/LpfEYRUqL6haPfweta/zMoB/9cGv4BwoWh41ewcp0n48WuUjNttVRy2RrGfsjQvzexjrNePA==
+
+out put : 
+	{
+    "Records": [
+        {
+            "SequenceNumber": "49623555499295417806079696867472432703661592729677201410",
+            "ApproximateArrivalTimestamp": "2021-11-02T22:21:22.690000+05:30",
+            "Data": "c2FtcGxlZGF0YQ==",
+            "PartitionKey": "testkey"
+        }
+    ],
+    "NextShardIterator": "AAAAAAAAAAG92VKZNgFFsUNLSevLO17e/De46Voww+cuC3n5wNmLfkErdBNw3+9giyB4Ne1RF6q8E5cAtN/sWY3AXBXTUoc9Zkk6VO8ae2idPfd03vTztmSZJK0Ldx1lujuhtK8Fnzl6U81hX7UoplVoS+SnjrjW//Q68FuGH3uGtH6BsNRmK5ltgZN5FXxMlUgEj4SL6mb9MQ3J0GGDvPuzeI9FEQuSyhKjy9sl1iZvMEw4zdwu2A==",
+    "MillisBehindLatest": 0
+}
+
+data is not in the format we pushed as base64 and is not decoded back to normal text format .
 				
 			
 		
+70. AWS Athena : 
+				-To get the data or query the data from S3 servce 
+				-We can use standard sql to query it 
+				-We can have data in CVS , json , apache ORC .
+				- Serverless , no need to create any servers.
+				
+				Steps : 
+					1. create the database 
+					2. create the table on the underlying data format.
+						mention the serializer and de-serializer.
+					3. now query the data .	
+					4. we can also create the DDL : the query script from the editor and use that 
+					
+71. AWS RedShift : Db
+			-Columnar database : means the data records is storded column by column on hard disk . As we know the records are stored as row by row in SQL in harddisk .
+			-Used as a datawarehouse service 
+			-used to store large amount of data or petabyte of data.
+			-used for data analytics on large amount of data .
+			-Column data 
+			- will be created in cluster of nodes or dbs.
+				details need : 	
+					cluster name 
+					db naem 
+					port 
+					node type  : dc2.large .
+					cluster type : single or multi node cluster
+					 
+NOte : for any db we can load the data from S3 service that bucket can contains any file CSV , xcel etc 			
 			
+			Below is just the representational of data store happened in these two DBS , although when you do the select query you will get the data in row format in both DBS.
+			
+			SQl data ----------
+			
+			name 			ID 
+			Meet			1991
+			rahul 			77889
+			
+			
+			
+			AWS Redshift --------
+			
+			name		Meet	Rahul
+			
+			
+			
+			ID 			1991	77889
+			
+72. AWS QuickSight : 
+		-Visualization reports 
+		-We can use data from various data sources like , Db , S3 service and then use the data to create reports and other graphs.
+		-SPICE is the tool it uses to create the visualizations .
+		-help in business analysis and quickly analyse the data and create a visualizations to see categories .
+		- two types  
+			standard 
+			enterprise :  more security features then standard.
+
+73. AWS data Pipeline services  : 
+			-Web service : allow the movement of data 
+			use case : 
+				task : Transfer the logs file from EC2 instance to S3 service bucket and use the EMR cluster or any other service to analyse the data .
+				
+				1. Using data pipeline we can create two taks 
+					a. Task1 : transfer the data from EC2 to S3 
+					b. Run the EMR cluster on the S3 service to analyse the data .
+					And these two task can be part of the Aws Data pipeline
+				2. it can export the data in json format into the S3 or any other storage 	
+			Use case can be anything .		
+
+74. AWS support plans	 : Important 
