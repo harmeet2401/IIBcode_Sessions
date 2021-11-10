@@ -96,27 +96,11 @@ Click Show User Security Credentials
 
 : https://www.certlibrary.com/   ::   https://www.examtopics.com/exams/microsoft/  and   https://www.itexams.com/
 
-1. AWS(Amazon web services) is the similar cloud platform provided by Amazon to allow user to build /deploy/manage their App or service and use the existing service that AWS have to host the app and make it available to the user , just like we did it in Microsoft Azure .
-2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
-olaa the app is up for the user.
+
 
 
 ---------------------------------------------------------------------------------
 
-Important point : 	infra as a service ----- > platform as a service -- > software as a service 
-
-				Eg: EC2 instance 	   ------> RDS service           -- > Mail boxes , softwares which you can install and use as per need.
-				
-				
-IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that . Maintain the backups and availability.
-
-PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
-No Need to Maintain the backups and availability.
-
-SAAS : Its a software as a service in which the vendor will give you the setup and service to just use . eg: gmail , FB , etc 
-
-
-----------------------------------------------------------
 Multiple cloud services are provided by AWS : 
 
 For example : 
@@ -154,6 +138,23 @@ Amazon Timestream
 Amazon MemoryDB for Redis
 
 ---------------------------------------------------------------------------------
+
+1. AWS(Amazon web services) is the similar cloud platform provided by Amazon to allow user to build /deploy/manage their App or service and use the existing service that AWS have to host the app and make it available to the user , just like we did it in Microsoft Azure .
+2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
+olaa the app is up for the user.
+
+Important point : 	infra as a service ----- > platform as a service -- > software as a service 
+
+				Eg: EC2 instance 	   ------> RDS service           -- > Mail boxes , softwares which you can install and use as per need.
+				
+				
+IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that . Maintain the backups and availability.
+
+PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
+No Need to Maintain the backups and availability.
+
+SAAS : Its a software as a service in which the vendor will give you the setup and service to just use . eg: gmail , FB , etc 
+
 
 We are going to cover Amazon VPC(virtual private cloud network)  and EC2 
 
@@ -229,12 +230,13 @@ e. You can set firewall rules via Security Groups
 		
 		Steps to create an EC2 instances : 
 			Select the region 
-			select the Amazon machine image (linux or windows )
-			Select the instance type (usually ask for cpu count and memmory)
+			select the Amazon machine image (linux or windows )  --------------- added to the cost
+			Select the instance type (usually ask for cpu count and memmory) --------------- added to the cost
 			select the VPC , the default or create a new one 
-			select the storage amount 
+			select the storage amount --------------- added to the cost
 			select configuring security group ,just like a firewall. Just like we have NSG in azure that contains the inbound and outbound rule , same in this we have inbound and outbound rule.
 			create a key pair which we will use to login . 
+			
 f. we can then use the login key to get decrypt and generate the password for RDP to windows VM or ssh to linux VM .
 	We can do --- this is used in case of Linux VM
 		First use putty key generater to use the .pem file to create a .ppk file 
@@ -273,8 +275,7 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 
 	
 8. INSTANCE PURCHASING OPTIONS : 
-		
-		
+				
 	a. : On demand instances : 
 		If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances.
 		On-Demand Instances let you pay for compute capacity by the hour or second (minimum of 60 seconds) with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.		
@@ -282,6 +283,8 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 		*With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
 
 	b. spot instance : 
+		-A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price
+		-Because Spot Instances enable you to request unused EC2 instances at steep discounts, you can lower your Amazon EC2 costs significantly. The hourly price for a Spot Instance is called a Spot price.
 		-here we can get an EC2 component at much lower cost then on-demand pricing.
 		-the EC2 component will be provided on the basis of EC2 capacity.
 		-here if the capacity from AWS become less then that spot instance will be shutdown and taken away from usr.
@@ -298,15 +301,15 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 		- Offering classes of instances in reserved category 
 			: standard - here we can change the size of the instance with in the term commited .
 			: convertible - here we can change the instance family , instance type , platform , scope and 	tenancy.
-		- depends upon the 
-			: os 
-			: tenancy
-			: instance type , t2.micro etc 
-			: term 
-			: offering class 
-			: payment options 
+		- depends upon the  - OTITOP
+			: O s 
+			: T enancy
+			: I nstance type , t2.micro etc 
+			: T erm 
+			: O ffering class 
+			: P ayment options 
 
-9. Dedicated Infrastructure for EC2.
+9. Dedicated Infrastructure for EC2. Meant the underlying Physical box in AWS Dc where the EC2 instance is runing.
 
 	a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on 
 	the same physical machine in Amazon data centers or on different .
