@@ -309,11 +309,16 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 			: O ffering class 
 			: P ayment options 
 
+	The cost decreases as we go from on-demand to reserved purchasing.
+		
+		Decreases --------------->
+		ondemand-----> spot instances(unused spare capacity of EC2 instance ) ------> reserved instances(for longer period.)
+
 9. Dedicated Infrastructure for EC2. Meant the underlying Physical box in AWS Dc where the EC2 instance is runing.
 
-	a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on 
-	the same physical machine in Amazon data centers or on different .
-	So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine .
+	a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on the same physical machine in Amazon data centers or on different and the public ip changes for internet access to the app on it. this makes us re-publish the ip to the client , again a headache.
+	
+	So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine . and we can also patch the machine on our own as the underlying host is our.
 	
 	b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
 	
