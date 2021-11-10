@@ -94,6 +94,7 @@ Click on the Security Credentials tab
 Click Create Access Key
 Click Show User Security Credentials
 
+: https://www.certlibrary.com/   ::   https://www.examtopics.com/exams/microsoft/  and   https://www.itexams.com/
 
 1. AWS(Amazon web services) is the similar cloud platform provided by Amazon to allow user to build /deploy/manage their App or service and use the existing service that AWS have to host the app and make it available to the user , just like we did it in Microsoft Azure .
 2. We can spun the virtual machine logon to it and install the mondate software like Git to clone the app on it , and use java to run it as a microservice and 
@@ -181,30 +182,46 @@ We are going to cover Amazon VPC(virtual private cloud network)  and EC2
 		AWS Cloud
 			
 			-------------------------------------------------------------------------------
-			AWS VPC (10.0.0.0/16) --- 16 means first 16 bits means 10.0 will remain constant.
+			AWS VPC (10.0.0.0/16) --- 16 means first 16 bits means 10.0 will remain constant.    --- each subnet will have its own private / public ip
 			
-					EC2 Instance1subnet1			EC2 Instance2subnet2
+					      subnet1			             subnet2
 					--------------------			-----------------------
+					EC2_1####						EC2_1####
 					priv IP : 10.0.0.5				priv IP : 10.0.1.5
 		
 					public ip : 148.90.9.0			public ip : 148.90.9.1
 		
 					
+					EC2_2####						EC2_2####
+					priv IP : 10.0.0.5				priv IP : 10.0.0.5		
+													
+					public ip : 148.90.9.0			public ip : 148.90.9.0
+											
 					--------------------			-----------------------
 					
 		
 			-------------------------------------------------------------------------------
 		
 		--------------------------------------------------------------------------------------------
-
 		
-5. EC2(Amazon Elastic Compute) : this will allow user to spin up the VMs on cloud without worrying about the underlying infra (storage , operation system , cooling system , network etc ). We can terminate and respin the VM once needed.		
+So just for my information : the VPC consists of multiple subnet out of the range of VPC internet iP range .
+Now each subnet can contain multiple machines as per the subnet ip range 
+
+example : One VPC ip range  :  10.0.0.0/16   here one of the ip range can be 10.0.1.0/24 , 10.0.2.0/24 , 10.0.3.0/24 ------> 10.0.255.0/24
+
+			Exmple of two subnet inside it 
+				Subnet 1 : range (10.0.1.0/24) it means ip ranges from 10.0.1.1 -----> 10.0.1.255
+				subnet 2 : range (10.0.2.0/24) it means ip ranges from 10.0.2.1 -----> 10.0.2.255
+
+			
+		
+5. EC2(Amazon Elastic Compute) :IAAS this will allow user to spin up the VMs on cloud without worrying about the underlying infra (storage , operation system , cooling system , network etc ). We can terminate and respin the VM once needed.		
 		
 a. Each virtual server that you create via this service is known as an instance.
 
 b. You can choose from various configurations of CPU, memory, storage for the instance.
 
-c. You can choose from a set of Preconfigured templates known as Amazon Machine Images(linux(ubuntu , centos etc ) or windows(windows 2016 , windows 2019 etc )). These templates will determine what is the underlying operating system for your machine.
+c. You can choose from a set of Pre-configured templates known as Amazon Machine Images(linux(ubuntu , centos etc ) or windows(windows 2016 , windows 2019 etc )). These templates will determine what is the underlying operating system for your machine.
 
 d. You can allocate volumes to the instance
 
@@ -219,7 +236,7 @@ e. You can set firewall rules via Security Groups
 			select configuring security group ,just like a firewall. Just like we have NSG in azure that contains the inbound and outbound rule , same in this we have inbound and outbound rule.
 			create a key pair which we will use to login . 
 f. we can then use the login key to get decrypt and generate the password for RDP to windows VM or ssh to linux VM .
-	We can do 
+	We can do --- this is used in case of Linux VM
 		First use putty key generater to use the .pem file to create a .ppk file 
 		Then use putty to enter the host and in SSH --- > auth ---> give that .ppk file .
 		login using user name : ubuntu and enter the passphrase you gave while cretaing the .ppk file .
@@ -227,36 +244,45 @@ f. we can then use the login key to get decrypt and generate the password for RD
 		sudo apt-get install ngnix
 	then hit localhost:80 to check the web server is running or not ?
 
-g. VOlume attached to VM is separate resource that will be chargeable.	
+g. Volume attached to VM is separate resource that will be chargeable.	 Even if you delete the EC2 instance it will cost you for EBS volume.
 			
-6. EC2 pricing : 
+6. EC2 pricing depends on below paramters: 
 			instance type  : medium  , large , x.large 
 			memory : price increase as it increases 
 			OS : price also changes as the os changes .
 			Region : the price of changes as the regions changes .
-		Pricing for the EBS volume or disk is seperate 
+			
+			Pricing for the EBS volume or disk is seperate 	
 
 NOTE  : EVEN IF YOU SHUTDOWN THE VM , YOU WILL NOT BE CHARGED FOR COMPUTE PROCESSING BUT WILL BE CHARGED FOR THE EBS VOLUME YOU HAVE AS IT IS STILL INTACT.		
 
 7. INSTANCE TYPES : ON THE BASIS OF OS , MEMORY AND OTHER PARAMETERS FOLLOWING ARE THE CATEGORIES WE HAVE .
-EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
+EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES . 
 
-	a. General Purpose 
-	b. Compute optimized 
-	c. Memory optimized 
-	d. Accelerated computing 
-	e. Storage Optimized 
-	f. Instance feature 
-	g. Measuring instance performance.
+	GCMASIM
+
+	a. G eneral Purpose 
+	b. C ompute optimized 
+	c. M emory optimized 
+	d. A ccelerated computing 
+	e. S torage Optimized 
+	f. I nstance feature 
+	g. M easuring instance performance.
 	
 	
-NOte : On demand instances : 
-If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances. With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
+
 	
 8. INSTANCE PURCHASING OPTIONS : 
 		
-	a. spot instance : 
-		-here we can get an EC2 component at much lower cost  then on-demand pricing.
+		
+	a. : On demand instances : 
+		If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances.
+		On-Demand Instances let you pay for compute capacity by the hour or second (minimum of 60 seconds) with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.		
+		
+		*With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
+
+	b. spot instance : 
+		-here we can get an EC2 component at much lower cost then on-demand pricing.
 		-the EC2 component will be provided on the basis of EC2 capacity.
 		-here if the capacity from AWS become less then that spot instance will be shutdown and taken away from usr.
 		-If the instance is taken form us , then it can be restarted or the app which also running on that instance can be brought up again when spot instance is given back to you . Used for data analysis , batch processing.
@@ -265,7 +291,7 @@ If you just need to have EC2 Instances running for a short duration of time, con
 		-to stop that go to - spot request and cancel the request.
 		
 	
-	b. 	Reserved instances 
+	c. 	Reserved instances 
 		- As the name says , you are willing to reserve an instance for a year or so , then only you will get a billing discount.
 		- this is a billing discount fetaure on the bsis of the reservation of instance.
 		- we can pay , partial , entire or no payment at the starting. But obviousely giving an upfront payment will provide a better discount.
