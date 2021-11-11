@@ -516,7 +516,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 23. AWS S3 pricing :
 			-the cost varies as you go from one region to another or from one class to another .
 			-the data going inside of S3 from the intrnet is free of cost 
-			-the data going out og the S3 is costed as per the class specified.
+			-the data going out of the S3 is costed as per the class specified.
 
 24 Some other features of AWS S3 			:
 		1. versioning : 
@@ -534,6 +534,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		4.	Cross Region Replication : 
 					Region replication of data in diff location arround the globe.
 					versioning should be enabled.
+					
 25. We can host a static website in S3 (simple storage service).
 						We need to create the bucket (just like storage account in azure) and store the static code for the website 
 							Then make the bucket as public 
@@ -550,8 +551,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 	The above feature usually depicts the lifecycle rule and policy for S3.
 
 27. IAM(Identity and access management policy ) to access the s3 bucket.
-		This feature usually talks about giving access to users using 
-			AWS account or giving access only to the bucket level .
+		This feature usually talks about giving access to users using AWS account or giving access only to the bucket level .
 		
 	-For this one upload an object in the bucket and don't make it public 
 		-Now create a user in IAM feature 
@@ -561,7 +561,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 	run below command : 
 		aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt  ----- this command is using clouduser as the user  , because we already configured the AWS using command : aws configure and provided the access key id and secret access key for this user on our system .
 
-28. Resource base access control to access S3 bucket 
+28. Resource base access control to access S3 bucket   RBAC
 	For this feature do follow : 
 		-go to your bucket 
 			-go to your bucket policy option
@@ -585,12 +585,16 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		e. go to the Ec2 instance from where you want to access the bucket --> In Actions ---> attach role --> search for the role and done 
 		f. run this command : aws s3api get-object --bucket demoaws2021 --key zoom.txt zoom.txt  ollaaaaaaaaaa its working .
 	
-30. Amazon Galcier : 		
+	
+	NOTE : FOR AN ACCESS RELATED , COMMON TECHNIQUE IS THERE IN WHICH WE CREATE THE POLICY AND ATTACH IT TO EITHER THE USER , OR THE RESOURCES TO WHICH THE ACCESS ANDPERMISSION NEED TO BE PROVIDED.
+	
+	
+30. Amazon Galcier : Service 
 	-low cost storage 
 	-underlying hardaware is maintained by the AWS.
 	-used to store data for longer period of time may be months .
-	-The retrieval of data take more time as compared ot Amazon S3 service.
-	-AGlacier cotains vaults insteda of bucket(in s3) and contains archives instead of objects .
+	-The retrieval of data take more time as compared to Amazon S3 service.
+	-A Glacier cotains vaults insteda of bucket(in s3) and contains archives instead of objects .
 	-We can not upload data using amazone web console , we have to use amazons sdk and amazon CLI for the same . And this apply to retrieval of data also .
 	
 	Amazone S3 --------------> bucket --------------------> Object1
@@ -601,35 +605,37 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 									  
 									  Archive are also objects such as file , videos , images etc
 
-	-three ways by which we can retrieve data from amazon glacier are : 		
+	-three ways by which we can retrieve data from amazon glacier are : 	 SEB	
 		:Standard - in this way we have to raise a request using the Amazon CLI or SDK and will take 3-5 hours .
 		:Expedited -- For quick retrival
 		:Bulk -- for retrival of large amount of data.	
 	
 31. Advantage of using Amazon S3 storage service over EBS volumes .
-	-Amazon S3 service is highly availabl , durable pand scalable on its own . So no need to worry about increasing the size if the storage site for increasing data in future.
-	-S3 is available globally all instance of app present on different region hosted can access these.Where as EBS volumes are local to the EC2 instances.
+	-Amazon S3 service is highly available and global available as we use url to get the objects , durable pand scalable on its own . So no need to worry about increasing the size if the storage site for increasing data in future.
+	-S3 is available globally all instance of app present on different region hosted can access these.Where as EBS volumes are local to the EC2 instances means to the same data centers.
 	
-32. Relational database Service (RDS Service) : Its a platform as a service 
+32. Relational database Service (RDS Service) : Its a platform as a service spin up the service and there you go .
 		-this service will allow user to host a data base and no need to worry about the underlying infra and database installation 
-		-there are some databases allowed by the Amazon in RDB service you can choose from 
+		-there are 6 databases allowed by the Amazon in RDB service you can choose from 
 			-Mysql 
 			-microsoft sql service
 			-oracle 
 			-Amazon Aurora
-			...etc
+			-MariaDb
+			-PostgreSQL
+			
 		-Just search RDB fill in all details and connect it using the workbench or local connector.	
 		
 	Amazon Aurora Service : 			
-		-Its a sql data base compatible relational dB.
-		-it means we can also migrate the on -premises DB to Amazon aurora which is either Mysql or postgre Dd.
-		-It provides 5 time faster speed then Mysql and 3 times faster speed then postgre Db.
+		-Its a sql data base and is a sql compatible relational dB.
+		-it means we can also migrate the on -premises DB to Amazon aurora which is either Mysql or postgre Db.
+		-It provides 5 times faster speed then Mysql and 3 times faster speed then postgre Db.
 		-its is cluster based architecture.
 		-once you create Aurora db it will create a cluster and Db under  it.
 
 		
-33. DynamoDB its a nosql database and as its no sql so its json schema based.
-		- its just like the mongoDb service in which the tables or collections are not schema dependent . its a PAAS
+33. DynamoDB its a nosql database and  its json schema based just like mongoDB
+		- its just like the mongoDb service in which the tables are collections  . its a PAAS
 		- Works in combination of the collections and documents which is in json . in dynamoDb the table and item combination is there .
 		- Each table/collection will have a partition key 
 		- A sort key can also be created with the partition key which can be used to retrieval.
@@ -639,14 +645,21 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 34. AWS pricing calculator. its the tool in which you can estimate the cost you will incur while creating or spinning up a service in Amazon.
 
 35. TCO (total cost of ownership) calculator : This tool will help the comp architect to migrate it own premiss setup of servers to Amazon.
-				-you can mention the number of servers required to be migrate 
+				-you can mention the number of servers required to be migrate which is the most important criteria.
 				-Underlying infrastructure or OS
-			This tool will give you the comparable table of cost saving done between onpremises setup VS migrated setup on AWS for three years .
+				-By default this tool will give you the comparable table of cost saving done between onpremises setup VS migrated setup on AWS for three years .
 			
-36. AWS support pans : 	This includes three categories of support plans  : https://www.bing.com/search?q=aws+support+plans&cvid=ebd7552c391e42b3819eb43d1a82b91c&aqs=edge.0.0j69i57j0l7.3533j0j9&FORM=ANAB01&PC=U531
-	The cost of support from developer to enterprise increases.
+36. AWS support pans : 	This includes three categories of support plans  :  https://www.bing.com/search?q=aws+support+plans&cvid=ebd7552c391e42b3819eb43d1a82b91c&aqs=edge.0.0j69i57j0l7.3533j0j9&FORM=ANAB01&PC=U531
+
+Common services to all types : 
+1. Customer Service and Communities - 24x7 access to customer service, documentation, whitepapers, and support forums.
+2. AWS Trusted Advisor - Access to core Trusted Advisor checks and guidance to provision your resources following best practices to increase performance and improve security.
+3. AWS Personal Health Dashboard - A personalized view of the health of AWS services, and alerts when your resources are impacted.
+
+
+	The cost of support from developer to enterprise increases. DBE
 	
-	
+	---Types of support planes.
 		-Developers : Recommended if you are experimenting or testing in AWS.
 		   AWS Trusted Advisor Best Practice Checks : 7 checks are done 
 		   Enhanced Technical Support : business hours support and email support unlimited cases./ 1 primary contact , General guidance: < 24 hours**,System impaired: < 12 hours**
