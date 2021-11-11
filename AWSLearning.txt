@@ -657,7 +657,7 @@ Common services to all types :
 3. AWS Personal Health Dashboard - A personalized view of the health of AWS services, and alerts when your resources are impacted.
 
 
-	The cost of support from developer to enterprise increases. DBE
+	The cost of support from developer to enterprise increases. DBE , Check for D character shows difference between business and enterprise
 	
 	---Types of support planes.
 		-Developers : Recommended if you are experimenting or testing in AWS.
@@ -675,26 +675,26 @@ Common services to all types :
 		-Business : Recommended if you have production workloads in AWS.
 		   AWS Trusted Advisor Best Practice Checks : full set of check 
 		   Enhanced Technical Support : 24x7 phone, email, and chat access to Cloud Support Engineers hours**,System impaired: < 12 hours**,Unlimited cases / unlimited contacts (IAM supported)
-		   Architectural Guidance : 	Contextual to your use-cases 
+	D	   Architectural Guidance : Contextual to your use-cases 
 		   Programmatic Case Management : AWS Support API
 		   Third-Party Software Support : Interoperability and configuration guidance and troubleshooting 
 		   Proactive Programs and Self Service : Access to Infrastructure Event Management for additional fee , Access to Support Automation Workflows with prefixes AWSSupport and AWSPremiumSupport
-		   Technical Account Management	  : no 
-		   Training : no 
-		   Account Assistance : no 
-		   Pricing : Greater then developer 
+	D	   Technical Account Management	  : no 
+	D	   Training : no 
+	D	   Account Assistance : no 
+	D	   Pricing : Greater then developer 
 		   
 		-Enterprise : Recommended if you have business and/or mission critical workloads in AWS.
 		   AWS Trusted Advisor Best Practice Checks : full set of check 
 		   Enhanced Technical Support : 24x7 phone, email, and chat access to Cloud Support Engineers hours**,System impaired: < 12 hours**,Unlimited cases / unlimited contacts (IAM supported)
-		   Architectural Guidance : Consultative review and guidance based on your applications
+	D	   Architectural Guidance : Consultative review and guidance based on your applications.
 		   Programmatic Case Management : AWS Support API
 		   Third-Party Software Support : Interoperability and configuration guidance and troubleshooting 
 		   Proactive Programs and Self Service : Infrastructure Event Management,Access to proactive reviews, workshops, and deep dives,Access to Support Automation Workflows with prefixes AWSSupport and AWSPremiumSupport
-		   Technical Account Management	  : 	Designated Technical Account Manager (TAM) to proactively monitor your environment and assist with optimization and coordinate access to programs and AWS experts 
-		   Training : 	Access to online self-paced labs 
-		   Account Assistance : Concierge Support Team 
-		   Pricing : Greater then business
+	D	   Technical Account Management	  : 	Designated Technical Account Manager (TAM) to proactively monitor your environment and assist with optimization and coordinate access to programs and AWS experts 
+	D	   Training : 	Access to online self-paced labs 
+	D	   Account Assistance : Concierge Support Team 
+	D	   Pricing : Greater then business
 
 37. Elastic load balancer : 
 	This is the service to route the requests coming to the service to the backend pool target EC2 machines running with same web api or app etc .
@@ -732,7 +732,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 40. Amazon Cloudfront service :
 	-its a web service that will help is distributing the static or dynamic web data across the globe.
 	-It will help is providing the response data to the user using the Data centers which actually known as the clound edge locations.
-	-there can be many edge locations.
+	-there can be many edge locations. and these edge located DCs works on closer affnity algorithm.
 	
 	Example 
 			
@@ -756,6 +756,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 					   <---------response back--------Cloudfront <----save the response to -------------------
 													edge location
 													(kind of cache)
+													
 													
 								
 				Request two : -----
@@ -827,7 +828,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	-then we can integrate above resource customer for Get method to a Mock service , lambda function call, HTTP api call etc 
 	In nutshel API gateway helps in creating a Rest api like structure using which we can even call the http service in the back end and also the serverless lambda function.
 
-46. AWS CloudFormation : IAAC.	Its similar to what we did in Azure templates . in which we wrote the json file or the templates to create pr setup the entire architecture of our applicatin system.
+46. AWS CloudFormation : CAAS.	Its similar to what we did in Azure templates . in which we wrote the json file or the templates to create pr setup the entire architecture of our applicatin system.
 				-Then we can submit and run the AWS template to the AWS CloudFormation
 				-AWS CloudFormation will run the template and create the ENV for us 
 				-Its usefull for quickly bringing up the ENV (which may contains multiple AWS Services like VPC , EC2 and RDS service using mysql).
@@ -878,18 +879,20 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	example , we can apply the policy to the AWS account to unauthorized to all except the EC2 instances.
 	6. the default access to all the AWS account is cllaed AllAccess something.
 	
-50. Key management Service : 
+50. Key management Service :  KMS
 		-So this service is all about creating a key encrypt it and using it.
 		-In this service we have a master key using which we generate the data key and using that data key to encrypt the data forward.
 		-Now we have key management services to manage the encrypted keys .
 		-keys defined in one region , can not be used in another regions.
 		
+		Master key ---------use it to generate ----> data key --------user this to encrypt -------> data
+		
 60. Moitoring and logging : This can be achieved by AWS cloud watch service .		
 	-used for below purposes to monitor our AWS resource and our application hosted on it.: 
-		: alaram : such as we can generate an alarm on the basis of EC2 instance CPU utilization for example , CPU_uti>70% send an enable
+		: alarm : such as we can generate an alarm on the basis of EC2 instance CPU utilization for example , CPU_uti>70% send an enable
 		: log  : We can configure ours AWS services to send the logs to the Cloudwatch to create a centralized logging framework.We can do that by installing an cloudwatch agent on theEC2 instances .
-		: events : We can also config cloud watch to response on some event generated, for example , we might or can run a lambda function that could get triggered by the Cloudwatch whic his capturing the events . Events like someone stops an EC2 instaces , terminate or done any other actions , then we can configure cloud watch for the same.
-		: metrics  : We can also pull the metrics of an EC2 instance or service to see the metrocs value in the form of charts .
+		: events : We can also config cloud watch to response on some event generated, for example , we might or can run a lambda function that could get triggered by the Cloudwatch which is capturing the events . Events like someone stops an EC2 instaces , terminate or done any other actions , then we can configure cloud watch for the same.
+		: metrics  : We can also pull the metrics of an EC2 instance or service to see the metrics value in the form of charts .
 		: dashboard : this will show you different options for diff services metrics captured.
 
 61. AWS Cloudtrail services : 		
@@ -901,16 +904,16 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 		for example 
 				AWS console ------------->		
 				AWS SDK ----------------->			
-												AWS ACCount --------------> will be recorded in CloudWatch
+												AWS ACCount --------------> will be recorded in Cloud trail
 				AWS CLI ----------------->
 				AWS API ----------------->
 
 62. AWS Config Service :  Track resource inventory and changes.
-	-The sole purpose this service is to provide a details veiw of all the service in your account.
+	-The sole purpose of this service is to provide a details view of all the service in your account.
 	-This service can also detect the config changes or any change in the service example : change in security group , added new folder to the S3 service et.
 
 63. Protecting Web Apps : Do one more time . its pretty imp and act as a firewall for our resources. Just like we have security group , we can also add the WAF and with its rule to block or allow or sends a default response .
-		1. WAF(Web application firewall):  We cam create rules or sleect rule from the availability and use those by subscribing it.
+		1. WAF(Web application firewall):  We cam create rules or select rule from the availability and use those by subscribing it.
 		THIS IS ON THE GLOBAL LEVEL CONFIGURATION .
 		
 64. Penetration testing : 
@@ -923,7 +926,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	-For penetration testing to be applied to the Aws services we need authorization from AWS post filling a form for it.
 	
 65. Trusted Advisor Tool : 
-		-This will advise about the service based on below paramters : 
+		-This will advise about the service based on below paramters :  CPSFS
 			C ost Optumization
 			P erformance 
 			S ecurity
@@ -1007,7 +1010,7 @@ Network Reachability-1.1
 
 69. AWS Kinesis :  just like kafka streams 
 			This AWS Service is used to stream variety of data as follow use case scenarios
-				1. IOTenable devices : in order to get the data out of the IOT enabled devices we can use above service to stream the data.
+				1. IOT enable devices : in order to get the data out of the IOT enabled devices we can use above service to stream the data.
 				2. Log ingestion : now this service can ingest the log data coming from not only the AWS services but also from the on-premises service or outside of AWS network or DCs.
 				3. Websites click or user interaction : we ca use this service to monitor the data in which we can create a  data sheet to see how much time user spends on which portion or my site and clicked which features how many times.
 				
@@ -1072,7 +1075,7 @@ data is not in the format we pushed as base64 and is not decoded back to normal 
 			
 		
 70. AWS Athena : 
-				-To get the data or query the data from S3 servce 
+				-To get the data or query the data from S3 service 
 				-We can use standard sql to query it 
 				-We can have data in CVS , json , apache ORC .
 				- Serverless , no need to create any servers.
@@ -1084,7 +1087,7 @@ data is not in the format we pushed as base64 and is not decoded back to normal 
 					3. now query the data .	
 					4. we can also create the DDL : the query script from the editor and use that 
 					
-71. AWS RedShift : Db
+71. AWS RedShift : Db for verry large amount of data storage.
 			-Columnar database : means the data records is storded column by column on hard disk . As we know the records are stored as row by row in SQL in harddisk .
 			-Used as a datawarehouse service 
 			-used to store large amount of data or petabyte of data.
