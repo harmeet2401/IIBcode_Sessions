@@ -337,16 +337,16 @@ availability region ---------contains 1 or many ---------> availability zones (d
 south-mumbai -----------------------------------> Data centers ---------------> many physical machine 
 
 
-CATEGORIES of volumes types : 
-	-General purpose SSD(solid state drive ) : 16000 IOPS per vol
-	-Provisioned SSD : for business critical  : 64000 IOPS per vol
-	-Throughput HDD (hard disk device ): for highly or frequently accessible data . Low cost HD volumes .
-	-COLD HDD : for less frequent accessible data . used to store archive data.
+CATEGORIES of volumes types :  GPTC 
+	-G eneral purpose SSD(solid state drive ) : 16000 IOPS per vol
+	-P rovisioned SSD : for business critical  : 64000 IOPS per vol
+	-T hroughput HDD (hard disk device ): for highly or frequently accessible data . Low cost HD volumes .
+	-C OLD HDD : for less frequent accessible data . used to store archive data.
 
 11. Attaching additional vol to instance.
 		- Create volume in same availability zone as the instance is runing .
 		- Go to volumes  ---- > enter the details and ollaa the volume created .
-		- In volumes --- > Actions --- > Attach --- > search ofr instance.	
+		- In volumes --- > Actions --- > Attach --- > search for instance.	
 		- Login to your instance windows -- > server manger -- > file storage -- > Disks -- > new disk see --> bring it online ---> initialize the disk ---> create new volume out of the disk.
 
 12. EBS snapshot : 
