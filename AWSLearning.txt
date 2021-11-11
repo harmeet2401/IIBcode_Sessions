@@ -431,7 +431,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 				: type of data (HTTP , ftp  , ssh , RDp ..) protocol specifically.
 				: target or source ip address , example : 0.0.0.0/0 ipv4 means from anywhere  and ::/0 means anywhere in ipv6
 				
-17. Network access control list :  Just the security group , NACL is also a kind of firewall that is applied on the subnet .
+17. Network access control list(subnet) :  Just like security group , NACL is also a kind of firewall that is applied on the subnet .
 			-It also contains the inbound and outbound rules for incoming or outgoing data.
 			-Similar property : 	
 				 - type
@@ -442,10 +442,10 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			- Keep in mind if you apply a rule on the NACL level then all the instances inside the subnet will be impacted by that rule.
 
 18. Budgets : 
-	-We  can create a budget in which we can add the budget amount limited to that ruppees 
+	-We can create a budget in which we can add the budget amount limited to that ruppees. 
 	-Then we can configure our alert by adding the threshold value in % then , if it cross the budget it will alert me in my email.
 				
-19. IAM : Identity and Access management 
+19. IAM : Identity and Access management
 		-In this feature we can create new users apart from the root user just like we did in azure IAM.
 		-In this we can also attach the policies or permissions to the users.
 		-In we can also create IAM groups and add that user as part of the group.
