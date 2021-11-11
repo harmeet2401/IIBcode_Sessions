@@ -324,14 +324,15 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	
 10. Elastic Block storage  (EBS volume) : 
 
--Its a separate resource created when we spin up the EC2 VM instances.
--You will get charged separately for this seperate resource 
--when you terminate the EC2 instance , make sure to delete the attached EBS volumes .
--We can attach or detach a new EBS volume disk at any point of time .
--we can increase the size of the volume any time .
--both the EC2 instance and EBS volumes should be in same region.
--the EBS volumes is replicated with in same availability zone for future hardware failure 
--even post detaching the volumes the data can persist for longer period of time.
+	-Its a separate resource created when we spin up the EC2 VM instances.
+	-You will get charged separately for this seperate resource 
+	-when you terminate the EC2 instance , make sure to delete the attached EBS volumes .
+	-We can attach or detach a new EBS volume disk at any point of time .
+	-we can increase the size of the volume any time .
+	-both the EC2 instance and EBS volumes should be in same region.
+	-the EBS volumes is replicated with in same availability zone for future hardware failure 
+	-even post detaching the volumes the data can persist for longer period of time.
+	-the EBS volume created may reside on same physical machine or on different machine as compare to EC2 instance to which it is attached.
 
 availability region ---------contains 1 or many ---------> availability zones (data centers)
 south-mumbai -----------------------------------> Data centers ---------------> many physical machine 
@@ -349,7 +350,7 @@ CATEGORIES of volumes types :  GPTC
 		- In volumes --- > Actions --- > Attach --- > search for instance.	
 		- Login to your instance windows -- > server manger -- > file storage -- > Disks -- > new disk see --> bring it online ---> initialize the disk ---> create new volume out of the disk.
 
-12. EBS snapshot : 
+12. EBS snapshot : This is like backing up the EBS volume at that snapshot taking moment. Support portability.
 			-Its a fetaure to take the backup of the EC2 instance. Just like creating an static image of the VM or instance .
 			-Once you take the snapshot of the instance , we can create a volume out of it 
 			-The volume created out of the snapshot can be attached to the other EC2 instances.
@@ -359,8 +360,10 @@ CATEGORIES of volumes types :  GPTC
 				
 				
 				
-Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TYPE 				
-13. Instance Store Volume : 
+Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TYPE 		
+		
+13. Instance Storage Volume : 
+	- EBS volumes may or may not be on the same host and physical machine.
 	-An instance store volume is attachable volume which resides on the same  host machine where your instance is running .
 	-allow more faster and frequent access to the data.
 	-disadvantage of data getting lost under below scenarios:
