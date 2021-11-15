@@ -145,6 +145,13 @@ testing uri : http://localhost:8080/hello : because spring boot run contains an 
 . Spring Data : --- provide solution for  data access 	for example , JDBC , JPA persisttence .
 	
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
+
+Dependecies needed to create a rest full api , as it is a web service we need below dependencies:
+	-spring web  : to tell the spring mvc that the app is for web explosure.
+	-spring actuator : to get an inbuilt interface to test the health of the app.
+	-spring devtools : to auto reload the app and get the new code in place.
+	
+	
 Create a controller using start.spring.io to set up the projects for spring boot.
 in order to create spring controller mentions @RestController to the class other than the @SpringBootApplication class.
 
