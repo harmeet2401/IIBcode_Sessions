@@ -79,21 +79,24 @@ Lab 1 ----------------- Create a hello world rest api service to respond as hell
 We need two things 
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
-	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions 
-	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get',Path="/hellow-world")
+	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody
+	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get/Post/PUT/DELETE/PATCH',Path="/hellow-world")
 	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
 	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
 	@PostMapping -- > We can also use this annotation  . no need to mention method as POST . @POstMapping(path="/hellow-world")
 	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
-	@ResponseEntity ----- > to modulate the outgoing response from the controller function 
-	@RequestBody ----- > to map the incoming request to the bean wrote .
+			Example  :  @GetMapping(path = "/uname")
+						public String getUserName( @RequestParam String name)
+						
+	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message .
+	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
-	@ExtendWith ------>is a repeatable annotation that is used to register extensions for the annotated test class or test method. Is used for JUNIT test => 5 
-	@Runwith  -------- is used for junit test < version 5 
+	@ExtendWith ------>is a repeatable annotation that is used to regixster extensions for the annotated test class or test method. Is used for JUNIT test => 5 
+	@Runwith  -------- is used for junit test < version 5 	
 	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
 	@Autowired : ---- > When we autowired any class instance into another class , that another class should get scanned by the ComponentScanner , it means that another class should be a bean and for that it should be annotated as @Component or @Service , @Repository etc .. in nutt shell it should be annotated as component
-	@JsonIgnore : --------- to ignore the mapping of the variable in bean 
+	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
 	@Transactional ------- it i used in test class , and it will rollback the trransactions happaned on DB after each @test
 	@PersistenceContext ---------- which is the collection os managed beans just like application context 
