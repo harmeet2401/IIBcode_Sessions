@@ -15,9 +15,9 @@ Q : Circuit breaker : This is another feature that spring boot provide , Resilie
 Q : Spring Actuator : It will be used to provide health check feature to the api you create . 
 Q : Difference between Abstract class and interface .
 
-		Interface and both abstract classes are same abstract classes . Both the classes have method names declard without body defination .
+		Both the classes have method names declard without body defination .
 		A single class can implements multiple interfaces in one go . 
-		A single class can extends only one abstract class or class in one go .
+		A single class can extends only one abstract class  in one go .
 		Interfaces only abtract methods are present in it.
 		Abstract contains both abstract fuction and non abstract function.
 		Both interface and abstract class can not be instantiated , means we can not create object of it , but we an use the class which implements to generate the instance of it.
