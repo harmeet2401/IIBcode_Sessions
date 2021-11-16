@@ -80,6 +80,7 @@ We need two things
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
 	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody
+	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody.
 	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get/Post/PUT/DELETE/PATCH',Path="/hellow-world")
 	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
 	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
@@ -95,14 +96,14 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@ExtendWith ------>is a repeatable annotation that is used to regixster extensions for the annotated test class or test method. Is used for JUNIT test => 5 
 	@Runwith  -------- is used for junit test < version junit 5 	
 	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
-	@Autowired : ---- > When we autowired any class instance into another class , that another class should get scanned by the ComponentScanner , it means that another class should be a bean and for that it should be annotated as @Component or @Service , @Repository etc .. in nutt shell it should be annotated as component
+	@Autowired : ---- >this annotation is used to inject the class instant (object into the other class and use it ). For this to happen the class to be autowired need to part of the classpath bean list . which can happen by annotating the class as @component which will tell componentscanner during bean creation . we can also annotate it as @Service  , @Repository which in lower stage are @component anootated interfaces.
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
-	@JsonProperty : ------- to assign the name of the variable when it comes out as json 
+	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
 	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test
-	@PersistenceContext ---------- which is the collection os managed beans just like application context 
+	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	
-Jdbc Template : So just like Resttemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
+Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
 
 Code for above templates : 
 a. 		new RestTemplate.getForEntity("http:localhost:8080/users",user.class)
@@ -183,7 +184,6 @@ Need below classes :
 @SpringBootApplication class : starter class 
 @Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 @Controller : which will contain the request mapping functions for incoming requests.
-NOte : The controller and Component should be in same package 
 
 Lab 2 ----------------- Create a hello world rest api service to respond as a bean back to the user.
 
@@ -498,6 +498,8 @@ Please add the below dependency instead of spring-data-rest-hal-browser
 		The actuator works around hal : HyperText Application language  : 
 		
 Why we use Actuator   ?   Now as we know we have documented our application  , now i need some monitoring feature for my api to show it is up and running or to see the metrics , for that spring boot have provided actuator for it.		
+
+Url launch for hal browser : localhost:8080
 
 Url to launch Actuator : localhost:8080/applications
 							localhost:8080/actuator
