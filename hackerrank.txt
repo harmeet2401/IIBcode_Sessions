@@ -6,7 +6,8 @@ HTTP POST : To create and post new  data from client to the api. It is applied o
 HTTP PUT :  Should only be used if you’re replacing a resource in its entirety. It is applied on a single item  example : http put ; http://localhost:8080/user/1
 HTTP DELETE : To delete the data from the api server .DELETE operations are idempotent
 HTTP PATCH : is the correct choice for partially updating an existing resource.The PATCH method is not a replacement for the POST or PUT methods. It applies a delta (diff) rather than replacing the entire resource. Means it is used to change the partiall value of an object  , example : the user have : email  , add , name . so changing the name only can be done using the patch operations
-
+Q : Vector : Vector in java are the one dimentional arrays which reperesents the motions and it is statuc array .
+Q : ArrayList : is the collection class which uses the primitive data types to store the objects of that primitive type.Its a dymaic array the size can be increased and decreased easily.
 Q : Fetch api or Api 
 		So fetch api is just an another javascript tool to invoke an existing rest api to get the data back and process it .
 		fetch("url to hit " , method.put/post/get)
@@ -27,8 +28,8 @@ Q : Difference between Abstract class and interface .
 		And both above provides and advantage of not writting the function in the implemented class if 1000 of functions are required to be writtern 
 Q : Fault Tolerance in spring boot : Resilience4j is one of the tool opensource provided by Netflix to add feature of retry (when app is down) , cirtcuit breaker (when in a chain of microservice  , one of the microservice is down ) , Rate limiter ( to controler the outgoing request to downstream Micro)  and bulkload.
 Q ; Primitive data types .
-Primitive data types - includes byte, short, int, long, float, double, boolean and char
-Non-primitive data types - such as String, Arrays and Classes (you will learn more about these in a later chapter)
+Primitive data types - includes byte, short, int, long, float, double, boolean and char ---- BSILFDBC
+Non-primitive data types - such as String, Arrays and Classes (you will learn more about these in a later chapter) --- SAC
 
 Note  : Float end with F  , doubel ends with D , Long ends with L
 Q : Completeable future : A CompltableFuture is used for asynchronous programming. Asynchronous programming means writing non-blocking code. It runs a task on a separate thread than the main application thread and notifies the main thread about its progress, completion or failure.
@@ -157,13 +158,13 @@ Q : java Collections : java.util
 	  @. LinkedLIst : LinkedLIst is almost similar to ArrayList holds a type of data collections LinkedLIst<String> linklist = new LinkedLIst<>(). But the elements are placed in container in LinkedLIst which are connected where as the elements are placed in array in ArrayList. LinkedLIst have more function like AddFirst , addLast , getAdd , getLast , removelast , removeFirst.
 	  @. hashmap : It stores the data in Key:Value pair , key and value can be of diff type or of same type as well.
 	  @. Collections : Its an class in java.util package and helps in sorting the words alphabetically  , Sorting can happen on both integer and string in ascending order 
-	  @. HasSet : A HashSet is a collection of items where every item is UNIQUE, and it is found in the java.util package. if you add a duplicate element it will store only the unique ones and remove one copy of duplicate(same size , same caps or lower) for example HashSet = BMW , BMW , bmw  , it will store as hashset = [BMW , bmw]
+	  @. HashSet : A HashSet is a collection of items where every item is UNIQUE, and it is found in the java.util package. if you add a duplicate element it will store only the unique ones and remove one copy of duplicate(same size , same caps or lower) for example HashSet = BMW , BMW , bmw  , it will store as hashset = [BMW , bmw]
 	  @. Iterator : so we studied collections , now to loop through these collections we use Iterator.
 		
 	We can use Lambda expression on all above collection java.util classes verry easily .	
 	
 Q. Wrapper classes : 	 In collections we use wrapper classes as we can not use primitive data types in collections to store data .
-		ArrayList<in> alist = new ArrayList<int>(); // invalid
+		ArrayList<int> alist = new ArrayList<int>(); // invalid
 		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
 		
 		Where Integer is the wrapper class.
@@ -197,7 +198,7 @@ Q : Coding challlenge
 NOtes : Importanat : 
 1.str.toCharArray() can break down the string to character and we can store it in char[]
 2.StringBuilder Class we ca use to reverse a string easily.
-3.CHaracter class we can use to convert a char to uppercase or lower case and can also check if its in upper case or lower case.
+3.Character class we can use to convert a char to uppercase or lower case and can also check if its in upper case or lower case.
  Scanner sc=new Scanner(System.in);
         name = sc.nextLine(); to read the string 
 		       sc.nextint(); to read the integer.
