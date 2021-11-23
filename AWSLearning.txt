@@ -3,9 +3,18 @@ Udemy Course : Neal Davis
 Detailed + Exam Cram 
 **************************************************************************************************************************************
 
-Free tier account in AWS : 
+Free tier account in AWS management console: 
 harmeet24011992@gmail.com
 Gogi@12345
+
+For Exam Amazon login : 
+harmeet.singh4@ibm.com
+Gogi@12345
+
+
+accessCode=680-224-371 locale=en-US
+
+
 **************************************************************************************************************************************
 Domain 1: Cloud Concepts		28%
 Domain 2: Security			24%
@@ -926,7 +935,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	-For penetration testing to be applied to the Aws services we need authorization from AWS post filling a form for it.
 	
 65. Trusted Advisor Tool : 
-		-This will advise about the service based on below paramters :  CPSFS
+		-This will advise about the service based on below paramters :  CPSFSer
 			C ost Optumization
 			P erformance 
 			S ecurity
@@ -1152,7 +1161,7 @@ What is the purpose of the AWS SOC report?
 The purpose of these reports is to help you and your auditors understand the AWS controls established to support operations and compliance. There are five AWS SOC Reports: AWS SOC 1 Report, available to AWS ARTIFACTS AND AWS CUSTOMER
 
 77.
-AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
+AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your own premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
 
 78. Amazon Pinpoint is a flexible and scalable outbound and inbound marketing communications service. You can connect with customers over channels like email, SMS, push, voice or in-app messaging
 
@@ -1168,3 +1177,9 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 83. AWS DATABASE MIGRATION SERVICE : USED TO to migrate an existing database from your on-premise location to the AWS Cloud
 
 84. COST ALLOCATION TAGS :  is a feature or service in AWS that allows one to track and categorize spending on a detailed level
+
+85. Amazon Connect is an easy-to-use omnichannel cloud contact center service offering superior, low-cost customer service using machine learning (ML), interactive voice response (IVR), and call center routing.
+
+86. AWS Directory Service. AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft Active Directory (AD), enables your directory-aware workloads and AWS resources to use managed Active Directory (AD) in AWS. AWS Managed Microsoft AD is built on actual Microsoft AD and does not require you to synchronize or replicate data from your existing Active Directory to the cloud. Also provide single sign on .
+
+87. Cost Allocation tags :  You can assign tags to different AWS resources. You can then use the same tags to track the costs of AWS resources on a detailed level
