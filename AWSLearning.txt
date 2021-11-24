@@ -1186,3 +1186,5 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 87. Cost Allocation tags :  You can assign tags to different AWS resources. You can then use the same tags to track the costs of AWS resources on a detailed level
 
 88. Amazon AppStream 2.0 is a fully managed non-persistent desktop and application service for remotely accessing your work.
+
+89 . Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS. ... Amazon Macie automates the discovery of sensitive data at scale and lowers the cost of protecting your data.
