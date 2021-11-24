@@ -920,6 +920,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 62. AWS Config Service :  Track resource inventory and changes.
 	-The sole purpose of this service is to provide a details view of all the service in your account.
 	-This service can also detect the config changes or any change in the service example : change in security group , added new folder to the S3 service et.
+	-AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources
 
 63. Protecting Web Apps : Do one more time . its pretty imp and act as a firewall for our resources. Just like we have security group , we can also add the WAF and with its rule to block or allow or sends a default response .
 		1. WAF(Web application firewall):  We cam create rules or select rule from the availability and use those by subscribing it.
@@ -1183,3 +1184,5 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 86. AWS Directory Service. AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft Active Directory (AD), enables your directory-aware workloads and AWS resources to use managed Active Directory (AD) in AWS. AWS Managed Microsoft AD is built on actual Microsoft AD and does not require you to synchronize or replicate data from your existing Active Directory to the cloud. Also provide single sign on .
 
 87. Cost Allocation tags :  You can assign tags to different AWS resources. You can then use the same tags to track the costs of AWS resources on a detailed level
+
+88. Amazon AppStream 2.0 is a fully managed non-persistent desktop and application service for remotely accessing your work.
