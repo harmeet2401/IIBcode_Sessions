@@ -1155,7 +1155,7 @@ NOte : for any db we can load the data from S3 service that bucket can contains 
 74. Amazon ElastiCache is a fully managed in-memory data store and cache service by Amazon Web Services (AWS). The service improves the performance of web applications by retrieving information from managed in-memory caches, instead of relying entirely on slower disk-based databases.
 
 
-75. AWS OpsWorks for Chef Automate is a fully managed CONFIGURATION MANAGEMENT SERVICE that hosts Chef Automate, a suite of automation tools from Chef for configuration management, compliance and security, and continuous deployment
+75. AWS OpsWorks for Chef Automate is a fully managed CONFIGURATION MANAGEMENT SERVICE that hosts Chef Automate, a suite of automation tools from Chef for configuration management, compliance and security, and continuous deployment. Where chef is a configuration management tool.
 
 76.
 What is the purpose of the AWS SOC report?
@@ -1164,27 +1164,28 @@ The purpose of these reports is to help you and your auditors understand the AWS
 77.
 AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your own premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
 
-78. Amazon Pinpoint is a flexible and scalable outbound and inbound marketing communications service. You can connect with customers over channels like email, SMS, push, voice or in-app messaging
+78. Amazon Pinpoint is a flexible and scalable outbound and inbound MARKETING communications service. You can connect with customers over channels like email, SMS, push, voice or in-app messaging
 
 79. Amazon Connect is an easy-to-use omnichannel cloud contact center service offering superior, low-cost customer service using machine learning (ML), interactive voice response (IVR), and call center routing.
-
 
 80. Amazon Rekognition offers pre-trained and customizable computer vision (CV) capabilities to extract information and insights from your IMAGES and VIDEOS
 
 81. AWS COST EXPLORER is used to get detailed reports as to which service is consuming a large part of your AWS expenditure and to be able to get these detailed level reports.
 
-82. AWS X-RAY helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors. BASICALLY FOR MY APP WELLNESS.
+82. AWS X-RAY  BASICALLY FOR MY APP WELLNESS. and helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors.
 
 83. AWS DATABASE MIGRATION SERVICE : USED TO to migrate an existing database from your on-premise location to the AWS Cloud
 
-84. COST ALLOCATION TAGS :  is a feature or service in AWS that allows one to track and categorize spending on a detailed level
-
-85. Amazon Connect is an easy-to-use omnichannel cloud contact center service offering superior, low-cost customer service using machine learning (ML), interactive voice response (IVR), and call center routing.
+84. COST ALLOCATION TAGS :  is a feature or service in AWS that allows one to track and categorize spending on a detailed level.
 
 86. AWS Directory Service. AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft Active Directory (AD), enables your directory-aware workloads and AWS resources to use managed Active Directory (AD) in AWS. AWS Managed Microsoft AD is built on actual Microsoft AD and does not require you to synchronize or replicate data from your existing Active Directory to the cloud. Also provide single sign on .
-
-87. Cost Allocation tags :  You can assign tags to different AWS resources. You can then use the same tags to track the costs of AWS resources on a detailed level
 
 88. Amazon AppStream 2.0 is a fully managed non-persistent desktop and application service for remotely accessing your work.
 
 89 . Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS. ... Amazon Macie automates the discovery of sensitive data at scale and lowers the cost of protecting your data.
+
+90 . Aws security bulletins shows the AWS security announcements from day to day with the users who has deployed their services on it.
+
+91.AWS Shield Advanced provides enhanced resource specific detection and employs advanced mitigation and routing techniques for sophisticated or larger attacks. You also get 24x7 access to the AWS Shield Response Team (SRT) for manual mitigation of edge cases affecting your availability.
+
+92.AWS Snowball(petabyte of data in or out of AWS	) is a service that provides secure, rugged devices, so you can bring AWS computing and storage capabilities to your edge environments, and transfer data into and out of AWS. Those rugged devices are commonly referred to as AWS Snowball or AWS Snowball Edge devices.
