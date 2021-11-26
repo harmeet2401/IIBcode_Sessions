@@ -935,7 +935,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 		Metaspoilt
 	-For penetration testing to be applied to the Aws services we need authorization from AWS post filling a form for it.
 	
-65. Trusted Advisor Tool : 
+65. Trusted Advisor Tool :  ONLY TO MAINTAIN THE BEST PRACTICES.
 		-This will advise about the service based on below paramters :  CPSFSer
 			C ost Optumization
 			P erformance 
@@ -1157,12 +1157,10 @@ NOte : for any db we can load the data from S3 service that bucket can contains 
 
 75. AWS OpsWorks for Chef Automate is a fully managed CONFIGURATION MANAGEMENT SERVICE that hosts Chef Automate, a suite of automation tools from Chef for configuration management, compliance and security, and continuous deployment. Where chef is a configuration management tool.
 
-76.
-What is the purpose of the AWS SOC report?
+76.What is the purpose of the AWS SOC report?
 The purpose of these reports is to help you and your auditors understand the AWS controls established to support operations and compliance. There are five AWS SOC Reports: AWS SOC 1 Report, available to AWS ARTIFACTS AND AWS CUSTOMER
 
-77.
-AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your own premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
+77.AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from your own premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections.
 
 78. Amazon Pinpoint is a flexible and scalable outbound and inbound MARKETING communications service. You can connect with customers over channels like email, SMS, push, voice or in-app messaging
 
@@ -1172,7 +1170,7 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 
 And 
 
-Amazon Polly is a service that turns text into lifelike speech
+Amazon Polly is a service that turns text into life like speech
 
 81. AWS COST EXPLORER is used to get detailed reports as to which service is consuming a large part of your AWS expenditure and to be able to get these detailed level reports.
 
@@ -1213,3 +1211,5 @@ Amazon Polly is a service that turns text into lifelike speech
 101. AWS Outposts is a fully managed service that offers the same AWS infrastructure, AWS services, APIs, and tools to virtually any datacenter, co-location space, or on-premises facility for a truly consistent hybrid experience.
 
 102. AWS Ground Station is a fully managed service that lets you control satellite communications, process data, and scale your operations without having to worry about building or managing your own ground station infrastructure.
+
+103. Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets
