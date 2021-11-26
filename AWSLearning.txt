@@ -1205,3 +1205,11 @@ Amazon Polly is a service that turns text into lifelike speech
 97.AWS Batch provisions compute resources and optimizes the job distribution based on the volume and resource requirements of the submitted batch jobs. AWS Batch dynamically scales compute resources to any quantity required to run your batch jobs, freeing you from the constraints of fixed-capacity clusters.
 
 98.Amazon Inspector is an automated security assessment service to help improve security and compliance of applications deployed on AWS.
+
+99.AWS Device Farm is an application testing service that lets you improve the quality of your web and mobile apps by testing them across an extensive range of desktop browsers and real mobile devices . ITS THE TESTING SERVICE ALLOW TH EUSER TO TEST ITS WEB SERVICE ON DIFFERENT BROWSER AND IMPROVE THE QUALITY OF ITS WEB SERVICE.
+
+100. AWS Fargate is a serverless, pay-as-you-go compute engine that lets you focus on building applications without managing servers. AWS Fargate is compatible with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS)
+
+101. AWS Outposts is a fully managed service that offers the same AWS infrastructure, AWS services, APIs, and tools to virtually any datacenter, co-location space, or on-premises facility for a truly consistent hybrid experience.
+
+102. AWS Ground Station is a fully managed service that lets you control satellite communications, process data, and scale your operations without having to worry about building or managing your own ground station infrastructure
