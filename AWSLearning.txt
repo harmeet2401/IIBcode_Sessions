@@ -1170,6 +1170,10 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 
 80. Amazon Rekognition offers pre-trained and customizable computer vision (CV) capabilities to extract information and insights from your IMAGES and VIDEOS
 
+And 
+
+Amazon Polly is a service that turns text into lifelike speech
+
 81. AWS COST EXPLORER is used to get detailed reports as to which service is consuming a large part of your AWS expenditure and to be able to get these detailed level reports.
 
 82. AWS X-RAY  BASICALLY FOR MY APP WELLNESS. and helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors.
@@ -1189,3 +1193,15 @@ AWS Direct Connect is a cloud service solution that makes it easy to establish a
 91.AWS Shield Advanced provides enhanced resource specific detection and employs advanced mitigation and routing techniques for sophisticated or larger attacks. You also get 24x7 access to the AWS Shield Response Team (SRT) for manual mitigation of edge cases affecting your availability.
 
 92.AWS Snowball(petabyte of data in or out of AWS	) is a service that provides secure, rugged devices, so you can bring AWS computing and storage capabilities to your edge environments, and transfer data into and out of AWS. Those rugged devices are commonly referred to as AWS Snowball or AWS Snowball Edge devices.
+
+93. AWS simple monthly calculator can be used to foreacst the cost of a design containing some AWS resources.
+
+94. AWS Global Accelerator is a networking service that improves the performance of your users’ traffic by up to 60% using Amazon Web Services’ global network infrastructure
+
+95. Amazon Lightsail is an Amazon cloud service that offers bundles of cloud compute power and memory for new or less experienced cloud users. easy-to-use cloud platform that offers you everything needed to build an application or website, plus a cost-effective, monthly plan.
+
+96. AWS Systems Manager (formerly known as SSM) is an AWS service that you can use to view and control your infrastructure on AWS
+
+97.AWS Batch provisions compute resources and optimizes the job distribution based on the volume and resource requirements of the submitted batch jobs. AWS Batch dynamically scales compute resources to any quantity required to run your batch jobs, freeing you from the constraints of fixed-capacity clusters.
+
+98.Amazon Inspector is an automated security assessment service to help improve security and compliance of applications deployed on AWS.
