@@ -1217,10 +1217,10 @@ Amazon Polly is a service that turns text into life like speech
 
 106. TCO consider : Compute cost , Storage cost and network configuration cost.
 
-107 . approach AWS abuse team under below cases : 
-1. Spam
-2. Port scanning
-3. Denial-of-service (DoS) attacks
-4. Intrusion attempts
-5. Hosting prohibited content
-6. Distributing malware
+107 . approach AWS abuse team under below cases : SPDIHD
+1. S pam
+2. P ort scanning
+3. D enial-of-service (DoS) attacks
+4. I ntrusion attempts
+5. H osting prohibited content
+6. D istributing malware
