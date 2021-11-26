@@ -1187,7 +1187,7 @@ Amazon Polly is a service that turns text into life like speech
 
 91.AWS Shield Advanced provides enhanced resource specific detection and employs advanced mitigation and routing techniques for sophisticated or larger attacks. You also get 24x7 access to the AWS Shield Response Team (SRT) for manual mitigation of edge cases affecting your availability.
 
-92.AWS Snowball(petabyte of data in or out of AWS	) is a service that provides secure, rugged devices, so you can bring AWS computing and storage capabilities to your edge environments, and transfer data into and out of AWS. Those rugged devices are commonly referred to as AWS Snowball or AWS Snowball Edge devices.
+92.AWS Snowball(petabyte of data in or out of AWS) is a service that provides secure, rugged devices, so you can bring AWS computing and storage capabilities to your edge environments, and transfer data into and out of AWS. Those rugged devices are commonly referred to as AWS Snowball or AWS Snowball Edge devices.
 
 93. AWS simple monthly calculator can be used to foreacst the cost of a design containing some AWS resources.
 
@@ -1227,3 +1227,12 @@ Amazon Polly is a service that turns text into life like speech
 
 108. BUY AND SELL solutions o marketplace .
 	Buy thrid party solutions to the others on market place.
+	
+109. AWS managed services :  It simplifies deployment, migration, and management using automation and machine learning, backed up by a dedicated team of Amazon employees.		
+
+110. 5 Pillors of AWS Well-Architected Framework : OSRPC
+	- O perational Excellence
+	- S ECURITY
+	- R eliability
+	- P erformance Efficiency
+	- C ost Optimization
