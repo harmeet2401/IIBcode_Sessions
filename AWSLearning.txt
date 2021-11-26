@@ -79,9 +79,6 @@ Some Sample Ques :
 Practice Questions
 
 https://free-braindumps.com/amazon/free-aws-certified-cloud-practitioner-braindumps.html
-https://www.certification-questions.com/amazon-dumps/aws-certified-cloud-practitioner.html
-https://aws-certified-cloud-practitioner.fandom.com/wiki/AWS_Certified_Cloud_Practitioner_Wiki
-https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner/view/
 https://www.examtopics.com/exams/amazon/aws-certified-cloud-practitioner/view/ most Imp.
 
 **************************************************************************************************************************************
@@ -1214,4 +1211,16 @@ Amazon Polly is a service that turns text into life like speech
 
 103. Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets
 
-104. Amazon EMR is a platform for rapidly processing, analyzing, and applying MACHINE LANGUAGE (ML) to BIG DATA using open-source frameworks
+104. Amazon EMR is a platform for rapidly processing, analyzing, and applying MACHINE LANGUAGE (ML) to B using open-source frameworks
+
+105. Enterprise support plan = Concierge team  and  Access to a Technical Account Manager
+
+106. TCO consider : Compute cost , Storage cost and network configuration cost.
+
+107 . approach AWS abuse team under below cases : 
+1. Spam
+2. Port scanning
+3. Denial-of-service (DoS) attacks
+4. Intrusion attempts
+5. Hosting prohibited content
+6. Distributing malware
