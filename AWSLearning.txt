@@ -1213,3 +1213,5 @@ Amazon Polly is a service that turns text into life like speech
 102. AWS Ground Station is a fully managed service that lets you control satellite communications, process data, and scale your operations without having to worry about building or managing your own ground station infrastructure.
 
 103. Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets
+
+104. Amazon EMR is a platform for rapidly processing, analyzing, and applying MACHINE LANGUAGE (ML) to BIG DATA using open-source frameworks
