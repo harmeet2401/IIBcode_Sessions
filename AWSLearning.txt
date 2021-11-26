@@ -1224,3 +1224,6 @@ Amazon Polly is a service that turns text into life like speech
 4. I ntrusion attempts
 5. H osting prohibited content
 6. D istributing malware
+
+108. BUY AND SELL solutions o marketplace .
+	Buy thrid party solutions to the others on market place.
