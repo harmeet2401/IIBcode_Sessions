@@ -152,8 +152,10 @@ olaa the app is up for the user.
 Important point : 	infra as a service ----- > platform as a service -- > software as a service 
 
 				Eg: EC2 instance 	   ------> RDS service           -- > Mail boxes , softwares which you can install and use as per need.
-				
-				
+											   AWS DynamoDB
+											   AWS Aurora 
+											   AWS Athena 
+												etc
 IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that . Maintain the backups and availability.
 
 PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
@@ -170,7 +172,7 @@ We are going to cover Amazon VPC(virtual private cloud network)  and EC2
 
 3. Price : The pricing tier also changes from region to region . Ex of regions Asia Pacific (Mumbai), Asia Pacific (Behrain) etc 
 
-4. AWS VPC	: AWS Virtual private cloud network : Its similar to what we study in Azure as Azure VPN in azure cloud space.
+4. AWS VPCN	: AWS Virtual private cloud network : Its similar to what we study in Azure as Azure VPN in azure cloud space.
 		AWS VPC : will be a separate isolated space with IP range in AWS cloud. Now in AWS VPC we can spin up the Virtual machines with allocated private IP Addresses so that these machines can communicate with eachother .
 		
 		Private IPaddress :  will allow VMs in AWS VPC/AZURE VPN to talk to each other .
@@ -194,18 +196,18 @@ We are going to cover Amazon VPC(virtual private cloud network)  and EC2
 					      subnet1			             subnet2
 					--------------------			-----------------------
 					EC2_1####						EC2_1####
-					priv IP : 10.0.0.5				priv IP : 10.0.1.5
+					priv IP : 10.0.1.5				priv IP : 10.0.4.5
 		
 					public ip : 148.90.9.0			public ip : 148.90.9.1
 		
 					
 					EC2_2####						EC2_2####
-					priv IP : 10.0.0.5				priv IP : 10.0.0.5		
+					priv IP : 10.0.1.5				priv IP : 10.0.4.5		
 													
 					public ip : 148.90.9.0			public ip : 148.90.9.0
 											
 					--------------------			-----------------------
-					
+					10.0.1.0/24						10.0.4.0/24  				<------------------------ Sunbet ip range 
 		
 			-------------------------------------------------------------------------------
 		
@@ -222,7 +224,7 @@ example : One VPC ip range  :  10.0.0.0/16   here one of the ip range can be 10.
 
 			
 		
-5. EC2(Amazon Elastic Compute) :IAAS this will allow user to spin up the VMs on cloud without worrying about the underlying infra (storage , operation system , cooling system , network etc ). We can terminate and respin the VM once needed.		
+5. EC2(Amazon Elastic Compute cloud) :IAAS this will allow user to spin up the VMs on cloud without worrying about the underlying infra (storage , operation system , cooling system , network etc ). We can terminate and respin the VM once needed.		
 		
 a. Each virtual server that you create via this service is known as an instance.
 
@@ -280,7 +282,7 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	
 
 	
-8. INSTANCE PURCHASING OPTIONS : 
+8. EC2 INSTANCE PURCHASING OPTIONS : 
 				
 	a. : On demand instances : 
 		If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances.
@@ -289,7 +291,7 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 		*With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
 
 	b. spot instance : 
-		-A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price
+		-A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price.
 		-Because Spot Instances enable you to request unused EC2 instances at steep discounts, you can lower your Amazon EC2 costs significantly. The hourly price for a Spot Instance is called a Spot price.
 		-here we can get an EC2 component at much lower cost then on-demand pricing.
 		-the EC2 component will be provided on the basis of EC2 capacity.
@@ -302,10 +304,10 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	
 	c. 	Reserved instances 
 		- As the name says , you are willing to reserve an instance for a year or so , then only you will get a billing discount.
-		- this is a billing discount fetaure on the bsis of the reservation of instance.
+		- this is a billing discount feature on the basis of the reservation of instance.
 		- we can pay , partial , entire or no payment at the starting. But obviousely giving an upfront payment will provide a better discount.
 		- Offering classes of instances in reserved category 
-			: standard - here we can change the size of the instance with in the term commited .
+			: standard - here we can change the size of the instance(instance size) with in the term commited .
 			: convertible - here we can change the instance family , instance type , platform , scope and 	tenancy.
 		- depends upon the  - OTITOP
 			: O s 
@@ -315,18 +317,18 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 			: O ffering class 
 			: P ayment options 
 
-	The cost decreases as we go from on-demand to reserved purchasing.
+		The cost decreases as we go from on-demand to reserved purchasing.
 		
 		Decreases --------------->
 		ondemand-----> spot instances(unused spare capacity of EC2 instance ) ------> reserved instances(for longer period.)
 
 9. Dedicated Infrastructure for EC2. Meant the underlying Physical box in AWS Dc where the EC2 instance is runing.
 
-	a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on the same physical machine in Amazon data centers or on different and the public ip changes for internet access to the app on it. this makes us re-publish the ip to the client , again a headache.
-	
-	So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine . and we can also patch the machine on our own as the underlying host is our.
-	
-	b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
+		a. Amazon EC2 dedicated host : As we know when we spun up the vm on-demand , the VM can comes up on the host and when we stop and start the VM, the VM may comes up on the same physical machine in Amazon data centers or on different and the public ip changes for internet access to the app on it. this makes us re-publish the ip to the client , again a headache.
+		
+			So to have more controll to above process , the client request for amazon dedicated hosts , in which the VM post restarting comes up on the same machine all the time . NOTE  : BUT THE PRICING IS MORE FOR THIS. We can apply our licenses to the physical machine . and we can also patch the machine on our own as the underlying host is our.
+			
+		b. Amazon EC2 dedicated instances : In this case the VM instance will be assign to the dediated host / physical machine, but we will not have complete control over the machine sockets and physical cores. So we can not bring our own licenses to the machine as complete control is not there .
 	
 10. Elastic Block storage  (EBS volume) : 
 
@@ -334,8 +336,8 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	-You will get charged separately for this seperate resource 
 	-when you terminate the EC2 instance , make sure to delete the attached EBS volumes .
 	-We can attach or detach a new EBS volume disk at any point of time .
-	-we can increase the size of the volume any time .
-	-both the EC2 instance and EBS volumes should be in same region.
+	-we can increase the size of the volume any time . 
+	-both the EC2 instance and EBS volumes should be in same region , but can be on different Dc and different hardware device.
 	-the EBS volumes is replicated with in same availability zone for future hardware failure 
 	-even post detaching the volumes the data can persist for longer period of time.
 	-the EBS volume created may reside on same physical machine or on different machine as compare to EC2 instance to which it is attached.
@@ -350,6 +352,10 @@ CATEGORIES of volumes types :  GPTC
 	-T hroughput HDD (hard disk device ): for highly or frequently accessible data . Low cost HD volumes .
 	-C OLD HDD : for less frequent accessible data . used to store archive data.
 
+		Cost of accessing data --------->> increasing ------------->
+		<----------Cost of storing data decreasing ----------------
+		G ----------> P---------------> T----------------->C
+	
 11. Attaching additional vol to instance.
 		- Create volume in same availability zone as the instance is runing .
 		- Go to volumes  ---- > enter the details and ollaa the volume created .
@@ -357,7 +363,7 @@ CATEGORIES of volumes types :  GPTC
 		- Login to your instance windows -- > server manger -- > file storage -- > Disks -- > new disk see --> bring it online ---> initialize the disk ---> create new volume out of the disk.
 
 12. EBS snapshot : This is like backing up the EBS volume at that snapshot taking moment. Support portability.
-			-Its a fetaure to take the backup of the EC2 instance. Just like creating an static image of the VM or instance .
+			-Its a feature to take the backup of the EC2 instance. Just like creating an static image of the VM or instance .
 			-Once you take the snapshot of the instance , we can create a volume out of it 
 			-The volume created out of the snapshot can be attached to the other EC2 instances.
 			-Steps :	
@@ -447,7 +453,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 				 - ONE ADDITION PROPERT IS WE CAN SAY ALLOW AND DENY IN NACL FOR INCOMING AND OUTGOING  DATA.
 			- Keep in mind if you apply a rule on the NACL level then all the instances inside the subnet will be impacted by that rule.
 
-18. Budgets : 
+18. AWS Budgets : 
 	-We can create a budget in which we can add the budget amount limited to that ruppees. 
 	-Then we can configure our alert by adding the threshold value in % then , if it cross the budget it will alert me in my email.
 				
@@ -702,7 +708,7 @@ Common services to all types :
 	D	   Account Assistance : Concierge Support Team 
 	D	   Pricing : Greater then business
 
-37. Elastic load balancer : 
+37. Elastic load balancer : It is being called elastic because it autoscale and scale down the instance running in backend pool.
 	This is the service to route the requests coming to the service to the backend pool target EC2 machines running with same web api or app etc .
 	-This service will autoscale 
 	-Provide high availability
@@ -711,7 +717,7 @@ Common services to all types :
 	-Types of Load balancer : 
 		: Classic LB - Old verion of lb
 		: Application LB - that works on the application layer
-		: network LB - that works on the network layer.
+		: network LB - that works on the network layer. 
 38. Autoscaling : 
 			-set the lauch configuration - AMI ID , security group , intance type etc 
 			-Autoscaling group - Will contains the Min , max number of EC2 instances to be maintained.
@@ -834,7 +840,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	-then we can integrate above resource customer for Get method to a Mock service , lambda function call, HTTP api call etc 
 	In nutshel API gateway helps in creating a Rest api like structure using which we can even call the http service in the back end and also the serverless lambda function.
 
-46. AWS CloudFormation : CAAS.	Its similar to what we did in Azure templates . in which we wrote the json file or the templates to create pr setup the entire architecture of our applicatin system.
+46. AWS CloudFormation : CAAS.	Its similar to what we did in Azure templates . in which we wrote the json file or the templates to create pr setup the entire architecture of our application system.
 				-Then we can submit and run the AWS template to the AWS CloudFormation
 				-AWS CloudFormation will run the template and create the ENV for us 
 				-Its usefull for quickly bringing up the ENV (which may contains multiple AWS Services like VPC , EC2 and RDS service using mysql).
@@ -861,12 +867,14 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 		-Ensure firmware is updated on hardaware in which the App or data is hosted.
 		-Maintaining Environmental control in DCs.
 		-Awareness and training.
+		-configuration
 	2. Shared responsibility of Customer.:
 		-encryption of the data at rest 
 		-encryption  of the data in transit 
-		-patching of EC2 instances 
+		-patching of EC2 instances for software used to run the applications.
 		-patching of guest OS , database and liberaries in EC2 instances 
 		-Awareness and training.
+		-configurations.
 							
 49. AWS organisation : 
 	1. Central management for multiple AWS accounts
@@ -905,7 +913,7 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 	-So this service purpose is to store the events occured by any identity to any resoure in AWS.
 	-This service will nt only record the source of the events but also records the , time and the identity that trigered the events .
 	-These events by default are stored for 90 days 
-	-these events persistency cana be increase and may allow the events to live upto longer period of time in S3 buckets or in log.
+	-these events persistency can be increase and may allow the events to live upto longer period of time in S3 buckets or in log.
 	-The source of events can be anything : 
 		for example 
 				AWS console ------------->		
@@ -989,13 +997,14 @@ Network Reachability-1.1
 					-Keep AMI's ready. So that it can be given as an OS.
 					-Store the backup in a scheduled intervals in an S3 bucket in a different region . Cross region replication 
 					-This process will take some time to create a backup and use that snapshot for cross region replications.
-				
+					- higher downtime , because of slow cross region redundancy and replications.
 				2. Pilot Light : 
 						-In this we are running one complete set up in one region A
 						-and another setup with less instances in Region B (in which all main components reside as a non-running state.)
 						-Whenever the Region A goes down , we can bring the region B components up and bring the system active.
 						-Route53 is a DNS service for Domain name resolvee. This is used to route all traffic from region A to Region B once the disaster occurs.
 						-low cost solution.
+						-Less downtime then backup and restroe.
 				
 				3. Warm standby : 	
 						-In this we are running one complete set up in one region A
@@ -1003,11 +1012,13 @@ Network Reachability-1.1
 						-Whenever the Region A goes down , it will use Route53 is a DNS service for Domain name resolver and This is used to route all traffic from region A to Region B once the disaster occurs.
 						-high cost solution. as all component in another region is also running.
 						-quick failover.
+						- less downtime then pilot light
 				4. Multi -site scenarios.
 						-In this also both the region A and region B have running components
 						-And both the regions are  getting access by the using in shared mode example : 50% each.
 						-Once the disaster occurs in region A , it will use Route53 service to send the traffic of region A 50 % also to the region B,making region B consuming 100% traffic .
 						-High cost 
+						-less downtime then warm standby.
 						
 						
 		Replications technique : For data replications in case we have used Db service like DynamoDb , RDS , etc .
@@ -1199,8 +1210,6 @@ Amazon Polly is a service that turns text into life like speech
 
 97.AWS Batch provisions compute resources and optimizes the job distribution based on the volume and resource requirements of the submitted batch jobs. AWS Batch dynamically scales compute resources to any quantity required to run your batch jobs, freeing you from the constraints of fixed-capacity clusters.
 
-98.Amazon Inspector is an automated security assessment service to help improve security and compliance of applications deployed on AWS.
-
 99.AWS Device Farm is an application testing service that lets you improve the quality of your web and mobile apps by testing them across an extensive range of desktop browsers and real mobile devices . ITS THE TESTING SERVICE ALLOW TH EUSER TO TEST ITS WEB SERVICE ON DIFFERENT BROWSER AND IMPROVE THE QUALITY OF ITS WEB SERVICE.
 
 100. AWS Fargate is a serverless, pay-as-you-go compute engine that lets you focus on building applications without managing servers. AWS Fargate is compatible with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS)
@@ -1215,7 +1224,7 @@ Amazon Polly is a service that turns text into life like speech
 
 105. Enterprise support plan = Concierge team  and  Access to a Technical Account Manager
 
-106. TCO consider : Compute cost , Storage cost and network configuration cost.
+106. TCO consider : Compute cost , Storage cost and network configuration cost.CPSFSer
 
 107 . approach AWS abuse team under below cases : SPDIHD
 1. S pam
