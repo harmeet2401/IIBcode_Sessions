@@ -357,10 +357,10 @@ This is the feature in which suppose you are getting data request or get request
 So language is a barrier , in order to response with different data as per the locale we internationalize the response using property files.
 
 @Bean
-	LocaleResolver localeResolver(){
-		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-		localeResolver.setDefaultLocale(Locale.US);
-		return localeResolver;
+LocaleResolver localeResolver(){
+	 SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+	 localeResolver.setDefaultLocale(Locale.US);
+	 return localeResolver;
 	}
 	in the getter method of the controller we have to pass the locale paramter in header .
 	
@@ -521,7 +521,7 @@ Why we use Actuator   ?   Now as we know we have documented our application  , n
 Url launch for hal browser : localhost:8080
 
 Url to launch Actuator : localhost:8080/applications
-							localhost:8080/actuator
+						 localhost:8080/actuator
 {
 	"_links": {
 		"self": {
@@ -573,7 +573,7 @@ mapping.setfiltering(filter);
 return mapping;
 
 
-Verry important point always mention the @JsonFlter on top of the bean class to implement the dynamic filter occuring from controller.
+Verry important point always mention the @JsonFilter on top of the bean class to implement the dynamic filter occuring from controller.
 
 
 
@@ -660,7 +660,7 @@ Keep track of the function we use for the DAO service while interacting with the
 Or 
 
 We have an older approach 
-1. DAo is the data Access object clas with function defination for the method declared in Interface .
+1. DAO is the data Access object clas with function defination for the method declared in Interface .
 2. Interface containing the function declared 
 3. Repository : - Which will implements the interface and defined the function 
 4. This repository will be autowired in the controller class or springboottest class to test and run it .
@@ -694,7 +694,7 @@ challanges  for monolithic approach
 
 Spring Cloud Config : just like we can save all configs properties in one place in in git repo
 Centralized external configuration management backed by a git repository. The configuration resources map directly to Spring Environment but could be used by non-Spring applications if desired.
-Which will have Spring cloud client and spring cloud server dependenciesto be used .
+Which will have Spring cloud client and spring cloud server dependencies to be used .
 
 
 
