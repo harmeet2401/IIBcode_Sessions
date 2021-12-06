@@ -51,25 +51,27 @@ Soap defines does not impose any restriction on the transport , we can use eithe
 
 A WSDL is create web service definition language that  contains :
 
-	The End point 
+	The End point 																							End point , request , response and format .
 	the operation (delete employee , get employee , update employee data )
 	The request structure 
 	The response structure.
 
-Soap only involve XML as the message format to exchange request and response .
+Soap only involve XML as the message format to exchange request and response .  WSDL are all in XML language which is used in soap service only .
+These are defined structure .
 
 	
-REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol .
+REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol . Methodology to make best use of HTTP protocol.
 
-The HTTP protocol is used to transfer HTML data from consumer to service provider .
+The HTTP protocol is used to transfer HTML data from consumer to service provider . HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
+like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this url we can send the html data which can be any form of data.
 
-rest contains 
+rest contains  : rest APIcontains the format of message(request , response) , methods used for each resources : PUT , post , get , patch etc.
 	Message format  : The format of the message to exchange in between is Json , XML or any other format  
 	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP.)
 	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
 	
 start.sring.io  : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
-The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools 
+The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools . Used to create a project by adding the dep
 
 There are multiple methods for the rest api to send/retrive/update the data .
 
@@ -79,21 +81,23 @@ Lab 1 ----------------- Create a hello world rest api service to respond as hell
 We need two things 
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
-	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody
-	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody.
-	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. @RequestMapping(method='Get/Post/PUT/DELETE/PATCH',Path="/hellow-world")
+	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , post , get , patch  reqeust send on http url this controller will hanlde .
+	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody. @RestController interface is annotated as @ResponseBOdy.
+	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. 
+	@RequestMapping(method='Get/Post/PUT/DELETE/PATCH',Path="/hellow-world"
+	getCarddetailsfn()
+	
 	@GetMapping -- > We can also use this annotation  . no need to mention method as get . @GetMapping(path="/hello")
 	@PutMapping -- > We can also use this annotation  . no need to mention method as PUT . @PutMapping(path="/hellow-world")
 	@PostMapping -- > We can also use this annotation  . no need to mention method as POST . @POstMapping(path="/hellow-world")
 	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
-						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message .
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
-	@ExtendWith ------>is a repeatable annotation that is used to regixster extensions for the annotated test class or test method. Is used for JUNIT test => 5 
+	@ExtendWith ------>is a repeatable annotation that is used to register extensions for the annotated test class or test method. Is used for JUNIT test => 5 
 	@Runwith  -------- is used for junit test < version junit 5 	
 	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
 	@Autowired : ---- >this annotation is used to inject the class instant (object into the other class and use it ). For this to happen the class to be autowired need to part of the classpath bean list . which can happen by annotating the class as @component which will tell componentscanner during bean creation . we can also annotate it as @Service  , @Repository which in lower stage are @component anootated interfaces.
@@ -102,17 +106,17 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
-	
+	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
 
 Code for above templates : 
-a. 		new RestTemplate.getForEntity("http:localhost:8080/users",user.class)
-b.		new JDBCTemplate().queryForObjects("Select * from users", user.class)
+a. 		new RestTemplate.getForEntity("http:localhost:8080/users",user.class)   --- we are calling the api or other webservice.
+b.		new JDBCTemplate().queryForObjects("Select * from users", user.class) -- same we can use the jdbc template to make a DB call.
 c.		new JmsTemplate.convertAndSend(orderNumber, messagePostProcessor -> {
 			message.set(messagePostProcessor);
 				return messagePostProcessor;
 					});
-d.		new KafkaTemplate().send("topicname ", message);
+d.		new KafkaTemplate().send("topicname ", message);   ----------- Just like that we can use kafkatemplate to send and consume the message.
 
 
 We can Autowire in Spring boot instead of creating an object or instantiate its objects .
@@ -152,7 +156,7 @@ Lab 1 ----------------- Create a hello world rest api service to respond as hell
 
 Dependecies needed to create a rest full api , as it is a web service we need below dependencies:
 	-spring web  : to tell the spring mvc that the app is for web explosure.
-	-spring actuator : to get an inbuilt interface to test the health of the app.
+	-spring actuator : to get an inbuilt interface to test the health of the app.  to be used to health check our services,
 	-spring devtools : to auto reload the app and get the new code in place.
 	
 	
@@ -243,18 +247,17 @@ For best HTTP REST api service : While creating an object you can send the Build
 This can be achieved by using ServeletUriComponentbuilder class that helps in creating the uri which we can pass to the user in header 				
 
 URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(users.getId()).toUri();
-        ResponseEntity.created(location);
+ResponseEntity.created(location);
 		
-http status code : 201 : the object created
+http status code :  201 : The object created
 					200 : get ok 
 					404 : not found 
 					
-Now if we need to handle the not found exceptions we can throw the runtimeexception under a certain conditions	. By creating a class exception class 
+Now if we need to handle the not found exceptions we can throw the RuntimeException under a certain conditions . By creating a class exception class 
 
 package myproject.minlearning.startertestclass.users;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFouncException extends RuntimeException {
@@ -263,22 +266,21 @@ public class UserNotFouncException extends RuntimeException {
     }
 }
 
-
-
 Post that RUntimeexception we start getting exception 500 internal server error 
 
 We can make it more readable htppstatus by adding @ResponseStatus(HttpStatus.NOT_FOUND) to the UserNOtFoundException class.
 We can modify the http status code accordingly.
 
-*******NOTE : WHENEVER YOU WANT TO CUSTOMIZE ANY RESPONSE FROM REST API , CREATE A BEAN AND USE THAT BEAN AND THE ATTRIBUTES DEFINED IN IT AS A STRUCTURE FOR YOUR API RESPONSE.				
+*******NOTE : WHENEVER YOU WANT TO CUSTOMIZE ANY RESPONSE FROM REST API , CREATE A BEAN AND USE THAT BEAN AND THE ATTRIBUTES DEFINED IN IT AS A STRUCTURE FOR YOUR API RESPONSE.
+Means you can create a user defined exception bean class and use that and return that bean object structure in response for a dfined error structure.
 
 But for the generic exception response to be sent to the user we need to use ResponseEntityExcpetionHandler class to be extend this class provide various functions to override so 
 that we can send an instance of our bean to the user when ever an exception comes around any controller
 
 For that we need to make that class A extend ResponseEntityExcpetionHandler to be a Restcontroller and with annotation @ControllerAdvicer (which is used to share the feature 
-across all the controller ).
+across all the controller).
 
-	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES  FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class
+	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES  FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class  --- REEH
 	----------------------------------------------------------------
     THATS COOL , I MEAN YOU JUST HAVE TO DEFINE THE @RestController AND @controllerAdviser to share the feature to all controllers .
 				You need to handle the exceptions whether it is generic or it is specific .
@@ -301,10 +303,27 @@ For the validation to work on the attributes of the bean , we need to use :
 		In bean class for each attibutes for which we need the validation to happen . use validation annotation like , @Size (which says the min or max lenght of the string )
 			or @Past to constraints the date to be in past 
 		
-			Now when you hit the api it will validate and send you bad request , but the respose body will be empty :(
+			Now when you hit the api it will validate and send you bad request , but the respose body will be empty :( .
 			So to bring something readable for user to read we need to add one more function in customexceptionresponseentityclass which is the override function of
 			ResponseEntityExcpetionHandler class named : handlemethodArgumentnotvalid
 
+public class Validbean {
+
+    @Past(message = "The dob should be greater than present date")
+    private Date dob;
+
+    @Max(message = "the max amount permisseable is 1000000", value = 0L)
+    private int creditamount;
+
+    @Min(message = "The max amount permissabe is 10000",value = 0l)
+    private int debitamount;
+
+    @Email(message = "the email entered is wrong")
+    private String email;
+
+    public Validbean() {
+    }
+}
 
 *********CREATING A CUSTOMIZEEXCEPTIONHANLDER CLASS IS MUST , DON'T FORGET TO ADD THIS CLASS . EXTENDS ResponseEntityExcpetionHandler CLASS.			
 Lab 4 ----------------- now for above created Rest api we are to perform validation 
