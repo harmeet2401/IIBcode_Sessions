@@ -706,7 +706,7 @@ Eureka(Naming server) : two feature :
 				instance discovery
 
 
-Spring Cloud Sleuth is used for tracing along with zipkin
+Spring Cloud Sleuth is used for tracing along with zipkin.
 Distributed tracing for Spring Cloud applications, compatible with Zipkin, HTrace and log-based (e.g. ELK) tracing.
 
 spring cloud api gateway : which is used to hold many common fetaure which involved authentication  , logging etc.
