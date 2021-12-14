@@ -22,3 +22,24 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 
 5. OCP cli  : its the command line interface to run the cmmand to deploy your app , manage the pods , containers , monitoring and logging the app logs etc.
+
+6. OCP dashboard can also used to manage the same as we do it in OCL cli . but we have an advantage to automate using OCP cli code and make the deployment , auto conig , autoscaling easy.
+
+NOte openshift 4 is the latest version in pursuit by Redhat.
+------------------------------------------------------------------------------------------------------------------
+
+Installion of dev tools to start working with the cli.
+
+1. Docker Desktop  https://www.docker.com/get-started : to get the installer. to get the docker desktop. This will give you the docker cli also for your desktop to start playing wih container.
+
+2. Openshift installtion : hosted sandbox env is better option to gowith .
+	1. Create a redhat account using redhat.com
+	2. go to https://developers.redhat.com/developer-sandbox
+	3. Click on the ? on top right corner post going inside sandbox dashboard.
+	4. Download the windows zip , unzip it , place it in a User folder 
+	5. copy the path of the extracted folder till oc.app file and add it to the ENV variable ---> user variables 
+	6. open a terminal and type oc olaaaaaaa ! it started recognising.
+	
+	NOTE *** : THE ABOVE STEPS WILL LEAD TO CREAT THE OPENSHIFT DASHBOARD SIMILAR TO WHAT WE DID BEFORE AND FROM THERE WE CAN COPY THE LOGIN COMMAND AND USE THAT TO CONNECT OUR LOCAL SYSTEM TERMINAL WITH IT FOR INTERACTION.
+	
+	7. Now clone a code from https://gitlab.com/practical-openshift/labs to see the other steps .
