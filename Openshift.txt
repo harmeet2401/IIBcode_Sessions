@@ -1,0 +1,24 @@
+Openshift training -----------------------------
+
+1. The openshift container platform  or OCP is some thing that runs the applications.
+2. Many resources are there which helps developers to deploy their applications to the ocp clusters and expose it to the end users. 
+3. The openshift runs on multiple openshift cluster servers .
+4. There are two categories or Planes in OCP servers : 
+	a. Control plane : 
+		- which contains the Rest Api , Data persistence and monitoring .
+	b. Data plane : 
+		- which contains the servers where the applications runs.
+		
+								--------------		       							----------------
+								Control plane 				Deploy apps to 					
+Developers ---------------->	 Rest api 				----------------------->		 Data plane 
+																						ocp servers
+			Send request																
+			for our apps 		--------------		       							----------------	
+			
+			
+			
+Various tools provided By either redhat named as the sandbox or the desktop app to run the openshift which parallely runs the Control planes and the data planes.			
+
+
+5. OCP cli  : its the command line interface to run the cmmand to deploy your app , manage the pods , containers , monitoring and logging the app logs etc.
