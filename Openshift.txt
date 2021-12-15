@@ -43,3 +43,51 @@ Installion of dev tools to start working with the cli.
 	NOTE *** : THE ABOVE STEPS WILL LEAD TO CREAT THE OPENSHIFT DASHBOARD SIMILAR TO WHAT WE DID BEFORE AND FROM THERE WE CAN COPY THE LOGIN COMMAND AND USE THAT TO CONNECT OUR LOCAL SYSTEM TERMINAL WITH IT FOR INTERACTION.
 	
 	7. Now clone a code from https://gitlab.com/practical-openshift/labs to see the other steps .
+	
+3. Small overview on container : These are isolated light weight processes run in their own space utilizing small amount of underlying OS memory .
+	Containers are created by running a packaged or bundled artefacts names as images .
+	A container is just like a virtual machine running with its own os.
+	Resources required for running the cotainer is Docker engine 
+	Docker engine contains docker daemon process which receives all the requests to create a container from an image.
+	Docker engine maintains the container lifecycle.
+	
+	
+	Docker client (cli) ---> Send the request to -----> Docker Daemon ------> Itchecks for images locally if present ?-------->Yes ------> runs the image ------>Create container 
+																									|
+																									|
+																									|
+																									|
+																									|
+																									|------------------No -----------> Pulls the images from the docker repository and ------> create container 
+																									
+																									
+																									---------------------------------------> post that will displays the output to the docker client -------> which shows it to the terminal.
+																									
+																									
+4. Docker image build : 
+	- This requires the Dockerfile which contains the steps to run the docker image
+	- Then navigate to that dockerfile and source code location
+	- Run Docker Build .   (dot means in current directoty)
+	
+	Some core docker commands 
+		docker ps 
+		docker ps -a 
+		docker images 
+		docker images -a
+		docker run imagename
+		docker run -it imagename
+		docker run -itd imagesname
+		docker run -itd -p 8080:8080 imagename
+	docker file autopsy : 
+		.FROM : is used to get the base image for your container 
+		.COPY  : COPY fileinhostmachinelocation    filelocationinsidecontainer  : used to copy the file
+		.ENV : ENV nameo_of_variabe "value to this variable"  : used to create a variable which is red inside the container.
+		.RUN : the bachine machine run the command given to run command wait for it to finish and saved the results inside the container.
+			
+			Run chmod 777 /home/files/txt/run.txt
+			****Note this commands is mostly used to change the folder access level , update the package in linux container etc
+		.EXPOSE  : it is only used for documentation , but use port command to map the port of hostmachine to you container app.
+		.CMD java -jar /src/lib/gateway.jat:snapshot_1.0
+		
+			
+			
