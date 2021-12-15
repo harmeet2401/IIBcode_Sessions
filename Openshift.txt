@@ -106,7 +106,9 @@ Installion of dev tools to start working with the cli.
 	
 	So explain help giving the documentation of the command.
 	
-7. how to run / start a pod in OCP
+	
+-------------------------------------------------------POD RESOURCE----------------------------------------	
+7. how to run / start a POD in OCP   oc explain pod.spec
 
 Below commands sends a post or get request to the control plane (rest api) for creating pods and get the pods running status.
 
@@ -128,6 +130,48 @@ oc rsh podname   ---------- the same terminal that we used on OCP dashboard insi
 wget localhost:8080 or curl localhost:8080	
 
 Cat filename : to open a file in shell.
+
+# Delete the pod
+oc delete pod delete		
+
+
+# To see the Real time updates in pods	
+oc get pods --watch
 			
+above command will show logs in the terminal and help in monitoring the pods deployemnets.			
 			
 ******NOTE****** : In simple language , you need to compile you app , build it and create an image , push it to the docker hub repo . Now use that image to create a pod in open shift , to create containers any where in kubernetes etc. open shift creates a POD even if you run a single container or 10000000 containers and we can also create multiple pods in bigger architecture.			
+
+
+
+8. Yaml : standard language for docker config (yet another markup language)
+
+https://yaml.org/
+
+NOTE : SO WE HAVE BUILD AN IMAGE USING A DOCKERFILE , PUSHED THAT IMAGE TO DOCKER HUB , USED A YAML FILE TO PULL THAT IMAGE OUT , CREATED A POD OUT OF IT AND DEPLOYED IT ON OCP CLUSTER.
+
+
+-------------------------------------------------------POD RESOURCE----------------------------------------
+
+-------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
+9.Deployement configs :  oc explain deploymentconfig.spec
+
+Deployement config is the template used in yaml file to allow new image deployemnets and configuration changes for a pod.
+
+The also falls under spec which is undet template key 
+
+deploymentconfig :
+  spec :
+    replicas : 3
+    paused : true
+	
+		
+
+
+
+
+
+
+
+
+-------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
