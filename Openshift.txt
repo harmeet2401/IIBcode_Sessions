@@ -90,4 +90,44 @@ Installion of dev tools to start working with the cli.
 		.CMD java -jar /src/lib/gateway.jat:snapshot_1.0
 		
 			
+5. Projects and Users  : 
+		oc delete all --all
+		oc whoami
+		oc logout
+		oc login -u meet14764
+		oc project
+		oc new-project myproject
+		oc projects : list the projects in OCP cluster.
+		
+6. Pod : contains one container or more than one container.		
+	oc explain pod : to get the description of the pod
+	oc explain pod.spec : spec is one of the field in pod
+	oc explain pod.spec.containers : containers is a field inside spec.
+	
+	So explain help giving the documentation of the command.
+	
+7. how to run / start a pod in OCP
+
+Below commands sends a post or get request to the control plane (rest api) for creating pods and get the pods running status.
+
+# Check that OpenShift is running 
+# You can use minishift start if the cluster has stopped
+oc status
+
+# Create a Pod on OpenShift based on a file
+oc create -f pods/pod.yaml   
+
+# Show all currently running Pods
+oc get pods
+	
+	
+# In order to go inside of the pod from you local termnal 
+oc rsh podname   ---------- the same terminal that we used on OCP dashboard inside the pod.
+
+# to ping a service on a port 
+wget localhost:8080 or curl localhost:8080	
+
+Cat filename : to open a file in shell.
 			
+			
+******NOTE****** : In simple language , you need to compile you app , build it and create an image , push it to the docker hub repo . Now use that image to create a pod in open shift , to create containers any where in kubernetes etc. open shift creates a POD even if you run a single container or 10000000 containers and we can also create multiple pods in bigger architecture.			
