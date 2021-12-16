@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2021-12-16T08:04:32Z"
+  labels:
+    app: demo-app
+    app.kubernetes.io/component: demo-app
+    app.kubernetes.io/instance: demo-app
+  name: demo-app
+  namespace: meet14764-stage
+  resourceVersion: "580720497"
+  uid: 518c4830-f130-415e-ad30-c9377ef8e901
+spec:
+  clusterIP: 172.30.211.179
+  clusterIPs:
+  - 172.30.211.179
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deploymentconfig: demo-app
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -170,15 +170,11 @@ NOTE : SO WE HAVE BUILD AN IMAGE USING A DOCKERFILE , PUSHED THAT IMAGE TO DOCKE
 	 
 	-Deployment config is a collections of pods.
 	-The also falls under spec which is undet template key 
-
-	- COmmand to be use while creating a pod uses a deployment config as well : 
-		
-		oc new-app quay.io/practicalopenshift/hello-world --as-deployment-config 
-	- Yaml sample for deployemnetconfig
 	
 command : 
 
 	-Create a deployemnetconfig
+		oc new-app quay.io/practicalopenshift/hello-world --as-deployment-config 
 		oc get svc				------ will give service
 		oc get dc 			  --------- will give deploymentconfig
 		oc get istag          ------- image stream tag		
@@ -192,13 +188,70 @@ command :
 		oc delete all -l app=hello-world ----------- then use -l and mention the label got from describe command 
 		
 		best recommended way to delete the resources.
-			
-	-Name a deployemnetconfig
+			 
+	-Name a deployemnetconfig using --name flag
+		oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deployment-config 
+		oc status : 
+			svc/demo-app - 172.30.210.218:8080
+				dc/demo-app deploys istag/demo-app:latest
+					deployment #1 running for 3 minutes - 1 pod
 
 
+		NOte : we can deploy the same DC with different --name multiple copies on OCP.
+		
+	- Create deployment config using git repo url  : for this the git repolocation will have a DockerFile which it will use to build and image and use that to create a DC
+		oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config
+		
+		Steps taken : 
+			1. Will clone the repository
+			2. go through the dockerfile step by step as below and build and image push it to image streams of buid config.
+				for example : 
+					FROM golang:alpine
+					ADD src/hello-world.go hello-world.go					
+					ENV MESSAGE "Welcome! You can change this message by replacing the MESSAGE environment variable."
+					ENV HOME /go					
+					RUN chgrp -R 0 /go && chmod -R g+rwX /go					
+					EXPOSE 8080					
+					LABEL io.openshift.expose-services 8080/http					
+					USER 1001					
+					CMD go run hello-world.go
+					
+		oc status : 
+				svc/hello-world - 172.30.61.85:8080
+					dc/hello-world deploys istag/hello-world:latest <-
+						bc/hello-world docker builds https://gitlab.com/practical-openshift/hello-world.git on istag/golang:alpine   ---- extra step from above command we did 
+						not built yet
+							deployment #1 waiting on image or update
 
 
+					NOte : here bc/hello-world is also there because oc uses the container to build the image by cloning the code rn the dockerfile one step at a time.
 
-
-
+		oc logs -f  bc/hello-world  : to get the logs of bc : which will sho you the steps took to buld the image by cloning.
+		
+		
+	- Replication controller :  use by deploy to mainatain proper number of pods running .
+				oc get rc  : get the replication controller.
+				
+	- Roll out a new version of DC post changing te config / src code etc .
+				oc rollout latest dc/demo-app   : this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
+				oc rollback dc/demo-app : this will roll back the deployment to the old version we terminated 
+		
 -------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
+
+
+-------------------------------------------------------SERVICES AND ROUTES----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------SERVICES AND ROUTES----------------------------------------

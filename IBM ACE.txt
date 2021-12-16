@@ -1,5 +1,0 @@
-IBM ACE Training-----------------
-
-
-For containerisation of IBM ace app : https://www.learnibmesb.com/post/ibm-app-connect-enterprise-building-running-integration-solutions-in-docker
-		https://www.learnibmesb.com/post/creating-flows-for-an-api-on-ibm-cloud-in-ibm-app-connect-enterprise-v11
