@@ -98,6 +98,11 @@ Installion of dev tools to start working with the cli.
 		oc project
 		oc new-project myproject
 		oc projects : list the projects in OCP cluster.
+		oc status -- shows all resources in our project
+			output of oc status :                								
+				svc/hello-world - 172.30.180.208:8080							--------- Service
+					dc/hello-world deploys istag/hello-world:latest             --------- Deployement config
+						deployment #1 deployed 8 minutes ago - 1 pod			---------1 pod
 		
 6. Pod : contains one container or more than one container.		
 	oc explain pod : to get the description of the pod
@@ -156,17 +161,39 @@ NOTE : SO WE HAVE BUILD AN IMAGE USING A DOCKERFILE , PUSHED THAT IMAGE TO DOCKE
 -------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
 9.Deployement configs :  oc explain deploymentconfig.spec
 
-Deployement config is the template used in yaml file to allow new image deployemnets and configuration changes for a pod.
+	- Deployment Configs define the template for a pod and manages deploying new
+     images or configuration changes. A single deployment configuration is
+     usually analogous to a single micro-service. Can support many different
+     deployment patterns, including full restart, customizable rolling updates,
+     and fully custom behaviors, as well as pre- and post- deployment hooks.
+     Each individual deployment is represented as a replication controller
+	 
+	-Deployment config is a collections of pods.
+	-The also falls under spec which is undet template key 
 
-The also falls under spec which is undet template key 
-
-deploymentconfig :
-  spec :
-    replicas : 3
-    paused : true
-	
+	- COmmand to be use while creating a pod uses a deployment config as well : 
 		
+		oc new-app quay.io/practicalopenshift/hello-world --as-deployment-config 
+	- Yaml sample for deployemnetconfig
+	
+command : 
 
+	-Create a deployemnetconfig
+		oc get svc				------ will give service
+		oc get dc 			  --------- will give deploymentconfig
+		oc get istag          ------- image stream tag		
+		oc delete svc/hello-world ------ dleete the service
+		oc delete dc/hello-world  ----- delete deployment config.
+	
+	-Delete a deployemnetconfig
+		We can also delete the resources using label  : to get the label we can use describe command 
+		
+		oc describe dc/hello-world -------- describe the dc with label 
+		oc delete all -l app=hello-world ----------- then use -l and mention the label got from describe command 
+		
+		best recommended way to delete the resources.
+			
+	-Name a deployemnetconfig
 
 
 
