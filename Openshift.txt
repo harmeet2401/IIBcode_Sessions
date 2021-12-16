@@ -240,18 +240,81 @@ command :
 
 
 -------------------------------------------------------SERVICES AND ROUTES----------------------------------------
+- Service is just like a front end part which will contain a public ip and port which is connected to the pods in the cluster.
+- We know when we create / deploy an api we need an IP and port on which it will listne and sends the request to the pods in the backend.
 
 
+Steps : 
+	-Create a pod first 
+		oc create pod pod/pod.yaml
+	-create the service 
+		oc expose --port 8080 pod/hello-world-pod
+		
+		this will create a service showing you the ip and port which is exposed internally inside the cluster and not access from internet.
+		
+	- to access the first pod create another pod in the same cluster and ping from second to first pod
+		oc create pod pod/pod2/yaml
+		oc status  ------------------------------- > you will get the service ip and address of first pod
+		oc rsh pod/hello-world-pod-2
+			: wget -qO- ipaddressoffirstpod:port
+		
 
+	- to access the first pod using env variable 
+		command : env ------------ show all env inside pod terminal 
+				  wget -qO- $HELLO_WORLD_POD_PORT_8080_TCP_ADDR:$HELLO_WORLD_POD_PORT_8080_TCP_PORT  : env used to get the response from first pod
 
-
-
-
-
-
-
+	- Cretae a ROUTE  to access it from outside a cluster means from internet 
+		oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deployment-config 
+		oc expose service/demo-app ---- this will expose the service to internet by assigning it a domain name
+		oc status : -------- will show you the service domain name url us it to do get the response.
+		oc get -o yaml route/demo-app
+		oc get -o yaml svc/demo-app
+		oc get -o yaml build/demo-app
+		oc get -o yaml dc/demo-app
+	above get -o yaml commands are to get the yaml representation of those in a file 
 
 
 
 
 -------------------------------------------------------SERVICES AND ROUTES----------------------------------------
+
+
+
+-------------------------------------------------------CONFIG MAPS ----------------------------------------
+
+- Config maps are used in case of we are deploying the apps in different regions dev , stage , productin etc 
+- These configs maps are used by the pods. 1MB limit.
+- oc explain configmaps 
+- oc explain configmaps.data
+
+	- create config map   : configmaps are on globall level , it can be applied on all the pods in the clusters.
+		oc create configmap message-map --from-literal MESSAGE="HELLO FROM CONFIGMAPS"
+		oc get configmaps
+		oc get -o yaml cm/message-map
+		
+	- use the config map we created in above steps.		: command to apply the map variable to the demp-app using which is MESSAGE
+		oc set env dc/demo-app  --from cm/message-map 
+		
+	- create a config map using a file 
+		echo "Hello from new config map " >> MESSAGE
+		oc create configmap file-map --from-file=MESSAGE
+		oc get cm/file-map
+		oc get -o yaml cm/file-map
+				
+				yaml file comes as below : 
+				---------
+				apiVersion: v1
+				data:
+				MESSAGE: "\"Hello from new config map \" \r\n"
+				kind: ConfigMap
+				metadata:
+				creationTimestamp: "2021-12-16T10:42:36Z"
+				name: file-map
+				namespace: meet14764-stage
+				resourceVersion: "581158858"
+				uid: 3033e676-9733-46d0-b6cd-caa6f27d978d
+				---------
+		oc set env dc/demo-app --from file-map		
+				
+				
+-------------------------------------------------------CONFIG MAPS ----------------------------------------
