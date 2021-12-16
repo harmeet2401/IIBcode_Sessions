@@ -1,0 +1,42 @@
+Splunk -----------------------------------------
+
+Support community : Community.splunk.com
+
+Splunk documentation : docs.splunk.com
+
+What is splunk 
+- Splunk is an IT operations tool that consumes machine-data(any system , app on -premises or on cloud ) in real time. Most BI tools do not consume and analyze data in real time.
+
+- Splunk is used to turn or convert unstructured data into something readable and present it in human readable format .
+
+-is  a powerful tool like Splunk to investigate and solve a complex IT problem.
+
+Data storage in Splunk : 
+
+-splunk transforms incoming data into events stores in idexes(which are spaces called buckets in harddisk).
+-Store as a single row data for each event and have its own metadata .
+-add default field to each events like  source, sourcetypes  , timestamp , host.
+	: source : means file , app , cloud webservice etc 
+	: sourcetype : format of data 
+	: host : source ip address
+	: timestamp : current timesatamp
+
+
+		Incoming data -----transformsinto each -----------> event ---------->stored on indexes(buckets)-------->On DISK
+- 5 types of buckets in which the data is ditributed as per the requirement 
+
+	1. hot (read / write ) : this is where we interact with the data 
+	2. warm (read ) : data rolled from hot 
+	3. cold (directory changed ) : in this the directory is changed for the data .
+	4. Frozen(Deletes or archive the data )
+	5. thawed : data is restored from archive in here .
+	
+	
+- Licensing 
+	purchaing model : 
+	
+		a. standard
+		b. enterprise
+		c. Sales trial
+		d. Dev/test
+		e. free 

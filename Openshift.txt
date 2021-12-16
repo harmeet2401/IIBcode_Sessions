@@ -25,6 +25,8 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 6. OCP dashboard can also used to manage the same as we do it in OCL cli . but we have an advantage to automate using OCP cli code and make the deployment , auto conig , autoscaling easy.
 
+7. OpenShift does have a built-in image registry
+
 NOte openshift 4 is the latest version in pursuit by Redhat.
 ------------------------------------------------------------------------------------------------------------------
 
@@ -315,6 +317,102 @@ Steps :
 				uid: 3033e676-9733-46d0-b6cd-caa6f27d978d
 				---------
 		oc set env dc/demo-app --from file-map		
+		
+	- create a config map using all files in a directory 
+		oc create configmap pods-example --from-file pods -----------> pods is the folder that contains the files
+		oc get -o yaml cm/pods-example
+		
 				
 				
 -------------------------------------------------------CONFIG MAPS ----------------------------------------
+
+
+-------------------------------------------------------SECRETS ----------------------------------------
+- create secrets  generic or opaque secrets   ------ its totalyy similar to configmaps but the data stored as base64 encoded 
+
+	oc create secret generic message-secrets --from-literal MESSAGE="SECRET MESSAGE"
+	oc get secrets
+	oc get -o yaml secrets/message-secrets
+		Output : 
+			apiVersion: v1
+			data:
+			MESSAGE: U0VDUkVUIE1FU1NBR0U=
+			kind: Secret
+			metadata:
+			creationTimestamp: "2021-12-16T12:38:09Z"
+			name: message-secrets
+			namespace: meet14764-stage
+			resourceVersion: "581479490"
+			uid: 76b5e4ba-6616-4611-9110-2ddf2c5e27b9
+			type: Opaque
+
+	oc set env dc/demo-app --from secret/message-secrets --------> aplying the secrete message to env variable 
+
+
+-------------------------------------------------------SECRETS ----------------------------------------
+
+
+-------------------------------------------------------ImageStream & imagestreamtag ----------------------------------------
+Imagestreamd 'and imagestreamtag are similar to what we studied as images and image tags .
+ Command to create IS:
+	oc get is
+	oc delete is/demo-app : to delete the image stream 
+	oc import-image --confirm quay.io/practicalopenshift/hello-world 
+	oc new-app meet14764-stage/hello-world --as-deployment-config  ------------ after importing the image stream we can use that only and no need to create a new one , OC will create rest of the resource lik e, svc , dc , bc and route if required.
+	
+ Adding more IStags
+    oc tag quay.io/practicalopenshift/hello-world:update-message hello-world:update-message
+	
+ Pushing the private image to quay.io	
+	# Remote Tag syntax
+	<host name>/<your username>/<image name>
+	
+	# Load environment variables from credentials.env
+	source credentials.env
+	
+	# Building an image with a remote tag
+	docker build -t quay.io/$REGISTRY_USERNAME/private-repo .
+	
+	# Log into a registry
+	docker login <hostname>
+	
+	# Log into quay.io
+	docker login quay.io
+	
+	# Push (send) an image to a remote registry
+	docker push <remote tag>
+	
+	# Push the image to Quay
+	docker push quay.io/$REGISTRY_USERNAME/private-repo
+
+
+ Downloading and deploying the private image 
+    # The command to import the private image (won't work without extra auth steps)
+	oc new-app quay.io/$REGISTRY_USERNAME/private-repo
+	
+	# You may need to run this command 
+	source credentials.env
+	
+	# Create a Docker registry secret
+	oc create secret docker-registry \
+	demo-image-pull-secret \
+	--docker-server=$REGISTRY_HOST \
+	--docker-username=$REGISTRY_USERNAME \
+	--docker-password=$REGISTRY_PASSWORD \
+	--docker-email=$REGISTRY_EMAIL
+	
+	# A touch of secrets magic
+	# This command links the secret to the service account named "default"
+	oc secrets link default demo-image-pull-secret --for=pull
+	
+	# Check that the service account has the secret associated
+	oc describe serviceaccount/default
+	
+	
+	# The same image from the start should work now
+	oc new-app quay.io/$REGISTRY_USERNAME/private-repo
+
+ 
+
+-------------------------------------------------------ImageStream & imagestreamtag ----------------------------------------
+
