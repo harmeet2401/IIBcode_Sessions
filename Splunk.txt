@@ -1,4 +1,9 @@
 Splunk -----------------------------------------
+https://www.splunk.com/
+Splunk account : 
+meet14764
+Gogi@12345
+
 
 Support community : Community.splunk.com
 
@@ -40,3 +45,154 @@ Data storage in Splunk :
 		c. Sales trial
 		d. Dev/test
 		e. free 
+		f. Industrial IOT 
+		g. Forwarder 
+		
+- splunk apps :  collections of splunk configuration files . Download it from splunkbase.com
+	provides below features : 
+	  visualization 
+	  analysis
+	  Reports % Dashboard 
+	  User Interface 
+- Splunks Add on : is a subset of splunk 
+	  Data enrichment 
+	  tags 
+	  data models
+	  Data sets
+
+- we can directly go to splunk.com , create an account download the software enterprise windows 64 msi install it and add the admin username and password and start using that by uploading the data 
+
+- We can then go to splunk enterprise installer we install on windows and then use it to download an install splunk app. Splunk app is the collection of the splunk configuration files and using subset of the splunk fetaures.
+
+
+Windows : 
+C:\Program Files\Splunk\var\lib\splunk\defaultdb\db\hot_v1_0\rawdata : for splunk data where the data we uploaded for search to test is stored 
+
+
+Common splunk flow for incomgin data 
+- IPIIS : input  --> parsing --> indexing queue --> indexing  --> search 
+
+
+
+1. Input : 
+	a. File and directory inputs :
+		- Monitor files and directory : local or remote file/directory monitoring. Monitor compressed files . 
+		- upload files to splunk , used for one time anayalis
+		- Monitor no handle : monitors only the windows host system files which auto rotate .
+	b. Network input : 
+		Data over TCP or UDP : ---> like sending syslogs to splunk
+		Data from SNMP 
+	c. Windows Input : 
+		Windows event logs forwarding , error logging , system boot logs etc to splunk . perfmon logs to splunk 
+	d. App sending data over HTTP to send the events or logging data to splunk . as we did in using the splunk dependencies for oour rest api and pass the logging data to splunk .
+		link for spring boot and splunk integration  : https://stackoverflow.com/questions/61426758/splunk-integration-with-spring-boot
+		
+
+	We can set up inputs means start or pushing data to splunk using : 
+	CLI : splunk add monitor command 
+	Splunk web : Add data : upload data 
+	Splunk app 
+	java integration using the jar it provides . configure the username and passwords.
+	
+	
+2. Forwarder : 
+		Universal : Only sends the data from source to receiver  , does not apply indexes and searching . 
+		Heavy :  not only forward the data but also transforms the dataa and need full set of installation .
+
+	how to configure both forwarder ? Forwarder are just like we create a forwarder which will keep on monitoring a file , directories , tcp or udp port , an app server , a windows log events directory , error directory etc .
+
+	a. We can download the setup for universal forwarder and install it and configure it in same way as we did in splunk web
+		
+		
+		
+	b. Below steps are done on splunk web .	
+		steps : for receiver 
+			1. open splunk local application on web 
+			2. click on setting 
+			3. Under Data ----> forwarder and receiver 
+			4. select configure recever 
+			5. Enter the port and save 
+	
+		steps : for forwarder 
+			1. open splunk local application on web 
+			2. click on setting 
+			3. Under Data ----> forwarder and receiver 
+			4. select configure forwarder 
+			5. Enter the IP : port and save 
+		steps to add data File and directory inputs :
+			1. Add input 
+			2. file and directories
+			3. select the folder and olaaa 
+		Go back to home page and search and 	search for host=splunkmainlocal 
+------------------------------------------------------------------------------------------------	
+3. 	ADD DATA : BELOW OPTIONS ARE THERE : 
+
+Local Event Logs
+Collect event logs from this machine.
+
+Remote Event Logs
+Collect event logs from remote hosts. Note: this uses WMI and requires a domain account.
+
+Files & Directories
+Upload a file, index a local file, or monitor an entire directory.
+
+HTTP Event Collector
+Configure tokens that clients can use to send data over HTTP or HTTPS.
+
+TCP / UDP
+Configure the Splunk platform to listen on a network port.
+
+Local Performance Monitoring
+Collect performance data from this machine.
+
+Remote Performance Monitoring
+Collect performance and event information from remote hosts. Requires domain credentials.
+
+Registry monitoring
+Have the Splunk platform index the local Windows Registry, and monitor it for changes.
+
+Active Directory monitoring
+Index and monitor Active Directory.
+
+Local Windows host monitoring
+Collect up-to-date hardware and software (Computer, Operating System, Processor, Service, Disk, Network Adapter and Application) information about this machine.
+
+Local Windows network monitoring
+This is an input for Splunk Network Monitor.
+
+Local Windows print monitoring
+Collect information about printers, printer jobs, print drivers, and print ports on this machine.
+
+Scripts
+Get data from any API, service, or database with a script.
+
+Powershell v3 Modular Input
+Execute PowerShell scripts v3 with parameters as inputs.
+
+Splunk Secure Gateway
+Initializes the Splunk Secure Gateway application to talk to mobile clients over websockets
+
+Splunk Secure Gateway Mobile Alerts TTL
+Cleans up storage of old mobile alerts
+
+Splunk Secure Gateway Deleting Expired Tokens
+Delete expired or invalid tokens created by Secure Gateway from Splunk
+
+Splunk Secure Gateway Role Based Notification Manager
+Used for sending mobile alerts to users by role
+
+Splunk Secure Gateway Enable
+Determine if Splunk Secure Gateway core modular inputs should be enabled
+
+Splunk Secure Gateway Metrics Collector
+Collects metrics for Splunk Secure Gateway
+
+Splunk Secure Gateway Registered Users List
+Sync the list of registered gateway users
+
+Splunk Secure Gateway Subscription Clean Up
+Clean up expired subscriptions
+
+Splunk Secure Gateway Subscription Processor
+Process subscriptions and send visualization data to subscribed devices.
+
