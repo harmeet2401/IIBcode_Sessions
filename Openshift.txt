@@ -25,7 +25,9 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 6. OCP dashboard can also used to manage the same as we do it in OCL cli . but we have an advantage to automate using OCP cli code and make the deployment , auto conig , autoscaling easy.
 
-7. OpenShift does have a built-in image registry
+7. OpenShift does have a built-in image registry.
+
+8. In OCP it uses Pods for everything like for creating a Deployement config if will spin up the pod for it once completes it will delete , just like for creating a build cofig it will spin up the pod for itand once completes it will delete it.
 
 NOte openshift 4 is the latest version in pursuit by Redhat.
 ------------------------------------------------------------------------------------------------------------------
@@ -416,3 +418,28 @@ Imagestreamd 'and imagestreamtag are similar to what we studied as images and im
 
 -------------------------------------------------------ImageStream & imagestreamtag ----------------------------------------
 
+-------------------------------------------------------BUILD config  ----------------------------------------
+Its similar to when we run Docker build command using the src code. It create an image and use that further .
+
+Create build config  : Build config logs if you will check you will find the logs showing the dockerfile line of codes running step by steps and creating an image 
+
+	command : 
+		- To create a build config 
+			oc new-build https://gitlab.com/practical-openshift/hello-world.git
+			oc get build
+			oc get -o yaml bc/hello-world >> bc.yaml
+			oc logs -f bc/hello-world ---------------------- to see the logs for bc for dockerfile LOC run.
+			
+		- To start an existing build vconfig .
+			oc start-build bc/hello-world  ----------------- this will trigger the build config again to create an image or in open shift language image stream .
+			oc get build -------------------------------------- then check the latest build you started 
+			oc logs -f build/hello-world-3 -------------------- this is build name 
+			  you can check the logs 
+			  
+			oc start-build is used in case we want to rebuild the image getting error before.
+			oc get is/hello-world ------------ this will show the image builded by the start-build .	
+		
+		- To cancel the build : 
+			oc cancel-build bc/hello-world
+
+-------------------------------------------------------BUILD config  ----------------------------------------
