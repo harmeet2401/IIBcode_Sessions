@@ -443,3 +443,356 @@ Create build config  : Build config logs if you will check you will find the log
 			oc cancel-build bc/hello-world
 
 -------------------------------------------------------BUILD config  ----------------------------------------
+
+-------------------------------------------------------Webhook for open shit build   ----------------------------------------
+
+Webhooks are http endpoints which get triggers when a src system found any change in it .
+														
+																			|------------------------------------------------------------------------------------------|
+																			|                                                                                          |
+																			|                        		                                                           |
+Client user ------Pushed code to ------> Git hub ------sends HTTP request --|-----> WEBHOOK -----trigger -----> build config ------> create -----> imagestream(image.) |
+																			|                                                                                          |
+																			|                                                                                          |
+																			|			                    OCP PLATFORM                                               |
+																			|------------------------------------------------------------------------------------------|
+1. We are going to use generic webhook , for that we need generic secret for webhook to work 
+
+	sequence of command  : on windows cmd
+	
+		oc get -o yaml bc/hello-world -------------> get the secret from build config under trigger tag in exported yaml 
+		SET GENERIC_SECRET=H5gq7BUUavJh-qrn-nF1   ----------- > export the secret in ENV variable that gurbich code on left is the secret i too it from buildconfig yaml .
+		ECHO %GENERIC_SECRET%
+		oc describe bc/hello-world  ------------------- > in describe you will get the webhook links both github and generic.
+		CURL -X POST -k https://api.sandbox.x8i5.p1.openshiftapps.com:6443/apis/build.openshift.io/v1/namespaces/meet14764-stage/buildconfigs/hello-world/webhooks/%GENERIC_SECRET%/generic  : this command will post a request to 	generic web hook for buildconfig and will trigger the build which you can see by looking at a new build pod running  cooooooooooooooooooool
+		oc logs -f pods/hello-world-3 -------------------- > we can check the latest build running .
+		
+		
+	Post commits hook : means pushing the image build, post hook triger the builds created the image and runs the test.	
+		oc new-build https://gitlab.com/practical-openshift/hello-world.git 
+		
+		# Set a post-commit hook
+		oc set build-hook bc/hello-world \
+		--post-commit \
+		--script="echo Hello from build hook"
+		
+		# Start a build to check it out
+		oc start-build bc/hello-world
+		
+		# Check the logs output for "Hello from build hook"
+		oc logs -f bc/hello-world
+		
+		# Set a failing build hook to observe the behavior for error 
+		oc set build-hook bc/hello-world \
+		--post-commit \
+		--script="exit 1"
+		
+		# Check the events to see if it ran
+		oc get events
+		
+		# Remove the build hook
+		oc set build-hook bc/hello-world \
+		--post-commit \
+		--remove
+
+
+ 
+-------------------------------------------------------Webhook for open shit build   ----------------------------------------
+
+
+-------------------------------------------------------BUILD FROM A BRANCH    ----------------------------------------
+
+We know the command to create a build config using git repo 
+
+oc new-build https://gitlab.com/practical-openshift/hello-world.git
+
+But for building a particular branch for this 
+oc new-build https://gitlab.com/practical-openshift/hello-world.git#update-message ---------------> upadte-message is the branch used
+
+
+-------------------------------------------------------BUILD FROM A BRANCH    ----------------------------------------
+
+
+-------------------------------------------------------BUILD FROM A BRANCH subfolder    ----------------------------------------
+
+We know that we can build a branch using above command 
+
+oc new-build https://gitlab.com/practical-openshift/hello-world.git#update-message ---------------> upadte-message is the branch used
+
+We can build a subfolder project using 
+
+oc new-build https://gitlab.com/practical-openshift/labs.git  --context-dir hello-world-go ---------------> hello-world-go is the folder in it .
+
+
+
+-------------------------------------------------------BUILD FROM A BRANCH subfolder   ----------------------------------------
+
+
+
+------------------------------------S2I (source to image ) scripts --------------------------
+There are two scripts that openshift use to convert the source code to a rnnable image and it will remove the need to create a dockerfile.
+
+Scripts : 
+Assemble : used to buld image 
+RUN  : used to run cmd instructions 
+
+provides openshift advantages
+remove dockerfile dependency
+can use the existing builder images 
+
+
+		case 1 : 
+			OCP integrates the S2I scripts as part of the new-app command 
+				oc new-app https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config
+			step you will find in build config  :RUN /usr/libexec/s2i/assemble
+			wowwww there was no need of dockerfile . It took advantage of S2I ruby assemble scripts 
+		
+		
+		Q .how this worked , how ocp detects to use ruby assemble script for above new-app holding ruby code. ?
+		
+		- Its worked like this using S2I Auto-detection
+			
+														----------------------			No
+			ocp ------------------>check ------------------ dockerfile exists? ----------------> source strategy is used 
+														----------------------
+																|
+																| Yes
+																|
+																|
+														Docker strategy is used 
+														
+				
+		
+		- In docker strategy it will run the docker file as per the locs writteren 
+		- IN source code strategy ocp will check for the specfic files example in case of java it will look for pom.xml and in case of ruby it found config.ru. so it took ruby assemblescript in first place to execute.
+		
+		
+		Case 2 : How to explicitly tell the ocp its a Ruby image or java , or python or .net or nodej
+		
+			Command 
+				oc new-app ruby~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config  --- > used ruby keyword with ~ tilda
+				oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config  --- > used python keyword with ~ tilda this fails for a ruby project as usual 
+				
+				
+	*****NOTE******	we can customize the assemble scripts in project folder .s2i/bin . if a script is present there then its our and we are overriding it  , if its empty then ocp will call the defaul assemble script for it .		
+	
+	
+	
+		Case 3 : Override the assemble scripts. We can avoid wrting a dockerfile as we have assemble scripts.
+			1. While writting our own assemble always call the default script .
+			2. we need to create .s2i/bin folder in our project to set the override.
+			
+			sample assemble
+				#!/bin/sh
+
+				echo Hello from before assemble script 
+				
+				# Call the original script
+				/usr/libexec/s2i/assemble
+				
+				echo Hello from after assemble script
+
+			3. oc new-app https://gitlab.com/practical-openshift/labs.git#add-s2i-overrides --context-dir s2i/ruby --as-deployment-config
+		
+			
+------------------------------------S2I (source to image ) scripts --------------------------
+
+------------------------------------volumes --------------------------
+Filesystem mounted on pods 
+    : configmaps , secrets
+	: harddisk 
+	: its portable 
+	: we can attach and detach the volumes
+	
+types :
+		Empty dir volumes : not persistence and is removed when pods deletes. not used mostly . But it can retain the dtaa in emptydir when pod restart
+		
+		1. Steps : 
+			oc new-app quay.io/practicalopenshift/hello-world  --as-deployment-config 
+			oc set volumes dc/hello-world --add --type emptyDir --mount-path /dir-demo-hello-world
+			
+			This will add below elements 
+				VolumesMounts : 
+			      - mountpath : /empty-dir-demo
+				    name : Volumee-dhgm
+					
+				Volumes : 
+                - emptyDir : {}
+			      name : Volumee-dhgm
+				  
+			oc rsh pod/hello-world-pod 
+				ls -ltr 
+				check for the   /empty-dir-demo
+				cd  /empty-dir-demo
+				touch "thshskksks sks sks" >> test.txt 
+				ls -ltr 
+
+		2. Configmaps as a file in volumes
+			oc create configmap cm-volumes --from-literal file.txt="this config is for volumes"  ------> file.txt is the key you can mention anytin .
+			oc set volumes dc/hello-world --add --configmap-name cm-volumes --mount-path /cm-dir
+			oc  rsh podname 
+				 &:/ check for the cm-dir folder existing in the pod or not ?
+				 
+			
+
+------------------------------------volumes --------------------------
+
+
+-----------------------------------------typesofpersistentvol----------------------------------
+Kubernetes volumes page and some of the popular explain command for some resources created when new-app command ran 
+command that create below resource : oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config
+oc status : 
+				svc/hello-world - 172.30.61.85:8080
+					dc/hello-world deploys istag/hello-world:latest <-
+						bc/hello-world docker builds https://gitlab.com/practical-openshift/hello-world.git on istag/golang:alpine   ---- extra step from above command we did 
+						not built yet
+							deployment #1 waiting on image or update
+							
+							
+							
+							
+oc explain deploymentconfig 
+oc explain buildconfig 
+oc explain service
+oc explain pod
+oc explain cm  ---------------- configmap
+oc explain secret
+oc explain is  -------------- image stream 
+oc explain istag ------------- image stream tag 
+oc explain persistentvolume.spec ----------- will give all persistentvolume spec attributes
+-----------------------------------------typesofpersistentvol----------------------------------
+
+
+-----------------------------------------Advance Deployement config ----------------------------------
+
+BIGGER AUTOMATION PROCESS FOR OPENSHIFT   : check for the image saved in git repo image name : OpenshiftAutomation Steps.png
+
+
+
+1. CODE CHANGE TRIGGER AUTOMATION : ------------
+
+CLIENT ---PUSHCODE--> GITHUB -----------> WEBHOOK  -----triggr -----> BUILD CONFIG -----create---> BUILD -----|
+																											  |
+																											  |
+																											  |
+																											  |
+																											  |
+										New Image  ---------------------------------create -------------------|
+											|
+											|
+											|
+											|-------changes -----------ISTAG--->image change trigger's ---> DC ---Trigger Rollout a new Dc 
+
+
+
+NOTE : MEAN WHEN EVER WE PUSH THE CODE TO GIT , GIT WILL TRIGGER A WEB HOOK THAT WILL TRIGGER A NEW BUILD AND CREATE A NEW IMAGE OUT OF THAT BUILD , THEN IMAGE CHANGE TRIGGER IN Deployement CONFIG IS CONTINUOUSELY MONITORING THE IMAGE CHANGE , SO CHANGED IMAGE WILL TRIGGER A NEW DEPLOYEMENT AND NEW PODS COMES UP WITH NEW IMAGE CHANGES.		
+
+NOTE  : WHENEVER YOU ARE LOOKING TO AUTOMATE THE TRIGGER FOR AN IMAGE CHANGED , CODE CANGE , CONFIG CHANGE ALSWAYS DO A DESCRIBE COMMAND 
+
+EXAMPLE  IN CASE OF WEB HOOK ALWAYS FOR CODE CHANGE DO DESCRIBE COMMAND ON BUILD CONFIG  TO SEE THE WEB HOOK INFO , BECAUSE WE ARE ROLLING A BC
+EXAMPLE IN CASE OF CONFIG CHANAGE , IMAGE STREAM CHANGE  ALWAYS DO DESCRIBE ON DEPLOYMENT TO SEE THE TRIGGER  , BECAUSE WERA ROLLING A DC  							
+		
+		
+		
+		
+2. CONFIG CHANGES TRIGGER AUTOMATION : ------------------------
+
+DC YAML CHANGES --------->NEW DEPLOYMENT ROLLOUT ------> NEW POD COMES UP 
+
+This happens when we attach a new volumens , config or secret map .
+
+	- Now we will do below steps to re-trigger the DC deployemnetconfig pod.
+			1. Create new app : oc new-app githubrepo --as-deployment-config
+			2. update the DC created in above command by either changing the ENV varible ot by changing the volume 
+			3. oc set volumes dc/hello-world --add --type emptyDir --mount-path /dir-demo-hello-world
+		
+				above steps will create a new DC pod and terminate it once done.
+	
+	- How to modify the triggers as we know new-app automatically sets the trigger for you 
+			. oc set triggers dc/hello-world ---- to get the trigger list 
+			. oc set triggers dc/hello-world --remove --from-config ----------- to remove the triggers . this will make the Auto flag as false.
+			. oc set triggers dc/hello-world  --from-config -------------- to readd the config change trigger.
+			. oc set triggers dc/hello-world --remove --from-image hello-world:latest --------- this will remove the trigger for image change..
+			. oc set triggers dc/hello-world  --from-image hello-world:latest  -c hello-world --------- this will add the image change trigger.
+		
+
+
+-----------------------------------------Advance Deployement config ----------------------------------
+
+
+-----------------------------------------Deployement strategy ----------------------------------
+two strategy for this course : 
+	Rolling  : start a new one  , once comes up , stop the old one.
+		- oc rollout latest dc/hello-world
+	
+	Recreate : start a new one 
+	
+ 1. Configure pre-deployemnets hook : 
+		# Watch the pods
+		oc get pods --watch
+		
+		# Trigger a deployment
+		oc rollout latest dc/hello-world
+		
+		# Add the deployment hook
+		oc set deployment-hook dc/hello-world --pre -c hello-world -- /bin/echo Hello from pre-deploy hook
+		
+		# Check the definition
+		oc describe dc/hello-world
+		
+		# Roll out again to see the changes
+		# You should get a hello-world-4-hook-pre pod
+		oc rollout latest dc/hello-world
+		
+		# Check events
+		oc get events 
+		
+2. Configure recreate deployemnets strategy : for this we have edit the deployment config manually uusing below command 
+
+		- oc edit dc/hello-world  : change the strategy to recreate , then
+		- oc rollout latest dc/hello-world : this will show you a recreationg process of app pod in other window for (oc get pods --watch) command 
+
+
+
+
+
+
+-----------------------------------------Deployement strategy ----------------------------------
+
+
+-------------------------------liveness and readiness probes ------------------------------------
+
+
+Just like health check for the pods running on OCP .
+This will allow auto check of health and restart if down 
+
+1. Readiness probe : this will fail only in case pod is not in a condition of receiving traffic.
+2. Liveness probe : this happen in case of app is down and pod is also down , in this the pod will not restart. This probes if fails will restart the pods for health well.
+
+
+
+	probe check : 
+		http get probe  : for rest api .
+		TCP :  TCP socket connection check for non-rest api .
+		Command :for no- rest api  , command execution probe is configured inside pod which keeps on running for health check  
+		
+	paramters : 
+		no of tries 
+		time betweek replies .
+		
+	- configure the liveness probe  : for restaring pod fall into failure states.
+		. oc set probe dc/hello-world --liveness --open-tcp=8080   :     Liveness:           tcp-socket :8080 delay=0s timeout=1s period=10s #success=1 #failure=3
+		
+	- Set the probe incorrectly use wrong port , as our hello-world is listens on 8080 . we will use 8081 , it will fail and restart the pods.	
+		. oc set probe dc/hello-world --liveness --open-tcp=8081
+
+-------------------------------liveness and readiness probes ------------------------------------
+
+
+-------------------------------Scaling  ------------------------------------
+
+
+
+
+
+-------------------------------Scaling  ------------------------------------

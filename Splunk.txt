@@ -16,6 +16,7 @@ What is splunk
 
 -is  a powerful tool like Splunk to investigate and solve a complex IT problem.
 
+- it stores the data it consumes in harddisk of the system on which the instance is running .
 Data storage in Splunk : 
 
 -splunk transforms incoming data into events stores in idexes(which are spaces called buckets in harddisk).
@@ -196,3 +197,60 @@ Clean up expired subscriptions
 Splunk Secure Gateway Subscription Processor
 Process subscriptions and send visualization data to subscribed devices.
 
+------------------------------------------------------------------------------------------------	
+
+--------------------------SPL search processing language -----------------------
+
+1. Search  pipeline : It goes like this 
+
+			|globae of raw data or events  | intermediate global transforms | get the readable format data |
+			
+			Above three process keep on happening untill we get the structured data in hand .
+
+2. Time : we can manage the time frames or using time stamps .
+				So we can set the filter of time frames or zones to get the data out. its essential fild.
+				
+			- its looks for the event time stamp occured 
+			- source name or file 
+			- file modification time 
+			- current system time stamp 
+			- Time variables : 
+				%c
+				%F 
+
+
+
+3. basic search  : 
+	We can use bsic fields : will reduce the processing time .
+		host 
+		index 
+		source and sourcetype 
+		wildcards :  *ailed , tes* , id*  , usern*
+		repeatable fields in each event .
+
+	
+	PIpe 
+	
+		sort 
+		rename 
+		
+		
+		example:  
+		
+		Note : space in between is AND 
+		
+		host=mysts.cl source=hstlogs  user*=(message=fail* OR message=loc*)
+		| table _table  user message  ------------------------------------------------ will display only three column
+		| sort -_time ------------------------------------------------ will sort by _time
+		
+4. Fields 	splunk auto discover fields 
+	default fields 
+	obvious key-value pairs 
+	fields set  by apps
+
+	Mode of field search : 
+		fast , smart and verbose
+		
+	field extractions : 
+		use regular expression 
+--------------------------SPL search processing language -----------------------
