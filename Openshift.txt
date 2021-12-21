@@ -909,8 +909,8 @@ We need  : https://codefresh.io/docker-tutorial/create-docker-images-for-java/
 	2. Use the maven tool to build the jar file or the build runable file. 
 	3. Create a Docker file which contains the base jdk image , copy command to copy the jar to the container flder and CMD to run the jar and EXPOSE the port for the host port : container port mapping 
 	4. Test using the command : docker build -t meet14764/myapi:1.0  . ------------ this will rename the image to meet14764/myapi:1.0 where meet14764 is my repo name in docker hub repository.
-	5.  Use the : oc new-app quay.io/meet14764/practicalocp:2.0 --as-deployment-config 
-		or 		  oc new-app meet14764/ocprepo:myapi-1.0.snapshot --name demo-app --as-deployment-config
+	5.  Use the : oc new-app quay.io/meet14764/practicalocp:2.0 --as-deployment-config  --------working 
+		or 		  oc new-app meet14764/ocprepo:myapi-1.0.snapshot --as-deployment-config   ------ some issue
 				  
 	6. check the app in OCP clusters.
 	
@@ -924,4 +924,5 @@ We need  : https://codefresh.io/docker-tutorial/create-docker-images-for-java/
 	
 	
 	
-	
+	docker pull quay.io/meet14764/practicalocp:2.0
+	docker pull meet14764/ocprepo:myapi-1.0.snapshot
