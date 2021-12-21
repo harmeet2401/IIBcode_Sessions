@@ -162,6 +162,7 @@ above command will show logs in the terminal and help in monitoring the pods dep
 			
 ******NOTE****** : In simple language , you need to compile you app , build it and create an image , push it to the docker hub repo . Now use that image to create a pod in open shift , to create containers any where in kubernetes etc. open shift creates a POD even if you run a single container or 10000000 containers and we can also create multiple pods in bigger architecture.			
 	If you give git url the bc will be created using new-app , but if you give the image url then as usual no build required and direct dc and svc will get created .
+	In oc get -f logs bc/demo-app will show you the logs for bc you will see the image build and push also .
 
 
 
@@ -480,8 +481,10 @@ Client user ------Pushed code to ------> Git hub ------sends HTTP request --|---
 		oc logs -f pods/hello-world-3 -------------------- > we can check the latest build running .
 		
 		
+	IMPORTANT ****** In Minishift  , in build config , we can direclty add the webhook links for gitlab , github , or bitbucket . after adding the webhook got to you github settings or gitlab setting and in integration tab enter the webhook url and check the push event option and add webhook in it . Then test it .	
+		
 	Post commits hook : means pushing the image build, post hook triger the builds created the image and runs the test.	
-		oc new-build https://gitlab.com/practical-openshift/hello-world.git 
+		oc new-build https://gitlab.com/harmeet2401/hello-world.git
 		
 		# Set a post-commit hook
 		oc set build-hook bc/hello-world \
@@ -734,10 +737,10 @@ This happens when we attach a new volumens , config or secret map .
 
 -----------------------------------------Deployement strategy ----------------------------------
 two strategy for this course : 
-	Rolling  : start a new one  , once comes up , stop the old one.
+	Rolling  : start a new one  , once comes up , stop the old one.  low downtime
 		- oc rollout latest dc/hello-world
 	
-	Recreate : start a new one 
+	Recreate : start a new one and bring all old pods down . This increase the downtime of the pods.
 	
  1. Configure pre-deployemnets hook : 
 		# Watch the pods
@@ -899,3 +902,12 @@ Three part sof template ::
 So kubernetes is the container orchestration tool helps in managing the infra and instance level management for our apps arch.	
 	
 
+
+Q. Create a hello world java rest api listening on port 8080 , build it using dockerfile and deploy it on openshift .
+We need 
+	rest api java project 
+	Docker file 
+	To build the image using oc command 
+	Then create a new app using oc new-app using the image created.
+	Lets try , why not ? :)
+	

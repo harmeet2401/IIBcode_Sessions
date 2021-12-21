@@ -1,0 +1,5 @@
+FROM openjdk:16-alpine3.13
+ENV MESSAGE "Welcome to my ne api deployed to open shift 4.0"
+COPY target/Myapi-0.0.1-SNAPSHOT.jar /home/Myapi-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+RUN java -jar /home/Myapi-0.0.1-SNAPSHOT.jar
