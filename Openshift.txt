@@ -29,6 +29,12 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 8. In OCP it uses Pods for everything like for creating a Deployement config if will spin up the pod for it once completes it will delete , just like for creating a build cofig it will spin up the pod for itand once completes it will delete it.
 
+9. Its PAAS as a service 
+
+10. open shift is build on top of the kubernetes which is on top of dockers . OCP  provide various tools and resources that abstract the underlying functionality of kuberneter and docker .
+
+11. We can use either the MInishift or openshift sandbox . MInishift its th one we used in OPtum (where we install Minishift on different linux boxes and have the openshift url for differnet Dcs) is the iso image we can download by running MInishift.exe and open that iso image in virtual box but that will take more memory of underlying machine . So go for  the sandbox  go to https://developers.redhat.com/developer-sandbox
+
 NOte openshift 4 is the latest version in pursuit by Redhat.
 ------------------------------------------------------------------------------------------------------------------
 
@@ -97,6 +103,7 @@ Installion of dev tools to start working with the cli.
 5. Projects and Users  : 
 		oc delete all --all
 		oc whoami
+		oc whoamo -t : we can use this command to get the token to login to console from cli.
 		oc logout
 		oc login -u meet14764
 		oc project
@@ -790,9 +797,100 @@ This will allow auto check of health and restart if down
 
 
 -------------------------------Scaling  ------------------------------------
-
-
-
-
+replication controller : 1 by default 
+	
+	1. Manually command level scaing 
+		- oc new-app quay.io/practicalopenshift/hello-world  --as-deployment-config
+		- oc scale dc/hello-world --replicas=3
+	2. HPA : horizontal pod autoscaler. : 
+			Scaling as per the resource utilization of the pod. means CPU % or memory  %used .
+			Usage ratio  : used currently / Threshhold    : ===== example 200 millis/100 millis  : 2
+			No of pods to be running : no of pods running * usage ration  : 4 * 2 = 8 
+			
+			and vice versa 
+			
+		Steps to create HPA : 
+			oc autoscale dc/hello-world --min 1 --max 10 --cpu-percent=80
+			oc get hpa  -------------- will show you the targets 0%80% minpods and maxpods ,replicas and AGE
+			oc delete hpa 
+			oc rsh podname 
+					 : run : yes > /dev/null &  ----- 5 times 
+					 : run : cat /proc/cpuinfo : to see the cpu utilization 
+			oc get pods --watch ------------------------ you will see the pods scaling up as the utilization of cpu goes more that 80%		 
+	
+	
 
 -------------------------------Scaling  ------------------------------------
+
+
+
+-------------------------------Template : code as a service : using the template code to deploy the app on ocp servers ------------------------------------
+We can use yaml and do all the stuf as we did above so far.
+
+Three part sof template ::
+
+		----------------------
+			Preamble 
+		----------------------	
+		  Object resource lst 
+		----------------------	
+			Parameters
+		----------------------
+
+		How to create : 
+			oc create -f hello-world-template.yaml  : upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc 
+			oc new-app hello-world  : this will create the pods similar .
+			oc new-app hello-world -p MESSAGE="HELLO FROM OTHER PARMS"
+			
+		Processing template : Oc new-app command is not the only way to use template .
+			oc process hello-world  : this will show the template as a json  
+			oc process hello-world -o yaml >> proces.yaml 
+			oc create -f process.yaml 
+			
+		Processing a file presnt locally without uploading the file to ocp server.	
+			oc process hello-world -o yaml -f hello-world-template.yaml
+			oc new-app hello-world -f hello-world-template.yaml -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "
+		
+		Custom our own template : 
+			# Get YAML for existing objects on the OpenShift server
+			# The dc,is... syntax lists the types of resources that you would like to export
+			# Add hpa or any other type if you need them
+			oc get -o yaml dc,is,bc,svc,route --export
+			
+			# Save output to a file
+			oc get -o yaml dc,is,bc,svc,route \
+			--export \
+			> test-template.yaml
+			
+			# Open it up
+			vi test-template.yaml
+			
+			Steps for a custom template:
+			1. Change the items property to objects
+			2. Change kind from List to Template
+			3. Add a name property to the metadata section
+			4. Remove status from each resource
+			5. Remove most of metadata except for name, labels, and annotations
+			6. Remove any automatically-assigned resources such as service Virtual IPs and Route hosts
+			7. (optional) Add template parameters 
+		
+		How to use built -in templates : 
+			oc get template  -n openshift
+
+-------------------------------Template : code as a service  ------------------------------------
+
+
+######################################################################################################################################################
+
+ Quick intro on Docker and kubernetes :
+ 
+- Docker is the containerization tech used to create containers and allow easy dev and operation hadshake without any delay .
+- Contains are light weight processes running it its own isolated space and share the same OS as underlying hostmachine .
+- Images are the package , template that we used which contains the underlying base image , liberaries and actual build file for your application to run .
+- Containers are the running instances of the images that runs on a single host .
+- Tool need to run docker containers 
+	Docker engine . : This engine of process helps is running the containers with the help of docker daemon thread that send or receives the request from docker engine that rsend/receives the request from the clienst 
+- Kubernetes : Theere should be tool in place in case of performance hit happens on the app architecture , this tool might have the functionality to scale up and scale down the contains runing on one host machine or multiple host machine automatically.
+So kubernetes is the container orchestration tool helps in managing the infra and instance level management for our apps arch.	
+	
+
