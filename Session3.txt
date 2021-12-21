@@ -327,7 +327,7 @@ docker container run --detach --publish 8088:27017 --name mongo mongo:3.4 ---  t
 docker cotainer ls - docker ps 
 docker system prune---------------------------------------------------------- to rm all sop containers
 docker image build -t python-hello-world . ---------------------------------- to run the docker file and -t will rename the image to python-hello-world.
-
+docker image tag hello-world meet14764/myhello:1.0 -------------------------- to rename the image name and tag 
 for creating an image holding a python app.
 
 We require to python ----------- so FROM python base image 

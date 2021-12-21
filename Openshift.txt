@@ -900,14 +900,26 @@ Three part sof template ::
 	Docker engine . : This engine of process helps is running the containers with the help of docker daemon thread that send or receives the request from docker engine that rsend/receives the request from the clienst 
 - Kubernetes : Theere should be tool in place in case of performance hit happens on the app architecture , this tool might have the functionality to scale up and scale down the contains runing on one host machine or multiple host machine automatically.
 So kubernetes is the container orchestration tool helps in managing the infra and instance level management for our apps arch.	
-	
+- Dockerfile commands : https://kapeli.com/cheat_sheets/Dockerfile.docset/Contents/Resources/Documents/index
 
 
 Q. Create a hello world java rest api listening on port 8080 , build it using dockerfile and deploy it on openshift .
-We need 
-	rest api java project 
-	Docker file 
-	To build the image using oc command 
-	Then create a new app using oc new-app using the image created.
-	Lets try , why not ? :)
+We need  : https://codefresh.io/docker-tutorial/create-docker-images-for-java/
+	1. Rest api java project 
+	2. Use the maven tool to build the jar file or the build runable file 
+	3. Create a Docker file which contains the base jdk image , copy command to copy the jar to the container flder and CMD to run the jar and EXPOSE the port for the host port : container port mapping 
+	4. Test using the command : docker build -t meet14764/myapi:1.0  . ------------ this will rename the image to meet14764/myapi:1.0 where meet14764 is my repo name in docker hub repository.
+	5.  Use the : oc new-app docker.io/meet14764 --as-deployment-config  , docker pull docker.io/meet14764/myapi:1.0
+		oc new-app myregistry:5000/example/myimage
+		
+	6. check the app in OCP clusters.
 	
+	
+	Note : DON'T ADD THE BUILD TOOL LIKE MVN AS A LAYER IN YOUR DOCKER FILE IT WILL INCREASE THE SIZE OF THE IMAGE AND MAKE THE STORUING COST MORE.
+	
+	
+	
+	Docker quay.io push and pull command s : https://docs.quay.io/solution/getting-started.html
+	
+	docker push quay.io/meet14764/practicalocp
+	docker tag meet14764/myapi:1.0 myapi:quay.io/meet14764/practicalocp
