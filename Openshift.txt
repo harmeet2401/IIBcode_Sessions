@@ -29,11 +29,14 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 8. In OCP it uses Pods for everything like for creating a Deployement config if will spin up the pod for it once completes it will delete , just like for creating a build cofig it will spin up the pod for itand once completes it will delete it.
 
-9. Its PAAS as a service 
+9. Its PAAS as a service . Means u just have to run you application in the service that Redhat OCP servers provides . No need to maintain the under infra and OS.
 
 10. open shift is build on top of the kubernetes which is on top of dockers . OCP  provide various tools and resources that abstract the underlying functionality of kuberneter and docker .
 
 11. We can use either the MInishift or openshift sandbox . MInishift its th one we used in OPtum (where we install Minishift on different linux boxes and have the openshift url for differnet Dcs) is the iso image we can download by running MInishift.exe and open that iso image in virtual box but that will take more memory of underlying machine . So go for  the sandbox  go to https://developers.redhat.com/developer-sandbox
+
+12. In minishift we have different numbers of catalog which shows you can directly enter the github or gitlab or source code projct url and allow the deployment take place .
+		The catalog contains many things , like python , jenkins pipeline  , mysql , ruby , nginx , ruby etc.
 
 NOte openshift 4 is the latest version in pursuit by Redhat.
 ------------------------------------------------------------------------------------------------------------------
@@ -106,6 +109,7 @@ Installion of dev tools to start working with the cli.
 		oc whoamo -t : we can use this command to get the token to login to console from cli.
 		oc logout
 		oc login -u meet14764
+		oc get users 
 		oc project
 		oc new-project myproject
 		oc projects : list the projects in OCP cluster.
@@ -157,6 +161,7 @@ oc get pods --watch
 above command will show logs in the terminal and help in monitoring the pods deployemnets.			
 			
 ******NOTE****** : In simple language , you need to compile you app , build it and create an image , push it to the docker hub repo . Now use that image to create a pod in open shift , to create containers any where in kubernetes etc. open shift creates a POD even if you run a single container or 10000000 containers and we can also create multiple pods in bigger architecture.			
+	If you give git url the bc will be created using new-app , but if you give the image url then as usual no build required and direct dc and svc will get created .
 
 
 
@@ -285,7 +290,7 @@ Steps :
 	above get -o yaml commands are to get the yaml representation of those in a file 
 
 
-
+quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e37e981b6f84173f2f452854d81d1b7e
 
 -------------------------------------------------------SERVICES AND ROUTES----------------------------------------
 
