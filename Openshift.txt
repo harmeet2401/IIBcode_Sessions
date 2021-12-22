@@ -898,7 +898,20 @@ Three part sof template ::
 		How to use built -in templates : 
 			oc get template  -n openshift
 
+		In MInishift we can see multiple app catalog to select from . you can add more by searching the template and just import it and save it .
+		   Search In openshift origin repository 
 -------------------------------Template : code as a service  ------------------------------------
+
+---------------------------------Custom template ------------------------------------------------
+
+ - Means creating a template yaml file for the entire arch so that we can deploy all the microservice using only one template yaml file in the catalog
+ - when ever you use the yaml file from ocp server for existing ocp resource like IS , dc , bc , secrets, services , routes etc . post copying it keep the spec as it is rest remove the uneccessory details from metadata.
+ - once copying is done , create a new project in ocp , 
+	login to that project 
+		use command : oc create -f template.yaml -n namespacename
+
+
+---------------------------------Custom template ------------------------------------------------
 
 
 ######################################################################################################################################################

@@ -254,3 +254,40 @@ Process subscriptions and send visualization data to subscribed devices.
 	field extractions : 
 		use regular expression 
 --------------------------SPL search processing language -----------------------
+
+COmmand : 
+
+Top  : will give the most command value and top values using a diff colum or attribite value 
+	host=main | top Industry_aggregation_NZSIOC by year
+	
+rare : is apposite of top command , it will give the least common value fields 
+
+	 host=main | rare Industry_aggregation_NZSIOC by year
+Stats : stats avg(kbps) by host 	
+		
+		avg(kbps)   host 
+		654.99		host1.domain.com
+		768.9		host2.dommain.com
+		
+		stats count(failed_login) by users
+			
+			failed_login    user
+			43				james
+			22				jacob
+			
+		host=main | stats count(Units) as cunit by Year | sort by year  : its means number of Units fields in a year and that year will be fetched by splunk 
+
+		Year	cunit
+		2013	4635
+		2014	4635
+		2015	4635
+		2016	4635
+		2017	4635
+		2018	4635
+		2019	4635
+		2020	4635
+
+
+
+
+		
