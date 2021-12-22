@@ -649,6 +649,19 @@ types :
 				 &:/ check for the cm-dir folder existing in the pod or not ?
 				 
 			
+		3. Storage  : We are talking about the persistence storage volume that we claim for our pods.
+			- first go to storage 
+			- enter the name of the storage claim as we did in optum named eemsdev
+			- enter the size to be claimed . Now here one more catch the claim we are doing it out of the storage attached to the cluster can be of any plugin , AWS EBS , azure volume , file system local , etc 
+			- click save 
+			- go to you pod 
+			- in Deployement config click on add storage 
+			- select the storage claim name created before 
+			- enter the folder you want to be created 
+			- save 
+			
+			Now this claimed storage is the persistence volumes accessible to all the pods who got that added as a storage .
+			The data in that folder will be retained even if the pod is deleted.
 
 ------------------------------------volumes --------------------------
 
