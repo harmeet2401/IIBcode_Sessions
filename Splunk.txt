@@ -287,7 +287,49 @@ Stats : stats avg(kbps) by host
 		2019	4635
 		2020	4635
 
+---------------------------visualization : ----------------------
 
+Reports and alerts need enterprose level license and in free license the report and alerts are disabled
+
+Reports : means get the data fetch it and draft it into a file or table bar chars etc and generate it on hourly , mins days or monthly etc basis on the dashboard .
+Alerts : is to send emails or message to the concerned user for a data reaching a certain threashhold.
+
+1. Pivot tool : To generate report , dashboard and alerts without knowing the SPL language .
+		pivot function : 
+			- filters 
+			- split by row 
+			- split by col
+			- colume value : its numberic involves sum etc.
+		  By defulat it will show count of events .
+		  It will show just like excel 
+		  
+- Demo : creating dashboard and will create data model 
+
+- Pretty easy to generate the dashboard and generate the alerts just like we saw that in optum . The pivot is the tool which works of the data sets and help in sorting itand convert it into graphs and show it on the dashboard.
+
+- The one we created : http://127.0.0.1:8000/en-US/app/search/splunk_internal : this dashboard we created using the existing data model which is the system generated data sets 
+
+- To create a new data model for your data sets or data , click on setting  : data model -  new data model . and add events 
+	: Post creating the data model and save it , we can open that data model in pivot and starts creating th alerts and dashboard for visualization we will create.
+	
+	
+2. Deployment and forwarder management .
+3. users roles and administrator 
+	- Roles : 	
+		admin
+		power users 
+		users 
+		can _ dalete 
+		splunk _system _role
+	- Splunk administrator  : can cretae roles 
+	
+  	- Authentication types : 
+		Local 
+		LDAp 
+		SAML 
+		Scriptes SSO 
+
+			
 
 
 		
