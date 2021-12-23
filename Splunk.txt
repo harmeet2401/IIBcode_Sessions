@@ -328,6 +328,37 @@ Alerts : is to send emails or message to the concerned user for a data reaching 
 		LDAp 
 		SAML 
 		Scriptes SSO 
+		
+4. Configuration file : what ever you do online splunk it will write it to the splunkg cofiguration files .
+
+    Configuration precedence maintain by splunk :
+		system local directory 
+		app local directory
+		app default directory
+		system default directory
+		
+5. knowledge objets : 
+			Add knowledge to enrich the data .
+			include fields , extraction , saved searches or etc 
+		a. Saved searches 
+		b. Field extraction 
+		c. tags : assign name to the specific field and value combinations 
+		d. event types : tagging an entire search string . Then we can use that tag everytime for this complete string search .
+		e. Lookups : Add custom fields to the events from external sources . lik ecsv files.
+		
+	Demo of above knowledge objects : 
+		1. Lookup tables :  is a csv file with 2 number of columns . OOh k just like we need to replace the value with other value. Lookups will help in mapping the values.
+			create a csv file as below 
+			
+			test.csv : 
+			log_level,column2
+			INFO , INFO has been converted
+			WARN , WARN has been converted
+
+			Setting --> lookups --> add the file change the permission 
+
+			index=_internal* log_level=warn | lookup test.csv log_level output column2 | table log_leve1 column2		
+			
 
 			
 
