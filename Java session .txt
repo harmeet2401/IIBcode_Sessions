@@ -41,3 +41,27 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 	Access modifier default is it is access with in the class only . 
 	if we put that in different package we need to make it public to import it another clas. 
+	
+	private  : will be access with same class and package 
+	protected   : 
+	public  : can be access from anywhere 
+	default : can access only with in clas
+	
+7. variables and data types  :
+
+	a.  Premitive data type variable  : like : char , int , short , long , double . All these have different storage size.
+			variables : Instance variable and Local variable
+			- Instance variable : 
+				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created,
+			- Local variable : 
+				Those variable declared inside the mthod os the class . those variables should be initialized or else the compiler will complaint.
+				
+	b.  Reference variable : Are the variable which are refrencesd to the heap memory .
+			Person alex  = new Person();
+			-----------
+				|
+				|
+				|
+			Reference variable .	
+
+				

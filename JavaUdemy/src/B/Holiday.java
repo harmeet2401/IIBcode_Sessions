@@ -1,24 +1,24 @@
 package B;
 import A.Trip;
-public class Holiday {
-    public static void main(String[] args) {
-        Trip trip_1 = new  Trip();
-        trip_1.noOfPlannedDays=2;
-        trip_1.location ="Eiffel Tower";
-        System.out.println(printTripDetails(1,trip_1.location, trip_1.noOfPlannedDays));
-        Trip trip_2 = new  Trip();
-        trip_2.noOfPlannedDays=1;
-        trip_2.location ="Notre Dame Catheral";
-        System.out.println(printTripDetails(2,trip_2.location, trip_2.noOfPlannedDays));
-        Trip trip_3 = new  Trip();
-        trip_3.noOfPlannedDays=5;
-        trip_3.location ="Louvre Museum";
-        System.out.println(printTripDetails(3, trip_3.location, trip_3.noOfPlannedDays));
+public class Holiday{
+    public static void main(String args[]){
+        System.out.println(printTripDetails());
+    }
+    public static String printTripDetails(){
+
+        Trip trip_1 = new Trip();
+        trip_1.location = "Eiffel Tower";
+        trip_1.noOfPlannedDays = 2;
+
+        Trip trip_2 = new Trip();
+        trip_2.location = "Notre Dame Cathedral";
+        trip_2.noOfPlannedDays = 1;
+
+        Trip trip_3 = new Trip();
+        trip_3.location = "Louvre Museum";
+        trip_3.noOfPlannedDays = 5;
+        return "Trip 1 : location - "+trip_1.location+" and planned number of days "+trip_1.noOfPlannedDays+" | "+"Trip 2 : location - "+trip_2.location+" and planned number of days "+trip_2.noOfPlannedDays+" | "+"Trip 3 : location - "+trip_3.location+" and planned number of days "+trip_3.noOfPlannedDays;
 
     }
-    public static String printTripDetails(int i,String location , int noofplanneddays){
-        // TODO : Write you logic here to return trip details
-        return "Trip "+i+": location - "+location+" and "+"noofplanneddays - "+noofplanneddays;
 
-    }
 }
