@@ -55,7 +55,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created,
 			- Local variable : 
 				Those variable declared inside the mthod os the class . those variables should be initialized or else the compiler will complaint.
-				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000'
+				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000' , this is the unicode value for char when you will sout the char using unicode it will print the char a , b, c, ....
 				
 	b.  Reference variable : Are the variable which are refrencesd to the heap memory .
 			Person alex  = new Person();
@@ -65,4 +65,4 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				|
 			Reference variable .	
 
-				
+8. type casting  : 				
