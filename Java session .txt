@@ -139,9 +139,86 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			Float b = new Float(10f);
 			Double b = new Double(10d);
 
-13. Array : 			
-			
+13 . Q WHERE THE OBJECTS , METHOD , INSTANC VARIABLES , LOCAL VARIABLE RESIDES IN ?
+				
+		HEAP MEMORY (garbage collectable memory)-----								STACK MEMORY--------
+        						
+		Objects 																	Methods 
+													
+		instances variable 															Local variables 
 			
 		
 			
+	Objects reside in the heap memory which can be released when the garbage collector comes .
+	instance variables are connected with Objects so it also stays on heap 
+	
+	Methods reside in stack just like a stack of books , execute the methods one by one and pos  out of the memory
+	Local variables as usual declared inside mothods so it also stay on stack .
+	
+	
+	While coding keep in mind how to utilize the memory 
+	
+14. Modifiers of Methods : 	
+		public : access from all 
+		protected : restrict the access in same package 
+		private : can not acess.
+		default : can call it from same class only 
+		static  : no need to create an insance/objects of the class in which this method is to access it . It will beloing to class.
+		final   : Can not override the method  in child class which inherit the base class that contain final method.
+		abstract : it is used only to declare the method without body .
+		synchronised : only one thread can access this mthod at a time . Oher threads will wait for the release.
+		
+15. lambda : 
+		Now Let's convert regular incrementByOne method to Lambda expression step by step.
+		
+		This is original method,
+		
+		public int incrementByOne(int num) {
+			return ++num;
+		}
+		Step 1: Remove Access Modifier, Return type and Method Name
+		
+		So expression will be like like this,
+		
+		(int num) {
+			return ++num
+		}
+		Step 2: Add Lambda operator(->) between the parameters and method block,
+		
+		(int num) -> {
+			return ++num
+		}
+		This is the modified version of incrementByOne using lambda expression. If you want to simplify further, parameter’s data type is optional, so Let's remove those
+		
+		So method will be looks like this now.
+		
+		(num) -> {
+			return ++num
+		}
+		To simply further,
+		
+		If your method has only one line of statement, you can remove {}. And also, if code is not in block return keyword is not needed
+		
+		So method will be looks like this now.
+		
+		(num) -> ++num;
+		
+		
+		Sample code for Lambda expression:
+		
+		interface NumExamples{
+			public int incrementByOne(int num);
+		}
+		
+		public class MyClass {
+			public static void main(String[] args) {
+			NumExamples result = ( num) -> ++num;
+			}
+		}
+		Since we haven’t discussed interfaces yet, The above code might be hard to understand for you. For now, just understand the idea of the Lambda expression.
+		
+		Note: If you are comfortable with the earlier structure of method implementation, feel free strict with the same. This is just an advanced and simplified version of the method structure.
+
+		
+16. 		
 	
