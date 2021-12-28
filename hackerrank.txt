@@ -266,6 +266,20 @@ Q. Wrapper classes : 	 In collections we use wrapper classes as we can not use p
 		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
 		
 		Where Integer is the wrapper class.
+		These classes are ussed to wrap primitive data types like : boolean , byte , char , int , long , short , double , float etc 
+		
+		primitive data types 				Wrapper class 
+		boolean									Boolean
+		byte									Byte 
+		char									Character
+		int										Integer
+		long									Long
+		short									Short
+		double									Double
+		float									Float
+
+	Notes 	We can understand it like this : we can declared the wrapper class object as this Boolean b = new Boolean(false) ; ------> in this , the constructor is used to hold the primitive data value.
+
 
 Q : Java Spring bean scope : The spring context container holds all the components which are on the classpath or annotated or configured . So if we create a bean class or entity .
 	Asking the getBean method from spring context for that bean class. We can get the hashcode of that class object which make the scope categories as below.

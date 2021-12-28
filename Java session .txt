@@ -95,5 +95,53 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 11. Operators in java : 
 
 		Important point : always use equals in string comparisons 
+		++ and -- : always try to use it in suffix like : ++x or --x , if  you want the value incremented assinged it to x immediatley 
+			x++ and x-- will increament and decrement the valus but will be assigend to the variable on next set of code lines.
+		
+	- below loc will give same results  : 
+		System.out.println(--x1);
+        System.out.println(x1);
+		
+	- below loc will give diffe results : 
+		System.out.println(x1--);
+        System.out.println(x1);
+		
+	- conditional operators :  example 
+		- z =  x==y ? z = 100 : z =109;
+		- z = str1.equalsIgnoreCase(str2) ? 100 : 109;
+		
+	- you can either use & or &&  , | or || both will work in same manners
+
+12. Wrapper classes : 	 In collections we use wrapper classes as we can not use primitive data types in collections to store data .
+		ArrayList<int> alist = new ArrayList<int>(); // invalid
+		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
+		
+		Where Integer is the wrapper class.
+		These classes are ussed to wrap primitive data types value like : boolean , byte , char , int , long , short , double , float etc 
+		
+		primitive data types 				Wrapper class 
+		boolean									Boolean
+		byte									Byte 
+		char									Character
+		int										Integer
+		long									Long
+		short									Short
+		double									Double
+		float									Float
+
+	Notes 	We can understand it like this : we can declared the wrapper class object as this Boolean b = new Boolean(false) ; ------> in this , the constructor is used to hold the primitive data value.
+	
+	****AUTOBOXING AND UNBOXING : 
+		This is the cool feature of java in which if we want to convert the primitive data type value to wrapper class just directly write it like tihs :
+		- Interger f = 100;   here the Integer is the wrapper class and 100 is an int value , java is converting it automaticaaly to wrapper which is now giving us the advantage to us all other functions that wrapper class provide.
+		- normal way to wrap a primitive value in wrapper class  
+			Byte b = new Byte(10);
+			Float b = new Float(10f);
+			Double b = new Double(10d);
+
+13. Array : 			
+			
+			
+		
 			
 	
