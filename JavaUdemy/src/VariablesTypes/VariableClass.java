@@ -1,20 +1,25 @@
-package C;
+package VariablesTypes;
 
 import com.sun.beans.editors.BooleanEditor;
 
 public class VariableClass {
     //Boolean x = false;
     //int x = 991076801;
-    //long x = +919910768018l;  more mem usage then int
+    long x = +919910768018l;  //more mem usage then int
+    long y = +919910768018l;
     //short x = 900; less mem usage then long
     //double x = 10999999.999199999189918999223232938380132131739821737739d;
     //float x = 9001991991919919991.99918881999198119918811919f;
-    char x = 'a';
+    //char x = 'a';
     //char x = '\u0016';
 
     public static void main(String[] args) {
         VariableClass c= new VariableClass();
         System.out.println(c.x);
+
+        if(c.x==c.y){
+            System.out.println("both the long objects are same");
+        }
 
         /*Type casting
          */
