@@ -1,8 +1,10 @@
 package B;
 import A.Trip;
 public class Holiday{
+    int x;
     public static void main(String args[]){
         System.out.println(printTripDetails());
+        
     }
     public static String printTripDetails(){
 
