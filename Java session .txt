@@ -220,5 +220,21 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		Note: If you are comfortable with the earlier structure of method implementation, feel free strict with the same. This is just an advanced and simplified version of the method structure.
 
 		
-16. 		
+16. Switch statements are better then if else block , the execustion line of code is lsser and it is faster then if else .
+ switch (a == 0 || a==-1 | a==-2 | a==-4 | a==-3 ? 0 : 10) {
+            case (5):
+                System.out.println("FIRST BLOCK WITH a = 5");
+                break;
+            case (1):
+                System.out.println("SECOND BLOCK WITH a = 1");
+                break;
+            case (0):
+                System.out.println("THIRD BLOCK WITH a = 0");
+                break;
+            default :
+                System.out.println("DEFAULT BLOCK EXECUTED");
+                break;
+        }
+
+17. 		
 	
