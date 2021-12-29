@@ -365,3 +365,19 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				Keep this in mind
 					- == operator if we apply on a reference objects it will tell if it is pointing to the same memory locations ?
 					- equals operator will compare the string values . Always use equals/equalsIgnoreCase for string compare
+					- String objects are immutable means we can change the value but need to chNGE THE REFERENCE VALUE 
+						String str1 = "test ";
+						str1 =str1.concat("jaav");
+						sout(testjaav)
+						
+26. Stringbuffer and stringbuilder 	: 
+		these are not immutable classes , we can do as many chanes as we can .
+		its thread safe .
+		
+		 StringBuffer strb = new StringBuffer("Welcome to java ");
+          strb.append("((");
+          System.out.println(strb);
+
+          StringBuilder stringBuilder = new StringBuilder("Welcome to java ");
+          stringBuilder.append("@@");
+          System.out.println(stringBuilder);
