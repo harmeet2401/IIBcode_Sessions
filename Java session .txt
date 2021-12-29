@@ -331,3 +331,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 					- even a one function in a class abstract then the clas is abstract
 					- We extends these.
 					
+23. Encapsulation : Hiding the back end functionality . Just like remote control , you can see the buttons to control .
+					Hiding can be done using the access modifiers .
+					Private access modifier can be used to do that 
+					
