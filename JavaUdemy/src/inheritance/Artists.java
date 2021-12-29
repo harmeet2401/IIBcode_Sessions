@@ -20,6 +20,7 @@ public class Artists extends Human{
         artists.eat();
         artists.walk();
         artists.speak();
+        artists.check();
         System.out.println(artists.name +" of age :"+ artists.age+" and gender : "+ artists.gender +" can do the : "+ artists.art);
         Artists a = new Artists();
         Artists b = new Artists();// these objects are refring to diff address or mem space so these are diff

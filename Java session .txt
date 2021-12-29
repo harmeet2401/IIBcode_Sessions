@@ -313,3 +313,13 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				
 					GenericLivingCreatureInterface g = new Human(); --------------- possible
 					Human h = new GenericLivingCreatureInterface();  --------------not possible 
+			- we can multiple inheritance by multiple implements of interface 
+			
+			#IMP# : Imagine one interface is implemented in 1000 classes , adding a one more function in interface will break all 1000 classe 
+				to overcome this we have default function in which we can add the function body in interface itself 
+					
+					default void check(){
+						System.out.println("new function added");
+					}
+					
+					

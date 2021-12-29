@@ -9,6 +9,9 @@ public interface GenericLivingCreatureInterface {
     public abstract void speak();
     public abstract void breath();
     public abstract void eat();
+    default void check(){
+        System.out.println("new function added");
+    }
 
 
 
