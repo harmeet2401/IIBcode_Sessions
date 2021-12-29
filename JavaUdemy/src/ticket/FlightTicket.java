@@ -7,6 +7,13 @@ public class FlightTicket {
     public String ticketCategory;
     public static int noOfSeatAvailable = 4;
 
+
+    static {
+        System.out.println("STATIC BLOCK 2 ");
+    }
+    static {
+        System.out.println("STATIC BLOCK 1");
+    }
     public FlightTicket(int ticketNumber, int ticketId, int flightId, String ticketCategory,int noOfSeatAvailable) {
         this.ticketNumber = ticketNumber;
         this.ticketId = ticketId;

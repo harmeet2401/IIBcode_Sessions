@@ -267,5 +267,20 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				static variable are which will be common to all objects like 
 					no of seta available is common to all tickets going to each pessenger . which will have an updated count . mean 90 is available for all .
 			
+			2. 	Static blocks : which will be run at the verry first step , sbse pehle run hogga 
+			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocksare executed sequentially.
 			
-			2. 			
+20. Inheritance : 			
+
+	- Wecan use extends the super class 
+	-  public class subclass extends superclass
+		subclass object = new subclass();
+		
+		this will use the super class and base class members.
+		
+		superclass object = new subclass();
+		this will again  use the super class and base class members.
+		
+		superclass object = new superclass;
+		this will use the super class only.
+		
