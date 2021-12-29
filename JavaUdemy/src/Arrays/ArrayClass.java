@@ -16,6 +16,13 @@ public class ArrayClass {
         arrayList.add(2);
         arrayList.add(3);
         arrayList.forEach(item -> System.out.println(item));
-        int y = () -> x++;
+
+        System.out.println("----------------------------------");
+        System.out.println(averageValue(7,9,11));
+
+    }
+    public static double averageValue(int a , int b , int c){
+
+        return a+b+c/3;
     }
 }
