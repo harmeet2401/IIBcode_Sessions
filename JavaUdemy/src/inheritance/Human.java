@@ -1,6 +1,6 @@
 package inheritance;
 
-public class Human  implements GenericLivingCreatureInterface{
+public class Human  implements GenericLivingCreatureInterface ,GenericLiveInterface{
     public String name ;
     public int age;
     public String gender;

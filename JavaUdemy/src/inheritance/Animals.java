@@ -1,6 +1,6 @@
 package inheritance;
 
-public class Animals implements GenericLivingCreatureInterface {
+public class Animals implements GenericLivingCreatureInterface,GenericLiveInterface {
     @Override
     public void walk() {
         System.out.println("walks on four feet");

@@ -322,4 +322,6 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 						System.out.println("new function added");
 					}
 					
-					
+			- two interfaces have same fnction : how to call the functions then post implementation		
+				
+				code : Interfacename.super.functionname()
