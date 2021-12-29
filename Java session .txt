@@ -257,4 +257,15 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			  super(1,"Meet","orlendo") this will call the 3 parameterized constructor in super pojo class.
 			  super("meet",100999) this will call the 2 parameterized constructor in super pojo class.
 
-	#IMP#  Single ton class : Can have only one object and can not be instantiated again .			
+	#IMP#  Single ton class : Can have only one object and can not be instantiated again .	
+
+19. STATIC MEMBERS : static members can not call non-static members and vice - versa  . static is for class.
+
+		Applied on below members of java : 
+		
+			1. static Instance variable : variables which are on class level can only be declared as static . public static int setavailable = 90;
+				static variable are which will be common to all objects like 
+					no of seta available is common to all tickets going to each pessenger . which will have an updated count . mean 90 is available for all .
+			
+			
+			2. 			
