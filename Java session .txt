@@ -308,3 +308,8 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			
 			- variables are final and static 
 			- functions ar abstract declared without body.
+			- we can not make a instance for an interface 
+				but we can create a references 
+				
+					GenericLivingCreatureInterface g = new Human(); --------------- possible
+					Human h = new GenericLivingCreatureInterface();  --------------not possible 

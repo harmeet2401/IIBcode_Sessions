@@ -5,6 +5,12 @@ public class Ameba extends Animals{
         Ameba a =new Ameba();
         a.breath();
         a.eat();
-
+        System.out.println("-------------------------------------------------------");
+        GenericLivingCreatureInterface g = new Human();  // this will call function defination froHuman
+        g.breath();
+        System.out.println("-------------------------------------------------------");
+        GenericLivingCreatureInterface g1 = new Animals();
+        g1.breath();
+        System.out.println("-------------------------------------------------------");
     }
 }
