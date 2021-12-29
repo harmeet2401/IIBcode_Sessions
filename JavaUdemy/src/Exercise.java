@@ -16,7 +16,7 @@ public class Exercise {
          * IN CASE A IS 0 CASE BLOCK A == 5 WILL NOT EXECUTE , CASE(A==1) WILL NOT EXECUTE AND THEN CASE A == 0 WILL EXECUTE
          *          * TO REACH THE TREU STATEMENTS
          */
-        switch (a) {
+        switch (a == 0 || a==-1 | a==-2 | a==-4 | a==-3 ? 0 : 10) {
             case (5):
                 System.out.println("FIRST BLOCK WITH a = 5");
                 break;
@@ -44,7 +44,7 @@ public class Exercise {
             System.out.println("THIRD ELSE-IF WITH a = 0");
         }
         else {
-            System.out.println("default block ");
+            System.out.println("default ELSE block ");
         }
         return a;
         // Finally return int value
