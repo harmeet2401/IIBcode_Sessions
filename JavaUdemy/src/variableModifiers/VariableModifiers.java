@@ -1,4 +1,4 @@
-package VariableModifiers;
+package variableModifiers;
 public class VariableModifiers {
     //static int i = 000000000000000000000000000001 ; //single copy of the variable , value can be changed
     //final int i = 000000000000000000000000000001 ; immutable value or can not be changed.

@@ -1,5 +1,5 @@
-package B;
-import A.Trip;
+package b;
+import a.Trip;
 public class Holiday{
     int x;
     public static void main(String args[]){

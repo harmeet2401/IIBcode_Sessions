@@ -1,6 +1,4 @@
-package VariablesTypes;
-
-import com.sun.beans.editors.BooleanEditor;
+package variablesTypes;
 
 public class VariableClass {
     //Boolean x = false;
