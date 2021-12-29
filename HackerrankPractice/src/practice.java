@@ -18,6 +18,11 @@ class AirJet extends  AirPlane{
 public class practice {
 
     public static void main(String arg[]) {
+        List li = new ArrayList();
+        li.add(0,"test1");
+        li.add(1,"test1");
+
+        li.forEach(el-> System.out.println("List : - "+el));
         System.out.println("--------------Array List------------");
         ArrayList<String> list = new ArrayList<>();
         list.add("Harmeet");
@@ -68,6 +73,8 @@ public class practice {
         hashMap.put("4","WOLKWOGEN");
         hashMap.put("5","AUDI");
 
+        String name = hashMap.get("5");
+        System.out.println("the name i fetched using key "+name);
 
         //lambda expression
         hashMap.values().forEach(value->{
