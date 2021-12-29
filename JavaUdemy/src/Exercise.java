@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static javax.swing.text.html.HTML.Tag.I;
@@ -7,6 +8,7 @@ public class Exercise {
     float x = 5.2f;
     public static void main(String[] args) {
         System.out.println(printResult());
+        printResultLoop();
     }
 
     public static int printResult(){
@@ -50,4 +52,61 @@ public class Exercise {
         // Finally return int value
     }
 
+    public static void printResultLoop(){
+        int k = 0;
+        int j = 0;
+
+        /**
+         * Will run till i is greater then 9
+         */
+        for (int i = 0; i < 9 ; i++) {
+            System.out.println("For loop ::" +i);
+        }
+
+        System.out.println("----------------------------------------");
+
+        /**
+         * will run till j become greater then 9
+         */
+        while (j<9){
+            System.out.println("While loop ::" +j);
+            j++;
+        }
+
+        System.out.println("----------------------------------------");
+        /**
+         * This loop will run atleast once as first time no conditional check is there .
+         */
+        do {
+            System.out.println("Do while  loop ::" +k);
+            k++;
+
+        }while(k<9);
+
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.add(5);
+
+        System.out.println("---------------------------------------------");
+        for(int e : arrayList){
+            System.out.println("Arraylist using enhanced loop :: " + e);
+
+        }
+        System.out.println("---------------------------------------------");
+        /* lambda statements :
+         */
+        arrayList.forEach(e-> {
+            if(e==5) {
+                return;
+            }else{
+                System.out.println("Arraylist using the lambda expression :: " + e);
+            }
+        }
+        );
+        System.out.println("post running all LOC");
+
+    }
 }

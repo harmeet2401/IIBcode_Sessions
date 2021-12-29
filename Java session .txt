@@ -235,6 +235,6 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
                 System.out.println("DEFAULT BLOCK EXECUTED");
                 break;
         }
-
-17. 		
+ 
+17. lambda expression in java for loop to break use return statement in it .
 	
