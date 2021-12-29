@@ -1,6 +1,6 @@
 package bean;
 
-import bean.bean.UserParent;
+import bean.UserParent;
 
 public class User extends UserParent {
     public String name;

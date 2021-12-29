@@ -256,4 +256,5 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			- super() function used in pojo class itself will call the constructor of the super class class and this one will call the non-parameterized one and if no super class is there then Object class constructor will be called 
 			  super(1,"Meet","orlendo") this will call the 3 parameterized constructor in super pojo class.
 			  super("meet",100999) this will call the 2 parameterized constructor in super pojo class.
-			
+
+	#IMP#  Single ton class : Can have only one object and can not be instantiated again .			

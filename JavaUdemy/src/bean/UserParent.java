@@ -1,4 +1,4 @@
-package bean.bean;
+package bean;
 
 import bean.User;
 
