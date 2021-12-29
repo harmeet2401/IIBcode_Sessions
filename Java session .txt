@@ -325,3 +325,9 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			- two interfaces have same fnction : how to call the functions then post implementation		
 				
 				code : Interfacename.super.functionname()
+				
+22. abstract classes : 
+					- unlike interface , abstract classes can have functions with body . and withour body also .
+					- even a one function in a class abstract then the clas is abstract
+					- We extends these.
+					

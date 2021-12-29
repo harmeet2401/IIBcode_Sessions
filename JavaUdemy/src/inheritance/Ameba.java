@@ -12,6 +12,8 @@ public class Ameba extends Animals{
         GenericLivingCreatureInterface g1 = new Animals();
         g1.breath();
         System.out.println("-------------------------------------------------------");
-
+        AbstractClass am = new Animals();
+        am.type();
+        am.chill();
     }
 }

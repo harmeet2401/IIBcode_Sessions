@@ -1,6 +1,6 @@
 package inheritance;
 
-public class Animals implements GenericLivingCreatureInterface,GenericLiveInterface {
+public class Animals extends  AbstractClass implements GenericLivingCreatureInterface,GenericLiveInterface {
     @Override
     public void walk() {
         System.out.println("walks on four feet");
@@ -19,5 +19,15 @@ public class Animals implements GenericLivingCreatureInterface,GenericLiveInterf
     @Override
     public void eat() {
         System.out.println("Eats anything");
+    }
+
+    @Override
+    public void check() {
+        GenericLivingCreatureInterface.super.check();
+    }
+
+    @Override
+    public void type() {
+        System.out.println("Type method from abstract class");
     }
 }
