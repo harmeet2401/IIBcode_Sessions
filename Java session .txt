@@ -283,4 +283,17 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		
 		superclass object = new superclass;
 		this will use the super class only.
+	- We can also pass the subclass type object as a paramter to a function needing super class objects
 		
+		public static lesswalk (Human h){
+		
+			sout(name + " :   walks less");
+			
+		}
+		
+		psvm(){
+			sportsperson a = new sportsperson();
+			a.name = "keen";
+			lesswalk(a); ---------------------------------------------------------> subclass refenrce means HUman super set hai and sportsperson is subset humans ka 
+		
+		}
