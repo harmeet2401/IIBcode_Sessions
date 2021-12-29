@@ -381,3 +381,35 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
           StringBuilder stringBuilder = new StringBuilder("Welcome to java ");
           stringBuilder.append("@@");
           System.out.println(stringBuilder);
+
+27. Exception handling : 
+
+	Exception are sudden error occured in our program which may be a result of a file not found exception or stackoverflow exceptio , array index ot of bound exception etc 
+	
+	Types of exception : 
+	  - checked exception : These are the exception which comes during compilation . The java compiler throws these exception during the run time and does not allow a clean compile and will not create a .class(byte code) file for it.
+	  - Unchecked Exceptions : Runtime exception. These ex eption comes at runtime due to unwanted code bug etc . in this case the .class  has already been generated but will break while running the code in JVM.
+	  
+	The order or hierarchy of thr exception really matters :
+		Objects 
+			|
+		Exception
+			|
+	ioex  , clssnotfoundex , .... runtime exception 
+										|
+									Arithmetic exception , numberformt exception , null pointerexceptio  ....... more 
+									
+	so we have to add multipe catch block by check ing our code .
+		Exception class is capable of catching all exceptions .
+		
+								
+      - Finally block : 	
+				This block always run . this block comes at the end of the catch or try block . We mostly used this block to close all the open inputstream , db connections , flush the buffer etc . This will help in reducing the memory leak due to db connection s, network leak etc .
+				
+	  - propagating the unhandled exceptions  : means the exception occured upstream or backword if not catched , similar to what we do in IIB .
+		
+	  - Throw and throws : 
+			Throw key word we can use to throw an exception like throw new NumberFormatException("Messge for it")
+			Throws we can use to throw multiple exceptions from downstream method to upstream .
+			
+	  - Custom exception or user define : 
