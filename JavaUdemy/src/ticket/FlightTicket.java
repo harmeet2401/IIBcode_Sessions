@@ -5,7 +5,7 @@ public class FlightTicket {
     public int ticketId;
     public int flightId;
     public String ticketCategory;
-    public static int noOfSeatAvailable = 8;
+    public static int noOfSeatAvailable = 4;
 
     public FlightTicket(int ticketNumber, int ticketId, int flightId, String ticketCategory,int noOfSeatAvailable) {
         this.ticketNumber = ticketNumber;
@@ -16,19 +16,25 @@ public class FlightTicket {
     }
 
     public static void main(String[] args) {
-        FlightTicket ticket1 = new FlightTicket(1,1100,1122,"Business",--FlightTicket.noOfSeatAvailable);
-        System.out.println("Ticket with Id : "+ticket1.ticketId +" is booked");
-        System.out.println("Available number of seat : "+FlightTicket.noOfSeatAvailable);
+        createTicket(1 ,1100,1122,"Business");
+        createTicket(2,1200,1122,"Business");
+        createTicket(3 ,1300,1122,"Business");
+        createTicket(4 ,1400,1122,"Business");
+        createTicket(5 ,1500,1122,"Business");
 
-        FlightTicket ticket2 = new FlightTicket(2,1200,1122,"Economy",--FlightTicket.noOfSeatAvailable);
-        System.out.println("Available number of seat with ID : - "+ticket2.ticketId+" before booking  : "+ticket2.noOfSeatAvailable);
-        System.out.println("Ticket with Id : "+ticket2.ticketId +" is booked");
-        System.out.println("Available number of seat with ID : - "+ticket2.ticketId+" before booking  : "+ticket2.noOfSeatAvailable);
+        }
 
+    private static void createTicket(int ticketNumber,int ticketId , int flightId , String ticketCategory) {
+        System.out.println("------------------------------------------------------------------------------------------------------------");
+        System.out.println("Available number of seat before booking  : "+ FlightTicket.noOfSeatAvailable);
+        if(FlightTicket.noOfSeatAvailable>0) {
+            FlightTicket ticket = new FlightTicket(ticketNumber, ticketId, flightId, ticketCategory, --FlightTicket.noOfSeatAvailable);
+            System.out.println("Ticket with Id : " + ticket.ticketId + " is booked");
+            System.out.println("Available number of seat with post booking   : "+ticket.noOfSeatAvailable);
+        }else{
+            System.out.println(" :( sorry seats are not available");
+        }
 
-        FlightTicket ticket3 = new FlightTicket(3,1300,1122,"Business",--FlightTicket.noOfSeatAvailable);
-        System.out.println("Available number of seat with ID : - "+ticket3.ticketId+" before booking  : "+ticket3.noOfSeatAvailable);
-        System.out.println("Ticket with Id : "+ticket3.ticketId +" is booked");
-        System.out.println("Available number of seat with ID : - "+ticket3.ticketId+" before booking  : "+ticket3.noOfSeatAvailable);
+        System.out.println("------------------------------------------------------------------------------------------------------------");
     }
 }
