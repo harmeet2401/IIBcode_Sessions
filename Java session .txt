@@ -297,3 +297,14 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			lesswalk(a); ---------------------------------------------------------> subclass refenrce means HUman super set hai and sportsperson is subset humans ka 
 		
 		}
+	
+	- ambiguous arises and java doesnot support multiple inheritance and extends for two super class , nope not possible.
+	- if we use final keyword for a class make that class non extendable .
+	
+21. Interface : Are the abstract class which contains the abstract functions and promotes the abstraction features by not defining the method functions .
+
+			we know human can be categories as Artists and musician , both have diffr eating style , walking , breathing level and eye colours .
+			Thses differnet featres we can keep it as a template in interface and fill the template when Implemented in sub class.
+			
+			- variables are final and static 
+			- functions ar abstract declared without body.
