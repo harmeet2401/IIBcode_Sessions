@@ -18,6 +18,8 @@ public class SportsPerson extends Human{
                 " and gender : "+ sportsPerson.gender +" play : "+ sportsPerson.playSoftBall);
         sportsPerson.speak();
         lesswalk(sportsPerson);  //---------------------------------------------------------> subclass refenrce means HUman super set hai and sportsperson is subset humans ka
+
+
     }
     public  void speak(){
         System.out.println(name + ": can speak a faster way.");
