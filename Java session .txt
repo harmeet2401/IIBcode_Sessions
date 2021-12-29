@@ -238,4 +238,22 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
  
 17. lambda expression in java for loop to break use return statement in it .
 
-18. 	
+18. Constructor : 
+			- Constructor can not have return type and can not be statis 
+			
+			- It is used to initialize the class variable .
+			
+			- As we did in rest api to initialize the bean attributes to a values.
+			
+			- One amazing thing learned is in our pojo class or bean class we can add both the constructor parameterized and non parameterized
+				Paramterized will help in initializing the attaribute variable by passing the value in constructor.
+				Non-parameterized will help in initializing the variable by using the .(dot) opertaor 
+			
+			- this() function used in pojo class itself will caal the constructor of the same class and this one will call the non-parameterized one
+			  this(1,"Meet","orlendo") this will call the 3 parameterized constructor in same pojo class.
+			  this("meet",100999) this will call the 2 parameterized constructor in same pojo class.
+			
+			- super() function used in pojo class itself will call the constructor of the super class class and this one will call the non-parameterized one
+			  super(1,"Meet","orlendo") this will call the 3 parameterized constructor in super pojo class.
+			  super("meet",100999) this will call the 2 parameterized constructor in super pojo class.
+			
