@@ -413,3 +413,8 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			Throws we can use to throw multiple exceptions from downstream method to upstream .
 			
 	  - Custom exception or user define : 
+													 - create a class and								
+													 - extends Exception class and write a constructor and pass the message attribite to super(message)
+													 - use throw new MyExceptionClass("your message")
+													 
+28. Collections : 													 
