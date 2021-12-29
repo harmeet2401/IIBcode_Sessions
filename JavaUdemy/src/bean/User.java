@@ -1,6 +1,8 @@
 package bean;
 
-public class User {
+import bean.bean.UserParent;
+
+public class User extends UserParent {
     public String name;
     public String address;
     public int userid;
@@ -12,6 +14,7 @@ public class User {
      * @param userid
      */
     public User(String name , String address , int userid){
+        // here compiler will automaticallly add the super() call which will call the parent class constructor.
         this.address = address;
         this.name = name;
         this.userid = userid;
@@ -21,7 +24,8 @@ public class User {
      * we are setting the default values in below cons
      */
     public User(){
-        this("Bobby","Get the address",9889);
+        //this("Bobby","Get the address",9889);
+        //super(new User("Bobby","Get the address",9889),"adminuser"); // this will call the constructor of parent class that we extends above
     }
 
 
