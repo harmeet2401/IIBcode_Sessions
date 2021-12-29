@@ -29,11 +29,29 @@ public class practice {
         list.add("Aarmeet");
         list.add("Barmeet");
         list.add("Carmeet");
+        list.remove(2);
         Collections.sort(list);
         for (String l:list
              ) {
             System.out.println(l);
         }  ;
+        ArrayList nolist = new ArrayList();
+        nolist.add("Arraylist");
+        nolist.add(new Person("Meet","88277",9009));
+        nolist.forEach(elements -> System.out.println("non-specific arraylist : - "+elements));
+        System.out.println("The person name from person object "+ ((Person)nolist.get(1)).getName());
+        System.out.println("The person address from person object "+ ((Person)nolist.get(1)).getAddress());
+        System.out.println("The person id from person object "+ ((Person)nolist.get(1)).getId());
+
+        System.out.println("---------------arraylist<Person>");
+        ArrayList<Person> nolist1 = new ArrayList<Person>();
+        nolist1.add(new Person("beet","88277",9129));
+        nolist1.add(new Person("preet","88247",9119));
+        nolist1.add(new Person("geet","38277",1009));
+        nolist1.add(new Person("jeet","58277",2009));
+        Collections.sort(nolist1);
+        nolist1.forEach(per-> System.out.println("Each person name : "+ per.getName()));
+        System.out.println("---------------arraylist<Person>");
 
         ArrayList<Integer> integers = new ArrayList<>();
         integers.add(12);

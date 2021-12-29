@@ -428,12 +428,22 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		Map : Key and value pair.  when we need object from list or collections we have to iterate the collections , but map we can just push the key and we can get the value out. quick and faster then collections  , hashmap  is the extendable of map .
 		Queues : FIFO flavour. linkedList is extendable
 		
-	Before using a collections always thing about : 
+	1. Before using a collections always thing about : 
 			You need : 
-				sorted or unsorted 
-				ordered or unordered 
-				unique or duplicate value 
+				- sorted or unsorted 
+				- ordered or unordered 
+				- unique or duplicate value 
 				
-		Collection is an ordered data set .
-		sorting order is used to sort the data .
+		- Collection is an ordered data set .
+		- sorting order is used to sort the data . we can use Collections.sort()
+			: But how to sort the collection if it contains the bean objects collections 
+				ArrayList<Person> arraylist = new ArrayList<Person>();
+					We have to tell the Collections how to sort  verrrrrrryyyyyyyyyyyyyyyyyyeasy 
+			: go to your pojo class implements the Comparable<Person> and override the compareTo method 
+					  @Override
+					  public int compareTo(Person o) {
+
+							return name.compareTo(o.name);
+							}
+		
 		
