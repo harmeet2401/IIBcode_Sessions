@@ -7,8 +7,10 @@ import static javax.swing.text.html.HTML.Tag.I;
 public class Exercise {
     float x = 5.2f;
     public static void main(String[] args) {
-        System.out.println(printResult());
-        printResultLoop();
+        //System.out.println(printResult());
+        //printResultLoop();
+        //System.out.println(printResultPattern());
+        System.out.println(printResultMultipleOf2());
     }
 
     public static int printResult(){
@@ -108,5 +110,34 @@ public class Exercise {
         );
         System.out.println("post running all LOC");
 
+    }
+    public static String printResultPattern(){
+        // Write your logic here to return expected patter as string
+       /* for(int j = 0 ; j < 4 ; j++) {
+            for (int i = 0; i <= j; i++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }*/
+        String finalStr = "";
+        for (int i=1;i<=4;i++){
+            String s="";
+            for(int j=1;j<=i;j++){
+                s=s+"*";
+            }
+            finalStr = finalStr+s+"\n";
+        }
+        return finalStr;
+    }
+
+    public static String printResultMultipleOf2(){
+        String finalStr = "";
+        // Write the loop logic here. and assign finalStr at end of all iteration
+        String s = "";
+        for(int m=1;m<=10;m++){
+            s = "2 * "+m+" = "+(2*m);
+            finalStr=finalStr+s+"\n";
+        }
+        return finalStr;
     }
 }
