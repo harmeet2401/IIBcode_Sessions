@@ -341,5 +341,27 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 					 setter : writting 
 					 getter  : only readable 
 					 
-					------ in rest api or spring boot api , we don;t need to extends the bean class , we can import it and use it. 
+					------ in rest api or spring boot api , we don;t need to extends the bean class , we can import it and use it.
+
+24. Polymorphism : 
+				- One super class gots extends in two sub classes , overriding a functions of super class with two diff defination in two diff sub classes is polymorphism 
+				- Runtime polymorphism: 
+					overriding a mthod rule : 
+							name same 
+							arguments match 
+							body differ.
+							Access level should not be highly hidden like private . Keep public 
+							We can not override a method marked as final 
+				
+				- Method overrloading   : 
+						Rules : 
+							Keep the name same 
+							change the arguments list 
+							change the return type 
+							change the acess modifier 
 					
+25. String classes  : from java.lang.string 
+				
+				Keep this in mind
+					- == operator if we apply on a reference objects it will tell if it is pointing to the same memory locations ?
+					- equals operator will compare the string values . Always use equals/equalsIgnoreCase for string compare
