@@ -589,5 +589,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 31. Serialization : As we used this to convert the data to bytes to send across the network .
 										As we used in kafka stream .
 										
-				We can serialized and deserialized at the target system .						
+				We can serialized and deserialized at the target system .
+
+			Remember when we serialized the data into byte stream in kafka produce stream and deserialize the data to readable in target ss
 				
