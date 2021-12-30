@@ -592,4 +592,17 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				We can serialized and deserialized at the target system .
 
 			Remember when we serialized the data into byte stream in kafka produce stream and deserialize the data to readable in target ss
-				
+			
+			Steps to do serialization : 
+					- Create a class pojo class and implements it with Serializable .
+					- In PSVM Create a fileoutputstream and filename in ti 
+					- then create ObjectOutputStream object and pass the fileoutputstream obj
+				    - ObjectOutputStream.writeObject(pojo);
+					
+			steps to do the deserialization : 
+			- Create a class pojo class and implements it with Serializable .
+					- In PSVM Create a fileintputstream and filename in ti 
+					- then create ObjectinputStream object and pass the fileintputstream obj
+				    - polo = ObjectOutputStream.readObjects();
+					
+			
