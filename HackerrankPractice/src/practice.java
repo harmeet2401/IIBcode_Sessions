@@ -217,12 +217,30 @@ public class practice {
         linkedHashMap.put(null,"null value");
 
         for (Map.Entry<String, String> m:
-                hashMap.entrySet()) {
+                linkedHashMap.entrySet()) {
             System.out.println("LinkedHashmap get the value : - "+ m.getKey() +" : "+m.getValue());
         }
         System.out.println("-----------LinkedHashmap ------------");
-        System.out.println("-----------Iterator ------------");
-        Iterator arrayListIt = list.iterator();
+
+        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+        TreeMap<String,String> treeMap = new TreeMap<>();
+        treeMap.put("1","BMW");
+        treeMap.put("2","Chevrolet");
+        treeMap.put("2","Chevrolet");
+        treeMap.put("3","Royalce Royece");
+        treeMap.put("4","WOLKWOGEN");
+        treeMap.put("5","AUDI");
+        //treeMap.put(null,"null value"); // null pointer null is not allowed
+
+        for (Map.Entry<String, String> m2:
+                treeMap.entrySet()) {
+            System.out.println("treeMap get the value : - "+ m2.getKey() +" : "+m2.getValue());
+        }
+        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+
+        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+        //System.out.println("-----------Iterator ------------");
+      /*  Iterator arrayListIt = list.iterator();
         arrayListIt.forEachRemaining(elm->{
             System.out.println(elm);
         });
@@ -239,8 +257,8 @@ public class practice {
         Iterator hashSetIt = hashSet.iterator();
         hashSetIt.forEachRemaining(hashsetel-> System.out.println(hashsetel));
 
-
-        System.out.println("-----------Iterator ------------");
+*/
+        //System.out.println("-----------Iterator ------------");
 
     }
 }
