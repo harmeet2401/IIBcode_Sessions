@@ -76,10 +76,26 @@ public class practice {
         linkedList.add("Link-Aarmeet");
         linkedList.add("Link-Barmeet");
         linkedList.add("Link-Carmeet");
+        linkedList.addLast("lastelement");
+        linkedList.addFirst("firstelement");
+         System.out.println(linkedList.getFirst() + " --  "+
+        linkedList.getLast());
         Collections.sort(linkedList);
+        for (String str:
+             linkedList) {
+            System.out.println("Printing the linked list using for each method : -"+str);
+        }
        linkedList.forEach(value-> System.out.println(value));
 
         System.out.println("--------------Linked List------------");
+        System.out.println("--------------Vector------------");
+        Vector<String> vec = new Vector<>();
+        vec.add("A");
+        vec.add("B");
+        vec.add("C");
+
+        vec.forEach(elem-> System.out.println("vector ele : -"+elem));
+        System.out.println("--------------Vector------------");
 
 
         System.out.println("-----------Hashmap ------------");
@@ -103,14 +119,17 @@ public class practice {
         });
         System.out.println("-----------Hashmap ------------");
 
-        System.out.println("-----------HashSet ------------");
+        System.out.println("-----------HashSet remove the duplicate ------------");
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add("BMW");
         hashSet.add("bmw");
         hashSet.add("bmw");
         hashSet.add("bmw");
+        hashSet.add("Audio");
+        HashSet<String> newhash = new HashSet<>(linkedList);
+        newhash.forEach(element -> System.out.println(element));
         hashSet.forEach(element -> System.out.println(element));
-        System.out.println("-----------HashSet ------------");
+        System.out.println("-----------HashSet remove the duplicate ------------");
 
         System.out.println("-----------Iterator ------------");
         Iterator arrayListIt = list.iterator();

@@ -445,5 +445,18 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 							return name.compareTo(o.name);
 							}
+							
+		a. Arrayalist : collection of objects and kind of works as a array but is dynamic and can increase size without dclaring it in pre-requisite. Its index based insertions.
+		b. LinkedList : Works in node structure .
+						Single linkedlist : data|pointer(addressof next node)  ---------------> data|pointer(addressof next node)
+						Double linkedlist : pointer(addressof previous node)|data|pointer(addressof next node)  ---------------> pointer(addressof previous node)|data|pointer(addressof next node).Its index based insertions.
+						
+						Faster then arraylist to delete and add the elements in list . we can use addfirst and addlist
+		c. Vector : It is similar then arraylist , slower then array list and is thread safe means only one thread can access it one at a time.
+			its synchronised and increase the size of the array to 100% if one more elements is added. Its index based insertions.
+		d. Hashset : It will remove the duplicate elements and it is not index based data strucure .
+		e. hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
+		For large amount of data hashmap is used as look up of elements at different index is pretty easy , just pass the key and ollllaaaa we got it.
+						
 		
 		
