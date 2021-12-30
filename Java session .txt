@@ -543,6 +543,46 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		h. hashtable : are synchronised as hashmap is synchronised.
 			It will not allow null for a key .hashtable.put(null,"kk"); /// null pointer exception will be thrown
 		
-		I. LinkedHashMap : The only difference is that it will maintain the order . and slower then hashmap
+		I. LinkedHashMap : The only difference is that it will maintain the order . and slower then hashmap.
 		
+		j. TreeMap : Its sorted , means sort acc to natural method. Similar to hashmap , but is sorted .Treemap it will sort the coll will not allow null on key
 		
+		K. queue collection :  Root interface and used by linkedList and Priorityqueue. dqueue to remove and add to insert .
+		
+		L. Priorityqueue : wil insert the data in sorted order .
+		
+29. Thread : Multithreading and multipe processing .
+
+				Steps to create multi threaded env : 
+					1. create  a class whih extends the Thread class  or implements the Runnable interface 
+					2. Override the run method and implement the job .Run method can be invoked by crating object of the Thread class.
+
+30. synchronised block and methods : This will help in multi threading architecture which will allow only one thread to  hold the method , variable or resource at a time .
+
+			public synchronised void run(){   -----------> this will lock the method complete for on thread to complete 
+			
+			
+			}
+			
+			synchronised(){ -------------------- this will allow use to lock a piece of code to get locked for one thread to complete and let go post that.
+			}
+			
+			sleep()
+			
+			setPriority() --- to cheange the priority of thread Min_pri(1) , normal_pri(5) , max_pri (10)
+			
+			isAlive()----> to get if the thread is still alive 
+			
+			wait()-------->  this will make the thread to wait , but will not come alive untill we use notify method for it.
+			
+			yield ()-----> will give other thread the chance to run if other thread is taking more time
+			
+		- states of threads : 
+				
+				new ----->Runnablbe ------>Running ----------->Dead
+							/\				|
+							|				|
+							|				\/
+							|---Waiting/-----
+									block 
+				
