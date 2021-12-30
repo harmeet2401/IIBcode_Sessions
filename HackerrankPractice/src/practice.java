@@ -45,6 +45,13 @@ public class practice {
 
         System.out.println("---------------arraylist<Person>");
         ArrayList<Person> nolist1 = new ArrayList<Person>();
+        Person per1 = new Person("beet","88277",9129);
+        Person per2 = new Person("beet","88277",9129);
+            if(per1==per2){
+                System.out.println("equal");
+            }else{
+                System.out.println("not equals");
+            }
         nolist1.add(new Person("beet","88277",9129));
         nolist1.add(new Person("preet","88247",9119));
         nolist1.add(new Person("geet","38277",1009));
@@ -62,6 +69,7 @@ public class practice {
         integers.add(36);
         integers.add(25);
         Collections.sort(integers);
+        //integers.clear();
         for (Integer i :
              integers) {
             System.out.println(i.toString());
@@ -103,10 +111,16 @@ public class practice {
         HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("1","BMW");
         hashMap.put("2","Chevrolet");
+        hashMap.put("2","Chevrolet");
         hashMap.put("3","Royalce Royece");
         hashMap.put("4","WOLKWOGEN");
         hashMap.put("5","AUDI");
+        hashMap.put(null,"null value");
 
+        for (Map.Entry<String, String> m:
+             hashMap.entrySet()) {
+            System.out.println("Hashmap get the value : - "+ m.getKey() +" : "+m.getValue());
+        }
         String name = hashMap.get("5");
         System.out.println("the name i fetched using key "+name);
 
@@ -119,6 +133,21 @@ public class practice {
         });
         System.out.println("-----------Hashmap ------------");
 
+        System.out.println("-----------Hashtable doesnot allow null on keys and all methods in it an synchronised and removed duplicated------------");
+        Hashtable<String,String> hashtable = new Hashtable<>();
+        hashtable.put("1","BMW");
+        hashtable.put("2","Chevrolet");
+        hashtable.put("2","Chevrolet");
+        hashtable.put("3","Royalce Royece");
+        hashtable.put("4","WOLKWOGEN");
+        hashtable.remove("4");
+        //hashtable.put(null,"kk"); /// null pointer exception will be thrown
+        for (Map.Entry<String, String> m1:
+             hashtable.entrySet()) {
+            System.out.println("hastable : -"+m1.getKey()+ " --- "+m1.getValue());
+        }
+        System.out.println("-----------Hashtable doesnot allow null on keys and all methods in it an synchronised and removed duplicated------------");
+
         System.out.println("-----------HashSet remove the duplicate ------------");
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add("BMW");
@@ -129,8 +158,69 @@ public class practice {
         HashSet<String> newhash = new HashSet<>(linkedList);
         newhash.forEach(element -> System.out.println(element));
         hashSet.forEach(element -> System.out.println(element));
+        HashSet<Person> personHashSet = new HashSet<Person>( );
+        personHashSet.add(new Person("beet","88277",129));
+        personHashSet.add(new Person("peet","88277",191));
+        personHashSet.add(new Person("geet","88277",1929));
+        personHashSet.add(new Person("geet","88277",1929));
+        personHashSet.forEach(per->{
+            System.out.println("persons from hashset : -"+per.getName());  /// duplicates is not removed then we have to override
+                                                                            // the equals and hashcode of Object class which Person class extends by default
+                                                                            // by generating the hashcode and equals we could able to see the duplicate removed.
+        });
         System.out.println("-----------HashSet remove the duplicate ------------");
 
+        System.out.println("----------LinkedHashSet remove the duplicate ------------");
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("Apple");
+        linkedHashSet.add("Pineapple");
+        linkedHashSet.add("Orange");
+        linkedHashSet.forEach(elehash->{
+            System.out.println("Linked hashset value :- "+elehash);
+        });
+
+        System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
+
+
+        TreeSet<String> treeset = new TreeSet<>();
+        treeset.add("Apple");
+        treeset.add("Pineapple");
+        treeset.add("Banana");
+        treeset.add("Grapes");
+        treeset.add("Orange");
+        treeset.add("Orange");
+        treeset.forEach(elehash->{
+            System.out.println("Linked hashset value :- "+elehash);
+        });
+
+        TreeSet<Person> treesetper = new TreeSet<Person>();
+        treesetper.add(new Person("beet","88277",129));
+        treesetper.add(new Person("peet","88277",191));
+        treesetper.add(new Person("geet","88277",1929));
+        treesetper.add(new Person("geet","88277",1929));
+        treesetper.forEach(pertree->{
+            System.out.println("Treeset holding the person objects :- "+pertree.getName()); // As we have already override the compareto
+                                                                                            // method treeset could sort the collection by name
+        });
+
+        System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
+
+        System.out.println("-----------LinkedHashmap ------------");
+
+        LinkedHashMap<String,String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("1","BMW");
+        linkedHashMap.put("2","Chevrolet");
+        linkedHashMap.put("2","Chevrolet");
+        linkedHashMap.put("3","Royalce Royece");
+        linkedHashMap.put("4","WOLKWOGEN");
+        linkedHashMap.put("5","AUDI");
+        linkedHashMap.put(null,"null value");
+
+        for (Map.Entry<String, String> m:
+                hashMap.entrySet()) {
+            System.out.println("LinkedHashmap get the value : - "+ m.getKey() +" : "+m.getValue());
+        }
+        System.out.println("-----------LinkedHashmap ------------");
         System.out.println("-----------Iterator ------------");
         Iterator arrayListIt = list.iterator();
         arrayListIt.forEachRemaining(elm->{

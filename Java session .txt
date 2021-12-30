@@ -445,8 +445,10 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 							return name.compareTo(o.name);
 							}
-							
+	Important : ---------								
+
 		a. Arrayalist : collection of objects and kind of works as a array but is dynamic and can increase size without dclaring it in pre-requisite. Its index based insertions.
+		
 		b. LinkedList : Works in node structure .
 						Single linkedlist : data|pointer(addressof next node)  ---------------> data|pointer(addressof next node)
 						Double linkedlist : pointer(addressof previous node)|data|pointer(addressof next node)  ---------------> pointer(addressof previous node)|data|pointer(addressof next node).Its index based insertions.
@@ -454,9 +456,93 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 						Faster then arraylist to delete and add the elements in list . we can use addfirst and addlist
 		c. Vector : It is similar then arraylist , slower then array list and is thread safe means only one thread can access it one at a time.
 			its synchronised and increase the size of the array to 100% if one more elements is added. Its index based insertions.
-		d. Hashset : It will remove the duplicate elements and it is not index based data strucure .
-		e. hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
+			
+		d. Hashset : It will remove the duplicate elements and it is not index based data strucure . We know it will remove the duplicate in case of string objects , but how it will find duplicate in case of POJO java objects as a primitive passed in it 
+			for exaple : Hashset<Person> newper = new Hashset<Person>();
+				Q. Here we used person and want to remove the duplicacy how ?
+				Ans. As  a dev first we have to find which attribute of person makes it duplicate . Same what we observed in Rule coding 
+					for example we can use Id and name both to be part of duplicate check. 
+					We have to override the equal and hashcode method of Object class which Person class extends by default . the default equals method says all person objects are Different .
+					exmaple :  below two objects are different , if we do per1==per2 it will be false as it is point to a different memory space .
+						Person per1 = new Person("beet","88277",9129);
+						Person per2 = new Person("beet","88277",9129);
+					
+				IMP : Generate he hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
+				
+		e. Hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
 		For large amount of data hashmap is used as look up of elements at different index is pretty easy , just pass the key and ollllaaaa we got it.
 						
+			Verry verry important : 
+					How hashmap works internally  : 
+					
+				- hashmap works on the process called hashing .
+				- hashing involves a hashcode function which generate the hashcode using the key we give while putting and that hashcode is the index value in the Hashmap bucket array that resides in memory .
+				- Each array index of hashmap bucket contains a linkedList which holds the elements [key,value]|addresstonextnode 
+				- When we do map.put("IN",indiabj);
+				
+				hashing will pick the IN key and push it to hashfunction and generate the hashcode (hashmap bucket array index) and stores the [key,value] at that index.
+			
+		Case 1 : inserting the data 
+				example for IN ------> hashfunction() -----hashcode generated ----> 2
+				
+																													
+							map.put("IN",indiaobj)								map.put("US",usobje)																
+								|													|								
+								|													|								
+								IN													US																				
+								|													|								
+		hash fucntion () -- returns 2      									hashfunc() ---> returns 2
+							
+							
+										
+												map.put("GM",gmobje)
+													|				
+													|				
+													GM				
+													|				
+											hashfunc() ---> returns 0
+										
+										
+										
+										
+										
+								Hasmap Bucket
+							----------------------------------------------------	
+							|Array							 					|					
+							| 0 -->[GM,v]|pointer
+							| 1                              					|	
+							| 2 -->[IN,v]|pointer--->[US,v]|pointer     		|	
+							| 3	                             					|	
+							| 4                              					|	
+							| 5                              					|	
+                            | 6                              					|	
+							| 7                              					|	                                                                            
+							| 8                              					|	                                                                            
+							| 9                              					|	                                                                            
+							| 10                             					|																				
+							|		                         					|																					
+							 ---------------------------------------------------																							
+		Case 2 : getting the data 																											
+		
+											map.get("GM")
+													|				
+													|				
+													GM				
+													|				
+											hashfunc() ---> returns 0
+											
+				It goes to the bucket at 0 index and using the equals functions will search the GM and retrun the value back.
+																													
+        Case 3  : what happen in case of th Person objects or pojo object saving then we can either add the hashcode fnction to override and equals method to override . But by default all classes extends the functiosn fro objects class.																														
+																													
+		f. Linkedhashset : 	Aswe saw the elements entered in hashset while retrieving it the elements are in different order.
+			To remove that use Linkedhashset and ollla ||||.
+		
+		g.Treeset : We know we can use the Collections.sort to sort the collections , but when you push the data to treeSet it will automatically sort the data in ASCENDING ORDER and also removes the duplicates	
+		
+		h. hashtable : are synchronised as hashmap is synchronised.
+			It will not allow null for a key .hashtable.put(null,"kk"); /// null pointer exception will be thrown
+		
+		I. LinkedHashMap : The only difference is that it will maintain the order . and slower then hashmap
 		
 		
