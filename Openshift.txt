@@ -1,4 +1,6 @@
-Openshift training -----------------------------
+Exam : Red Hat Certified Specialist in Containers and Kubernetes exam (EX180)
+
+Openshift training ----------------------------- 
 
 1. The openshift container platform  or OCP is some thing that runs the applications.
 2. Many resources are there which helps developers to deploy their applications to the ocp clusters and expose it to the end users. 
