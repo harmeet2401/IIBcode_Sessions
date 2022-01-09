@@ -247,7 +247,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			
 			- One amazing thing learned is in our pojo class or bean class we can add both the constructor parameterized and non parameterized
 				Paramterized will help in initializing the attaribute variable by passing the value in constructor.
-				Non-parameterized will help in initializing the variable by using the .(dot) opertaor 
+				Non-parameterized will help in initializing the variable by using the .(dot) opertaor by crating the object of the class.
 			
 			- this() function used in pojo class itself will caal the constructor of the same class and this one will call the non-parameterized one
 			  this(1,"Meet","orlendo") this will call the 3 parameterized constructor in same pojo class.
@@ -257,6 +257,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			  super(1,"Meet","orlendo") this will call the 3 parameterized constructor in super pojo class.
 			  super("meet",100999) this will call the 2 parameterized constructor in super pojo class.
 
+	#IMP# : whenever you write a constructor in your class , compiler adds the super()function in starting point of it automaticaaly which will call the constructor of java.lang.object class if no class is extended.
 	#IMP#  Single ton class : Can have only one object and can not be instantiated again .	
 
 19. STATIC MEMBERS : static members can not call non-static members and vice - versa  . static is for class.
