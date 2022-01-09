@@ -98,10 +98,10 @@ public class practice {
         System.out.println("--------------Linked List------------");
         System.out.println("--------------Vector------------");
         Vector<String> vec = new Vector<>();
-        vec.add("A");
-        vec.add("B");
-        vec.add("C");
-
+        vec.add("c");
+        vec.add("a");
+        vec.add("b");
+        Collections.sort(vec);
         vec.forEach(elem-> System.out.println("vector ele : -"+elem));
         System.out.println("--------------Vector------------");
 
@@ -115,7 +115,7 @@ public class practice {
         hashMap.put("3","Royalce Royece");
         hashMap.put("4","WOLKWOGEN");
         hashMap.put("5","AUDI");
-        hashMap.put(null,"null value");
+        hashMap.put(null,"null value"); // no null pointer exception is thrown .
 
         for (Map.Entry<String, String> m:
              hashMap.entrySet()) {

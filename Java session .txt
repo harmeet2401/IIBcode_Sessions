@@ -388,8 +388,8 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 	Exception are sudden error occured in our program which may be a result of a file not found exception or stackoverflow exceptio , array index ot of bound exception etc 
 	
 	Types of exception : 
-	  - checked exception : These are the exception which comes during compilation . The java compiler throws these exception during the run time and does not allow a clean compile and will not create a .class(byte code) file for it.
-	  - Unchecked Exceptions : Runtime exception. These ex eption comes at runtime due to unwanted code bug etc . in this case the .class  has already been generated but will break while running the code in JVM.
+	  - checked exception : These are the exception which comes during compilation . The java compiler throws these exception during the compile time and does not allow a clean compile and will not create a .class(byte code) file for it.
+	  - Unchecked Exceptions : Runtime exception. These exception comes at runtime due to unwanted code bug etc . in this case the .class  has already been generated but will break while running the code in JVM.
 	  
 	The order or hierarchy of thr exception really matters :
 		Objects 
@@ -539,7 +539,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		f. Linkedhashset : 	Aswe saw the elements entered in hashset while retrieving it the elements are in different order.
 			To remove that use Linkedhashset and ollla ||||.
 		
-		g.Treeset : We know we can use the Collections.sort to sort the collections , but when you push the data to treeSet it will automatically sort the data in ASCENDING ORDER and also removes the duplicates	
+		g.Treeset : We know we can use the Collections.sort to sort the collections , but when you push the data to treeSet it will automatically sort the data in ASCENDING ORDER and also removes the duplicates	 . this is one of best data structure for ascending ordered sorted and unique value holding technique.
 		
 		h. hashtable : are synchronised as hashmap is synchronised.
 			It will not allow null for a key .hashtable.put(null,"kk"); /// null pointer exception will be thrown

@@ -1,5 +1,10 @@
 package thread;
 
+
+/**
+ * This is a better technique as we can allow main thread to run independently from the threads we are invoking
+ * using the Thread class objects
+ */
 public class MyThreadRunnable implements  Runnable{
 
     @Override
@@ -33,6 +38,7 @@ public class MyThreadRunnable implements  Runnable{
 
     public static void main(String[] args) {
         MyThreadRunnable objthreadRunnable = new MyThreadRunnable();
+        //Whenever we create a Thread class object we are invoking a new thread aprt from main thread
         Thread t1 = new Thread(objthreadRunnable);
         t1.setName("A");
         t1.start(); // --- this will start the run method defined above
