@@ -12,6 +12,7 @@ class Encryption{
     public static String  Validate(String name){
         String n = "";
         for (char ch : name.toCharArray()) {
+            System.out.println("character : -");
             if(!((ch>='a' && ch<='z') || (ch>='A' && ch<='Z')
                     ||(ch==' ') )){
                 System.out.println("The name is not valid");

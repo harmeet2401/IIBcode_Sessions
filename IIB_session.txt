@@ -178,7 +178,26 @@ NOte : Some how the String validation is not working using content and value opt
 it means if the message set contains string type ad you send int it is not validating , reverse is working .
 Lab 1 ------------ Creating message sets and validating input message.
 
+------------------------------Compute Mode --------------------------------------------
 
+we have below compute modes : 
+	message 
+	localenvironment and message 
+	localenvironment
+	Exception
+	Exception and message
+	Exception and LocalEnvironment
+	All
+	
+When ever we select a particular mode for example 
+
+1. if we select message then we have to do outputroot = inputroot or we simple terms we have to set the outputroot or else an empty outputroot will be send forwards.
+2. if we select localenvironment we have to set outputlocalenvironment = inputLocalEnvironment or something or else it will be sent as empty 
+
+Note : In simple terms whenever we want to propagate any kind of tree further if we selected that compute mode tree , then it will override or propgate using the SET statements.
+
+
+------------------------------Compute Mode --------------------------------------------
 
 Lab 2 ---------- ESQL code is used to read the  data from incoming data and out it in a file in different structure  
 	Compute node  ---- transformation occur only in compute node , rest of the below nodes  perform dff operations. 

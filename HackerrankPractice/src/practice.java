@@ -121,6 +121,11 @@ public class practice {
              hashMap.entrySet()) {
             System.out.println("Hashmap get the value : - "+ m.getKey() +" : "+m.getValue());
         }
+        hashMap.clear();
+        for (Map.Entry<String, String> m:
+                hashMap.entrySet()) {
+            System.out.println("2nd : Hashmap get the value : - "+ m.getKey() +" : "+m.getValue());
+        }
         String name = hashMap.get("5");
         System.out.println("the name i fetched using key "+name);
 
