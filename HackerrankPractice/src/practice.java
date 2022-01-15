@@ -24,7 +24,8 @@ public class practice {
     public static void main(String arg[]) {
        //CollectionsMethods();
        //feherenheitToCelcius();
-       sumOfIntegerDigits();
+       //sumOfIntegerDigits();
+        sumOfIntegerDigits();
 
     }
 
@@ -302,5 +303,10 @@ public class practice {
 
         }
         System.out.println("SUM : "+sum);
+    }
+    private static void minutesToYearsDays(){
+        Scanner in = new Scanner(System.in);
+        int minutes = in.nextInt();
+        
     }
 }
