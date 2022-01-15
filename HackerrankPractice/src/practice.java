@@ -17,7 +17,20 @@ class AirJet extends  AirPlane{
 }
 public class practice {
 
+    //below are the instance variables
+    int f ;
+    int g;
+
     public static void main(String arg[]) {
+       //CollectionsMethods();
+       //feherenheitToCelcius();
+       sumOfIntegerDigits();
+
+    }
+
+
+
+    private static void CollectionsMethods() {
         List li = new ArrayList();
         li.add(0,"test1");
         li.add(1,"test1");
@@ -32,7 +45,7 @@ public class practice {
         list.remove(2);
         Collections.sort(list);
         for (String l:list
-             ) {
+        ) {
             System.out.println(l);
         }  ;
         ArrayList nolist = new ArrayList();
@@ -47,11 +60,11 @@ public class practice {
         ArrayList<Person> nolist1 = new ArrayList<Person>();
         Person per1 = new Person("beet","88277",9129);
         Person per2 = new Person("beet","88277",9129);
-            if(per1==per2){
-                System.out.println("equal");
-            }else{
-                System.out.println("not equals");
-            }
+        if(per1==per2){
+            System.out.println("equal");
+        }else{
+            System.out.println("not equals");
+        }
         nolist1.add(new Person("beet","88277",9129));
         nolist1.add(new Person("preet","88247",9119));
         nolist1.add(new Person("geet","38277",1009));
@@ -71,7 +84,7 @@ public class practice {
         Collections.sort(integers);
         //integers.clear();
         for (Integer i :
-             integers) {
+                integers) {
             System.out.println(i.toString());
         }
         System.out.println("--------------Array List------------");
@@ -86,14 +99,14 @@ public class practice {
         linkedList.add("Link-Carmeet");
         linkedList.addLast("lastelement");
         linkedList.addFirst("firstelement");
-         System.out.println(linkedList.getFirst() + " --  "+
-        linkedList.getLast());
+        System.out.println(linkedList.getFirst() + " --  "+
+                linkedList.getLast());
         Collections.sort(linkedList);
         for (String str:
-             linkedList) {
+                linkedList) {
             System.out.println("Printing the linked list using for each method : -"+str);
         }
-       linkedList.forEach(value-> System.out.println(value));
+        linkedList.forEach(value-> System.out.println(value));
 
         System.out.println("--------------Linked List------------");
         System.out.println("--------------Vector------------");
@@ -112,13 +125,13 @@ public class practice {
         hashMap.put("1","BMW");
         hashMap.put("2","Chevrolet");
         hashMap.put("2","Chevrolet");
-        hashMap.put("3","Royalce Royece");
-        hashMap.put("4","WOLKWOGEN");
+        hashMap.put("3","Royalce royal");
+        hashMap.put("4","Wolkswogen");
         hashMap.put("5","AUDI");
-        hashMap.put(null,"null value"); // no null pointer exception is thrown .
+        hashMap.put(null,"Null Value"); // no null pointer exception is thrown .
 
         for (Map.Entry<String, String> m:
-             hashMap.entrySet()) {
+                hashMap.entrySet()) {
             System.out.println("Hashmap get the value : - "+ m.getKey() +" : "+m.getValue());
         }
         hashMap.clear();
@@ -148,7 +161,7 @@ public class practice {
         hashtable.remove("4");
         //hashtable.put(null,"kk"); /// null pointer exception will be thrown
         for (Map.Entry<String, String> m1:
-             hashtable.entrySet()) {
+                hashtable.entrySet()) {
             System.out.println("hastable : -"+m1.getKey()+ " --- "+m1.getValue());
         }
         System.out.println("-----------Hashtable doesnot allow null on keys and all methods in it an synchronised and removed duplicated------------");
@@ -170,8 +183,8 @@ public class practice {
         personHashSet.add(new Person("geet","88277",1929));
         personHashSet.forEach(per->{
             System.out.println("persons from hashset : -"+per.getName());  /// duplicates is not removed then we have to override
-                                                                            // the equals and hashcode of Object class which Person class extends by default
-                                                                            // by generating the hashcode and equals we could able to see the duplicate removed.
+            // the equals and hashcode of Object class which Person class extends by default
+            // by generating the hashcode and equals we could able to see the duplicate removed.
         });
         System.out.println("-----------HashSet remove the duplicate ------------");
 
@@ -205,7 +218,7 @@ public class practice {
         treesetper.add(new Person("geet","88277",1929));
         treesetper.forEach(pertree->{
             System.out.println("Treeset holding the person objects :- "+pertree.getName()); // As we have already override the compareto
-                                                                                            // method treeset could sort the collection by name
+            // method treeset could sort the collection by name
         });
 
         System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
@@ -265,5 +278,29 @@ public class practice {
 */
         //System.out.println("-----------Iterator ------------");
 
+    }
+    private static void feherenheitToCelcius(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the feherenheit");
+        //local variables
+        float feh = in.nextFloat();
+        float cel = (feh - 32) * 5/9;
+        System.out.println("Celcius : "+cel);
+
+
+    }
+    private static void sumOfIntegerDigits(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the integer between 0 to 1000");
+        Integer num = in.nextInt();
+        int sum = 0;
+        String numstr = num.toString();
+        char[] a = numstr.toCharArray();
+        for (int i = 0; i < a.length; i++) {
+            System.out.println("print all the chars : "+a[i]);
+            sum = sum + Character.getNumericValue(a[i]);
+
+        }
+        System.out.println("SUM : "+sum);
     }
 }
