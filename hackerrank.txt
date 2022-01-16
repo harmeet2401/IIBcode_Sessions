@@ -265,6 +265,7 @@ Q : java Collections : java.util
 		
 	To gte the unicode value of Character	
 		- use str.codePointAt(indexvalue)
+		- use str.codePointBefore(indexvalue)
 		
 		
 		
