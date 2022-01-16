@@ -29,7 +29,9 @@ public class practice {
         //minutesToYearsDays();
         //timeOffset();
         //sortFunction();
-        printGrid();
+        //printGrid();
+        //arrayManipulation();
+        stringManipulation();
 
     }
 
@@ -374,6 +376,27 @@ public class practice {
 
 
     }
+    private static ArrayList<Integer> getCollectionArray(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the array collection");
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i <5; i++) {
+            arrayList.add(in.nextInt());
+        }
+        return arrayList;
+    }
+    private static int[] getArray(){
+        //calculate average
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the size of array");
+        int size = in.nextInt();
+        int[] arr = new int[size];
+        System.out.println("Enter the elements of the array");
+        for (int i = 0; i < size; i++) {
+            arr[i] = in.nextInt();
+        }
+        return arr;
+    }
     private static void printGrid(){
         for (int i = 0; i < 10 ; i++) {
             for (int j = 0; j < 10 ; j++) {
@@ -381,18 +404,54 @@ public class practice {
             }
             System.out.println("\n");
         }
-        //calculate average
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the size of array");
-        int size = in.nextInt();
-        int[] arr = new int[size];
-        System.out.println("Enter the elements of the array");
-        int sum = 0;
-        for (int i = 0; i < size; i++) {
-            arr[i] = in.nextInt();
-            sum = sum + arr[i];
+        int num[] = getArray();
+        for (int i = 0; i < num.length ; i++) {
+            sum = sum + num[i];
         }
-        float average = sum/size;
+        float average = sum/num.length;
         System.out.println("Average : "+ average);
+    }
+    private static void arrayManipulation(){
+        int index = 0;
+        ArrayList<Integer> num = getCollectionArray();
+        System.out.println("Remove specific array element to remove from array");
+        Scanner in = new Scanner(System.in);
+        int number = in.nextInt();
+        for (Integer n : num) {
+
+            if(n==number){
+                num.remove(n);
+                break;
+            }
+            index++;
+        }
+        int finalIndex = index;
+        num.forEach(ele-> System.out.println("After delete : "+ ele +" - "+ "index is :"+ finalIndex));
+
+
+    }
+    private static void stringManipulation(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("enter the string:");
+        String str = in.nextLine();
+        char[] arr = str.toCharArray();
+        System.out.println("Enter the index for a char to fetch ");
+        int index = in.nextInt();
+        System.out.println("Character at index : "+index+" char : "+ arr[index]);
+    }
+    private static void stringUnicode(){
+        String str = "w3resource.com";
+        System.out.println("Original String : " + str);
+
+        // codepoint at index 1
+        int val1 = str.codePointAt(1);
+
+        // codepoint at index 9
+        int val2 = str.codePointAt(9);
+
+        // prints character at index1 in string
+        System.out.println("Character(unicode point) = " + val1);
+        // prints character at index9 in string
+        System.out.println("Character(unicode point) = " + val2);
     }
 }

@@ -263,6 +263,9 @@ Q : java Collections : java.util
 		- We can convert from char to interger using Character static class .
 		- int a = Character.getNumericValue(c);    ---------------- where c is the character 
 		
+	To gte the unicode value of Character	
+		- use str.codePointAt(indexvalue)
+		
 		
 		
 	We can use Lambda expression on all above collection java.util classes verry easily .	
