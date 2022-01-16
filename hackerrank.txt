@@ -259,6 +259,10 @@ Q : java Collections : java.util
 	  @. HashSet : A HashSet is a collection of items where every item is UNIQUE, and it is found in the java.util package. if you add a duplicate element it will store only the unique ones and remove one copy of duplicate(same size , same caps or lower) for example HashSet = BMW , BMW , bmw  , it will store as hashset = [BMW , bmw]
 	  @. Iterator : so we studied collections , now to loop through these collections we use Iterator.
 	  
+	Collections : 
+		- Collections.copy(arrayList,arrayList1); // copy fist list to another
+        - Collections.sort(arrayList1); // sort second list ascending
+        - Collections.shuffle(arrayList1); // shuffle the elemenst 
 	Integer : 
 		- We can convert from char to interger using Character static class .
 		- int a = Character.getNumericValue(c);    ---------------- where c is the character 

@@ -21,6 +21,7 @@ public class practice {
     int f ;
     int g;
     static int sum = 0;
+    static  String str1 = "";
 
     public static void main(String arg[]) {
        //CollectionsMethods();
@@ -32,7 +33,9 @@ public class practice {
         //printGrid();
         //arrayManipulation();
         //stringManipulation();
-        stringUnicode();
+        //stringUnicode();
+        //charArrayToString();
+        longestSubstring();
 
     }
 
@@ -52,6 +55,8 @@ public class practice {
         list.add("Carmeet");
         list.remove(2);
         Collections.sort(list);
+        //Collections.copy(List1, List2);
+        //Collections.shuffle(list_Strings);
         for (String l:list
         ) {
             System.out.println(l);
@@ -460,7 +465,10 @@ public class practice {
         int result=str1.compareTo(str2);
         int count =  str1.codePointCount(1,10);
         int results = str1.compareToIgnoreCase(str2);
-
+        boolean test = str1.contains("Exercise");
+        StringBuffer stringBuffer = new StringBuffer(str1);
+        StringBuffer stringBuffer1 = new StringBuffer(str2);
+        boolean re = stringBuffer.equals(str2);
         if (result < 0)
         {
             System.out.println("\"" + str1 + "\"" +
@@ -479,5 +487,53 @@ public class practice {
                     " is greater than " +
                     "\"" + str2 + "\"");
         }
+    }
+    private static void charArrayToString(){
+        char[] arr = {'a','b','c','d','e'};
+        String name1 = new String("Stephen Edwin King");
+        String name2 = new String("Stephen Edwin King");
+
+        String str1 = "";
+        for (char c : arr) {
+            str1 = str1 + c;
+        }
+        boolean r = str1.endsWith("cde");
+        boolean d = str1.startsWith("abc");
+        boolean r1 = (name1.equals(name2));
+        boolean d1 = (name1.equals(name2));
+        System.out.println(str1);
+    }
+    private static void longestSubstring(){
+        String str = "pickoutthelongestsubstring";
+        char[] arr = str.toCharArray();
+        TreeSet<Character>  set = new TreeSet<>();
+        for (char c : arr) {
+            set.add(c);
+        }
+        set.forEach(el-> {
+            System.out.println("Tree set :" + el);
+            str1 = str1 + el;
+        }
+        );
+        System.out.println("old string :"+ str +" its length :"+ str.length());
+        System.out.println("new string :" +str1+ "  its length "+ str1.length());
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Sunday");
+        arrayList.add("Monday");
+        arrayList.add("Tuesday");
+        arrayList.add("Wednesday");
+        arrayList.add("Thursday");
+        arrayList.add("Friday");
+        arrayList.add("Saturday");
+        Collections.sort(arrayList); // sort the first list ascending
+        arrayList.forEach(el-> System.out.println("arrayList   :"+ el));
+
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        Collections.copy(arrayList,arrayList1); // copy fist list to another
+        Collections.sort(arrayList1); // sort second list ascending
+        arrayList1.forEach(l-> System.out.println("arrayList1 before  :"+ l));
+        Collections.shuffle(arrayList1); // shuffle elements of list2
+        System.out.println("----------------------------------------------- ");
+        arrayList1.forEach(l-> System.out.println("arrayList1 After shuffle   :"+ l));
     }
 }
