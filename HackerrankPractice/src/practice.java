@@ -20,12 +20,16 @@ public class practice {
     //below are the instance variables
     int f ;
     int g;
+    static int sum = 0;
 
     public static void main(String arg[]) {
        //CollectionsMethods();
        //feherenheitToCelcius();
        //sumOfIntegerDigits();
-        minutesToYearsDays();
+        //minutesToYearsDays();
+        //timeOffset();
+        //sortFunction();
+        printGrid();
 
     }
 
@@ -317,5 +321,78 @@ public class practice {
         int days = (int) (min / 60 / 24) % 365;
 
         System.out.println((int) min + " minutes is approximately " + years + " years and " + days + " days");
+    }
+    private static void timeOffset(){
+        int in = 90/18; // this will give you the factor of it  5
+        int in1 = 90%18; // this will give you the remainder    0
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Input the time zone offset to GMT: ");
+        long timeZoneChange = input.nextInt();
+
+        long totalMilliseconds = System.currentTimeMillis();
+
+        long totalSeconds = totalMilliseconds / 1000;
+
+        long currentSecond = totalSeconds % 60;
+
+        long totalMinutes = totalSeconds / 60;
+
+        long currentMinute = totalMinutes % 60;
+
+        long totalHours = totalMinutes / 60;
+
+        long currentHour = ((totalHours + timeZoneChange) % 24);
+
+        System.out.println("Current time is " + currentHour + ":" + currentMinute + ":" + currentSecond);
+
+    }
+    private static void sortFunction(){
+        TreeSet<String> arrayList = new TreeSet<>();
+        System.out.println("Enter he string array");
+        Scanner in = new Scanner(System.in);
+        arrayList.add(in.nextLine());
+        arrayList.add(in.nextLine());
+        arrayList.add(in.nextLine());
+        arrayList.add(in.nextLine());
+        arrayList.add(in.nextLine());
+        arrayList.forEach(strel-> System.out.println(strel));
+        TreeSet<Integer> num = new TreeSet<>();
+        System.out.println("Enter he numberic array");
+        num.add(in.nextInt());
+        num.add(in.nextInt());
+        num.add(in.nextInt());
+        num.add(in.nextInt());
+        num.add(in.nextInt());
+        num.forEach(numel-> System.out.println(numel));
+
+        num.forEach(el ->{
+
+            sum = sum + el;
+        });
+        System.out.println("sum of the array : "+ sum);
+
+
+    }
+    private static void printGrid(){
+        for (int i = 0; i < 10 ; i++) {
+            for (int j = 0; j < 10 ; j++) {
+                System.out.print("-");
+            }
+            System.out.println("\n");
+        }
+        //calculate average
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the size of array");
+        int size = in.nextInt();
+        int[] arr = new int[size];
+        System.out.println("Enter the elements of the array");
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            arr[i] = in.nextInt();
+            sum = sum + arr[i];
+        }
+        float average = sum/size;
+        System.out.println("Average : "+ average);
     }
 }
