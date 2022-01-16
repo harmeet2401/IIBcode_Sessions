@@ -31,7 +31,8 @@ public class practice {
         //sortFunction();
         //printGrid();
         //arrayManipulation();
-        stringManipulation();
+        //stringManipulation();
+        stringUnicode();
 
     }
 
@@ -455,8 +456,11 @@ public class practice {
         System.out.println("Character(unicode point) = " + val2);
 
         String str1 = "This is Exercise 1";
-        String str2 = "This is Exercise 2";
+        String str2 = "This is exercise 1";
         int result=str1.compareTo(str2);
+        int count =  str1.codePointCount(1,10);
+        int results = str1.compareToIgnoreCase(str2);
+
         if (result < 0)
         {
             System.out.println("\"" + str1 + "\"" +

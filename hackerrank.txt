@@ -266,9 +266,12 @@ Q : java Collections : java.util
 	To get the unicode value of Character	
 		- use str.codePointAt(indexvalue)
 		- use str.codePointBefore(indexvalue)
-	
+		- use int ctr = str.codePointCount(1, 10);
+
 	String : 
-		str1.compareTo(str2).Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this String object is compared lexicographically to the character sequence represented by the argument string.
+		- int count = str1.compareTo(str2)   ----------------------- consider case 
+		- int count_time = str1.compareToIgnoreCase(str2) ---------- ignore alphabet case.
+		Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this String object is compared lexicographically to the character sequence represented by the argument string.
 		
 		
 		
