@@ -263,9 +263,12 @@ Q : java Collections : java.util
 		- We can convert from char to interger using Character static class .
 		- int a = Character.getNumericValue(c);    ---------------- where c is the character 
 		
-	To gte the unicode value of Character	
+	To get the unicode value of Character	
 		- use str.codePointAt(indexvalue)
 		- use str.codePointBefore(indexvalue)
+	
+	String : 
+		str1.compareTo(str2).Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this String object is compared lexicographically to the character sequence represented by the argument string.
 		
 		
 		
