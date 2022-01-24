@@ -37,15 +37,24 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				
 			In my view creating multiple objects and heap memory with it will use more memory space of you system .
 			Instead we can point the reference object to the same heap memory space . But that might end up bombarding the healp memory used by all instance objects 
+			so we can create object by referencing it .
+			Person a = new Person();
+			Person b;
+			b=a ------------------------- this will also point to the same heap memory locations.
+			
 6. Package name :  Collections of classes.
 
 	Access modifier default is it is access with in the class only . 
 	if we put that in different package we need to make it public to import it another clas. 
+				
+				With in Class 					IN Same package 			In subclasses			In Other packages 			
+    public  	Allowed access					Allowed access				Allowed access			 Allowed access								
+	protected   Allowed access					Allowed access				Allowed access 			 Denied access							
+	default     Allowed access					Allowed access              Denied access            Denied access                                  		
+	private   	Allowed access 					Denied Access 				Denied Access			 Denied Access 				
 	
-	private  : will be access with same class and package 
-	protected   : 
-	public  : can be access from anywhere 
-	default : can access only with in clas
+	
+		
 	
 7. variables and data types  :
 
@@ -54,7 +63,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			- Instance variable : 
 				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created,
 			- Local variable : 
-				Those variable declared inside the mthod os the class . those variables should be initialized or else the compiler will complaint.
+				Those variable declared inside the mthod of the class . those variables should be initialized or else the compiler will complaint.
 				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000' , this is the unicode value for char when you will sout the char using unicode it will print the char a , b, c, ....
 				
 	b.  Reference variable : Are the variable which are refrencesd to the heap memory .
@@ -221,7 +230,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 		
 16. Switch statements are better then if else block , the execustion line of code is lsser and it is faster then if else .
- switch (a == 0 || a==-1 | a==-2 | a==-4 | a==-3 ? 0 : 10) {
+			switch (a == 0 || a==-1 | a==-2 | a==-4 | a==-3 ? 0 : 10) {
             case (5):
                 System.out.println("FIRST BLOCK WITH a = 5");
                 break;
@@ -266,9 +275,9 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		
 			1. static Instance variable : variables which are on class level can only be declared as static . public static int setavailable = 90;
 				static variable are which will be common to all objects like 
-					no of seta available is common to all tickets going to each pessenger . which will have an updated count . mean 90 is available for all .
+					no of seats available is common to all tickets going to each pessenger . which will have an updated count . mean 90 is available for all .
 			
-			2. 	Static blocks : which will be run at the verry first step , sbse pehle run hogga 
+			2. Static blocks : which will be run at the verry first step , sbse pehle run hogga 
 			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocksare executed sequentially.
 			
 20. Inheritance : 			
@@ -371,7 +380,9 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 						str1 =str1.concat("jaav");
 						sout(testjaav)
 						
-26. Stringbuffer and stringbuilder 	: 
+26. Stringbuffer and stringbuilder 	:  Strongest tool or classes to create string and can concatenate any data types value 
+		stringBuilder.append("@@"); ----------------- the parameter can be int , float , double , short , string .
+			
 		these are not immutable classes , we can do as many chanes as we can .
 		its thread safe .
 		
@@ -400,7 +411,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 										|
 									Arithmetic exception , numberformt exception , null pointerexceptio  ....... more 
 									
-	so we have to add multipe catch block by check ing our code .
+	so we have to add multipe catch block by checking our code .
 		Exception class is capable of catching all exceptions .
 		
 								
@@ -453,8 +464,8 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		b. LinkedList : Works in node structure .
 						Single linkedlist : data|pointer(addressof next node)  ---------------> data|pointer(addressof next node)
 						Double linkedlist : pointer(addressof previous node)|data|pointer(addressof next node)  ---------------> pointer(addressof previous node)|data|pointer(addressof next node).Its index based insertions.
-						
 						Faster then arraylist to delete and add the elements in list . we can use addfirst and addlist
+						
 		c. Vector : It is similar then arraylist , slower then array list and is thread safe means only one thread can access it one at a time.
 			its synchronised and increase the size of the array to 100% if one more elements is added. Its index based insertions.
 			
@@ -468,7 +479,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 						Person per1 = new Person("beet","88277",9129);
 						Person per2 = new Person("beet","88277",9129);
 					
-				IMP : Generate he hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
+				IMP : Generate the hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
 				
 		e. Hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
 		For large amount of data hashmap is used as look up of elements at different index is pretty easy , just pass the key and ollllaaaa we got it.
@@ -508,7 +519,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 										
 										
 								Hasmap Bucket
-							----------------------------------------------------	
+							 ---------------------------------------------------	
 							|Array							 					|					
 							| 0 -->[GM,v]|pointer
 							| 1                              					|	
@@ -523,7 +534,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 							| 10                             					|																				
 							|		                         					|																					
 							 ---------------------------------------------------																							
-		Case 2 : getting the data 																											
+		Case 2 : Getting the data 																											
 		
 											map.get("GM")
 													|				

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -23,8 +24,9 @@ public class practice {
     static int sum = 0;
     static  String str1 = "";
 
-    public static void main(String arg[]) {
-       //CollectionsMethods();
+    public static void main(String arg[])
+    {
+       CollectionsMethods();
        //feherenheitToCelcius();
        //sumOfIntegerDigits();
         //minutesToYearsDays();
@@ -35,12 +37,9 @@ public class practice {
         //stringManipulation();
         //stringUnicode();
         //charArrayToString();
-        longestSubstring();
+       // longestSubstring();
 
     }
-
-
-
     private static void CollectionsMethods() {
         List li = new ArrayList();
         li.add(0,"test1");
@@ -95,6 +94,18 @@ public class practice {
         integers.add(36);
         integers.add(25);
         Collections.sort(integers);
+        System.out.println("Sorted ArrayList "
+                + "in Ascending order : "
+                + integers);
+        // Sorting ArrayList in descending Order
+        // using Collection.sort() method
+        // by passing Collections.reverseOrder() as comparator
+        Collections.sort(integers, Collections.reverseOrder());
+
+        // Print the sorted ArrayList
+        System.out.println("Sorted ArrayList "
+                + "in Descending order : "
+                + integers);
         //integers.clear();
         for (Integer i :
                 integers) {
@@ -147,6 +158,7 @@ public class practice {
                 hashMap.entrySet()) {
             System.out.println("Hashmap get the value : - "+ m.getKey() +" : "+m.getValue());
         }
+        //Collections.sort(hashMap); can not be applied to hashmaps
         hashMap.clear();
         for (Map.Entry<String, String> m:
                 hashMap.entrySet()) {
@@ -201,7 +213,7 @@ public class practice {
         });
         System.out.println("-----------HashSet remove the duplicate ------------");
 
-        System.out.println("----------LinkedHashSet remove the duplicate ------------");
+        System.out.println("----------LinkedHashSet remove the duplicate add the elements in order------------");
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
         linkedHashSet.add("Apple");
         linkedHashSet.add("Pineapple");
@@ -209,6 +221,7 @@ public class practice {
         linkedHashSet.forEach(elehash->{
             System.out.println("Linked hashset value :- "+elehash);
         });
+        System.out.println("----------LinkedHashSet remove the duplicate add the elements in order------------");
 
         System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
 
@@ -229,48 +242,49 @@ public class practice {
         treesetper.add(new Person("peet","88277",191));
         treesetper.add(new Person("geet","88277",1929));
         treesetper.add(new Person("geet","88277",1929));
-        treesetper.forEach(pertree->{
-            System.out.println("Treeset holding the person objects :- "+pertree.getName()); // As we have already override the compareto
-            // method treeset could sort the collection by name
-        });
+        treesetper.forEach(pertree-> {
+                    System.out.println("Treeset holding the person objects :- " + pertree.getName()); // As we have already override the compareto
+                    // method treeset could sort the collection b
+                            });
 
-        System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
 
-        System.out.println("-----------LinkedHashmap ------------");
+            System.out.println("----------Treeset sort the collections in Ascending order and remove the duplicate values  ------------");
 
-        LinkedHashMap<String,String> linkedHashMap = new LinkedHashMap<>();
-        linkedHashMap.put("1","BMW");
-        linkedHashMap.put("2","Chevrolet");
-        linkedHashMap.put("2","Chevrolet");
-        linkedHashMap.put("3","Royalce Royece");
-        linkedHashMap.put("4","WOLKWOGEN");
-        linkedHashMap.put("5","AUDI");
-        linkedHashMap.put(null,"null value");
+            System.out.println("-----------LinkedHashmap ------------");
 
-        for (Map.Entry<String, String> m:
-                linkedHashMap.entrySet()) {
-            System.out.println("LinkedHashmap get the value : - "+ m.getKey() +" : "+m.getValue());
-        }
-        System.out.println("-----------LinkedHashmap ------------");
+            LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+            linkedHashMap.put("1", "BMW");
+            linkedHashMap.put("2", "Chevrolet");
+            linkedHashMap.put("2", "Chevrolet");
+            linkedHashMap.put("3", "Royalce Royece");
+            linkedHashMap.put("4", "WOLKWOGEN");
+            linkedHashMap.put("5", "AUDI");
+            linkedHashMap.put(null, "null value");
 
-        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
-        TreeMap<String,String> treeMap = new TreeMap<>();
-        treeMap.put("1","BMW");
-        treeMap.put("2","Chevrolet");
-        treeMap.put("2","Chevrolet");
-        treeMap.put("3","Royalce Royece");
-        treeMap.put("4","WOLKWOGEN");
-        treeMap.put("5","AUDI");
-        //treeMap.put(null,"null value"); // null pointer null is not allowed
+            for (Map.Entry<String, String> m :
+                    linkedHashMap.entrySet()) {
+                System.out.println("LinkedHashmap get the value : - " + m.getKey() + " : " + m.getValue());
+            }
+            System.out.println("-----------LinkedHashmap ------------");
 
-        for (Map.Entry<String, String> m2:
-                treeMap.entrySet()) {
-            System.out.println("treeMap get the value : - "+ m2.getKey() +" : "+m2.getValue());
-        }
-        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+            System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+            TreeMap<String, String> treeMap = new TreeMap<>();
+            treeMap.put("1", "BMW");
+            treeMap.put("2", "Chevrolet");
+            treeMap.put("2", "Chevrolet");
+            treeMap.put("3", "Royalce Royece");
+            treeMap.put("4", "WOLKWOGEN");
+            treeMap.put("5", "AUDI");
+            //treeMap.put(null,"null value"); // null pointer null is not allowed
 
-        System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
-        //System.out.println("-----------Iterator ------------");
+            for (Map.Entry<String, String> m2 :
+                    treeMap.entrySet()) {
+                System.out.println("treeMap get the value : - " + m2.getKey() + " : " + m2.getValue());
+            }
+            System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+
+            System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
+            //System.out.println("-----------Iterator ------------");
       /*  Iterator arrayListIt = list.iterator();
         arrayListIt.forEachRemaining(elm->{
             System.out.println(elm);
@@ -289,7 +303,9 @@ public class practice {
         hashSetIt.forEachRemaining(hashsetel-> System.out.println(hashsetel));
 
 */
-        //System.out.println("-----------Iterator ------------");
+            //System.out.println("-----------Iterator ------------");
+
+
 
     }
     private static void feherenheitToCelcius(){
@@ -298,6 +314,7 @@ public class practice {
         //local variables
         float feh = in.nextFloat();
         float cel = (feh - 32) * 5/9;
+        float feho = (cel +32) * 9/5;
         System.out.println("Celcius : "+cel);
 
 
@@ -379,6 +396,17 @@ public class practice {
             sum = sum + el;
         });
         System.out.println("sum of the array : "+ sum);
+
+        ArrayList<String> array = new ArrayList<String>();
+        array.add("meet");
+        array.add("heet");
+        array.add("zeet");
+        array.add("weet");
+        array.add("ueet");
+        array.add("peet");
+        Collections.sort(array);
+        array.forEach(el-> System.out.println("Each elemenets : "+el));
+
 
 
     }
@@ -515,6 +543,16 @@ public class practice {
             str1 = str1 + el;
         }
         );
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(1);
+
+        stringBuilder.append(1);
+        stringBuilder.append(1);
+        stringBuilder.append(1);
+        stringBuilder.append(1);
+        System.out.println("Inter --------------------" + stringBuilder);
+
         System.out.println("old string :"+ str +" its length :"+ str.length());
         System.out.println("new string :" +str1+ "  its length "+ str1.length());
         ArrayList<String> arrayList = new ArrayList<>();
@@ -536,4 +574,5 @@ public class practice {
         System.out.println("----------------------------------------------- ");
         arrayList1.forEach(l-> System.out.println("arrayList1 After shuffle   :"+ l));
     }
+
 }
