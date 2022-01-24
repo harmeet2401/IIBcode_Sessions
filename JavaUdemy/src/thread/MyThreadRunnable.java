@@ -42,7 +42,7 @@ public class MyThreadRunnable implements  Runnable{
         Thread t1 = new Thread(objthreadRunnable);
         t1.setName("A");
         t1.start(); // --- this will start the run method defined above
-        objthreadRunnable.letsWait();
+        objthreadRunnable.letsWait();// -- this is the main thread
 
 
 

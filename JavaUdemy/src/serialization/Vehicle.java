@@ -3,8 +3,9 @@ package serialization;
 import java.io.Serializable;
 
 public class Vehicle implements Serializable {
-    private String brand;
-    private  int year ;
+//   transient private String brand; // this variable will not be included which serializing the object value
+   private String brand; // this variable will not be included which serializing the object value
+   private  int year ;
     private String model;
 
     public Vehicle(String brand, int year, String model) {
