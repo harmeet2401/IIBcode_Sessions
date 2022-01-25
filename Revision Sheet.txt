@@ -66,6 +66,13 @@ Collections :
 	linkedhashmap : similar to hashset , maintain the order of the elements entered
 	vector : its a synchrounised and thread safe . Can not work in multithreaded env or setup . Somewhat slower and not usable in multi - threaded env.
 	queuee : works on FIFO first in first out method .
+Collections interface allow many functions to be used for collections 
+		Collections.sort  --- ascending order
+		collections.shuffle
+		collections.min
+		collections.max
+		collections.sort(list,collections.reverserOrder) -- descending order 
+		
 --------------
 Exceptions : 
 		checked exp : which is the compile time excpetion and if occurs will not allow create the .class file .
@@ -100,5 +107,51 @@ collections are the tables and documents are the row.
 Secondary indices are not available in MongoDB
 writtern in C C++ javascript etc .
 MongoDB has been adopted as backend software by a number of major websites and services.
- 
+Documents (objects) map nicely to programming language data types.
 ---------------				
+Premitive and non premitive datatypes : 
+	Premitive datatypes include : int , byte , char , long , double , short , float boolean etc 
+	Non premitive data type are : String , Array etc 
+	
+--------------------
+Wrapper classes : which is used for user defined data types : 
+		We can use wrapper classses in collections classes to defined the data .
+		ArrayLIst<Character> arr = new ArrayLIst<Character>();
+		ArrayLIst<Integer> arr = new ArrayLIst<Integer>();
+		ArrayLIst<Boolean> arr = new ArrayLIst<Boolean>();
+		ArrayLIst<Person> arr = new ArrayLIst<Person>();
+-----------------------
+Stringbuffer and stringbuilder are immutable classes we can use these classes to append or concatenate the strings easily 
+Stringbuffer str = new Stringbuffer("String to be test");
+Stringbuilder str = new Stringbuilder("String to be test");
+----------------------
+constructor : 
+	Whenever we create a constructor of a class compiler adds a Super() method at very first steps of the constructor.
+
+public class ABS {
+	
+	private ABS (){
+			super();
+			
+	}
+
+}
+		
+Keywords : super() --- points to the base class constructor		
+			super.  ----- this will give you list of methods and variable of the base class tobe used.
+			this() --- this will call theconstructor of the same class 
+			this. ---- this will show the methods and variables declared in same class 
+-------------------------
+Autoboxing : its the type cast used from premitive to non=premitive data types 
+				example:   
+				Integer i = new Integer(9999);
+				Character i = new Integer(c);  or Character c = 'a';
+				Float i = new Flat(9999.9900); or Float f = 999.90;
+	Giving us the advantage of using all methods in Wrapper class Integer , character etc 
+
+AUTOUNBOX : 
+		Integer i = 100;
+		int a = i;  -- this Auto unbox 
+		
+----------------------------		
+			

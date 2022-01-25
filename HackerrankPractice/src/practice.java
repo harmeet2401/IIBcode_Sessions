@@ -5,14 +5,17 @@ import java.util.*;
 
 class AirPlane{
     public  AirPlane() throws IOException {
+        //super(); -------------  if you don't add this here then it compiler will add it for you and will point itto the Objects Class constructor.
+        //super.equals();
         System.out.println("AirPlane");
         throw new IOException();
         }
 }
 class AirJet extends  AirPlane{
     public  AirJet() throws IOException{
+        super();
         System.out.println("AirJet");
-        //super();
+
     }
 
 }

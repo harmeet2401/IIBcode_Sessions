@@ -140,7 +140,9 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 	Notes 	We can understand it like this : we can declared the wrapper class object as this Boolean b = new Boolean(false) ; ------> in this , the constructor is used to hold the primitive data value.
 	
-	****AUTOBOXING AND UNBOXING : 
+	****BOXING AND UNBOXING : 
+		The automatic adaptation of primitive data types into its corresponding Wrapper type is known as boxing, and reverse operation is known as unboxing
+	**** AUTOBOXING AND AUTOUNBOXING : Autoboxing is the process by which a primitive type is automatically encapsulated (boxed) into its equivalent type wrappers whenever an object of the type is needed	
 		This is the cool feature of java in which if we want to convert the primitive data type value to wrapper class just directly write it like tihs :
 		- Interger f = 100;   here the Integer is the wrapper class and 100 is an int value , java is converting it automaticaaly to wrapper which is now giving us the advantage to us all other functions that wrapper class provide.
 		- normal way to wrap a primitive value in wrapper class  
