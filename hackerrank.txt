@@ -1,5 +1,5 @@
 java hackerrank test--------------------------
-Q : Rest Defination : Representation state transfer is the protocol to allow best use f HTTP protocol and help in trasferring data across net using HTTP/Https protocol.
+Q : Rest Defination : Representation state transfer is the protocol to allow best use of HTTP protocol and help in trasferring data across net using HTTP/Https protocol.
 Q : Rest operations  : 
 HTTP GET : To get the request on a path . Its idempotent , means it will keep on sending the same data back to client untill the data is changed by other PUT and post methods.
 HTTP POST : To create and post new  data from client to the api. It is applied on the collections of data . example : http put ; http://localhost:8080/user
@@ -119,16 +119,17 @@ Q : Circuit breaker : This is another feature that spring boot provide , Resilie
 Q : Spring Actuator : It will be used to provide health check feature to the api you create . 
 Q : Difference between Abstract class and interface .
 
-		Both the classes have method names declard without body defination .
-		A single class can implements multiple interfaces in one go . 
-		A single class can extends only one abstract class  in one go .
-		Interfaces only abtract methods are present in it.
-		Abstract contains both abstract fuction and non abstract function.
-		Both interface and abstract class can not be instantiated , means we can not create object of it , but we an use the class which implements to generate the instance of it.
-		All functions in interface are abstracts . Mixed fucntion are present in abstract classes .
-		We can use interfcae when we knew all features of an entityt have different values .
-		We can use abstract class in case we know some features of entityt have diff values and some have constant , remember the WWE example.
-		And both above provides and advantage of not writting the function in the implemented class if 1000 of functions are required to be writtern 
+		- Both the classes have method names declard without body defination .
+		- A single class can implements multiple interfaces in one go . 
+		- A single class can extends only one abstract class  in one go .
+		- Interfaces only abtract methods are present in it.
+		- Abstract contains both abstract fuction and non abstract function.
+		- Both interface and abstract class can not be instantiated , means we can not create object of it , but we an use the class which implements to generate the instance of it.
+		- All functions in interface are abstracts . Mixed fucntion are present in abstract classes .
+		- We can use interfcae when we knew all features of an entityt have different values .
+		- We can use abstract class in case we know some features of entityt have diff values and some have constant , remember the WWE example.
+		- And both above provides and advantage of not writting the function in the implemented class if 1000 of functions are required to be writtern.
+		- But what happened if we want to add one more function in interface and 1000 classes have implemented the interface then we ave to go in each class and add the newly added - functions and its defination. To overcome that we can use default keyword function defined in interface and then we can direcly call it .
 Q : Fault Tolerance in spring boot : Resilience4j is one of the tool opensource provided by Netflix to add feature of retry (when app is down) , cirtcuit breaker (when in a chain of microservice  , one of the microservice is down ) , Rate limiter ( to controler the outgoing request to downstream Micro)  and bulkload.
 Q ; Primitive data types .
 Primitive data types - These are the data types which are defined by java already in its liberary .includes byte, short, int, long, float, double and char ---- BSILFDBC
@@ -162,14 +163,16 @@ static class b{
 Q : Super() function . Whenever we call a constructor of base class by cretaing the object for it  , the compiler will add a super( )function in default constructor of base class which in turn call the default constructor of super class. coooool , even if you dont mention  super() will be there .
 We can add a parameterized constructor and then call it by giving value and use the super()function accordingly.
 
-Q : Mongo Db : session is really nce , it works using collections (tables) and documents (Rows of table) structure.
+Q : Mongo Db :https://www.sanfoundry.com/mongodb-questions-answers-basics/
+ session is really nce , it works using collections (tables) and documents (Rows of table) structure.
 	We have mongodb collection schema also to validate the collections data . Documents will fail on validation 
+	Secondary indices are not available in MongoDB
 	use dbname : -------- to use the db name or switch to it
 	MongoImport  : to import the data.
 	mongoExport : To export the data in json
 	mongodump : to get the data in BSON (back end stored data in mongo db )
 	db.states.find() : to run the query just like the where clause
-			db.states.find({"states":"Delhi"})
+	db.states.find({"states":"Delhi"})
 	db.states.find({"states":"Delhi","District":"south delhi"}) ---- comma , is for and 
     db.states.count() --- to count the documents 	
 	db.democollection.insert([{"_id":1,"firstname":"Harmeet","lastname":"singh"}]) --------- to insert the dcument in collection name example : democollection
@@ -240,7 +243,6 @@ OAuth2(Open Authorization) is an authorization framework that enables the applic
 			|
 			|<------------------------get a token back ------------------------------------------------------------------
 			|
-			|
 			|---------------------------------using that token -----------------------------access the ------------------> Kotak mahindras api for harmeet's bank details using the Resource lke controller
 			
 			
@@ -263,6 +265,11 @@ Q : java Collections : java.util
 		- Collections.copy(arrayList,arrayList1); // copy fist list to another
         - Collections.sort(arrayList1); // sort second list ascending
         - Collections.shuffle(arrayList1); // shuffle the elemenst 
+		- int max = Collections.max(arrayList);  --------- to find the min of the list value 
+        - int min = Collections.min(arrayList); ------------ to find the maximum of the is value 
+		- Collections.reverseOrder() -- will sort the collections in Descending order.
+		  Collections.sort(list , Collections.reverseOrder())  --- will do in reverse order and descending order
+		
 	Integer : 
 		- We can convert from char to interger using Character static class .
 		- int a = Character.getNumericValue(c);    ---------------- where c is the character 

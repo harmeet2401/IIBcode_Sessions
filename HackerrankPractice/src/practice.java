@@ -16,7 +16,7 @@ class AirJet extends  AirPlane{
     }
 
 }
-public class practice {
+  public class practice {
 
     //below are the instance variables
     int f ;
@@ -26,7 +26,7 @@ public class practice {
 
     public static void main(String arg[])
     {
-       CollectionsMethods();
+      // CollectionsMethods();
        //feherenheitToCelcius();
        //sumOfIntegerDigits();
         //minutesToYearsDays();
@@ -38,6 +38,7 @@ public class practice {
         //stringUnicode();
         //charArrayToString();
        // longestSubstring();
+        byteCharArrayStringFunctions();
 
     }
     private static void CollectionsMethods() {
@@ -285,7 +286,7 @@ public class practice {
 
             System.out.println("---------------------Treemap it will sort the coll will not allow null on key--------------------------");
             //System.out.println("-----------Iterator ------------");
-      /*  Iterator arrayListIt = list.iterator();
+        Iterator arrayListIt = list.iterator();
         arrayListIt.forEachRemaining(elm->{
             System.out.println(elm);
         });
@@ -302,7 +303,7 @@ public class practice {
         Iterator hashSetIt = hashSet.iterator();
         hashSetIt.forEachRemaining(hashsetel-> System.out.println(hashsetel));
 
-*/
+
             //System.out.println("-----------Iterator ------------");
 
 
@@ -573,6 +574,56 @@ public class practice {
         Collections.shuffle(arrayList1); // shuffle elements of list2
         System.out.println("----------------------------------------------- ");
         arrayList1.forEach(l-> System.out.println("arrayList1 After shuffle   :"+ l));
+    }
+    private static void byteCharArrayStringFunctions(){
+        StringBuilder str1 = new StringBuilder("The new String equals This is a sample String.");
+        String str = "The new - String + ) equals #@ This is a sample String.";
+        // getting using byte array
+        byte[] bytes = str.getBytes();
+        for (int i = bytes.length - 1; i >= 0; i--) {
+            System.out.println("Bytes array:"+bytes[i]);
+        }
+
+        // getting using char array
+        char[] chars = str.toCharArray();
+
+        //str  = str.toUpperCase(Locale.ROOT);
+        String strout = "";
+        for (char aChar : chars) {
+            if((aChar>='a' | aChar>='A') & (aChar<='z' | aChar<='Z')) {
+                System.out.print(aChar);
+                strout = strout + aChar;
+            }
+        }
+        System.out.println("\n");
+        System.out.println("Upper cased statements : ="+ strout.toUpperCase(Locale.ROOT));
+
+        // to get the index of a char
+        System.out.println(strout.indexOf("G",0));
+        System.out.println(strout.lastIndexOf("G",0));
+        strout.length();
+        //strout.regionMatches();
+
+        //Intern functions
+        String str2  = "Meet bob";
+        System.out.println( strout.intern());  // will give you the Canonical statement
+        System.out.println( str2.intern());  // will give you the Canonical statement
+        // there is a pool of string maintained by the string class . when the intern function is called it will check in the pool of string and do the
+        // equals function ot get the sring out and return or else it will return the ref obj
+
+        String  strcat = "The quick brown fox jumps over the lazy dog.";
+
+        //startsWith
+        boolean b= strcat.startsWith("The");
+        if(b){
+            strcat = strcat.replaceAll("fox","cat");
+            System.out.println("Fox with cat :-  "+strcat);
+
+        }
+
+
+
+
     }
 
 }

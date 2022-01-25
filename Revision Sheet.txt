@@ -1,0 +1,104 @@
+ArrayList : list of values , inserts and add the value in same order.
+		 index based insertion , in order to get the value or search the value need to traverse the entire list 
+
+Hashmap : Key  value data structure . it is faster then arrayList 
+			Based on hashing . a hashmap bucket is stored in heap memory to hold an array , Each arrau index contains a single linked list .
+			A hash function is used to generate the index value using the key provided and push the value to that idex.
+			hash function is used to get the value when we provide the key which gen the index value from where to get the value .
+			
+Hashset : Its not index based DS . It helps in removing the duplicacy .
+				
+Linked List : will work on non index based DS. Each elements contains a data and a pointer location to next element 
+faster then ArrayList
+
+TreeSet : its also non index based . Can remove duplcacy and sort the data in ascending order.
+
+Hashtable : its similar to hashmap and are synchrounised .
+
+Treemap  :  but sort the data in natural order. simiar to hashmap .
+
+Linkedhashmap : similar to hashmap but maintains the order.
+
+Linkedhashset  : this will remove duplicacy and similar to hashset but maintain the order.
+
+Queue : FIFO
+
+------ 
+what is java 
+jre 
+jdk
+jvm 
+Objects creation 
+heap memory 
+object and  instance vari is in heap memory
+local variable and methods are in stack memory 
+Refeenec variable person p = new perons()
+				 ----------
+					ref var 
+Access modifiers : 
+public 
+protected 
+private 
+default 
+--------------
+iterface  : used by implements keyword . consists only abstract function declarations . used when we know donstream contains diff function defination 
+abstract class : used using extend keyword , consists of mixed functions (fun dec and func defination ) , when we know downstream contains diff and unique functionality 
+--------
+Keyword : final variable : value can not be changed 
+			final class : can not extend it 
+			 final mehthod : can be overloaded (means we can change the paramters , return type etc of the function name post extending it from the base class)
+			 
+		: static variable : unique value for all the objects or the instance of the class . we can use this variable by using the class name and dot operator 
+           static inner class : this class can be instantiated without instantiating the upper class of it 
+			 static method : this function can be called using the class name and dot operator. 
+			   only static members calles the static class , variable and method .
+			   
+---------------
+Collections : 
+	arraylist : index based DS . need iterator to traverse through all elements . somewhat slower then other DS
+	hashset  : not indx bases , remove the duplicacy . If added duplicate elements will be removed auto.
+	hashmap  : key , value pair DS . based on hashing . In memory hash table that contains array . Each index in that array contains linked list . hashFN used to get the index value. Key can  be null 
+	linkedList : combination of (value |address of next node -------> value|address of next node) faster then arraylist.
+	treeset   : Non index based DS , remove the duplicacy and sort the elements in natural order (ascending order.) . 
+	treemap   : Non index based DS , sort in natural order. Key value pair DS . Null key is not allowed.
+	hashtable : key value pair and is thread safe means its synchrounised. only one thread at a time . Removed duplicacy . null key is not allowed.
+	linkedhashset : similar to hashset , maintain the order of the elements entered
+	linkedhashmap : similar to hashset , maintain the order of the elements entered
+	vector : its a synchrounised and thread safe . Can not work in multithreaded env or setup . Somewhat slower and not usable in multi - threaded env.
+	queuee : works on FIFO first in first out method .
+--------------
+Exceptions : 
+		checked exp : which is the compile time excpetion and if occurs will not allow create the .class file .
+		unchecked exp : which is the runtime exception and it doesn't occured while compile time. This occurs at runtime post .class is done 
+--------------
+Synchronised block : only one thread can execute the block and will lock it for the others threads to come .
+synchrounised methods : only one thread can execute the method and will lock ot for the other threads to come.
+volatile variable : this will make it thread safe and will allow oly thread to change the value of the variable 
+--------------
+Spring boot : 
+			actuator : health check ui 
+			circuit breaker : used in fault tolereance 
+-------------- 
+REST api : Represntation state transfer : is the methodology for best use of  http protocol 
+methods : GEt , post , put , patch , delete etc and get is idenpotent means same response will come untill a change in data take place .
+--------------
+OAUTH2 : O Authorization : its the protocol used for secure access to the resource for a REST api .
+Its depends on the client id and client secret. These two props are provided by the api auth server.
+
+Its two way authentication using the grant token 
+
+First request for access approval -------------------->
+									<----------Approved --
+									---sends request for grant token ----->
+									<----receive grant token --------------
+									Get logged in 
+									
+---------------
+https://www.sanfoundry.com/mongodb-questions-answers-basics/
+MongoDb : Its no sql bases data base depends upon the collections and documents .
+collections are the tables and documents are the row. 	
+Secondary indices are not available in MongoDB
+writtern in C C++ javascript etc .
+MongoDB has been adopted as backend software by a number of major websites and services.
+ 
+---------------				
