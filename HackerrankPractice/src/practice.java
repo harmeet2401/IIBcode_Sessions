@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.*;
 
-class AirPlane{
+class AirPlane implements  Cloneable{
     public  AirPlane() throws IOException {
         //super(); -------------  if you don't add this here then it compiler will add it for you and will point itto the Objects Class constructor.
         //super.equals();

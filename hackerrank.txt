@@ -45,7 +45,7 @@ public class Main {
 
 Java Patterns : 
 	1. Creational Design Patterns
-		a. Singleton Pattern --------------imp Singleton pattern restricts the instantiation of a class and ensures that only one instance of the class exists in the Java virtual machine. We can implement that as .mention the constructor as private  .Keep only one global access to class for the instance .one static bloack for instantiation.
+		a. Singleton Pattern --------------imp Singleton pattern restricts the instantiation of a class and ensures that only one instance of the class exists in the Java virtual machine. We can implement that as .mention the constructor as private  .Keep only one global access to class for the instance .one static block for instantiation.
 		
 										
 										
@@ -57,9 +57,33 @@ Java Patterns :
 				  Third class Class_factory returns the instance of Class A or Class B on some if conditions  which is an example of factory methods.
 		
 		c. Abstract Factory Pattern - In Abstract Factory pattern, we get rid of if-else block and have a factory class for each sub-class and then an Abstract Factory class that will return the sub-class based on the input factory class
+						1. one interface  Color . one method : getcolor();
+						2. one class blue implements color . method override getcolor : sout("blue color ")
+						
+						3. one interface shape . one mthoed : getshape();
+						4. one class square implements shape. method override getShape :sout("square").
+						
+						5. one abstract class abstractFactory . one method Shape getShape(String str) , one method Color getcolor(String str );
+						6. Class shapeFactory extends abstract . Override method getShape(String shapetype) :
+																			if(shapetype==squre){
+																				return new Square();
+																				
+																			} ////// this is called Abstract Factory pattern in which we used an another abstract class ot get the object of implementing classes on some condition .
+																				
+			
 		
-		d. Builder Pattern
-		e. Prototype Pattern
+		d. Builder Pattern : steps by step procedure to create complex objects .Main advantage of builder design pattern is that it provides better control over object construction process.
+		e. Prototype Pattern : Prototype pattern refers to creating duplicate object while keeping performance in mind. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object. https://www.tutorialspoint.com/design_pattern/prototype_pattern.htm
+		
+		Here in this we create an abstract class which extends cloneable 
+		for exmaple 
+			a. Abstract class Shape implements Cloneable interface 
+				Some methods 
+			b. One class cirle extends shape , define one function 
+			c. one class square extends shape , define and override the functions .
+			d. one class rectangle extends shape , define and override the functions .
+			
+			e. ShapecacheClas , which load the cache(use hashtable DS) in one method  and then one method does the clone .
 	
 	2. Structural Design Patterns
 		a. Adapter Pattern --------imp The adapter design pattern is one of the structural design patterns and it’s used so that two unrelated interfaces can work together.Its just like we have a program that allow communications between two discretesystems.

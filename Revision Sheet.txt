@@ -153,5 +153,10 @@ AUTOUNBOX :
 		Integer i = 100;
 		int a = i;  -- this Auto unbox 
 		
-----------------------------		
+----------------------------
+spring IOC container : this is the contex loaded which traverse through the classpath and through the entire project searches the class and load them as a bean into the memry which can then be injected automatically into other classes .
+----------------------------
+Java Patterns : 
+			singleton : 
+			prototype : 
 			
