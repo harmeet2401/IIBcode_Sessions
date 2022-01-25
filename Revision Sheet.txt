@@ -168,5 +168,11 @@ Java Patterns :
 			Dependecncy  : used to inject the objects and removed the dependency on other classes.
 			mvc : For web based applications 
 ----------------------------
- Spring boot rest api:  
+ OAUTH2 its the protocol which include below attributes as part of the complete webapi authentication.
+ 
+ client app 
+ Authorization server 
+ resource server 
+ resource owner 
+ 
 			
