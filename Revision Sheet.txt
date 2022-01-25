@@ -157,6 +157,16 @@ AUTOUNBOX :
 spring IOC container : this is the contex loaded which traverse through the classpath and through the entire project searches the class and load them as a bean into the memry which can then be injected automatically into other classes .
 ----------------------------
 Java Patterns : 
-			singleton : 
-			prototype : 
+			singleton :  keep the class instantiation to one objects . to do this keep the constructor private 
+			prototype :  create duplicate objs .
+			factory   : used if else condition to return downstream class objects which extends the abstracts class or interface 
+			abstract factory  : Removes the if else block with a abstract class in which the if else is writtern to rturn the downstream classes objects 
+			builder  : steps by steps to create complex objs
+			adapter   : The class which act as a bridge to allow two unrelated interfaces to talk to each other 
+			facade : hides the complexity by keeping the attributes private and allow access to the user.
+			Dao : To keep the data base interacting layer separate .
+			Dependecncy  : used to inject the objects and removed the dependency on other classes.
+			mvc : For web based applications 
+----------------------------
+ Spring boot rest api:  
 			

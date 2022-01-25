@@ -86,12 +86,12 @@ Java Patterns :
 			e. ShapecacheClas , which load the cache(use hashtable DS) in one method  and then one method does the clone .
 	
 	2. Structural Design Patterns
-		a. Adapter Pattern --------imp The adapter design pattern is one of the structural design patterns and it’s used so that two unrelated interfaces can work together.Its just like we have a program that allow communications between two discretesystems.
+		a. Adapter Pattern --------imp The adapter design pattern is one of the structural design patterns and it’s used so that two unrelated interfaces can work together.Its just like we have a program that allow communications between two discretesystems. 
 		b. Composite Pattern
 		c. Proxy Pattern
 		d. Flyweight Pattern
 		
-		e. Facade Pattern ---imp Facade Pattern is used to help client applications to easily interact with the system. Suppose we have an application with a set of interfaces to use MySql/Oracle database and to generate different types of reports, such as HTML report, PDF report, etc. So we will have a different set of interfaces to work with different types of databases
+		e. Facade Pattern ---imp Facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. Creating a class which is exposing the class functionality to do acess the system and not able see the attributes.
 		
 		f. Bridge Pattern
 		g. Decorator Pattern
@@ -189,8 +189,9 @@ We can add a parameterized constructor and then call it by giving value and use 
 
 Q : Mongo Db :https://www.sanfoundry.com/mongodb-questions-answers-basics/
  session is really nce , it works using collections (tables) and documents (Rows of table) structure.
-	We have mongodb collection schema also to validate the collections data . Documents will fail on validation 
-	Secondary indices are not available in MongoDB
+	We have mongodb collection schema also to validate the collections data . Documents will fail on validation .
+	Secondary indices are not available in MongoDB.
+	MMS stands for MongoDB Management Service and is available to all users in the cloud and on-premises as part of MongoDB Standard and Enterprise Subscriptions.
 	use dbname : -------- to use the db name or switch to it
 	MongoImport  : to import the data.
 	mongoExport : To export the data in json
@@ -200,8 +201,11 @@ Q : Mongo Db :https://www.sanfoundry.com/mongodb-questions-answers-basics/
 	db.states.find({"states":"Delhi","District":"south delhi"}) ---- comma , is for and 
     db.states.count() --- to count the documents 	
 	db.democollection.insert([{"_id":1,"firstname":"Harmeet","lastname":"singh"}]) --------- to insert the dcument in collection name example : democollection
-	
 	If the db and collection (table) name is not there then while running insert and use command it will auto create those for us.
+	
+	
+Q. Spring Transacion : 	???????????????/
+	
 Q : What is the expected results ?-------------------- MULTI CHOICE
 Q : WHAT IS THE RIGHT ANSWER TO THE FOLLOWING ?-------------------- MULTI CHOICE
 Q : WHAT WILL BE THE OUTPUT OF THE PROGRAM ? -------------------- MULTI CHOICE
@@ -246,7 +250,14 @@ http://api.canvas.com/shapes/polygons/quadrilaterals/squares
 Q : GOOD URI DESIGN JAVA REST -------------------- MULTI CHOICE
 Q : SPRING DATA -------------------- MULTI CHOICE :  Its the feature of spring which we can find in docs.spring.io . We can download or refer spring data to bring data access features into our projects like , JDBCtemplate , MongoTemplate etc.
 
-Q : OAUTH2-------------------- MULTI CHOICE : 
+Q : OAUTH2-------------------- MULTI CHOICE :  https://www.w3cschool.cn/oauth2/5ghz1jab.html
+OAuth 2.0 lists four different types of authorization approvals, each with different security features. These authorization approval types are:
+
+-authorization code
+-indenture
+-the resource owner key certificate
+-client certificate
+-each authorization approval is mentioned below.
 
 OAuth is an authentication protocol that allows you to approve one application interacting with another on your behalf without giving away your password.
 OAuth2(Open Authorization) is an authorization framework that enables the application Web Security to access the resources from the client. To build an OAuth2 application, we need to focus on the Grant Type (Authorization code), Client ID and Client secret.
