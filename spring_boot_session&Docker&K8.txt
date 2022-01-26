@@ -62,7 +62,7 @@ These are defined structure .
 	
 REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol . Methodology to make best use of HTTP protocol.
 
-The HTTP protocol is used to transfer HTML data from consumer to service provider . HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
+The HTTP protocol is used to transfer HTML data from consumer to service provider or vice versa. HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
 like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this url we can send the html data which can be any form of data.
 
 rest contains  : rest APIcontains the format of message(request , response) , methods used for each resources : PUT , post , get , patch etc.
@@ -245,6 +245,8 @@ I have also added the method to delete the user from the list using PUT methods 
 
 For best HTTP REST api service : While creating an object you can send the Build uri back to the user in header .
 This can be achieved by using ServeletUriComponentbuilder class that helps in creating the uri which we can pass to the user in header 				
+			
+					----------------ServeletUriComponentbuilder----------------
 
 URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(users.getId()).toUri();
 ResponseEntity.created(location);
@@ -516,7 +518,7 @@ Please add the below dependency instead of spring-data-rest-hal-browser
 		
 		The actuator works around hal : HyperText Application language  : 
 		
-Why we use Actuator   ?   Now as we know we have documented our application  , now i need some monitoring feature for my api to show it is up and running or to see the metrics , for that spring boot have provided actuator for it.		
+Why we use Actuator   ?   Now as we know we have documented our application  , now i need some monitoring feature for my api to show if it is up and running or to see the metrics , for that spring boot have provided actuator for it.		
 
 Url launch for hal browser : localhost:8080
 
@@ -631,7 +633,10 @@ Step 1 : add below
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
+		
+		o r 
+		We can also add mongo dependencies or the Db2 dependencies for template to use.
+			 
 
 
 Step 2 : add below in app.yml
@@ -648,7 +653,7 @@ Step 3 : create an sql file and run three insert queries to insert data to h2 in
 
 
 Step 4 : 
-	a. Create a different user(bean) controller
+	a. Create a different user(bean) controller and a  User bean anootated as @Entity
 	b. create a repository as an interface extending JPArepository<Users(bean) , Integer> , this repository is just like a daoservice that we used to get the value from Bean data.
 		Now this repository will get the data from in memory db (h2).
 		
@@ -687,8 +692,7 @@ challanges  for monolithic approach
 2. Elasticity 
 3. Failt tolerance 
 4. tracebility
-5. auto - cloud configuration
-5. Bounderies -- this shows what a single microservice is doing 
+5. Bounderies -- this shows what a single microservice is doing.
 6. load balancing 
 
 
@@ -831,12 +835,12 @@ It means it will send a response in which the value of 1 dollar is given as 65 r
 
 						call(getexchange value)
 Currency Conversion MICRO -------------------------> Currency exchange MICRO 
-											|
-											|
-											|
-											|
-											|
-											database to save the value .
+														|
+														|
+														|	Call h2 DB to save the values in memory space 
+														|
+														|
+														database to save the value .
 											
 ----------------------------MICRO1-------------
 	group id : com.in28minutes.microservices
@@ -972,7 +976,7 @@ Steps :
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
-2. Annotate main class with @EnableEurekaserver  , this i just like when we created the config server we annotate it as @EnableConfigServer .
+2. Annotate main class with @EnableEurekaserver  , this i just like when we created the config server we annotate it as @EnableConfigServer ,
 		@EnableFeignClient is annotated the main class from where we are using the proxy .
 3.	Add name of the app 
 	eureka.client.register-with-eureak = false
@@ -1016,11 +1020,13 @@ so all the api hit will go through this api gateway containing the common featur
 
 Steps : 
 1. Add the dep 
-	DevTools
+
+DevTools
 Actuator
 Config Client
 Eureka Discovery Client
 Gateway (Spring Cloud Routing)
+
 2. now how it works ?
 		Apigatewayurl/micro registered name on naming server / url of the micro to hit 
 		
@@ -1128,8 +1134,10 @@ LAB 20 : -----------Circuit breaker/failover/retry/rate limit  ----------------
 		
 		
 resilience4j.bulkhead.instances.default.maxConcurrentCall=10
+
 resilience4j.ratelimiter.instances.default.limitForPeriod=2
 resilience4j.ratelimiter.instances.default.limitRefreshedPeriod=10s
+
 resilience4j.retry.instances.sample-api.maxRetryAttempts=4
 resilience4j.retry.instances.sample-api.waitDuration=1s
 resilience4j.retry.instances.sample-api.enableExponentialBackoff=true		

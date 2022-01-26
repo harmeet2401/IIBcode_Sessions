@@ -174,5 +174,113 @@ Java Patterns :
  Authorization server 
  resource server 
  resource owner 
- 
+-------------
+- Spring boot is the fetaure ainly used to create bootable rest api and web applications .
+It runs on top of the spring IOC containr or spring mvc which triggers the beancreater and traverse through the project and classpth to start creating the bean and adding it to the applicationContext .
+- Rest Api : representational state transfer which shows the best use of HTTP protocol . Need the method (get , put , post , delete , patch etc ) and send via http protocol.
+- Soap applicatin : which requres a WSDL , endpoint url , request and response structure and transport protocol for it . operation is use to invoke the Soap service.
+- Dependecncy used for web api or rest api to be created 
+	spring starter web 
+	spring actuator : for api health check 
+	spring boot devtools  : which is used to auto load the changes happened.
+- Annotation :
+	@RequestBody : which is used to map the incoming data to the bean created 
+	@ResponseBOdy : whic is used to map the outgoing data using a bean 
+	@component : which shows the spring mvc that this is the spring component and add it to the bean list in application context .
+	@Valid : which is used to activat ethe validation of incoming data using a bean and this worked in combinatin with @RequestBody
+	@JsonIgnore : whic his used for static filtering 
+	@JsonIgnoreProperties : which is used for static filter and annotated at class level .
+	@Entity : which is used to annotate a bean class as an entity and used with h2 db setup 
+	@controller : which says the controller will recieve all the request .
+	@Restcontroller : this will tell spring mvc that this controller will recieve all HTTP request using get , post , put and other method .
+	@springboottest: this is used to annotate the class as a test class 
+	@Test :  to write down a test in the spring boot test cass for unit tsting .
+	@EnableConfigServer : which is used to annotate the main spring boot class to create a config server 
+	@Enableopenfeign : which is used to create a proxy class or interface to call other service 
+	EnableEurekaserver : which is used t enable the naming server 
+	@Value  : which is used to load propertyfrom the applicatin.yml file . example : @value("${key.value}") . to get the value from the app.yml 
+	@ConfigirationProperties(prefix="key.valuetobefetched") : it is also used to load the value from the app.yml file 
+	@Service : which is used to create a spring boot service is also annotated as @Component 
+	@Repository : which is used to create a Repository that interact with the Data base or in memory database.
+	@RequestParams : which is used to get the value from the query paramater : http://localhost:8080/user/value?name=harmeet . @RequestBody String name
+	@PathVariable : which is used to get the value coming in uri . http://localhost:8080/user/harmeet . and in mapping method uri =  http://localhost:8080/user/{} @PathVariable String name 
+	@Requestmapping : which is used to annotate the method to receive the incoming http request. @Requestmapping(method="get", uri="/user/get")
+	@GetMapping : which is used to annotate the meothod without telling the method just mention the uri 
+	@PostMapping : which is used to annotate the meothod without telling the method just mention the uri 
+	@PutMapping : which is used to annotate the meothod without telling the method just mention the uri 
+	@PatchMapping : which is used to annotate the meothod without telling the method just mention the uri 
+	@ResponseEntity : which is used to build the outgoing data and the httpresponsecode with it 
+	@ResponseStatus :  which is used to mention the response HTTP status.
+	
+- Internationalization : which is used to create multipe response in different language for different locale .
+- Versioning : which is used to create multiple versions of the api 
+		Uri versioning 
+		Header versioning
+		Request Params versioning 
+		MIME versioing 
+- Jackson parsing : 
+		whch is the default parser for the Response coming out of the rest api 
+		we can change the parsing to  XML using : jackson-dataformat-xml
+- HATEOS : Hypermedia at the engine of application state : which is used to send extra info back to the consumer .
+			Dependency : spring boot starter - hateos 
+- Actuator : 
+		for health check 
+		spring boot starter - actuatro 
+		localhost:8088/actuator
+	We can also use the hel browser 
+- Validation : for validation to activat using the bean 
+		Spring boot starter validation 
+		Annotate the bean class attribute with @Size , @Mmin , @Max and @Email
+- Swagger : used dep spring -openapi -doc 		
+		uri : localhost:8080/swagger-ui/index.html : to see the UI of the api 
+		uri : localhost:8080/v3/api-doc : to see the swagger json file of the api 
+- Static filtering : which is done by using JsonIgnore and JsonIgnoreProperties
+- Dynamic filtering : which is used to create a custom filter using MappingjacksonValue class create the filter and return the map 
+- Authentication : which is used to add the security to the Rest Api : 
+		Dependecncy : spring-boot-starter-security 
+		This will add the security layer to the rst api.
+		In logs we can get the password and defautl username is user 
+- JPA  : Java persistence API : which act as a bridge between the java objects and the DATABSES . This  api or interface helps in wrapping up the java objects and push the objects to the DATABSE,
+Dependecncy : spring boot startetr data - jpa : this is the api or interface 
+dependency : spring boot starter  - h2  : h2 is the in memory database  : http://localhost:8080//h2-console
+
+- Spring cloud config : which provide the feature to connect to the remote repository of code  that holds the configs.
+   Need to things 
+		- Spring cloud server : spring boot netflix -<artifactId>spring-cloud-config-server</artifactId> in microservice 
+			app.yml 
+			spring.application.name="spring-config-server"
+			server.port=8088
+			spring.cloud.config.server.git.uri=""
+			spring.cloud.config.server.git.username=""
+			spring.cloud.config.server.git.password=""
+			spring.cloud.config.server.git.force-pull="true"
+			
+		- rest api  which will join the spring config server : <artifactId>spring-cloud-starter-config</artifactId> in microservice 
+			spring.application.name=app1
+			server.port=8081
+			spring.config.import=opetiona:configserver:http://localhost:8088
+- RestTemplate() : which is used to call other api from one api 
+- openfeign : which is used to create a proxy and call the api from one api better then RestTemplate()
+	feign also does the loadBalancer ans switch od incoming request the api
+- Naming server : used to register the apis to resolve the DNS names	
+
+	Similar like config servers :  annotate the main class with @EnableEurekaserver
+	create a naming server api : <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+	create a rest api  : <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+- Resilience4j : i is used to circuit breaker and failover condition to recover from .
+		dep : 
+			springbootstart.aop
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+			
+	resilience4j.ratelimiter
+	resilience4j.retry
+	resilience4j.bulkhead
+
+rateliiter : it is used  in case of app us dwn and need to stop the request rate to some extends 
+retry :create a controler and use resttemplate hitting a dummy uri and annotate the method with @Retry(name="springap",fallbackmethod="runthismethod")
+	
+		
+		
+		
+
 			
