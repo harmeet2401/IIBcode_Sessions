@@ -302,7 +302,7 @@ Q : java Collections : java.util
         - Collections.shuffle(arrayList1); // shuffle the elemenst 
 		- int max = Collections.max(arrayList);  --------- to find the min of the list value 
         - int min = Collections.min(arrayList); ------------ to find the maximum of the is value 
-		- Collections.reverseOrder() -- will sort the collections in Descending order.
+		- Collections.reverse(ar) -- will sort the collections in Descending order.
 		  Collections.sort(list , Collections.reverseOrder())  --- will do in reverse order and descending order
 		
 	Integer : 
@@ -318,6 +318,12 @@ Q : java Collections : java.util
 		- int count = str1.compareTo(str2)   ----------------------- consider case 
 		- int count_time = str1.compareToIgnoreCase(str2) ---------- ignore alphabet case.
 		Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this String object is compared lexicographically to the character sequence represented by the argument string.
+	
+	StringBuilder ,StringBuffer : 
+		- StringBuilder str = new StringBuilder("Harmeet Singh");
+			str.append();
+			str.reverse();
+			
 		
 		
 		

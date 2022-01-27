@@ -93,6 +93,11 @@ OAUTH2 : O Authorization : its the protocol used for secure access to the resour
 Its depends on the client id and client secret. These two props are provided by the api auth server.
 
 Its two way authentication using the grant token 
+The arch features : 
+	client app 
+	authorization server 
+	Resource owner 
+	Resource Server 
 
 First request for access approval -------------------->
 									<----------Approved --
@@ -149,16 +154,17 @@ Autoboxing : its the type cast used from premitive to non=premitive data types
 				Float i = new Flat(9999.9900); or Float f = 999.90;
 	Giving us the advantage of using all methods in Wrapper class Integer , character etc 
 
-AUTOUNBOX : 
+AUTO-UNBOXING : 
 		Integer i = 100;
 		int a = i;  -- this Auto unbox 
 		
 ----------------------------
 spring IOC container : this is the contex loaded which traverse through the classpath and through the entire project searches the class and load them as a bean into the memry which can then be injected automatically into other classes .
+@SPringbootapplication will tell the main class to load the application context and will trigger the compoenscanner and autoconfiguration to start scanning the project  and annotation ans start creating and registering bean .
 ----------------------------
 Java Patterns : 
-			singleton :  keep the class instantiation to one objects . to do this keep the constructor private 
-			prototype :  create duplicate objs .
+			singleton :  keep the class instantiation to one objects . to do this keep the constructor private .
+			prototype :  create duplicate objects .
 			factory   : used if else condition to return downstream class objects which extends the abstracts class or interface 
 			abstract factory  : Removes the if else block with a abstract class in which the if else is writtern to rturn the downstream classes objects 
 			builder  : steps by steps to create complex objs
@@ -175,7 +181,7 @@ Java Patterns :
  resource server 
  resource owner 
 -------------
-- Spring boot is the fetaure ainly used to create bootable rest api and web applications .
+- Spring boot is the fetaure mainly used to create bootable rest api and web applications .
 It runs on top of the spring IOC containr or spring mvc which triggers the beancreater and traverse through the project and classpth to start creating the bean and adding it to the applicationContext .
 - Rest Api : representational state transfer which shows the best use of HTTP protocol . Need the method (get , put , post , delete , patch etc ) and send via http protocol.
 - Soap applicatin : which requres a WSDL , endpoint url , request and response structure and transport protocol for it . operation is use to invoke the Soap service.
@@ -197,7 +203,7 @@ It runs on top of the spring IOC containr or spring mvc which triggers the beanc
 	@Test :  to write down a test in the spring boot test cass for unit tsting .
 	@EnableConfigServer : which is used to annotate the main spring boot class to create a config server 
 	@Enableopenfeign : which is used to create a proxy class or interface to call other service 
-	EnableEurekaserver : which is used t enable the naming server 
+	@EnableEurekaserver : which is used t enable the naming server 
 	@Value  : which is used to load propertyfrom the applicatin.yml file . example : @value("${key.value}") . to get the value from the app.yml 
 	@ConfigirationProperties(prefix="key.valuetobefetched") : it is also used to load the value from the app.yml file 
 	@Service : which is used to create a spring boot service is also annotated as @Component 
@@ -211,6 +217,7 @@ It runs on top of the spring IOC containr or spring mvc which triggers the beanc
 	@PatchMapping : which is used to annotate the meothod without telling the method just mention the uri 
 	@ResponseEntity : which is used to build the outgoing data and the httpresponsecode with it 
 	@ResponseStatus :  which is used to mention the response HTTP status.
+	@Autowired : which used to inject the class instances in other class without creating the reference object and allocating the heap memory 
 	
 - Internationalization : which is used to create multipe response in different language for different locale .
 - Versioning : which is used to create multiple versions of the api 

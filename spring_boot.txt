@@ -29,7 +29,7 @@ It will enable the Autoconfiguration and ComponentScanner
 
 1. ComponentScanner : Will scan all folders of the project to start registering the classes as a component 
 		And the annotation will provide the registeration .
-			example : @Controller , @RestController , @Component , @Service , @Repository , @EnableConfigServer ,@Entity etc 
+			example : @Controller , @  , @Component , @Service , @Repository , @EnableConfigServer ,@Entity etc 
 2.	Autoconfiguration : it will look over the class path and start creating beans on the basis of it .
 	We can turn on the debug level logs using 
 	
@@ -180,7 +180,7 @@ Evolution from spring --------------> spring mvc -------------------> spring boo
 each tech is solving it own prob :
 spring : it removes the issue of dependencies injection 
 spring mvc : it provides better connection with embedded system 
-sprig boot : it helps by using sping and spring mvc under it and allow auto configure to auto create all beans required for creating dispatcher servelet , injecting dependencies and giving an embedded web server to deploy a web service 		
+sprig boot : it helps by using spring and spring mvc under it and allow auto configure to auto create all beans required for creating dispatcher servelet , injecting dependencies and giving an embedded web server to deploy a web service 		
 
 
 starter dependencies : docs.spring.io
