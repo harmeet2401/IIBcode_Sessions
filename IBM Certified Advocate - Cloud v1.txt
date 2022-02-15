@@ -1,0 +1,24 @@
+IBM Certified Advocate - Cloud v1
+
+Cloud computing : is enabling on cloud feature to spin up the resource in less amount of time and less manual interventions.
+
+	1. Ondemand - provide the resource or increase the resources on demand
+	2. Broad network acces : can be accessed view any device 
+	3. Resource pooling : Economies of scale . Dynamically assigned and reassigned 
+	4. Rapid Elasticity : Down or up scale the resource as per th eload 
+	5. Measured service  : Pay as you go : n use no billing .
+
+
+1. Deployment model : 
+	public : usage is shared by other company  
+	private : Usage is for single organisation
+	hybrid : Mix of both public and private 
+
+2. Service model : 
+	Application SAAS : direct software install
+	Platform PAAS : Provide under lying infa and provide hold onto the OS as well.
+	Ifra(IAAS) : prvide the underlying infra 
+
+3. Cloud computing evolution : 
+
+

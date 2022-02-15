@@ -14,8 +14,7 @@ public class MyCypherWheel {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         char[] arr = str.toCharArray();
-        for (char c:
-             arr) {
+        for (char c: arr) {
             if(c!='A') {
                 strout += (char) (c - 2);
             }else{
