@@ -97,4 +97,20 @@ PAAS : 	Maintain below resources :
 			Apis 
 			databases 
 
+			as middleware and runtime are managed by the vendor , the developer can focus more on the app dev.
+			As the data bses and runtime are mainatined by the vendor , then the user or dev have no control  over the updation of the OS . Or routine updation .
+
+SAAS  : Maintain below resource : 
+			Server devices   ------------ DCs
+			Network devices	   ------------ virtualisation , api 
+			storage devices    ------------ objects , block storage 
+			security ----
+			keep the code or the service on a centralized repo to be accessed by the user .
 			
+			example : email application , HRM , HCM , financial application , microsoft office.
+			
+		concerns : 
+			Need constant network setup to access the software 
+		Pros : 
+			as it is SAAS , no need to maintain any IT infra 
+			Storage , network etc 
