@@ -1,5 +1,7 @@
 IBM Certified Advocate - Cloud v1
 
+Cloud computing is the delivery of on-demand computing resources over the internet on a pay-as-you-go basis; resources are dynamically assigned and reassigned among multiple users and scale up and down in response to users’ needs.
+
 Cloud computing : is enabling on cloud feature to spin up the resource in less amount of time and less manual interventions.
 
 	1. Ondemand - provide the resource or increase the resources on demand
@@ -21,4 +23,78 @@ Cloud computing : is enabling on cloud feature to spin up the resource in less a
 
 3. Cloud computing evolution : 
 
+4. Flexibility , ondemand increase of theresources , access cloud from anywhere .
+5. No need to worry about the underlying infra and its maintainance
+6.  hosted data can be access from anywhere and from any device 
+7. hardware failure doesnot results in data loss , as data redundacny , fault tolerance and disaster recovery is applicable for the damage.
 
+Key cloud srevice provide : 
+AWS 
+Azure (microsoft ) 
+Google cloud platform(GCP) .
+Aliyun (alibaba cloud) chinese cloud.
+Salesforce.
+
+
+8. Business case fr cloud computing 
+First create an IBM cloud account : https://courses.cognitiveclass.ai/courses/course-v1:IBMDeveloperSkillsNetwork+CC0101EN+v1/courseware/97dfd2321ab2469c9b8ebaaecf03a508/62c5ec272127473891cfc570811077a6/?child=first
+
+9. pay-as-you-go and Spiningup the application in lower amount of time results in lower the risk for the companies to start adopting the Cloud .
+	The above approach helps in avoiding huge upfront cost and maintainance of the underlying hardware even if when all or some of our apps and services are sitting idle and is not in use.
+	
+a. IOT Devices : internet of things : IOT is the platform powered by Cloud which is access using a smart phone of any device generating data . IOT devices helps in converting the digital data acceptable in cloud and be analyzed by the cloud back end and generate values.
+
+case study : Maglvendon socitry in affrica using IOT devices connected to each Rhino to track their movement and ca also be warned before any one comes near to them 
+Help them escape . Using these IOT devices connected to Each rhino the cloud is maintaining the dtaa count overall africa.
+
+Note  : IN nutshell IOT devices generates data 
+
+b. AI : Artificial intelligence 	: Now AI consumes data process and Leanr from the data generate from IOT devices . 
+
+
+use flexibility / elasticity / scalable feature of cloud----------->cloud <----------  make use of the flexibility / elasticity / scalable feature of cloud
+													|							|
+													|							|
+													IOT Devices------------------->AI			
+														/\
+														|
+														|
+														Mobile devices
+
+C. Block chain and analytics :  Block chain is more similar to IOT . As IT devices connected to various data generating devices and send it to AI which help in learing from the event driving data generation , dysruption , error occured , . That complete set og data generated from theIOT devices will be USed by  AI to generate an analysed data sheet to allow organisation or the vendors to take supportive steps.				
+
+Some case studies that demonstrate how the use of emerging technologies on the cloud is creating value for millions around the world.
+
+o   The use of the Internet of Things on the cloud to combat poaching of endangered rhinos in South Africa
+
+o   Artificial Intelligence on the cloud being leveraged to deliver unique digital experiences to millions of fans around the world by the United States Tennis Association
+
+o   Blockchain on the cloud helping farmers reduce waste by building traceability and transparency in the food supply chain
+
+o   The use of data analytics for driving predictive maintenance solutions for a city’s infrastructure by KONE
+
+
+NOTE : CLOUD MOSTLY IS USED BECAUSE OF ITS WIDELY USED FEATURES : SCLABLE , FLIXIBLA E, PAY AS YOU GO , DISASTER RECOVERY , GLOBAL DISTIBURTION ETC 
+
+
+Difference between IAAS  , PAAS and SAAS 
+IAAS : In this arch the underlying srever , datacenters , cooling plant , wiring , network , power setup is maintained by the vendor. The choice of OS is users and then install the DB and etc 
+PAAS : In this along with above IAAS resource , the vendor also maintained the underlying OS installed on the server.
+SAAS : In this along with the above PAAS resources , the vendor also maintained the application and other pre-requisite need to run the app .
+
+IAAS :  Maintain below resources : 
+			Server devices   ------------ DCs
+			Network devices	   ------------ virtualisation , api 
+			storage devices    ------------ objects , block storage 
+
+PAAS : 	Maintain below resources : 
+			Server devices   ------------ DCs
+			Network devices	   ------------ virtualisation , api 
+			storage devices    ------------ objects , block storage 
+			Operating system 
+			application runtime 
+			middleware 
+			Apis 
+			databases 
+
+			
