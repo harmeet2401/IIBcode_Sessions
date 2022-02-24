@@ -422,14 +422,13 @@ But public cloud like   AZURE platform provide many benefits  :
 						--- involves operational cost for example monthly.
 Private	Coud : Which shows how the service will be hosted on the 100%business maintained DCs on these private network . On premises DCs
 						--- More secure than the public cloud hosting 
-						---Need to maintain the infra , storage  , and other resource s required for the computing app
+						--- Need to maintain the infra , storage  , and other resource s required for the computing app
 						--- intial nivestment of the infra is  required 
 						---  involves capital cost
 Hybrid : 
 
 Combination of both :
-						example : the business can ask to host the data on their private cloud and spun up the other computing resource on private cloud which might Auto 
-						scalability or elasticity for the resource as the usage 
+						example : the business can ask to host the data on their private cloud and spun up the other computing resource on private cloud which might Auto scalability or elasticity for the resource as the usage 
 						
 Economics of Scale :
 					The prcess to accomplish task efficiently and under less amount of money or low cost per unit  :

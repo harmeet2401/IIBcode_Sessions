@@ -114,3 +114,76 @@ SAAS  : Maintain below resource :
 		Pros : 
 			as it is SAAS , no need to maintain any IT infra 
 			Storage , network etc 
+			
+----- Deployment model -------
+Public 
+private 
+hybrid 			
+
+1. Public : In this model all the resouurcse are presnet on cloud which are mainatained by the vendor and is solely responsible for maintaining the underlying infrastructure for the user's application to run . resource like : servers , storage , network , security and infrastructure all are maintained by the vendor or cloud provider . user by using the management console or UI can subscribe to these resource usage and pay as they use. Miltiple tenant and multi org 
+	benefits : 
+			Is benefetial for the orgs which have fluctuating storage and processing and infra need .
+			On demand resource availability 
+			No upfront or capital cost need to invest 
+			Focus more on developing the application which need to be run on the cloud 
+			We can scale up and scale down the resource as we need .
+			Pay as you go subscription plans 
+			pay for what you use. idle resources will not cost .
+	cons : 
+			low security and data sovereignty issue. As the data is present in shared resource in cloud more risk to hijacking , hacking of resource which leads to data leak and other issues.
+			
+2. 	Private : In this deployment model all the resources are managed on private cloud space for a single organisaton which can reside on-premises or on external cloud space .Keeping all the resources on private cloud organisation can have more control on the regulatory compliance of the apps , security patching and network security . 
+
+		benefits : -All benefits are there which invludes easy and quick bring up of apps.
+				   -Virtual private cloud (VPC) is the isolated space that is created for the user to spin their resources.
+				   -Better security set up on network.
+				   -Can apply compliance rules on the applications/resource which are developed for a single organisation.
+				   -Easy portability of entire set up from one Data center to another as the space is not shared and is an isolated space for the org resources.
+				   -User can spin up the resource like DB and other data resouce and allow the apps in public cloud to access the DB in the private clud using more secure way.
+				   -can control the server OS patching , install there own software licenses .
+				   
+3. Hybrid cloud. : Its the best of both cloud private and public cloud. It connects the resources on-premises private cloud tp the resources in public cloud .
+				-Organisations can deploy their applications which are more sensistive on private cloud and apps which are less sensistive and dynamics on public cloud . 
+				-The private cloud resource can use the share space in public cloud on-demand as per their needs.
+				-Portability is there as private cloud is used for more sensitive apps . like data bases and credentials storage or key storage for their apps.
+				-We can port the private cloud not only to different DC but to the a new cloud providers.
+				-This deployment is better then private and public model as this model will help apps running on private and public cloud connected to utilize the resource from each other without impacting the running apps on either side.
+				- But it is recommended that the apps which are on-premises private cloud should utilise the resource from public cloud as pay as you go subscrption plan is there for the users.
+
+
+---- Overview of Cloud infrastructure--------
+1. Cloud infrastructure contains 
+						1 Region-------->1 or more AZ(availability zones)----> 1 or more Data centers -----> multiple data wracks and pshysical machines.
+
+								EaCh DC has its own Network , power supply and coopling system for the physical machines.
+						Multiple region arch helps in disaster recovery .
+						1 DC ----> 1 wrack ----> HyperVisors installed ------> provision VMs on that installed hypervisors . All are maintained by the Cloud provider. Except the virtual machine is provisioned by the end users.
+						
+2. Storage : We are by default getting local storage with each VMs spun up and Bare metal machine . But these local drives get lost when the VM is decommissioned. So we have below storage services : 
+							-Both file and bloack storage are not distributed globally and have less security 
+								File Storage 
+								Bloack storage 
+								
+							- Where as the object storage is distributed globally over multiple regions .	
+								Objects storage 
+								
+3. Networking : STN software networking.
+
+---------------------Virtualization :------------
+1. Hyper visors and Virtual machines are the core part of virtualisations 
+Types of Hyper visors 
+	1. type 1 : Which is also called as Bare metal hyper visors and is more frequently used hyper visors and provide less latency in network .
+	2. type 2 : which is called hosted hyper visors which is less frequently used hyper v and provide more latency as compared to BM hyper v.
+We can spin up multiple virtual machines on Hyper Visors and as each VM is independent from each other each VM can have different OS and can barely use the resources shared with hosted machine.
+
+Benefits : 
+		1. Lower downtime : as VMs are portable . we can shift the vm to other Hyper v running on a working Host or physicall machine . 
+		2. Cost savings
+		3. backup facilities 
+		
+Note : Hyper v is installed on Physical or host machines or a wrack and VM is installed or run on Hyper V.
+									
+				   
+					
+				
+			

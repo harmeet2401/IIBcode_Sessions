@@ -1,0 +1,16 @@
+
+Espanol : spanish 
+Carro : cart 
+caro : expensive 
+Boligrapho : PEN
+
+vowels : 
+	A - AH 
+	E - EH
+	I - EE
+	O - OH 
+	U - OO
+a (ae)
+b (be)
+c  (ce)
+
