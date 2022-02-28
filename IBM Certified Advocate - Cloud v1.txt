@@ -182,8 +182,77 @@ Benefits :
 		3. backup facilities 
 		
 Note : Hyper v is installed on Physical or host machines or a wrack and VM is installed or run on Hyper V.
-									
-				   
-					
-				
+
+- Type of VMs 
+		Note : 1 and 2nd run on multi tenent mode and 3rd one runs on single tenent mode.
+		Multiple tenant mode means multiple org VMs might be running on the same Hyper v on same host.
+		Single tenant mode means single org VMs be running on the single hyper v on single host machine.
+	1. Spot instance or transient instance or vms : these VMS are spun up in the unused space in the data center .	
+		Because these instances are using the unused space and user can utilize these servers for testing and developing purposed.
+		These instance can also be decommissioned by the cloud provided anytime when the space inside the DC decrease.
+		So mostly sed for testing and developing purpose.
+		
+	2. Reserved instances : These are the VMs instance which run on the reserved space for our an year or so .
+		This is more of a subscription discount scheme for the user to reserved the instance for a given period of time 
+		Greater the period of reservation greater is the discount.
+	3. Dedicated host : these instance run on the dedicated host or physical machine for a single organisation .
+			These instances are mostly used licensing and regulatory practices to take place.
+
+
+- Types of base host machines
+	1. Bare Metal Severs : Which is a single tenant machine decicated to a single organisation .
+		.As it is dedicated to a single organisation it is the responsibility of the org to maintain the underlying oS and provision the fix pack and 
+		also do the patching on a regular basis.
+		.Best suited for lcense and regulatory practices and help organisation to install a differnt vendor HYPER V on the machine which the cloud provider does not provide.
+		.As it is not sharing the underlying machine resouces with other org it helps in executing high performance computing like AI , deep data learning , ERP , CRM etc which required high resource utilisation .
+		.As we compare it with the multi tenant machine it is much expensive and comes along with the regulatory or daily maintance of the underlying softwares .
+		.If we use multi tenant we could use the underlying resources under less cost and provides elastic scalability of the resources on pay as we go subscription.
+		. BM host also provide more security as only single tenant is using the machine and no other intrusion can happen.
+		
+- how the underlying VMS are deployed to the cloud
+			-On cloud space each space is seperated by a Virtual private network 
+			-Each virtual private network contains an IP address space 10.0.0.0/32 : it means first 32 bits are same 
+            -Each VPC or VPN contains subnets created from the very address apace 
+			-Each subnet contains the running VMS
+			-Ech Subnet contains ACLs : access control list to act as a firewall
 			
+        -----------------------------------||				
+			---------------   Vm1_1-------||
+			subnest 1         Vm1_1-------LB||----------------------Public intenet gateway -------------------------- Internet acces ----||---------------Computers
+			---------------   Vm1_1-------|                                                                                             |
+			                               ||                                                                                            ||
+			---------------                |                                                                                             ||
+			subnet 2                       ||                                                                                            ||
+			---------------                |                                                                                             ||
+		                                   ||                                                                                            |
+		                                   |                                                                                             ||VPN used
+				|                          ||                                                                                            |
+				|                          |                                                                                             ||
+				|                          ||                                                                                            |
+		    ---------------                |                                                                                             organisation which can |
+			subnet n                       ||																							expand by connectinf via VPN
+		                                   |
+			---------------                ||
+									       |
+				                           ||
+					                       |
+				                           ||
+		                                   |
+                                           ||
+                                           |
+                                           ||
+                                           |
+		-----------------------------------|	
+		
+		-VPC on top of the network contains IP address and its range 
+			- Subnets inside VPC -- Contains ACLs to act as a firewall 
+				- Each subnet contains VMs or other resource which contains SGs to act as a security group access
+				
+		
+- Contanerisation ()
+	-Better then then native approach of Hyper v containing multiple VM utilising the underlying host resources .
+	-Containers are light weight , 
+	-We can scale up and scale down 
+	use the shared pool of  resources 
+	-These are portable 
+	-Lower dowtime if the one of the container goes down . For better architecture we can use Kubernetes to bring container orchestration and results in automatic -control over killing and bring live to more containrrs.
