@@ -616,7 +616,7 @@ This service is for allowing users to access the web service or any app hosted o
 
 user ----------------------->  Edge servers ----------------------------> Origin (azure web app) central us
 	 <----------------------- cache the response<------------------------ 										
-east asia							  Under the profile 	
+east asia					  Under the profile 	
 							  will try to connect
 								the user to the 
 							  nearest region app deployed	

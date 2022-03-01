@@ -266,6 +266,7 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
 		3. Block Storage : This is the EBS volume we used attached to each compute node or VMs. This Storage can be persistent and non- presistent as per our choice . if we make it persistent then this storage will persist even if the compute node is deleted. And will cost as per the need.
 		4. Objects Storage :This is the storage used for storing any kind of  data , it has lower IOPS then other storage devices but have elastic storage capacity that is if volument needs to be increased then it will be handle Auto by the clud.
 		It is also global , means if compute mode or resourcess across the region wants to access it is doable.
+		The data in object storage is accessed using an API. with a security or authentication keys
 		
 - File Storage : 		
 	File storage also need to be mounted from a remote storage appliacnce before it can be used for the operations 
@@ -277,11 +278,69 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
 	The file storage is connected to compute node using Ethernet network .
 	
 - Block Storage : 
+	Block storage split the file into blocks ate is stored seperately in blocks.
 	Block storage in similar way to be mounted to the compute node before being utilized .
 	Block storage also get conncted to the compute node using a remote storage appliances 
 	Block storage appliances are connected via fiber networks which are high speed network for data tranfer. Include more cost as compared to file storage.
 	Block storage is connected to only one compute node one at a time.
 	Block storage also provides encryption of data at rest and the data in transient.
 	Block storages are mostly use in cases where high speed or high throughput data access is requred for eg : in case of data bases .
+	
+- Object storage:
+	Object storage stores the data in buckets . 
+	Objects storage unlike file storage and block storage can be used without mounting it with the compute nodes or any other resources.
+	Object storage size unlike file storage and block storage need not to be provisioned initially by gicing upfront cost . Means the objects storage is infinite and can be utilized and charged per Gigabytes of data. Pay as per use.
+	Objects storage is suitable for toring audio , video , images and data emiting from IOT devices.
+	Objects storages are suitable for archiving the data .
+	Objects storages are suitable for distributing the data on geagraphical regions and can be access via APIs for uploading and downloading the data.
+	Objects storage can not be used for the data which is changing constantly in a less period of time.
+  
+  @Objects storage and its API	
+	Objects storages have different storage tiers :
+		a. Standard S3 :  in which the data is storage which subjects to more frequent access to it.
+		b. Vault / archive tier : in which the data is access once or twice a year . The storage cost decrease and access cost increase.
+		c. Cold Vault : in which the data is not accessed at all and is used for arhive the data . The storage cost is more less and acess cost is more and may take upto hours to access the data .
+	Objects storage APIs : The standard S3 api is the RESTFUL web service and APIs  which allow GET ( download )the data and PUT(upload) the data to the objects storage.
+	
+- Content Delivery Network : 
+	Its a feature and resource that help in distributing the data all arround the globe.
+	This resource uses the response data cache which will happen in edge servers or CDN servers in location from where the user is hitting the main website server.
+	
+	user ----------------------->  Edge servers ----------------------------> Origin (azure web app) central us
+	 <----------------------- cache the response<------------------------ 										
+east asia					  Under the profile 	
+							  will try to connect
+								the user to the 
+							  nearest region app deployed	
+							  amd get the reponse
+
+NOTE : post caching the data , when a new user sends the request the CDN will search for the nearby server as per the geagraphic and get the data from cache and send it back to the user. This will remove direct hit to main website serevr , high security and high uptime.
+
+- Hybrid multi cloud architecture :
+	In this design we are talking about different cloud providers and multi cloud arround the globe.
+	A hybrid design helps in connecting the on-premises infrastructure to public cloud which can be in same geographical or differentgeo region.
+	The public cloud which is connected to private on premises cloud give the architecture the feature t scale up and scale down the resource the microservices which need to face more data traffic or need to handle high data volumes.
+	
+- Microservices : 
+	It removed the approach called the monolithic which shows a single app as a whole showing high cohesiveness to all modules.
+	In this architecture the bigger servces is broken down to smaller pieces loosely coupled and communicate using the API and event streaming , message queues , kafka topic or message broker.
+	
+- ServerLess arch 
+		Ibm cloud functions
+		Azure functions
+		AWS lambda 
+		- Will not charged 
+		- Service as a code.
+		- We can run the function and pay when ever the function is called .
+		- The serverless resource can scale up and scale down as per the work load
+		
+- Cloud native applications : these are the application that supports the microservices approach with lower dependencies on other modules.
+- DevOps : Its the methodology that help `in speed up and automate the process of build , deploy , run , test and maintaining the application or env .
+			It also help in providing a easier approach to share the same package app with the ops team with similar running env with in smaller period of time.
+			Results in lower downtime.
+			
+	
+		
+   	
 	
 	
