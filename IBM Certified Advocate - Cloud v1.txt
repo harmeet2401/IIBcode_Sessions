@@ -256,3 +256,32 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
 	use the shared pool of  resources 
 	-These are portable 
 	-Lower dowtime if the one of the container goes down . For better architecture we can use Kubernetes to bring container orchestration and results in automatic -control over killing and bring live to more containrrs.
+	
+- Cloud storage : 
+	Four types : 
+		1.Direct Storage  : This is the storage directly attached to the machine residing on the hardware wrack . A wrack contains multipe hardware machine and each hardware need OS to be stored somewhere so this storage comes into the picture . 
+			One wrack -----> 3 hardware machines -----> 3 Direct storage attached to it 
+			this storage is not presistent and it is ephemera lmeans it get lost once the hardware goes down or damage.
+		2. File Storage (NFS storage) : network file system : This is the simple file storage which can be access in a folder structure and can be mounted toany compute node any time . it is also portable means we can de-mount and mount it to another compute node .
+		3. Block Storage : This is the EBS volume we used attached to each compute node or VMs. This Storage can be persistent and non- presistent as per our choice . if we make it persistent then this storage will persist even if the compute node is deleted. And will cost as per the need.
+		4. Objects Storage :This is the storage used for storing any kind of  data , it has lower IOPS then other storage devices but have elastic storage capacity that is if volument needs to be increased then it will be handle Auto by the clud.
+		It is also global , means if compute mode or resourcess across the region wants to access it is doable.
+		
+- File Storage : 		
+	File storage also need to be mounted from a remote storage appliacnce before it can be used for the operations 
+	The remote appliances are the same storage devices which can be connected to the compite node presnet in under lying DCs
+	The File Storage can also be called as Network File Storage or Network Access Storage .
+	The File Storage is better then the Direct storage , more resilient and have more security as the storage appliaces provide encryption at rest as well as for data in transient .
+	The File storage can be attached or mounted to multiple compute node at a time .
+	IOPS : Input/output operations which shows the spedd with which the data can be read and write from the file storage or disk connected to it.
+	The file storage is connected to compute node using Ethernet network .
+	
+- Block Storage : 
+	Block storage in similar way to be mounted to the compute node before being utilized .
+	Block storage also get conncted to the compute node using a remote storage appliances 
+	Block storage appliances are connected via fiber networks which are high speed network for data tranfer. Include more cost as compared to file storage.
+	Block storage is connected to only one compute node one at a time.
+	Block storage also provides encryption of data at rest and the data in transient.
+	Block storages are mostly use in cases where high speed or high throughput data access is requred for eg : in case of data bases .
+	
+	
