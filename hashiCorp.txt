@@ -1,0 +1,63 @@
+Integrating HashiCorp Vault with AWS: -------------------
+
+Video about what is hashicopr vault and which problem statements it is resolving and what are the feature it has : https://www.vaultproject.io/
+
+Definatin : vault is the resource which is used to hold secrets . username password , tsl certificates, encryption keys , DB creds  etc 
+
+Problem: as below 
+1.  : we know that we need many creds for athenticationa and authorization process which includes 
+	username and password 
+	dB creds 
+	TSL certificates 
+	API tokens etc or Oauth techniques
+	
+2. These creds or tokens services are presnet in below repo which are spread across all the different repo apps . 
+		DB 
+		Git repo 
+3. We don't have audit features to know who might have access to these repos so that we can manage who can actually see the creds by an implicit access to the repo.
+4. As we know these repo or Db are getting accessed by the APP so the APP is receiving these creds and may be leaking it to the other woorld apps , linke logging it to the openshift log s, splunk logging and those apps are accessible by unwanted users 
+5. single creds were shared for many apps . So if the creds got compromised then all app downtime comes in picture if we revoke the creds .
+6. Smtime the developer cryptographic the incoming key to encrypt the keys . Which may be improper 
+
+
+Features resolving above issues by vault : 
+1. vault allow the users to keep all the creds in a centralised  vault .
+2. it will encrypt the creds or token or ant other certificates at rest and while in transient to 	the APPS.
+3. Dynamic ephemeral creds means : the vault sends a dynamic creds to APP consuming it and even if the app leaks it to the splunk while logging those creds would be valid for 30 mins or so as set by the vault users. This will give a bounce back to the hacker to use the same creds for the hack to happn.
+4. Unique ceds for multiple app instances . means 40 instances 40 creds .
+5. If the creds got compromised for 34th instance then we can revoke the cresd for 34th instance and rest of theinstances will work as is.
+6. vault provide key name and corresponding key cryptographic standards to allow apps to do the encryption is any.
+		
+	
+													------------
+	how vault looks like : 							Storage unit : for read and write data
+												---------------------
+												|					|
+											    |                   |
+				API hit			|        |      |                   |	|        |
+		EC VMS --------------->	|        |	    |                   |   |        |
+		K8S	 --------------->	|        |      |  Core vault       |   |        |This may contains DB , AWS luging to dynamically generate the creds as we 
+		Etcs ----------		>	| API for|		|                   |   |        | discussed for ephemeral creds 
+				API hit			|   apps |      |                   |   | Secrets|
+								|		 |      |                   |   |		 |
+                                |        |      |                   |   |        |
+                                |        |      |                   |   |        |
+                                |        |		|                   |   |        |
+                                |        |      |                   |   |        |
+                                                |                   |
+                                                |                   |
+                                                |                   |
+												---------------------
+													-------------
+													Auditing apps
+													
+													example : splunk 
+													vault will itself thows the
+													auditing logs for itself to splunk 
+													for example 
+													
+													
+
+
+- Master and slaves archicture for Vault is used 
+	
