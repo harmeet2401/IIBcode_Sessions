@@ -4,6 +4,8 @@ Video about what is hashicopr vault and which problem statements it is resolving
 
 Definatin : vault is the resource which is used to hold secrets . username password , tsl certificates, encryption keys , DB creds  etc 
 
+For generating creds for the user to interact with the AWS services it using various plugin to connect to AWS resources and activat ethe secrets and create the creds for it.
+
 Problem: as below 
 1.  : we know that we need many creds for athenticationa and authorization process which includes 
 	username and password 
@@ -51,7 +53,7 @@ Features resolving above issues by vault :
 													-------------
 													Auditing apps
 													
-													example : splunk 
+													example : splunk or aws cloud watch
 													vault will itself thows the
 													auditing logs for itself to splunk 
 													for example 
@@ -62,4 +64,148 @@ Features resolving above issues by vault :
 - Master and slaves archicture for Vault is used .
 - We can also have Autoscaling and downscaling it as per the need.
 - ASg : autoscaling group : which will help in maintaining the desired number of nodes for Vault.
+- We can AWS load balancing for the vault node of more then 3 nodes in a cluster 
+
+		(Load balancer) ------------------------------------->node 1
+		front id 		------------------------------------->node 2
+		backend pool 	------------------------------------->node 3
+		health checks
+
+- Security group : this will contains the incoming and outgoing network rules . Its in node level of Ec2 instance level 
+- NOTE : IN ORDER TO ALLOW HashiCorp VAULT TO ACCESS THE AWS RESOURCES TO GENERATE KEY ENCRYPTION , USE S3 BUCKETS , KMS RESOURCE THE VAULT NEED ACCESS TO THESE SERVICES IN AWS . WE CAN DO THAT BY FOLLOWING METHODS.:
+		1. IAM ROLES : WE CAN ADD ROLE POLICIES HOLDING VAULT ID AND ATTACH IT TO THE RESOURCE IT NEED ACCESS TO.(PREFFERED ONE )
+		2 . SECRET ENGINE ROOT CONFIGURATION 
+		3. ENV VARIABLES.
+			
+	
+			
+	REQUEST APPLICATION 				1.														2.
+	REQUEST FOR CREDENTIALS ------------------------>HASHICORP VAULT USING ---------------------------------------------> AWS IAM ROLE SERVICE WILL GENERATE THE 
+	FROM HASHICORP VAULT 			   				AWS SECRETS ENGINE 													DYNAMIC EPHEMRAL SECRETS KEY AND PASSWORD 
+									4.				USING IAM ROLE WILL						3.
+						<----------------------------CONNECT TO AWS <-------------------------------------------------	SEND THE SECRETS BACKT O VAULT
+						 ADD THE LEASE OR EXPIRE TIME
+						 TO THE DYNAMIC KEY AND PASS
+						 SEND IT BACK TO REQUESTING 
+						 APP
+- Integration vault to AWS cloud watch which is used to generate the metrics and trigger the alarm for it .
+	this is actually the audit logging part as described in above diagram.
+
+
+			vault ------>cloud watch logs ------------> generate metrices -------------> send alarms ----------------> admin peaple.
+			
+	In metrics we mostly search for the 
+		: use of root creds
+		: old version of key 
+		: resoure code vioation 
+		: cloud based resource changes 
+		: seal status of vault 
+		: permission denied 
+		: creation of new root token or creds 
+		:  modification of auth method.
+		: creation of auth methods.
+		
+			
+	steps 		
+		1. create cloud watch log group in aws management console var_audit_log
+		2. create the log file audit_file.log
+		3. Give permission to this file for vault to read and write user.
+		4. enable vault audit enable  file file_path=audit_file.log
+		now command :  sudo cat audit_file.log : you will see some logs added 
+		5. now set up the cloud watch agent on my local machine  : yaml cloud watch command 
+		6. In  cloud watch configuration file at the end : change the file name and the cloud watch log group name we created in step 1 .
+		7. sudo systemctl start awslogsd : command to start the cloud watch agent and it will start sending the logs to cloud watch log group in AWS 
+		8. Now go to cloud watch create a metrics filter 
+		9. click on metrics filter and select set alarm , in alarm select the count of the filtered event above which you need to be alarmed.
+		
+- vault can also use EC2 metadata to authenticat ethe EC2 instance 
+
+
+
+
+								2. sends metedata info to vault						3. Authenticate with 	
+				EC2 instance  ----------------------------------------> Vault ----------------------------->  AWS
+					|		  <----------------------------------------					
+					|				4. send the token back to EC2
+					|
+					|1. obtaib docs 
+					|
+					\/
+				ec2 metadata file 
+
+- how vault uses the VPC Endpoint to access AWS KMS service to unwrap the keys .
+													------------------------------------------------->INTERNET	
+													|													|
+													|													|
+		|----------------------------------INTERNET GATEWAY-------------|								|
+		|                                     /\                         |								|
+		|        second aproach               |                          |                              |
+        |       |-----------------------------                                                          |
+		|       |                                                        |								|
+		|       |                                                       |                               |
+        |       |                                                        |                              |
+		|    VAULT ----------->VPC ENDPOINT-------------------------->AWS KMS <--------------------------
+        |               first approach                                  |
+		|                                                               |
+        |                                                               |
+		|                                                               |
+        |                                                               |
+		|                                                               |
+        |                                                               |
+		|                                                               |
+        |                                                               |
+		 ----------------------------------------------------------------
+		 
+- Configure MFA in vault 
+
+			IAM user ----------------2. Request MFA creds ------> vault 
+			    |
+                |
+                |
+                |
+                |
+                |
+                |		1. loginusing creds 
+                |--------------------------------> AWS
+				|
+				|-------------------------------->AWS
+					3. submit MFA token 
+					
+					
+- DB sectrets engine for amazon RDS databases.
+									1. request dynamic creds form vault for DB 				2. Generate the dynamic creds 
+	user / app server / web app --------------------------------------------------> vault -------------------------------->Amazon RDS database
+								<--------------------------------------------------
+										3. Send the creds back to user
+										
+								------------------------------------------------------------------------------------------>
+										4. use those dynamic creds to loging to the Db 
+   Steps : 
+	1. Launch a new RdS Db 
+	2. Configre vault : 
+		a. start the db secrets engine 
+			vault secrets enable -path= mysql database.
+			vault secrets list 
+		b. Connect vault to backend DB 
+			vault write mysql/config/mysql-database \
+			>plugin_name=mysql-rds-database-plugin \
+			>connection_url="{username}" go to aws and open the db and copy the connection url from props \
+			>allowed_roles="advanced" \
+			>usrename="admin" \
+			>password="vaultadvanced"
+			enter if not error means the connection from vault to db is successfull.
+		c. create role : vault write mysql/roles/advanced \
+				>db_name=mysql-database \
+				>creation_statement="sql query" \
+				>default_ttl="1h" \
+				>max_ttl="24h" \
+				vault read mysql/roles/advanced
+				vault reade mysql/config/mysql-database 
+				vault write -f mysql/rotate-root/mysql-database : we rotated the creds 
+				vault read mysql/roles/advanced
+		d.create the dynamic creds  vault read mysql/creds/advanced 		
+		e. We can also rvoke those creds : vault lease revoke 	mysql/roles/advanced/lease_id
+		vault lease revoke -prefix mysql/roles/advanced : to revoke all creds 
+				
+	
 	
