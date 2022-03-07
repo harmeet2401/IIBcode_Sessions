@@ -340,6 +340,11 @@ NOTE : post caching the data , when a new user sends the request the CDN will se
 			Results in lower downtime.
 			
 	
+- IBM cloud essentials : Which shows IBM cloud is the combination of IAAS , PAAS and SAAS .
+It as 200 services and 60 data centers all arroud the globe .
+a.IBM Console : it is similar to what we saw in AWS console and azure console which allow user to subscribe and use the service provided by IBM , Microsoft and amazon .
+b.IBM Cloud Shell : it is the terminal using which the user can run the ibm cloud command or CLI command to interact with the IBM services .
+c.IBM Cloud CLI : its a bundled package program which help user to install it on their local and using IBM CLOUD cli command to interact wth the IBM CLOUD services.
 		
    	
 	

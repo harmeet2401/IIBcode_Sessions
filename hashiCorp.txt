@@ -206,6 +206,29 @@ Features resolving above issues by vault :
 		d.create the dynamic creds  vault read mysql/creds/advanced 		
 		e. We can also rvoke those creds : vault lease revoke 	mysql/roles/advanced/lease_id
 		vault lease revoke -prefix mysql/roles/advanced : to revoke all creds 
-				
+
+- Integrated vault with S3: store the vault snapshot in s3 
+		vault status : vault cluster is running or not 
+		1. create an S3 bucket in aws console 
+		2. create Customer manged key on aws console 
+		3. vault list sys/storage/raft/snapshot-auto/config
+		4. vault write sys/storage/raft/snapshot-auto/config/hourly \
+		 >retain parameter 
+		 >storage_type=aws-s3 \
+		 >aws_s3_bucket=production-vault-snapshots \
+		 >aws_s3_enable_kms=true \
+		 >aws_s3_kms_key=managed key 
+		enter successfull 
+		5. vault read sys/storage/raft/snapshot-auto/config/hourly 
+		6. go to s3 refresh the S3 bucket whic hwill contain the vault snapshot
+		
+- using cloud auto-join to cretae cluster automatically in AWS
+		1. sudo cat /etc/vault.d/vault.hcl
+			you will see auto-join and retyr join props 
+				which provider : aws , azure etc 
+				  region /
+				   tag \
+				    tag value
+ 			
 	
 	

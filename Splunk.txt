@@ -14,6 +14,21 @@ What is splunk
 
 - Splunk is used to turn or convert unstructured data into something readable and present it in human readable format .
 
+- Splunk main component is INDEX , consider INDEX as the factory and raw data is pushed to the INDEX(factory) where the inspector inspect the data and organise those into the events . These events are marked with time stamps and can be picked by the user from the splunk web app search bar
+
+- We can use wild card like below in search bar : the search keyword i not case sensitive
+	fail*
+	failed
+	faiLed
+	FAILED
+	failed OR password 
+	failed NOT password 
+	failed and password
+	"chris password"  ----------------- to search for the exact string use quotes
+	"\chris password \" --------------- to search for the keywords that contains quotes use backslash.
+	
+	
+
 -is  a powerful tool like Splunk to investigate and solve a complex IT problem.
 
 - it stores the data it consumes in harddisk of the system on which the instance is running .
@@ -26,6 +41,7 @@ Data storage in Splunk :
 	: sourcetype : format of data 
 	: host : source ip address
 	: timestamp : current timesatamp
+	
 
 
 		Incoming data -----transformsinto each -----------> event ---------->stored on indexes(buckets)-------->On DISK
@@ -203,9 +219,21 @@ Process subscriptions and send visualization data to subscribed devices.
 
 1. Search  pipeline : It goes like this 
 
-			|globae of raw data or events  | intermediate global transforms | get the readable format data |
+			globae of raw data or events  | intermediate global transforms | get the readable format data |
+			
+			command1 | command 2 | search 
+			
+			Command1 search results will be fed to command 2
+			
+			'as' keyword will store the result sin the field name after as keywork and 'by' is used to sort the data as per the field writtern after the by keyword
+			
+			'search' keyword can further filter the results comming from command 2 and show it.
+			
+			Index , source , host and sourcetype are the strongest field we can use to filter the data 
 			
 			Above three process keep on happening untill we get the structured data in hand .
+			
+			NOTE : SEARCH COMMAND ALWAYS RETURN THE RESULTS IN reverse chronological order (from most recent to oldest) ORDER MEANS according to the time they occurred
 
 2. Time : we can manage the time frames or using time stamps .
 				So we can set the filter of time frames or zones to get the data out. its essential fild.
@@ -358,6 +386,7 @@ Alerts : is to send emails or message to the concerned user for a data reaching 
 			Setting --> lookups --> add the file change the permission 
 
 			index=_internal* log_level=warn | lookup test.csv log_level output column2 | table log_leve1 column2		
+			
 			
 
 			
