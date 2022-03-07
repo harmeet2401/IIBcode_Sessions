@@ -1,0 +1,19 @@
+:-------------------Twistlock protects
+
+As A summary  : its an application or tech deployed as a containers to your host or machines where our application are also running as a containerrs.
+This will help in discovery of the assets on your environment and allow you identify the assets easily which are not protected.
+
+
+1. Twistlock protects your cloud native assets anywhere they operate—whether you’rerunning containers, serverless functions, non-container hosts, or any combination of 
+them. Advanced threat intelligence and machine learning enable protection of your entire cloud native stack, whether it runs in the public cloud, private cloud, or airgapped environment
+
+
+2. Twistlock provides an agentless architecture that requires no changes to your host ,container engine, or applications. Twistlock is deployed as a set of containers, as a 
+service on your hosts, or as a runtime component of your serverless function. For environments that do not support deployment of Twistlock as a privileged peer, we 
+offer runtime application self protection (RASP) capabilities.
+
+3. Upon deployment, Twistlock immediately begins working to secure your container and cloud environment. Twistlock supports discovery of assets within your cloud 
+environment, allowing you to easily identify assets which are not protected and add them.
+
+4. wistlock is easily integrated into your container build process with support for continuous integration (CI) systems and registry/serverless repository scanning 
+capabilities.

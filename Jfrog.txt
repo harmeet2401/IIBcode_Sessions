@@ -1,0 +1,37 @@
+JFROG : --------------------------------
+
+https://www.jfrog.com/confluence/display/JFROG/JFrog+Platform+Overview
+Main features of JFrog :
+
+- JFrog Artifactory provides end-to-end automation and management of binaries and artifacts throughout the application delivery process.
+
+- JFrog Xray natively integrates with Artifactory, giving DevSecOps teams an easy way to proactively identify open source vulnerabilities and license compliance violations, before they manifest in production.
+
+- JFrog Mission Control is a single access point and dashboard, for managing all JFrog services under your administrative control, whether they are installed on your own site or at geographically remote sites.
+
+- JFrog Distribution efficiently distributes immutable release bundles and automates the delivery of your software updates.
+  JFrog Distribution is a centralized platform that lets you provision software release distribution. It is a core part of JFrog Enterprise+, managing Release Bundles and their distribution processes, including release content, permission levels, and target destinations.
+  Distribution provides a secure and structured platform to distribute release binaries to multiple remote locations and update them as new release versions are produced. As part of the release flow, release bundles are verified by the target destination to ensure that they are signed correctly and safe to use
+  
+- JFrog Pipelines is a next-generation Cl / CD automation and orchestration tool that embraces and enhances your pipeline processes by providing a centralized command and control mechanism across all your DevOps pipelines.
+
+- JFrog Artifactory Edge (an "Edge node") is an edition of JFrog Artifactory whose available features have been customized to serve the primary purpose of distributing software to a runtime such as a data center, a point-of-sale or even a mobile device. All packages hosted in an Edge node are part of a Release Bundle which is a secure and immutable collection of software packages that make up a release to be provisioned or can be uploaded using direct file upload through the UI or REST API.
+
+- JFrog Insight provides you with the metrics about the JFrog Platform. You can monitor the various trends graphs related to Distribution, Replication, Security and Storage based on historical data collected and stored in the Unified JFrog Platform
+
+
+We mostly use below three JFROG services for an app to build , scanned adn deployed : 
+1. JFrog Artifactory: Universal package management and container registry in one, supporting all major packaging formats, build tools, and CI servers.
+2. JFrog Xray: Open source security scanning and license compliance enabling DevSecOps and ensuring application security throughout your SDLC.
+3. JFrog Pipelines: CI/CD pipeline orchestration all the way from code to production.
+
+MyJFrog Portal is JFrog’s cloud solution for cost management and billing services. MyFrog helps you to understand your JFrog billing, manage and upgrade your subscriptions, monitor spending, and learn how to make the most of your resources. MyJFrog is designed to provide this information in a way that is adapted to the type of subscription you are using as well as to your billing profile. !!!!!!!!!!!!!!!!!!! BILLING!!!!!!!!!!!!!!!!!!
+
+
+JFrog current version of services : 
+JFrog Artifactory 7.0
+JFrog Xray 3.0
+JFrog Mission Control 4.0
+JFrog Distribution 2.0
+JFrog Pipelines 1.0
+

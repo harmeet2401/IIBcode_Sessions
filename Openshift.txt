@@ -954,3 +954,7 @@ We need  : https://codefresh.io/docker-tutorial/create-docker-images-for-java/
 	
 	docker pull quay.io/meet14764/practicalocp:2.0
 	docker pull meet14764/ocprepo:myapi-1.0.snapshot
+	
+	
+Helm Charts : What is a helm chart?
+A Helm chart can be thought of as a Kubernetes package. Charts contain the declarative Kubernetes resource files required to deploy an application. Similar to an RPM, it can also declare one or more dependencies that the application needs in order to run. Helm v3 is based on a client-only architecture.
