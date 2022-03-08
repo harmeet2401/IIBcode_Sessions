@@ -341,11 +341,143 @@ NOTE : post caching the data , when a new user sends the request the CDN will se
 			
 	
 - IBM cloud essentials : Which shows IBM cloud is the combination of IAAS , PAAS and SAAS .
-It as 200 services and 60 data centers all arroud the globe .
+It as 200 services/products and 60 data centers all arroud the globe .
 a.IBM Console : it is similar to what we saw in AWS console and azure console which allow user to subscribe and use the service provided by IBM , Microsoft and amazon .
 b.IBM Cloud Shell : it is the terminal using which the user can run the ibm cloud command or CLI command to interact with the IBM services .
 c.IBM Cloud CLI : its a bundled package program which help user to install it on their local and using IBM CLOUD cli command to interact wth the IBM CLOUD services.
+d. ibmcloud is distributed acrosss 6 regions acrosss the globe and 19 counteries and 60 datacenters 
+e. In ibmcloud also the similar concept of Availability region -----> Availability Zones -----> data centers are presents 
+ 		
 		
-   	
+IBM cloud shell commands : 
+
+ibmcloud --version ------------------------------ To check the IBMcloud version 
+ibmcloud  resource service-instance ---------- To check all the instances of resources running on ibmcloud
+ibmcloud resource service-instance (NAME|ID) [--location LOCATION] [-g RESOURCE_GROUP] [--id] [--output FORMAT] [-q, --quiet]
+ibmcloud ks cluster ls ------------------------- to list all application in kubernetes cluster 
+
+f. Account types and supports plans : 
+
+- Account types : 
+1. Lite : Its free of cost . Will not expire . Access to 40 services in ibmcloud.
+2. pay-as-you-go : Its pay as per the usage of the services. Access to all IBM cloud services. Need credit card subscription. Fits best for production level scenarion or deployments 
+3. Subscription : Its for the organisations which commits for a period of time. because of which they get access to all IBM cloud under discounted offers . Just like pay as you go its fits for production level deployments .
+
+Support plan : 
+1. Basic
+	a. availability of support 24 *7 phone call , char etc 
+	b. SLA for the incident raise by chat , phone is not there
 	
+2. advanced 
+	a. availability of support 24 *7 phone call , char etc 
+	b. SLA for the incident raise by chat , phone is  there of less then 1 hours for case severty 1 , less then 2 hours for case severty 2 ,less then 3 hours for case severty 3.
+	
+
+3. premium
+	a. availability of support 24 *7 phone call , char etc 
+	b. SLA for the incident raise by chat , phone is  there of less then 15 mins for case severty 1 , less then 2 hours for case severty 1 ,less then 3 hours for case severty 2.
+	c. Additional support : Technical manager 
+4. Billing an usage : 
+		View detail information for billing as a monthly or by service category 
+		Manage :---> Billing an usage ----> you can see the billing 
+			Promotion : We can add the promo code for discount . This is not available in Free tier account.
+			Spending notification : We can set alerts and threashhold on the spending and get an alert evrytime for it. This is not available in Free tier account
+5. Cost estimater Tool : 
+		in catalog : 
+			We can add the corresponding service post selectig it from the catalog and selecting its usage and capacity .
+			We can add multiple services to the cost estimator and can download the report as a pdf for showcase.
+6. Access policy : IAM 
+		- User and access group 
+			users : user is anyone which become part of the ibmcloud account by mean of ibm console or by using the IBM cloud api.
+				A user can have View , editor , manager .
+			Access group : its a the collection of the users which make the access classification and degree of access assigned easily .
+						Example : biiling access group , developer access group , IT access group , etc.
+		- Service and resources 
+			1. Services are the app categories available in the IBM cloud catalog , Like VM , data base ,etc 
+			2. Resources : Are the running instances of the Services like , Dev-vm , sita-vm and prod-vm  are instances of VM service. Cloudant which is the instanceof the database services.
+			3. Resource groups : which is the collection of running instances of the IBM cloud service . RS is set while creating a resource from a service.
+				just like we did in Azure 
+		- Access policy
+	
+				The combination of 
+				SUBJECT to have particular ROLE over a TARGET(RESOURCE OR RESOURCE GROUP )
+				-----------------------------------------
+				SUBJECT 	ROLE 		TARGET
+				++++++++++++++++++++++++++++++
+				user		editor		resource 
+				accessgrp	manager		resource group 
+				--------------------------------------------
+				
+		- how to create a api key and authenticate userself and invite other user to your account.		
+			steps : 		
+				manage ---> IAM ----> create new API key ----> save and download 
+				open IBM cli on your terminal 
+					Command : ibmcloud login --apikey  keydownloaded 
+			
+				users ----> invite users --> enter the email 
+				We can also add them in access group wit below role :---->
+					Admin
+					Admin billing 
+					User 
+				we can add the permission related to it .
+					No access 
+					View only
+					Basic User 
+					Super User
+					
+7. Virtual Server Offerings : 
+	a. Virtual servers  : these are the classic virtual machine to run with the base OS to run our apps and act as a IAAS 
+		Type of vms 
+			1. public which is prsnt on the host machines used the other orgs , mainly multi tenent 
+			2. Dedicated : which is used for single tenent for own use and no noisy neighbours .
+			3. Transient : which are provisioned using he usused space of host machine . The cheapest but get decomission if the space is collected back by cloud providers.
+			4. Reserved : which is used the org to reserved the host machines for a period of time and et discouted offers .
+	b. Bare Metal  : Which is used to run IO intensive activitie.and can be provisioned in any IBM Dc arround the globe 
+		Blling types : 
+			hourly 
+			monthly 
+			1 year 
+			3 year contracts
+		performance is better then the VM classic
+			
+	c. Power System : To spin up power system with OS eg  : AI 
+		Flexible compute services 
+		machine types 
+			e880 
+			s922
+		images : 
+			AIX 
+			IBM i
+			bring our own linux
+		performance is better then the VM classic	
+	d. Hyper protect : IBM linux spin up 
+		Deploy to specific DCs 
+		provide security which is better then other virtual system offerings
+-----------------------------------------Create SSH key --------------------------------
+ https://courses.cognitiveclass.ai/courses/course-v1:IBMDeveloperSkillsNetwork+CC0103EN+v3/courseware/5b35991d4f3d4da2aca82ade77525a66/f85d162b6af3471c856c073802e63a1a/?child=first
+ Create an SSH key
+This step requires the user to create an SSH key. Here are some suggestions based on your environment:
+
+Most Mac and Linux platforms will have the ssh-keygen command available by default and can follow the steps below.
+The IBM Cloud Shell is a Linux based container and can also be used. However the keys will be deleted in an hour.
+Windows users can use Putty and follow these steps.
+To create an SSH, copy the command below, substituting in your email address. This creates a new SSH key, using the provided email as a label.
+
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
+
+> Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+At the prompt, type a secure passphrase. It can be empty.
+
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+Output the public key by using the cat command.
+
+cat ~/.ssh/id_rsa.pub
+The key should look like the example below.
+
+ssh-rsa AAAAB3NA...nJrhG8Ap6Uw== stevemar@foo.com				
+-----------------------------------------Create SSH key --------------------------------
+
+8. Block and File Storage and Cloud backup :
 	
