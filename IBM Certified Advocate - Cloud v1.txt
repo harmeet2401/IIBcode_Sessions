@@ -479,5 +479,42 @@ The key should look like the example below.
 ssh-rsa AAAAB3NA...nJrhG8Ap6Uw== stevemar@foo.com				
 -----------------------------------------Create SSH key --------------------------------
 
-8. Block and File Storage and Cloud backup :
+8. Block ,File Storage and Cloud backup :
+
+Block storage : which can be attached or mount only to one compute node at a time 
+				it uses iSCI .
+				It can be attached or deattached easily from the compute node.
+				If the VM is removed then the EBS volume persist for a longer period of time and can cost for sitting idle .
+				We have to manually delete the EBS volume .
+				Used for highely intensive work loads.
+				The IOPS in relatively high in EBS volume then the other file storage 
+				provides encryption of data at rest 
+				
+File Storage : which is used file storage system 
+			   It uses the NFS (network file storage).
+			   This storage can be mounted to more then one compute resources.
+			   The IOPS is low in NFS
+			   This storage persists the data stored in NFS volume.
+			   As a shared resource or storage it does not get deleted .
+			   
+
+Cloud backup : Which involves backing up the data in stored volumes.
+			   That include Geo-redundancy which will copy the data in two geo-graphical regions across the globe .
+			   
+Cloud object storage : 
+					protect data using IAM policy 
+					Provide 4 tier : 
+						Smart : in which we don't know about the accessibility of data 
+						Standard : which is standard and is used for frequently access data.
+						vault : which is used to store data which is infrequently access.
+						cold vault  : which is used for archival of the data .
+					It is used to store any kind of unstructured data .
+					Post storing the objects there is no tree structure and folder structure.
+					The objects are stored in bucket .
+					SDKs and S3 compatible APIs are used to access the objects .
+					By default the accessibility of objects are private .
+					is not used or referred in high intensive thework load.
+
+						
+				
 	
