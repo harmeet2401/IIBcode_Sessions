@@ -637,6 +637,8 @@ use : oc expose command to create a route and hit the routed urls.
  7. language support by function , java , py , ruby , nodejs , js , yaml , groovy etc 
  8. Tight integration with other providers like , git etc 
  9. Cloud function is based on Openwhisk open source 
+ 10. : To deploy a Cloud Foundry project command  : CF push 
+ 11. Its FaaS : functions as a service
  
  
  NOTE point :
@@ -645,6 +647,62 @@ use : oc expose command to create a route and hit the routed urls.
  
  -----THIS SHOWS THE EVOLUTION OF INFRA INDEPENDENCY AND MICROSERVICE ADAPTATION------------------------->
  -----------MORE FOCUS ON APP DEVELOPMENT AND DEPLOYMENT IS MANAGED BY IBM MORE --------------------------------->
+ 
+15. Relational DB on IBMCLOUD.
+
+Types of databases : 
+1. Relational Data bases : which are the classic DBs with rows and columns and which allow users to interact using structural query language(SQL) to insert , update , get or delete data . these are mostly used in high intensive dat acollectins and used in online shopping website.
+example : DB2 fully licensed DB which can be installed  , Db2 hosted (run db2 with full admin acces ) , postgrese open source DB
+2. Document data base : these are no sql dbs which does not contains the rows and columsn , these are schema bases dbs , mongo Db is oneof the example of it. These Dbs can hanle dynamic query .
+Example : Mongo DB(flexible , auto scaling) , Cloudant (based of apachecoucheDb)  , elasticsearch (json indexing data storing. data encryption)
+3. Key value pair DBs : which is also no SQL dbs and is mostly used in  creating hash table and in memory databases.
+	example : redis , etcd
+
+DBAAS : Which allow user to just spin up the db service provided by the cloud provider and no need to take care the underlying OS , device and other pre-requisite for the db run.
+
+16. Integration : 
+1. INtegration involves , connecting apps , transforming the data and routing the data back to the connecting apps.
+ some of the integration service by ibm cloud 
+	APP connect (ACE) , API connect(provide the feature to build the api in a faster rate) , event Streams(build totally on Apache kafka softwares) , MQ.
+	
+17. AI and data science : 
+Data science : which is the mthod to generate insight from lareg amount of data emitting rom different data generating tools or devices.
+AI : which involves various chains to gain knowledge and creating meaningfull patterns and data predictability using NLP , machine learning , data extraction(processing data from IOT devices.). That helps in sending realtime data .
+
+AI services by IM cloud  : 
+
+1. Ai lifecycle managements services  : 
+Watson studio  : Buld , run and manage AI models 
+Watson MAchine learning  : run and deploy machine learning module anywhere 
+Watson Openscale. : monitor AI models in prod.
+Knowlege catalog  :Categorise and share data models.
+
+2. Text processing services : 
+ Natural language understanding : uses deep learning to extract mata from text.keywords , relation , emotions .
+ Tone Analyzer. : uses linguastic to analyse data , such as tone , fear , joy or sadness.
+ Watson Discovery : Is a search service which shows results of our search .
+ 
+ 
+3. Speech processing service 
+	Speech to text : Which is to transform voice to text 
+	Text to speech : transform text to voice 
+	language translator  : Dynamically translate news , patents or conversations.
+	Natural language Classifier : Assign custom categories to inputted text.
+	Watson assistant. : build conversational interfaces like a chat bot for any other organisations.
+	
+	
+18. Analytics Service in IBM cloud.
+Planning : what is our plan.?
+Descriptive : What happened?
+Dignostics  : why did this happend?
+Predictive  : machin learning , precitive model , what will happen next ?
+Prescrptive : What should we do.?
+
+
+	
+	
+
+
 					
 					
 			
