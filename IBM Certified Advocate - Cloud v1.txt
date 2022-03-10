@@ -555,7 +555,7 @@ CIS : Cloud internet service which uses cloudflare service for internet facing a
 		
 
 						
-10 Diff b/W gen1 and gen2 VPC
+10. Diff b/W gen1 and gen2 VPC
 A VPC is a an isolated private network space inside a public cloud .
 A VPC provide multiple subnets and IPs address attached to each subnet .
    Diff Gen 1 VPC and Gen 2 VPC 
@@ -594,4 +594,22 @@ VMware solutions Shared
 	products like : 
 			VEEAM : whic his used to back up VM on the machine 
 			ZERTO : whch is used for disaster recovery process.
+
+11. Container and kubernetes
+
+1. Container : container are running instance of an image : An image is a packaged build file whih contains the runtime , OS , liberaries and the actual jar/war/bar build file of your app to run it .
+	The container are totaly isolated for mthe underlyinh os on host machines. some of the popular vendors of containers Docker which provide docker engine which can run both on Windows and linux os.
+	The Container can run anywhwre untill wehave docker engine running . It is portable . means we can pack the running container into a new image push it to the container registry and can be pull by any user to run a new container on other ost machine as a container.
+2. In case when 1 or 2 container are running we can manage that , but if more than 10000 containers are running we need orchestration tool to manage the scale in and scale out tool , health check set , auto upgrade the under docker version etc 
+		For that we have kubernetes which help in orchestrating the running containers by chcking their health and bring containers up and down on scale value anytime.
+
+3. What is IKS  :IBM kubernetes service : which is the service provide by the IBM cloud using which the user can run a kubernetes cluster and allow a full fledged architecture runnning . there is no need to maintain the underlying kubernetes software required to install KS , we just need to run that and ola we are up 
+		------> First login to IBM cloud account 
+			-----> Select the IKS service 
+			--------> enter the region 
+				-------> enter the zone 
+				 --------> then push the image to the container registry (one of the IBM service) we can do so by creating new namespace.
+					--------> then use IBMcloud ks cmmands to run the kubernetescluster pulling above image and olaaaa 
+					
+					
 			
