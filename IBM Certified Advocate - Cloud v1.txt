@@ -215,7 +215,8 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
             -Each VPC or VPN contains subnets created from the very address apace 
 			-Each subnet contains the running VMS
 			-Ech Subnet contains ACLs : access control list to act as a firewall
-			
+		
+		VPC
         -----------------------------------||				
 			---------------   Vm1_1-------||
 			subnest 1         Vm1_1-------LB||----------------------Public intenet gateway -------------------------- Internet acces ----||---------------Computers
@@ -514,7 +515,83 @@ Cloud object storage :
 					SDKs and S3 compatible APIs are used to access the objects .
 					By default the accessibility of objects are private .
 					is not used or referred in high intensive thework load.
+					
+9. Network services. : 
+
+CIS : Cloud internet service which uses cloudflare service for internet facing applications 
+	  This provides many benefits like : 
+			Global load balancers 
+			DNS service (Domain name space )
+			TLS layer for security 
+			Rate Limiter : which will availability detect the incoming traffic and help is maintaing load over the server.
+			DDOS protection : which is a protection agained malacious hacker attacks , which comes in the form of fake traffic bombarded on the web serevr.
+			Smart routing : which is usedfor routing the incoming traffic 
+			WAF
+			caching : which is used to cache the response or request . redices latency and improve performance /
+			
+    Network services : 
+		1. Direct Link : Create direct link between remote networks and IBM cloud. 
+					Secure dedicated network .
+					used for creating multi cloud .
+					5gbps of speed can be achived 
+					
+		2. CDN : A higly distributed platform of servers that helps minimize servers.
+			  based on Akamai.
+			  Smart at scaling : auto scale service global 
+			  Secure 
+			  Global distribution of data
+			  optimize dynamic content 
+			  usage based pricgin , pay as you used.
+		3. Load balancer : used to reduce traffic .
+					public and private load balancer 
+					health check 
+					backend pool of IPS 
+					Front end IPS.					
+		4. Gateway :which act as a virtual router 
+		5. Firewall : which is used for traffoc filteration process.
+		6. VPN : which is used to maintain adedicated network link between the device with its own organisation network .
+		7. Subnets & IPs : which provide more ip address.
+		8. VLAN : which identifies the ip address and allow multiple devices to reside on the same physical machine.
+		
 
 						
-				
+10 Diff b/W gen1 and gen2 VPC
+A VPC is a an isolated private network space inside a public cloud .
+A VPC provide multiple subnets and IPs address attached to each subnet .
+   Diff Gen 1 VPC and Gen 2 VPC 
+   
+Gen1 : 
+	availability in all 6 regions 
+	upto to 16gbps speed 
+	provider manage securoty and BYOK 
 	
+Gen2 : 
+	availability in all 5 regions 
+	upto to 80gbps speed 
+	provider manage security only 
+	
+11. VMWare solutions : 
+Why to bring VMware on cloud?
+ -because it will help us in saving the underlying infra cost , Dv cost and the corresponding cost of cooling and networking facilties.
+ -Provide encryption of data on rest and in transient .
+ -Complience 
+ -Rapid setup of system 
+
+VmWare solutions type : 
+
+VMWare deciated solution : 
+		Which is a Bare metal solutions and is dedicated to one client only . Is a single tenent solutions 
+			- vCenter type of this is fully automated , VMware softwaredefined datacenters,
+			- vSphere is a manual configuration  for network , storage and addons.
+			- both solutions allow to bring own license or IBM provided licenses.
+			- much costlier then the shared one
+VMware solutions Shared 		
+			- We have Ondemad and reserved instances in VMware shared solution.
+			- this is hosted to the shared cloud .
+			- best for temp migration of solutions 
+			- Up and running in smalll period of time .
+			
+	products like : 
+			VEEAM : whic his used to back up VM on the machine 
+			ZERTO : whch is used for disaster recovery process.
+			
