@@ -610,6 +610,41 @@ VMware solutions Shared
 				-------> enter the zone 
 				 --------> then push the image to the container registry (one of the IBM service) we can do so by creating new namespace.
 					--------> then use IBMcloud ks cmmands to run the kubernetescluster pulling above image and olaaaa 
+
+12. openshift 4 : 
+
+openshift is OKD platform dependent sofwtare which is build on top of kuberneter. This help users to utilize kubernetes features in a much better way and easy to manage using the openhift ui .
+IBM cloud also provide OPenshift service using which the user can bring a openshift resource up and we can delpy the appto openshift .
+Once we spin up the openshift resource , we can open the OCP console and start creating our delpyment , service and routes for our apps 
+
+we can first login using the oc login commadn 
+We can then use oc new-project giturl to create the deplyment and service 
+use : oc expose command to create a route and hit the routed urls.
+
+13. benefits of cloudfoundry on ibmcloud.					
+	a. Cloud foundry is a PAAS implementation provided by the IBM cloud which allow user to just build their app and deploy it to the cloud foundry of any language type whehhet it java , python , nodejs etc .
+	b. PAAS means there is not need to maintain the underlying infra ,OS , runtime or even the binary required for the type of language build file forexample , as we required java jDK for jar  file to run or other SDKs for particular type of language code.
+	c. Its an opensurce .
+	d. It also provide many features like autoscaling ,automatic routing and health checks etc.
+
+14. Cloud functions :
+ 1. These are serverless service provide by IBM cloud.
+ 2. used when small functions are requierd to be called by bigger app modules .
+ 3. Pay for the active hit to the functions 
+ 4. No cost billable if the function sit idle.
+ 5. We can trigger the functions using , events comes from matrics , threshold reached , web hook and rest api calls.
+ 6. 5M Execution free first month
+ 7. language support by function , java , py , ruby , nodejs , js , yaml , groovy etc 
+ 8. Tight integration with other providers like , git etc 
+ 9. Cloud function is based on Openwhisk open source 
+ 
+ 
+ NOTE point :
+ 
+ BARE METAL -----> VIRTUAL SERVERS (SHARED , DEDICATED)------> CONTAINERS ------> CLOUD FOUNDRY ------> FUNCTIONS 
+ 
+ -----THIS SHOWS THE EVOLUTION OF INFRA INDEPENDENCY AND MICROSERVICE ADAPTATION------------------------->
+ -----------MORE FOCUS ON APP DEVELOPMENT AND DEPLOYMENT IS MANAGED BY IBM MORE --------------------------------->
 					
 					
 			
