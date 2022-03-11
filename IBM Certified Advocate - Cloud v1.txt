@@ -451,7 +451,7 @@ Support plan :
 			IBM i
 			bring our own linux
 		performance is better then the VM classic	
-	d. Hyper protect : IBM linux spin up 
+	d. Hyper protect : IBM linux spin up .This is a Compute service allows you to run virtual servers on IBM LinuxONE, getting you access to IBM Z technology
 		Deploy to specific DCs 
 		provide security which is better then other virtual system offerings
 -----------------------------------------Create SSH key --------------------------------
@@ -639,6 +639,7 @@ use : oc expose command to create a route and hit the routed urls.
  9. Cloud function is based on Openwhisk open source 
  10. : To deploy a Cloud Foundry project command  : CF push 
  11. Its FaaS : functions as a service
+ 12. Cloud Functions use the following concepts  : Actions, Triggers, Sequences 
  
  
  NOTE point :
@@ -647,6 +648,9 @@ use : oc expose command to create a route and hit the routed urls.
  
  -----THIS SHOWS THE EVOLUTION OF INFRA INDEPENDENCY AND MICROSERVICE ADAPTATION------------------------->
  -----------MORE FOCUS ON APP DEVELOPMENT AND DEPLOYMENT IS MANAGED BY IBM MORE --------------------------------->
+ 
+ 
+ 
  
 15. Relational DB on IBMCLOUD.
 
@@ -698,11 +702,119 @@ Dignostics  : why did this happend?
 Predictive  : machin learning , precitive model , what will happen next ?
 Prescrptive : What should we do.?
 
+hadoop : distributing processing of lareg data . Its open source 
+Sparx 
 
+Analytics service on IBM cloud : 
+1. Analytics Engine : Deploy and develop apps using open source apache hadoop and sparx. It has ondemand Auto scale facility. Its Hipaa ready.
+2. Streaming Analytics : Ingest , analyzed , monitor and correlate data in realtime. From unstructured text . data in motions. integrated with hadoop and sparx
+3. Db2 Warehouse  : to crate data warehouse engine.Highly scalable. Its secure . monitor acitivity on DB . 
+4. Cognos Dashboard  : Let to add end to end data visualization for your app to create visualizations.
+5. Information Server  : data integration platform . It does ETL . 
+						in information serve we can use many connectors to connect and generate the data , transform the data and store it in other storage devices.
+6. App Connect : IBM Cloud service is all-in-one tool for easily connecting apps, integrating data, building APIs and acting on events						
+						
+						node1 ()----------> peek ---------> sort ------------> Store in S3 bucket
+
+19. Devops : 
+Devops is the practice which bridges the Developer activity and IT operations activity on one platform .
+
+Continuous Integration : it is the process by which code repo is integrated with build , test stages and help in autmating the whole process of automatic build process whenever a new commit comes into the branch .
+Continuous Delivery : It is the process by which the test coded is promoted to the staging area .
+Continuous Deployment : It is the process by which the staged tested app is pushed to the production in a small period of time .
+
+So below process is CI/CD pipeline .
+
+Commit code -----> git repo----> Web hook trigger ----> build---- > test -----> pushed to ---> Stage region -----> production
+
+Toolchain : 
+Continuous Delivery  : 
+Continuous pipleine : 
+
+Toolchain example : 
+
+		   Stages  : think phase ---->Code phase ---->Deliver phase ---->Run phase ---->Learn phase ---->Culture phase 
+	
+														
+IBM Cloud services : Issue tracket---->Repo----------> Pipeline--------->IBM cloud CLOUD->google analytics-->slack
+														Tekton,				foundary, 						 pager Duty ,Jira
+														Razee				Kubernetes 
+																			Services
+																			
+20. BlockChain : 
+1. Block chain is the continuous or permanent/distributed ,immutable chain of data records connected with each other using hash(crypptographic) values .
+
+data structure of blockchain : so if you see below the record 2  contains the hash of previous record1 and record 3 contains the hash of previous record 2
+																				
+Record 1 							Record 2						Record 3
+--------------------------			-------------------------       -------------------------
+date|"hello from record1"           date|"hello from record2"       date|"hello from record3"
+                                                                    
+previous hash : 0099100HG           previous hash : 00999912UH      previous hash : 00999912II
+                                                                    
+hash : 00999912UH			        hash : 00999912II		        hash : 00999912OO		
+-------------------------			-------------------------		-------------------------												
+	
+2. Hyperledger faric : framework to build blockchain apps . Adopted by Alibab , AWS , azure and Google , IBM . Focus more on contracts  ,consesus , confidentialty,resiliency and scalability
+
+a. Smart contracts  : used to block chain app with hypelegder fabric  . Are executed to change or read the value in world state . After get /put/delet the value from world state it generates records that transaction in block chain and emits an events. Its like whenever a change happens to world state DB , it create a trnx and store it in blcok chain app and connect those trans with hash values .
+
+
+							Smart contracts -----------------------------------> emits events 
+							|			|
+							|           |
+							|           |
+		get/put/delete		|           | generate a trnx
+				|------------			-------------|
+				|				                     |							----------------->emits events 
+                |                                    |
+               \/                                    \/
+		World state data 					block chain app 
+											trx1(hash,prhash)----->trx2(hash,prhash)----->trx3(hash,prhash)
+					
+b. Consensus : this shows how the nodes(network) terminal aggree on order of transactions
+
+
+					IBM blockchain platform 
+	-------------------------------------------------------------------
+				Hyperledger fabric 
+
+	-------------------------------------------------------------------
+				Contains orchestration and virtualization 
 	
 	
+	--------------------------------------------------------------------
+					openshift 
+				on prem , AWS , AZURE , IBM 	
+	
+	
+	
+	-------------------------------------------------------------------
+	
+21. IOT platform : 
+		internet of things are the connected systems that emits data which can be used for predictive measures that can be taken to avoid early or delayed maintanance .
+		These systesm can be vehicles , lifst , animals, or many systems which can be monitored so that we can correlate the data emits from each device and take decision upon it.
+		IOT device should be regitered .
+		Help in monitoring all IOT devices to be monitored on a common platform .
+		
+	services on which the Watson IoT Platform write to	 Cloudant, Object Storage, Event Streams, Db2 Warehouse
+22. Cloud paks :
 
+1. Cloud pask ae the containerized solutions to run anywhere . In others words its the bundle of containerized softwares out of which we can select to deply the software and run it anywhwre .
+- When we say anywhwre it means : On IBM cloud  , on premises and provisioning OPEnshift console to bring the software deployed there.
+- some of the containerized software present in cloud pask are 
 
-					
-					
-			
+	Cloud pak for applications : build new  or modernize existing apps. mobile app dev tools provided.
+	Cloud pak for data  : provide database , data virtualization. It has ibmcloud ai model . 
+	Cloud pak for integration : Allow integration of apps from anywher to many tools 
+	Cloud pak for Automation : Low code consumable tools . BUsiness Automation work flow.
+	Cloud pak for security : 
+	Cloud pak for MultiCloud management : IT management over the apps running anywhere.SRE tools , Partener integration 
+	
+	Above containerized bundle run on top of openshit platform .	
+		
+23. *************Importanat : 
+1. Openshit 4 : OpenShift 4 brought in which new features
+ Serverless, Pipelines, Mesh Networking, Operators
+2. How does OpenShift extend Kubernetes? :Projects, integrated console, monitoring tools 
+		
