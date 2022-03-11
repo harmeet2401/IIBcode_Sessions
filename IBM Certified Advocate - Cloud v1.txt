@@ -804,12 +804,12 @@ b. Consensus : this shows how the nodes(network) terminal aggree on order of tra
 - When we say anywhwre it means : On IBM cloud  , on premises and provisioning OPEnshift console to bring the software deployed there.
 - some of the containerized software present in cloud pask are 
 
-	Cloud pak for applications : build new  or modernize existing apps. mobile app dev tools provided.
-	Cloud pak for data  : provide database , data virtualization. It has ibmcloud ai model . 
-	Cloud pak for integration : Allow integration of apps from anywher to many tools 
-	Cloud pak for Automation : Low code consumable tools . BUsiness Automation work flow.
-	Cloud pak for security : 
-	Cloud pak for MultiCloud management : IT management over the apps running anywhere.SRE tools , Partener integration 
+	.Cloud pak for applications : build new  or modernize existing apps. mobile app dev tools provided.
+	.Cloud pak for data  : provide database , data virtualization. It has ibmcloud ai model .  this Cloud Pak is a fully integrated data and AI platform that modernizes how businesses collect, organize and analyze data to infuse AI throughout their organizations
+	.Cloud pak for integration : Allow integration of apps from anywher to many tools 
+	.Cloud pak for Automation : Low code consumable tools . BUsiness Automation work flow.
+	.Cloud pak for security : 
+	.Cloud pak for MultiCloud management : IT management over the apps running anywhere.SRE tools , Partener integration 
 	
 	Above containerized bundle run on top of openshit platform .	
 		
@@ -817,4 +817,4 @@ b. Consensus : this shows how the nodes(network) terminal aggree on order of tra
 1. Openshit 4 : OpenShift 4 brought in which new features
  Serverless, Pipelines, Mesh Networking, Operators
 2. How does OpenShift extend Kubernetes? :Projects, integrated console, monitoring tools 
-		
+3. IBM MQ is enterprise grade messaging platform that is compatible with IBM and AWS?		
