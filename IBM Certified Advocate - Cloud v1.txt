@@ -1,13 +1,27 @@
 IBM Certified Advocate - Cloud v1
 
+Exam C1000-124: IBM Cloud Advocate v1
+PartnerWorld code: C0010900
+
+pearsonVUE IBM account : 
+userid : harmeet.singh4@ibm.com
+
 Cloud computing is the delivery of on-demand computing resources over the internet on a pay-as-you-go basis; resources are dynamically assigned and reassigned among multiple users and scale up and down in response to users’ needs.
 
+https://www.ibm.com/training/certification/C0010900
+
+REGION Availability FOR IBM CLOUD : DWLFTS : DALLAS , WASHINGTON , LONDON , FRANKFURT , TOKYO AND SYDNEY 
 Cloud computing : is enabling on cloud feature to spin up the resource in less amount of time and less manual interventions.
 
+Tools which can be used to access IBM cloud and resources in it : IBM cloud console , IBM CLI and IBM Cloud shell(which is accessible using IBM console)
+For file storage and block storage (EBS in aws ) are accesed through IBM CLOUD CLI and IBM CLOUD console.
+For Objects the access is giving using API by hitting the object access url passing the authorization key along with it
+
+Advantages of cloud computing  :
 	1. Ondemand - provide the resource or increase the resources on demand
 	2. Broad network acces : can be accessed view any device 
-	3. Resource pooling : Economies of scale . Dynamically assigned and reassigned 
-	4. Rapid Elasticity : Down or up scale the resource as per th eload 
+	3. Resource pooling : Economies of scale . Dynamically assigned and reassigned.
+	4. Rapid Elasticity : Down or up scale the resource as per the load 
 	5. Measured service  : Pay as you go : n use no billing .
 
 
@@ -17,21 +31,26 @@ Cloud computing : is enabling on cloud feature to spin up the resource in less a
 	hybrid : Mix of both public and private 
 
 2. Service model : 
-	Application SAAS : direct software install
-	Platform PAAS : Provide under lying infa and provide hold onto the OS as well.
-	Ifra(IAAS) : prvide the underlying infra 
+
+	Infrastructure as a service(IAAS) : provide the underlying infra. data cenets , cooling sstems , netwrok , wracks and hardware machine is maintained by the Cloud provider.
+	Platform as a service  PAAS : Provide under lying infa and provide hold onto the OS as well. infra , as well as OS/ runtime installed on hardware machine is maintained by the cloud provider
+	Application as a serice  SAAS : direct software install. 
+	FAAS : File system as a service . : this feature will provide share file storage access to the applications. NFS is an example of it.
+	DBaas : Data base as a service .: This involves provisioning a Data base and user doens't have to maintain the underlying hardware , OS and runtime required for the Data base to run.
+	
+	
 
 3. Cloud computing evolution : 
 
 4. Flexibility , ondemand increase of theresources , access cloud from anywhere .
-5. No need to worry about the underlying infra and its maintainance
-6.  hosted data can be access from anywhere and from any device 
+5. No need to worry about the underlying infra and its maintainance.
+6.  Hosted data can be access from anywhere and from any device 
 7. hardware failure doesnot results in data loss , as data redundacny , fault tolerance and disaster recovery is applicable for the damage.
 
 Key cloud srevice provide : 
 AWS 
 Azure (microsoft ) 
-Google cloud platform(GCP) .
+Google cloud platform(GCP).
 Aliyun (alibaba cloud) chinese cloud.
 Salesforce.
 
@@ -39,29 +58,29 @@ Salesforce.
 8. Business case fr cloud computing 
 First create an IBM cloud account : https://courses.cognitiveclass.ai/courses/course-v1:IBMDeveloperSkillsNetwork+CC0101EN+v1/courseware/97dfd2321ab2469c9b8ebaaecf03a508/62c5ec272127473891cfc570811077a6/?child=first
 
-9. pay-as-you-go and Spiningup the application in lower amount of time results in lower the risk for the companies to start adopting the Cloud .
+9. pay-as-you-go and Spining up the application in lower amount of time results in lower the risk for the companies to start adopting the Cloud .
 	The above approach helps in avoiding huge upfront cost and maintainance of the underlying hardware even if when all or some of our apps and services are sitting idle and is not in use.
 	
 a. IOT Devices : internet of things : IOT is the platform powered by Cloud which is access using a smart phone of any device generating data . IOT devices helps in converting the digital data acceptable in cloud and be analyzed by the cloud back end and generate values.
 
-case study : Maglvendon socitry in affrica using IOT devices connected to each Rhino to track their movement and ca also be warned before any one comes near to them 
-Help them escape . Using these IOT devices connected to Each rhino the cloud is maintaining the dtaa count overall africa.
+case study : Maglvendon society in affrica using IOT devices connected to each Rhino to track their movement and can also be warned before any one comes near to them.
+Help them escape . Using these IOT devices connected to Each rhino the cloud is maintaining the data count overall africa.
 
-Note  : IN nutshell IOT devices generates data 
+Note  : IN nutshell IOT devices generates data and fed it to cloud which allow analysis and generate values.
 
-b. AI : Artificial intelligence 	: Now AI consumes data process and Leanr from the data generate from IOT devices . 
+b. AI : Artificial intelligence 	: Now AI consumes data process and learn from the data generated from the IOT devices . 
 
 
 use flexibility / elasticity / scalable feature of cloud----------->cloud <----------  make use of the flexibility / elasticity / scalable feature of cloud
 													|							|
 													|							|
-													IOT Devices------------------->AI			
+													IOT Devices----push data---->AI Services in cloud.		
 														/\
 														|
 														|
 														Mobile devices
 
-C. Block chain and analytics :  Block chain is more similar to IOT . As IT devices connected to various data generating devices and send it to AI which help in learing from the event driving data generation , dysruption , error occured , . That complete set og data generated from theIOT devices will be USed by  AI to generate an analysed data sheet to allow organisation or the vendors to take supportive steps.				
+C. Block chain and analytics :  Block chain is more similar to IOT . As IT devices connected to various data generating devices and send it to AI which help in learing from the event driving data generation , dysruption , error occured , . That complete set of data generated from theIOT devices will be USed by  AI to generate an analysed data sheet to allow organisation or the vendors to take supportive steps.				
 
 Some case studies that demonstrate how the use of emerging technologies on the cloud is creating value for millions around the world.
 
@@ -69,7 +88,7 @@ o   The use of the Internet of Things on the cloud to combat poaching of endange
 
 o   Artificial Intelligence on the cloud being leveraged to deliver unique digital experiences to millions of fans around the world by the United States Tennis Association
 
-o   Blockchain on the cloud helping farmers reduce waste by building traceability and transparency in the food supply chain
+o   Blockchain on the cloud helping farmers reduce waste by building traceability and transparency in the food supply chain.
 
 o   The use of data analytics for driving predictive maintenance solutions for a city’s infrastructure by KONE
 
@@ -78,7 +97,7 @@ NOTE : CLOUD MOSTLY IS USED BECAUSE OF ITS WIDELY USED FEATURES : SCLABLE , FLIX
 
 
 Difference between IAAS  , PAAS and SAAS 
-IAAS : In this arch the underlying srever , datacenters , cooling plant , wiring , network , power setup is maintained by the vendor. The choice of OS is users and then install the DB and etc 
+IAAS : In this arch the underlying srever , datacenters , cooling plant , wiring , network , power setup is maintained by the vendor. The choice of OS is users and then install the DB and application along 
 PAAS : In this along with above IAAS resource , the vendor also maintained the underlying OS installed on the server.
 SAAS : In this along with the above PAAS resources , the vendor also maintained the application and other pre-requisite need to run the app .
 
@@ -120,7 +139,7 @@ Public
 private 
 hybrid 			
 
-1. Public : In this model all the resouurcse are presnet on cloud which are mainatained by the vendor and is solely responsible for maintaining the underlying infrastructure for the user's application to run . resource like : servers , storage , network , security and infrastructure all are maintained by the vendor or cloud provider . user by using the management console or UI can subscribe to these resource usage and pay as they use. Miltiple tenant and multi org 
+1. Public : In this model all the resources are presnet on cloud which are mainatained by the vendor and is solely responsible for maintaining the underlying infrastructure for the user's application to run . resource like : servers , storage , network , security and infrastructure all are maintained by the vendor or cloud provider . user by using the management console or UI can subscribe to these resource usage and pay as they use. Miltiple tenant and multi org 
 	benefits : 
 			Is benefetial for the orgs which have fluctuating storage and processing and infra need .
 			On demand resource availability 
@@ -431,7 +450,7 @@ Support plan :
 		Type of vms 
 			1. public which is prsnt on the host machines used the other orgs , mainly multi tenent 
 			2. Dedicated : which is used for single tenent for own use and no noisy neighbours .
-			3. Transient : which are provisioned using he usused space of host machine . The cheapest but get decomission if the space is collected back by cloud providers.
+			3. Transient : which are provisioned using the usused space of host machine . The cheapest but get decomission if the space is collected back by cloud providers.
 			4. Reserved : which is used the org to reserved the host machines for a period of time and et discouted offers .
 	b. Bare Metal  : Which is used to run IO intensive activitie.and can be provisioned in any IBM Dc arround the globe 
 		Blling types : 
@@ -451,8 +470,10 @@ Support plan :
 			IBM i
 			bring our own linux
 		performance is better then the VM classic	
+		dallas , frankfurt , washington , sydney 
+		
 	d. Hyper protect : IBM linux spin up .This is a Compute service allows you to run virtual servers on IBM LinuxONE, getting you access to IBM Z technology
-		Deploy to specific DCs 
+		Deploy to specific DCs  : dallas , frankfurt , washington , sydney 
 		provide security which is better then other virtual system offerings
 -----------------------------------------Create SSH key --------------------------------
  https://courses.cognitiveclass.ai/courses/course-v1:IBMDeveloperSkillsNetwork+CC0103EN+v3/courseware/5b35991d4f3d4da2aca82ade77525a66/f85d162b6af3471c856c073802e63a1a/?child=first
@@ -483,7 +504,7 @@ ssh-rsa AAAAB3NA...nJrhG8Ap6Uw== stevemar@foo.com
 8. Block ,File Storage and Cloud backup :
 
 Block storage : which can be attached or mount only to one compute node at a time 
-				it uses iSCI .
+				it uses iSCSi .
 				It can be attached or deattached easily from the compute node.
 				If the VM is removed then the EBS volume persist for a longer period of time and can cost for sitting idle .
 				We have to manually delete the EBS volume .
@@ -493,8 +514,8 @@ Block storage : which can be attached or mount only to one compute node at a tim
 				
 File Storage : which is used file storage system 
 			   It uses the NFS (network file storage).
-			   This storage can be mounted to more then one compute resources.
-			   The IOPS is low in NFS
+			   This storage can be mounted to more then one compute resources(VMs).
+			   The IOPS is low in NFS.
 			   This storage persists the data stored in NFS volume.
 			   As a shared resource or storage it does not get deleted .
 			   
