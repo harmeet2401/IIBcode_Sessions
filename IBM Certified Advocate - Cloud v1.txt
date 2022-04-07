@@ -1,3 +1,9 @@
+Every IBMer who completes the following two activities by March 31, 2022 will earn 1,000 IBM BluePoints ($250 USD in value):
+Complete and pass a new IBM Cloud certification from the list below, and
+Share your experience by posting on Linked In (100 word minimum) and submit the link below
+I could see only 2 activities as part of earning 1000 BPs . In addition to this, is there any other activity supposed to be done l? Please confirm
+
+
 IBM Certified Advocate - Cloud v1
 
 Exam C1000-124: IBM Cloud Advocate v1
@@ -5,6 +11,9 @@ PartnerWorld code: C0010900
 
 pearsonVUE IBM account : 
 userid : harmeet.singh4@ibm.com
+
+Username:	hasing0933
+Temporary Password:	Gogi@12345
 
 Cloud computing is the delivery of on-demand computing resources over the internet on a pay-as-you-go basis; resources are dynamically assigned and reassigned among multiple users and scale up and down in response to users’ needs.
 
@@ -74,11 +83,12 @@ b. AI : Artificial intelligence 	: Now AI consumes data process and learn from t
 use flexibility / elasticity / scalable feature of cloud----------->cloud <----------  make use of the flexibility / elasticity / scalable feature of cloud
 													|							|
 													|							|
-													IOT Devices----push data---->AI Services in cloud.		
+												IOT Platform----push data---->AI Services in cloud.	power the insight 	
 														/\
 														|
+														|data
 														|
-														Mobile devices
+														Mobile devices(IOT devices)
 
 C. Block chain and analytics :  Block chain is more similar to IOT . As IT devices connected to various data generating devices and send it to AI which help in learing from the event driving data generation , dysruption , error occured , . That complete set of data generated from theIOT devices will be USed by  AI to generate an analysed data sheet to allow organisation or the vendors to take supportive steps.				
 
@@ -235,6 +245,7 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
 			-Each subnet contains the running VMS
 			-Ech Subnet contains ACLs : access control list to act as a firewall
 		
+--------------------ZONE1--------------------------	
 		VPC
         -----------------------------------||				
 			---------------   Vm1_1-------||
@@ -263,7 +274,8 @@ Note : Hyper v is installed on Physical or host machines or a wrack and VM is in
                                            ||
                                            |
 		-----------------------------------|	
-		
+--------------------ZONE1--------------------------			
+	  - Availability ZOne : in which the VPC network is deployed alonf with the subnet under the VP cloud .
 		-VPC on top of the network contains IP address and its range 
 			- Subnets inside VPC -- Contains ACLs to act as a firewall 
 				- Each subnet contains VMs or other resource which contains SGs to act as a security group access
@@ -539,7 +551,8 @@ Cloud object storage :
 					
 9. Network services. : 
 
-CIS : Cloud internet service which uses cloudflare service for internet facing applications 
+
+	a. CIS : Cloud internet service which uses cloudflare service for internet facing applications.
 	  This provides many benefits like : 
 			Global load balancers 
 			DNS service (Domain name space )
@@ -549,8 +562,9 @@ CIS : Cloud internet service which uses cloudflare service for internet facing a
 			Smart routing : which is usedfor routing the incoming traffic 
 			WAF
 			caching : which is used to cache the response or request . redices latency and improve performance /
+			Firewall : which is used for traffoc filteration process.
 			
-    Network services : 
+    b. Cloud infrastructure services : VPNs, VLANs,Load balancer ,CDN ,Direct link and gateway appliaces
 		1. Direct Link : Create direct link between remote networks and IBM cloud. 
 					Secure dedicated network .
 					used for creating multi cloud .
@@ -563,13 +577,12 @@ CIS : Cloud internet service which uses cloudflare service for internet facing a
 			  Global distribution of data
 			  optimize dynamic content 
 			  usage based pricgin , pay as you used.
-		3. Load balancer : used to reduce traffic .
+		3. Load balancer : used to distribute traffic  and  help in lower down the latency from deployed backend applications.
 					public and private load balancer 
-					health check 
+					health check/probe 
 					backend pool of IPS 
 					Front end IPS.					
 		4. Gateway :which act as a virtual router 
-		5. Firewall : which is used for traffoc filteration process.
 		6. VPN : which is used to maintain adedicated network link between the device with its own organisation network .
 		7. Subnets & IPs : which provide more ip address.
 		8. VLAN : which identifies the ip address and allow multiple devices to reside on the same physical machine.
@@ -584,7 +597,7 @@ A VPC provide multiple subnets and IPs address attached to each subnet .
 Gen1 : 
 	availability in all 6 regions 
 	upto to 16gbps speed 
-	provider manage securoty and BYOK 
+	provider manage security and BYOK (bring your own keys)
 	
 Gen2 : 
 	availability in all 5 regions 
@@ -601,8 +614,8 @@ Why to bring VMware on cloud?
 VmWare solutions type : 
 
 VMWare deciated solution : 
-		Which is a Bare metal solutions and is dedicated to one client only . Is a single tenent solutions 
-			- vCenter type of this is fully automated , VMware softwaredefined datacenters,
+		Which is a Bare metal solutions and is dedicated to one client only . Is a single tenent solutions .
+			- vCenter type of this is fully automated , VMware software defined datacenters.
 			- vSphere is a manual configuration  for network , storage and addons.
 			- both solutions allow to bring own license or IBM provided licenses.
 			- much costlier then the shared one
@@ -638,12 +651,12 @@ openshift is OKD platform dependent sofwtare which is build on top of kuberneter
 IBM cloud also provide OPenshift service using which the user can bring a openshift resource up and we can delpy the appto openshift .
 Once we spin up the openshift resource , we can open the OCP console and start creating our delpyment , service and routes for our apps 
 
-we can first login using the oc login commadn 
+we can first login using the oc login command
 We can then use oc new-project giturl to create the deplyment and service 
 use : oc expose command to create a route and hit the routed urls.
 
 13. benefits of cloudfoundry on ibmcloud.					
-	a. Cloud foundry is a PAAS implementation provided by the IBM cloud which allow user to just build their app and deploy it to the cloud foundry of any language type whehhet it java , python , nodejs etc .
+	a. Cloud foundry is a PAAS implementation provided by the IBM cloud which allow user to just build their app and deploy it to the cloud foundry of any language type whether it is java , python , nodejs etc .
 	b. PAAS means there is not need to maintain the underlying infra ,OS , runtime or even the binary required for the type of language build file forexample , as we required java jDK for jar  file to run or other SDKs for particular type of language code.
 	c. Its an opensurce .
 	d. It also provide many features like autoscaling ,automatic routing and health checks etc.

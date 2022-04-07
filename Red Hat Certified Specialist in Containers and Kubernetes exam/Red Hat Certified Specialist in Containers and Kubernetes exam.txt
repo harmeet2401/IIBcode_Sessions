@@ -1,4 +1,4 @@
-slcak link : https://blueatnbs.slack.com/archives/C01QADS797S/p1641535719058800
+slack link : https://blueatnbs.slack.com/archives/C01QADS797S/p1641535719058800
 Foundational course :
 https://yourlearning.ibm.com/activity/RHO-42415994
 Exam Preparation Material:
@@ -13,3 +13,5 @@ Webinar links:
  https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000 
 Slack Channel
 #redhat_certification: https://gbs-cai.slack.com/archives/C01RAFGPA0M
+
+---------------------------------------------------------------------------------------------------

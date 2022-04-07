@@ -1,4 +1,5 @@
 Exam : Red Hat Certified Specialist in Containers and Kubernetes exam (EX180)
+openshift sandbox creds : meet14764 , Gogi@12345
 
 Openshift training ----------------------------- 
 
