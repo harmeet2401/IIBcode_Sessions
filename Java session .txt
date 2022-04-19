@@ -11,6 +11,15 @@ Java Course ----------------------------------------
 	C and c++ compiler doesnot create a byte code. It sirectly run the binary code post compilation 
 	
 	Because of the extra step in java of creating a byte code its some says its slower . But we can use JUST-IN-TIME-COMPILER .  whic at the same time converts the byte code to the binary code and machine language.
+	
+	JDK  -------Contains ---------------> Compiler & JRE  -------->Contains the JVM and class binaries  -------JVM -----> is the virtual env to run .class file
+											|						required to run the program . 
+																	No compiler is there
+											|
+											|
+											|
+								Its the source code compiler to compile the .java file to create the .class file.	
+									  
 3. JRE and JDk and JVM : 
 	- JRE : Java run time environments.
 		Its a software package that only contains the JVM and class liberaries which are required to run a java program . we can not compile the java program using a JRE.
@@ -24,6 +33,10 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 
 4. Class is the blueprint from which we an create the different objects .
 	understand it like class is a generic page or higher classification . Like person : ----person is a blue print for two types of persons(girl or  a boy.)
+	Class is Person 
+	Object can be Person james = new Person()
+	Object can be Person clark = new Person()
+	Object can be Person mia = new Person()
 	
 5. Life of objects :  So we know that : Person a = new Person();
 
@@ -33,7 +46,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				
 				In order start making the ref remote cnotrol pointing to heap mem allocated we need to link these.
 				
-				Person a = new Person();
+				Person a = new Person(); -------------> linking or start making the object a start pointing to JVM heap memory location 
 				
 			In my view creating multiple objects and heap memory with it will use more memory space of you system .
 			Instead we can point the reference object to the same heap memory space . But that might end up bombarding the healp memory used by all instance objects 

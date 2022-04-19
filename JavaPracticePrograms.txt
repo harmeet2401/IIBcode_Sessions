@@ -1,2 +1,0 @@
-Practice java programs : ----
- Q. (32°F − 32) × 5/9 = 0°C
