@@ -31,7 +31,7 @@ Java Course ----------------------------------------
 
 NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK WHICH HAVE JRE AND COMPILER . IF WE WANT TO RUN A JAR FILE OR THE .CLASS FILE WE ONLY NEED JRE AS IT PROVIDES THE JVM FOR RUNNING THE CODE.
 
-4. Class is the blueprint from which we an create the different objects .
+4. Class is the blueprint from which we can create the different objects .
 	understand it like class is a generic page or higher classification . Like person : ----person is a blue print for two types of persons(girl or  a boy.)
 	Class is Person 
 	Object can be Person james = new Person()
@@ -49,11 +49,11 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				Person a = new Person(); -------------> linking or start making the object a start pointing to JVM heap memory location 
 				
 			In my view creating multiple objects and heap memory with it will use more memory space of you system .
-			Instead we can point the reference object to the same heap memory space . But that might end up bombarding the healp memory used by all instance objects 
+			Instead we can point the reference object to the same heap memory space . But that might end up bombarding the heap memory used by all instance objects 
 			so we can create object by referencing it .
 			Person a = new Person();
-			Person b;
-			b=a ------------------------- this will also point to the same heap memory locations.
+			Person b; ----------> only creating a refernce object but not allocating any heap memory
+			b=a ------------------------- this will also point to the same heap memory locations as a object is doing 
 			
 6. Package name :  Collections of classes.
 
@@ -67,18 +67,20 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 	private   	Allowed access 					Denied Access 				Denied Access			 Denied Access 				
 	
 	
-		
+JAVA apis : application programming interfaces : which are the collections of packages of classes or programs writtern to be re-used . Like we used String , int and these classes are already wriiter in JDK know as the APIs
 	
 7. variables and data types  :
 
-	a.  Premitive data type variable  : like : char , int , short , long , double . All these have different storage size.
+	a.  Primitive data type variable  : like : char , int , short , long , double . All these have different storage size. These are not user defined and can not be changed.
 			variables : Instance variable and Local variable
 			- Instance variable : 
 				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created,
 			- Local variable : 
-				Those variable declared inside the mthod of the class . those variables should be initialized or else the compiler will complaint.
+				Those variable declared inside the method of the class . those variables should be initialized or else the compiler will complaint.
 				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000' , this is the unicode value for char when you will sout the char using unicode it will print the char a , b, c, ....
-				
+		
+		Non-primitive data types are arrays , classes , string. These data types can be user defined means user can customize these data types to create new one.
+		
 	b.  Reference variable : Are the variable which are refrencesd to the heap memory .
 			Person alex  = new Person();
 			-----------
@@ -94,7 +96,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 	Static variable : It is accessible by all objects in a class and have a single copy of it across the class. This get loaded to the JVM when the program runs
 	Instance variable : Which got initialized when the object or class gets instantiated. As it is on class level it can be accessed by all objects in the class
 	Local variable : Is accessible only inside the method block .
-	Block variabe : Whic is access only inside a block of code , like if  else block , for loop block etc . out side of these these are not accessible 
+	Block variabe : Whic is access only inside a block of code , like if  else block , for loop block etc . out side of these are not accessible 
 				Example: 
 					if(x == false){
 							boolean y = true 
@@ -190,7 +192,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 		static  : no need to create an insance/objects of the class in which this method is to access it . It will beloing to class.
 		final   : Can not override the method  in child class which inherit the base class that contain final method.
 		abstract : it is used only to declare the method without body .
-		synchronised : only one thread can access this mthod at a time . Oher threads will wait for the release.
+		synchronised : only one thread can access this method at a time . Oher threads will wait for the release.
 		
 15. lambda : 
 		Now Let's convert regular incrementByOne method to Lambda expression step by step.
@@ -263,7 +265,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 17. lambda expression in java for loop to break use return statement in it .
 
 18. Constructor : 
-			- Constructor can not have return type and can not be statis 
+			- Constructor can not have return type and can not be static
 			
 			- It is used to initialize the class variable .
 			
@@ -273,13 +275,14 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 				Paramterized will help in initializing the attaribute variable by passing the value in constructor.
 				Non-parameterized will help in initializing the variable by using the .(dot) opertaor by crating the object of the class.
 			
-			- this() function used in pojo class itself will caal the constructor of the same class and this one will call the non-parameterized one
+			- this() function used in pojo class itself will call the constructor of the same class and this one will call the non-parameterized one
 			  this(1,"Meet","orlendo") this will call the 3 parameterized constructor in same pojo class.
 			  this("meet",100999) this will call the 2 parameterized constructor in same pojo class.
 			
 			- super() function used in pojo class itself will call the constructor of the super class class and this one will call the non-parameterized one and if no super class is there then Object class constructor will be called 
 			  super(1,"Meet","orlendo") this will call the 3 parameterized constructor in super pojo class.
 			  super("meet",100999) this will call the 2 parameterized constructor in super pojo class.
+			  "this" keyword onlone if you do this(dot) then it will show you all the instance members(class variable and methods) of the class.
 
 	#IMP# : whenever you write a constructor in your class , compiler adds the super()function in starting point of it automaticaaly which will call the constructor of java.lang.object class if no class is extended.
 	#IMP#  Single ton class : Can have only one object and can not be instantiated again .	
@@ -294,7 +297,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			
 			2. Static blocks : which will be run at the verry first step , sbse pehle run hogga 
 			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocksare executed sequentially.
-			
+			Important  : STATIS MEMBERS CAN BE CALLED BY THE STATIC MEMBER ONLY (MEMBSR CAN BE ANYTHING , CLASS , FUNCTION , VARIABLE ETC )
 20. Inheritance : 			
 
 	- Wecan use extends the super class 
@@ -336,7 +339,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 			- we can not make a instance for an interface 
 				but we can create a references 
 				
-					GenericLivingCreatureInterface g = new Human(); --------------- possible
+					GenericLivingCreatureInterface g = new Human(); --------------- possible , IF Human is a super class.
 					Human h = new GenericLivingCreatureInterface();  --------------not possible 
 			- we can multiple inheritance by multiple implements of interface 
 			
@@ -371,26 +374,26 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 24. Polymorphism : 
 				- One super class gots extends in two sub classes , overriding a functions of super class with two diff defination in two diff sub classes is polymorphism 
 				- Runtime polymorphism: 
-					overriding a mthod rule : 
+					   overriding a mthod rule : 
 							name same 
 							arguments match 
 							body differ.
 							Access level should not be highly hidden like private . Keep public 
 							We can not override a method marked as final 
 				
-				- Method overrloading   : 
-						Rules : 
+				- Compile time Method overrloading  :
+						Rules :
 							Keep the name same 
 							change the arguments list 
 							change the return type 
 							change the acess modifier 
 					
-25. String classes  : from java.lang.string 
+25. String classes  : from java.lang.string
 				
 				Keep this in mind
 					- == operator if we apply on a reference objects it will tell if it is pointing to the same memory locations ?
-					- equals operator will compare the string values . Always use equals/equalsIgnoreCase for string compare
-					- String objects are immutable means we can change the value but need to chNGE THE REFERENCE VALUE 
+					- equals functions will compare the string values . Always use equals/equalsIgnoreCase for string compare.
+					- String objects are immutable means we can change the value but need to CHANGE THE REFERENCE VALUE.
 						String str1 = "test ";
 						str1 =str1.concat("jaav");
 						sout(testjaav)
@@ -398,10 +401,10 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 26. Stringbuffer and stringbuilder 	:  Strongest tool or classes to create string and can concatenate any data types value 
 		stringBuilder.append("@@"); ----------------- the parameter can be int , float , double , short , string .
 			
-		these are not immutable classes , we can do as many chanes as we can .
-		its thread safe .
+		These are not immutable classes , we can do as many chanes as we can.
+		Its thread safe. It means only one thread can access the object one at a time . Will released by one thread and picked by other thread.
 		
-		 StringBuffer strb = new StringBuffer("Welcome to java ");
+		  StringBuffer strb = new StringBuffer("Welcome to java ");
           strb.append("((");
           System.out.println(strb);
 
@@ -474,7 +477,7 @@ NOTE : IN NUT SHELL , IF WE NEED TO WRITE , COMPILE AND RUN THE CODE WE NEED JDK
 							}
 	Important : ---------								
 
-		a. Arrayalist : collection of objects and kind of works as a array but is dynamic and can increase size without dclaring it in pre-requisite. Its index based insertions.
+		a. Arrayalist : collection of objects and kind of works as a array but is dynamic and can increase size without declaring it in pre-requisite. Its index based insertions.
 		
 		b. LinkedList : Works in node structure .
 						Single linkedlist : data|pointer(addressof next node)  ---------------> data|pointer(addressof next node)

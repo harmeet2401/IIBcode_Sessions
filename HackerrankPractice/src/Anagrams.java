@@ -43,9 +43,9 @@ class Anagrams
 	    for(int i=0;i<st1.length();i++)
 	    {
 	        int c=(int)st1.charAt(i);
-	        ar[c-97]++;
+	        int a = ar[c-97]++;
 	        int c1=(int)st2.charAt(i);
-	        ar[c1-97]--;
+	        int b = ar[c1-97]--;
 	    }
 	    for(int i=0;i<26;i++)
 	    {

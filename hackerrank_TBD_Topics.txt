@@ -1,0 +1,22 @@
+Topics to covered for full marks : -------
+Java Class Path :---------------
+. Which environment variable is used to set the java path?
+a) MAVEN_Path
+b) JavaPATH
+c) JAVA
+d) JAVA_HOME : correct 
+
+
+
+Java : Design Patterns
+java8
+REST API representations for resources.
+What's in an API?
+REST Server Response
+HTTP Methods I
+HTTP headers
+microservices
+Spring container
+Spring Data
+Spring Annotation
+Java - Array Challenge

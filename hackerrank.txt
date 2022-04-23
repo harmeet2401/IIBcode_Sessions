@@ -436,6 +436,8 @@ A method is always executed at the end.
 to find the output of ++x  if x = 1
 	result = ++x   ------------------------ out put will be 2 as ++ is the closer or higher precedence operator and will get increment first
 	result = x++ ------------------------- output will be 3 bcse the '=' has a pre operator closer to X and will execute first and assign the value of x to result , post that x will be incremented
+	this is moslty used in looping . So in forloop you can mentions x++ this will allow first iteration to go with x = 1 and get incremented in next round 
+	if ++x the first iteration itself with go with 2
 7.The Javadoc is a tool that is used to generate API documentation in HTML format from the Java source files. In other words, it is a program (tool) that reads a collection of source files into an internal form	
 ---------------------------------imp links   :
 
