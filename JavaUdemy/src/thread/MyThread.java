@@ -8,7 +8,7 @@ public class MyThread extends  Thread{
         synchronized (this) {
             try {
                 System.out.println("Thread "+Thread.currentThread().getName()+ " going for sleep");
-                Thread.sleep(1000);
+                Thread.sleep(10000);
                 this.notifyAll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -32,6 +32,7 @@ public class MyThread extends  Thread{
         MyThread thread = new MyThread();
         thread.setName("Thread-A");
         thread.start(); // --- this will start the run method defined above
+        thread.letsWait();
 /*
         MyThread thread1 = new MyThread();
         thread1.setName("Thread-B");

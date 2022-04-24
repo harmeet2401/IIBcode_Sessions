@@ -12,8 +12,8 @@ public class MyThreadRunnable implements  Runnable{
         synchronized (this) {
             try {
                 System.out.println("Thread "+Thread.currentThread().getName()+ " going for sleep");
-                Thread.sleep(100000);
-                System.out.println("Thread "+Thread.currentThread().getName()+ " will wake up main thread");
+                Thread.sleep(10000);
+                //System.out.println("Thread "+Thread.currentThread().getName()+ " will wake up main thread");
                 synchronized (this) {
                     this.notifyAll();
                 }
@@ -38,11 +38,12 @@ public class MyThreadRunnable implements  Runnable{
 
     public static void main(String[] args) {
         MyThreadRunnable objthreadRunnable = new MyThreadRunnable();
-        //Whenever we create a Thread class object we are invoking a new thread aprt from main thread
+        //Whenever we create a Thread class object we are invoking a new thread apart from main thread
         Thread t1 = new Thread(objthreadRunnable);
         t1.setName("A");
         t1.start(); // --- this will start the run method defined above
         objthreadRunnable.letsWait();// -- this is the main thread
+
 
 
 
