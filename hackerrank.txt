@@ -445,3 +445,4 @@ java questions : google.co.in
 
 
 ---------------------------------imp links   :
+Truncation in java : Floating-point value assigned to an integer type

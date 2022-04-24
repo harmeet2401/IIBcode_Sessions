@@ -446,6 +446,13 @@ JAVA apis : application programming interfaces : which are the collections of pa
 													 - create a class and								
 													 - extends Exception class and write a constructor and pass the message attribite to super(message)
 													 - use throw new MyExceptionClass("your message")
+		Which exception is thrown when java is out of memory?
+a) MemoryError
+b) OutOfMemoryError
+c) MemoryOutOfBoundsException
+d) MemoryFullException
+
+B : correct 											 
 													 
 28. Collections :  it can hold collections of objects 
 					commaon function s: 
@@ -635,4 +642,32 @@ JAVA apis : application programming interfaces : which are the collections of pa
 					- then create ObjectinputStream object and pass the fileintputstream obj
 				    - polo = ObjectOutputStream.readObjects();
 					
-			
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Java 8 session : ------------------------------------------------- 
+
+** IMP : BUILD YOUR KNOWLEDGE ON THEFUNCTIONS INTRODUCED IN JAVA 8 AND USE THEM AS NEEDED.
+
+1. coupe of features were added to java 8 : 
+				a. lambda functions : functional programming 
+				b. Immutability is added.
+				c. Streams  : which include kafka streaming and all
+				d. optional etc 
+	
+2. Imperitive an declarative programming 
+	Imperitive proramming : focus on what we need to achieve and keeping that in mind we code for it.
+							Object mutability is involved in this type of programming
+							This is th eold approach as we were doing since the java existence 
+							Here we need to focus on how the job is happening example : removing the duplicacy , summing up the value etc 
+							
+	(Java 8)Declarative proramming : Doesn't focus on what we need to achieve and keeping that in mind we code for it.
+							 Object imutability is involved in this type of programming.
+							 This is actually what it specifically points to java 8 programming.
+							 Java 8 release lot of functions which do the jobs as part of the streams introduced.
+							 Here we no need to worry about how the job is happening .
+							
+		Example : We can use stream in wide range and go further to use functions 
+
+			like : list.stream().distinct().collects(Collections.toList());
+				   Intstream.rangeClosed(0,100).sum() ----> rangeClosed() is just ike we give range in loop , these functions will do the iterationa and all in the back .
+				

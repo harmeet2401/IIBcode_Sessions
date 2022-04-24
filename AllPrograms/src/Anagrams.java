@@ -9,27 +9,16 @@ class Anagrams{
     public void fn2(){
         System.out.println("second function ");
     }
-    public static void main(String[] args) {
-        int x = 1;
+    public static void main(String args[])
+    {
+        if(args.length>0)
+            System.out.println(args.length);
+        int arr[] = {1, 2, 3, 4, 5};
+        for ( int i = 0; i < arr.length - 2; ++i)
+            System.out.println(arr[i] + " ");
 
-        System.out.println(++x);
-        System.out.println(x);
-        x = 1;
-        System.out.println(x++);
-        System.out.println(x);
-        ArrayList<String> persons = new ArrayList<>();
-        for (int i = 0 ; i<10;i++)
-        {
-                   }
-        persons.forEach(item->{
-            System.out.println(item);
-        });
-        {
-            int y = 1;
-            System.out.println(x + " " + y);
-        }
-        System.out.println(x + " " + y);
-        byte b = 50;
-        b = b * 50;
+        char chars[] = {'a', 'b', 'c'};
+        String s = new String(chars);
+        System.out.println(s);
     }
 }
