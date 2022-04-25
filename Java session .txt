@@ -673,6 +673,7 @@ Java 8 session : -------------------------------------------------
 				   
 3. Lambda 
 
+Important point : Lambdafunctions are moslty used to provide defiintions to the functinal interface (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
 syntax : ()					-> 					{}       
 		 fn pramater 	   linked operator     fn body 
 These are equivalent to the functions without function name
@@ -691,7 +692,19 @@ Java runnable is an interface used to execute code on a concurrent thread. It is
 
 The lambda expresion target should be an interface.
 
-Q. what is a comparator class ?
+Q. what is a comparator Interface ?
+Comparator interface are the functional interface which has only one abstract function and is annotated as @FunctionalInterfaces. It contains a compare function which is used to compare any type of field values .
+
+
+Q. Functional interfaces : 
+
+Four initial functional interfaces are 
+	Consumer 
+	predicate 
+	Function 
+	Supplier.
+	
+1. Consumer Functional interface : java.util.function	
 
 
 				
