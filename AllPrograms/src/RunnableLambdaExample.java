@@ -1,8 +1,8 @@
 
-public class JavaLambdaExample {
+public class RunnableLambdaExample {
 
     public static void main(String[] args) throws InterruptedException {
-        JavaLambdaExample j = new JavaLambdaExample();
+        RunnableLambdaExample j = new RunnableLambdaExample();
         //Runnable interface
         Runnable runnable = new Runnable() {
             @Override
@@ -22,9 +22,11 @@ public class JavaLambdaExample {
 
         };
         new Thread(runnable1).start();
-        TestInterface testInterface = ()->{
-            System.out.println("Applying lambda expression to normal interface with one function sin it .");
-        };
+        TestInterface testInterface = ()-> System.out.println("Applying lambda expression to normal " +
+                "                                               interface with one function sin it .");
+
+        new Thread(()-> System.out.println("-----Runnable using 2")).start();
+
     }
 
 }

@@ -673,19 +673,25 @@ Java 8 session : -------------------------------------------------
 				   
 3. Lambda 
 
+syntax : ()					-> 					{}       
+		 fn pramater 	   linked operator     fn body 
 These are equivalent to the functions without function name
 These are the anonymus funtions 
 These expressions have all three features that a normal functions has 
 	Method name
 	Method body 
 	Method Return type 
+	
+Lambdacan also be used to implemet Runnable(which is for multi threading ) and Comparator(compare two parameter of any types) interfaces.	
 				
-What is a runnable interface ?
+Q. What is a runnable interface ?
 This is the interface which we implements in a class to allow multithreading to work .
 Run method is declared in this interface with no body , no paramters and no return  types .
 Java runnable is an interface used to execute code on a concurrent thread. It is an interface which is implemented by any class if we want that the instances of that class should be executed by a thread.
 
+The lambda expresion target should be an interface.
 
-W
+Q. what is a comparator class ?
+
 
 				
