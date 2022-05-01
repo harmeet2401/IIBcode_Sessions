@@ -12,8 +12,8 @@ public class StudentInstace {
         Students student1 = new Students("Harmeet","7982195539","plot no91",890,Arrays.asList("gym","volleyball"));
         Students student2 = new Students("Rahul","7982177509","plot no94",900,Arrays.asList("gymnastic","cricket"));
         Students student3 = new Students("Amit","7892195509","plot no95",600,Arrays.asList("long jump","hockey"));
-        Students student4 = new Students("Arshad","7988892509","plot no97",790,Arrays.asList("runnig","baseball"));
-        Students student5 = new Students("Anil","7982120509","plot 09090",910,Arrays.asList("sky  diving","rugby"));
+        Students student4 = new Students("Arshad","7988892509","plot no97",290,Arrays.asList("runnig","baseball"));
+        Students student5 = new Students("Anil","7982120509","plot 09090",310,Arrays.asList("sky  diving","rugby"));
 
         ArrayList<Students> students = new ArrayList<>(Arrays.asList(student1,student2,student3,student4,student5));
 

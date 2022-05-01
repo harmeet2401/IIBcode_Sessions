@@ -715,3 +715,11 @@ Consumer chain in foreach we can add one conaumr object and then do (dot) and ge
 2.  BIconsumer functional interface : Just like the consumer accept method want one paramter , the Biconsumer accept two paramters so that two objects can be used to do the task .
 
 interface name : Biconsumer 				
+
+
+3. Predicate functional interface : It mostly contains the functions whic play arround the boolean values and resuts . 
+	Function like : or , and , negate . test is the fn which accepts the paramter which is similar to accept function in consumer interfaces.
+	interface name : Predicate  
+
+code reusablity is the best benefit that is provided by the functional interfaces.
+

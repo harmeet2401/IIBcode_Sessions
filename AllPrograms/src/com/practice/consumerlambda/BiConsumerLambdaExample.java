@@ -1,4 +1,4 @@
-package com.practice.com.practice.consumerlambda;
+package com.practice.consumerlambda;
 
 import com.practice.bean.Students;
 import com.practice.service.StudentInstace;
@@ -13,12 +13,12 @@ import java.util.function.BiConsumer;
 public class BiConsumerLambdaExample {
     public static void main(String[] args) {
         System.out.println("Simple example to mltiple and divide two number using BiConsumer interface.");
-        MathsOperations();
+        mathsOperations();
         System.out.println(" ");
         System.out.println("Students class operations :-------------------- ");
-        StudentsOperation();
+        studentsOperation();
     }
-    public static void MathsOperations(){
+    public static void mathsOperations(){
         BiConsumer<Integer,Integer> biConsumer1 = (a1,b1)->{
             System.out.println("Multiple the numbers : "+ a1*b1);
         };
@@ -27,7 +27,7 @@ public class BiConsumerLambdaExample {
         };
         biConsumer1.andThen(biConsumer2).accept(10,2);
     }
-    public static void StudentsOperation(){
+    public static void studentsOperation(){
 
         List<Students> studentsList = new StudentInstace().getstudents();
 

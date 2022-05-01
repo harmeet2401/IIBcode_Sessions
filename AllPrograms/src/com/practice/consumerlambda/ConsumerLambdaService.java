@@ -1,4 +1,4 @@
-package com.practice.com.practice.consumerlambda;
+package com.practice.consumerlambda;
 
 import com.practice.bean.Students;
 import com.practice.service.StudentInstace;
@@ -50,7 +50,6 @@ public class ConsumerLambdaService {
         list.forEach(consumer2);
 
     }
-
     public static  void filterStudentNameAsPerMarks(ArrayList<Students> list){
         System.out.println("          ");
         System.out.println("filterStudentNameAsPerMarks------------------");
