@@ -729,8 +729,14 @@ code reusablity is the best benefit that is provided by the functional interface
 	This interface test function will help is adding multiple conditions required for the conditional logic to work .
 	
 	
-QQQ Function - Functional Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bi predicate) but with diff features.
+QQQ Function - 
+
+1. Functional Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bi predicate) but with diff features.
 
 interface name : Function.java 	 , functions available in this interface : addThen , compose and apply (input , output)
 
 its like creating the implementation for each Function interface object and then use apply method to run it.
+
+2. Bifuntional functional interface : Its just like the Function functional interface , the only difference is it takes two input parameter instead of one.
+	interface name  : BiFunction  and it only have apply and addThen method .
+
