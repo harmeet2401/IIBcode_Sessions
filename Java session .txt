@@ -696,7 +696,7 @@ Q. what is a comparator Interface ?
 Comparator interface are the functional interface which has only one abstract function and is annotated as @FunctionalInterfaces. It contains a compare function which is used to compare any type of field values .
 
 
-Q. Functional interfaces : 
+QQQ. Functional interfaces : 
 
 Four initial functional interfaces are 
 	Consumer 
@@ -727,3 +727,10 @@ code reusablity is the best benefit that is provided by the functional interface
 	Interface name : Bipredicate  : similar to predicate and the only diff is the test function will receive two paramters and return type is same as boolean.
 	contains  : or , and , nagate .
 	This interface test function will help is adding multiple conditions required for the conditional logic to work .
+	
+	
+QQQ Function - Functional Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bi predicate) but with diff features.
+
+interface name : Function.java 	 , functions available in this interface : addThen , compose and apply (input , output)
+
+its like creating the implementation for each Function interface object and then use apply method to run it.

@@ -1,4 +1,4 @@
-package com.functionalinterfaces.consumerlambda;
+package com.functionalinterfaces;
 
 import com.functionalinterfaces.bean.Students;
 import com.functionalinterfaces.service.StudentInstace;

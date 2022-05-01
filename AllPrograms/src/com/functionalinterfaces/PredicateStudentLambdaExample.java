@@ -1,4 +1,4 @@
-package com.functionalinterfaces.predicateexample;
+package com.functionalinterfaces;
 
 import com.functionalinterfaces.bean.Students;
 import com.functionalinterfaces.service.StudentInstace;
