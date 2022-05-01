@@ -705,6 +705,13 @@ Four initial functional interfaces are
 	Supplier.
 	
 1. Consumer Functional interface : java.util.function	
+		Interface name : Consumer 
+Consumer chain in foreach we can add one conaumr object and then do (dot) and get addThen() .
 
+ We need to create a program with one student bean , one class that instantiate the student beans and then we will you another class which will use lambda expression to call consumer and apply flter and other stuff.
+ 
+ Consumer chain is th etechnique in which we can add more consumer objects in line line c1.addThen(c2) where c1 and c2 are the cosumer objects
 
-				
+2.  BIconsumer functional interface : Just like the consumer accept method want one paramter , the Biconsumer accept two paramters so that two objects can be used to do the task .
+
+interface name : Biconsumer 				
