@@ -1,4 +1,4 @@
-package com.practice.predicateexample;
+package com.functionalinterfaces.predicateexample;
 
 import java.util.function.Predicate;
 

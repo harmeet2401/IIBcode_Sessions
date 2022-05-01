@@ -723,3 +723,7 @@ interface name : Biconsumer
 
 code reusablity is the best benefit that is provided by the functional interfaces.
 
+4. BiPredicate interface : 
+	Interface name : Bipredicate  : similar to predicate and the only diff is the test function will receive two paramters and return type is same as boolean.
+	contains  : or , and , nagate .
+	This interface test function will help is adding multiple conditions required for the conditional logic to work .

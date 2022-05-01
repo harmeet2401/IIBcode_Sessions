@@ -1,6 +1,5 @@
-package com.practice.bean;
+package com.functionalinterfaces.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 public class Students {
     public String name;

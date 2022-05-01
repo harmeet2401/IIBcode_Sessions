@@ -1,10 +1,9 @@
-package com.practice.consumerlambda;
+package com.functionalinterfaces.consumerlambda;
 
-import com.practice.bean.Students;
-import com.practice.service.StudentInstace;
+import com.functionalinterfaces.bean.Students;
+import com.functionalinterfaces.service.StudentInstace;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class ConsumerLambdaService {

@@ -1,7 +1,7 @@
-package com.practice.predicateexample;
+package com.functionalinterfaces.predicateexample;
 
-import com.practice.bean.Students;
-import com.practice.service.StudentInstace;
+import com.functionalinterfaces.bean.Students;
+import com.functionalinterfaces.service.StudentInstace;
 import java.util.List;
 import java.util.function.Predicate;
 
