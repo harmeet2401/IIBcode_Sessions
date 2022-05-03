@@ -1,15 +1,13 @@
-package com.functionalinterfaces;
+package com.learnjava8.functionalinterfaces;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
-import com.functionalinterfaces.PredicateAndConsumerLambdaExample;
-import com.functionalinterfaces.bean.Students;
-import com.functionalinterfaces.service.StudentInstace;
+import com.learnjava8.bean.Students;
+import com.learnjava8.service.StudentInstace;
 
 /**
  * This classwill use th BiFunction interface and allow two input paramters to be used
@@ -32,6 +30,6 @@ public class BiFunctionLambdaExample {
         filterStudents(list);
     }
     public static void filterStudents(List<Students> list){
-        System.out.println(mapBiFunction.apply(list,PredicateAndConsumerLambdaExample. biPredicate));
+        System.out.println(mapBiFunction.apply(list,PredicateAndConsumerLambdaExample.biPredicate));
     }
 }

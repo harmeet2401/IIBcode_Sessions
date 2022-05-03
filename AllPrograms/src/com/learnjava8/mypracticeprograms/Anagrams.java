@@ -1,3 +1,5 @@
+package com.learnjava8.mypracticeprograms;
+
 import java.util.ArrayList;
 
 class Anagrams{

@@ -1,12 +1,11 @@
-package com.functionalinterfaces;
+package com.learnjava8.functionalinterfaces;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
-import com.functionalinterfaces.bean.Students;
-import com.functionalinterfaces.service.StudentInstace;
+import com.learnjava8.bean.Students;
+import com.learnjava8.service.StudentInstace;
 
 public class PredicateAndConsumerLambdaExample {
     //Predicate<Students> p1 = (student)-> student.getMarks()>=300;

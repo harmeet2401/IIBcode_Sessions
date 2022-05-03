@@ -1,4 +1,4 @@
-package com.functionalinterfaces;
+package com.learnjava8.functionalinterfaces;
 
 import java.util.Locale;
 import java.util.function.Function;

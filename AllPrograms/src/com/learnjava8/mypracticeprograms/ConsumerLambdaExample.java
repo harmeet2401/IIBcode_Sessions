@@ -1,3 +1,5 @@
+package com.learnjava8.mypracticeprograms;
+
 import java.util.Locale;
 import java.util.function.Consumer;
 public class ConsumerLambdaExample {

@@ -1,11 +1,10 @@
-package com.functionalinterfaces;
+package com.learnjava8.functionalinterfaces;
 
-import com.functionalinterfaces.bean.Students;
-import com.functionalinterfaces.service.StudentInstace;
+import com.learnjava8.bean.Students;
+import com.learnjava8.service.StudentInstace;
 
 import java.util.HashMap;
 import java.util.List;
-import java.awt.*;
 import java.util.Map;
 import java.util.function.Function;
 

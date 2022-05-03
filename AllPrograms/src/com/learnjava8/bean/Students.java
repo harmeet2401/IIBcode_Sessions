@@ -1,4 +1,4 @@
-package com.functionalinterfaces.bean;
+package com.learnjava8.bean;
 
 import java.util.List;
 public class Students {

@@ -1,3 +1,5 @@
+package com.learnjava8.mypracticeprograms;
+
 import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 

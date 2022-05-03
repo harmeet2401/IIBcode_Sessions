@@ -1,13 +1,11 @@
-package com.functionalinterfaces.service;
-
-import com.functionalinterfaces.bean.Students;
-
+package com.learnjava8.service;
+import com.learnjava8.bean.Students;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StudentInstace {
 
-    public ArrayList<Students> getstudents(){
+    public static ArrayList<Students> getstudents(){
         Students student1 = new Students("Harmeet","7982195539","plot no91",890,Arrays.asList("gym","volleyball","singing"));
         Students student2 = new Students("Rahul","7982177509","plot no94",900,Arrays.asList("gymnastic","cricket"));
         Students student3 = new Students("Amit","7892195509","plot no95",600,Arrays.asList("long jump","hockey","Running"));
@@ -22,4 +20,6 @@ public class StudentInstace {
 
         return students;
     }
+
+   
 }

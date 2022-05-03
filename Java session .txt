@@ -673,7 +673,7 @@ Java 8 session : -------------------------------------------------
 				   
 3. Lambda 
 
-Important point : Lambdafunctions are moslty used to provide defiintions to the functinal interface (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
+Important point : Lambdafunctions are moslty used to provide defiintions to the functional interface (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
 syntax : ()					-> 					{}       
 		 fn pramater 	   linked operator     fn body 
 These are equivalent to the functions without function name
@@ -739,4 +739,40 @@ its like creating the implementation for each Function interface object and then
 
 2. Bifuntional functional interface : Its just like the Function functional interface , the only difference is it takes two input parameter instead of one.
 	interface name  : BiFunction  and it only have apply and addThen method .
+	
+NOte : --- operators functiona intefaces are used in case both the input and out are of same types 	
+3. UnaryOpertor functional interface : this is the functional interface which extends Function functional	interface is used if the input and out both are of same data type .
+		
+4. Binaryoperator functional interface : this is the functional operator which extends the BiFunctionfunctional interface is used to take two input of same type and generate a output of same type
+
+5. Supplier functional interface 
+	interface name : Supplier 
+	It is used to return something and it doesn't required any paramters .
+	The syntax for lambda would be (no input params)->{}
+	
+QQQ  : Method references	
+
+1. Method references are just a shortcut way to write lambda expressions 
+
+syntax   : ClassName::Methodname
+		   ClassInstance::Methodname
+		   
+		   
+		 example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
+				   Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
+				   
+			There are some cases it is difficult to apply method reference .	   
+2. So in nutshell in JAVA8 we can use classname::method references and get the work done 
+
+if we have create a Class test and it has a method with input paramters or not . 
+
+				We can use functional interface and then use th class Test::methodrefrences.
+				
+				But kepe in mind the functional interface that you will use either it is a Consumer , BiConsumer , Predicate , BiPredicate , Function , BiFunctional , UnaryOpertor or Binaryoperator . The right hand side function that you are refering must have same method decalaration .
+				
+				Means we know that if we use Function functional interface then you might be sending input paramters .
+				
+		 
+		 
+	
 
