@@ -16,6 +16,14 @@ public class Students {
         this.activities = activities;
     }
 
+    public Students() {
+
+    }
+
+    public Students(String s) {
+        this.name=s;
+    }
+
     public List<String> getActivities() {
         return activities;
     }

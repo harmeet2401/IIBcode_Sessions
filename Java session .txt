@@ -771,7 +771,35 @@ if we have create a Class test and it has a method with input paramters or not .
 				But kepe in mind the functional interface that you will use either it is a Consumer , BiConsumer , Predicate , BiPredicate , Function , BiFunctional , UnaryOpertor or Binaryoperator . The right hand side function that you are refering must have same method decalaration .
 				
 				Means we know that if we use Function functional interface then you might be sending input paramters .
-				
+
+QQQ. Local variables and its scope in labmda expressions.
+
+ two restrictions are there : 
+		inside lambda expression we can use the local variable 
+		We can not reset the value of a local vaoriable to a new value 
+		We can use the instance variable where ever we can .
+		
+QQQ. Effectively final : It means we saw that the when we tried to change the value of a local variable inside the labmda expression we get compilation . This concept shows that the lambda expression treat local variable as effectively FINAL (whose value can not be changed.)		
+
+	fn(){
+	
+	int value = 9
+	Consumer<integer> c = (u) ->{
+		value = 8; // this line will shows compilation error as lambda treat local variables as final .
+		
+	}
+	}
+	
+QQQ. Stream Api 
+	Streams api is used over the List , or collection of data , which can be Map , List , ArrayList , LinkedList and all other collections .
+	There are two stream  to create using below.
+		students.stream()
+		students.parallelStream() -----------> this will run all the other task like filter , collects etc in parallel.
+	Stream is nothing but a streamlined data of a collection on which we can do all the manipulations.	
+
+
+	
+		
 		 
 		 
 	
