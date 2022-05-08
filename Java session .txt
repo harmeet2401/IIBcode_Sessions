@@ -909,4 +909,12 @@ System.out.println(StudentInstace.getstudents().stream()
 
 will find first elements from the stream 
 
-13. Short circuiting : 				
+13. Short circuiting : 	its the process in which a given function doesn't iterate through the whole stream to get the results .
+So all the functions below doens't iterate through the stream to get the results 
+
+limit 
+allmatch
+anymatch
+noneMatch
+findfirst 
+findany
