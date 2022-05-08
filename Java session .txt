@@ -808,6 +808,8 @@ StudentInstace.getstudents().stream() ------------------------------------> will
 				
 2.Difference between Collections 	and streams 
 
+NOTE  : ANYTHING WHICH IS A LIST OR A COLLECTIONS (ARRAYLIS , HASHSET , TREEMAP , HASHMAP , LINKEDLIST , ARRAYS, LIST  ETC ) WE CAN CONVERT THOSE TO STREAM AND USE ALL THE STREAM API FUNCTION TO PLAY ARROUND
+
 Collections : 
 	Elements can be added or removed from the collections as required
 	Elements can be access from any index
@@ -854,7 +856,17 @@ sorted : will sort the elements in alphabetical order .
 We an use Sort function which except a parameter sort(comparator function fnctional interface)
 
 	- using sort function we can sort by selecting any field value as a comparator and help in sorting the values .
+	example : StudentInstace.getstudents().stream() /// stream function always pass the elements ONE BY ONE 
+                .sorted(Comparator.comparing(Students::getName).reversed())   // this will print the students in revred order
+                .collect(Collectors.toList());
 		 
-		 
-	
+7. FIlter function which wants predicate functional interface that contains conditions to help filter out the elements		 
+	EXAMPLE :  StudentInstace.getstudents().stream()
+                .filter(students -> students.getMarks()>500)
+                .filter(students -> students.getActivities().stream().count()>2)
+                .collect(Collectors.toList());
+
+8. reduce function of stream api . it is also a terminal function means the end operation . Collect is also a terminal operations.
+
+This function si used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values.
 

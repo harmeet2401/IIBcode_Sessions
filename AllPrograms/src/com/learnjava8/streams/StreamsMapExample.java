@@ -4,6 +4,7 @@ import com.learnjava8.service.StudentInstace;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -11,9 +12,14 @@ import java.util.stream.Collectors;
  */
 public class StreamsMapExample {
     public static void main(String[] args) {
-        System.out.println(addressList());
-        System.out.println(nameSet());
-        System.out.println(mobSet());
+        System.out.println("Address list : ");
+        addressList().forEach(System.out::println);
+        System.out.println("nameSet list : ");
+        nameSet().forEach(System.out::println);
+        System.out.println("mobSet list : ");
+        mobSet().forEach(System.out::println);
+        System.out.println("printStudentsFilterBymarks -------");
+        printStudentsFilterBymarks().forEach(System.out::println);
     }
     public static List<String> addressList(){
         return StudentInstace.getstudents().stream() // will give Stream<Students>
@@ -28,6 +34,14 @@ public class StreamsMapExample {
                 .map(String::toUpperCase)
                 .collect(Collectors.toSet());
     }
+    public static List<Students> printStudentsFilterBymarks(){
+        return StudentInstace.getstudents().stream()
+                .filter(students -> students.getMarks()>500)
+                .filter(students -> students.getActivities().stream().count()>2)
+                .collect(Collectors.toList());
+
+    }
+
     static Function<Students,String> function = (student)->{
         return student.getMobno().concat("+Mobile numbers").toUpperCase();
     };
