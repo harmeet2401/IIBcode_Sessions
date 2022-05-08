@@ -17,10 +17,20 @@ public class ReduceFnExample {
         if(integer.isPresent())
         {
             System.out.println("printReducedValueWithoutIdentity  "+integer.get());
+        }else {
+            System.out.println("Input list is empty ");
         }
         Optional<Students> optionalStudents = studentWithHighestMakrs();
         if(optionalStudents.isPresent()){
             System.out.println("highets marks gained by :"+ optionalStudents.get());
+        }else{
+            System.out.println("Input lis is empty ");
+        }
+        Optional<Integer> integer1 = printStudentNameWithMaxMarks(StudentInstace.getstudents());
+        if(integer1.isPresent()){
+            System.out.println("Max marks attained by a student : "+ integer1.get());
+        }else{
+        System.out.println("Input list is empty ");
         }
 
     }
@@ -54,6 +64,14 @@ public class ReduceFnExample {
 
     }
 
+    public static Optional<Integer> printStudentNameWithMaxMarks(List<Students> list){
+            return list.stream() //Stream<Students>
+                    .map(students -> students.getMarks()) // Stream<Integers>
+                    //.reduce((a,b)->a>b?a:b);
+                //.reduce((a,b)->Integer.max(a,b));
+        .reduce((a,b)->Integer.min(a,b));
+
+    }
     public static Optional<Students> studentWithHighestMakrs(){
         return StudentInstace.getstudents().stream()
                 .reduce((s1,s2)->s1.getMarks()>s2.getMarks() ? s1:s2);

@@ -21,7 +21,8 @@ public class FilterMapReduceStreamExample {
                 .peek(notebooks -> {
                     System.out.println("Notebooks for each student "+ notebooks);
                 })
-                .reduce(0,(n1,n2)->n1+n2);
+                //.reduce(0,(n1,n2)->n1+n2);
+        .reduce(0,Integer::sum); // direct using the java class to sum up
 
     }
 

@@ -870,3 +870,43 @@ We an use Sort function which except a parameter sort(comparator function fnctio
 
 This function si used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values.
 
+Exmaple of map , filter and reduce 
+StudentInstace.getstudents().stream() // Stream<Students>
+                .filter(students -> students.getMarks()>300) // Stream<Students>
+                .filter(students -> students.getActivities().stream().count()>2)// Stream<Students> with activities greater then 2
+                .peek(student -> {
+                    System.out.println("Post filter "+ student);
+                })
+                .map(Students::getNotebooks)// Will give Stream<Integers>
+                .peek(notebooks -> {
+                    System.out.println("Notebooks for each student "+ notebooks);
+                })
+                .reduce(0,(n1,n2)->n1+n2);
+				
+9. min, max operation  we can do using the method reference of Integer class like Integer::max(a,b) and Integer::min(a,b).
+Always use reduce without default identity value
+
+10. Limit() and Skip() fn of stream api .		
+
+limit(3) --- > it means it will only send the first three elements from the stream to further process 
+skip(3)----- > it means it will skip the firt three elements and send the rest of the elements to further process.
+
+11. anymatch , nonmatch , allmatch stream api fn  return boolean 
+
+all these three function wants predicate as a n input 
+
+anyMatch () ---> will return true when any one of the elements matches the predicate 
+Allmatch () --> will return true when all the elements from the streams matches the predicate .
+nonmatch ()----> its opposite of allmatch it will return true when none of the elements matches the predicate and false it matches.
+System.out.println(StudentInstace.getstudents().stream()
+                .allMatch(students -> students.getMarks()>500));
+        System.out.println(StudentInstace.getstudents().stream()
+                .noneMatch(students -> students.getMarks()>500));
+        System.out.println(StudentInstace.getstudents().stream()
+                .anyMatch(students -> students.getMarks()>500));
+
+12. findAny() and findFirst()
+
+will find first elements from the stream 
+
+13. Short circuiting : 				
