@@ -2,11 +2,23 @@ package com.learnjava8.bean;
 
 import java.util.List;
 public class Students {
-    public String name;
-    public String mobno;
-    public String address;
-    public int marks;
-    public List<String> activities;
+    private String name;
+    private String mobno;
+    private String address;
+    private int marks;
+    private List<String> activities;
+    private int notebooks;
+    public Students(String name, String mobno, String address, int marks, List<String> activities, int notebooks) {
+        this.name = name;
+        this.mobno = mobno;
+        this.address = address;
+        this.marks = marks;
+        this.activities = activities;
+        this.notebooks = notebooks;
+    }
+
+
+
 
     public Students(String name, String mobno, String address, int marks, List<String> activities) {
         this.name = name;
@@ -62,6 +74,14 @@ public class Students {
 
     public void setMarks(int marks) {
         this.marks = marks;
+    }
+
+    public int getNotebooks() {
+        return notebooks;
+    }
+
+    public void setNotebooks(int notebooks) {
+        this.notebooks = notebooks;
     }
 
     @Override
