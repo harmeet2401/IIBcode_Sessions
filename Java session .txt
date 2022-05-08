@@ -797,9 +797,63 @@ QQQ. Stream Api
 		students.parallelStream() -----------> this will run all the other task like filter , collects etc in parallel.
 	Stream is nothing but a streamlined data of a collection on which we can do all the manipulations.	
 
+1.How stream API works?
 
+Example : 
+StudentInstace.getstudents().stream() ------------------------------------> will create Stream<Students>
+                .filter(p) ------------------------------------> will create Stream<Students> filtered
+                .filter(p1)------------------------------------> will create Stream<Students> filtered
+                .collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
+				
+				
+2.Difference between Collections 	and streams 
+
+Collections : 
+	Elements can be added or removed from the collections as required
+	Elements can be access from any index
+	It is eagrly constructed
+	It can traversed N number of times 
+	Iteration is done using external iteration technique. We use for loop explicitly to traverse the collections .
+	
+Streams : 
+	Elemnets can not be added or removed from the stream . only the fiteration can be applied by adding he Predicate 
+	Elements can be accessed only once 
+	It is traversed only once using the streams 
+	Iteration for stream happened using internal iteration / internal stream api function .
 	
 		
+3.How to debug a stream operation applied to a collections ?
+
+We can use peek () method and pass a consumer to peek() and print the single object of the stream 
+
+4. map() method in stream api . is used to convert one type of stream to another 
+ example 
+ Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
+                .map(function1) // will give Stream<String>  so map is converting the Stream of students type to stream of string type 
+                .collect(Collectors.toSet());
+
+5 flatmap method in stream api : flatmap is similar to map function is applied to convert from one type to another .
+And is applied to the stream in which each each element in the stream contains multiple elemenst 
+
+exmaple : below are the two example stream 
+
+	Stream <List> : This means each element in this stream contains List , List , List , List .....
+	Stream<Arrays>: This emans each elements in this stream contains Array, Array, Array, Array, Array, ......
+	
+	
+	Just like we had streams<String >
+			It contains Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,...
+			
+6. We have some more functions in streams api : distinct , sorted and count 
+
+distinct : it will return the distinct value form the stream .
+Count : will give you the count of the element in the stream 
+sorted : will sort the elements in alphabetical order .			
+		 
+		 
+We an use Sort function which except a parameter sort(comparator function fnctional interface)
+
+	- using sort function we can sort by selecting any field value as a comparator and help in sorting the values .
 		 
 		 
 	

@@ -1,0 +1,46 @@
+package com.learnjava8.streams;
+import com.learnjava8.bean.Students;
+import com.learnjava8.service.StudentInstace;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+/**
+ * Map method of streams api generally used to transform the stream to one type to another
+ */
+public class StreamsMapExample {
+    public static void main(String[] args) {
+        System.out.println(addressList());
+        System.out.println(nameSet());
+        System.out.println(mobSet());
+    }
+    public static List<String> addressList(){
+        return StudentInstace.getstudents().stream() // will give Stream<Students>
+                .map(Students::getAddress) // will give Stream<String>
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+
+    }
+    public static Set<String> nameSet(){
+        return  StudentInstace.getstudents().stream() // will give Stream<Students>
+                .map(Students::getName) // will give Stream<String>
+                .map(String::toUpperCase)
+                .collect(Collectors.toSet());
+    }
+    static Function<Students,String> function = (student)->{
+        return student.getMobno().concat("+Mobile numbers").toUpperCase();
+    };
+    static Function<Students,String> function1 = (student)->{
+        return student.getMobno().concat("+Mobile numbers").toUpperCase();
+    };
+    public static Set<String> mobSet(){
+        Set<String> collect = StudentInstace.getstudents().stream()
+                .map(function1)
+                .collect(Collectors.toSet());
+        return collect;
+    }
+
+
+
+}
