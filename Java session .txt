@@ -918,3 +918,25 @@ anymatch
 noneMatch
 findfirst 
 findany
+
+14. Stream api operations : 
+
+of() - this funtion will help in creating the stream of values . The values can be infinite 
+iterate()-  this function will iterate value to infinite values 
+generate() - this function will also generate stream of infinite value and ask for a Supplier<> functional interface objects .
+
+
+15. NumericStreams : 
+
+	Name of the stream : IntStream . 
+	Why we have to use IntStream ? 
+	Because when ever we do any numeric operation like blow the unboxing from Interger to int is happening one by one which is an added steps.
+	So thats we can use IntStream directly to do the operations.
+	
+	example : 
+	return IntStream
+                .rangeClosed(1,6)
+                .sum();
+
+	
+	
