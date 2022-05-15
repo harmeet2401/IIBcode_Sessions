@@ -987,3 +987,30 @@ Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION
 			mapToLong : this will convert the instream to long stream 
 			
 			mapTodouble : this will convert the instream to double stream 
+			
+17. Terminal functions : which is used to collect the end elemenst post all operations in a stream .
+		exmaple of terminal functions : 
+			max() , min() , sum () , reduce() , average() , collects () etc 
+			
+	Main focus on collect method () .
+		collect(Collector class objects and a function call (joining , ToList etc ))
+
+			- joining() which will concatenate all the elements 
+			  joining (delimiter , preffix , suffix)
+			 
+			- counting() this will give the number of elements collected in the last collect fn.
+			
+			- mapping() this fn will apply the transformation first and then collects the data in a collecition (could be on ay type .)
+				In this fun we can do the transformation as one parameter and collect in another paramater of the fn.
+				
+			- maxBy and minBy fn needs a comparator onbject and that comparator fn will need the function functional interface object (like a condition to use for )
+			
+			- averagingInt() and summingInt() . These two Collectors(dot) funtions will help is summing up and calculating average of the lements in the streams
+				These fn will reduce one step or LOC .
+					earlier approach  : We create stream , then map , then sum or average .
+					now approiach  : we create stream , then collects(Collectors(dot)summingInt() or averagingInt)
+			
+			- groupingBy () : this function will help in grouping the data on a basis of the paramater we give as an input. 
+								This fun will always return Map<k,V> . 
+					
+		
