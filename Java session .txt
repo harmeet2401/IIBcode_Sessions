@@ -1010,7 +1010,34 @@ Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION
 					earlier approach  : We create stream , then map , then sum or average .
 					now approiach  : we create stream , then collects(Collectors(dot)summingInt() or averagingInt)
 			
-			- groupingBy () : this function will help in grouping the data on a basis of the paramater we give as an input. 
+VVVVIMP  	- groupingBy () : this function will help in grouping the data on a basis of the paramater we give as an input. 
 								This fun will always return Map<k,V> . 
+								
+					Types : 
+						type1 : In this we have one parameter groupingBY . in which only one condition will be there .
+								
+								   Map<Integer,List<Students>> collect = StudentInstace.getstudents()
+								.stream()
+								.collect(Collectors.groupingBy(students -> students.getMarks()));
+								
+						type2 : In which we can pass two level grouping by passing two parameters to it.
+								groupingBy(fn classifier , Collector)
+								
+								 Map<String, Integer> map  = StudentInstace.getstudents()
+								.stream()
+								.collect(groupingBy(Students::getName,Collectors.summingInt(Students::getNotebooks)));
+								
 					
-		
+						type3 : in which we will paaing three paramters , one is input , 2nd is what is the data type or objects returned as a whole 
+									, 3rd will be the output 
+									 Map<Integer, List<Students>> map  = StudentInstace.getstudents()
+									.stream()
+									.filter(students -> students.getMarks()>-500)
+									.collect(groupingBy(Students::getNotebooks, LinkedHashMap::new,Collectors.toList()));
+		        - partitioningBy() : its also kind of groupingBy 
+					It generate Map as an output.  will always create two Key and its value (key1 as true and key2 as false .)
+					The key will always be a boolean 
+					The first parameter is a predicate . 
+					
+					Type 1 : with single paramater only predicate 
+					Type 2 : with two paramater (predicate , downstreamcollection .)

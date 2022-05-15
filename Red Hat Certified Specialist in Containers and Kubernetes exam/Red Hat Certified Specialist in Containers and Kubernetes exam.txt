@@ -14,4 +14,6 @@ Webinar links:
 Slack Channel
 #redhat_certification: https://gbs-cai.slack.com/archives/C01RAFGPA0M
 
+https://w3.ibm.com/w3publisher/gbs-apac-red-hat-services/learning/red-hat-certification-award#Timeframe
+
 ---------------------------------------------------------------------------------------------------
