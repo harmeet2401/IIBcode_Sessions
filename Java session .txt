@@ -931,12 +931,59 @@ generate() - this function will also generate stream of infinite value and ask f
 	Name of the stream : IntStream . 
 	Why we have to use IntStream ? 
 	Because when ever we do any numeric operation like blow the unboxing from Interger to int is happening one by one which is an added steps.
-	So thats we can use IntStream directly to do the operations.
+	So thats we can use IntStream,LongStream directly to do the operations.
 	
 	example : 
 	return IntStream
                 .rangeClosed(1,6)
                 .sum();
 
+16. NumericStreams range functions : 
+	IntStream.Range(1,50) --> This will range the integre from 1 to 49  , excluding 50.
+	IntStream.RangeClosed(1,50)---> this will range the integer from 1 to 50 .
 	
+	We have 
+	LongStream.Range(1,50) --> This will range the integre from 1 to 49  , excluding 50.
+	LongStream.RangeClosed(1,50)---> this will range the integer from 1 to 50 .
 	
+	We don't have range and ranegclosed for doublestream
+	
+	IntStream.RangeClosed(1,50).asDoubleStream().foreach(sout(i))
+	
+Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION.	
+	
+
+		A. Different aggregate function used along with range functions 
+		sum(),min(),max() and average()
+		
+		example : 
+		System.out.println("Int Range closed sum : "+IntStream.rangeClosed(1,50).sum());
+						System.out.println("Int Range sum : "+IntStream.range(1,50).sum());
+						System.out.println("Long Range closed sum : "+LongStream.rangeClosed(1,50).sum());
+						System.out.println("Long Range sum : "+LongStream.range(1,50).sum());
+						System.out.println("Double Range closed sum : "+ IntStream.rangeClosed(1,50).asDoubleStream().sum());
+						System.out.println("Double Range  sum : "+ IntStream.range(1,50).asDoubleStream().sum());
+						OptionalInt min = IntStream.rangeClosed(1, 50).min();
+				if(min.isPresent()){
+					System.out.println(min.getAsInt());
+				}else{
+					System.out.println("No range is there");
+				}
+				OptionalInt max = IntStream.rangeClosed(0, 0).max();
+				if(max.isPresent()){
+					System.out.println(max.getAsInt());
+				}else{
+					System.out.println("No range is there");
+				}	
+				
+		B. boxing and unboxing : 
+		Unboxing  : its represents the unwrapping of data type from wrapper class(Integer , Double , Character , Boolean etc ) to premitive types(int , long , double etc ).		
+		Boxing  : its represents the wrapping of premitive types(int , long , double etc ) to wrapper class(Integer , Double , Character , Boolean etc ).
+		
+		
+		C. Some more NumericStream function : mapToObj , mapToLong , mapToDouble
+			mapToObj : is used to convert intstream to any object . we can use customize class also for the conversion . Matlab kissi  bhi class ke constructor ko cal krke value pass kro and create an  object from it.
+			
+			mapToLong : this will convert the instream to long stream 
+			
+			mapTodouble : this will convert the instream to double stream 
