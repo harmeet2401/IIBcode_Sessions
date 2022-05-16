@@ -1041,3 +1041,7 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 					
 					Type 1 : with single paramater only predicate 
 					Type 2 : with two paramater (predicate , downstreamcollection .)
+					
+					
+18. Parallel streams : 					
+	What are parallel streams : the parallel streams will break the steam into pieces and run the terminal operations parallely taking less amount of time.

@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * Supplier is used to return anything without giving it any parameters
+ */
 public class SupplierLambdaExample {
     static Supplier<String> stringSupplier = ()->{return "Mytest string";};
     static Supplier<Students> studentsSupplier = ()->{
