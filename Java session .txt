@@ -1044,4 +1044,48 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 					
 					
 18. Parallel streams : 					
-	What are parallel streams : the parallel streams will break the steam into pieces and run the terminal operations parallely taking less amount of time.
+	What are parallel streams : the parallel streams will break the steam into pieces and run the terminal operations parallely taking less amount of time.	
+	Its not always increase the performance of the operation of apps. Always check it .
+	     int sum = list.parallelStream()
+                .reduce(0,(x,y)->x+y);
+				
+		Q when not to use parallel streams.?
+			- whenever you are using a mutable variable not to use the parallel streams . because the thread created will keep on updating the value of the mutable variable 
+				concurrently giving  wrong results 
+			
+19. Optional			: used to represnt a Non-null values in java 8 
+
+	Optional.OfNullable(p1) -- this will return either a valid value or the optional.emmpty object back to handle the null value s
+	Optional.Of(p1) ---- this will either give you valid value of a null pointer exception in case of null value pass to it.
+	Optional.Empty() -- this will return optiona.empty object back .
+
+	So we used these Optional class to wrap the values to either generate a optional of values or an Optional of empty.
+	
+	This gives an advantage of getting optional as empty which is far better then getting a null which can not be used to check further and poses NullPointerException.
+	
+	In lemn term , we can do dot to optional object and still move away from getting exception in case empty value is there.
+	
+	SUMMARY : SO USING OPTIONAL.NULLABLEOF WILL WRAP THE NULL VALUE TO OPTION.EMPTY AND HELP BYPASSING GETTING NULL POINTER EXCEPTION .
+	
+  a. Methods used  :
+		- orElse : this is used to return a value(String) other then the valid one 
+			Optional<Students> optionalStudents = Optional.ofNullable(StudentInstace.supplier.get());
+			return optionalStudents.map(Students::getName).orElse("Default name ");
+			
+		- orElseGet : this is used to return the value(It used supplier as a paramter) other then the valid one 
+			Optional<Students> optionalStudents = Optional.ofNullable(StudentInstace.supplier.get());
+			return optionalStudents.map(Students::getName).orElseGet(StudentInstace.supplierName);
+			
+		- orElseThrow  : this is used to return an exception if the value is not valid.
+					Optional<Students> optionalStudents = Optional.ofNullable(StudentInstace.supplier.get());
+			return optionalStudents.map(Students::getName).orElseThrow(StudentInstace.supplierException);
+  
+  b. More mthod : So ifPresent will do the thing that  if else is doing using isPresent
+		- isPresent() : This fn will tell you if the value is present or not and return boolean results.
+		- ifPresent()  : this fn will tell you if the vaue is present or not and also what to do further using a consumer functonal interface paramater 
+		
+  c. More method : 
+		- filter() : just we used filter in strean to filter out the stream elements using a predicate , we can filter out the element from an Optional also  . It uses the predicate.
+		- Map() : just like we used in stream to convert the value from the object to another . Here as an example we map the vaue from a student class to string while getting a name.
+		- flatMap : it must be used in case we have element which is a list of elements .and convert it to elements of normal type .
+					BUt here if we want to get the Optional elements under an another Optional Object

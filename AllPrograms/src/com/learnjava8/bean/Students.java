@@ -1,6 +1,8 @@
 package com.learnjava8.bean;
 
 import java.util.List;
+import java.util.Optional;
+
 public class Students {
     private String name;
     private String mobno;
@@ -8,6 +10,7 @@ public class Students {
     private int marks;
     private List<String> activities;
     private int notebooks;
+    Optional<Bicycle> bicycle = Optional.empty();
     public Students(String name, String mobno, String address, int marks, List<String> activities, int notebooks) {
         this.name = name;
         this.mobno = mobno;
@@ -17,8 +20,26 @@ public class Students {
         this.notebooks = notebooks;
     }
 
+    @Override
+    public String toString() {
+        return "Students{" +
+                "name='" + name + '\'' +
+                ", mobno='" + mobno + '\'' +
+                ", address='" + address + '\'' +
+                ", marks=" + marks +
+                ", activities=" + activities +
+                ", notebooks=" + notebooks +
+                ", optional=" + bicycle +
+                '}';
+    }
 
+    public Optional<Bicycle> getBicycle() {
+        return bicycle;
+    }
 
+    public void setBicycle(Optional<Bicycle> bicycle) {
+        this.bicycle = bicycle;
+    }
 
     public Students(String name, String mobno, String address, int marks, List<String> activities) {
         this.name = name;
@@ -84,14 +105,4 @@ public class Students {
         this.notebooks = notebooks;
     }
 
-    @Override
-    public String toString() {
-        return "Students{" +
-                "name='" + name + '\'' +
-                ", mobno='" + mobno + '\'' +
-                ", address='" + address + '\'' +
-                ", marks=" + marks +
-                ", activities=" + activities +
-                '}';
-    }
 }

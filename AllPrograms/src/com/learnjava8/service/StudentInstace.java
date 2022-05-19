@@ -1,10 +1,25 @@
 package com.learnjava8.service;
+import com.learnjava8.bean.Bicycle;
 import com.learnjava8.bean.Students;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class StudentInstace {
-
+    public  static Supplier<Students> supplier = ()->{
+        Bicycle bicycle = new Bicycle();
+        bicycle.setModelname("ABC");
+        bicycle.setName("ZBB");
+        Students students =  new Students("Dominic","7982195539","plot no91",890,Arrays.asList("gym","volleyball","singing"),12);
+        students.setBicycle(Optional.ofNullable(bicycle));
+        return students;
+    };
+    public static Supplier<String> supplierName = ()->"Narinder kaur";
+    public static Supplier<RuntimeException> supplierException = ()->new RuntimeException("no data found");
+    public static Students getStudent(){
+        return new Students("Harmeet","7982195539","plot no91",890,Arrays.asList("gym","volleyball","singing"),12);
+    }
     public static ArrayList<Students> getstudents(){
         Students student1 = new Students("Harmeet","7982195539","plot no91",890,Arrays.asList("gym","volleyball","singing"),12);
         Students student2 = new Students("Rahul","7982177509","plot no94",900,Arrays.asList("gymnastic","cricket"),11);
