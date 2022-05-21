@@ -1089,3 +1089,54 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 		- Map() : just like we used in stream to convert the value from the object to another . Here as an example we map the vaue from a student class to string while getting a name.
 		- flatMap : it must be used in case we have element which is a list of elements .and convert it to elements of normal type .
 					BUt here if we want to get the Optional elements under an another Optional Object
+					
+20. Interfaces : Which contains only fn declarative and not body for it. we have to define the body of the fn in the implementation class.
+				Problem : if we add one fn to the interface then all classes have to import the newly added method for clean build.
+				For this they added default fn in interfaces.
+					Default methods contains the body of the fn and can be overriden in implementation classes.
+					
+	For List< > interface some more default fn are added to the interface.
+		Those fns are
+			default sort() : will sort the in either natural order or some other order.
+			default replaceAll()
+			dfeault Spliterator()
+			
+21. Comparator interface : Which is used to sort the collections like List .List has a default function sort which can be used to sort the collection we just have to pass he comparator to it.
+				- now we have already seen that can be achievable using the stream.sort(Comparator.comparing(Students::getname)).Collect(Collection.toLIst) : which sort the students as per their names.
+				
+				- We can use the comparator interface itself to do the same .
+				
+				exmaple :  List<Students> list = StudentInstace.getstudents();
+							list.sort(Comparator.comparing(Students::getMarks).thenComparing(Comparator.comparing(Students::getMarks)));
+							list.forEach	(consumer)
+		
+				- We can also chain the Comparator two or more  logics into one .
+					thenComparing() is the fn we can use to chain an another criteria for sorting the elements 
+					
+						
+				- How to handle if the elements lists contains null elements . To do so by using above method it will throw null pointer exception .
+						So we can use another fn named : 
+						  List<Students> list = StudentInstace.getstudents();
+							list.sort(Comparator.nullsFirst(Comparator.comparing(Students::getName)));
+							list.forEach(consumer);
+				
+				
+22. INterfaces and two method introduced in JAVA 8 for interfaces.
+	- default method : which will have a fn body and the fn can be overriden in the implementation class.
+	- static method : which will have a fn body and can not  be overriden in implementation class because its on the class lvel .
+
+23. Multiple inheritence : 
+		Two imp points : 
+			- one interface can extends anther interface 
+			public interface Interface2 extends Interface1{
+			- class can implements multiple interfaces .
+			public class MultipleInheritence implements Interface1,Interface2, Interface3{
+			
+		Overiding precedence goes as follow : 
+			1 priotity : the fn which is overriden in the IMPL class which is implementing the interface.
+			2 priotity : the fn which is overriiden in the interface that extends the other interface.
+				
+		Imp Point : for exmaple interface1 has default mthodA and interface2 also has default methodB , then in main class impl java compile issue will be ther e.
+					To resolve that we need to override the methodA in IMPL class .
+					
+24. Introduction to data/Time Liberaries 					

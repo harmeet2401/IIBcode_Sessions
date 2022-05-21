@@ -1,4 +1,4 @@
-package com.learnjava8.com.learnjava8.terminalfn;
+package com.learnjava8.terminalfn;
 
 import com.learnjava8.bean.Students;
 import com.learnjava8.service.StudentInstace;
