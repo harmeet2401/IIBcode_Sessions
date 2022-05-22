@@ -1139,4 +1139,71 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 		Imp Point : for exmaple interface1 has default mthodA and interface2 also has default methodB , then in main class impl java compile issue will be ther e.
 					To resolve that we need to override the methodA in IMPL class .
 					
-24. Introduction to data/Time Liberaries 					
+24. Introduction to data/Time Liberaries  
+
+Introduction to java 8 date / time classes. : immutable 
+Localdate 
+LocalTime 
+LocalDateTIme
+			LocalDate localDate = LocalDate.now();
+        System.out.println("localDate : "+ localDate);
+        LocalTime localTime = LocalTime.now();
+        System.out.println("localTime : "+ localTime);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("localDateTime : "+ localDateTime);
+		
+----------------------
+   LocalDate localDate = LocalDate.now();
+        System.out.println("localdate :  "+ localDate);
+        System.out.println("day of the Era : " +localDate.get(ChronoField.YEAR_OF_ERA));
+        System.out.println("Month using getmonth : "+localDate.getMonth());
+        System.out.println("Month using get month  value :  "+ localDate.getMonthValue());
+        localDate.getYear();
+        localDate.getDayOfYear();
+        localDate.getDayOfMonth();
+        localDate.atStartOfDay();
+
+
+How to modifying the localdate/localTime  instance : check the programs in git hub we wrote 
+
+As a summray : 
+	1. You can create an instance of Localdate , LocalTime and localdateTime using dot(.)now() funtions 
+    2. Then you can also create the instances of each above class using Of() in which you can mention your values as per the date and time required 
+	3. Then you can get the value from the instances you created using various method exmple  : getMonths() , getHours etc 
+	4. Then you can also update or modify the instance value you created using many mthods like , Plus() , minus() , with () etc 
+	5. We can also convert the localDate to localDatetime using .atTime(localTime instance ) mthod and also we can get the localdate and localtime from LocalDateTime instances .
+	
+25. Period class : This will be able to generate period of a time . it is compatible with LocalDate instance only . It can not be applied on other instances .
+		// first create the period using localDate.untill(localDate1) method  or by using Period.ofYear(10).
+		// Then we can get the value accordignly .
+		
+26. Duration  : it is only compatible with the localTime instance.
+			Duration duration = Duration.ofDays(10);
+        System.out.println("Second in a day : "+ duration.getSeconds());
+
+        LocalTime localTime = LocalTime.of(21,23);
+        LocalTime localTime1 = LocalTime.of(22,23);
+        long duration1 = localTime.until(localTime1, ChronoUnit.MINUTES);
+        System.out.println("Minutes in time differnce of loc1 and loc : "+duration1 );
+
+        Duration duration2 = Duration.between(localTime,localTime1);
+        System.out.println("Diff using between fn : "+duration2.getSeconds());
+		
+		
+27. Instant : part of java.time , used to represents a time for machine readable format .	
+
+28. TimeZone creation using java 8 zone sepcific date time liberaries
+ZoneDateTime : generate the datetime asper the zone (region)  . It contains Zone id and Zone offset 
+
+how to convert the localDateTime to ZonedDateTime .
+We can use localDateTime.atZone	() fn to set the zone and get the time for that zone .
+
+29. Convert java.util.date to localdate and vice versa and java.sql.date to localdate and vice versa.
+
+30. DateTimeFormatter class : 
+
+DateTimeFormatter is widely used to parse of format LocalDate , LocalTime , LocalDatTime.
+
+So everytime we need to convert a string date to LocalDate format we can parse the localdate object using parse method and pass the date and DateTimeFormatter.Codeorformatttouse.
+So everytime we need to convert a string date to LocalTime format we can parse the localTime object using parse method and pass the time and DateTimeFormatter.Codeorformatttouse.
+So everytime we need to convert a string date to LocalDateTime format we can parse the localDateTime object using parse method and pass the Datetime and DateTimeFormatter.Codeorformatttouse.
