@@ -21,7 +21,166 @@ https://w3.ibm.com/w3publisher/gbs-apac-red-hat-services/learning/red-hat-certif
 Udemy link : 	
  1) https://ibm-learning.udemy.com/course/openshift-for-developers/   : Important for handon experience and steps 
 
- 2) https://ibm-learning.udemy.com/course/learn-openshift/
+ 2) https://ibm-learning.udemy.com/course/learn-openshift/ : for beginners 
  
  Exam link : https://www.redhat.com/en/services/certification/red-hat-certified-specialist-in-containers-and-kubernetes?info=exam
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.openshift is the open sourec cloud platform by redhat that helps users to host and develop their applications and expose those app to the outside world to consume.
+And its platfom as a service . Which is PAAS , and take are of underlying infra structure , the user just have to devlop and deploy the application . Rest about the storage , ram process 
+all is undertaken by the redhat or third part cloud which uses openshift opensource to allow user to host their apps.
+
+There are 4 versions of openshift
+	a. openshit origin  : Its the upstream open source openshift project (may be a source code or some package ) using which all other versions are derived.
+
+	b. openshift online : Its the openshift application hosted by REDHAT online to be used by various clients which allow user to host apps . This is REDHATS online hosted OCP. 
+	here the DCs are from redhats infra.
+
+	c. openshift dedicated  :  Its the managed cloud cluster on Cloud services provided by Google cloud or AWS. This cluster can also be used to host user app but the app will be on 
+	google's or AWS's data centers. The infra is maintain by the cloud service provider.
+
+	d. openshift enterprise  : This is the private OCP setup by a single organisation on it own premises data centers . like you run an organisation which need OCP clusters to be set up and 
+	host app . This provide the best security and compliance setup . As it is on our Dcs. But one drwback that the org can not utilize the cloud auto scale and elastic services.
+
+
+
+2. First Session : Its totaly based on openshift orogin which is the base open soure code that runs on top of docker and kubernetes clusters that works aloing with the added tools 
+	provided by Redhat openshit to devlop and host apps as needed. 
+
+	Thse added tools can be a UI , and other services . CLI to interact with the openshift clsters.
+	
+ Architecture :   The architecture goes from bottom to top . First Docker which is the containerisation technology to create and run images of the app and deploy docker engine .
+ Then on top of docler kubernetes came which is the orchestration tool to manage the health and count of the running containers in a cluster of many nodes.
+ Then on top of kubernetes tools provided by redhat which allow user to ease down the steps to develop , deploy and maintain the applicaton on the kubernetes clusters
+
+ ------------------------- 		   / \
+		openshift Tools    			|
+									|
+ ------------------------- 			|
+		Kubernetes         			|
+									|
+ ------------------------- 			|
+									|
+		DOCKER             			|
+									|
+ -------------------------		
+ 
+ Tools provided : 
+	- SCM Inbuilt : Code versioning and code storage repositories like Git and SCM.
+	- Pipeline : It also provide built in pipeline to build deploy and test the app 
+	- OCR (openshit container registry)Image registry : Its also provides in built image docker repositories to store the images 
+	- Access management : which includes the creation of access groups and user id which are allowed the access to specific resource.
+	- APIs : opeshift have apis which allow easy integration with openshift by the apps running on a different host.
+	- Software defined network : which include internal network system .
+	
+	
+3. Containers : Its a container orchestration technology that helps in maitaining the container health and count in case deployed to mutipe nodes.
+
+	Kubernetes basucally work on top of docker .
+
+		a. Docker : is a containerisation tech which helps in running containers in its own isolated space 
+		b. Container : It runs on docker engine which we need to install .
+		c. image : its like the build packaged file that cotains all libs and software required to run the apps. once we run the image it create a container .
+	
+	.Now the containers are introduced when a problem is faced by the devlopers or architects to create full stack architecture on a single OS.
+	.A single OS and running multiple apps app1(web server) , app2(DB2) , app2(java springboot app) etc . Each app utilizeits own version of libs which may results in problem 
+	for the 
+		other apps.
+	. One other problem is during onboarding in which the new dev has to be given a new system which took long time to bring it up and running .
+	
+	For tht containers is introduced which runs on top of Docker which uses the same OS kernel.
+
+	This an OS  = Softwares( UI and other features ) on top of OS kernel . 
+	Each OS hvae its own OS kernel 
+		
+	Containes use the under OS kernel . So using containers the user could able to run multiple containers 	(multple apps app1 , app2 , app3 and app4 ) which does not interfer with 
+	the other apps lib as it is running in its own isolated space , only the OS used by containers are same . So the containers with diff version of  OS kernel  which could be the 
+	updated version of underlying OS can run .
+	
+	Example  of containers
+	
+							Container(santos )		Container (ubuntu)				container (windows)	<----- this container will not work as it is usinf windows OS kernel and base machine have OS kernel(linux)
+							uses linux os kernel	uses linux os kernal 			use windows OS kernel 
+	                        --------------------------------------------------------------------------------------------
+														         Docker 
+							--------------------------------------------------------------------------------------------
+															OS kernal (linux)
+							--------------------------------------------------------------------------------------------
+																Hardware 	
+							--------------------------------------------------------------------------------------------
+							
+							
+	Example  of Hyper V
+	
+							  VM(santos )		VM (ubuntu)				VM (windows)	<----- this container will  work as it is using windows OS kernel . As each VM has its own OS installed and containers uses the underlying machine OS kernel.
+							 linux os kernel	linux os kernal 		windows OS kernel 
+	                        --------------------------------------------------------------------------------------------
+														         Docker 
+							--------------------------------------------------------------------------------------------
+															OS kernal (linux)
+							--------------------------------------------------------------------------------------------
+																Hardware 	
+							--------------------------------------------------------------------------------------------
+																															
+	
+	
+4. Container orchestration tech :  To maintains the scalability of the container as per the demands or load increases decrease . Manage the containers under hardware . Increase the 
+	resources . in nut shell it will manage the 100 of 1000 of container in a cluster env
+
+		Mesos from apache  : its difficult to setup 
+		Docker swarm  : lack in some options 
+		Kubernetes from google  : is the best 
+		
+		
+5. openshit architecture : 		There is a component named ETCD which keeps the info about the diff k8 cluster.
+
+		OCR (image registry )--------
+			|						|
+			|                       |
+			|                       |
+		Build an image              |
+			|                       |
+	        |                       | Deploy the image as a container to openshift cluster .
+	        |                       |
+	        |						|
+	        |                       |
+			|				        |
+			|				        |
+									|									Multiple pods creats a single deployment
+									|	                     ------------------------------------------------------------
+	OCP CI/CD pipeline				|
+			|						|	Pod1							POd2									pod3							pod4
+			|						|   -----------					----------								-----------							---
+			|						|		
+			|						---> c1,c2,c3						c4,c5								c6,c7,c8,c9						    c10     <------- containers 
+			|						 --------------------------------------------------------------------------------------------------------------------
+			|							NODE1  							NODE2								NODE3								NODE4
+SCM --------|																			Kubernetes Cluster 
+									
+									--------------------------------------------------------------------------------------------------------------------
+		
+									These master node will manage the slave nodes . and host the apis need to allow integration with other sources
+									-------------				-------------
+Webconsole                           Master node 1               Master node 2
+Will allow users                    -------------               -------------
+to login                                     
+									
+6. Setting up OpenShift			: use the sand box , as minishift require image download and run it on virtual box or hyper v.
+
+
+7. openshift management s: we can interact with OCP via below three options : 
+	a. OCP web CLI : commands
+	b. OCP web console  : ui login 
+	c. API : we can send requests to the api and see the cluster info and stuff
+	
+                                    
+                                    
+                                    
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -36,7 +36,9 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 10. open shift is build on top of the kubernetes which is on top of dockers . OCP  provide various tools and resources that abstract the underlying functionality of kuberneter and docker .
 
-11. We can use either the MInishift or openshift sandbox . MInishift its th one we used in OPtum (where we install Minishift on different linux boxes and have the openshift url for differnet Dcs) is the iso image we can download by running MInishift.exe and open that iso image in virtual box but that will take more memory of underlying machine . So go for  the sandbox  go to https://developers.redhat.com/developer-sandbox
+11. We can use either the MInishift or openshift sandbox . MInishift its the one we used in OPtum (where we install Minishift on different linux boxes and 
+have the openshift url for differnet Dcs) is the iso image we can download by running MInishift.exe and open that iso image in virtual box but that will take 
+more memory of underlying machine . So go for  the sandbox  go to https://developers.redhat.com/developer-sandbox
 
 12. In minishift we have different numbers of catalog which shows you can directly enter the github or gitlab or source code projct url and allow the deployment take place .
 		The catalog contains many things , like python , jenkins pipeline  , mysql , ruby , nginx , ruby etc.
