@@ -212,31 +212,94 @@ to login
 	 1. From the developer catalog i can select "import from git hub" then 	just need to mention the git repository url which contains a valid Dockerfile .
 	 2. Then it will ask for the resource to be created and boom it will trigger the build for you.
 	 3. So it will trigger two pods one is for build which will generate the image and push it to image stream stream wich is the default feature of OCP.
+	 4. you can create the service and route using the existing service and route yaml file gerenerated by OCP for other apps . Just remove unwanted fields like label , annotations
+	 and timestamp etc . change the other details accordingly 
 	 
-	 Resources created as fllow : 
+	 Resources created as follow and we can use below resources to replicate it. 
 	 
-	 build pod
-	 Deployment pod
-	 service 
-	 route -----------------------------> this will have the host name used to hit the service if required.
-	 imagestream / docker stream 
+		build pod & build config
+		Deployment pod   (We need to create the deploymentconfig which will help in maintaining the rollbakc and replicationcontroller.)
+		service 
+		route -----------------------------> this will have the host name used to hit the service if required.
+		imagestream / docker stream 
 	 
 	 
-	Deployment
+- Deployment
 	apps/Deployment
 	A Deployment enables declarative updates for Pods and ReplicaSets.
 	
-	DeploymentConfig
+- DeploymentConfig
 	apps.openshift.io/DeploymentConfig
 	A DeploymentConfig defines the template for a Pod and manages deploying new Images or configuration changes.
-			
+	
+
+	
 			
 	****VVIMP : FOR EACH BUILD CONFIG AND DEPLOYEMENT CONFIG A POD IS SPUN UP TO DO THE JOB .
 					
-                                    
+Note : 
+	We can use the same build and delpyment configs to make a change and import it to run a new build and deployments.
+	While you use the same build vconfig yaml , keep in mind to change the image stream name which needs to be there .
+	Really important point the imagestream name you mentioned should be in place of created before running the build .
+	
+12 . Creating CI/CD using webhook and code change triggered from the Git repository.
+We can do that by : 
+		1. Get the webhook url (generic webhook url )from the build configuration .
+		2. Then mention that webhook url in the settings -----> webhook ----> url  of git repository
+		3. Enable SSL should be unchecked .
+		4. Content type for the post request should be application/json
+	
+	
+13. Deployments : deployments in ocp is similar to deployments in kuberenetes.	
+	We will understand it likea hierarchy 
+	
+	first 
+	
+	Container --> Collection of containers(Pod) 
+			---> Replication controller (maintains the count of the pods to be maintained in case on goes down.) 
+				-- > Deployment controller ( Replication controller + rollbacks + upgrades etc)
  
+	Properties of Deployment configs : 
+		1. Strateggy : rolling updates . which means the pods goes one at a time and keep other pods running , then 2nd pod turn , then 3rd turn etc .
+			this way the servce will never goes down . Its the default deployment strategy 
+		2. Blue green strategy : In this strategy the two sets of pods(blue servers) are running in connection with a load balancer and consumer is using it .
+			Then same set of pods (green servers upgraded) is deployed which first get tested and once completed the traffic is routed from blue to green servers from the load balancer.
+		3. A/B strategy : In this strategy 2 blue pods and 2 green pods run parallely consuming 60 / 40 , 70 , 30 % of traffic from load balancer . Once the green servers keep on 
+			serving btter the load traffic started shiting to green servers   10% blue server / 90% green server .
+			
+		
+					
  
- 
+14. OCP network topology .
+	a. As we know there are communication required between pods inside the cluster which is achieved by using overlay network that booked set of ip addresses .
+	   This overlay network will then assign private ip addresses to the pods so that they can communicate with each other. 
+	b. For external communication over the internet from client we need public ip address or DNS which is a user friendly host name assigned to the public ip address .
+		This is achieved via services and routes which exposes the service to the internet and also assign a user readable host name to it .
+		
+15. Service and routes 
+	
+	a. Service act as a load balancer/connection(contains service and targets ports(many)) between the backend pods and the front end pods running . For internal and external communicaton the Service actually contains the 
+	 service port and target port to where the traffic need to be routed to .
+	b. Route : Now as user wants to access our apps deployed to the pods using www.someweb.com . now this DNS name has to be there and should act as a router to the service so that the traffic goes to the service and then to the desired pod.
+	- It also act as a load balancer and ask for the target port after selcting the service name . So as many ports are there in the service. We can select the target port out of these and use it in the route.
+	- The Route also help in load balancing by using 3 routing strategies : 
+		1. source strategy : in which the traffic is loaded to same pod again and again 
+		2. Round robin : in which the traffoc is loaded to each pod one by one . first request first pod , second request second pod and third request third pod.
+		3. lessconn: will route the traffic to the pod which has least conne.
+		
+	- The Route can also route the traffic to 2 services we can select alternate service and select 2 or more services to route the weighted traffic we can mention there.
+
+16. Scaling : Scaling we know how to do that .
+
+	- Important point that we need to mention the deployment config name in the service for the load to get distributed in case scaling happens.
+	- The dafaut behaviour of the route is to save the IP address of the user and keep o sending him with the same pod response.
+	- To route the traffic evenly to both the pods we have to add below two properties in route yaml .
+				first is the LN balancer algo :  haproxy.router.openshift.io/balancer: roundrobin
+				seconf to trun of the cookie :  haproxy.router.openshift.io/disable_cookie: 'true'
+	
+		
+	 
+	
  
  
  
