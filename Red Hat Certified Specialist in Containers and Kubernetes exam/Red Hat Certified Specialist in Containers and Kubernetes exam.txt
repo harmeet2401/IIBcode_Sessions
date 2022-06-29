@@ -175,7 +175,64 @@ to login
 	c. API : we can send requests to the api and see the cluster info and stuff
 	
                                     
-                                    
+    To setup the minishift on windows 10 : https://www.faustocv.org/en/devops/2019/08/11/minishift-windows-10-hyperv/
+
+
+8. While selecting from the catalog it automatically create a buil dimage . You are worndering how that happen without you providing the dockerfile to the builder.
+		Answer : The openshift provide inbuilt tool named : S2I (source to image ) tool which inject the dockerfile as per the language selected from the catalog and start building the
+				images. That docker file will contains 
+				
+					baseimage 
+					Install java 
+					COPY command  to copy the build file (.jar in case of java )
+					RUN command to run the jar file .
+	If you don't want to use the inbuilt S2I build file . then you can use custom builder to build your app as per the languaeg of source code
+	
+9. Image stream : are th ejust the metadata of the actual images build .
+
+10 . How to create a build config using the S2I in built build image .
+
+		use this : https://github.com/mmumshad/simple-webapp-docker.git repo for the example 
+		
+	In Sand box : go to the developer user and create the build config 
+
+		So in nutshell :
+		
+		
+		1. first build config will be created that will clone the source code , use it to create a build image and pushed it to internal image repositories
+		2. Second the deployment config will be created to deploy the image to the OCP kubernetes cluster .
+		
+11. BUILD configs : template you can create and run these to build an image .
+    Deplpyment configs  : are the template you can create and run these to  deploy the image to the OCP kubernetes cluster		
+	ImageStream : Its the inbuild image repository to push builded image to .
+		
+	
+	Steps to import your java project from git :
+
+	 1. From the developer catalog i can select "import from git hub" then 	just need to mention the git repository url which contains a valid Dockerfile .
+	 2. Then it will ask for the resource to be created and boom it will trigger the build for you.
+	 3. So it will trigger two pods one is for build which will generate the image and push it to image stream stream wich is the default feature of OCP.
+	 
+	 Resources created as fllow : 
+	 
+	 build pod
+	 Deployment pod
+	 service 
+	 route -----------------------------> this will have the host name used to hit the service if required.
+	 imagestream / docker stream 
+	 
+	 
+	Deployment
+	apps/Deployment
+	A Deployment enables declarative updates for Pods and ReplicaSets.
+	
+	DeploymentConfig
+	apps.openshift.io/DeploymentConfig
+	A DeploymentConfig defines the template for a Pod and manages deploying new Images or configuration changes.
+			
+			
+	****VVIMP : FOR EACH BUILD CONFIG AND DEPLOYEMENT CONFIG A POD IS SPUN UP TO DO THE JOB .
+					
                                     
  
  
