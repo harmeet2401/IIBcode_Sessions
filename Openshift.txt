@@ -134,6 +134,7 @@ Installion of dev tools to start working with the cli.
 	
 	
 -------------------------------------------------------POD RESOURCE----------------------------------------	
+clone : https://gitlab.com/practical-openshift/labs
 7. how to run / start a POD in OCP   oc explain pod.spec
 
 Below commands sends a post or get request to the control plane (rest api) for creating pods and get the pods running status.

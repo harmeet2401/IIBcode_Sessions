@@ -18,9 +18,11 @@ output of oc status :
 				svc/hello-world - 172.30.180.208:8080							--------- Service
 					dc/hello-world deploys istag/hello-world:latest             --------- Deployement config
 						deployment #1 deployed 8 minutes ago - 1 pod			---------1 pod
-oc explain pod : to get the description of the pod
-oc explain pod.spec : spec is one of the field in pod
-oc explain pod.spec.containers : containers is a field inside spec.
+oc explain pod :---------------------------------------------------------------- to get the description of the pod
+oc explain pod.spec :----------------------------------------------------------- spec is one of the field in pod
+oc explain pod.spec.containers :------------------------------------------------ containers is a field inside spec.
+oc create -f pod.yaml ---------------------------------------------------------- this will create the pod on ocp 
+oc delete pod/nameofthepod ----------------------------------------------------- this will delete the pod
 							
 		
 		
