@@ -43,3 +43,6 @@ oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
 oc get -o yaml svc/hello-world >> svc.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
 oc new-app https://github.com/harmeet2401/MyApi.git --as-deployment-config--------------------------------- to create DC for my app 
+oc rollout latest dc/hello-world   :-------------------------------------------------------------------------- this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
+oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
+				
