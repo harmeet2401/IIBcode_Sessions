@@ -235,7 +235,8 @@ to login
 
 	
 			
-	****VVIMP : FOR EACH BUILD CONFIG AND DEPLOYEMENT CONFIG A POD IS SPUN UP TO DO THE JOB .
+	****VVIMP : FOR EACH BUILD CONFIG AND DEPLOYEMENT CONFIG A POD IS SPUN UP TO DO THE JOB . WHEN YOU CREATE A DEPLOYMENT CONFIG IT WILL CREATE ALL THE REST OF THE RESOURCES LIKE
+	BUILD CONFIGS , IMAGESTREAM , SERVCE , ROUTE AND TRIGGERS A BUILD AND DEPLOY AS WELL.
 					
 Note : 
 	We can use the same build and delpyment configs to make a change and import it to run a new build and deployments.
@@ -295,7 +296,32 @@ We can do that by :
 	- The dafaut behaviour of the route is to save the IP address of the user and keep o sending him with the same pod response.
 	- To route the traffic evenly to both the pods we have to add below two properties in route yaml .
 				first is the LN balancer algo :  haproxy.router.openshift.io/balancer: roundrobin
-				seconf to trun of the cookie :  haproxy.router.openshift.io/disable_cookie: 'true'
+				seconf to trun of the cookie :   haproxy.router.openshift.io/disable_cookie: 'true'
+				
+17. Storage : 
+
+- As we know the storage of the pod is not persistent it get destriyed as the pod deleted .
+- For that the concept of persistent volume is introduced  which is attachable and detachable or simple term mounted volumes .
+- Now these volume have a been part of the storage device which are connected to the OCP cluster using below drivers  :
+
+	local 
+	iSCSI
+	Fibre channel 
+	Azure disk 
+	Azure file 
+	AWS EBS volumes 
+	NFS 
+- By creating a persistentVolume claims means we will be allocating a small amount o space in the Storage device that is attached to the OCP cluster 
+		The access types are : 
+			Single read write  : Only one node can read and write the volumes
+			Shared read ann write : multiple nodes can read or write 
+			read only : is only used to read the volumens.
+- We can attach and detach (mount or unmount) the PV from the one pod to another .
+- Create a build config : run the build get the image .
+- create a DeploymentConfig using above image and run the pods 
+- now go to the deployment config and under storage section add storage that you created.			
+			
+				
 	
 		
 	 
