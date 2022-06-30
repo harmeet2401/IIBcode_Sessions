@@ -263,7 +263,8 @@ command :
 	- Roll out a new version of DC post changing te config / src code etc .
 				oc rollout latest dc/demo-app   : this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
 				oc rollback dc/demo-app : this will roll back the deployment to the old version we terminated 
-		
+				
+	standard phase of container creation : from pending -------> containercreating ---------> Running 	
 -------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
 
 
