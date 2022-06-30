@@ -6,7 +6,7 @@ oc get projects --------------------------------------------------------------- 
 oc project -------------------------------------------------------------------- to get to which project currently using .
 oc delete all --ll ------------------------------------------------------------ this will delete all the resources (Deployment ,deployment config , services , route , image stream , buld config , build )
 oc delete secret --all --------------------------------------------------------  this will delete all the secrets 
-oc new-app jenkins-ephemeral --------------------------------------------------  this will create a deployement config and run a pod for jenkins server .
+oc new-app jenkins-ephemeral(this is the image name) --------------------------  this will create a deployement config and run a pod for jenkins server .
 	Will create below resources : 
 		1. DC 
 		2. Route 
@@ -25,6 +25,16 @@ oc create -f pod.yaml ----------------------------------------------------------
 oc delete pod/nameofthepod ----------------------------------------------------- this will delete the pod
 oc get pods --watch ------------------------------------------------------------ this will keep a watch on the pod list . on the other terminal you can create an another pod and see it getting creating in earlier one . real time changes.
 oc explain pod.spec.containers.env----------------------------------------------- this will show the inbult documentation for resource pod.spec.contaiers.env
-		
-		
+oc new-app quay.io/practicalopenshift/hello-world --as-deployment-config  : oc new-app imagetagname --as-deployment-config ------- used to create a deployment config.
+oc status ----------------------------------------------------------------------- this will show you all the resource and check your app 
+oc expose svc/hello-world ------------------------------------------------------- this will expose the service(load balancer) to outside world and creates a route for it.
+oc get svc				--------------------------------------------------------- will give service
+oc get dc 			  ----------------------------------------------------------- will give deploymentconfig
+oc get istag          ----------------------------------------------------------- image stream tag		
+oc delete svc/hello-world ------------------------------------------------------- dleete the service
+oc delete dc/hello-world  ------------------------------------------------------- delete deployment config.
+oc describe dc/hello-world ------------------------------------------------------ describe the dc with label 
+oc delete all -l app=hello-world ------------------------------------------------ then use -l and mention the label got from describe command and delete the resources.
+oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deployment-config ---------------- this will create a deployment config with label name as demo-app		
+oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config----------------- Similar to above command just we are giving the git repository url to create a DC using the Dockerfile present in the git repository.
 

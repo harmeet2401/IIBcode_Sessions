@@ -184,7 +184,8 @@ NOTE : SO WE HAVE BUILD AN IMAGE USING A DOCKERFILE , PUSHED THAT IMAGE TO DOCKE
 
 -------------------------------------------------------DEPLOYEMENT CONFIG RESOURCE----------------------------------------
 9.Deployement configs :  oc explain deploymentconfig.spec
-
+	Its collections of pods .
+	
 	- Deployment Configs define the template for a pod and manages deploying new
      images or configuration changes. A single deployment configuration is
      usually analogous to a single micro-service. Can support many different
@@ -193,7 +194,7 @@ NOTE : SO WE HAVE BUILD AN IMAGE USING A DOCKERFILE , PUSHED THAT IMAGE TO DOCKE
      Each individual deployment is represented as a replication controller
 	 
 	-Deployment config is a collections of pods.
-	-The also falls under spec which is undet template key 
+	-The also falls under spec which is under template key 
 	
 command : 
 
@@ -223,7 +224,7 @@ command :
 
 		NOte : we can deploy the same DC with different --name multiple copies on OCP.
 		
-	- Create deployment config using git repo url  : for this the git repolocation will have a DockerFile which it will use to build and image and use that to create a DC
+	- Create deployment config using git repo url  : for this the git repository will have a DockerFile which it will use to build and image and use that to create a DC
 		oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config
 		
 		Steps taken : 
