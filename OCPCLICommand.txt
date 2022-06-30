@@ -23,7 +23,8 @@ oc explain pod.spec :-----------------------------------------------------------
 oc explain pod.spec.containers :------------------------------------------------ containers is a field inside spec.
 oc create -f pod.yaml ---------------------------------------------------------- this will create the pod on ocp 
 oc delete pod/nameofthepod ----------------------------------------------------- this will delete the pod
-							
+oc get pods --watch ------------------------------------------------------------ this will keep a watch on the pod list . on the other terminal you can create an another pod and see it getting creating in earlier one . real time changes.
+oc explain pod.spec.containers.env----------------------------------------------- this will show the inbult documentation for resource pod.spec.contaiers.env
 		
 		
 
