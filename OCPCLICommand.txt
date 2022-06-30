@@ -1,0 +1,27 @@
+OCP CLI commands --------------------------------------------------------------
+oc login -u username -p password ---------------------------------------------- to login to OCP cluster
+oc get pods ------------------------------------------------------------------- To get the pods running on current project selected in OCP cluster node.
+oc project nameofproject ------------------------------------------------------ to switch to a new project and start using it.
+oc get projects --------------------------------------------------------------- to get to know which projects are there in ocp cluster.
+oc project -------------------------------------------------------------------- to get to which project currently using .
+oc delete all --ll ------------------------------------------------------------ this will delete all the resources (Deployment ,deployment config , services , route , image stream , buld config , build )
+oc delete secret --all --------------------------------------------------------  this will delete all the secrets 
+oc new-app jenkins-ephemeral --------------------------------------------------  this will create a deployement config and run a pod for jenkins server .
+	Will create below resources : 
+		1. DC 
+		2. Route 
+		3. 2 Services 
+		4. Config map 
+oc delete all -l app=hello-world ---------------------------------------------- this will delete all the resources connected to app= hello-world		
+oc status --------------------------------------------------------------------- this will show you all the Dc , bc , route ,services and other configuration done apps in the current project. using this command you can check the exposed url as well.
+output of oc status :                								
+				svc/hello-world - 172.30.180.208:8080							--------- Service
+					dc/hello-world deploys istag/hello-world:latest             --------- Deployement config
+						deployment #1 deployed 8 minutes ago - 1 pod			---------1 pod
+oc explain pod : to get the description of the pod
+oc explain pod.spec : spec is one of the field in pod
+oc explain pod.spec.containers : containers is a field inside spec.
+							
+		
+		
+

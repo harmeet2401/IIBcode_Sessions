@@ -222,7 +222,7 @@ sudo service docker restart
 docker info -------------------------------------------------------------------- will give permission denied . the ubuntu user is not in docker group
 sudo docker info --------------------------------------------------------------- will give docker installation info
 sudo usermod -aG docker ubuntu  ------------------------------------------------ Add ubuntu user id in docker group and reconnect linux 
-docker images ------------------------------------------------------------------ to see the images
+docker images ------------------------------------------------------------------ to see the images.
 docker pull ubuntu ------------------------------------------------------------- will pull image ubuntu latest version(official image) .
 docker run --name myubuntu ubuntu----------------------------------------------- you can specify the name of the container
 docker pull ubuntu:16.04 ------------------------------------------------------- will pull ubuntu 16.04 version where 16.04 is a tag

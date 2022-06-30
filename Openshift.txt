@@ -5,7 +5,7 @@ Openshift training -----------------------------
 
 1. The openshift container platform  or OCP is some thing that runs the applications.
 2. Many resources are there which helps developers to deploy their applications to the ocp clusters and expose it to the end users. 
-3. The openshift runs on multiple openshift cluster servers .
+3. The openshift runs on multiple openshift cluster servers or kubernetes cluster .
 4. There are two categories or Planes in OCP servers : 
 	a. Control plane : 
 		- which contains the Rest Api , Data persistence and monitoring .
@@ -26,15 +26,15 @@ Various tools provided By either redhat named as the sandbox or the desktop app 
 
 5. OCP cli  : its the command line interface to run the cmmand to deploy your app , manage the pods , containers , monitoring and logging the app logs etc.
 
-6. OCP dashboard can also used to manage the same as we do it in OCL cli . but we have an advantage to automate using OCP cli code and make the deployment , auto conig , autoscaling easy.
+6. OCP dashboard can also used to manage the same as we do it in OCL cli . but we have an advantage to automate using OCP cli code and make the deployment , auto config , autoscaling easy.
 
-7. OpenShift does have a built-in image registry.
+7. OpenShift does have a built-in image registr which is called Imagestream.
 
-8. In OCP it uses Pods for everything like for creating a Deployement config if will spin up the pod for it once completes it will delete , just like for creating a build cofig it will spin up the pod for itand once completes it will delete it.
+8. In OCP it uses Pods for everything like for creating a Deployement config if will spin up the pod for it once completes it will delete , just like for creating a build cofig it will spin up the pod for it and once completes it will delete it.
 
-9. Its PAAS as a service . Means u just have to run you application in the service that Redhat OCP servers provides . No need to maintain the under infra and OS.
+9. Its PAAS as a service . Means u just have to run you application in the service that Redhat OCP servers provides . No need to maintain the underlying infra and OS.
 
-10. open shift is build on top of the kubernetes which is on top of dockers . OCP  provide various tools and resources that abstract the underlying functionality of kuberneter and docker .
+10. open shift is build on top of the kubernetes which is on top of dockers . OCP  provide various tools and resources that abstract the underlying functionality of kuberneter and docker . Those tools may include Cli , web console  to interact and r brig your apps up and running .
 
 11. We can use either the MInishift or openshift sandbox . MInishift its the one we used in OPtum (where we install Minishift on different linux boxes and 
 have the openshift url for differnet Dcs) is the iso image we can download by running MInishift.exe and open that iso image in virtual box but that will take 
@@ -43,7 +43,7 @@ more memory of underlying machine . So go for  the sandbox  go to https://develo
 12. In minishift we have different numbers of catalog which shows you can directly enter the github or gitlab or source code projct url and allow the deployment take place .
 		The catalog contains many things , like python , jenkins pipeline  , mysql , ruby , nginx , ruby etc.
 
-NOte openshift 4 is the latest version in pursuit by Redhat.
+Note openshift 4 is the latest version in pursuit by Redhat.
 ------------------------------------------------------------------------------------------------------------------
 
 Installion of dev tools to start working with the cli.
@@ -84,18 +84,18 @@ Installion of dev tools to start working with the cli.
 																									
 4. Docker image build : 
 	- This requires the Dockerfile which contains the steps to run the docker image
-	- Then navigate to that dockerfile and source code location
-	- Run Docker Build .   (dot means in current directoty)
+	- Then navigate to that Dockerfile and source code location
+	- Run docker Build .   (dot means in current directoty)
 	
 	Some core docker commands 
-		docker ps 
-		docker ps -a 
-		docker images 
-		docker images -a
-		docker run imagename
-		docker run -it imagename
-		docker run -itd imagesname
-		docker run -itd -p 8080:8080 imagename
+		docker ps  ---------- will show the running containers
+		docker ps -a  -------- will show the all running or stopped containers 
+		docker images  ------- will show you the image build using dockerfile or downloaded from docker hub 
+		docker images -a ----- this will show you all images 
+		docker run imagename --- this will create a container 
+		docker run -it imagename -- you will go into container in interactive mode(start and make connection).
+		docker run -itd imagesname -- will send the running container to background and your cursor will on the base VM.
+		docker run -itd -p 8080:8080 imagename -- will send the running container to background and your cursor will on the base VM. and map a port (host machine-port : container-port)
 	docker file autopsy : 
 		.FROM : is used to get the base image for your container 
 		.COPY  : COPY fileinhostmachinelocation    filelocationinsidecontainer  : used to copy the file
@@ -108,10 +108,11 @@ Installion of dev tools to start working with the cli.
 		.CMD java -jar /src/lib/gateway.jat:snapshot_1.0
 		
 			
-5. Projects and Users  : 
+5. Projects and Users  :
+	Projects are used by the OCP to grouped together the related resources.(dc,bc,service,route etc)
 		oc delete all --all
-		oc whoami
-		oc whoamo -t : we can use this command to get the token to login to console from cli.
+		oc whoami : will give you the current user login 
+		oc whoamo -t : we can use this command to get the token to login to console from cli. this command will work post logging in .
 		oc logout
 		oc login -u meet14764
 		oc get users 
