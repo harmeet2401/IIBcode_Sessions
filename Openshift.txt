@@ -249,7 +249,8 @@ command :
 							deployment #1 waiting on image or update
 
 
-					NOte : here bc/hello-world is also there because oc uses the container to build the image by cloning the code rn the dockerfile one step at a time.
+		NOte : here bc/hello-world is also there because oc uses the container to build the image by cloning the code from the dockerfile one step at a time. And new-app command only have one diff is that it using git repo url instead of image . if we give Imagetag it will not create BC as it is not required bcse image is already there .
+		But here we have to build an image from the git repo. Thats why a Bc is created.
 
 		oc logs -f  bc/hello-world  : to get the logs of bc : which will sho you the steps took to buld the image by cloning.
 		
@@ -257,6 +258,8 @@ command :
 	- Replication controller :  use by deploy to mainatain proper number of pods running .
 				oc get rc  : get the replication controller.
 				
+	- To get the yaml of any yaml : BC , DC , service , imagestream :  oc get -o yaml bc/hello-world	
+	
 	- Roll out a new version of DC post changing te config / src code etc .
 				oc rollout latest dc/demo-app   : this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
 				oc rollback dc/demo-app : this will roll back the deployment to the old version we terminated 
