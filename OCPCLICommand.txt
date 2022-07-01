@@ -47,3 +47,4 @@ oc rollout latest dc/hello-world   :--------------------------------------------
 oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
 oc expose --port 8080 pod/hello-world-pod -------------------------------------------------------------------- this will expose a pod and create a service 
 oc expose svc/hello-world------------------------------------------------------------------------------------- this will expose the service and create a route 				
+env ---------------------------------------------------------------------------------------------------------- show all env inside pod terminal 
