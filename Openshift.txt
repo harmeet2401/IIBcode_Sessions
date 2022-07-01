@@ -270,7 +270,8 @@ command :
 
 -------------------------------------------------------SERVICES AND ROUTES----------------------------------------
 - Service is just like a front end part which will contain a public ip and port which is connected to the pods in the cluster.
-- We know when we create / deploy an api we need an IP and port on which it will listne and sends the request to the pods in the backend.
+- We know when we create / deploy an api we need an IP and port on which it will listen and sends the request to the pods in the backend.
+- Theip and port assigned to the service is for internal pod communications . We can not access the service from outside world using this IP. So for that we have to create a route 
 
 
 Steps : 
@@ -279,13 +280,14 @@ Steps :
 	-create the service 
 		oc expose --port 8080 pod/hello-world-pod
 		
-		this will create a service showing you the ip and port which is exposed internally inside the cluster and not access from internet.
+***VVIMP : - This will create a service showing you the ip and port which is exposed internally inside the cluster and not access from internet.
+
 		
 	- to access the first pod create another pod in the same cluster and ping from second to first pod
 		oc create pod pod/pod2/yaml
 		oc status  ------------------------------- > you will get the service ip and address of first pod
 		oc rsh pod/hello-world-pod-2
-			: wget -qO- ipaddressoffirstpod:port
+			: wget -qO- ipaddressoffirstpodservice:port
 		
 
 	- to access the first pod using env variable 

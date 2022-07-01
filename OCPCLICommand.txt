@@ -45,4 +45,5 @@ oc get -o yaml svc/hello-world >> svc.yaml -------------------------------------
 oc new-app https://github.com/harmeet2401/MyApi.git --as-deployment-config--------------------------------- to create DC for my app 
 oc rollout latest dc/hello-world   :-------------------------------------------------------------------------- this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
 oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
-				
+oc expose --port 8080 pod/hello-world-pod -------------------------------------------------------------------- this will expose a pod and create a service 
+oc expose svc/hello-world------------------------------------------------------------------------------------- this will expose the service and create a route 				
