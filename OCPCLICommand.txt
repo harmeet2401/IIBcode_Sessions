@@ -31,12 +31,15 @@ oc expose svc/hello-world ------------------------------------------------------
 oc get svc				--------------------------------------------------------- will give service
 oc get dc 			  ----------------------------------------------------------- will give deploymentconfig
 oc get istag          ----------------------------------------------------------- image stream tag		
+oc get is             ----------------------------------------------------------- image stream 		
 oc delete svc/hello-world ------------------------------------------------------- dleete the service
 oc delete dc/hello-world  ------------------------------------------------------- delete deployment config.
+oc delete is/hello-world  ------------------------------------------------------- delete image stream.
 oc describe dc/hello-world ------------------------------------------------------ describe the dc with label 
 oc delete all -l app=hello-world ------------------------------------------------ then use -l and mention the label got from describe command and delete the resources.
 oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deployment-config ---------------- this will create a deployment config with label name as demo-app		
 oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config----------------- Similar to above command just we are giving the git repository url to create a DC using the Dockerfile present in the git repository.
+oc new-app meet14764-dev/hello-world --as-deployment-config-------------------------------------------- Another way to create DC using image from the image stream imported
 oc logs -f  bc/hello-world  :---------------------------------------------------------------------------- to get the logs of bc : which will sho you the steps took to buld the image by cloning.
 oc get rc  :--------------------------------------------------------------------------------------------- get the replication controller.
 oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------------------------------- to export the yaml to a file for build config 
@@ -57,3 +60,22 @@ oc set env dc/hello-world  --from cm/message-map -------------------------------
 oc create configmap file-map --from-file=MESSAGE.txt ---------------------------------------------------------- pods is the folder that contains the files
 oc create configmap file-map-2 --from-file=MESSAGE=MESSAGE.txt  ----------------------------------------------- this will update the key value to only MESSAGE
 oc create configmap pod-example --from-file pods -------------------------------------------------------------- this will create config maps using directory name "pods" this directory contains 3 yaml files pod.yaml , pod2.yaml and service.yaml which will be added as a key value pair .where filename as a key and yaml contenet as a value
+oc create secret generic message-secrets --from-literal MESSAGE="SECRET MESSAGE"------------------------------- will create a secrets just like the config maps ,but will save the value of message as Base 64 encoded.
+oc set env dc/hello-world --from secret/message-secrets ---------------------------------------------------------- aplying the secrete message to env variable to a DC
+oc import-image --confirm quay.io/practicalopenshift/hello-world  ------------------------------------------------ just like oc new-app oc import-image will helpin creating imagestreamfrom the image provided in command without creating any BC , DC , service or route 
+oc new-app meet14764-stage/hello-world --as-deployment-config ---------------------------------------------------- to create a deployment config using the image imported to the imagestream
+oc tag quay.io/practicalopenshift/hello-world:update-message hello-world:update-message--------------------------- command to create a imagestreamtag for an imagestream.
+syntax : oc tag <original><destination> Command will create a new tag for the imagestream with update-message name .
+oc new-build https://gitlab.com/practical-openshift/hello-world.git ---------------------------------------------- command to buld a BC using the docker file in case of git url 
+oc start-build bc/hello-world  ----------------------------------------------------------------------------------- this will trigger the build config  to create a build which will create an image or in open shift language image stream .
+oc cancel-build bc/hello-world ----------------------------------------------------------------------------------- to cancel the build 
+
+----For webhooks -------------
+oc get -o yaml bc/hello-world ------------------------------------------------------------------------------------ copy the secret under trigger tag ----> Generic 
+oc describe bc/hello-world --------------------------------------------------------------------------------------- copy the generic url from the describe output.
+Mention that in you git repo ----> settings -----> webhook------> add
+----For webhooks -------------
+
+
+
+

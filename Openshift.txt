@@ -406,6 +406,7 @@ quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e3
 -------------------------------------------------------SECRETS ----------------------------------------
 - create secrets  generic or opaque secrets   ------ its totalyy similar to configmaps but the data stored as base64 encoded 
 
+below command is used to create generic secrets
 	oc create secret generic message-secrets --from-literal MESSAGE="SECRET MESSAGE"
 	oc get secrets
 	oc get -o yaml secrets/message-secrets
@@ -441,7 +442,7 @@ Imagestreamd 'and imagestreamtag are similar to what we studied as images and im
 	
  Pushing the private image to quay.io	
 	# Remote Tag syntax
-	<host name>/<your username>/<image name>
+	<host name>/<your username or Repository>/<image name(:tag)>
 	
 	# Load environment variables from credentials.env
 	source credentials.env
