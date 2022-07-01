@@ -42,9 +42,15 @@ oc get rc  :--------------------------------------------------------------------
 oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------------------------------- to export the yaml to a file for build config 
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
 oc get -o yaml svc/hello-world >> svc.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
+oc get -o yaml route/hello-world >> route.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
 oc new-app https://github.com/harmeet2401/MyApi.git --as-deployment-config--------------------------------- to create DC for my app 
 oc rollout latest dc/hello-world   :-------------------------------------------------------------------------- this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
 oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
 oc expose --port 8080 pod/hello-world-pod -------------------------------------------------------------------- this will expose a pod and create a service 
 oc expose svc/hello-world------------------------------------------------------------------------------------- this will expose the service and create a route 				
 env ---------------------------------------------------------------------------------------------------------- show all env inside pod terminal 
+oc explain configmaps ---------------------------------------------------------------------------------------- to get the inbuild OCP documentation for configmaps.
+oc create configmap message-map --from-literal MESSAGE="HELLO FROM CONFIGMAPS" ------------------------------- to create a config maps
+oc get configmaps--------------------------------------------------------------------------------------------- to get the configmaps
+oc get -o yaml cm/message-map--------------------------------------------------------------------------------- get the yaml forconfig maps 
+oc set env dc/demo-app  --from cm/message-map ---------------------------------------------------------------- to apply the config map to a DC which will start using the MESSAGE key and its value 

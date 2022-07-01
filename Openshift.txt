@@ -304,6 +304,7 @@ Steps :
 		oc get -o yaml dc/demo-app
 	above get -o yaml commands are to get the yaml representation of those in a file 
 
+	Services uses label selectors under selector.app to route the traffic to backedn pool .
 
 quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e37e981b6f84173f2f452854d81d1b7e
 
@@ -312,7 +313,7 @@ quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e3
 
 
 -------------------------------------------------------CONFIG MAPS ----------------------------------------
-
+- ConfigMap holds configuration data for pods to consume.
 - Config maps are used in case of we are deploying the apps in different regions dev , stage , productin etc 
 - These configs maps are used by the pods. 1MB limit.
 - oc explain configmaps 
@@ -324,7 +325,8 @@ quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e3
 		oc get -o yaml cm/message-map
 		
 	- use the config map we created in above steps.		: command to apply the map variable to the demp-app using which is MESSAGE
-		oc set env dc/demo-app  --from cm/message-map 
+		oc set env dc/demo-app  --from cm/message-map
+		oc set env dc/hello-world  --from cm/message-map		
 		
 	- create a config map using a file 
 		echo "Hello from new config map " >> MESSAGE
@@ -336,7 +338,7 @@ quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e3
 				---------
 				apiVersion: v1
 				data:
-				MESSAGE: "\"Hello from new config map \" \r\n"
+				MESSAGE: "\"Hello from new config map \" \r\n"        ---------------> this is important . rest of the values in configmaps are just metadata
 				kind: ConfigMap
 				metadata:
 				creationTimestamp: "2021-12-16T10:42:36Z"
