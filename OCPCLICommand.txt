@@ -53,4 +53,7 @@ oc explain configmaps ----------------------------------------------------------
 oc create configmap message-map --from-literal MESSAGE="HELLO FROM CONFIGMAPS" ------------------------------- to create a config maps
 oc get configmaps--------------------------------------------------------------------------------------------- to get the configmaps
 oc get -o yaml cm/message-map--------------------------------------------------------------------------------- get the yaml forconfig maps 
-oc set env dc/demo-app  --from cm/message-map ---------------------------------------------------------------- to apply the config map to a DC which will start using the MESSAGE key and its value 
+oc set env dc/hello-world  --from cm/message-map -------------------------------------------------------------- to apply the config map to a DC which will start using the MESSAGE key and its value 
+oc create configmap file-map --from-file=MESSAGE.txt ---------------------------------------------------------- pods is the folder that contains the files
+oc create configmap file-map-2 --from-file=MESSAGE=MESSAGE.txt  ----------------------------------------------- this will update the key value to only MESSAGE
+oc create configmap pod-example --from-file pods -------------------------------------------------------------- this will create config maps using directory name "pods" this directory contains 3 yaml files pod.yaml , pod2.yaml and service.yaml which will be added as a key value pair .where filename as a key and yaml contenet as a value

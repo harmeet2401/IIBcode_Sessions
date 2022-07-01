@@ -347,13 +347,58 @@ quay.io/practicalopenshift/hello-world@sha256:2311b7a279608de9547454d1548e2de7e3
 				resourceVersion: "581158858"
 				uid: 3033e676-9733-46d0-b6cd-caa6f27d978d
 				---------
-		oc set env dc/demo-app --from file-map		
-		
+			oc set env dc/hello-world --from file-map		
+			oc create configmap file-map --from-file=MESSAGE.txt -----------> pods is the folder that contains the files
+			
+			oc get -o yaml cm/file-map 
+			apiVersion: v1
+				data:
+					MESSAGE.txt: "\"hello from config map file \" \r\n" --------> here the name of the key will not match the key used in hello-world app.
+					kind: ConfigMap
+					metadata:
+					creationTimestamp: "2022-07-01T10:29:16Z"
+					name: file-map
+					namespace: meet14764-dev
+					resourceVersion: "1455888886"
+					uid: d7df1703-f3d9-44d2-84e5-e52a1bbc0c14
+					
+			oc create configmap file-map-2 --from-file=MESSAGE=MESSAGE.txt  ---------> this will update the key value to only MESSAGE		
+			data:
+				MESSAGE: "\"hello from config map file \" \r\n"
+				kind: ConfigMap
+				metadata:
+				creationTimestamp: "2022-07-01T10:53:38Z"
+				name: file-map-2
+				namespace: meet14764-dev
+				resourceVersion: "1455942379"
+				uid: dbf5af7e-83a4-477f-b0fd-44c99309dbea
+			oc set env dc/hello-world --from file-map-2	
+			
 	- create a config map using all files in a directory 
-		oc create configmap pods-example --from-file pods -----------> pods is the folder that contains the files
-		oc get -o yaml cm/pods-example
+		oc create configmap pod-example --from-file pods -------------------------------> this will create config maps using directory
 		
-				
+			apiVersion: v1
+				data:
+				pod.yaml: "apiVersion: v1\r\nkind: Pod\r\nmetadata:\r\n  name: hello-world-pod\r\n
+					\ labels:\r\n    app: hello-world-pod\r\nspec:\r\n  containers:\r\n  - env:\r\n
+					\   - name: MESSAGE\r\n      value: Hi! I'm an environment variable\r\n    image:
+					quay.io/practicalopenshift/hello-world\r\n    imagePullPolicy: Always\r\n    name:
+					hello-world-override\r\n    resources: {}\r\n"
+				pod2.yaml: "apiVersion: v1\r\nkind: Pod\r\nmetadata:\r\n  name: hello-world-pod-2\r\n
+					\ labels:\r\n    app: hello-world-pod-2\r\nspec:\r\n  containers:\r\n  - env:\r\n
+					\   - name: MESSAGE\r\n      value: Hi! I'm an environment variable in pod 2\r\n
+					\   image: quay.io/practicalopenshift/hello-world\r\n    imagePullPolicy: Always\r\n
+					\   name: hello-world-override\r\n    resources: {}\r\n"
+				service.yaml: "apiVersion: v1\r\nkind: Service\r\nmetadata:\r\n  name: hello-world-pod-service\r\nspec:\r\n
+					\ selector:\r\n    app: hello-world-pod\r\n  ports:\r\n    - protocol: TCP\r\n
+					\     port: 80\r\n      targetPort: 8080\r\n"
+				kind: ConfigMap
+				metadata:
+				creationTimestamp: "2022-07-01T11:03:45Z"
+				name: pod-example
+				namespace: meet14764-dev
+				resourceVersion: "1455964920"
+				uid: 5177308f-b22a-4913-ae66-07d7137962c3
 				
 -------------------------------------------------------CONFIG MAPS ----------------------------------------
 
