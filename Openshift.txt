@@ -640,7 +640,7 @@ can use the existing builder images
 			wowwww there was no need of dockerfile . It took advantage of S2I ruby assemble scripts 
 		
 		
-		Q .how this worked , how ocp detects to use ruby assemble script for above new-app holding ruby code. ?
+		Q .how this worked , how ocp Auto detects to use ruby assemble script for above new-app holding ruby code. ?
 		
 		- Its worked like this using S2I Auto-detection
 			
@@ -657,7 +657,15 @@ can use the existing builder images
 		
 		- In docker strategy it will run the docker file as per the locs writteren 
 		- IN source code strategy ocp will check for the specfic files example in case of java it will look for pom.xml and in case of ruby it found config.ru. so it took ruby assemblescript in first place to execute.
+	
 		
+		The autodetection happens when ocp detects the presenc of below files for below projects 
+			1. ruby        ----------------------- Rakefile , Gemfile , config.ru  
+			2. java        ----------------------- pom.xml
+			3. node        ----------------------- app.json , package.json 
+			4. PHP 		   ----------------------- index.php , composer.json 
+			5. Python      ----------------------- requirement.txt , setup .py 
+			6. Perl        ----------------------- index.pl , cpanfile
 		
 		Case 2 : How to explicitly tell the ocp its a Ruby image or java , or python or .net or nodej
 		
@@ -666,11 +674,11 @@ can use the existing builder images
 				oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config  --- > used python keyword with ~ tilda this fails for a ruby project as usual 
 				
 				
-	*****NOTE******	we can customize the assemble scripts in project folder .s2i/bin . if a script is present there then its our and we are overriding it  , if its empty then ocp will call the defaul assemble script for it .		
+	*****NOTE******	we can customize the assemble scripts in project folder .s2i/bin . if a script is present there then its our and we are overriding it  , if its empty then ocp will call the default assemble script for it .		
 	
 	
 	
-		Case 3 : Override the assemble scripts. We can avoid wrting a dockerfile as we have assemble scripts.
+		Case 3 : Override the assemble scripts. We can avoid wrting a dockerfile as we have assemble scripts. This is used only in case we don't want to write any Dockerfile and become more profficient in writing assemblescripts 
 			1. While writting our own assemble always call the default script .
 			2. we need to create .s2i/bin folder in our project to set the override.
 			
@@ -687,6 +695,7 @@ can use the existing builder images
 			3. oc new-app https://gitlab.com/practical-openshift/labs.git#add-s2i-overrides --context-dir s2i/ruby --as-deployment-config
 		
 			
+		NOte : these assemble scripts in .s2i/bin is similar to Dockerfile . In both build scripts for the building the image we can write echo statements also .	
 ------------------------------------S2I (source to image ) scripts --------------------------
 
 ------------------------------------volumes --------------------------
