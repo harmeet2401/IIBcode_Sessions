@@ -545,7 +545,7 @@ Client user ------Pushed code to ------> Git hub ------sends HTTP request --|---
 		
 	IMPORTANT ****** In Minishift  , in build config , we can direclty add the webhook links for gitlab , github , or bitbucket . after adding the webhook got to you github settings or gitlab setting and in integration tab enter the webhook url and check the push event option and add webhook in it . Then test it .	
 		
-	Post commits hook : means pushing the image build, post hook triger the builds created the image and runs the test.	
+2. Post commits hook : means pushing the image build, post hook triger the builds created the image and runs the test.	
 		oc new-build https://gitlab.com/harmeet2401/hello-world.git
 		
 		# Set a post-commit hook
@@ -567,7 +567,7 @@ Client user ------Pushed code to ------> Git hub ------sends HTTP request --|---
 		# Check the events to see if it ran
 		oc get events
 		
-		# Remove the build hook
+		# Remove the build hook 
 		oc set build-hook bc/hello-world \
 		--post-commit \
 		--remove
@@ -605,12 +605,27 @@ oc new-build https://gitlab.com/practical-openshift/labs.git  --context-dir hell
 -------------------------------------------------------BUILD FROM A BRANCH subfolder   ----------------------------------------
 
 
+---------------------------------------------------Post build hook----------------------------------------------------------------
+
+bC created -----> build starts ----> build runs -----> build completes ---------> post build hooks ----------> pushed image to IS
+
+How to configure post commit build hook > 
+steps : 
+	1. first create a bc : oc new-build gitrepolnk 
+	2. second : run command : oc set build-hook bc/hello-world --post-commit --script="echo hello from post build hook"
+							  oc set build-hook bc/hello-world --post-commit --script="exit 1"
+							  oc set build-hook bc/hello-world --post-commit --remove
+	3. third : oc start-build bc/hello-world  : it will show you the logs in which just before pushing the image to IS it will print the echo command line 
+
+
+---------------------------------------------------Post build hook----------------------------------------------------------------
+
 
 ------------------------------------S2I (source to image ) scripts --------------------------
 There are two scripts that openshift use to convert the source code to a rnnable image and it will remove the need to create a dockerfile.
 
 Scripts : 
-Assemble : used to buld image 
+Assemble : used to build image 
 RUN  : used to run cmd instructions 
 
 provides openshift advantages
