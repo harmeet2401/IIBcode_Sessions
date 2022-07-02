@@ -35,7 +35,11 @@ oc get is             ----------------------------------------------------------
 oc delete svc/hello-world ------------------------------------------------------- dleete the service
 oc delete dc/hello-world  ------------------------------------------------------- delete deployment config.
 oc delete is/hello-world  ------------------------------------------------------- delete image stream.
-oc describe dc/hello-world ------------------------------------------------------ describe the dc with label 
+oc describe dc/hello-world ------------------------------------------------------ describe the dc with label will give you description of the props it has 
+oc describe bc/hello-world ------------------------------------------------------ describe the bc with label will give you description of the props it has 
+oc describe svc/hello-world ------------------------------------------------------ describe the svc with label will give you description of the props it has 
+oc describe route/hello-world ------------------------------------------------------ describe the ruote with label will give you description of the props it has 
+oc describe pod/hello-world ------------------------------------------------------ describe the pods with label will give you description of the props it has 
 oc delete all -l app=hello-world ------------------------------------------------ then use -l and mention the label got from describe command and delete the resources.
 oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deployment-config ---------------- this will create a deployment config with label name as demo-app		
 oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config----------------- Similar to above command just we are giving the git repository url to create a DC using the Dockerfile present in the git repository.
@@ -80,9 +84,35 @@ oc new-build https://gitlab.com/practical-openshift/hello-world.git#update-messa
 oc new-build https://gitlab.com/practical-openshift/labs.git  --context-dir hello-world -------------------------- hello-world is the folder in it .
 oc set build-hook bc/hello-world --post-commit --script="echo hello from post build hook"------------------------- it will run a script in this case a echo command to print something in build config to check if the build is running or not .
 oc new-app ruby~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used ruby keyword with ~ tilda to specifically tell the ocp to use the ruby S2I scripts to build the ruby app.
-oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
-oc set volumes dc/myapi --add --type pv1 --mount-path /data -------------------------------------------------------- to mount the empty volume to the Dc
+oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
+oc set volumes dc/myapi --add --type emptyDir --mount-path /empty-dir-demo ----------------------------------------- to mount the empty volume to the Dc. this is not persistent it will be destroyed once pod died.
 oc set volumes dc/myapi --add --type persistentVolumeClaim --claim-name pv1 --mount-path /data --------------------- to mount the persistentVolumeClaim to the DC
+oc create configmap cm-volumes --from-literal file.txt=file="this config is for volumes"  -------------------------- file.txt is the key you can mention anytin .
+oc set volumes dc/myapi --add --configmap-name cm-volumes --mount-path /cm-dir         ----------------------------- to mount the configmap as a volume in DC
+oc set triggers dc/hello-world ------------------------------------------------------------------------------------- to get the trigger list 
+oc set triggers dc/hello-world --remove --from-config -------------------------------------------------------------- to remove the triggers . this will make the Auto flag as false.
+oc set triggers dc/hello-world  --from-config ---------------------------------------------------------------------- to read the config change trigger.
+oc set triggers dc/hello-world --remove --from-image hello-world:latest -------------------------------------------- this will remove the trigger for image change. Then no deployment will be rolled when an image is changed 
+oc set triggers dc/hello-world  --from-image hello-world:latest  -c hello-world ------------------------------------ this will add the image change trigger.
+oc rollout latest dc/hello-world------------------------------------------------------------------------------------ this will rollout a DC with strategy to bring down the pod one ata time and bring other ups.
+oc set deployment-hook dc/myapi --pre -c myapi -- /bin/echo Hello from pre-deploy hook----------------------------- Its for pre deploymet hook 
+oc set deployment-hook dc/myapi --mid -c myapi -- /bin/echo Hello from mid-deploy hook------------------ Its for mid deploymet hook .for this first set the DC strategy to recreate bcse 
+this mid dep hook can be set to recreate strategy 
+oc edit dc/myapi --------------------------------------------------------------------------------------------- its used to edit the DC and we can change the strategy 
+oc rollout latest dc/myapi  
+oc set probe dc/hello-world --liveness --open-tcp=8080   :-------------------------------------------------- tcp-socket :8080 delay=0s timeout=1s period=10s #success=1 #failure=3
+oc set probe dc/hello-world --liveness --open-tcp=8081 --------------------------------------------------- this will bring container in crashimageloopback bcse of wrong set up pg port to the liveness probe .
+oc scale dc/hello-world --replicas=3---------------------------------------------------------------------- to scale up 
+oc autoscale dc/hello-world --min 1 --max 10 --cpu-percent=80--------------------------------------------- for horizontal scaling setup 
+oc get hpa  --------------------------------------------------------------------------------------------- will show you the targets 0%80% minpods and maxpods ,replicas and AGE
+oc delete hpa ------------------------------------------------------------------------------------------- will delete the HPA
+oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc 
+oc get template ----------------------------------------------------------------------------------------- to get the template created 
+oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
+oc create -f process.yaml  ------------------------------------------------------------------------------ to create an app using the template file without uploading it to ocp
+oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------------------------------- we are passing parameter value for variable/paramter named MESSAGE
+
+
 
 
 

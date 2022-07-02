@@ -704,11 +704,12 @@ Filesystem mounted on pods
 	: harddisk 
 	: its portable 
 	: we can attach and detach the volumes
-	
+	oc set volumes dc/myapi --add --type persistentVolumeClaim --claim-name pv1 --mount-path /data --------------------- to mount the persistentVolumeClaim to the DC
 types :
 		Empty dir volumes : not persistence and is removed when pods deletes. not used mostly . But it can retain the dtaa in emptydir when pod restart
 		
-		1. Steps : 
+		1. EmptyDir as an attached volume : This is the one type of pod event that emptyDir can handle that it will retain the data in emptydir when pod restart 
+			Steps : 
 			oc new-app quay.io/practicalopenshift/hello-world  --as-deployment-config 
 			oc set volumes dc/hello-world --add --type emptyDir --mount-path /dir-demo-hello-world
 			
@@ -729,7 +730,7 @@ types :
 				ls -ltr 
 
 		2. Configmaps as a file in volumes
-			oc create configmap cm-volumes --from-literal file.txt="this config is for volumes"  ------> file.txt is the key you can mention anytin .
+			oc create configmap cm-volumes --from-literal file.txt=file="this config is for volumes"  ------> file.txt is the key you can mention anytin .
 			oc set volumes dc/hello-world --add --configmap-name cm-volumes --mount-path /cm-dir
 			oc  rsh podname 
 				 &:/ check for the cm-dir folder existing in the pod or not ?
@@ -841,6 +842,9 @@ two strategy for this course :
 	
 	Recreate : start a new one and bring all old pods down . This increase the downtime of the pods.
 	
+	Custom strategy : 
+		We sply the image we want to rollout.
+	
  1. Configure pre-deployemnets hook : 
 		# Watch the pods
 		oc get pods --watch
@@ -895,7 +899,7 @@ This will allow auto check of health and restart if down
 		time betweek replies .
 		
 	- configure the liveness probe  : for restaring pod fall into failure states.
-		. oc set probe dc/hello-world --liveness --open-tcp=8080   :     Liveness:           tcp-socket :8080 delay=0s timeout=1s period=10s #success=1 #failure=3
+		. oc set probe dc/hello-world --liveness --open-tcp=8080   :     Liveness:tcp-socket :8080 delay=0s timeout=1s period=10s #success=1 #failure=3
 		
 	- Set the probe incorrectly use wrong port , as our hello-world is listens on 8080 . we will use 8081 , it will fail and restart the pods.	
 		. oc set probe dc/hello-world --liveness --open-tcp=8081
@@ -904,7 +908,26 @@ This will allow auto check of health and restart if down
 
 
 -------------------------------Scaling  ------------------------------------
+
+
+			Resources (Ram etc )/\
+								|
+								|
+								|
+                                |
+								|
+                                |
+								|
+								------------------------------------>
+									Processes (number of instance of app)
+
+Vertical scallling  :      When we increase the ram and resource for a single instances we are scaling vertically 
+
+Horizontal scaling  : when we increase the no of instances we are scaling horizontal
+
 replication controller : 1 by default 
+	
+	
 	
 	1. Manually command level scaing 
 		- oc new-app quay.io/practicalopenshift/hello-world  --as-deployment-config
@@ -941,12 +964,13 @@ Three part sof template ::
 		----------------------	
 		  Object resource lst 
 		----------------------	
-			Parameters
+			Parameters   -------------- > these are like the variables we can use the value of these anywhere in template file like ${variablename}
 		----------------------
 
 		How to create : 
-			oc create -f hello-world-template.yaml  : upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc 
-			oc new-app hello-world  : this will create the pods similar .
+			oc create -f template/hello-world-template.yaml  : upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc 
+			oc get template  : to get the template created.
+			oc new-app hello-world  : this will create the pods similar . hello-world is the template name 
 			oc new-app hello-world -p MESSAGE="HELLO FROM OTHER PARMS"
 			
 		Processing template : Oc new-app command is not the only way to use template .
