@@ -973,12 +973,13 @@ Three part sof template ::
 			oc new-app hello-world  : this will create the pods similar . hello-world is the template name 
 			oc new-app hello-world -p MESSAGE="HELLO FROM OTHER PARMS"
 			
-		Processing template : Oc new-app command is not the only way to use template .
+		Processing template : Oc new-app command is not the only way to use template . use to chck if our template is ok or not 
 			oc process hello-world  : this will show the template as a json  
 			oc process hello-world -o yaml >> proces.yaml 
 			oc create -f process.yaml 
 			
 		Processing a file presnt locally without uploading the file to ocp server.	
+			oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
 			oc process hello-world -o yaml -f hello-world-template.yaml
 			oc new-app hello-world -f hello-world-template.yaml -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "
 		
@@ -1019,6 +1020,11 @@ Three part sof template ::
  - once copying is done , create a new project in ocp , 
 	login to that project 
 		use command : oc create -f template.yaml -n namespacename
+		
+		
+		oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
+which need some changes to the yaml file exported out 
+
 
 
 ---------------------------------Custom template ------------------------------------------------

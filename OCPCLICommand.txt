@@ -111,6 +111,13 @@ oc get template ----------------------------------------------------------------
 oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
 oc create -f process.yaml  ------------------------------------------------------------------------------ to create an app using the template file without uploading it to ocp
 oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------------------------------- we are passing parameter value for variable/paramter named MESSAGE
+oc process hello-world  : -------------------------------------------------------------------------------this will show the template as a json  
+Processing a file presnt locally without uploading the file to ocp server.	
+	oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
+	
+oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
+which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
+		
 
 
 
