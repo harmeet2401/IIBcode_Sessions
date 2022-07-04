@@ -25,6 +25,15 @@ Udemy link :
  
  3) https://rhtapps.redhat.com/promo/course/rh024?segment=0 :  in progress
  
+ 4) https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000  : 3 hours training 
+ 
+ 5) https://ibm.seismic.com/app?ContentId=f8d25c6e-5a6e-4db4-b542-dad3e5d902f5#/doccenter/5477419a-9474-4c51-94af-b442e9169fab/doc/%252Fdd98c5a3df-6b7c-1d77-6f07-d12e63954c78%252FdfOTRiYmU4NTQtNWY4NC03Y2QyLWZjYWUtOGIxYmFmZjkyZThk%252CPT0%253D%252CUXVpY2sgcmVmZXJlbmNlIGd1aWRl%252Flfcfb60952-87d8-4c66-86da-6883494dff93/grid/
+ 
+ 6) : https://yourlearning.ibm.com/activity/RHO-42415994
+ 
+ 7) https://ibm.ent.box.com/s/qgrdbc3x7rfd4c5v9yxcbwyq82u2znf2 : this doc is on IBM box which contains the remove exam setup guide and some more link same as above 
+ 
+ 
  Exam link : https://www.redhat.com/en/services/certification/red-hat-certified-specialist-in-containers-and-kubernetes?info=exam
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,10 +334,21 @@ We can do that by :
 			
 				
 	
-		
+------------------------------------------------------------------------------------------------
+Practical excercises : 
+
+1. To create JBOSS server 
+-ADD command to add a file to a remote directory 
+-EXPOSE to expose port of the container we can mention multiple ports separated by space .
+-ENTRYPOINT it is used to run the container example: ENTRYPOINT $JBOSS_HOME/bin/standalone.sh -c standalone-full-ha.xml		
+-ENTRYPOINT command :  if you want to run a container with the condition that a particular command is always executed.
+-ENV command : it is used to create the Environment variable for the image.
+-CMD commands: if you want to specify default arguments and want it to be overwritten on specifying CLI arguments, use . 
+-RUN is simply used to build additional image layers over the base image.
 	 
 	
- 
+Command to run the Dockerfile to create image 
+1. sudo podman build -t jboss-app .(dot)
  
  
  
