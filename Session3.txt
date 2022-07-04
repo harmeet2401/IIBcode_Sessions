@@ -289,6 +289,7 @@ services:
       - "80:80"
 docker-compose up -d ------------------------------------------------------------- will download images run multiple containers	  
 docker-compose down  ------------------------------------------------------------- it will shutdown the service 
+docker log containerId/containername --------------------------------------------- it will helpin pulling the logs out.
 docker run -it --name container1 -d ubuntu --------------------------------------- set the name of the container for linking the containers
 docker run -it --name container2 --link container1 -d ubuntu---------------------- linked with container1 on network
 docker exec -it container2-id bash ----------------------------------------------- do cat etc/hosts/ , you will find new entry of container1's IP
