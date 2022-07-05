@@ -349,6 +349,41 @@ Practical excercises :
 	
 Command to run the Dockerfile to create image 
 1. sudo podman build -t jboss-app .(dot)
+2. sudo podman images : ---- to see the images built 
+
+Q : run a container using above images for jboss and name the container as jboss-eap-app and expose the port of the container 8080, 9990 and 9999 to the host port 8080, 9990
+and 9999.
+
+Ans : command : sudo podman run -d --name jboss-eap-app -p 8080:8080 -p 9990:9990 -p 9999:9999 jboss-app
  
+command : sudo podman ps : 
+CONTAINER ID  IMAGE                       COMMAND               CREATED        STATUS            PORTS                                                                   NAMES
+167648de3a3d  localhost/jboss-app:latest  /bin/sh -c /bin/b...  7 seconds ago  Up 7 seconds ago  0.0.0.0:8080->8080/tcp, 0.0.0.0:9990->9990/tcp, 0.0.0.0:9999->9999/tcp  jboss-eap-app
+
+command : sudo podman ps -a : this will show you all the containers (running and stopped state )
  
- 
+Q. Get the last 10 lines of logs for the running container jboss-eap-app. Then stop the container and remoce the container .
+
+Ans : command : sudo podman logs --tail=10 jboss-eap-app
+	  command : sudo podman stop jboss-eap-app
+	  command : sudo podman rm jboss-eap-app
+	  
+Q. Add a tag to the image in local tag : 6.4.v1 and then save the image with new tag to the tar file jboss-eap.6.4.v1.tar and then push it to the docker registry.
+
+Ans : 
+
+1. sudo podman images 	  
+REPOSITORY                       TAG         IMAGE ID      CREATED      SIZE
+localhost/jboss-app              latest      5760136e5dae  7 hours ago  1.16 GB
+registry.access.redhat.com/ubi8  latest      2fd9e1478809  2 weeks ago  225 MB
+
+2. sudo podman tag localhost/jboss-app localhost/jboss-app:6.4.v1
+
+3. sudo podman save -o jboss-eap.6.4.v1.tar jboss-app:6.4.v1
+
+4. repository name in docker hub : meet14764/podmanjboss:tagname
+
+command to push  : 
+	- sudo podman login docker.io  
+	- sudo podman tag localhost/jboss-app:6.4.v1 docker.io/meet14764/jboss-eap:6.4.v1
+	- sudo podman push docker.io/meet14764/jboss-eap:6.4.v1
