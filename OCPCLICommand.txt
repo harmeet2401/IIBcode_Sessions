@@ -45,6 +45,7 @@ oc new-app quay.io/practicalopenshift/hello-world --name demo-app --as-deploymen
 oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deployment-config----------------- Similar to above command just we are giving the git repository url to create a DC using the Dockerfile present in the git repository.
 oc new-app meet14764-dev/hello-world --as-deployment-config-------------------------------------------- Another way to create DC using image from the image stream imported
 oc logs -f  bc/hello-world  :---------------------------------------------------------------------------- to get the logs of bc : which will sho you the steps took to buld the image by cloning.
+oc logs -f  pod/hello-world  :---------------------------------------------------------------------------- to get the logs of pods : which will sho you the steps took to buld the image by cloning.
 oc get rc  :--------------------------------------------------------------------------------------------- get the replication controller.
 oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------------------------------- to export the yaml to a file for build config 
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
@@ -55,7 +56,9 @@ oc rollout latest dc/hello-world   :--------------------------------------------
 oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
 oc expose --port 8080 pod/hello-world-pod -------------------------------------------------------------------- this will expose a pod and create a service 
 oc expose svc/hello-world------------------------------------------------------------------------------------- this will expose the service and create a route 				
+oc expose svc/hello-world --hostname=mysqltestapptesturl.com ------------------------------------------------------------------------------------- this will expose the service and create a route 	and also assign a hostname of our choice		
 env ---------------------------------------------------------------------------------------------------------- show all env inside pod terminal 
+oc cp mytestfile.txt podname:/temp/--------------------------------------------------------------------------- this will copy the mytestfile.txt from host machine to the runing pod os the application . just like uploading a file to a pod.
 oc explain configmaps ---------------------------------------------------------------------------------------- to get the inbuild OCP documentation for configmaps.
 oc create configmap message-map --from-literal MESSAGE="HELLO FROM CONFIGMAPS" ------------------------------- to create a config maps
 oc get configmaps--------------------------------------------------------------------------------------------- to get the configmaps
@@ -106,21 +109,34 @@ oc scale dc/hello-world --replicas=3--------------------------------------------
 oc autoscale dc/hello-world --min 1 --max 10 --cpu-percent=80--------------------------------------------- for horizontal scaling setup 
 oc get hpa  --------------------------------------------------------------------------------------------- will show you the targets 0%80% minpods and maxpods ,replicas and AGE
 oc delete hpa ------------------------------------------------------------------------------------------- will delete the HPA
-oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc 
+oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc . this command creats the template and upload it to OCP
 oc get template ----------------------------------------------------------------------------------------- to get the template created 
 oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
 oc create -f process.yaml  ------------------------------------------------------------------------------ to create an app using the template file without uploading it to ocp
-oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------------------------------- we are passing parameter value for variable/paramter named MESSAGE
-oc process hello-world  : -------------------------------------------------------------------------------this will show the template as a json  
+oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------------------------------- we are passing parameter value for variable/paramter named MESSAGE . hello-world is the template name 
+oc process hello-world  : -------------------------------------------------------------------------------this will show the template as a json  ,hello-world is the template name 
 Processing a file presnt locally without uploading the file to ocp server.	
-	oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
+oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
+oc create -f process.yaml ------------------------------------------------------------------------------- to create and app using a yaml file on OCP 
 	
 oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
 which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
 		
+oc new-app --docker-image=registry.access.redhat.com/rhscl/mysql-57-rhel7 --name=mysql-app -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books -e MSYSQL_ROOT_PASSWORD=password -l app=mydbapp   ---------------------------------------------------------- to run a musql db app 
+
+oc new-app --docker-image=registry.access.redhat.com/rhscl/mysql-57-rhel7 --name=mysql-app --as-deployment-config -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books -e MSYSQL_ROOT_PASSWORD=password -l app=mydbapp
+
+oc get all ---------------------------------------------------------------------------------------------- will show all the resources created 
+oc get all -o wide --------------------------------------------------------------------------------------- this will shows the selectors as well .
+oc rsh podname ------------------------------------------------------------------------------------------- to login in or go in shell mode into the pod 
+	$:// mysql --version 
+	$:// mysql -u user1 -p 
+		enter the pass as password 
+		mysql> SELECT VERSION ();
+		
+		VERSION : 5.7.12
 
 
-
-
-
-
+"oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a yamls file 
+oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- creats a template 
+"oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a tempate created by above command  

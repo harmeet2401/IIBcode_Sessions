@@ -387,3 +387,73 @@ command to push  :
 	- sudo podman login docker.io  
 	- sudo podman tag localhost/jboss-app:6.4.v1 docker.io/meet14764/jboss-eap:6.4.v1
 	- sudo podman push docker.io/meet14764/jboss-eap:6.4.v1
+	
+Q. Run mysql container using below image : registry.access.redhat.com/rhscl/mysql-57-rhel7:latest
+ Name of the container  : mydb 
+ Expose container port 3306 to port 30306 on local host 
+ Pass container parameters : 
+   MSYSQL_ROOT_PASSWORD=password 
+   MYSQL_USER=user1
+   MYSQL_PASSWORD=password 
+   MYSQL_DATABASE=books
+   
+ Ans : Need access to rhel image registery to pull the image on your local .
+
+Command to remov elocal images  : [harmeet2401@instance-1 registries.d]$  sudo podman run --rm --name test registry.access.redhat.com/ubi8/ubi:8.0-199 date
+
+Created a new account : meet14764.io
+				password : Gogi@12345
+command 1 : sudo podman login registry.access.redhat.com
+	enter username and password
+command 2 : sudo podman run -d --name mydb -p 3306:30306  -e  MSYSQL_ROOT_PASSWORD=password -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books registry.access.redhat.com/rhscl/mysql-57-rhel7   ---------> this image is deprecated 
+
+use this command image : podman run -d --name mydb -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books -e MSYSQL_ROOT_PASSWORD=password -p 30306:3306 rhel8/mysql-80
+
+Note :  -d is for backgroud running of pod 
+		-e is for sending container parameters
+		-p to expose and map the Localhost port  : Container port 
+
+command 3: sudo podman exec -it mydb /bin/bash
+			mysql -u user1 -p password
+			login successfull 
+			SELECT VERSION ();
+			
+				version : 5.7.24 
+				
+Q CREATE THE SIMILAR APP ABOVE ON OCP SAND BOX USING OC COMMAND ?
+ANS 
+oc new-app --docker-image=registry.access.redhat.com/rhscl/mysql-57-rhel7 --name=mysql-app -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books -e MSYSQL_ROOT_PASSWORD=password -l app=mydbapp   ---------------------------------------------------------- to run a musql db app 
+
+oc new-app --docker-image=registry.access.redhat.com/rhscl/mysql-57-rhel7 --name=mysql-app --as-deployment-config -e MYSQL_USER=user1 -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=books -e MSYSQL_ROOT_PASSWORD=password -l app=mydbapp
+
+oc get all ---------------------------------------------------------------------------------------------- will show all the resources created 
+oc get all -o wide --------------------------------------------------------------------------------------- this will shows the selectors as well .
+oc rsh podname ------------------------------------------------------------------------------------------- to login in or go in shell mode into the pod 
+	$:// mysql --version 
+	$:// mysql -u user1 -p 
+		enter the pass as password 
+		mysql> SELECT VERSION ();
+		
+		VERSION : 5.7.12
+
+Q. Create mysql application usinf mysql.json or mysql.yaml 
+	variables to set 
+		MYSQL_USER=user1
+		MYSQL_PASSWORD=password
+		MYSQL_DATABASE=books
+		MSYSQL_ROOT_PASSWORD=password
+		
+		
+Ans		"oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a file 
+
+
+Q. Create mysql application usinf mysql.json or mysql.yaml 
+	Use the template file created from yaml file   
+	variables to set 
+		MYSQL_USER=user1
+		MYSQL_PASSWORD=password
+		MYSQL_DATABASE=books
+		MSYSQL_ROOT_PASSWORD=password
+ANS : First create a template from the json file or yaml file 
+		oc create -f mysql.yaml  : ------------- this will create a template 
+		"oc process -f mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a file 
