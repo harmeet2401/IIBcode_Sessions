@@ -94,11 +94,21 @@ user -----------------> PersistenceVolumeClaim -------------> acquire persistent
 																			|                    |
 																			--- Disk ------------|
 																			
-3. Service layer : This layer helps in load balancing and create interconnection with in the pods in OCP cluster using the private IP addresses assign to the cluster from the cluster IP range.
+3. Service layer : This layer helps in load balancing and create interconnection with in the pods in OCP cluster using the private IP addresses assign to the cluster from the cluster IP range. provides permanent IP address to group of similar pods
 
 4. Routing layer : now we know that a service is created for the inter connections of the pods in OCP cluster . Now to expose the pods to the outer world so that it can access it from external consumer .
 
 This routing layer will provide the url which contains the hostname on which the routing service will help in route the request to the service which in turn sends the request to the correct pod as per the back end pool set .
+
+
+Container -----------------------> target Service using IP : 172.6.7.8:9999
+
+										|
+										|
+										|
+									   \ /
+									   Openshift proxied the packet to 
+
 
 5. Replica set or Replication controller :  ReplicaSet is of Kubernetes and Replication controller is of openshift. Now both of these features are available and help in maintaining the required number of pods mentioned in the replicaset .
 Replication controller : Monitors the pods activities and if it comes down or leaves , as per th replicaset it will spin up more .
@@ -120,19 +130,19 @@ Puts all operational knowledge into Kubernetes primitives.
 Administrators, shell scripts, automation software (e.g. Ansible®) now in Kubernetes pods.
 Integrates natively with Kubernetes concepts and APIs.	
 
-Operators:
+Operators: Its a piece of code running in side a container which help in maintainin the application service desired state.
 
-Are PODS with operator code that interact with Kubernetes API server
-
-Run "reconciliation loops" to check on application service
-
-Make sure user-specified state of objects is achieved
-
-Manage all deployed resources and the application
-
-Act as application-specific controllers
-
-Extend Kubernetes API with Custom Resource Definition (CRD)			
+	Are PODS with operator code that interact with Kubernetes API server
+	Run "reconciliation loops" to check on application service: run evrytime and check the app service
+	Make sure user-specified state of objects is achieved
+	Manage all deployed resources and the application
+	Act as application-specific controllers
+	Extend Kubernetes API with Custom Resource Definition (CRD)			
+	Operator framework : 	
+			Operator SDK : which help in build , compile test operator.
+			OLM (Operator Lifecycle Manager) : help install , update and manage the life cycle of operator in cluster.
+	Operator metering : 
+			Usage reporting of operators and resources with kubernetes
 
 
 						
