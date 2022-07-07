@@ -46,6 +46,7 @@ oc new-app https://gitlab.com/practical-openshift/hello-world.git --as-deploymen
 oc new-app meet14764-dev/hello-world --as-deployment-config-------------------------------------------- Another way to create DC using image from the image stream imported
 oc logs -f  bc/hello-world  :---------------------------------------------------------------------------- to get the logs of bc : which will sho you the steps took to buld the image by cloning.
 oc logs -f  pod/hello-world  :---------------------------------------------------------------------------- to get the logs of pods : which will sho you the steps took to buld the image by cloning.
+oc get pods -n projectname/namespacename ----------------------------------------------------------------- this command will get the pods running in your OCP project or namespace.
 oc get rc  :--------------------------------------------------------------------------------------------- get the replication controller.
 oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------------------------------- to export the yaml to a file for build config 
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
