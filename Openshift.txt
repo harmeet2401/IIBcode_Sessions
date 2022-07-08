@@ -143,9 +143,72 @@ Operators: Its a piece of code running in side a container which help in maintai
 			OLM (Operator Lifecycle Manager) : help install , update and manage the life cycle of operator in cluster.
 	Operator metering : 
 			Usage reporting of operators and resources with kubernetes
+Operators:
+Create, manage, and delete resources
+Implemented by operator pods
+			
 
+7. users and projects in OCP : 
+Each project has own:
 
+Objects: Pods, services, replication controllers, etc.
+
+Policies: Rules that specify which users can or cannot perform actions on objects
+
+Constraints: Quotas for objects that can be limited.
+
+Service accounts: Users that act automatically with access to project objects
+
+8. EFK stack useful for viewing logs aggregated from hosts and applications
+
+May come from multiple containers or even deleted pods
+
+Elasticsearch: Object store where all logs stored.
+
+Fluentd: Gathers logs from nodes, feeds them to Elasticsearch.
+
+Kibana: Web UI for Elasticsearch.
 						
+						
+8. Helm charts and operators : 
+	Helm Charts and Operators
+	Helm charts similar to templates
+	Collection of files that describe related set of Kubernetes resources
+	Choose from many available Helm charts.
+	Use charts with Helm operator to deploy application easily
+	
+	
+	
+9. Custome resources : 
+	Operators - Custom Resource (Application) Creation
+	Custom Resources are simple definitions of resource you want Operator to create
+	Running Operator watches for CR to be created in either:
+		- Entire OpenShift cluster.
+		- Project that Operator is running in	When CR created, operator receives event.
+	Operator then creates 	all OpenShift resources that make up application
+	
+10 Helm charts : 
+
+Two main files are there  : 
+	values.yaml
+	chart.yaml 
+	
+The value file will replace the values in the charts.yaml file and releases a deployment in openshift cluster .
+
+When Helm chart installed:
+
+Values in values file replaced in chart templates
+
+Release produced as instance of chart running in Kubernetes cluster
+
+Install same chart multiple times to create many releases
+
+Helm v3
+
+No server-side component (Tiller)
+
+Helm CLI interacts with Kubernetes APIs	
+----------------------------------------------------------------------------------------------------------------------------------------------	
 
 
 1. The openshift container platform  or OCP is some thing that runs the applications.

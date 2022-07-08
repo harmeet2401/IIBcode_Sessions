@@ -110,6 +110,7 @@ oc scale dc/hello-world --replicas=3--------------------------------------------
 oc autoscale dc/hello-world --min 1 --max 10 --cpu-percent=80--------------------------------------------- for horizontal scaling setup 
 oc get hpa  --------------------------------------------------------------------------------------------- will show you the targets 0%80% minpods and maxpods ,replicas and AGE
 oc delete hpa ------------------------------------------------------------------------------------------- will delete the HPA
+oc export all --as-template=myapi_template ------------------------------------------------------------- to  export the existing project in a template form .
 oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc . this command creats the template and upload it to OCP
 oc get template ----------------------------------------------------------------------------------------- to get the template created 
 oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
@@ -141,3 +142,5 @@ oc rsh podname -----------------------------------------------------------------
 "oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a yamls file 
 oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- creats a template 
 "oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a tempate created by above command  
+oc get quota -n meet14764-dev --------------------------------------------------------------------------------- this will give you the list  of  resource quota assigned to the project .
+oc describe quota core-object-counts -n meet14764-dev  ----------------------------------------------------------- this will give youthe list of core-objec count quota assigned to the project 
