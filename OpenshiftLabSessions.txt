@@ -73,3 +73,26 @@ j. The container running inside the pod is also mentioed in POD sections
 The Pod’s status and the OpenShift node hosting it.
 
 The information displayed in the Containers section, including the image name and container state.	
+
+k. lab 2 
+
+nodejs + postgre Db 
+
+Password for postgreSQL db : AiDRIhPhnTQd2WKs
+
+below password for admin access : 
+
+ echo $POSTGRESQL_ADMIN_PASSWORD   : 4QFEKvO424JjYhvB
+ 
+Some of te linux command : 
+Action: In the terminal shell, enter the ps -ef command.
+
+Explain: This allows you to see the processes running inside your container.
+
+Action: In the terminal shell, enter the env | grep -i postgre command.
+
+Explain: This allows you to see the environment variables, and that you can see the password shown here is the same as the one you set earlier in the demonstration.
+
+Action: In the terminal shell, enter the cat /etc/resolv.conf command.
+
+Explain: This shows parameters associated with host name resolution, such as the default search domain and IP address of the DNS servers.

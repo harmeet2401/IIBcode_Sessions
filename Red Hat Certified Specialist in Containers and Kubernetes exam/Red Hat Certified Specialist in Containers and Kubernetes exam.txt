@@ -333,6 +333,78 @@ We can do that by :
 - now go to the deployment config and under storage section add storage that you created.			
 			
 				
+18. OpenShift is Kubernetes
+
+Kubernetes "deployment" ⇐⇒ OpenShift "deployment configuration"
+
+Kubernetes "ReplicaSet" ⇐⇒ OpenShift "replication controller"
+
+
+19. Deployment Config : 
+ Features Provided by Deployment System.
+	- Deployment configuration: Template for running applications
+	- Contains version number
+	- Incremented each time new replication controller (Kubernetes ReplicaSet) created from configuration
+	- Contains cause of last deployed replication controller
+	- Triggers that drive automated deployments in response to events
+	- Strategies to transition from previous version to new version
+	- Rollbacks to previous version in case of deployment failure
+	- Either manual or automatic.
+	- Manual replication scaling and autoscaling.
+
+20. Rollbacks
+	- Deployments allow rollbacks
+	 
+	- Rollbacks revert application back to previous revision
+	 
+	- Performed via REST API, CLI, or web console
+	 
+	- Deployment configurations support automatic rollback to last successful revision of configuration
+		Triggered if latest template fails to deploy	
+		
+21. Deployment strategies :
+
+	The application deployed using the DC can have diff 
+		Availability 
+	There are readiness checks available in which the rediness checks the pods up or running if not then it will try untill it comes onlin .
+	
+22. Rolling Deploment Strategy : 
+		In this th deployment occurs in a strategy to keep the old pod up untill the new one comes up and runs fine.
+		This procss is checked by the rediness.
+		Two Deploment hooks are also there : 
+			pre-hooks			
+			post-hook
+	Rolling Deployment Strategy Process
+		Steps in rolling strategy process:
+		
+			-Execute pre life-cycle hook
+			-Scale up new deployment by one or more pods (based on maxSurge value)
+			-Wait for readiness checks to complete
+			-Scale down old deployment by one or more pods (based on maxUnavailable value)
+			-Repeat scaling until new deployment reaches desired replica count and old deployment scales to zero
+			-Execute any post life-cycle hooks
+			-When scaling down, strategy waits for pods to become ready
+			-Decides whether further scaling would affect availability
+			-If scaled-up pods never become ready, deployment times out
+			-Results in deployment failure
+			
+23. Recreate Deploment Strategy		
+	In this th deployment occurs in a strategy to bring all the pods down and ten bring new dep one pod at a tim. It holds more downtime.
+		This procss is checked by the rediness.
+		Two Deploment hooks are also there : 
+			pre-hooks
+			mide-hook
+			post-hook	
+			
+	Recreate Strategy
+		-Has basic rollout behavior
+		-Supports life-cycle hooks for injecting code into deployment process
+		-Steps in Recreate strategy deployment:
+		-Execute pre life-cycle hook
+		-Scale down previous deployment to zero
+		-mid deployment hook can also be executed .
+		-Scale up new deployment
+		-Execute post life-cycle hook		
 	
 ------------------------------------------------------------------------------------------------
 Practical excercises : 
