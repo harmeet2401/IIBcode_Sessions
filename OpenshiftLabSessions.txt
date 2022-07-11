@@ -5,3 +5,71 @@ OPENTLC Username: harmeet.singh4-ibm.com
 Temporary Password: 5d7d841e 
 Password : Narinder@667335424
 Email Address: harmeet.singh4@ibm.com
+
+Using above catalog OPENTLC platform provided by  REDHAT , we can spin up an openshift environment 4.6 and they will give us the console url to login .
+We can also spin up the VM so that we can interact with the console from it .
+
+Below information is important  for loggin purpose. :
+
+1. openshift_api_url: 'https://api.shared-na46.openshift.opentlc.com:6443', openshift_console_url: 'https://console-openshift-console.apps.shared-na46.openshift.opentlc.com',
+openshift_username: harmeet.singh4-ibm.com  ,  password : Narinder@667335424}
+
+
+2. Openshift Master Console: https://console-openshift-console.apps.shared-na46.openshift.opentlc.com
+	Openshift API for command line 'oc' client: https://api.shared-na46.openshift.opentlc.com:6443
+	
+	
+3. Shared VM credentials : 
+users:
+  lab-user: {password: TanUzA9oTg0w, ssh_command: ssh lab-user@studentvm.59r4m.example.opentlc.com}
+	
+	
+	
+a. Point out that the application resource name (nodejs-ex) is appended with indicators for the different types of resource objects as follows:
+
+D: Deployment
+
+DC: Deployment Config
+
+SS: StatefulSet
+
+DS: Daemonset
+
+b. For serverless applications, the Pods are automatically scaled down to zero when idle and scaled up depending on the channel traffic.
+
+c. These are just some of the resources associated with the Deployment.
+
+Pods are the basic units of OpenShift applications, with access to their logs.
+
+Builds were created to compile the source code and package it into images. See their status, access logs, and start a new build if needed.
+
+Services were created for your Pod, and assigned ports are listed.
+
+Routes were created to permit external access to the Pods, and the URL to access them is listed.
+
+d. Action: To add the MongoDB service to the existing application group, hold SHIFT, select the mongodb Pod and drag it to the application; the MongoDB service is added to the existing application group. Application groups can be created to group together multiple apps ina single group .
+
+e. The replication controller manages the number of Pods actually rolled out, as requested by the Deployment Config.
+
+f. Services : As we know services are the internall load balancer for the pods running the OCP cluster . For routing to happen internal to the cluster .
+	A property name "POD SELECTOR" which contains the name of the pod to which the route to happen is mentioned.
+	
+g. Similarly the route is used for external access to the pod from the internet. A propety name "Service" is mentioned in the route which helps in sending the request  package to the service and then to the pod.
+
+h. Build Config Details page opens.
+
+Point out that you can start a new build by clicking the top right Actions menu and selecting Start Build.
+
+Point out that you can see the GIT REPOSITORY where the source code of the build is stored.
+
+i. In build it contains some more details like  : the git commit and the url used to pull the code and build image for it .
+
+BUILD FROM : image-registry.openshift-image-registry.svc:5000/openshift/nodejs@sha256:1ab9834c333f4f57443e219a2fb2dcd8338bd200888b2c3cf626a047723f6616
+
+Above image is build using the Dockerfile / package.json or other build files present as per the language of source code .
+
+
+j. The container running inside the pod is also mentioed in POD sections 
+The Pod’s status and the OpenShift node hosting it.
+
+The information displayed in the Containers section, including the image name and container state.	
