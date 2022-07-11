@@ -157,3 +157,7 @@ $ oc policy add-role-to-group system:image-puller system:serviceaccounts:pipelin
 
 	h. Now check using the OPENTLC you can connect to Jenkins deployed in a pod on OCP 
 		oc get routes jenkins -n pipeline-${GUID}-dev-ex
+		
+7. Demonstrate OpenShift Pipelines Integration
+
+	a. 
