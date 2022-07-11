@@ -96,3 +96,64 @@ Explain: This allows you to see the environment variables, and that you can see 
 Action: In the terminal shell, enter the cat /etc/resolv.conf command.
 
 Explain: This shows parameters associated with host name resolution, such as the default search domain and IP address of the DNS servers.
+
+l. Another lab using the student VM : 
+$ export OCP_USERNAME=harmeet.singh4-ibm.com
+$ oc login -u $OCP_USERNAME https://api.shared-na46.openshift.opentlc.com:6443
+Username: youropentlc-account.com
+Password: ********** [ This is your OPENTLC Account password ]
+
+
+2. Commands : Create a three new projects for your demonstration: Dev, Test, and Prod. In the demonstration you build your app in Dev and promote it through Test and Prod.
+$ export GUID=r5d4
+$ oc new-project pipeline-${GUID}-dev-ex  --description="Cat of the Day Development Environment" --display-name="Cat Of The Day - Dev"
+$ oc new-project pipeline-${GUID}-test-ex --description="Cat of the Day Testing Environment"     --display-name="Cat Of The Day - Test"
+$ oc new-project pipeline-${GUID}-prod-ex --description="Cat of the Day Production Environment"  --display-name="Cat Of The Day - Prod"
+
+
+3.  Deploy a jenkins on dev project 
+oc new-app jenkins-persistent -e DISABLE_ADMINISTRATIVE_MONITORS=true -n pipeline-${GUID}-dev-ex
+
+4. Use oc policy to enable the Jenkins service account to manage resources in the pipeline-${GUID}-test and pipeline-${GUID}-prod projects:
+
+$ oc policy add-role-to-user edit system:serviceaccount:pipeline-${GUID}-dev-ex:jenkins -n pipeline-${GUID}-test-ex
+$ oc policy add-role-to-user edit system:serviceaccount:pipeline-${GUID}-dev-ex:jenkins -n pipeline-${GUID}-prod-ex
+
+5. Use oc policy to enable pulling of images from the pipeline-${GUID}-dev project to the pipeline-${GUID}-test and pipeline-${GUID}-prod projects:
+
+$ oc policy add-role-to-group system:image-puller system:serviceaccounts:pipeline-${GUID}-test-ex -n pipeline-${GUID}-dev-ex
+$ oc policy add-role-to-group system:image-puller system:serviceaccounts:pipeline-${GUID}-prod-ex -n pipeline-${GUID}-dev-ex
+
+6. Deploy sample application 
+
+	a. Deploy the "Cat of The Day" (cotd) application in the pipeline-${GUID}-dev project:
+
+		$ oc new-app php~https://github.com/StefanoPicozzi/cotd2 -n pipeline-${GUID}-dev-ex --as-deployment-config=true
+		
+	b. Tag the latest build of cotd2 with the tag testready.
+
+	c. Tag the same image with prodready:
+
+		$ oc tag cotd2:latest cotd2:testready -n pipeline-${GUID}-dev-ex
+		$ oc tag cotd2:testready cotd2:prodready -n pipeline-${GUID}-dev-ex	
+		
+	d. oc describe imagestream cotd2 -n pipeline-${GUID}-dev-ex : examine the image stream created 	
+	e. Deploy the cotd2 application in the pipeline-${GUID}-test and pipeline-${GUID}-prod projects:
+
+		$ oc new-app pipeline-${GUID}-dev-ex/cotd2:testready --name=cotd2 -n pipeline-${GUID}-test-ex --as-deployment-config=true
+		$ oc new-app pipeline-${GUID}-dev-ex/cotd2:prodready --name=cotd2 -n pipeline-${GUID}-prod-ex --as-deployment-config=true
+		
+	f. Create routes for all three of the applications:
+
+		$ oc expose service cotd2 -n pipeline-${GUID}-dev-ex
+		$ oc expose service cotd2 -n pipeline-${GUID}-test-ex
+		$ oc expose service cotd2 -n pipeline-${GUID}-prod-ex
+		
+	g. Disable automatic deployment for all of the deployment configurations in your demonstration:
+
+		$ oc get dc cotd2 -o yaml -n pipeline-${GUID}-dev-ex  | sed 's/automatic: true/automatic: false/g' | oc replace -f -
+		$ oc get dc cotd2 -o yaml -n pipeline-${GUID}-test-ex | sed 's/automatic: true/automatic: false/g' | oc replace -f -
+		$ oc get dc cotd2 -o yaml -n pipeline-${GUID}-prod-ex | sed 's/automatic: true/automatic: false/g' | oc replace -f -
+
+	h. Now check using the OPENTLC you can connect to Jenkins deployed in a pod on OCP 
+		oc get routes jenkins -n pipeline-${GUID}-dev-ex

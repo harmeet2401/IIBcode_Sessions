@@ -144,3 +144,7 @@ oc create -f mysql.yaml --------------------------------------------------------
 "oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a tempate created by above command  
 oc get quota -n meet14764-dev --------------------------------------------------------------------------------- this will give you the list  of  resource quota assigned to the project .
 oc describe quota core-object-counts -n meet14764-dev  ----------------------------------------------------------- this will give youthe list of core-objec count quota assigned to the project 
+
+oc policy--------------------------------------------------------------------------------------------------------- is used again, but this time roles are added to groups. Note that the service account name "jenkins" is never used. Only the service account group is used.
+
+oc logs -f buildconfig/cotd2 -n pipeline-${GUID}-dev ------------------------------------------------------------- is used to watch the logs for the BC on project/namespace : pipeline-${GUID}-dev

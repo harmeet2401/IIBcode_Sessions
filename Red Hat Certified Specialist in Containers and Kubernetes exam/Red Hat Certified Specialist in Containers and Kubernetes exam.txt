@@ -405,6 +405,14 @@ Kubernetes "ReplicaSet" ⇐⇒ OpenShift "replication controller"
 		-mid deployment hook can also be executed .
 		-Scale up new deployment
 		-Execute post life-cycle hook		
+		
+24. Buid strategies
+		our primary build strategies:
+		
+			-Container build		
+			-Source-to-Image (S2I) build		
+			-Custom build		
+			-Pipeline build (deprecated)
 	
 ------------------------------------------------------------------------------------------------
 Practical excercises : 
