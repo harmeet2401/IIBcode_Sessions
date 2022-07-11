@@ -832,6 +832,8 @@ steps :
 ------------------------------------S2I (source to image ) scripts --------------------------
 There are two scripts that openshift use to convert the source code to a rnnable image and it will remove the need to create a dockerfile.
 
+S2I need A Git repository URL and a builder image
+
 Scripts : 
 Assemble : used to build image 
 RUN  : used to run cmd instructions 
