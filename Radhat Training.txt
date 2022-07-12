@@ -5,6 +5,10 @@ ENV setup steps for Labs :
 
 Git hub  :-----------------------------------------------------------------------
 
+Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
+username : harmeet2401
+password : Gogi!321
+
 token : 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
 
 Git hub  :-----------------------------------------------------------------------
