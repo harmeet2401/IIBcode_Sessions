@@ -29,13 +29,14 @@ Udemy link :
  
  5) https://ibm.ent.box.com/s/qgrdbc3x7rfd4c5v9yxcbwyq82u2znf2 : this doc is on IBM box which contains the remove exam setup guide and some more link same as above 
 	a. https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D44800090 --- in progress.
+	b. https://github.com/Max-Jaeger/redhat-PE180-exam-tips  ------- exam tips 
+	c. https://ibm.ent.box.com/s/ul7nzvyebmsshkwg7hrd6u3ezcuez2hw : ---------- ppt with some commands
 	
-	 
  6) https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000  : 3 hours training   : elearning will open on IBM network use the Hyper V to open it 
  
 
  
- Exam link : https://www.redhat.com/en/services/certification/red-hat-certified-specialist-in-containers-and-kubernetes?info=exam
+ Exam link : https://www.youtube.com/watch?v=LX3VMIAuPzg  &  https://www.redhat.com/en/services/certification/red-hat-certified-specialist-in-containers-and-kubernetes?info=exam
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 

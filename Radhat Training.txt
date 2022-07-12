@@ -1,5 +1,45 @@
 https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000 ------------------- 
 
+
+ENV setup steps for Labs : 
+
+Git hub  :-----------------------------------------------------------------------
+
+token : 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
+
+Git hub  :-----------------------------------------------------------------------
+
+
+quay.io : -----------------------------------------------------------------------
+
+username : harmeet_singh4
+Password: Narinder@667335424
+
+repo name : testrepo
+
+quay.io : -----------------------------------------------------------------------
+
+
+lab Environment : ---------------------------------------------------------------
+
+Username	RHT_OCP4_DEV_USER	whknkc
+Password	RHT_OCP4_DEV_PASSWORD	cad14e5aa9e849e7bc30
+API Endpoint	RHT_OCP4_MASTER_API	https://api.ap46a.prod.ole.redhat.com:6443
+Console Web Application		https://console-openshift-console.apps.ap46a.prod.ole.redhat.com
+Cluster Id		1e69d923-f37c-4eaf-9658-41d317640b71
+
+
+Workstation : username and password--------------
+username : student 
+password : student 
+
+
+lab Environment : ---------------------------------------------------------------
+
+
+
+
+
 1. Why we need the containerisation technology ?
 - In traditional OS where we have a single host machine and single VM on a single machine . The shared libereries and dependencies are entangled with the OS installd on top of the OS of host machine .
 - Difficulty arrised in Traditional OS architecture : 
@@ -7,5 +47,34 @@ https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000 -------------------
   . Shared liberaries are utilized equally among many applications running on the same host which can also impact one app running in case we need update in shared lib for another app.
 - Container solutions : 	
 	Which includes containerisation and allo each app to be deployed in a separate container have its own OS and Liberaried to be used in the applications.
+	Also make isolation for security , storage and network.
+	container engines available to manage and execute individual containers, including Rocket, Drawbridge, LXC, Docker, and Podman.
 	
-	
+****IMP : Podman is available in redhat 7.6x version
+
+
+2. Image : image is a file-system bundle that contains all dependencies required to execute a process: files in the file system, installed packages, available resources, running processes, and kernel modules.
+
+3. Podman is used for interaction with the container tech . We can build or pull th eimage using podman . Its an opensource and it keeps the images into the local repository which overcome the need of client/server architecture and remove the dependencies of daemon thread running on it .
+ It has similar syntax of command as the Docker , so no need to learn new tool 
+ 
+4. Limitations os container : 
+	.As the number gross for containers in a system , managing the containers which includes (restarting , starting , killing , updating the liberaries etc ) become difficult .
+	.In production env the customer wants to execute :
+			- auto renewal of the os or lib in the container which can be done by mean of roll-outs etc
+			- each orchestration which include maintaing the desired number of containers running .
+			- easy resource management across the containers on the base machines
+			-  easy scale up and scale down as per the traffic coming or resource utlization 
+5. For above issues : Kubernetes is introduced for orchestration of the containers . We can deploy the container across the multiple nodes of kubernetes and allow kubernetes to maintain the count of the container , rolling out new deployments when a change occurs in source code etc
+
+		K8 features :
+			Service discovery and load balancing
+			Horizontal scaling
+			Self healing 
+			Automated rollout
+			Operators
+Operators are packaged Kubernetes applications that also bring the knowledge of the application's life cycle into the Kubernetes cluster. Applications packaged as Operators use the Kubernetes API to update the cluster's state reacting to changes in the application state.
+
+
+
+			
