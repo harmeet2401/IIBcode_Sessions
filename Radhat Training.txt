@@ -9,7 +9,7 @@ Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
 username : harmeet2401
 password : Gogi!321
 
-token : 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
+token : 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
 
 Git hub  :-----------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ quay.io : ----------------------------------------------------------------------
 
 lab Environment : ---------------------------------------------------------------
 
-Username	RHT_OCP4_DEV_USER	whknkc
+Username	whknkc
 Password	RHT_OCP4_DEV_PASSWORD	cad14e5aa9e849e7bc30
 API Endpoint	RHT_OCP4_MASTER_API	https://api.ap46a.prod.ole.redhat.com:6443
 Console Web Application		https://console-openshift-console.apps.ap46a.prod.ole.redhat.com
@@ -80,5 +80,8 @@ lab Environment : --------------------------------------------------------------
 Operators are packaged Kubernetes applications that also bring the knowledge of the application's life cycle into the Kubernetes cluster. Applications packaged as Operators use the Kubernetes API to update the cluster's state reacting to changes in the application state.
 
 
+
+			
+6. Fetching container images using Podman
 
 			
