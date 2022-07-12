@@ -1,0 +1,11 @@
+https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000 ------------------- 
+
+1. Why we need the containerisation technology ?
+- In traditional OS where we have a single host machine and single VM on a single machine . The shared libereries and dependencies are entangled with the OS installd on top of the OS of host machine .
+- Difficulty arrised in Traditional OS architecture : 
+  . Can not update or patch the base OS bcse it might update the shared libs and dependencies which might impact the application running .
+  . Shared liberaries are utilized equally among many applications running on the same host which can also impact one app running in case we need update in shared lib for another app.
+- Container solutions : 	
+	Which includes containerisation and allo each app to be deployed in a separate container have its own OS and Liberaried to be used in the applications.
+	
+	
