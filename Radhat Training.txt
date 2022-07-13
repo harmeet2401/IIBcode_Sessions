@@ -108,6 +108,25 @@ Operators are packaged Kubernetes applications that also bring the knowledge of 
 			 [root@containerID / ]# exit 
 			 	
 		Summary : it means the podman and redhat openshift allow user to run the containers with normAL users .
+		
+7. Create containerised Services : 
+	Q: Use the quay.io/redhattraining/httpd-parent image with the 2.4 tag to start a new container named httpd-basic in the background. Forward port 8080 on the host to port 80 in the container.
+	Ans : oc new-app --name=httpd-basic -p 80:8080 quay.io/redhattraining/httpd-parent:2.4
+		Using podman  : podman run --name=httpd-basic -d  -p 8080:80 quay.io/redhattraining/httpd-parent:2.4
+		
+	Q : Test that Apache HTTP server is running inside the httpd-basic container.?
+	
+	Name of the container we assigned as --name-httpd-basic its really important and helps in bashing inside the container 
+	Ans ; podman exec -it httpd-basic /bin/bash  -------> this will bash you inside the container .
+		  curl http://localhost:8080 : ----- you can curl it from outside and from inside of the container 
+
+	Q. Customize the httpd-basic container to display Hello World as the message. The container's message is stored in the file /var/www/html/index.html.
+	Ans : First do a bash in to the container : podman exec -it containername /bin/bash 
+												cd var/www/html/
+												vi index.html
+												 change the content and save it .
+												exit 
+								Do a curl https://localhost:8080
 			 
 			
 *. Fetching container images using Podman
