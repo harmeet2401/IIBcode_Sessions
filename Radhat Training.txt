@@ -80,8 +80,38 @@ lab Environment : --------------------------------------------------------------
 Operators are packaged Kubernetes applications that also bring the knowledge of the application's life cycle into the Kubernetes cluster. Applications packaged as Operators use the Kubernetes API to update the cluster's state reacting to changes in the application state.
 
 
-
+6. Rootless container : 
+	As we know many of the containers are created by running th image as a root user user . Most of the images in docker.io runs through the root users.
+	But podman and RedhatOpenshift runs container with root users by default.
 			
-6. Fetching container images using Podman
+*. Fetching container images using Podman
 
-			
+	a. podman searhc rhel ----------------------------------------- Command to search the image in red hat image repository 
+	b. podman pull rhel ------------------------------------------- this will download the image on your local and can use it .
+		The image names are based on following syntax : 
+		registry_name/user_name/image_name:tag
+	c.  podman images --------------------------------------------- this will show us the images present on local 	
+	d.  podman run ubi8/ubi:8.3 echo 'Hello world!' --------------- this run command to run the container using the image 
+	e.  podman run -d -p 8080 registry.redhat.io/rhel8/httpd-24---- to run a container in bakcground using -d .
+	f.  podman port -l--------------------------------------------- to see the container port mapped .
+	g.  podman run -it ubi8/ubi:8.3 /bin/bash---------------------- this command will create a container and do a bash inside the running container in interactive mode.
+	h.  podman run -e GREET=Hello -e NAME=RedHat ubi8/ubi:8.3 printenv GREET NAME--------- this will inject environment variables into container from outside using "-e"
+	i.  podman run --name mysql-custom  -e MYSQL_USER=redhat -e MYSQL_PASSWORD=r3dh4t  -e MYSQL_ROOT_PASSWORD=r3dh4t  -d registry.redhat.io/rhel8/mysql-80
+	j.  podman login registry.redhat.io------------------------------------------------------ login to rehat image registry 
+	k.  podman run --name mysql-basic -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
+	l.  podman ps --format "{{.ID}} {{.Image}} {{.Names}}" ---------------------------------- to see the running containers.
+	m.  podman exec -it mysql-basic /bin/bash ----------------------------------------------- To do the bash to a running container  -it says to go bash mode .
+		bash-4.2$ mysql -uroot 
+				>enter the password 
+				mysql > mysql --version 
+	n. lab container-create finish ----------------------------------------------------------On workstation, run the lab container-create finish script to complete this lab.
+
+	
+	
+	Many Podman flags also have an alternative long form; some of these are explained below:
+
+		-t is equivalent to --tty, meaning a pseudo-tty (pseudo-terminal) is to be allocated for the container.
+		
+		-i is the same as --interactive. When used, standard input is kept open into the container.
+		
+		-d, or its long form --detach, means the container runs in the background (detached). Podman then prints the container id.			

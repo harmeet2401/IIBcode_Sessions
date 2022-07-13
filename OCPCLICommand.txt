@@ -148,3 +148,22 @@ oc describe quota core-object-counts -n meet14764-dev  -------------------------
 oc policy--------------------------------------------------------------------------------------------------------- is used again, but this time roles are added to groups. Note that the service account name "jenkins" is never used. Only the service account group is used.
 
 oc logs -f buildconfig/cotd2 -n pipeline-${GUID}-dev ------------------------------------------------------------- is used to watch the logs for the BC on project/namespace : pipeline-${GUID}-dev
+podman searhc rhel ----------------------------------------- Command to search the image in red hat image repository 
+podman pull rhel ------------------------------------------- this will download the image on your local and can use it .
+The image names are based on following syntax : 
+registry_name/user_name/image_name:tag
+podman images --------------------------------------------- this will show us the images present on local 	
+podman run ubi8/ubi:8.3 echo 'Hello world!' --------------- this run command to run the container using the image 
+podman run -d -p 8080 registry.redhat.io/rhel8/httpd-24---- to run a container in bakcground using -d .
+podman port -l--------------------------------------------- to see the container port mapped .
+podman run -it ubi8/ubi:8.3 /bin/bash---------------------- this command will create a container and do a bash inside the running container in interactive mode.
+podman run -e GREET=Hello -e NAME=RedHat ubi8/ubi:8.3 printenv GREET NAME--------- this will inject environment variables into container from outside using "-e"
+podman run --name mysql-custom  -e MYSQL_USER=redhat -e MYSQL_PASSWORD=r3dh4t  -e MYSQL_ROOT_PASSWORD=r3dh4t  -d registry.redhat.io/rhel8/mysql-80
+podman login registry.redhat.io------------------------------------------------------ login to rehat image registry 
+podman run --name mysql-basic -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
+podman ps --format "{{.ID}} {{.Image}} {{.Names}}" ---------------------------------- to see the running containers.
+podman exec -it mysql-basic /bin/bash ----------------------------------------------- To do the bash to a running container  -it says to go bash mode .
+bash-4.2$ mysql -uroot 
+		>enter the password 
+		mysql > mysql --version 
+lab container-create finish ----------------------------------------------------------On workstation, run the lab container-create finish script to complete this lab.
