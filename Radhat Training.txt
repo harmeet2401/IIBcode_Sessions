@@ -83,6 +83,32 @@ Operators are packaged Kubernetes applications that also bring the knowledge of 
 6. Rootless container : 
 	As we know many of the containers are created by running th image as a root user user . Most of the images in docker.io runs through the root users.
 	But podman and RedhatOpenshift runs container with root users by default.
+	
+	Commands : 
+		1. First run the container and bash to it using the sudo command to run the container as a root user : 
+			here you saw that the bash and run command ran is under root user .
+			 [student@workstaion ~]$ sudo podman run --rm --name asroot -ti registry.access.redhat.com/ubi8:latest /bin/bash
+			 [root@containerID / ]# whoami
+			 root 
+			 [root@containerID / ]# sleep 1000
+			 [student@workstaion ~]$ sudo ps -ef | grep "sleep 1000"  ------------ > run this in a different terminal
+			 root        3137    3117  0 10:18 pts/0    00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 1000
+		
+			 [root@containerID / ]# exit 
+			 
+		2. Second run the container and bash to it using the normal command to run the container as a normal user : 
+			here you saw that the bash and run command ran is under student user . which is the normal user .
+			 [student@workstaion ~]$ podman run --rm --name asuser -ti registry.access.redhat.com/ubi8:latest /bin/bash
+			 [root@containerID / ]# whoami
+			  root 
+			 [root@containerID / ]# sleep 1000
+			 [student@workstaion ~]$ sudo ps -ef | grep "sleep 2000" | grep -v grep
+			student     3345    3325  0 10:24 pts/0    00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 2000
+			
+			 [root@containerID / ]# exit 
+			 	
+		Summary : it means the podman and redhat openshift allow user to run the containers with normAL users .
+			 
 			
 *. Fetching container images using Podman
 
