@@ -134,9 +134,18 @@ some of the commands which is the used the by ethe developers to manager the con
 
 1. To create and maintain the containers pull , pull , run , exec , rmi , rm , save , load , pause , unpause etc .
 2. To search the containers : ps -a : which will give all the contaiers including the running and stop container .
+Chekc the OCPCLICommand.txt for creating a myqsl container and then create a table and then run the insert and select query to get the results.
 
 
-9. 
+9. Attaching the persistent volume to the container. 
+
+As we know that the storage of the containers are ephemeral and is destroyed when the cotainer is destroyed .
+Here we will be mounting the host directory means the base machine on which the podman is running to the directory inside the container so that if the container is delete the file is accessible again from the host directory which is mounted to the folder inside the container.
+
+For example : host machine directoty for dbfiles : /home/student/dbfiles
+			  container image have this folder : /var/lib/mysql   -----------> which needs to be mounted to the above folder .
+			
+Chekc the OCPCLICommand.txt to see the folder creation or the command to mount the host directory to the container folder .			  
 
 	
 	

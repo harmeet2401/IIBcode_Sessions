@@ -176,6 +176,18 @@ podman run --name mysql  -d -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYS
 podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ ------------------- this will copy the file from host machine to container(mysql) root directory and gave mysql as the users.
 podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /db.sql'--------------- this command is used to run the sql file which will create the table and insert the row into it.
 podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'-------------------------- this will send the select query as the env variable value and run it inside container.
+
+-----------------------------------To mount a host path to the container path ---------------
+
+mkdir /home/student/dbfiles
+podman unshare chown -R 27:27 /home/student/dbfiles------------------The podman unshare command provides a session to execute commands within the same user namespace as the process running inside the container.
+sudo semanage fcontext -a -t container_file_t '/home/student/dbfiles(/.*)?'----------------Apply the container_file_t context to the directory (and all subdirectories) to allow containers access to all of its contents.
+sudo restorecon -Rv /home/student/dbfiles--------------------------------Apply the SELinux container policy that you set up in the first step to the newly created directory:
+podman run -v /home/student/dbfiles:/var/lib/mysql rhmap47/mysql ---------- Mounting a Volume
+podman run --name mysql  -v /home/student/dbfiles:/var/lib/mysql -d -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1 ------ running a container and also mounting the path so that i can bash into it to see the file i added.
+
+-----------------------------------To mount a host path to the container path ---------------
+
 podman logs mysql-db ----------------------------------------------------------------- it is used to get the logs out.
 podman images : ---------------------------------------------------------------------- it will show all the images .
 podman run --name my-httpd-container registry.redhat.io/rhel8/httpd-24 -------------------------------------------------------- thiswill create a cotainer using the image and container name will be http-server.
