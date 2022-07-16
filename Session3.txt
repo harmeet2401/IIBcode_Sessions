@@ -246,7 +246,7 @@ docker stop container-id--------------------------------------------------------
 docker start container-id------------------------------------------------------- It will start the same container which is in stop state
 docker run -it New-Nameimage---------------------------------------------------- it will create a container with apace2 installed already 
 docker rm container-id---------------------------------------------------------- it will remove the container but first stop it using docker ps -- > then docker stop container-id
-docker rm -f  $(docker ps -a -q)------------------------------------------------ it will remove all running docker 
+docker rm -f  $(docker ps -a -q)------------------------------------------------ it will remove all running docker containr
 docker container prune---------------------------------------------------------- will remove all container in stopped state
 docker rmi image-id ------------------------------------------------------------ will remove the image with that image id.
 docker login ------------------------------------------------------------------- login to docker hub (user defined images always starts with username/imagename . docker push image-id will not work)
