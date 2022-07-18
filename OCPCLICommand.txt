@@ -192,8 +192,9 @@ podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.P
 .sudo restorecon -R /home/student/local/mysql -----------------------------------------Apply the SELinux policy to the newly created directory.
 .ls -ldZ /home/student/local/mysql-----------------------------------------------------Verify that the SELinux context type for the /home/student/local/mysql directory is container_file_t.
 .podman unshare chown 27:27 /home/student/local/mysql----------------------------------Change the owner of the /home/student/local/mysql directory to the mysql user and mysql group:
-.podman run --name persist-db  -d -v /home/student/local/mysql:/var/lib/mysql/data  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
-.then do a bash inside the container to see the file here and there.
+.podman run --name persist-db  -d -p 13306:3306 -v /home/student/local/mysql:/var/lib/mysql/data  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
+.podman ps --format="{{.ID}} {{.Names}}" ---------------------------------------------- is used to check if the container created/strated successfully or not .
+then do a bash inside the container to see the file here and there.
 -----------------------------------To mount a host path to the container path ---------------
 
 So wecan use -p [<IP address>:][<host port>:]<container port> to map the port of the host to the container port 
@@ -209,6 +210,40 @@ So wecan use -p [<IP address>:][<host port>:]<container port> to map the port of
 .podman exec -it mysqldb-port /bin/bash----------------------------------------------------------------------------- doing bash to the mysql container and then run the sleect query 
 	- mysql login -uroot -p
 		- select * from item;
+		
+		or 
+		
+ mysql -uroot items -e "SELECT * FROM Item"		
+ 
+ 
+------------------------VVVVIMP Question for the DB setup ----------------------------------------------------------------------------
+
+Q. You should be able to deploy and manage a persistent database using a shared volume. You should also be able to start a second database using the same shared volume and observe that the data is consistent between the two containers because they are using the same directory on the host to store the MySQL data.
+
+ANS : 
+.mkdir -pv /home/student/local/mysql
+.sudo semanage fcontext -a -t container_file_t '/home/student/local/mysql(/.*)?' ------Add the appropriate SELinux context for the /home/student/local/mysql directory and its contents.
+.sudo restorecon -R /home/student/local/mysql -----------------------------------------Apply the SELinux policy to the newly created directory.
+.ls -ldZ /home/student/local/mysql-----------------------------------------------------Verify that the SELinux context type for the /home/student/local/mysql directory is container_file_t.
+.podman unshare chown 27:27 /home/student/local/mysql----------------------------------Change the owner of the /home/student/local/mysql directory to the mysql user and mysql group:
+.podman run --name mysql-1 -p 13306:3306 -d -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
+. podman ps --format="{{.ID}} {{.Names}}"---------------------------------------------- to check if the container started successfully .
+. mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items < /home/student/DO180/labs/manage-review/db.sql------------------------ to run the sql file to the mysql 
+. podman exec -it mysql-1  mysql -uroot items -e "SELECT * FROM Item"------------------------------------------------- to get the items inserted to DB 
+
+*********Note : Stop the first container now 
+start another container as name mysql-2 you will see that the second container will automatially loads up the insert query and data into db aling with table creations becuase of the persistent volume mounted the second container picked up the same data.sql file.
+
+.podman run --name mysql-2 -p 13306:3306 -d -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
+. podman ps -a > /tmp/my-containers ------------------------------------------------------------------------ to save the stopped and running containers in a file 
+. podman exec -it mysql-2 /bin/bash 
+	bash&: mysql -uroot
+		mysql> use items ;                     ----------------------------------------- this is to selecte the Dbs.
+		mysql> insert into Item (description, done) values ('Finished lab', 1);
+		mysql> Select * from Item;
+
+ 
+------------------------VVVVIMP Question for the DB setup ----------------------------------------------------------------------------
 	
 
 podman logs mysql-db ----------------------------------------------------------------- it is used to get the logs out.
