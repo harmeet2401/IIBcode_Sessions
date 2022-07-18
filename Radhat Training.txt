@@ -181,4 +181,41 @@ start another container as name mysql-2 you will see that the second container w
 		mysql> insert into Item (description, done) values ('Finished lab', 1);
 		mysql> Select * from Item;
 
+
+11. Mananging images : 
+. Redhat provide various images repositories including the private and public images . 
+. redhat provide many advantages for the images :
+	Vulnerabilities control 
+	security controlled 
+	Scanned images 
+	Red Hat Enterprise linux compatible images 
+	
+Quay.io is another tool which allo users to store and download images from or to the private / public repositories.	
+
+Private Repositories : 
+	1. update the /etc/containers/registries.conf Edit the registries entry in the [registries.search] section, adding an entry to the values list:
+
+[registries.search]
+registries = ["registry.access.redhat.com", "quay.io"]
+
+	2. Secure connections to a registry require a trusted certificate. To support insecure connections, add the registry name to the registries entry in [registries.insecure] section of /etc/containers/registries.conf file:
+
+[registries.insecure]
+registries = ['localhost:5000']
+
+
+- how to search for the  images in the repositoris 
+	Approach 1: 
+	. In above steps we configured the regitsries 
+	. Second log in to the registry using podman login command 
+	. use command : podman search [OPtion] imagesname
+	Approach 2: using an API exposed by the registries .
+	.To list all repositories available in a registry, use the /v2/_catalog endpoint. The n parameter is used to limit the number of repositories to return:
+
+[user@host ~]$ curl -Ls https://myserver/v2/_catalog?n=3
+{"repositories":["centos/httpd","do180/custom-httpd","hello-openshift"]}
+
+- how to download the iage to our local : 
+	command :  podman pull quay.io/bitnami/nginx
+	
 	
