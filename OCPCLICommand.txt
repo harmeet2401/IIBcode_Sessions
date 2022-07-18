@@ -194,14 +194,14 @@ podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.P
 .podman unshare chown 27:27 /home/student/local/mysql----------------------------------Change the owner of the /home/student/local/mysql directory to the mysql user and mysql group:
 .podman run --name persist-db  -d -v /home/student/local/mysql:/var/lib/mysql/data  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
 .then do a bash inside the container to see the file here and there.
-
+-----------------------------------To mount a host path to the container path ---------------
 
 So wecan use -p [<IP address>:][<host port>:]<container port> to map the port of the host to the container port 
 .podman run -d --name apache1 -p 8080:80  registry.redhat.io/rhel8/httpd-24 ------------------------------ To run the container httpd using localhost port 8080 mapped to 80 port of container 
-.podman run -d --name apache3 -p 127.0.0.1::80  registry.redhat.io/rhel8/httpd-24 ------------------------- Here the host port is not specified so the podman assigned a random port.
+.podman run -d --name apache3 -p 127.0.0.1::80  registry.redhat.io/rhel8/httpd-24 ------------------------ Here the host port is not specified so the podman assigned a random port.
+.podman run -d --name apache4  -p 80 registry.redhat.io/rhel8/httpd-24 ---------------------------------- Here if we mention the container port then random host is assigned to it.
 
 
------------------------------------To mount a host path to the container path ---------------
 
 podman logs mysql-db ----------------------------------------------------------------- it is used to get the logs out.
 podman images : ---------------------------------------------------------------------- it will show all the images .
