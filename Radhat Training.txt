@@ -145,7 +145,15 @@ Here we will be mounting the host directory means the base machine on which the 
 For example : host machine directoty for dbfiles : /home/student/dbfiles
 			  container image have this folder : /var/lib/mysql   -----------> which needs to be mounted to the above folder .
 			
-Chekc the OCPCLICommand.txt to see the folder creation or the command to mount the host directory to the container folder .			  
+Chekc the OCPCLICommand.txt to see the folder creation or the command to mount the host directory to the container folder .
+
+10. Accessing containers : 
+
+When we ran a container rootless there is no IP  address available for accessing the container .
+So wecan use -p [<IP address>:][<host port>:]<container port> to map the port of the host to the container port 
+
+example : -p 8080:80 
+This example creates an externally accessible container. The value 8080 colon 80 specifies that any requests to port 8080 on the host are forwarded to port 80 within the container.
 
 	
 	
