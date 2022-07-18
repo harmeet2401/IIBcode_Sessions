@@ -258,8 +258,6 @@ podman stop -a :----------------------------------------------------------------
 podman rm -a : -------------------------------------------------------------------------------------- it will remove all stopped containers.
 
 
-
-
 Many Podman flags also have an alternative long form; some of these are explained below:
 		-t is equivalent to --tty, meaning a pseudo-tty (pseudo-terminal) is to be allocated for the container.		
 		-i is the same as --interactive. When used, standard input is kept open into the container.		
