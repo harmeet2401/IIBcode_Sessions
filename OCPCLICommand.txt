@@ -163,7 +163,15 @@ podman rm container-id : -------------------------------------------------------
 podman rmi image-nme/image-id ----------------------------------------------------------------------- it will remove the images from the local registry 
 podman stop -a :------------------------------------------------------------------------------------- it will stop all the running container.
 podman rm -a : -------------------------------------------------------------------------------------- it will remove all stopped containers.
-
+podman pull registry.redhat.io/rhel8/mysql-80:1 ----------------------------------------------------- this will download the mysql image mysql-80:1.
+podman save -o mysql_image.tar registry.redhat.io/rhel8/mysql-80:tag(any tag which is available)------------------------------------- this save command will wrap the metadat and the image layer into a tar file ready to be pshed to the registry.
+podman rmi -a ---------------------------------------------------------------------------------------- remove all the local images .
+podman load -i mysql_image.tar ---------------------------------------------------------------------- this will unload or extract the images from the tar file. its the apposite of the load command 
+podman diff mysql-basic------------------------------------------------------------------------------The diff subcommand tags any added file with an A, any changed ones with a C, and any deleted file with a D.
+podman inspect -f "{{range .Mounts}}{{println .Destination}}{{end}}" CONTAINER_NAME/ID--------------- to inspect the mounted volume of the container we can use inspect command.
+podman commit mysql-basic(container ID running )  mysql-custom(new container image)------------------ to commit the changes to a new container. VVVVIMP
+podman tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG] example  : podman tag mysql-custom devops/mysql  or podman tag mysql-custom devops/hsingh/mysql:2.0 ---------------- To assign the tag to it.
+podman push devops/hsingh/mysql:2.0 ----------------------------------------------------------------- push images to the repository.
 
 Many Podman flags also have an alternative long form; some of these are explained below:
 		-t is equivalent to --tty, meaning a pseudo-tty (pseudo-terminal) is to be allocated for the container.		
@@ -213,6 +221,7 @@ podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.P
 .podman run --name persist-db  -d -p 13306:3306 -v /home/student/local/mysql:/var/lib/mysql/data  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  registry.redhat.io/rhel8/mysql-80:1
 .podman ps --format="{{.ID}} {{.Names}}" ---------------------------------------------- is used to check if the container created/strated successfully or not .
 then do a bash inside the container to see the file here and there.
+
 -----------------------------------To mount a host path to the container path ---------------
 
 So wecan use -p [<IP address>:][<host port>:]<container port> to map the port of the host to the container port 
@@ -264,4 +273,4 @@ start another container as name mysql-2 you will see that the second container w
 ------------------------VVVVIMP Question for the DB setup ----------------------------------------------------------------------------
 	
 
----------------------------------------------Podman command -------------------------------------------------------------------------------------------------------------------
+---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------

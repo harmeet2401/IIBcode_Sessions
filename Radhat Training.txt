@@ -219,3 +219,10 @@ registries = ['localhost:5000']
 	command :  podman pull quay.io/bitnami/nginx
 	
 	
+12. Manipulating Container Images : 
+
+Once we build our app and packaged as a container images now user want to send the images to the other devlopers and on production . Two steps to do for that 
+		1. save that image as a .tar file 
+		2. push the tr file to the registry .
+	
+	
