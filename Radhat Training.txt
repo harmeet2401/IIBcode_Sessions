@@ -225,4 +225,22 @@ Once we build our app and packaged as a container images now user want to send t
 		1. save that image as a .tar file 
 		2. push the tr file to the registry .
 	
-	
+check the OCPCLICommand.txt to see the commands and setup required to run all container access related .
+
+
+13. Image builder and manipulations : 
+.We can use multiple command to run and build images using the dockerfile and S2I script for the same .
+.podman pull imagesname 
+.podman push hosturl/repo/imagename:tag
+.podman commit containernamerunning imagename
+.podman diff containernamerunning 
+.podman tag imagename newimagename:tag
+
+14.Creating an Apache server on OCP container.
+Guided excercise : as per my knowledge we can create an apahce server just by running the image httpd which is the apache tomcat image we can run on default port of 8080.
+
+command may be : podman run -d --name=apahceserver -p 8080:80 redhat.rhel.io/redhattraining/httpd-parent
+
+Here in this excercise we will be downloading an image from quay.io which is the image registry provided by redhat for its consumers.
+
+

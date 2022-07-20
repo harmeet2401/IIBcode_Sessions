@@ -169,7 +169,7 @@ podman rmi -a ------------------------------------------------------------------
 podman load -i mysql_image.tar ---------------------------------------------------------------------- this will unload or extract the images from the tar file. its the apposite of the load command 
 podman diff mysql-basic------------------------------------------------------------------------------The diff subcommand tags any added file with an A, any changed ones with a C, and any deleted file with a D.
 podman inspect -f "{{range .Mounts}}{{println .Destination}}{{end}}" CONTAINER_NAME/ID--------------- to inspect the mounted volume of the container we can use inspect command.
-podman commit mysql-basic(container ID running )  mysql-custom(new container image)------------------ to commit the changes to a new container. VVVVIMP
+podman commit mysql-basic(container Name running )  mysql-custom(new container image)------------------ to commit the changes to a new container. VVVVIMP
 podman tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG] example  : podman tag mysql-custom devops/mysql  or podman tag mysql-custom devops/hsingh/mysql:2.0 ---------------- To assign the tag to it.
 podman push devops/hsingh/mysql:2.0 ----------------------------------------------------------------- push images to the repository.
 
@@ -202,6 +202,15 @@ podman run --name mysql  -d -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYS
 podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ ------------------- this will copy the file from host machine to container(mysql) root directory and gave mysql as the users.
 podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /db.sql'--------------- this command is used to run the sql file which will create the table and insert the row into it.
 podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'-------------------------- this will send the select query as the env variable value and run it inside container.
+podman login quay.io ----------------------------------------------------------------------------------------------- to login to the quay.io 
+podman run -d --name official-httpd -p 8180:80 quay.io/redhattraining/httpd-parent---------------------------------- to run apache tomcat server using podman in a container.
+podman exec -it official-httpd /bin/bash -
+	bash : echo "Welcome from D0180 class" > /var/www/html/index.html
+podman stop official-httpd ----------------------------------------------------------------------------------------- to stop the running container	
+podman commit -a 'harmeet_singh4' official-httpd do180-custom-httpd -------------------------------------------------------------------- this will create a new image outof the running apache container.	
+podman tag localhost/do180-custom-httpd quay.io/harmeet_singh4/do180-custom-httpd:v1.0 -------------------------------- tagging the image we create above to a new tag 
+podman pull quay.io/harmeet_singh4/do180-custom-httpd:v1.0 ------------------------------------------------------------ pulling the images we commit , tagged and push to the quay.io 
+	
 
 -----------------------------------To mount a host path to the container path ---------------
 
