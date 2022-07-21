@@ -244,3 +244,121 @@ command may be : podman run -d --name=apahceserver -p 8080:80 redhat.rhel.io/red
 Here in this excercise we will be downloading an image from quay.io which is the image registry provided by redhat for its consumers.
 
 
+15. Maintaiing images using commit , run and other command for image maintaining .
+commands in OCPCLICommand.txt
+
+16. Creating custom container 
+Red Hat Software Collections Library (RHSCL), or simply Software Collections, is Red Hat's solution for developers who require the latest development tools that usually do not fit the standard RHEL release schedule.
+
+17. Building Base Containers
+A Containerfile is a mechanism to automate the building of container images. Building an image from a Containerfile is a three-step process.
+
+1. Create a working directory : An empty working directory which will contain all the liberaries required for building an image.
+
+2. Write the Containerfile : A Containerfile is a text file named either Containerfile or Dockerfile that contains the instructions needed to build the image. The basic syntax of a Containerfile.
+
+
+# This is a comment line 1
+FROM ubi8/ubi:8.3 2
+LABEL description="This is a custom httpd container image" 3
+MAINTAINER John Doe <jdoe@xyz.com> 4
+RUN yum install -y httpd 5
+EXPOSE 80 6
+ENV LogLevel "info" 7
+ADD http://someserver.com/filename.pdf /var/www/html 8
+COPY ./src/ /var/www/html/ 9
+USER apache 10
+ENTRYPOINT ["/usr/sbin/httpd"] 11
+CMD ["-D", "FOREGROUND"] 12
+1 Lines that begin with a hash, or pound, sign (#) are comments.
+
+2 The FROM instruction declares that the new container image extends ubi8/ubi:8.3 container base image. Containerfiles can use any other container image as a base image, not only images from operating system distributions. Red Hat provides a set of container images that are certified and tested and highly recommends using these container images as a base.
+
+3 The LABEL is responsible for adding generic metadata to an image. A LABEL is a simple key-value pair.
+
+4 MAINTAINER indicates the Author field of the generated container image's metadata. You can use the podman inspect command to view image metadata.
+
+5 RUN executes commands in a new layer on top of the current image. The shell that is used to execute commands is /bin/sh.
+
+6 EXPOSE indicates that the container listens on the specified network port at runtime. The EXPOSE instruction defines metadata only; it does not make ports accessible from the host. The -p option in the podman run command exposes container ports from the host.
+
+7 ENV is responsible for defining environment variables that are available in the container. You can declare multiple ENV instructions within the Containerfile. You can use the env command inside the container to view each of the environment variables.
+
+8 ADD instruction copies files or folders from a local or remote source and adds them to the container's file system. If used to copy local files, those must be in the working directory. ADD instruction unpacks local .tar files to the destination image directory.
+
+9 COPY copies files from the working directory and adds them to the container's file system. It is not possible to copy a remote file using its URL with this Containerfile instruction.
+
+10 USER specifies the username or the UID to use when running the container image for the RUN, CMD, and ENTRYPOINT instructions. It is a good practice to define a different user other than root for security reasons.
+
+11 ENTRYPOINT specifies the default command to execute when the image runs in a container. If omitted, the default ENTRYPOINT is /bin/sh -c.
+
+12 CMD provides the default arguments for the ENTRYPOINT instruction. If the default ENTRYPOINT applies (/bin/sh -c), then CMD forms an executable command and parameters that run at container start.
+
+Below both commands work in combination with each other 
+ENTRYPOINT ["command", "param1", "param2"]
+CMD ["param1","param2"]
+
+example1 : ENTRYPOINT["/bin/bash"]
+		CMD["-d","pwd"]
+		
+		command will be /bin/bash -c pwd 
+		
+example2 : ENTRYPOINT ["/bin/date", "+%H:%M"]
+
+example3 : ENTRYPOINT ["/bin/date"]
+CMD ["+%H:%M"]
+
+exmaple 2 and 3 results in same command.
+		
+VVIMP : Each command inside th Dockerfile or containerfile creates a layer in the image which decides the size of the images. So we suggest to minimize the number of layers to as less as possible .
+
+For example : this commands will add three layers to the image ad will add up to the size of the image .
+LABEL version="2.0" 
+LABEL description="This is an example container image" 
+LABEL creationDate="01-09-2017"
+
+exampl e: using the escape char will minize the command to one and will reduce the layer to only one
+LABEL version="2.0" \
+ description="This is an example container image" \
+ creationDate="01-09-2017"
+
+
+
+3. Build the image with Podman
+
+podman build -t NAME:TAG  DIR
+
+DIR is the path to the working directory. It can be the current directory as designated by a dot (.) if the working directory is the current directory. NAME:TAG is a name with a tag given to the new image. If TAG is not specified, then the image is automatically tagged as latest.
+
+
+RUN yum install -y httpd &&  yum clean all
+
+check OCPCLICommand.txt to run the apache tomcat server using the containerfile.
+
+13. Lab: Creating Custom Container Images
+FROM ubi8/ubi:8.3
+
+MAINTAINER Your Name <youremail>
+
+ENV PORT 8080
+
+RUN yum install -y httpd && \
+    yum clean all
+
+RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && \
+    chown -R apache:apache /etc/httpd/logs/ && \
+    chown -R apache:apache /run/httpd/
+
+USER apache
+
+# Expose the custom port that you provided in the ENV var
+EXPOSE ${PORT}
+
+# Copy all files under src/ folder to Apache DocumentRoot (/var/www/html)
+COPY ./src/ /var/www/html/
+
+# Start Apache in the foreground
+CMD ["httpd", "-D", "FOREGROUND"]
+
+
+command : podman build -t do180/apache .
