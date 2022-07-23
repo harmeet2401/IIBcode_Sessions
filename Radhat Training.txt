@@ -362,3 +362,42 @@ CMD ["httpd", "-D", "FOREGROUND"]
 
 
 command : podman build -t do180/apache .
+
+14. Kubernetes and openshift : 
+Kubernetes is an orchestration service that simplifies the deployment, management, and scaling of containerized applications. One of the main advantages of using Kubernetes is that it uses several nodes to ensure the resiliency and scalability of its managed applications. Kubernetes forms a cluster of node servers that run containers and are centrally managed by a set of control plane servers. A server can act as both a control plane node and a compute node, but those roles are usually separated for increased stability.
+
+Table 6.1. Kubernetes Terminology
+
+Term	Definition
+Node	- A server that hosts applications in a Kubernetes cluster.
+Control Plane	- Provides basic cluster services such as APIs or controllers. Its usually present and exposed by the master node.
+Compute Node	- This node executes workloads for the cluster. Application pods are scheduled onto compute nodes. These are the slave nodes.
+Resource	- Resources are any kind of component definition managed by Kubernetes. Resources contain the configuration of the managed component (for example, the role assigned to a node), and the current state of the component (for example, if the node is available).
+Controller	- A controller is a Kubernetes process that watches resources and makes changes attempting to move the current state towards the desired state. This is also provided by the master node.
+Label	- A key-value pair that can be assigned to any Kubernetes resource. Selectors use labels to filter eligible resources for scheduling and other operations.
+Namespace	- A scope for Kubernetes resources and processes, so that resources with the same name can be used in different boundaries.
+
+
+a. Openshift clusters are the kubernetes clusters which are maintained by the tools provided by the redhat openshift container platform such command line interface and OCP console and APIs and controller exposed by the OCP services.
+b. OCP is built on top of the redhat core OS and kubernetes and extends its feature by providing more features using the tools like , CLI , console and user interface to utiize the base kubernetes cluster.
+	OCP provde as PAAS which is the platform as a service means the user can run and host its aplication in the ocp cluster in different namesapces and no need to worry about the undelying infrastructre and resources.
+
+
+OCP Architecture : 
+
+
+- The base OS is Red Hat CoreOS. Red Hat CoreOS is a Linux distribution focused on providing an immutable operating system for container execution.
+
+- CRI-O is an implementation of the Kubernetes Container Runtime Interface (CRI) to enable using Open Container Initiative (OCI) compatible runtimes==-. CRI-O can use any container runtime that satisfies CRI: runc (used by the Docker service), libpod (used by Podman) or rkt (from CoreOS). Just like we java runtime to run the cimpile version of java code . This allow to run OCI compatible commands.
+
+- Kubernetes manages a cluster of hosts, physical or virtual, that run containers. It uses resources that describe multicontainer applications composed of multiple resources, and how they interconnect.
+
+- Etcd is a distributed key-value store, used by Kubernetes to store configuration and state information about the containers and other resources inside the Kubernetes cluster.
+
+- Custom Resource Definitions (CRDs) are resource(Operators) types stored in Etcd and managed by Kubernetes. These resource types form the state and configuration of all resources managed by OpenShift.
+
+- Containerized services fulfill many PaaS infrastructure functions, such as networking and authorization. RHOCP uses the basic container infrastructure from Kubernetes and the underlying container runtime for most internal functions. That is, most RHOCP internal services run as containers orchestrated by Kubernetes.
+
+- Runtimes and xPaaS are base container images ready for use by developers, each preconfigured with a particular runtime language or database. The xPaaS offering is a set of base images for Red Hat middleware products such as JBoss EAP and ActiveMQ. Red Hat OpenShift Application Runtimes (RHOAR) are a set runtimes optimized for cloud native applications in OpenShift. The application runtimes available are Red Hat JBoss EAP, OpenJDK, Thorntail, Eclipse Vert.x, Spring Boot, and Node.js The one we used from the catalog
+
+- RHOCP provides web UI and CLI management tools for managing user applications and RHOCP services. The OpenShift web UI and CLI tools are built from REST APIs which can be used by external tools such as IDEs and CI platforms.
