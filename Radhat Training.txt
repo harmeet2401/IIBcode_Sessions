@@ -26,7 +26,7 @@ quay.io : ----------------------------------------------------------------------
 
 lab Environment : ---------------------------------------------------------------
 
-Username	whknkc
+Username	RHT_OCP4_DEV_USERNAME whknkc
 Password	RHT_OCP4_DEV_PASSWORD	cad14e5aa9e849e7bc30
 API Endpoint	RHT_OCP4_MASTER_API	https://api.ap46a.prod.ole.redhat.com:6443
 Console Web Application		https://console-openshift-console.apps.ap46a.prod.ole.redhat.com
@@ -401,3 +401,18 @@ OCP Architecture :
 - Runtimes and xPaaS are base container images ready for use by developers, each preconfigured with a particular runtime language or database. The xPaaS offering is a set of base images for Red Hat middleware products such as JBoss EAP and ActiveMQ. Red Hat OpenShift Application Runtimes (RHOAR) are a set runtimes optimized for cloud native applications in OpenShift. The application runtimes available are Red Hat JBoss EAP, OpenJDK, Thorntail, Eclipse Vert.x, Spring Boot, and Node.js The one we used from the catalog
 
 - RHOCP provides web UI and CLI management tools for managing user applications and RHOCP services. The OpenShift web UI and CLI tools are built from REST APIs which can be used by external tools such as IDEs and CI platforms.
+
+15. now till now we learned how to use PODMAN to run and create containers just like we run containers using Docker . These two are runtime to create containerization architecture
+
+Now we will learn how to deploy and create application using OCP command line feature as follow : 
+	many commands like : check OCPCLICommand.txt
+	oc login 
+	oc get all
+	oc status
+	oc new-app 
+	oc new-built
+	oc get -o resourcename yaml 
+	oc create 
+	oc process
+	oc delete 
+	oc exec 

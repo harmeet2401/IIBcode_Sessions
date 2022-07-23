@@ -48,10 +48,15 @@ oc logs -f  bc/hello-world  :---------------------------------------------------
 oc logs -f  pod/hello-world  :---------------------------------------------------------------------------- to get the logs of pods : which will sho you the steps took to buld the image by cloning.
 oc get pods -n projectname/namespacename ----------------------------------------------------------------- this command will get the pods running in your OCP project or namespace.
 oc get rc  :--------------------------------------------------------------------------------------------- get the replication controller.
+oc get pv ----------------------------------------------------------------------------------------------- get the persistent volume available
 oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------------------------------- to export the yaml to a file for build config 
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
 oc get -o yaml svc/hello-world >> svc.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
 oc get -o yaml route/hello-world >> route.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
+oc get -o pv/pvaname >> py.yaml ------------------------------------------------------------------------------- to export the PV in a yaml format 
+oc create -f pv.yaml ------------------------------------------------------------------------------------------ this will create the pv using the yaml file we exported from above command 
+oc get -o pvc/pvcname >> pvc.yaml ----------------------------------------------------------------------------- to export the pvc in a yaml file 
+oc create -f pvc.yaml : --------------------------------------------------------------------------------------- to create a persistent volume claim using the yaml and changing it to create new PVC
 oc new-app https://github.com/harmeet2401/MyApi.git --as-deployment-config--------------------------------- to create DC for my app 
 oc rollout latest dc/hello-world   :-------------------------------------------------------------------------- this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
 oc rollback dc/hello-world :---------------------------------------------------------------------------------- this will roll back the deployment to the old version we terminated 
@@ -59,6 +64,8 @@ oc expose --port 8080 pod/hello-world-pod --------------------------------------
 oc expose svc/hello-world------------------------------------------------------------------------------------- this will expose the service and create a route 				
 oc expose svc/hello-world --hostname=mysqltestapptesturl.com ------------------------------------------------------------------------------------- this will expose the service and create a route 	and also assign a hostname of our choice		
 env ---------------------------------------------------------------------------------------------------------- show all env inside pod terminal 
+oc exec container_id  bash ----------------------------------------------------------------------------------- to run bash command inside the container 
+
 oc cp mytestfile.txt podname:/temp/--------------------------------------------------------------------------- this will copy the mytestfile.txt from host machine to the runing pod os the application . just like uploading a file to a pod.
 oc explain configmaps ---------------------------------------------------------------------------------------- to get the inbuild OCP documentation for configmaps.
 oc create configmap message-map --from-literal MESSAGE="HELLO FROM CONFIGMAPS" ------------------------------- to create a config maps
@@ -77,7 +84,10 @@ syntax : oc tag <original><destination> Command will create a new tag for the im
 oc new-build https://gitlab.com/practical-openshift/hello-world.git ---------------------------------------------- command to buld a BC using the docker file in case of git url 
 oc start-build bc/hello-world  ----------------------------------------------------------------------------------- this will trigger the build config  to create a build which will create an image or in open shift language image stream .
 oc cancel-build bc/hello-world ----------------------------------------------------------------------------------- to cancel the build 
-
+oc port-forward podname/podid 3306:3306 ---------------------------------------------------------------- to forward the local port to the port of a single pod.
+exmaple : 
+[user@host ~]$ oc port-forward mysql-openshift-1-glqrp 3306:3306
+The command forwards port 3306 from the developer machine to port 3306 on the db pod, where a MySQL server (inside a container) accepts network connections.
 ----For webhooks -------------
 oc get -o yaml bc/hello-world ------------------------------------------------------------------------------------ copy the secret under trigger tag ----> Generic 
 oc describe bc/hello-world --------------------------------------------------------------------------------------- copy the generic url from the describe output.
@@ -120,7 +130,7 @@ oc process hello-world  : ------------------------------------------------------
 Processing a file presnt locally without uploading the file to ocp server.	
 oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
 oc create -f process.yaml ------------------------------------------------------------------------------- to create and app using a yaml file on OCP 
-	
+
 oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
 which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
 		
@@ -315,6 +325,37 @@ start another container as name mysql-2 you will see that the second container w
 
  
 ------------------------VVVVIMP Question for the DB setup ----------------------------------------------------------------------------
+	
+	
+------------------------OC cli command Lab ins redhat  ----------------------------------------------------------------------------
+oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+oc new-project ${RHT_OCP4_DEV_USER}-mysql-openshift
+oc new-app --template=mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=mypa55 -p MYSQL_DATABASE=testdb -p MYSQL_ROOT_PASSWORD=r00tpa55 -p VOLUME_CAPACITY=10Gi
+oc status
+oc get pods 
+oc describe pod mysql-1-5vfn4
+oc get svc
+oc describe service mysql
+oc get pvc 
+oc port-forward mysql-1-5vfn4 3306:3306
+mysql -uuser1 -pmypa55 --protocol tcp -h localhost ------------ run it from another terminal 
+mysql > show databases; --- show the dbs
+		use databasename; ----- use th dbs
+		show tables;------------ show the tables 
+		
+oc delete project ${RHT_OCP4_DEV_USER}-mysql-openshift
+
+ oc expose service quotedb --name quote : to create a route we have to expose the service.		
+
+
+
+
+
+
+------------------------OC cli command Lab ins redhat  ----------------------------------------------------------------------------
+
+
+
 	
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
