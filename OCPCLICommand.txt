@@ -327,7 +327,7 @@ start another container as name mysql-2 you will see that the second container w
 ------------------------VVVVIMP Question for the DB setup ----------------------------------------------------------------------------
 	
 	
-------------------------OC cli command Lab ins redhat  ----------------------------------------------------------------------------
+------------------------OC cli command Lab to deploy mysql using new-app command   ----------------------------------------------------------------------------
 oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
 oc new-project ${RHT_OCP4_DEV_USER}-mysql-openshift
 oc new-app --template=mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=mypa55 -p MYSQL_DATABASE=testdb -p MYSQL_ROOT_PASSWORD=r00tpa55 -p VOLUME_CAPACITY=10Gi
@@ -345,14 +345,25 @@ mysql > show databases; --- show the dbs
 		
 oc delete project ${RHT_OCP4_DEV_USER}-mysql-openshift
 
- oc expose service quotedb --name quote : to create a route we have to expose the service.		
+ oc expose service quotedb --name quote : to create a route we have to expose the service.
 
 
+------------------------OC cli command Lab to deploy mysql using new-app command   ----------------------------------------------------------------------------
 
+------------------------OC cli command Lab to create route for a service    ----------------------------------------------------------------------------
 
-
-
-------------------------OC cli command Lab ins redhat  ----------------------------------------------------------------------------
+oc login -u ${RHT_OCP4_DEV_USER} -p  ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+oc new-project ${RHT_OCP4_DEV_USER}-route
+oc new-app --docker-image=quay.io/redhattraining/php-hello-dockerfile --name php-helloworld
+oc get pods -w
+oc logs -f php-helloworld-74bb86f6cb-zt6wl
+oc get svc
+oc describe svc/php-helloworld
+oc expose svc/php-helloworld : it will create a route and allow to access the service from a url from internet 
+oc delete route/php-helloworld
+oc expose svc/php-helloworld --name=${RHT_OCP4_DEV_USER}-xyz
+curl  ${RHT_OCP4_DEV_USER}-xyz-${RHT_OCP4_DEV_USER}-route.${RHT_OCP4_WILDCARD_DOMAIN}
+------------------------OC cli command Lab to create route for a service    ----------------------------------------------------------------------------
 
 
 
