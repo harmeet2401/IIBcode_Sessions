@@ -9,7 +9,7 @@ Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
 username : harmeet2401
 password : Gogi!321
 
-token : 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
+token : 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
 
 Git hub  :-----------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ lab Environment : --------------------------------------------------------------
 
 
 
-
+git clone https://github.com/harmeet2401/DO180-apps
 
 1. Why we need the containerisation technology ?
 - In traditional OS where we have a single host machine and single VM on a single machine . The shared libereries and dependencies are entangled with the OS installd on top of the OS of host machine .
@@ -437,3 +437,14 @@ benefits of S2I :
 2.  Easy patching : As S2I will provide the base image for the container so , if there is an update for the base image it will automatically updates the base image and apply it to all the apps using the base image.
 3.  Speed : it will implement all complex features by not creating multiple layers.
 4. provide shared system of images and scripts which can be customised as per the need.
+
+
+When we run below command : 
+oc new-app . or oc new-app --name=myapp gitrepo . Following resources will be created : 
+1. First the image stresm from and where the input base image will be pulled and output build image will be pushed .
+2. Second the Build config which will be used to package the builder image and push it to theimage stream .
+3. third deployment which will deploy the image build to the deployment container and the yaml created will contains the autotrigger of deployment in case any changes comes to follow : 
+	- configuration change 
+	- image stream change when ever a new code is pushed.
+	
+	
