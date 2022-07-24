@@ -416,3 +416,24 @@ Now we will learn how to deploy and create application using OCP command line fe
 	oc process
 	oc delete 
 	oc exec 
+	
+16. S2I is the source to image feature provided by OCP .
+As we know using the dockerfile or containerfile we can build the source code and create an image and ru that image ina container as an app.
+But using S2I we can clone the sourcecode from the git repositories push it to the builder container with desired language builder image and create an image and push it to the image container . Then deploy it to the deployment pod as an aplication.
+																											pulls S2I asseble scripts as per the lanuage of the code from S2I registry		
+																												 |
+                                                                                                                 |pulls
+                                                                                                                 |
+																													       push
+			oc new-app sourcecoderepositories ------->S2I features ------> Builder configuration (BC) -----> builder pod -----> image resistry ------> deploy 
+																											  |						
+																									clones    | 	            
+																											  |					   			
+																											pulls source code 
+																											from git 
+																											
+benefits of S2I : 
+1.  Developer focus more on developing the app using the dev tools and no need to focus on Dockerfile and containerfile creation 
+2.  Easy patching : As S2I will provide the base image for the container so , if there is an update for the base image it will automatically updates the base image and apply it to all the apps using the base image.
+3.  Speed : it will implement all complex features by not creating multiple layers.
+4. provide shared system of images and scripts which can be customised as per the need.

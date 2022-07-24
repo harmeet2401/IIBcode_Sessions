@@ -96,9 +96,25 @@ Mention that in you git repo ----> settings -----> webhook------> add
 
 oc new-build https://gitlab.com/practical-openshift/hello-world.git#update-message ------------------------------- to create a BC using hello-world git from branch update-message.
 oc new-build https://gitlab.com/practical-openshift/labs.git  --context-dir hello-world -------------------------- hello-world is the folder in it .
+oc new-app . ----------------------------------------------------------------------------------------------------- this will create an application using the source code in current directory 
 oc set build-hook bc/hello-world --post-commit --script="echo hello from post build hook"------------------------- it will run a script in this case a echo command to print something in build config to check if the build is running or not .
 oc new-app ruby~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used ruby keyword with ~ tilda to specifically tell the ocp to use the ruby S2I scripts to build the ruby app.
+oc new-app -i ruby https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used ruby keyword with ~ tilda to specifically tell the ocp to use the ruby S2I scripts to build the ruby app.
 oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
+oc new-app -i python https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
+--------------------------------- is S2I is not mentioned using the -i or ~(tilda)
+new-app attempts to determine which language builder to use based on the presence of certain files in the root of the repository:
+
+Language	Files
+Ruby	Rakefile Gemfile config.ru
+Java EE	pom.xml
+Node.js	app.json package.json
+PHP	index.php composer.json
+Python	requirements.txt config.py
+Perl	index.pl cpanfile
+
+---------------------------------
+oc new-app https://gitlab.com/practical-openshift/hello-world.git#update-message ------------------------------------this will create an app using the source code from update-message branch .
 oc set volumes dc/myapi --add --type emptyDir --mount-path /empty-dir-demo ----------------------------------------- to mount the empty volume to the Dc. this is not persistent it will be destroyed once pod died.
 oc set volumes dc/myapi --add --type persistentVolumeClaim --claim-name pv1 --mount-path /data --------------------- to mount the persistentVolumeClaim to the DC
 oc create configmap cm-volumes --from-literal file.txt=file="this config is for volumes"  -------------------------- file.txt is the key you can mention anytin .
