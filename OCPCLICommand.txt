@@ -400,6 +400,23 @@ oc start-build php-helloworld --------------------------------------------------
 curl -s ${RHT_OCP4_DEV_USER}-helloworld-${RHT_OCP4_DEV_USER}-s2i. ${RHT_OCP4_WILDCARD_DOMAIN}
 --------------------------------OC CLI LAB to create new app using th S2I scripts-----------------------------------------------------------------------
 
+
+----------------------------------------------------------------------Lab Webconsole using S2I------------------------------------------------------------------------
+login 
+create projetc 
+Developer catalog 
+select the builder imaeg 
+enter the git repo 
+git ref : branch name : name
+create 
+
+source /usr/local/etc/ocp4.config
+oc login -u ${RHT_OCP4_DEV_USER} -p  ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+oc new-project ${RHT_OCP4_DEV_USER}-ocp
+oc new-app  --name=temps  php:7.3 https://github.com/RedHatTraining/DO180-apps/ --context-dir temps ---------- to create an app 
+or 
+oc new-app  --name=temps  php:7.3~https://github.com/RedHatTraining/DO180-apps/ --context-dir temps
+----------------------------------------------------------------------Lab Webconsole------------------------------------------------------------------------
 	
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------

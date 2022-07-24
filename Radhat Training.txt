@@ -9,7 +9,7 @@ Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
 username : harmeet2401
 password : Gogi!321
 
-token : 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
+token : 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
 
 Git hub  :-----------------------------------------------------------------------
 
@@ -447,4 +447,5 @@ oc new-app . or oc new-app --name=myapp gitrepo . Following resources will be cr
 	- configuration change 
 	- image stream change when ever a new code is pushed.
 	
-	
+
+17. Labs using the web console .	
