@@ -449,3 +449,19 @@ oc new-app . or oc new-app --name=myapp gitrepo . Following resources will be cr
 	
 
 17. Labs using the web console .	
+
+
+18. Multi container : 
+
+Now this topic says that how to allow multi container application to communicate with each other 
+1. By port forwarding which we know how we can do . Example if the container app is running on localhost: 8080 then to access it in case of rootless container we have to forward the port from host to the applcation 
+
+like 80:8080 which means the any request coming on hostserver at port 80 will be redirected to the 8080 port of container app.
+
+2. TO DO LIST application 
+
+	it contains following 
+		1. Web browser to browse the user web pages 
+		2. Front end : which the view page for any web application and may consists of HTML5 pages and javascript code 
+		3. backend application which can be a REST api that gets request coming from frontend 
+		4. data base container that will get interacted by the bakckend container which need some info out of it.

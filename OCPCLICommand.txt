@@ -138,6 +138,7 @@ oc get hpa  --------------------------------------------------------------------
 oc delete hpa ------------------------------------------------------------------------------------------- will delete the HPA
 oc export all --as-template=myapi_template ------------------------------------------------------------- to  export the existing project in a template form .
 oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc . this command creats the template and upload it to OCP
+VVimp ******* read this NOTE : Template is an another resource we can create it using a yaml and then we can use that template on ocp to create an app . OR we can also use the yaml file with -f to create app and its resources.
 oc get template ----------------------------------------------------------------------------------------- to get the template created 
 oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
 oc create -f process.yaml  ------------------------------------------------------------------------------ to create an app using the template file without uploading it to ocp
@@ -145,7 +146,7 @@ oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------
 oc process hello-world  : -------------------------------------------------------------------------------this will show the template as a json  ,hello-world is the template name 
 Processing a file presnt locally without uploading the file to ocp server.	
 oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
-oc create -f process.yaml ------------------------------------------------------------------------------- to create and app using a yaml file on OCP 
+oc create -f process.yaml ------------------------------------------------------------------------------- to create an app using a yaml file on OCP .
 
 oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
 which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
@@ -166,7 +167,7 @@ oc rsh podname -----------------------------------------------------------------
 
 
 "oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a yamls file 
-oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- creats a template 
+oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- create a deployment and deploy an app using yaml file which is a template
 "oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a tempate created by above command  
 oc get quota -n meet14764-dev --------------------------------------------------------------------------------- this will give you the list  of  resource quota assigned to the project .
 oc describe quota core-object-counts -n meet14764-dev  ----------------------------------------------------------- this will give youthe list of core-objec count quota assigned to the project 
@@ -417,6 +418,40 @@ oc new-app  --name=temps  php:7.3 https://github.com/RedHatTraining/DO180-apps/ 
 or 
 oc new-app  --name=temps  php:7.3~https://github.com/RedHatTraining/DO180-apps/ --context-dir temps
 ----------------------------------------------------------------------Lab Webconsole------------------------------------------------------------------------
+
+---------------------------------------Deploying the Web Application and MySQL on Linux Containers----------------------------------------------------------
+ip -br addr list | grep eth0  ------------------------------------------------- Command to see the host ip address and port.
+cat /home/student/DO180/labs/multicontainer-design/deploy/nodejs/nodejs-source/models/db.js ------- see the content
+cat  /home/student/DO180/labs/multicontainer-design/deploy/nodejs/build.sh ---------- run the build.sh file to use the ContainerFile to create an image.
+cd ~/DO180/labs/multicontainer-design/deploy/nodejs
+./build.sh
+podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"
+Edit the run.sh file located at /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked to insert the podman run
+podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v $PWD/work/data:/var/lib/mysql/data -p 30306:3306 registry.redhat.io/rhel8/mysql-80:1 ------ to run the mysql image 
+podman run -d --name todoapi -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -p 30080:30080 do180/todonodejs --- command to run todo node js image
+./run.sh --------------- this script is used to run the images and two containers formed by above two commands
+podman ps --format="table {{.ID}} {{.Names}} {{.Image}} {{.Status}}" ------------ to see th pod started or not 
+mysql -uuser1 -h 172.25.250.9  -pmypa55 -P30306 items < /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked/db.sql
+podman exec -it todoapi env----------------------- to see th exposed env variable 
+curl -w "\n" http://127.0.0.1:30080/todo/api/items/1 ------------ curl to the todoapi app 
+
+---------------------------------------Deploying the Web Application and MySQL on Linux Containers----------------------------------------------------------
+
+
+--------------------------------------Guided Exercise: Creating an Application on OpenShift-----------------------------------------------------------------
+source /usr/local/etc/ocp4.config
+oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+oc new-project ${RHT_OCP4_DEV_USER}-application
+cd /home/student/DO180/labs/multicontainer-application --------------- to see the yaml file a template 
+oc create  -f todo-app.yml-------------------------------------------- to create and deploy app using the template file
+oc port-forward mysql 3306:3306 -------------------------------------- host machine port forwarding to container port 
+cd /home/student/DO180/labs/multicontainer-application
+mysql -uuser1 -h 127.0.0.1 -pmypa55 -P3306 items < db.sql------------- to run the sql file for the db installed cntainer.
+oc expose service todoapi ----------------------------------------- create a route to access the container.
+oc status | grep -o "http:.*com" ---------------------------------- to get the route url 
+curl -w "\n" > routeurl(oc status se lelo )/todo/api/items/1 ---- curl to the todoapi 
+
+--------------------------------------Guided Exercise: Creating an Application on OpenShift-----------------------------------------------------------------
 	
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
