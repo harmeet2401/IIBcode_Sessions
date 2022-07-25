@@ -465,3 +465,17 @@ like 80:8080 which means the any request coming on hostserver at port 80 will be
 		2. Front end : which the view page for any web application and may consists of HTML5 pages and javascript code 
 		3. backend application which can be a REST api that gets request coming from frontend 
 		4. data base container that will get interacted by the bakckend container which need some info out of it.
+		
+19. Deploying a multi container application on OCP  env using a Template 		
+
+
+What is a template ? 
+A template defines a set of related resources to be created together, as well as a set of application parameters. The attributes of template resources are typically defined in terms of the template parameters, such as a resource's name attribute.
+
+
+using a template means with a yaml file we can run the command  
+oc create -f template.yaml , to get the yaml file we can use the 
+oc get -o all -yml >> template.yaml file .
+oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
+which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc
+oc get template mysql-persistent -n openshift -o yaml---------------------------------------------------- to get the template in a yaml formatt

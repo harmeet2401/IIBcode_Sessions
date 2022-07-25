@@ -53,7 +53,7 @@ oc get -o yaml bc/hello-world >> bc.yaml ---------------------------------------
 oc get -o yaml dc/hello-world >> dc.yaml ---------------------------------------------------------------- to export the yaml to a file for deployment-config  
 oc get -o yaml svc/hello-world >> svc.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
 oc get -o yaml route/hello-world >> route.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
-oc get -o pv/pvaname >> py.yaml ------------------------------------------------------------------------------- to export the PV in a yaml format 
+oc get -o yaml pv/pvaname >> py.yaml ------------------------------------------------------------------------------- to export the PV in a yaml format 
 oc create -f pv.yaml ------------------------------------------------------------------------------------------ this will create the pv using the yaml file we exported from above command 
 oc get -o pvc/pvcname >> pvc.yaml ----------------------------------------------------------------------------- to export the pvc in a yaml file 
 oc create -f pvc.yaml : --------------------------------------------------------------------------------------- to create a persistent volume claim using the yaml and changing it to create new PVC
@@ -137,17 +137,17 @@ oc autoscale dc/hello-world --min 1 --max 10 --cpu-percent=80-------------------
 oc get hpa  --------------------------------------------------------------------------------------------- will show you the targets 0%80% minpods and maxpods ,replicas and AGE
 oc delete hpa ------------------------------------------------------------------------------------------- will delete the HPA
 oc export all --as-template=myapi_template ------------------------------------------------------------- to  export the existing project in a template form .
-oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc . this command creats the template and upload it to OCP
+oc create -f hello-world-template.yaml------------------------------------------------------------------- upload to OCP servers . once this is uploaded we can update or use it to create deplpments , bc , svc , route etc . this command creats the template and upload it to OCP and you use (oc process templatename)
 VVimp ******* read this NOTE : Template is an another resource we can create it using a yaml and then we can use that template on ocp to create an app . OR we can also use the yaml file with -f to create app and its resources.
 oc get template ----------------------------------------------------------------------------------------- to get the template created 
 oc new-app templatenamecreated--------------------------------------------------------------------------- to cretae an app(dc,bc,service , route etc )
-oc create -f process.yaml  ------------------------------------------------------------------------------ to create an app using the template file without uploading it to ocp
 oc new-app hello-world  -p MESSAGE="HELLO FROM OTHER PARMS2 !!!!!! "------------------------------------- we are passing parameter value for variable/paramter named MESSAGE . hello-world is the template name 
 oc process hello-world  : -------------------------------------------------------------------------------this will show the template as a json  ,hello-world is the template name 
 Processing a file presnt locally without uploading the file to ocp server.	
 oc process hello-world -o yaml -p MESSAGE="processing the yaml file ">> hello-world-template.yaml
-oc create -f process.yaml ------------------------------------------------------------------------------- to create an app using a yaml file on OCP .
-
+oc process -f <filename> -------------------------------------------------------------------------------- to create the resources using the file . in this command shows the filename as a JSON or a YAML.
+oc process -o yaml -f <filename> ------------------------------------------------------------------------ to create the resources using the file . in this command shows the filename is  YAML.
+oc process -o yaml -f filename  > myapp.yaml ------------------------------------------------------------ this command will create the resources and write the output resources printed on console to a file myapp.yaml 
 oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
 which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
 		
@@ -166,9 +166,10 @@ oc rsh podname -----------------------------------------------------------------
 		VERSION : 5.7.12
 
 
-"oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a yamls file 
-oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- create a deployment and deploy an app using yaml file which is a template
-"oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f -" ------ to create a mysql app using a tempate created by above command  
+oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a yamls file and push the parameter value fro outside using command 
+oc process openshift//mysql-persistent -p MYSQL_USER=dev -p MYSQL_PASSWORD=$P4SSD -p MYSQL_DATABASE=bank -p VOLUME_CAPACITY=10Gi | oc create -f - ------------------ to create the resources using template : mysql-persistent and namespace : openshift separated by double slash(//)
+oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- to publish the application template to oc  
+oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a tempate created by above command  
 oc get quota -n meet14764-dev --------------------------------------------------------------------------------- this will give you the list  of  resource quota assigned to the project .
 oc describe quota core-object-counts -n meet14764-dev  ----------------------------------------------------------- this will give youthe list of core-objec count quota assigned to the project 
 
@@ -443,7 +444,7 @@ source /usr/local/etc/ocp4.config
 oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
 oc new-project ${RHT_OCP4_DEV_USER}-application
 cd /home/student/DO180/labs/multicontainer-application --------------- to see the yaml file a template 
-oc create  -f todo-app.yml-------------------------------------------- to create and deploy app using the template file
+oc create  -f todo-app.yml--------------------------------------------  to publish the application template to oc  
 oc port-forward mysql 3306:3306 -------------------------------------- host machine port forwarding to container port 
 cd /home/student/DO180/labs/multicontainer-application
 mysql -uuser1 -h 127.0.0.1 -pmypa55 -P3306 items < db.sql------------- to run the sql file for the db installed cntainer.
@@ -453,5 +454,27 @@ curl -w "\n" > routeurl(oc status se lelo )/todo/api/items/1 ---- curl to the to
 
 --------------------------------------Guided Exercise: Creating an Application on OpenShift-----------------------------------------------------------------
 	
+	
+----------------------Deploying a multi container application on OCP  env using a Template ------------------------------------------------------------
+oc get template -n openshift ------------------------------- to get the templates on a project. 
+oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
+which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc 
+oc get template mysql-persistent -n openshift -o yaml --------------------------------------------------- to get the template in a yaml  or you can use >> to get that in a yaml file , -n shows the OCP project 
+oc create -f todo-template.yaml ------------------------------------------------------------------------- to publish the application template to oc .
+oc describe template mysql-persistent -n openshift ------------------------------------------------------ to get the description of a template 
+oc process --parameters mysql-persistent -n openshift --------------------------------------------------- mysql-persistent is the template name 
+
+template name example : 3scale-gateway
+
+
+
+
+
+
+
+
+
+
+----------------------Deploying a multi container application on OCP  env using a Template ------------------------------------------------------------	
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
