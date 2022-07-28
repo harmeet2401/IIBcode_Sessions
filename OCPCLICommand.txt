@@ -115,6 +115,7 @@ Perl	index.pl cpanfile
 
 ---------------------------------
 oc new-app https://gitlab.com/practical-openshift/hello-world.git#update-message ------------------------------------this will create an app using the source code from update-message branch .
+oc get events ------------------------------------------------------------------------------------------------------To read OpenShift events, use the get subcommand with the events resource type
 oc set volumes dc/myapi --add --type emptyDir --mount-path /empty-dir-demo ----------------------------------------- to mount the empty volume to the Dc. this is not persistent it will be destroyed once pod died.
 oc set volumes dc/myapi --add --type persistentVolumeClaim --claim-name pv1 --mount-path /data --------------------- to mount the persistentVolumeClaim to the DC
 oc create configmap cm-volumes --from-literal file.txt=file="this config is for volumes"  -------------------------- file.txt is the key you can mention anytin .
@@ -202,7 +203,7 @@ podman inspect -f "{{range .Mounts}}{{println .Destination}}{{end}}" CONTAINER_N
 podman commit mysql-basic(container Name running )  mysql-custom(new container image)------------------ to commit the changes to a new container. VVVVIMP
 podman tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG] example  : podman tag mysql-custom devops/mysql  or podman tag mysql-custom devops/hsingh/mysql:2.0 ---------------- To assign the tag to it.
 podman push devops/hsingh/mysql:2.0 ----------------------------------------------------------------- push images to the repository.
-
+podman exec apache-container cat /var/log/httpd/error_log ------------------------------------------- to run the cat command or ant other linux command we can use exec 
 Many Podman flags also have an alternative long form; some of these are explained below:
 		-t is equivalent to --tty, meaning a pseudo-tty (pseudo-terminal) is to be allocated for the container.		
 		-i is the same as --interactive. When used, standard input is kept open into the container.		
@@ -240,7 +241,14 @@ podman stop official-httpd -----------------------------------------------------
 podman commit -a 'harmeet_singh4' official-httpd do180-custom-httpd -------------------------------------------------------------------- this will create a new image outof the running apache container.	
 podman tag localhost/do180-custom-httpd quay.io/harmeet_singh4/do180-custom-httpd:v1.0 -------------------------------- tagging the image we create above to a new tag 
 podman pull quay.io/harmeet_singh4/do180-custom-httpd:v1.0 ------------------------------------------------------------ pulling the images we commit , tagged and push to the quay.io 
-	
+podman run -it -v /bin:/bin image /bin/bash --------------------------------------------------------------------------- this will map the host folder bin to the container folder bin and also run a container with bash mode opened.
+podman cp standalone.conf todoapi:/opt/jboss/standalone/conf/standalone.conf ------------------------------------------ to copy the file standalone.conf to the pod (todoapi) folder /opt/jboss/standalone/conf/
+podman cp todoapi:/opt/jboss/standalone/conf/standalone.conf . -------------------------------------------------------- to copy the file from the container to the host 
+podman exec -i <container>  mysql -uroot -proot < /path/on/host/db.sql < db.sql --------------------------------------- to run the sql file from the host machine into the mysql container
+
+ podman exec -it <containerName> sh -c 'exec mysqldump -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD" items' > db_dump.sql----------- to get the dump out of the container to the host machine
+
+
 podman pull quay.io/redhattraining/nginx:1.17
 podman images 
 podman run -d -p 8080:80 --name=official-nginx quay.io/redhattraining/nginx:1.17
@@ -529,7 +537,20 @@ then add the start application command in the package.json which is similar to w
 - curl -w "\n" http://nodejs-hello-${RHT_OCP4_DEV_USER}-nodejs.${RHT_OCP4_WILDCARD_DOMAIN}
 
 
+-----------------------------------Guided Excercise--------------------------------------------------
 
+-------------------------------Guided Exercise: Configuring Apache Container Logs for Debugging------------------------
+
+podman build -t troubleshoot-container .  -------------------------- this will build the Dockerfile in the same folder 
+
+
+
+
+
+
+
+
+-------------------------------Guided Exercise: Configuring Apache Container Logs for Debugging------------------------
 
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
