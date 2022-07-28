@@ -9,7 +9,7 @@ Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
 username : harmeet2401
 password : Gogi!321
 
-token : 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
+token : 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
 
 Git hub  :-----------------------------------------------------------------------
 
@@ -418,8 +418,18 @@ Now we will learn how to deploy and create application using OCP command line fe
 	oc exec 
 	
 16. S2I is the source to image feature provided by OCP .
-As we know using the dockerfile or containerfile we can build the source code and create an image and ru that image ina container as an app.
-But using S2I we can clone the sourcecode from the git repositories push it to the builder container with desired language builder image and create an image and push it to the image container . Then deploy it to the deployment pod as an aplication.
+a. As we know using the dockerfile or containerfile we can build the source code and create an image and run that image in a container as an app.
+b. But using S2I we can clone the sourcecode from the git repositories push it to the builder container with desired language builder image and create an image and push it to the image container . 
+c. Then deploy it to the deployment pod as an aplication. It will automatically create the image based on the programming language used to code the app or service.
+
+d. composed of two major steps:
+
+- Build step: Responsible for compiling source code, downloading library dependencies, and packaging the application as a container image. Furthermore, the build step pushes the image to the OpenShift registry for the deployment step. The BuildConfig (BC) OpenShift resources drive the build step.
+
+- Deployment step: Responsible for starting a pod and making the application available for OpenShift. This step executes after the build step, but only if the build step succeeded. The Deployment OpenShift resources drive the deployment step.
+
+VVVIMP : The based image used in S2I setup is Red Hat Enterprise Linux .
+
 																											pulls S2I asseble scripts as per the lanuage of the code from S2I registry		
 																												 |
                                                                                                                  |pulls

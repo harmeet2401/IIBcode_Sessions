@@ -166,10 +166,12 @@ oc rsh podname -----------------------------------------------------------------
 		VERSION : 5.7.12
 
 
-oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a yamls file and push the parameter value fro outside using command 
-oc process openshift//mysql-persistent -p MYSQL_USER=dev -p MYSQL_PASSWORD=$P4SSD -p MYSQL_DATABASE=bank -p VOLUME_CAPACITY=10Gi | oc create -f - ------------------ to create the resources using template : mysql-persistent and namespace : openshift separated by double slash(//)
+oc process -f mysql.yaml -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a yamls file and push the parameter value fro outside using command . The command after pipe runs first push the output to the first command before pipe which is a template and create the resources.
+oc process openshift//mysql-persistent -p MYSQL_USER=dev -p MYSQL_PASSWORD=$P4SSD -p MYSQL_DATABASE=bank -p VOLUME_CAPACITY=10Gi | oc create -f - ------------------ to create the resources using template : mysql-persistent and namespace : openshift separated by double slash(//) .  The command after pipe runs first push the output to the first command before pipe and create the resources.
+oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a tempate created by above command . The command after pipe runs first push the output to the first command before pipe and create the resources. 
+oc new-app --template=mysql-persistent -p MYSQL_USER=dev -p MYSQL_PASSWORD=$P4SSD -p MYSQL_DATABASE=bank -p VOLUME_CAPACITY=10Gi -------------------- to create the resources by giving the templatename (--template)
 oc create -f mysql.yaml -------------------------------------------------------------------------------------------------- to publish the application template to oc  
-oc process mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=password -p MYSQL_DATABASE=books  | oc create -f - ------ to create a mysql app using a tempate created by above command  
+
 oc get quota -n meet14764-dev --------------------------------------------------------------------------------- this will give you the list  of  resource quota assigned to the project .
 oc describe quota core-object-counts -n meet14764-dev  ----------------------------------------------------------- this will give youthe list of core-objec count quota assigned to the project 
 
@@ -251,7 +253,7 @@ curl 0.0.0.0:8080
 podman stop official-nginx
 podman commit -a 'harmeet_singh4' official-nginx do180/mynginx:v1.0-SNAPSHOT--------------------------------------------- tagged the images 
 
-podman run -d -p 8080:80 --name= official-nginx-dev do180/mynginx:v1.0-SNAPSHOT------------------------------------------ create a container using thenew tagged image.
+podman run -d -p 8080:80 --name=official-nginx-dev do180/mynginx:v1.0-SNAPSHOT------------------------------------------ create a container using thenew tagged image.
 podman exec -it official-nginx-dev /bin/bash
 	bash&:> echo "DO180 page" > /usr/share/nginx/html/index.html
 	bash&:>exit
@@ -470,9 +472,64 @@ oc process -f test.yaml ------------------------------------------------------ t
 oc process -f test.json ------------------------------------------------------ to create the resources using the .json file
 oc process templatename ------------------------------------------------------ to create resources using the template published to the OCP
 
-
-
-
 ----------------------Deploying a multi container application on OCP  env using a Template ------------------------------------------------------------	
+
+----------------------------- Guided Exercise: Creating an Application with a Template------------------------------------------------------------------
+cd /home/student/DO180/labs/multicontainer-openshift
+oc process -f todo-template.json | oc create -f - ------------------------ to create the resources using the template create by the command after pipe.
+oc get pods -w  ---------------------------------------------------------- to get the pods on watch 
+oc port-forward mysql 3306:3306 ------------------------------------------ port forwarding host port to the contaier port 
+mysql -uuser1 -h 127.0.0.1 -pmypa55 -P3306 items < db.sql ---------------- to run the mysql command on the port forwarded 3306 on localhost on host machine .
+oc exec -it mysql /bin/bash ---------------------------------------------- to do the bash into the container on ocp 
+oc expose service todoapi ------------------------------------------------ to expose the service to create a route
+curl route url ----------------------------------------------------------- to it the route 
+----------------------------- Guided Exercise: Creating an Application with a Template------------------------------------------------------------------
+
+-----------------------------------Lab: Deploying Multi-Container Applications ---------------------------------------------------------------------------------
+
+podman build -t do180-mysql-80-rhel8 . ------------------------------------ to build an image using the Containerfile or dockerfile
+podman tag do180-mysql-80-rhel8 quay.io/harmeet_singh4/do180-mysql-80-rhel8 ------------------- tag the image 
+podman push quay.io/harmeet_singh4/do180-mysql-80-rhel8 --------------------------------------- push the images and if : is notmentioned than the tag of latest is set 
+
+podman build -t do180-quote-php . ------------------------------------------ to build an another image 
+podman tag do180-mysql-php quay.io/harmeet_singh4/do180-mysql-php ------------------- tag the image 
+podman push quay.io/harmeet_singh4/do180-mysql-php --------------------------------------- push the images and if : is notmentioned than the tag of latest is set 
+
+oc create -f quote-php.yaml ---------------------------------------------------------------- to publish the template to the oc to be used by other developer.
+oc process quote-php-persistent -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER}  | oc create -f - ------ to process the template to create the resources 
+oc get pods -w ----------------------------------------------------------------------------- to get the pods on watch 
+oc expose quote-php --------------------------------------------------------------  to create the route and service .
+curl -w "\n" http://quote-php-${RHT_OCP4_DEV_USER}-deploy.${RHT_OCP4_WILDCARD_DOMAIN}
+-----------------------------------Lab: Deploying Multi-Container Applications ---------------------------------------------------------------------------------
+
+oc adm policy add-scc-to-user anyuid -z default --------------------------------- To relax the OC project security 
+
+
+
+----------------------------------Guided excercise : -------------------------------------------------
+how to trouble shoot the issuse  
+- oc login -u "${RHT_OCP4_DEV_USER}" -p "${RHT_OCP4_DEV_PASSWORD}"
+
+- oc new-app --context-dir=nodejs-helloworld https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps#troubleshoot-s2i -i nodejs:12 --name nodejs-hello --build-env npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy
+
+Above commad will create an error of "No matching express~4.4.2" .
+
+- oc start-build nodejs-hello 
+
+	results : [student@workstation DO180-apps]$ oc logs nodejs-hello-7b99966464-fw4r8
+...output omitted...
+npm info using npm@6.14.8
+npm info using node@v12.19.1
+npm ERR! missing script: start
+...output omitted...
+
+- oc get route -o yaml : ------------------------------------------------ to see the yaml form of the route created
+
+then add the start application command in the package.json which is similar to writting the ENTRY point in dockerfile.
+- curl -w "\n" http://nodejs-hello-${RHT_OCP4_DEV_USER}-nodejs.${RHT_OCP4_WILDCARD_DOMAIN}
+
+
+
+
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
