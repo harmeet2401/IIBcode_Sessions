@@ -9,7 +9,7 @@ Creds for Git repo : https://github.com/harmeet2401/IIBcode_Sessions
 username : harmeet2401
 password : Gogi!321
 
-token : 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
+token : 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
 
 Git hub  :-----------------------------------------------------------------------
 
@@ -40,6 +40,10 @@ password : student
 
 lab Environment : ---------------------------------------------------------------
 
+
+
+VVVVIMP   : PODMAN IS SIMILAR TO DOCKER CLI WHICH IS USED TO CREATE CONTAINERS ON LOCAL SYSTEM . SO ONLY CONTAINER  RELATED COMMANDS NO PODS GET
+			OC IS THE CLI TO CREATE CONTAINER INSIDE THE POD ON OCP CLUSTER . ONLY PODS RELATED COMMAND NO CONTAINER  COMMAND 
 
 
 git clone https://github.com/harmeet2401/DO180-apps
@@ -489,3 +493,29 @@ oc get -o all -yml >> template.yaml file .
 oc get -o yaml dc,bc,is,svc,route >> complete_arch_template_app.yaml    ---------------------------------> now once you export this to a file it contains list so you have to convert it to a template 
 which need some changes to the yaml file exported out  , item to and remove the status object , annotations , , create datetime , UID etc
 oc get template mysql-persistent -n openshift -o yaml---------------------------------------------------- to get the template in a yaml formatt
+
+
+20. Implementing Microservices Architecture
+
+Microservices based architecture involves running the smallest process available in a sepearate container in an isolated space. many advantages are avaiable : 
+
+ 1. We can scale up and down only that part of the process which is running in thecontainer 
+ 2. Proper hardware utilization which is possible because the smaller process can be placed properly into a thread utilizing the hardware.
+ 3. Easy updates for the application . example : java updates , web server updates etc . Updates made for one porocess o running in one container will not effect the functionality of the otheer cotainer running .
+
+Monolithic appriach has evrything in one box which made it difficult to implement above advantages for the application .
+
+ 4 . two ways to break the architecture bsed on 
+			a. Tier (app layers )
+				The most common tiers that the architects divide the application stack is presentation layr , business layer (back end logic) and persistence layer(ddb layer).
+				this helps the user to extend the architecture to have two or three presentation layers like , a web application can also have another mobile app as another presentation layer both of them we will 
+				be hitting the same business logic utilizing the same persistence layer .
+			b. Services : which is the application functionality
+				The most common example of this is the shopping cart which can have 4 srvices , like , shopinh cart , online service and delivery services .
+					Now each of the this service cane be placed in a separate container as a microservICES AND help in utilizing the advantages provided by the microservICES architecture
+					
+					
+	TODoLIST application : So this is a web application which is better to be architected using the tier technique , as we know that while separating this app as per th tiers and keeping each tier can be placd in separate container or microsevices .
+								
+									browser ----------------> html page front end (presentation tier )----------------> business layer (back end logic )----------------> database layer(persistence tier.)
+

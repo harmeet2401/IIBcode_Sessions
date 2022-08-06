@@ -4,7 +4,7 @@ oc get pods ------------------------------------------------------------------- 
 oc project nameofproject ------------------------------------------------------ to switch to a new project and start using it.
 oc get projects --------------------------------------------------------------- to get to know which projects are there in ocp cluster.
 oc project -------------------------------------------------------------------- to get to which project currently using .
-oc delete all --ll ------------------------------------------------------------ this will delete all the resources (Deployment ,deployment config , services , route , image stream , buld config , build )
+oc delete all --all ------------------------------------------------------------ this will delete all the resources (Deployment ,deployment config , services , route , image stream , buld config , build )
 oc delete secret --all --------------------------------------------------------  this will delete all the secrets 
 oc new-app jenkins-ephemeral(this is the image name) --------------------------  this will create a deployement config and run a pod for jenkins server .
 	Will create below resources : 
@@ -495,7 +495,7 @@ curl route url ----------------------------------------------------------- to it
 
 -----------------------------------Lab: Deploying Multi-Container Applications ---------------------------------------------------------------------------------
 
-podman build -t do180-mysql-80-rhel8 . ------------------------------------ to build an image using the Containerfile or dockerfile
+podman build -t do180-mysql-80-rhel8 . ------------------------------------ to build an image using the Containerfile or dockerfile and name of the image as do180-mysql-80-rhel8
 podman tag do180-mysql-80-rhel8 quay.io/harmeet_singh4/do180-mysql-80-rhel8 ------------------- tag the image 
 podman push quay.io/harmeet_singh4/do180-mysql-80-rhel8 --------------------------------------- push the images and if : is notmentioned than the tag of latest is set 
 
@@ -540,17 +540,103 @@ then add the start application command in the package.json which is similar to w
 -----------------------------------Guided Excercise--------------------------------------------------
 
 -------------------------------Guided Exercise: Configuring Apache Container Logs for Debugging------------------------
-
-podman build -t troubleshoot-container .  -------------------------- this will build the Dockerfile in the same folder 
-
-
-
-
-
-
-
+cd ~/DO180/labs/troubleshoot-container
+podman build -t troubleshoot-container .  ------------------------------------ to build an image using the Containerfile or dockerfile and name of the image as troubleshoot-container
+podman run troubleshoot-container --name=troubleshoot-container -d -p 10080:80  troubleshoot-container ------ this will run the image as a container  with name troubleshoot-container
+podman logs troubleshoot-container ------------------------------------------- to see the logs of the container 
 
 -------------------------------Guided Exercise: Configuring Apache Container Logs for Debugging------------------------
+
+oc login -u "${RHT_OCP4_DEV_USER}" -p "${RHT_OCP4_DEV_PASSWORD}" "${RHT_OCP4_MASTER_API}"
+oc new-app --name nodejs-dev https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps#troubleshoot-review -i nodejs:12 --context-dir=nodejs-app --build-env npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy ------------------------- to create a new app using the git url using # to select the branch and then --context-dir to select the directory of thr code and then creating a build env variable and -i is the image stream to be used .
+oc logs -f bc/nodejs-dev ----------------------------------------------------------------- to see the logs of the build config.
+oc get pods ------------------------------------------------------------------------------ to get the pods
+cd nodejs-app 
+sed -i s/4.20/4.x/ package.json ---------------------------------------------------------- it will replace 4.20 with 4.x inside the file package.json
+oc start-build bc/nodejs-dev ------------------------------------------------------------- to start the build again 
+sed -i s/http-error/html-errors/ server.js ----------------------------------------------- to correct the dependecy name in server.js . sed is used to replace the http-error to html-errors
+oc expose svc ------------------------- to create a route 
+sed -i s/process.environment/process.env/ server.js -------------------------------------- fix the env value 
+oc start-build bc
+oc get pods 
+oc logs deployment 
+curl route 
+
+------------------------------------Lab: Containerizing and Deploying a Software Application----------------------------------------
+
+----------Containerfile---------------------------
+FROM ubi8/ubi:8.3
+
+MAINTAINER username <username@example.com>
+
+ARG NEXUS_VERSION=2.14.3-02
+ENV NEXUS_HOME=/opt/nexus
+
+RUN yum install -y --setopt=tsflags=nodocs java-1.8.0-openjdk-devel \
+    && yum clean all -y
+
+RUN groupadd -r nexus -f -g 1001 \
+    && useradd -u 1001 -r -g nexus -m -d ${NEXUS_HOME} -s /sbin/nologin \
+               -c "Nexus User" nexus \
+    && chown -R nexus:nexus ${NEXUS_HOME} \
+    && chmod -R 755 ${NEXUS_HOME}
+
+USER nexus
+
+ADD nexus-${NEXUS_VERSION}-bundle.tar.gz ${NEXUS_HOME}
+ADD nexus-start.sh ${NEXUS_HOME}/
+
+RUN ln -s ${NEXUS_HOME}/nexus-${NEXUS_VERSION} ${NEXUS_HOME}/nexus2
+
+WORKDIR ${NEXUS_HOME}
+
+VOLUME ["/opt/nexus/sonatype-work"]
+
+CMD ["sh", "nexus-start.sh"]
+----------Containerfile---------------------------
+
+podman build --layers=false -t nexus .  -------------------- to buld the cotainerfile or dockerfile 
+podman images ---------------------------------------------- will shows the image nexus
+podman run -d -v folder to mount -p 1800:80 nexus ---------- will run the container 
+podman rm -f inspiring_poincare ---------------------------- to remove the container 
+
+pushing the running containr image after tagging it to the quay.io 
+podman login -u ${RHT_OCP4_QUAY_USER} quay.io ---------------------- login to quay.io 
+podman push localhost/nexus:latest quay.io/${RHT_OCP4_QUAY_USER}/nexus:latest
+
+
+------------------------------------Lab: Containerizing and Deploying a Software Application----------------------------------------
+
+
+-----------------------------------------Guided Exercise: Refactoring the To Do List Application-----------------------------------
+This lab help is creating three images (front end , back end api and mysql db )
+Then run these three containers to establish microservices architecture. usig the Tier approach
+
+lab appendix-microservices start
+
+- Creating image of the Apache server ------------------
+
+cd ~/DO180/labs/appendix-microservices/apps/html5/
+mv ~/DO180/labs/appendix-microservices/apps/nodejs/todo/* ~/DO180/labs/appendix-microservices/apps/html5/src/
+vi /home/student/DO180/labs/appendix-microservices/apps/html5/src/script/item.js -------- change the url of backend api to http://workstation.lab.example.com:30080/todo/api/items/:id
+podman login registry.redhat.io
+cd ~/DO180/labs/appendix-microservices/deploy/html5  and ./build.sh --------------- to build the apache image 
+
+- Creating back rest api image : 
+Modify the REST API to Connect to External Containers
+vi /home/student/DO180/labs/appendix-microservices/apps/nodejs/models/db.js
+vi /home/student/DO180/labs/appendix-microservices/apps/nodejs/package.json
+vi /home/student/DO180/labs/appendix-microservices/apps/nodejs/app.js 
+cd ~/DO180/labs/appendix-microservices/deploy/nodejs  and ./build.sh 
+
+- No need to create the image for DB as it is already there in publi crepo mysql image 
+cd linked/
+./run.sh 
+podman ps 
+curl -w "\n" 127.0.0.1:30080/todo/api/items/1
+
+-----------------------------------------Guided Exercise: Refactoring the To Do List Application-----------------------------------
+
 
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
