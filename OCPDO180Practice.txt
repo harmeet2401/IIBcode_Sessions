@@ -1,2 +1,11 @@
 Practice for OCP guided labs : -------------------------
 
+1. Guided Exercise: Creating a MySQL Database Instance : to create this we need an image to create a container instance . We are gong to use POdman for that 
+ - podman run --name mysql-basic -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  -d registry.redhat.io/rhel8/mysql-80:1
+ - podman ps --format "{{.ID}} {{.Image}} {{.Names}}"	
+ - podman exec -it mysql-basic /bin/bash
+	# CREATE TABLE Projects (id int NOT NULL, name varchar(255) DEFAULT NULL, code varchar(255) DEFAULT NULL, PRIMARY KEY (id));
+	# insert into Projects (id, name, code) values (1,'DevOps','DO180');
+	# Select * from Projects;
+
+2. Guided Exercise: Exploring root and rootless containers : in ths we will be creating container using the id other than root .
