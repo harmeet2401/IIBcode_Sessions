@@ -9,3 +9,65 @@ Practice for OCP guided labs : -------------------------
 	# Select * from Projects;
 
 2. Guided Exercise: Exploring root and rootless containers : in ths we will be creating container using the id other than root .
+	As a root user :
+	-sudo podman run --name asroot  -rm -ti registry.redhat.io/rhel8/ubi8:latest /bin/bash
+		# whoami
+		# root
+		# id 
+			uid=root , gid root etc
+		# sleep 10000		
+	-sudo ps -ef | grep "sleep 10000"
+		root soething something 
+	
+	As a normal user : 
+	-podman run --name asauser -rm -ti registry.redhat.io/rhel8/ubi8:latest /bin/bash
+		# whoami 
+			root
+		# id
+			uid=root and gid something 
+		# sleep 10000
+			
+	- sudo ps -ef 	| grep "sleep 10000" | grep -v grep
+		student something something
+		
+3.  Creating containerised service 
+	- podman run --name httpd-basic -p 8080:80 -d quay.io/redhattraining/httpd-parent:2.4 -- to run the apache server http 
+	- curl localhost:8080
+	- podman exec  -it httpd-basic /bin/bash
+		# cd /var/www/html/
+		# vi index.html
+		# edit change the message 
+			or 
+		# echo "Hello world ">>	/var/www/html/index.html
+		#  curl localhost:80
+			it will show you hello world 
+		exit 
+	- curl localhost:8080
+		Hello world
+		
+4. Guided Exercise: Managing a MySQL Container		
+	- podman run --name mysql -d registry.redhat.io/rhel8/mysql-80:1 ---- this will not start the mysql as it need env variblae(username , password , db name etc )
+	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
+	- podman ps -- to show the container created by the name of mysql
+	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container 
+	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command fro hostmachine to container 
+	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
+	
+5. Guided Exercise: Create MySQL Container with Persistent Database
+you will create a container that stores the MySQL database data into a host directory.
+- SELinux : Processes and files are labeled with an SELinux context that contains additional information, such as an SELinux user, role, type, and, optionally, a level.
+	
+	- mkdir -pv /home/student/local/mysql
+	- sudo semanage fcontext -a -t container_file_t '/home/student/local/mysql(/.*)?' --- to create a policy for the folder(PV)
+	- sudo restorecon -R /home/student/local/mysql                                   --- to apply the above policy to folder 
+	- ls -ldZ /home/student/local/mysql
+	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as thisthe  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga
+	- podman login registry.redhat.io
+	- podman pull registry.redhat.io/rhel8/mysql-80:1
+	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1
+	- podman ps 
+	- check the items folder created under /home/student/local/mysql folder 
+			
+	Note :  The items directory stores data related to the items database that was created by this container. If the items directory does not exist, then the mount point was not defined correctly during container creation.		
+		
+			
