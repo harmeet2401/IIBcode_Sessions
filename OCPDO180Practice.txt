@@ -131,3 +131,22 @@ you will create a container that stores the MySQL database data into a host dire
 	- curl 0.0.0.0:8280
 	  == D0180 Page 
 	
+9. Guided Exercise: Creating a Basic Apache Container Image
+You should be able to create a custom Apache container image built on a Red Hat Universal Base Image 8 image. using the builder file or containerfile or dockerfile
+
+	- Create the containerfile to build an apache images  : vim /home/student/DO180/labs/dockerfile-create/Containerfile
+	  
+	  FROM ubi8/ubi:8.3
+	  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
+	  LABEL description='A custom Apache container based on UBI 8'
+	  RUN yum install -y httpd && yum clean all
+	  RUN echo "Hello from Containerfile" > /var/www/html/index.html 
+	  EXPOSE 80
+	  CMD["httpd","-D","FOREGROUND"]
+	- podman build --layers=false -t do180/apache .
+	- podman images 
+	- podman run --name lab-apache -p 10080:80 -d do180/apache
+	- podman ps 
+	- curl 0.0.0.0:10080
+	 == Hello from Containerfile
+	
