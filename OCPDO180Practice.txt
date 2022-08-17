@@ -95,13 +95,39 @@ you will create a container that stores the MySQL database data into a host dire
 	- podman stop official-httpd
 	- podman commit -a "harmeet singh" official-httpd do180-custom-httpd
 	- podman images 
-	- podman tag do180-custom-httpd quay/redhattraining/do180-custom-httpd:v1.0
+	- podman tag do180-custom-httpd quay.io/harmeet_singh4/do180-custom-httpd:v1.0
 	- podman images 
-	- podman push quay/redhattraining/do180-custom-httpd:v1.0
-	- podman pull quay/redhattraining/do180-custom-httpd:v1.0
-	- podman run --name test-httpd -p 8280:80 -d quay/redhattraining/do180-custom-httpd:v1.0
+	- podman push quay.io/harmeet_singh4/do180-custom-httpd:v1.0
+	- podman pull -q quay.io/harmeet_singh4/do180-custom-httpd:v1.0
+	- podman run --name test-httpd -p 8280:80 -d quay/harmeet_singh4/do180-custom-httpd:v1.0
 	- podman ps 
 	- curl localhost:8280
 		== DO180 page
 	
+8. Lab: Managing Images : Questions asking for commands
+	- podman pull -q quay.io/redhattraining/nginx:1.17
+	- podman images 
+	- podman run --name official-nginx -p 8080:80 -d quay.io/redhattraining/nginx:1.17
+	- podman ps
+	- podman exec -it official-nginx /bin/bash
+		# echo "DO180" > /usr/share/nginx/html/index.html
+		# Exit
+	- curl 0.0.0.0:8080 
+	- podman stop official-nginx
+	- podman commit -a 'Harmeet Singh' official-nginx do180/mynginx:v1.0-SNAPSHOT
+	- podman images 
+	- podman run --name  official-nginx-dev -p 8080:80 -d do180/mynginx:v1.0-SNAPSHOT
+	- podman exec -it official-nginx-dev /bin/bash
+		# echo "DO180 Page" > /usr/share/nginx/html/index.html
+		# Exit
+	- curl 0.0.0.0:8080 
+	- podman stop official-nginx-dev
+	- podman commit -a 'Harmeet Singh' official-nginx-dev do180/mynginx:v1.0
+	- podman images 
+	- podman rm official-nginx-dev
+	- podman rmi do180/mynginx:v1.0-SNAPSHOT
+	- podman images 
+	- podman run --name my-nginx -p 8280:80 -d do180/mynginx:v1.0
+	- curl 0.0.0.0:8280
+	  == D0180 Page 
 	
