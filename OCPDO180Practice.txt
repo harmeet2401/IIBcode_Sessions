@@ -149,4 +149,29 @@ You should be able to create a custom Apache container image built on a Red Hat 
 	- podman ps 
 	- curl 0.0.0.0:10080
 	 == Hello from Containerfile
-	
+
+10. Lab: Creating Custom Container Images : Questions asking some commands. note : sed commands is used to replace a part of the string in a file 
+	- vi /home/student/DO180/labs/dockerfile-review/Containerfile
+	- FROM ubi8/ubi:8.3
+	  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
+	  ENV PORT 8080
+	  RUN yum install -y httpd && yum clean all 
+	  RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && chown -R apache:apache /etc/httpd/logs/ && chown -R apache:apache /run/httpd/
+	  USER apache 
+	  EXPOSE ${PORT}
+	  COPY ./src/ /var/www/html/
+	  CMD ["httpd", "-D", "FOREGROUND"]
+	  
+	- podman build --layers=false -t do180/custom-apache .
+	- podman images 
+	- podman run --name containerfile -p 20080:8080 -d do180/custom-apache
+	- curl 0.0.0.0:20080
+		== <html>
+				<header><title>DO180 Hello!</title></header>
+				<body>
+					Hello World! The containerfile-review lab works!
+				</body>
+		   </html>
+		   
+11. Guided Exercise: Deploying a Database Server on OpenShift
+You should be able to create and deploy a MySQL database pod on OpenShift.		   
