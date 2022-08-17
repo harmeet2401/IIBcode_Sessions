@@ -60,14 +60,48 @@ you will create a container that stores the MySQL database data into a host dire
 	- mkdir -pv /home/student/local/mysql
 	- sudo semanage fcontext -a -t container_file_t '/home/student/local/mysql(/.*)?' --- to create a policy for the folder(PV)
 	- sudo restorecon -R /home/student/local/mysql                                   --- to apply the above policy to folder 
-	- ls -ldZ /home/student/local/mysql
+	- ls -ldZ /home/student/local/mysql --- just to check the SELinux policy applied
 	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as thisthe  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga
 	- podman login registry.redhat.io
 	- podman pull registry.redhat.io/rhel8/mysql-80:1
 	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1
 	- podman ps 
 	- check the items folder created under /home/student/local/mysql folder 
-			
+	- podman ps -a >> /tmp/my-containers -- to save the stopped container file to a flie 
 	Note :  The items directory stores data related to the items database that was created by this container. If the items directory does not exist, then the mount point was not defined correctly during container creation.		
 		
 			
+6. Guided Exercise: Loading the Database
+	In this case we will be running the db.sql using the port forwarding method.
+	- podman login registry.redhat.io
+	- podman run --name mysqldb-port -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE -e MYSQL_USER -e MYSQL_PASSWORD -e MYSQL_ROOT_PASSWORD -p 13306:3306 -d registry.redhat.io/rhel8/mysql-80:1
+	- mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items < /home/student/DO180/labs/manage-networking/db.sql    --- "-h is important"
+	- podman exec mysqldb-port /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from Item;"'
+			OR
+	  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items -e "Select * from Item;"
+	
+	- podman exec -it mysqldb-port /bin/bash 
+		# mysql -uuser1 -pmypa55 items -e "Select * from Item"
+		
+7. 	Guided Exercise: Creating a Custom Apache Container Image
+	We will be able to run a apache container and then create an image from it , then tag it , then push it to quay.io
+	- podman run --name official-httpd -p 8180:80 quay.io/redhattraining/httpd-parent
+	- podman ps 
+	- podman exec -it official-httpd /bin/bash
+		# echo "D0180 page" > /var/www/html/index.html
+		# exit
+	- curl localhost:8180
+		== DO180 page 
+	- podman stop official-httpd
+	- podman commit -a "harmeet singh" official-httpd do180-custom-httpd
+	- podman images 
+	- podman tag do180-custom-httpd quay/redhattraining/do180-custom-httpd:v1.0
+	- podman images 
+	- podman push quay/redhattraining/do180-custom-httpd:v1.0
+	- podman pull quay/redhattraining/do180-custom-httpd:v1.0
+	- podman run --name test-httpd -p 8280:80 -d quay/redhattraining/do180-custom-httpd:v1.0
+	- podman ps 
+	- curl localhost:8280
+		== DO180 page
+	
+	
