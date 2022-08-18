@@ -173,5 +173,60 @@ You should be able to create a custom Apache container image built on a Red Hat 
 				</body>
 		   </html>
 		   
-11. Guided Exercise: Deploying a Database Server on OpenShift
-You should be able to create and deploy a MySQL database pod on OpenShift.		   
+11. Guided Exercise: Deploying a Database Server on OpenShift : Means we are going to deploy an app on OCP which will create all OCP resources : buildconfig , build , deploymentconfig , service , route etc . Using oc commands
+You should be able to create and deploy a MySQL database pod on OpenShift.		
+    - oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+    - oc new-project ${RHT_OCP4_DEV_USER}-mysql-openshift
+	- oc new-app --template=mysql-persistent -p MYSQL_USER=user1 -p MYSQL_PASSWORD=mypa55 -p MYSQL_DATABASE=testdb -p MYSQL_ROOT_PASSWORD=r00tpa55 -p VOLUME_CAPACITY=10Gi
+	- oc status 
+	- oc describe pod mysql-1-5vfn4
+	- oc get svc
+	- oc describe svc servicename
+	- oc get pvc
+	- oc describe pvc pvcname 
+	- oc port-forward podname 3306:3306
+		port-forward 3306:3306------>
+		port-forward 3306:3306------>
+	- mysql -uuser1 -pmypa55 --protocol tcp -h 127.0.0.1	
+	
+12. Guided Exercise: Exposing a Service as a Route : to create an internet accessible service by exposing the service.
+	We will be able to deploy a service on ocp using a an image in oc new-app command 
+	
+    - oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+    - oc new-project ${RHT_OCP4_DEV_USER}-mysql-openshift
+	- oc new-app --name php-helloworld --docker-image=quay.io/redhattraining/php-hello-dockerfile 
+	- oc status
+	- oc get svc
+	- oc describe svc svcname
+	- oc expose svc svcname 
+	    OR
+	- oc expose svc/php-helloworld --name=${RHT_OCP4_DEV_USER}-xyz	 : -- when we want to create a route of specified name 
+	
+	- oc get routes
+	- curl route urlcreatedaboveusingexposecommand
+		or 
+	  curl ${RHT_OCP4_DEV_USER}-xyz-${RHT_OCP4_DEV_USER}-route.${RHT_OCP4_WILDCARD_DOMAIN}
+	  
+13. Guided Exercise: Creating a Containerized Application with Source-to-Image  Step : RUN /usr/libexec/s2i/assemble is the script that runs and create the image 
+	You should be able to:
+		Build an application from source code using the OpenShift command-line interface.
+		Verify the successful deployment of the application using the OpenShift command-line interface.	  
+	- git clone https://github.com/harmeet2401/DO180-apps.git
+	- git checkout master
+	- git checkout -b s2i 
+	- git push -u origin s2i
+	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+    - oc new-project ${RHT_OCP4_DEV_USER}-s2i
+	- oc new-app php:7.3 --name php-helloworld https://github.com/harmeet2401/DO180-apps.git#s2i --context-dir=php-helloworld
+	- oc describe deployment/php-helloworld
+	- oc expose service php-helloworld --name ${RHT_OCP4_DEV_USER}-helloworld
+	- curl therouteurls
+	- update the index.html to some message
+	- git add .
+	- git commit -m ""
+	- git push
+	- oc get bc
+		php-helloworld source git@s2i 2
+	- oc start-build bc/php-helloworld	
+	
+	
