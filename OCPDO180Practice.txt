@@ -272,7 +272,45 @@ You should be able to create an OpenShift application and access it through a we
 	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
 	- oc new-project ${RHT_OCP4_DEV_USER}-application
 	- cd /home/student/DO180/labs/multicontainer-application
-	- oc create -f todo-app.yml                                 ----------------- using the template file on local .
+	- oc create -f todo-app.yml                                 ----------------- using the yaml template  file on local .
 	- oc port-forward mysql 3306:3306
 	- mysql -uuser1 -pmypa55 -h 127.0.0.1 -P3306 items < db.sql
 	- oc expose svc todoapi 
+	
+17. Guided Exercise: Creating an Application with a Template : we will create an app using the template 
+	- source /usr/local/etc/ocp4.config
+	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+	- oc new-project ${RHT_OCP4_DEV_USER}-template
+	- cd /home/student/DO180/labs/multicontainer-application
+	- oc process -f todo-template.json | oc create -f - 
+	- oc port-forward mysql 3306:3306
+	- mysql -uuser1 -pmypa55 -h 127.0.0.1 -P3306 items < db.sql
+	- oc expose svc todoapi 
+
+18. Lab: Deploying Multi-Container Applications : questions to answer using the command
+	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+	- oc new-project ${RHT_OCP4_DEV_USER}-deploy
+	- cd /home/student/DO180/labs/multicontainer-review
+	- cd images/mysql 
+	- podman login registry.redhat.io
+	- podman build -t do180-mysql-80-rhel8 .
+	- podman login quay.io
+	- podman tag localhost/do180-mysql-80-rhel8 quay.io/harmeet_singh4/do180-mysql-80-rhel8
+	- podman push quay.io/harmeet_singh4/do180-mysql-80-rhel8
+	- podman tag quay.io/harmeet_singh4/do180-mysql-80-rhel8 quay.io/harmeet_singh4/do180-mysql-80-rhel8:v1_0-SNAPSHOT
+	
+	- podman build -t do180-quote-php .
+	- podman tag do180-quote-php quay.io/${RHT_OCP4_QUAY_USER}/do180-quote-php
+	- podman push quay.io/${RHT_OCP4_QUAY_USER}/do180-quote-php
+	- podman tag quay.io/harmeet_singh4/do180-quote-php quay.io/harmeet_singh4/do180-quote-php:v1_0-SNAPSHOT
+	- podman push quay.io/harmeet_singh4/do180-quote-php:v1_0-SNAPSHOT
+	
+	- cd /home/student/DO180/labs/multicontainer-review/
+	- oc create -f quote-php-template.json
+	- oc process quote-php-persistent -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -  ------ -p is given only in the case when there is parameters mentioned in .json template file 
+	- oc status
+	- oc get pods -w
+	- oc expose svc quote-php
+	- oc get route 
+	- curl -w "\n" http://quote-php-${RHT_OCP4_DEV_USER}-deploy.${RHT_OCP4_WILDCARD_DOMAIN}
+	

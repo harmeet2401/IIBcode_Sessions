@@ -475,10 +475,18 @@ oc describe template mysql-persistent -n openshift -----------------------------
 oc process --parameters mysql-persistent -n openshift --------------------------------------------------- mysql-persistent is the template name 
 
 Simple : We can publish the template to the ocp using the file 
-oc create -f test.yaml ------------------------------------------------------- publish it to the OCP 
-oc process -f test.yaml ------------------------------------------------------ to create the resources in the test.yaml 
-oc process -f test.json ------------------------------------------------------ to create the resources using the .json file
-oc process templatename ------------------------------------------------------ to create resources using the template published to the OCP
+steps : if you json on your local  
+1. oc create -f test.json ------------------------------------------------------- will publish and create a template to ocp 
+2. oc get template nameoftemplate > template.yaml ------------------------------- download the template as a yaml to run it 
+3. oc create -f template.yaml  ------------------------------------------------------ to create resources using the template published to the OCP
+	or 
+   oc process quote-php-persistent  | oc create -f -  ------------------------------ quote-php-persistent is the template name 
+
+steps : if you have yaml template on your local 
+1. oc create -f test.yaml ------------------------------------------------------- to create the resources if you have downloaded the template on your local as a yaml 
+2. oc process -f test.yaml ------------------------------------------------------ to create the resources in the test.yaml 
+
+
 
 ----------------------Deploying a multi container application on OCP  env using a Template ------------------------------------------------------------	
 
