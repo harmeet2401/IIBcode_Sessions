@@ -266,4 +266,13 @@ You should be able to create an OpenShift application and access it through a we
 	- ./run.sh	
 	- mysql -uuser1 -h 172.25.250.9 -pmypa55 -P30306 items < /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked/db.sql
 	- curl http://127.0.0.1:30080/todo/api/items/1
-	
+
+16. Guided Exercise: Creating an Application on OpenShift : now we are going to creat above containers on OCP using oc command line interface
+	- source /usr/local/etc/ocp4.config
+	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+	- oc new-project ${RHT_OCP4_DEV_USER}-application
+	- cd /home/student/DO180/labs/multicontainer-application
+	- oc create -f todo-app.yml                                 ----------------- using the template file on local .
+	- oc port-forward mysql 3306:3306
+	- mysql -uuser1 -pmypa55 -h 127.0.0.1 -P3306 items < db.sql
+	- oc expose svc todoapi 
