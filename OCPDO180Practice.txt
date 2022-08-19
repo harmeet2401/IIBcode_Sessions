@@ -229,4 +229,41 @@ You should be able to create and deploy a MySQL database pod on OpenShift.
 		php-helloworld source git@s2i 2
 	- oc start-build bc/php-helloworld	
 	
+14. Lab: Deploying Containerized Applications on OpenShift using S2I
+Outcomes
+
+You should be able to create an OpenShift application and access it through a web browser.	
+	
+	- source /usr/local/etc/ocp4.config
+	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
+    - oc new-project ${RHT_OCP4_DEV_USER}-ocp
+	- oc new-app --name temps php:7.3 https://github.com/RedHatTraining/DO180-apps --context-dir=temps
+	- oc status
+	- oc logs -f bc/temps
+	- oc expose svc/temps
+	- curl url
+
+15. Guided Exercise: Deploying the Web Application and MySQL on Linux Containers and we will use many shell scripts to do that.
+	We will build one image which is an api that access a DB mysql. Containerfile to be used to build the image for the api.
+	Run the cotainer for api
+	run thecontainer for the db mysql image mysql-80:1
+	Then curl the url for api 
+	script files used :
+	1. Containerfile : holds the steps to create an image of the todoapi
+	2. build.sh : this holds the script to run the podman build command to use Containerfile to create the image 
+	3. run.sh : this contains the command : node app.js  to run the mysql and todoapi 
+	
+	- podman login registry.redhat.io
+	- check the /home/student/DO180/labs/multicontainer-design/deploy/nodejs/Containerfile file 
+	- check the /home/student/DO180/labs/multicontainer-design/deploy/nodejs/nodejs-source/models/db.js node js script for api to access DB in mysql contains env for db mysql 
+	- cd ~/DO180/labs/multicontainer-design/deploy/nodejs
+	- ./build.sh  ----- script holds the podman build --layers=false -t do180/todonodejs --build-arg NEXUS_BASE_URL=${RHT_OCP4_NEXUS_SERVER} to build the todoapi image 
+	- podman images 
+	- ./run.sh edit to add below podman run command :  /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked
+		# In the same run.sh file, insert another podman run command at the appropriate line to run the todoapi container. The following screen shows the docker command to insert into the file.
+			.podman run -d --name todoapi -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -p 30080:30080 do180/todonodejs
+			.podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v $PWD/work/data:/var/lib/mysql/data -p 30306:3306 registry.redhat.io/rhel8/mysql-80:1
+	- ./run.sh	
+	- mysql -uuser1 -h 172.25.250.9 -pmypa55 -P30306 items < /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked/db.sql
+	- curl http://127.0.0.1:30080/todo/api/items/1
 	
