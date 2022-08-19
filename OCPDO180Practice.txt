@@ -314,3 +314,65 @@ You should be able to create an OpenShift application and access it through a we
 	- oc get route 
 	- curl -w "\n" http://quote-php-${RHT_OCP4_DEV_USER}-deploy.${RHT_OCP4_WILDCARD_DOMAIN}
 	
+19. Guided Exercise: Troubleshooting an OpenShift Build	
+You should be able to identify and solve the problems raised during the build and deployment process of a Node.js application.
+	- git checkout master
+	- git checkout -b troubleshoot-s2i
+	- git push -u origin troubleshoot-s2i
+	- oc login -u "${RHT_OCP4_DEV_USER}" -p "${RHT_OCP4_DEV_PASSWORD}"
+	- oc new-project ${RHT_OCP4_DEV_USER}-nodejs
+	- oc new-app --name nodejs-hello --context-dir=nodejs-helloworld https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps#troubleshoot-s2i -i nodejs:12  --build-env  npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy
+	The --build-env option defines an environment variable to the builder pod. In this case, it provides the npm_config_registry environment variable to the builder pod, so it can reach the NPM registry.
+	
+	- oc et pod -w
+	- oc start-build bcname
+	- oc expose svc svcname
+	- curl -w "\n" http://nodejs-hello-${RHT_OCP4_DEV_USER}-nodejs.${RHT_OCP4_WILDCARD_DOMAIN}
+	
+20. Guided Exercise: Configuring Apache Container Logs for Debugging	
+You should be able to configure an Apache httpd container to send debug logs to stdout and view them using the podman logs command.
+ The default log level for the Apache httpd image is warn. Change the default log level for the container to debug, and redirect log messages to stdout by overriding the default httpd.conf configuration file. To do so, create a custom image from the workstation VM.
+    - cat  /home/student/DO180/labs/troubleshoot-container/conf/httpd.conf
+	- cd ~/DO180/labs/troubleshoot-container
+	- add below lines in httpd.conf
+		# ErrorLog "/dev/stdout"
+		# LogLevel debug
+		# CustomLog "/dev/stdout" common
+	- podman build -t troubleshoot-container .	
+	- podman run --name troubleshoot-container -p 10080:80 -d troubleshoot-container 
+	- podman logs -f troubleshoot-container : logs will have debug logs also 
+	- curl http://127.0.0.1:10080
+			== hellow from containe 
+			
+21 : Lab: Troubleshooting Containerized Applications
+
+	- oc new-app --name nodejs-dev -i nodejs:12 https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps#troubleshoot-review  --context-dir nodejs-app --build-env npm_config_registry= http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy.
+	- sed -i s/4.20/4.x/ package.json
+	- git add .
+	- git commit -m ""
+	- git push
+	- oc start-build bc/bcname
+	- sed -i s/http-error/html-errors/ server.js
+	- git add .
+	- git commit -m ""
+	- git push
+	- oc start-build bc/bcname 
+	- oc get svc
+	- oc expose svc svcname 
+	- oc get route 
+	- curl routeurl
+	
+22. Lab: Containerizing and Deploying a Software Application
+You should be able to:
+
+Write a Containerfile that successfully containerizes a Nexus server
+Build a Nexus server container image and deploy it using Podman.
+Deploy the Nexus server container image to an OpenShift cluster.
+	-  cd  /home/student/DO180/labs/comprehensive-review
+	- curl -v 127.0.0.1:18081/nexus/ 2>&1  | grep -E 'HTTP|<title>'
+ ===	GET /nexus/ HTTP/1.1  HTTP/1.1 200 OK
+	- podman push localhost/nexus:latest quay.io/${RHT_OCP4_QUAY_USER}/nexus:latest
+	- envsubst < resources/nexus-deployment.yaml  | oc create -f -
+	- oc expose svc/nexus
+	- oc get route -o yaml
+	
