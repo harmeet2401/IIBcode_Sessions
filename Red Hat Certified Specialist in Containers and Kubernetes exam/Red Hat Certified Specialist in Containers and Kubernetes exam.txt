@@ -28,7 +28,7 @@ Udemy link :
  4) : https://yourlearning.ibm.com/activity/RHO-42415994  , username : harmeet.singh4 and pass : Narinder@667335424   ---- done
  
  5) https://ibm.ent.box.com/s/qgrdbc3x7rfd4c5v9yxcbwyq82u2znf2 : this doc is on IBM box which contains the remove exam setup guide and some more link same as above 
-	a. https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D44800090   (DO180)--- in progress.
+	a. https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D44800090   (DO180)--- done.
 	b. https://github.com/Max-Jaeger/redhat-PE180-exam-tips  ------- exam tips 
 	c. https://ibm.ent.box.com/s/ul7nzvyebmsshkwg7hrd6u3ezcuez2hw : ---------- ppt with some commands
 	
