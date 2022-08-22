@@ -176,7 +176,7 @@ CREATE APP USING FILE
 
 Create application using yaml file
 
-oc process -f template.yaml -p parameter1=value1 -p  parameter2=value2 | oc create -f– 
+oc process -f template.yaml -p parameter1=value1 -p  parameter2=value2 | oc create -f – 
 
 create template first and use the template to create application
 
@@ -188,7 +188,7 @@ To list templates
 
 oc get template
 
-oc process templatename -p parameter1=value1 -p  parameter2=value2 | oc create -f– 
+oc process templatename -p parameter1=value1 -p  parameter2=value2 | oc create -f – 
 
 if you need to pass labels use option -l as in below example
 

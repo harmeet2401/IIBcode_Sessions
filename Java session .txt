@@ -648,7 +648,7 @@ Java 8 session : -------------------------------------------------
 
 ** IMP : BUILD YOUR KNOWLEDGE ON THEFUNCTIONS INTRODUCED IN JAVA 8 AND USE THEM AS NEEDED.
 
-1. coupe of features were added to java 8 : 
+1. couple of features were added to java 8 : 
 				a. lambda functions : functional programming 
 				b. Immutability is added.
 				c. Streams  : which include kafka streaming and all

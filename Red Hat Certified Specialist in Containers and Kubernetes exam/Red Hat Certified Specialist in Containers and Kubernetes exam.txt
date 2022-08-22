@@ -25,7 +25,7 @@ Udemy link :
  3) https://ibm-learning.udemy.com/course/lab-setup-and-test-course-for-redhat-ex180-podman-openshift/learn/lecture/28337728#overview : done 
  
  
- 4) : https://yourlearning.ibm.com/activity/RHO-42415994  , username : harmeet.singh4 and pass : Narinder@667335424   ---- done
+ 4) https://yourlearning.ibm.com/activity/RHO-42415994  , username : harmeet.singh4 and pass : Narinder@667335424   ---- done
  
  5) https://ibm.ent.box.com/s/qgrdbc3x7rfd4c5v9yxcbwyq82u2znf2 : this doc is on IBM box which contains the remove exam setup guide and some more link same as above 
 	a. https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D44800090   (DO180)--- done.

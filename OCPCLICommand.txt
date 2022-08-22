@@ -648,3 +648,6 @@ curl -w "\n" 127.0.0.1:30080/todo/api/items/1
 
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
+
+podman save localhost/testimage:tag -o testimage.tar ------------------------------------------------ used to save the image we created an tagged as a tar
+podman load -i testimage.tar ------------------------------------------------------------------------ to extract the image fro the tar
