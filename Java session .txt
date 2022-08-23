@@ -654,8 +654,8 @@ Java 8 session : -------------------------------------------------
 				c. Streams  : which include kafka streaming and all
 				d. optional etc 
 	
-2. Imperitive an declarative programming 
-	Imperitive proramming : focus on what we need to achieve and keeping that in mind we code for it.
+2. Imperitive and declarative programming 
+	Imperitive proramming : Focus on what we need to achieve and keeping that in mind we code for it.
 							Object mutability is involved in this type of programming
 							This is th eold approach as we were doing since the java existence 
 							Here we need to focus on how the job is happening example : removing the duplicacy , summing up the value etc 
@@ -665,6 +665,7 @@ Java 8 session : -------------------------------------------------
 							 This is actually what it specifically points to java 8 programming.
 							 Java 8 release lot of functions which do the jobs as part of the streams introduced.
 							 Here we no need to worry about how the job is happening .
+							 See the SQL as an example of imperitive approach in which how the data is getting retrived wedon't know we just run the query and get the data .
 							
 		Example : We can use stream in wide range and go further to use functions 
 
@@ -683,7 +684,7 @@ These expressions have all three features that a normal functions has
 	Method body 
 	Method Return type 
 	
-Lambdacan also be used to implemet Runnable(which is for multi threading ) and Comparator(compare two parameter of any types) interfaces.	
+Some of the existing funtional interfaces available are Runnable(which is for multi threading ) and Comparator(compare two parameter of any types) interfaces which are anotated with @FunctionalInterface
 				
 Q. What is a runnable interface ?
 This is the interface which we implements in a class to allow multithreading to work .
@@ -692,9 +693,41 @@ Java runnable is an interface used to execute code on a concurrent thread. It is
 
 The lambda expresion target should be an interface.
 
+Runnable interface is also a functional interface which helps in executing multi-threaded programs . So in jave 8 we use lambda expression to invoke the run mehod inside Runnable interface
+
+examepl  : before java 8  ;
+			- Runnable runnable = new Runnable(){
+					
+					 @Override
+					public void run() {
+						System.out.println("----Runnable interface run");
+					}
+			}
+			new.Thread(runnable).start ();
+			
+			- After java 8 using lambda expressions.
+			
+			Runnable runnable2 = () -> {System.out.println("----Runnable interface run");}
+			new.Thread(runnable2).start ();
+			
+			So upr () ye brackets show the input parameter to run function of Runnable functional interface.
+			-> this shows the linked operator.
+			{  sout  } this shows the body of the run method.
+			
 Q. what is a comparator Interface ?
 Comparator interface are the functional interface which has only one abstract function and is annotated as @FunctionalInterfaces. It contains a compare function which is used to compare any type of field values .
+ 
+ 
+		// Compare function using the lambda function
+        Comparator<Integer> comparator1  = (Integer a,Integer b)->{
+            return a.compareTo(b);
+        };
+        System.out.println("The value of compare using lambda approach1 :"+ comparator1.compare(3,4));
 
+        /**
+         * Below comparator expression shows that if we remove the curly braces then no need to ad the return statements
+         */
+        Comparator<Integer> comparator2  = (a,b)->   a.compareTo(b);
 
 QQQ. Functional interfaces : 
 

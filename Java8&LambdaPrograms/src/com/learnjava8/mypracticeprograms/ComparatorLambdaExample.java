@@ -17,12 +17,15 @@ public class ComparatorLambdaExample {
         System.out.println("The value of compare using old approach :"+ comparator.compare(3,4));
 
         // Compare function using the lambda function
-        Comparator<Integer> comparator1  = (a,b)->{
-            return comparator.compare(3,4);
+        Comparator<Integer> comparator1  = (Integer a,Integer b)->{
+            return a.compareTo(b);
         };
         System.out.println("The value of compare using lambda approach1 :"+ comparator1.compare(3,4));
 
-        Comparator<Integer> comparator2  = (a,b)->   comparator.compare(3,4);
+        /**
+         * Below comparator expression shows that if we remove the curly braces then no need to ad the return statements
+         */
+        Comparator<Integer> comparator2  = (a,b)->   a.compareTo(b);
 
         System.out.println("The value of compare using lambda approach2 :"+ comparator2.compare(3,4));
 
