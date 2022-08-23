@@ -23,7 +23,7 @@ public class ComparatorLambdaExample {
         System.out.println("The value of compare using lambda approach1 :"+ comparator1.compare(3,4));
 
         /**
-         * Below comparator expression shows that if we remove the curly braces then no need to ad the return statements
+         * Below comparator expression shows that if we remove the curly braces then no need to ad the returns statements
          */
         Comparator<Integer> comparator2  = (a,b)->   a.compareTo(b);
 
