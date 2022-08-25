@@ -729,7 +729,7 @@ Comparator interface are the functional interface which has only one abstract fu
          */
         Comparator<Integer> comparator2  = (a,b)->   a.compareTo(b);
 
-QQQ. Functional interfaces : 
+QQQ. Functional interfaces :  part of java.util.function part of rt.jar
 
 Four initial functional interfaces are 
 	Consumer 
@@ -743,16 +743,16 @@ Consumer chain in foreach we can add one conaumr object and then do (dot) and ge
 
  We need to create a program with one student bean , one class that instantiate the student beans and then we will you another class which will use lambda expression to call consumer and apply flter and other stuff.
  
- Consumer chain is th etechnique in which we can add more consumer objects in line line c1.addThen(c2) where c1 and c2 are the cosumer objects
+ Consumer chain is th etechnique in which we can add more consumer objects in line line c1.addThen(c2) where c1 and c2 are the cosumer objects abd this approach is called consumer chain.
 
-2.  BIconsumer functional interface : Just like the consumer accept method want one paramter , the Biconsumer accept two paramters so that two objects can be used to do the task .
+2. BIconsumer functional interface : Just like the consumer accept method want one paramter , the Biconsumer accept two paramters so that two objects can be used to do the task .
 
 interface name : Biconsumer 				
 
 
-3. Predicate functional interface : It mostly contains the functions whic play arround the boolean values and resuts . 
+3. Predicate functional interface : It mostly contains the functions which play arround the boolean values and results . 
 	Function like : or , and , negate . test is the fn which accepts the paramter which is similar to accept function in consumer interfaces.
-	interface name : Predicate  
+	interface name : Predicate  	
 
 code reusablity is the best benefit that is provided by the functional interfaces.
 

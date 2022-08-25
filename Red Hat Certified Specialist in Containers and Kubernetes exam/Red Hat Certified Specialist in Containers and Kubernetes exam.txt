@@ -31,6 +31,7 @@ Udemy link :
 	a. https://training-lms.redhat.com/sso/saml/auth/rhopen?RelayState=deeplinkoffering%3D44800090   (DO180)--- done.
 	b. https://github.com/Max-Jaeger/redhat-PE180-exam-tips  ------- exam tips 
 	c. https://ibm.ent.box.com/s/ul7nzvyebmsshkwg7hrd6u3ezcuez2hw : ---------- ppt with some commands
+	d. https://ziyonotes.uz/ex180-sample : example of ex180
 	
  6) https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000  : 3 hours training   : elearning will open on IBM network use the Hyper V to open it 
  
