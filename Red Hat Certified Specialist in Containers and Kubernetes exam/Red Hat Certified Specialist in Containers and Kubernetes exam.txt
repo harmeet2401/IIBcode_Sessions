@@ -38,6 +38,8 @@ Udemy link :
 
  
  Exam link : https://www.youtube.com/watch?v=LX3VMIAuPzg  &  https://www.redhat.com/en/services/certification/red-hat-certified-specialist-in-containers-and-kubernetes?info=exam
+ 
+ to book the exam https://www.redhat.com/wapps/ugc/protected/account.html
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
