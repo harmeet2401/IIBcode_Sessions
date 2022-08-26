@@ -655,6 +655,8 @@ podman push registry:5000/httpd:twerks registry.do180.lab:5000/httpd:twerks ----
 podman rm -a -f ------------------------------------------------------------------------------------- to remove the containers (-f)forcefully.
 podman --help | grep -i label ----------------------------------------------------------------------- to check the label or any other value or property 
 podman inspect imagename --------------------------------------------------------------------------- to inspect the mage 
+oc new-app --help ---------------------------------------------------------------------------------- to see some help for new-app command 
+oc expose svc myapp --hostname=todler.co.com-------------------------------------------------------- to expose the service using s userdefined name 
 CMD []---------------------------------------------------------------------------------------------- it will allow you to override the command if given from the outside while runngin the container  
 Containerfile
 FROM ubi8/ubi:8

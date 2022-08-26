@@ -376,4 +376,5 @@ Deploy the Nexus server container image to an OpenShift cluster.
 	- envsubst < resources/nexus-deployment.yaml  | oc create -f -
 	- oc expose svc/nexus
 	- oc get route -o yaml
-	
+
+23. Run the comprehensive-review lab carefully and it will help a lot.	
