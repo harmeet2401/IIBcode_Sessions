@@ -655,3 +655,44 @@ podman push registry:5000/httpd:twerks registry.do180.lab:5000/httpd:twerks ----
 podman rm -a -f ------------------------------------------------------------------------------------- to remove the containers (-f)forcefully.
 podman --help | grep -i label ----------------------------------------------------------------------- to check the label or any other value or property 
 podman inspect imagename --------------------------------------------------------------------------- to inspect the mage 
+CMD []---------------------------------------------------------------------------------------------- it will allow you to override the command if given from the outside while runngin the container  
+Containerfile
+FROM ubi8/ubi:8
+CMD["date"]
+
+# podman build -t dbcmd 
+# podman run -name dbcmd dbcmd
+ output : date comes out 
+ 
+# podman run -name dbcmd dbcmd ls 
+ output : ls output will comes out as it will override the cmd command 
+ 
+ENTRYPOINT []---------------------------------------------------------------------------------------------- it will allow you to override the command if given from the outside while runngin the container  
+Containerfile
+FROM ubi8/ubi:8
+CMD["date"]
+
+# podman build -t dbent
+# podman run -name dbent dbent
+ output : date comes out 
+ 
+# podman run -name dbent dbent ls 
+ output : an error will comes as ls will be appended to the date command so the command will become : date ls : which is not a command 
+ 
+ 
+Containerfile
+FROM ubi8/ubi:8
+ENTRYPOINT["date"]
+CMD["+%T"] 
+
+# podman build -t final  
+# podman run -name final final
+ output : date comes out 
+ 
+# podman run -name final final 
+ output : date +%T
+ 
+# podman run -name final final +%M ------ this will override the +%T as it is the default behaviour of CMD
+ output : date +%M
+ 
+ 
