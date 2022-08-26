@@ -1,0 +1,7 @@
+DO180 bootcamp: -------------------------------------------
+
+1. Need USB of capacity more than 8 GB 
+2. Search EX180 and see the topics listed and you can go through the list and see if you are comfortable .
+
+1. Container engine is used to maintain the complete lufecycle of the container. example of contaner engine : podman  ,docker etc 
+2. In rootless we don't have the ip in the container then we have to use port mapping 

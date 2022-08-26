@@ -651,3 +651,5 @@ curl -w "\n" 127.0.0.1:30080/todo/api/items/1
 
 podman save localhost/testimage:tag -o testimage.tar ------------------------------------------------ used to save the image we created an tagged as a tar
 podman load -i testimage.tar ------------------------------------------------------------------------ to extract the image fro the tar
+podman push registry:5000/httpd:twerks registry.do180.lab:5000/httpd:twerks ------------------------- to push the image to the registry and tagging it also without usinf tag command 
+podman rm -a -f ------------------------------------------------------------------------------------- to remove the containers (-f)forcefully.
