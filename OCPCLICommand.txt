@@ -12,6 +12,7 @@ oc new-app jenkins-ephemeral(this is the image name) -------------------------- 
 		2. Route 
 		3. 2 Services 
 		4. Config map 
+oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent ------ to spin up the jenkins 		
 oc delete all -l app=hello-world ---------------------------------------------- this will delete all the resources connected to app= hello-world		
 oc status --------------------------------------------------------------------- this will show you all the Dc , bc , route ,services and other configuration done apps in the current project. using this command you can check the exposed url as well.
 output of oc status :                								
@@ -698,3 +699,6 @@ CMD["+%T"]
  output : date +%M
  
  
+Differenc between ADD an COPY : 
+COPY : this command will copy the file and excutable from the local to the image 
+ADD : This command can add the file and executable from the remote urls. as well.

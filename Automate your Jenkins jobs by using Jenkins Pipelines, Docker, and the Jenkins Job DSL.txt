@@ -1,0 +1,56 @@
+Automate your Jenkins jobs by using Jenkins Pipelines, Docker, and the Jenkins Job DSL
+
+Continuous integration : its the process continuous integrate th version control sytem to allow the code pull and allow the build to happen evrytime the commit happens.
+Continuous Delivery : its the process in which the continous delivery or deployment of the software and application to the staging env for the testing to proceed and allow production delivry to happen.
+
+process of CI CD pipeline : 
+		
+		Developer -------------> build -----> test -------> package ----->release ----> production servers
+			code 
+			save in 
+			code verison 
+			repo 
+			
+Install jenkins : 
+				on cloud (AWS , Azure , Google )
+				Using the virtual box using the ubuntu image and then pull the jenkins image using the docker nstallation on it 
+				using Docker engine on windows .
+				
+1. We can spin up the jenkins on OCP : oc new-app -e OPENSHIFT_ENABLE_OAUTH=true -e VOLUME_CAPACITY=10Gi jenkins-persistent ------ to spin up the jenkins 		
+
+	Steps : 
+	
+	1. get the git hub url from the project node js project to build using jenkins on ocp https://github.com/wardviaene/docker-demo				
+	2. install the plugin needed to run the code project on jenkins in manage plugins 
+	3. Create a freestyle project in jenkins ui .
+	
+	Steps : How to run the docker commands writtern in your dockerfile of your project inside jenkins .
+	
+		1. Run a container with jenkins image and container name as jenkins : this will run the jenkins server 
+		2. Do a bash inside the jenkins container and install docker inside it in the similar way we did on host machine . you can also install the docker plugin fro manage plugin window of jenkins 
+		3.  Create create a custom jenkins image , we can do that by creating a Dockerfile 
+			FROM jenkins 
+			user root 
+			some commands to allow jenkins to talk to the docker api
+			
+		4. Then docker build -t jenkins-docker .
+				this will build the image 
+		5. Stop the old jenkins and remove it.
+		6. now run the new jenkins using the new custom jenkins image . The expose port and url is same for the container and you can login in to the jenkins 
+		7. Afer above steps go to the jenkins ui , open the freestyle project you created and in the build steps add an "Docker build nd push"
+		
+2. jenkins jobs DSL : This the groovy scripts which is the similar code as in Jenkinsfile.
+We can write steps , stages , version control system , clean up process.
+
+Steps : 		https://github.com/wardviaene/jenkins-course/
+			1. First install the plugi for this JOb DSL also .
+			2. restart the jenkins 
+			3. enter the job dsl path under "Look on FileSystem" 
+			4. save 
+			5. build the job  with an erro : "Script have not been approved "
+			6. Go to manage jenkins ---> script approval click on it and approve it and build it again 
+			7. now open the job in configugre job mode : you will see the job picked up the dsl code values and created a job internal configuration which is called IAAC
+			8. Now run build now and the new 
+	
+	
+	

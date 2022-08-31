@@ -41,6 +41,13 @@ Udemy link :
  
  to book the exam https://www.redhat.com/wapps/ugc/protected/account.html
 
+
+
+
+For redhat journey : 
+https://courses.cognitiveclass.ai/courses/course-v1:IBMDeveloperSkillsNetwork+CC0201EN+v1/course/
+
+https://ibm-learning.udemy.com/course/learn-devops-ci-cd-with-jenkins-using-pipelines-and-docker/learn/lecture/7078308#overview
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
 1.openshift is the open sourec cloud platform by redhat that helps users to host and develop their applications and expose those app to the outside world to consume.

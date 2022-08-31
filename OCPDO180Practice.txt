@@ -13,7 +13,7 @@ Practice for OCP guided labs : -------------------------
 	As a root user :
 	-sudo podman run --name asroot  -rm -ti registry.redhat.io/rhel8/ubi8:latest /bin/bash
 		# whoami
-		# root
+		  root
 		# id 
 			uid=root , gid root etc
 		# sleep 10000		
@@ -51,7 +51,7 @@ Practice for OCP guided labs : -------------------------
 	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
 	- podman ps -- to show the container created by the name of mysql
 	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container 
-	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command fro hostmachine to container 
+	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command from hostmachine to container 
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
 	
 5. Guided Exercise: Create MySQL Container with Persistent Database
@@ -62,7 +62,7 @@ you will create a container that stores the MySQL database data into a host dire
 	- sudo semanage fcontext -a -t container_file_t '/home/student/local/mysql(/.*)?' --- to create a policy for the folder(PV)
 	- sudo restorecon -R /home/student/local/mysql                                   --- to apply the above policy to folder 
 	- ls -ldZ /home/student/local/mysql --- just to check the SELinux policy applied
-	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as thisthe  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga
+	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as this the  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga 
 	- podman login registry.redhat.io
 	- podman pull registry.redhat.io/rhel8/mysql-80:1
 	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1
@@ -325,7 +325,7 @@ You should be able to identify and solve the problems raised during the build an
 	- oc new-app --name nodejs-hello --context-dir=nodejs-helloworld https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps#troubleshoot-s2i -i nodejs:12  --build-env  npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy
 	The --build-env option defines an environment variable to the builder pod. In this case, it provides the npm_config_registry environment variable to the builder pod, so it can reach the NPM registry.
 	
-	- oc et pod -w
+	- oc get pod -w
 	- oc start-build bcname
 	- oc expose svc svcname
 	- curl -w "\n" http://nodejs-hello-${RHT_OCP4_DEV_USER}-nodejs.${RHT_OCP4_WILDCARD_DOMAIN}
