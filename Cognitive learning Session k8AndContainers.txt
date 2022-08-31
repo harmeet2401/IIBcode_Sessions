@@ -3,6 +3,18 @@ Some key points :
 1. The Cloud Native Computing Foundation known as CNCF conducts annual surveys to discern where and how cloud native technologies are being adopted. The 2019 survey indicates that 84 percent of respondents are using containers in production
 up from 74 percent in 2018; and 23 percent in the first survey in 2016.
 
+Kuberenetes : ---------------------------------
+1. k8 conrol planes : which contains 
+	- k8 api : to receive incoming cli or command request to view and update the cluster values .
+	- k8 scheduler : is used to schedue and align the newly crated pods to the nodes(kubernetes node master and slave kind of thing )
+	- etcd : to store the cluster data in Key value pair and store the state of the cluster that it is in.
+	- k8 controller manager : this run all the controller to monitor the state of the cluster and ensure the desired state of the cluster .
+	- Clouod controller manager : which allow k8 to get integrated with other cloud providers API.
+2. Nodes : Which are the running physicAL or virtual mchines . which contains 
+	- kubelet : which interact with the k8 api servers and receieve the incoming new request from the controller for the pods changed or new specifiction. Ensure the desired state.
+	- Control loop : non-terminating loop 
+
+
 Dockers ---------------
 
 Containers : --  running process in isolation under shared kernel using linux namespaces. Example of namespace is PID which allow each process to run in isolation on a host machine 
