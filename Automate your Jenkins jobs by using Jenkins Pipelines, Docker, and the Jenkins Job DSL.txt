@@ -52,5 +52,32 @@ Steps : 		https://github.com/wardviaene/jenkins-course/
 			7. now open the job in configugre job mode : you will see the job picked up the dsl code values and created a job internal configuration which is called IAAC
 			8. Now run build now and the new 
 	
+3. To get the function to be use in DSL jenkins jobs stages and steps wise ). We can go to https://jenkinsci.github.io/ob-dsl-plugin	
 	
+	Using Job dsl language just like jenkinsfile we can create a job easily
 	
+4. Jenkins pipelines.
+
+1. Jenkins job DSL an be used to create jenkins piplein jobs . As we see a seed job which is a freestyle contains the groovy file name when triggered creates the jenkins JOB.
+2. We can use ORGANISTION folder to detect and scan the repositories and remove the dependency to create new jobs 	
+
+jenkinsfile looks like : 
+		example for nodejs code 
+		
+		node {
+		def comit_id
+		
+			stage ("Scm checkout and compile ")
+			{
+			
+			}
+			stage("test stage ")
+			{
+			}
+			
+			stage (Docker build/push){
+				docker.build(registryhostname/imagename:tagname,".").push();
+			
+			}
+		
+		}

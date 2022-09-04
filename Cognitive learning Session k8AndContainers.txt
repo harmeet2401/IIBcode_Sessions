@@ -13,6 +13,35 @@ Kuberenetes : ---------------------------------
 2. Nodes : Which are the running physicAL or virtual mchines . which contains 
 	- kubelet : which interact with the k8 api servers and receieve the incoming new request from the controller for the pods changed or new specifiction. Ensure the desired state.
 	- Control loop : non-terminating loop 
+	
+3. KUBECTL cli : kubectl means kube control 
+
+Imperitive COmmand : 
+		kuberctl ru nginx --image nginx   but we may ned to run more commands to expose the service to the otside worl d.
+		kubectl create -f nginx.yaml  -------------- to create all the k8 resources and objects as we do on OCP using oc create -f yamlfile.
+		
+Declarative commands: 
+		kubectl apply -d nginx/ : it will apply all the file under the nginx nd performm the related changes automatically
+		kubectl apply -f file.yaml : it will run the applications in the desired state and user don't have to mention any operations.
+		kubectl get deployments --namespace kube-system  : to get the resources deployment 
+		kubectl describe deployment kube-dns-deployment --namespace kube-system : to describe the deployment resource.
+		kuberclt sclae deploy deploymentname --replicas=3
+		kuberctl delete pod podmane 
+		kubectl autoscale deploy  deloymentname --min=2 --max=5 --cpu-percent=10   --- it will autoscale the pods to max of 5 pods if the cpu % crosses 10 %
+		kubectl rollout status deploymentname
+		kubectl rollout undo status deploymentname
+		The k8 cluster replicaset will spin up the new node immediately 
+		
+		The “kubectl apply” command is intelligent enough to create an object if it doesn’t already exist.
+		It will look at the existing configuration and figure out what changes need to be made to the existing objects or...
+		
+
+4. Creating resources : 		
+
+1. Replicate set : Manages the pods to keep rught number of the pods to be up and running . it will delete or spin up new pods as needed. It interact with K8 api.
+2. Auscaling : means to allow autoscale the number of pods whenever the incoming  load increases and delete the nodes when the load decreases or CPU utilization.
+3. Rolling updates : It means to roll out new deployment on the basis of changes happens on the configmaps , build configs etc . We can also rollback to old stable version. It will be part of the strategies 
+4.  Configmaps and Secrets : is used to configure the values and configurations  that allow thedeployment to be env independent . it means it will pick the env specific values from the config maps . Secrets are similar to configmaps but are meant to store the sensitive data like keys , password etc 
 
 
 Dockers ---------------
