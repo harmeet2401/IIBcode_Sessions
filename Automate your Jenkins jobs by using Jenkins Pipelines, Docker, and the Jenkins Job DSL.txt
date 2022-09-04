@@ -58,26 +58,69 @@ Steps : 		https://github.com/wardviaene/jenkins-course/
 	
 4. Jenkins pipelines.
 
-1. Jenkins job DSL an be used to create jenkins piplein jobs . As we see a seed job which is a freestyle contains the groovy file name when triggered creates the jenkins JOB.
-2. We can use ORGANISTION folder to detect and scan the repositories and remove the dependency to create new jobs 	
+	1. Jenkins job DSL an be used to create jenkins piplein jobs . As we see a seed job which is a freestyle contains the groovy file name when triggered creates the jenkins JOB.
+	2. We can use ORGANISTION folder to detect and scan the repositories and remove the dependency to create new jobs 	
+	
+	jenkinsfile looks like : 
+			example for nodejs code 
+			
+			node {
+			def comit_id
+			
+				stage ("Scm checkout and compile ")
+				{
+				
+				}
+				stage("test stage ")
+				{
+				}
+				
+				stage (Docker build/push){
+					docker.build(registryhostname/imagename:tagname,".").push();
+				
+				}
+			
+			}
+			
+	Jenkins ----> Pipeline -----> enter the name ----? Select (Pipeline git from SCM)---> Enter the git url and then we have the Jenkinsfile which contains the stages .
+	We can mention the folder name for the Jenkinsfile also or if its on root then not need to mention the folder.
 
-jenkinsfile looks like : 
-		example for nodejs code 
-		
-		node {
-		def comit_id
-		
-			stage ("Scm checkout and compile ")
-			{
+5.  Run a docker container from the image build during the test stage and and then remove the container .
+	This will help in verifying the image build for verifying the fix or code done.
+	
+			node {
+			def comit_id
+			
+				stage ("Scm checkout and compile ")
+				{
+				
+				}
+				stage("test stage ")
+				{
+					def mycontainer = docker.image(nodejs:4.8)
+					mycontainer.pull() --------------------------------- this will pull the image from the docker registry 
+					mycontainer.inside(){ ------------------------------ this will run the container 
+						sh 'npm install --only=dev'
+							sh 'npm test'
+					
+					}
+				}
+				stage("test stage with run command  ")
+				{
+					def mycontainer = docker.image(mysql:8:3).run("-e MYSQL_ALLOW_EMPTY_PASSWORD=yes --rm") -------------------- this can also run the container using mysql image.	
+					def mycontainer = docker.image(nodejs:4.8)
+					mycontainer.pull() --------------------------------- this will pull the image from the docker registry 
+					mycontainer.inside("--link "){ ------------------------------ this will run the container for nodejs and link this container to the mysql icontainr.
+							sh 'npm install --only=dev'
+							sh 'npm test'
+					
+					}
+					mysql.stop() ------------------------ this will stop the container.
+				}
+				
+				stage (Docker build/push){
+					docker.build(registryhostname/imagename:tagname,".").push();
+				
+				}
 			
 			}
-			stage("test stage ")
-			{
-			}
-			
-			stage (Docker build/push){
-				docker.build(registryhostname/imagename:tagname,".").push();
-			
-			}
-		
-		}
