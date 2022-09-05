@@ -124,3 +124,101 @@ Steps : 		https://github.com/wardviaene/jenkins-course/
 				}
 			
 			}
+			
+6. Git hub hook for the jenkins pipeline.
+	We can use git hub plugin or other version control system plugin to configure the email notification .
+   - Pull hook : In this the jenkins will poll the git version control sytem after evry x minutes  to see if there is any change into the code.
+   - push : this is a better hook , as the git will send git hub hook rest api request to jenkins when a new code snippet is pushed to the git version hub.
+   
+   Email extension plugin to send email notification to the developer.
+   - plignin : Email Extension Plugin 
+			. Enter 	SMTP server : to shoot the emails 
+				SMTP username and password.
+				
+Jenkinsfile 
+
+node {
+		
+			
+				stage ("Scm checkout and compile ")
+				{
+						print("so far so good")
+				}
+				stage("test stage ")
+				{
+					try{
+						print ("test failed")
+						sh 'exit 1'  ------------------------- this will so there is an error.
+					}
+					catch(e){
+						def subject = "subject "
+						def body = "body content"
+						
+						//sending email.
+						emailcontext (subject :  subject , mimetype :'text/html',body:body ,to : 'harmet2401@gmail.com', attahcing : true)
+					
+					}
+					
+				}
+				
+				stage (Docker build/push){
+					docker.build(registryhostname/imagename:tagname,".").push();
+				
+				}
+			
+			}
+
+7. Slack integration.
+
+			We can integrate Jenkins with slack to start messaging the teams of devloper that a build is broken and it is creating a problem 
+		1. Plugin to be used : slack notification plugin.
+		2. Go to slakc channel you created and "add a custom integration"
+		3. login to slack , then search for the "incoming webhook"  . you will get the webhook url 
+		4. Go to the jenkins configurr , there you will see the slack notification plugin you installed and then enter the webhook url you get from above.
+		5. now create a jenkins pipeline with the jenkinsfile as follow 
+		node {
+		
+			
+				stage ("Scm checkout and compile ")
+				{
+						print("so far so good")
+				}
+				stage("test stage ")
+				{
+					try{
+						print ("test failed")
+						sh 'exit 1'  ------------------------- this will so there is an error.
+					}
+					catch(e){
+						def subject = "subject "
+						def body = "body content"
+						
+						//sending email.
+						slacksend (color :#FF000, message : "Messgae from thejeknins job for slack notfication")
+					
+					}
+					
+					throw e;
+					
+				}
+				
+				stage (Docker build/push){
+					docker.build(registryhostname/imagename:tagname,".").push();
+				
+				}
+			
+			}
+			
+8. Github/Bitbucket integration 			
+In this lab the jenkins will scan all the repositories in git hub and will create the pipelines.
+
+	Git hub integration :
+		- plugin name : github branch source plugin.
+		- goto jenkins ---> new item --> select Github Organisation
+		
+	Bitbucket integration :
+		- plugin name :  bitbucker branch source plugin.
+		- goto jenkins ---> new item --> select bitbucket team/project
+		
+9. JFrog Artefactory integration.
+		1. Plugin : JFrong plugin
