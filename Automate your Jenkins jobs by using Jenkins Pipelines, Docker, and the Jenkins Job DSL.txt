@@ -231,3 +231,23 @@ In this lab the jenkins will scan all the repositories in git hub and will creat
 			plugin neede : http request plugin 
 			
 11. Sonarqube integrations : software to inspect your code snippets			
+
+12. Blue ocean : its a new plugin introduced to jenkins that provides : 
+Plugin : blue ocean plugin 
+		1. sophistticated UI or a new UI for jenkins 
+		2. Pipeline Editor
+		3. personlization 
+		4. Integration for branch and pull request  :------------ very nice feature added to integrate jenkins with bitbucket and git 
+			this features will show the branch and PR realted to the repositories we are building using the pipelines and freestyle jobs . Ocean blue will show tht in new UI
+			When you click on new pipeline it will show you step by step veiw to enter the git or bitbucket urls
+		5. more prcision .
+
+13. how to access the private repos from jenkins .
+			- we can do that by using the ssh-agents which will hold the private key to login to the private repo in git hub 
+			- We know that we don't need to give the creds to login and checkout the repo code to build to happen. but for the private repos we have to the give the ssh-agent key for it.
+			
+			how to generate the ssh-key : 
+				command : ssh-keygen 
+			how to get the ssh-key for a service  
+				command : ssh-keyscan github.com >> to the .ssh folder as a known_hosts on the host from where you want to connect to the guthub.com
+				above command will tell the host to trust git hub and there won't b any issues accessing the github.cm

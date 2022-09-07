@@ -1,6 +1,9 @@
 https://yourlearning.ibm.com/channel/CNL_LCB_1618900946000 ------------------- 
 
 
+
+Scheduler link to schedule the exam : https://rhtapps.redhat.com/individualexamscheduler/
+
 ENV setup steps for Labs : 
 
 Git hub  :-----------------------------------------------------------------------
