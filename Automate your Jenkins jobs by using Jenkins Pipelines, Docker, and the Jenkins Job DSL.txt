@@ -1,3 +1,5 @@
+
+https://ibm-learning.udemy.com/course/learn-devops-ci-cd-with-jenkins-using-pipelines-and-docker/learn/lecture/7237420#overview
 Automate your Jenkins jobs by using Jenkins Pipelines, Docker, and the Jenkins Job DSL
 
 Continuous integration : its the process continuous integrate th version control sytem to allow the code pull and allow the build to happen evrytime the commit happens.
@@ -222,3 +224,10 @@ In this lab the jenkins will scan all the repositories in git hub and will creat
 		
 9. JFrog Artefactory integration.
 		1. Plugin : JFrong plugin
+		2. Go to jfrog and create a user "deploy"
+		3. goto jenkins and use deploy user to deploy the artefact to the jfrog.
+		
+10. Custom api integration
+			plugin neede : http request plugin 
+			
+11. Sonarqube integrations : software to inspect your code snippets			
