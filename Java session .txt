@@ -760,13 +760,14 @@ code reusablity is the best benefit that is provided by the functional interface
 	Interface name : Bipredicate  : similar to predicate and the only diff is the test function will receive two paramters and return type is same as boolean.
 	contains  : or , and , nagate .
 	This interface test function will help is adding multiple conditions required for the conditional logic to work .
+	For example if we have two separate conditon which were handled using two predicates , then we can clud these two predicate into single bipredicate object to code a condition.
 	
 	
 NOTE : WE CAN DEFINE THE CONSUMER, BICONSUMER , PREDICATE , BIPREDICATE IN A COMMON CLASS AND LET THESE CONDITIONS TO BE USED ALL THROUGH THE PROJECTS .
 THIS CLASS WILL BE LIKE A COMMAND UTILITY OF FUNCTIONS , CONDITIONS , SWITHCES ETC 	
 QQQ Function - 
 
-1. Functional Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bipredicate) but with diff features.
+1. Function Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bipredicate) but with diff features.
 
 interface name : Function.java 	 , functions available in this interface : addThen , compose and apply (input , output)
 

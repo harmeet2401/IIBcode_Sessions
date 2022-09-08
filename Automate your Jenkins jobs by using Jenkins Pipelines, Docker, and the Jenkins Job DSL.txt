@@ -251,3 +251,17 @@ Plugin : blue ocean plugin
 			how to get the ssh-key for a service  
 				command : ssh-keyscan github.com >> to the .ssh folder as a known_hosts on the host from where you want to connect to the guthub.com
 				above command will tell the host to trust git hub and there won't b any issues accessing the github.cm
+				
+14. Authorization : which the access rights given to the users logging to the jenkins 
+	1. jenkins ---> cofigure global security 
+	2. best is to use : matrix based authorization : in which we can check and uncheck the access rights as per the user. 	
+	
+15. Authentication : which is the process to verifying the users credentials and allow him to login to the service.				
+	1. for this eery organsation has its own user data base 
+	2. jenkins ---> configure global security -----> select LDAP and mentiosn the AD group created and all users part of the AD group will have authentication to jenkins.
+	
+	1. We can also use the hosted solutions which can then be integrated with jenkins to do the authentication
+	2. Onelogin.com is the hosted solutions for it .
+		- it uses SAML (security assertions markup language ) to exchange authentication and authorization data between parties. Onelogin.com uses SAML and also install SAML plugin in jenkins to copy paste the SAML plugin into the jenkins security section while activating the LDAP
+		
+	3. This onelogin.com will come 	in front of the jenkins login system wiht username and password to ask . When we hit the jenkins url it will redirect us to the onlogin login page to handle the authentication part
