@@ -769,9 +769,18 @@ QQQ Function -
 
 1. Function Interface - part 1 : its a functional interface just like (consumer , predicate , Biconsumer ,and bipredicate) but with diff features.
 
-interface name : Function.java 	 , functions available in this interface : addThen , compose and apply (input , output)
+	. Interface name : Function.java 	 , functions available in this interface : addThen , compose and apply (input , output)
+	. Its take an input and returns an output.
+	. its like creating the implementation for each Function interface object and then use apply method to run it. Its like writing a function assigning it to a variable to be used anywhere   AWESOMEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+	
+		//just going to perfomr uppercase
+        System.out.println(function.apply("Harmeet Singh"));
 
-its like creating the implementation for each Function interface object and then use apply method to run it.
+        // will first apply the uppercase and then send it for concat
+        System.out.println(function.andThen(addthenobj).apply("harmeet Singh"));
+
+        // compose will execute the second function implementation of concat first and the go for the uppercase
+        System.out.println(function.compose(addthenobj).apply("harmeet Singh"));
 
 2. Bifuntional functional interface : Its just like the Function functional interface , the only difference is it takes two input parameter instead of one.
 	interface name  : BiFunction  and it only have apply and addThen method .
