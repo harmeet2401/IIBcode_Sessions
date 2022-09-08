@@ -785,10 +785,11 @@ QQQ Function -
 2. Bifuntional functional interface : Its just like the Function functional interface , the only difference is it takes two input parameter instead of one.
 	interface name  : BiFunction  and it only have apply and addThen method .
 	
-NOte : --- operators functiona intefaces are used in case both the input and out are of same types 	
-3. UnaryOpertor functional interface : this is the functional interface which extends Function functional	interface is used if the input and out both are of same data type .
+NOte : --- operators function intefaces are used in case both the input and out are of same types 	
+
+3. UnaryOpertor functional interface : this is the functional interface which extends Function functional interface is used if the input and out both are of same data type .
 		
-4. Binaryoperator functional interface : this is the functional operator which extends the BiFunctionfunctional interface is used to take two input of same type and generate a output of same type
+4. Binaryoperator functional interface : this is the functional operator which extends the BiFunction functional interface is used to take two input of same type and generate a output of same type
 
 5. Supplier functional interface 
 	interface name : Supplier 
