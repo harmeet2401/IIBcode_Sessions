@@ -6,11 +6,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class FunctionInterfaceExample {
-    static public Function<String,String> function = (name)->name.toUpperCase();
+    //static public Function<String,String> function = (name)->name.toUpperCase();
+    /**
+     * below right hand side is the shortcut way to write the lambda expression
+     */
+    static public Function<String,String> function = String::toUpperCase;
+    static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
+
 
     static public Function<String,String> addthenobj = (name)->name.concat(" - java8");
     static public Function<List<Students>, Map<String,String>> studentFn = (students)->{

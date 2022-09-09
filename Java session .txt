@@ -807,6 +807,10 @@ syntax   : ClassName::Methodname
 		 example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
 				   Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
 				   
+				   For below example the getstudents_first is the public static function with Student object as a parameter.
+				   static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
+				   
+				   
 			There are some cases it is difficult to apply method reference .	   
 2. So in nutshell in JAVA8 we can use classname::method references and get the work done 
 
