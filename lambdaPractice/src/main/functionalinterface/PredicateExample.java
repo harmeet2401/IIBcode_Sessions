@@ -1,14 +1,13 @@
 package main.functionalinterface;
 
-import main.bean.Students;
+import main.bean.Student;
 import main.service.StudentsService;
 
 import java.util.List;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class PredicateExample {
-    static  Predicate<Students> predicate_books = (student)->{
+    static  Predicate<Student> predicate_books = (student)->{
         if(student.getBooks()>30){
             return  true;
         }
@@ -22,7 +21,7 @@ public class PredicateExample {
         }
         return  false;
     };*/
-    static Predicate<Students> StudentWithMorethe30BooksFromCSE_CSE2 = (student) ->{
+    static Predicate<Student> StudentWithMorethe30BooksFromCSE_CSE2 = (student) ->{
         if((student.getStreamname().equalsIgnoreCase("CSE")|
                         student.getStreamname().equalsIgnoreCase("CSE-2"))){
             return true;
@@ -38,12 +37,12 @@ public class PredicateExample {
     static  Predicate<String> predicate1 = (name)->name.equalsIgnoreCase("state");
     static  Predicate<String> predicate2 = (name)->name.equalsIgnoreCase("Harmeetsingh")?true:false;
     public static void main(String[] args) {
-        List<Students> students = StudentsService.getStudents();
+        List<Student> students = StudentsService.getStudents();
         //StudentWithBooksMoreThen(students,20);
         StudentWithMorethe30BooksFromCSE_CSE2(students,30);
 
     }
-    public static void StudentWithMorethe30BooksFromCSE_CSE2(List<Students> students , Integer nofbooks){
+    public static void StudentWithMorethe30BooksFromCSE_CSE2(List<Student> students , Integer nofbooks){
             students.forEach((student)->{
                 if(StudentWithMorethe30BooksFromCSE_CSE2.and(predicate_books).test(student))
                 {
@@ -60,7 +59,7 @@ public class PredicateExample {
 
         });
     }
-    public static void StudentWithBooksMoreThen(List<Students> students , Integer nofbooks){
+    public static void StudentWithBooksMoreThen(List<Student> students , Integer nofbooks){
 
         students.forEach(student -> {
                     if(predicate_books.test(student)){

@@ -798,29 +798,38 @@ NOte : --- operators function intefaces are used in case both the input and out 
 	
 QQQ  : Method references	
 
-1. Method references are just a shortcut way to write lambda expressions 
+	1. Method references are just a shortcut way to write lambda expressions 
+	
+	syntax   : ClassName::Methodname
+			ClassInstance::Methodname
+			
+			
+			example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
+					Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
+					
+					For below example the getstudents_first is the public static function with Student object as a parameter.
+					static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
+					
+					
+				There are some cases it is difficult to apply method reference .	   
+	2. So in nutshell in JAVA8 we can use classname::method references and get the work done 
+	
+	if we have create a Class test and it has a method with input paramters or not . 
+	
+					We can use functional interface and then use th class Test::methodrefrences.
+					
+					But kepe in mind the functional interface that you will use either it is a Consumer , BiConsumer , Predicate , BiPredicate , Function , BiFunctional , UnaryOpertor , Binaryoperator or a supplier . The right hand side function that you are refering must have same method decalaration .
+					
+					Means we know that if we use Function functional interface then you might be sending input paramters .
+	
 
-syntax   : ClassName::Methodname
-		   ClassInstance::Methodname
-		   
-		   
-		 example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
-				   Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
-				   
-				   For below example the getstudents_first is the public static function with Student object as a parameter.
-				   static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
-				   
-				   
-			There are some cases it is difficult to apply method reference .	   
-2. So in nutshell in JAVA8 we can use classname::method references and get the work done 
+QQQ. Constructor reference : 
+static Supplier<Students> supplier = Students::new; // allow it to create an empty constructor
 
-if we have create a Class test and it has a method with input paramters or not . 
+static Function<String,Students> function_cons_ref = Students::new;
 
-				We can use functional interface and then use th class Test::methodrefrences.
-				
-				But kepe in mind the functional interface that you will use either it is a Consumer , BiConsumer , Predicate , BiPredicate , Function , BiFunctional , UnaryOpertor or Binaryoperator . The right hand side function that you are refering must have same method decalaration .
-				
-				Means we know that if we use Function functional interface then you might be sending input paramters .
+the right hand side syntax will help in referencing the construcotr of the class with String as a input paramter.
+
 
 QQQ. Local variables and its scope in labmda expressions.
 
@@ -841,42 +850,47 @@ QQQ. Effectively final : It means we saw that the when we tried to change the va
 	}
 	
 QQQ. Stream Api 
-	Streams api is used over the List , or collection of data , which can be Map , List , ArrayList , LinkedList and all other collections .
+	Streams api is used over the List , or collection of data , which can be Map , List , ArrayList , LinkedList , treeset and all other collections .
 	There are two stream  to create using below.
 		students.stream()
 		students.parallelStream() -----------> this will run all the other task like filter , collects etc in parallel.
 	Stream is nothing but a streamlined data of a collection on which we can do all the manipulations.	
 
-1.How stream API works?
-
-Example : 
-StudentInstace.getstudents().stream() ------------------------------------> will create Stream<Students>
-                .filter(p) ------------------------------------> will create Stream<Students> filtered
-                .filter(p1)------------------------------------> will create Stream<Students> filtered
-                .collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
-				
-				
-2.Difference between Collections 	and streams 
-
-NOTE  : ANYTHING WHICH IS A LIST OR A COLLECTIONS (ARRAYLIS , HASHSET , TREEMAP , HASHMAP , LINKEDLIST , ARRAYS, LIST  ETC ) WE CAN CONVERT THOSE TO STREAM AND USE ALL THE STREAM API FUNCTION TO PLAY ARROUND
-
-Collections : 
-	Elements can be added or removed from the collections as required
-	Elements can be access from any index
-	It is eagrly constructed
-	It can traversed N number of times 
-	Iteration is done using external iteration technique. We use for loop explicitly to traverse the collections .
+	1.How stream API works?
 	
-Streams : 
-	Elemnets can not be added or removed from the stream . only the fiteration can be applied by adding he Predicate 
-	Elements can be accessed only once 
-	It is traversed only once using the streams 
-	Iteration for stream happened using internal iteration / internal stream api function .
+	Example : 
+	StudentInstace.getstudents().stream() ------------------------------------> will create Stream<Students>
+					.filter(p) ------------------------------------> will create Stream<Students> filtered
+					.filter(p1)------------------------------------> will create Stream<Students> filtered
+					.collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
+					
+				
+2.Difference between Collections and streams 
+
+	NOTE  : ANYTHING WHICH IS A LIST OR A COLLECTIONS (ARRAYLIS , HASHSET , TREEMAP , HASHMAP , LINKEDLIST , ARRAYS, LIST  ETC ) WE CAN CONVERT THOSE TO STREAM AND USE ALL THE STREAM API FUNCTION TO PLAY ARROUND
+	
+	Collections : 
+		Elements can be added or removed from the collections as required
+		Elements can be access from any index
+		It is eagrly constructed
+		It can traversed N number of times 
+		Iteration is done using external iteration technique. We use for loop explicitly to traverse the collections .
+		
+	Streams : 
+		Elemnets can not be added or removed from the stream . only the fiteration can be applied by adding the Predicate 
+		Elements can be accessed only once .
+		It is traversed only once using the streams . means we cannot apply for loop or an loop to traverse the stream created twice 
+		Iteration for stream happened using internal iteration / internal stream api function .
 	
 		
 3.How to debug a stream operation applied to a collections ?
 
-We can use peek () method and pass a consumer to peek() and print the single object of the stream 
+	We can use peek () method and pass a consumer to peek() and print the single object of the stream 
+	StudentsService.getStudents().stream()
+               // .peek((student)->System.out.println(student)) /// this show internal iteration of each student object is happening.
+                .filter(predicate1)
+                .peek((student)->System.out.println("Post filter :  "+ student)) /// this show internal iteration of each student object is happening.
+                .collect(Collectors.toList());
 
 4. map() method in stream api . is used to convert one type of stream to another 
  example 
@@ -893,7 +907,7 @@ exmaple : below are the two example stream
 	Stream<Arrays>: This emans each elements in this stream contains Array, Array, Array, Array, Array, ......
 	
 	
-	Just like we had streams<String >
+	Just like we had streams<String>
 			It contains Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,...
 			
 6. We have some more functions in streams api : distinct , sorted and count 
@@ -918,7 +932,7 @@ We an use Sort function which except a parameter sort(comparator function fnctio
 
 8. reduce function of stream api . it is also a terminal function means the end operation . Collect is also a terminal operations.
 
-This function si used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values.
+This function is used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values.
 
 Exmaple of map , filter and reduce 
 StudentInstace.getstudents().stream() // Stream<Students>

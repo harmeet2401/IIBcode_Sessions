@@ -1,12 +1,21 @@
 package main.bean;
 
-public class Students {
+public class Student {
     private String name;
     private String address;
     private String streamname;
     private int id;
 
     private int books;
+
+    public Student() {
+
+    }
+
+    public Student(String s) {
+        this.name=s;
+    }
+
 
     public int getBooks() {
         return books;
@@ -27,7 +36,7 @@ public class Students {
                 '}';
     }
 
-    public Students(String name, String address, String streamname, int id, int books) {
+    public Student(String name, String address, String streamname, int id, int books) {
         this.name = name;
         this.address = address;
         this.streamname = streamname;

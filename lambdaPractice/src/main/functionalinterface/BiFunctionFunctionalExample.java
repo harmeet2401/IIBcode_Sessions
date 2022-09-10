@@ -1,6 +1,6 @@
 package main.functionalinterface;
 
-import main.bean.Students;
+import main.bean.Student;
 import main.service.StudentsService;
 
 import java.util.HashMap;
@@ -26,8 +26,8 @@ public class BiFunctionFunctionalExample {
         stringMap.put("Check","Key");
       return stringMap;
     };
-    static Predicate<Students> predicate = (st)->st.getBooks()>=50;
-    static  BiFunction<List<Students>, Predicate<Students>, Map<String , Integer>> biFunction = (students, predicate)->{
+    static Predicate<Student> predicate = (st)->st.getBooks()>=50;
+    static  BiFunction<List<Student>, Predicate<Student>, Map<String , Integer>> biFunction = (students, predicate)->{
         Map<String ,Integer > map = new HashMap<>();
         students.forEach((st)-> {
             if (predicate.test(st)) {

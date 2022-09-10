@@ -1,14 +1,12 @@
 package main.functionalinterface;
-import main.bean.Students;
+import main.bean.Student;
 import main.service.StudentsService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class FunctionInterfaceExample {
     //static public Function<String,String> function = (name)->name.toUpperCase();
@@ -16,11 +14,12 @@ public class FunctionInterfaceExample {
      * below right hand side is the shortcut way to write the lambda expression
      */
     static public Function<String,String> function = String::toUpperCase;
-    static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
-
+    static public Function<Student,List<Student>> function1 = StudentsService::getStudents_first;
+    static Supplier<Student> supplier = Student::new; // allow it to create an empty constructor
+    static Function<String, Student> function_cons_ref = Student::new;
 
     static public Function<String,String> addthenobj = (name)->name.concat(" - java8");
-    static public Function<List<Students>, Map<String,String>> studentFn = (students)->{
+    static public Function<List<Student>, Map<String,String>> studentFn = (students)->{
         Map<String,String> newstudents = new HashMap<>();
         students.forEach(s -> {
             if (PredicateandConsumerExample.predicate.and(PredicateandConsumerExample.predicate1).test(s)) {
@@ -42,11 +41,12 @@ public class FunctionInterfaceExample {
 
     }
 
-    public static void filterFunciotnInterfaceUsage(List<Students> list){
+    public static void filterFunciotnInterfaceUsage(List<Student> list){
         System.out.println(studentFn.apply(list));
     }
     public static void main(String[] args) {
-        filterFunciotnInterfaceUsage(StudentsService.getStudents());
+        //filterFunciotnInterfaceUsage(StudentsService.getStudents());
+        System.out.println(function_cons_ref.apply("harmeet singh"));
     }
 
 
