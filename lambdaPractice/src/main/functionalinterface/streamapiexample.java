@@ -79,11 +79,14 @@ public class streamapiexample {
         Function<Student,Integer> functionList = (student)->{
             return student.getBooks();
         };
-        int totalbooks= StudentsService.getStudents().stream() //Stream<Student>
+        Optional<Integer> totalbooks= StudentsService.getStudents().stream() //Stream<Student>
                 .filter(student -> student.getStreamname().contains("CSE")) //Stream<Student>
                 .map(Student::getBooks)//Stream<Integer>
-                .reduce(0,(b1,b2)->b1+b2);
-        System.out.println("Total number of books : "+totalbooks);
+                //.reduce(0,(b1,b2)->b1+b2)
+                        .reduce(Integer::sum);
+
+
+        System.out.println("Total number of books : "+totalbooks.get());
 
         // To get the student which have max books.
         Optional<Student> optionalStudent = StudentsService.getStudents().stream()
@@ -91,8 +94,24 @@ public class streamapiexample {
                 .reduce((s1,s2) -> s1.getBooks() > s2.getBooks() ? s1 : s2);
             if(optionalStudent.isPresent()){
                 System.out.println("Student with max books : "+ optionalStudent.get() +
-                        " \n Max Books count : "+ optionalStudent.get().getBooks());
+                        "\nMax Books count : "+ optionalStudent.get().getBooks());
             }
+
+           // To get the max books count
+        Optional<Integer> opmaxbooks = StudentsService.getStudents().stream()
+                .map(student -> student.getBooks())
+                .reduce(Integer::max);
+        if(opmaxbooks.isPresent()){
+            System.out.println("Max books : "+ opmaxbooks.get());
+        }
+
+        // to get the min books assigned
+        Optional<Integer> opminbooks = StudentsService.getStudents().stream()
+                .map(student -> student.getBooks())
+                .reduce(Integer::min);
+        if(opminbooks.isPresent()){
+            System.out.println("Min books : "+ opminbooks.get());
+        }
 
     }
 }
