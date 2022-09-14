@@ -31,7 +31,7 @@ public class MapToObjectsExample {
 
     public static double maptoDouble(){
         return  IntStream.rangeClosed(1,10)
-                .mapToLong((i)->i)
+                .mapToDouble((i)->i)
                 .sum();
     }
 

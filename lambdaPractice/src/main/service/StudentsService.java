@@ -4,8 +4,15 @@ import main.bean.Student;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StudentsService {
+    public static Supplier<Student> supplier = ()->{
+        return new Student("Harmeet","pot 90","IT",12,100);
+    };
+    public static Supplier<String> suppliername = ()->{
+        return "Sample Name";
+    };
 
      public static List<Student> getStudents(){
             List<Student> studentList = Arrays.asList(

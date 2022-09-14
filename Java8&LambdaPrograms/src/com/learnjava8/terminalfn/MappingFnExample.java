@@ -15,6 +15,7 @@ public class MappingFnExample {
         /**
          * below LOC actually reduce one line of code where we used map to get the name and then use
          * collect fn to collect the list
+         * Help in removing the use of one LOC like .map(Students::getName)
          */
         List<String> collect = StudentInstace.getstudents()
                 .stream()

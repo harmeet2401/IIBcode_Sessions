@@ -971,7 +971,7 @@ System.out.println(StudentInstace.getstudents().stream()
 
 12. findAny() and findFirst()
 
-will find first elements from the stream 
+will find first elements from the stream .
 
 13. Short circuiting : 	its the process in which a given function doesn't iterate through the whole stream to get the results .
 So all the functions below doens't iterate through the stream to get the results 
@@ -985,7 +985,7 @@ findany
 
 14. Stream api operations : 
 
-of() - this funtion will help in creating the stream of values . The values can be infinite 
+of() - this funtion will help in creating the stream of values . The values can be infinite.
 iterate()-  this function will iterate value to infinite values 
 generate() - this function will also generate stream of infinite value and ask for a Supplier<> functional interface objects .
 
@@ -1092,11 +1092,11 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 								.collect(groupingBy(Students::getName,Collectors.summingInt(Students::getNotebooks)));
 								
 					
-						type3 : in which we will paaing three paramters , one is input , 2nd is what is the data type or objects returned as a whole 
+						type3 : in which we will pass three paramters , one is input , 2nd is what is the data type or objects returned as a whole 
 									, 3rd will be the output 
 									 Map<Integer, List<Students>> map  = StudentInstace.getstudents()
 									.stream()
-									.filter(students -> students.getMarks()>-500)
+									.filter(students -> students.getMarks()>500)
 									.collect(groupingBy(Students::getNotebooks, LinkedHashMap::new,Collectors.toList()));
 		        - partitioningBy() : its also kind of groupingBy 
 					It generate Map as an output.  will always create two Key and its value (key1 as true and key2 as false .)

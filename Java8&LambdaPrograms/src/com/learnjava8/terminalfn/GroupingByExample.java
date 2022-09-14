@@ -34,6 +34,8 @@ public class GroupingByExample {
     /**
      * below fn also uses the same groupingBY fn but we customizes the Key values instead of letting it using the d
      * default ones.
+     * This fn will use groupingBy terminal collectors fns and will group the students as "AVERAGE"
+     *      * and "OUTSTANDING"
      * @return
      */
     public static Map<String,List<Students>> groupByCustomizeKey(){

@@ -3,11 +3,15 @@ package main.functionalinterface;
 import main.bean.Student;
 import main.service.StudentsService;
 
+import java.net.Inet4Address;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class streamapiexample {
 
@@ -113,5 +117,51 @@ public class streamapiexample {
             System.out.println("Min books : "+ opminbooks.get());
         }
 
+        List<Integer> list1 = Arrays.asList(1,2,3,4,5,6,7,8,9);
+        int n = list1.size();
+        int sum =  list1.stream()
+                .limit(9)
+                .skip(3)
+                .reduce(0,(a,b)->a+b);
+
+        System.out.println("Sum : - "+sum +" Average : - "+ sum/n);
+
+        //anymatch , allmatch , nonmatch
+        System.out.println(StudentsService.getStudents().stream()
+                .allMatch(students -> students.getBooks()>10));
+        System.out.println(StudentsService.getStudents().stream()
+                .noneMatch(students -> students.getBooks()>10));
+        System.out.println(StudentsService.getStudents().stream()
+                .anyMatch(students -> students.getBooks()>10));
+
+        //finfirst , findany
+        System.out.println(StudentsService.getStudents()
+                .stream()
+                .findAny());
+        System.out.println(StudentsService.getStudents()
+                .stream()
+                .findFirst());
+        // factory methods of stream api : of() , generate() , iterate()
+        IntStream stream = IntStream.of(12,3,4,5,6,77,8);
+        System.out.println("Average of intstream   : "+ stream.average().getAsDouble());
+        /*System.out.println("sun of intstream   : "+ stream.sum());
+        System.out.println("max of intstream   : "+ stream.max());
+        System.out.println("min of intstream   : "+ stream.min());
+*/
+        Stream<String> stringStream = Stream.of("name","address","id");
+
+        /*Stream.iterate(1, x -> x * 2);*/
+
+        Stream.generate(Student::new);
+       /* Stream.generate(Arrays::asList)
+                .forEach(l->{
+                    System.out.println(l);
+                });*/
+        /*Stream.generate(new Random()::nextInt)
+                .forEach(System.out::println);*/
+
+        Optional<Student> optionalStudents = Optional.ofNullable(StudentsService.supplier.get());
+        System.out.println("Checkk ---  "
+                + optionalStudents.map(Student::getName).orElseGet(StudentsService.suppliername));
     }
 }
