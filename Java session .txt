@@ -1137,7 +1137,7 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 			- whenever you are using a mutable variable not to use the parallel streams . because the thread created will keep on updating the value of the mutable variable 
 				concurrently giving  wrong results 
 			
-19. Optional			: used to represnt a Non-null values in java 8 
+19. Optional			: used to represnt a Non-null values in java 8 or avoid NullPointerException
 
 	Optional.OfNullable(p1) -- this will return either a valid value or the optional.emmpty object back to handle the null value s
 	Optional.Of(p1) ---- this will either give you valid value of a null pointer exception in case of null value pass to it.
