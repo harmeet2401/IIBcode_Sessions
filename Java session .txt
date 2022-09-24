@@ -809,6 +809,7 @@ NOte : --- operators function intefaces are used in case both the input and out 
 QQQ  : Method references	
 
 	1. Method references are just a shortcut way to write lambda expressions 
+		
 	
 	syntax   : ClassName::Methodname
 			ClassInstance::Methodname
@@ -816,6 +817,7 @@ QQQ  : Method references
 			
 			example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
 					Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
+					means we are telling compiler to refer the defination of the method on the right hand side to give implementation to the abstract method of Function functional interface
 					
 					For below example the getstudents_first is the public static function with Student object as a parameter.
 					static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
