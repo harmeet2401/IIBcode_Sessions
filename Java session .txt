@@ -815,9 +815,14 @@ QQQ  : Method references
 			ClassInstance::Methodname
 			
 			
-			example : Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
-					Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
+			example : 
+					- Function<String , String > function = (s)->s.toUpperCaseString(); --------------> this is lambda expression 
+					when we right lambda expresion in place of method reference we give defination to the abstart method of th Function funtional interface
+					
+					
+					- Functions<String , String > functions = String::toUpperCaseString(); -------------> method reference
 					means we are telling compiler to refer the defination of the method on the right hand side to give implementation to the abstract method of Function functional interface
+					
 					
 					For below example the getstudents_first is the public static function with Student object as a parameter.
 					static public Function<Students,List<Students>> function1 = StudentsService::getStudents_first;
