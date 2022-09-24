@@ -1,0 +1,26 @@
+AI /ML data model will help in taining the data and predict the targets out of the data ingested .
+
+
+1. Good loan or Bad loan: 
+
+	We can get the data values from the customer using the ai create an CSV and feed it to the AI data model to predict if the loan they are going to lend will be beneficial for the bank or not . That will be for internal used for by the bank 
+	
+	Two pods on OCP 
+		1. One is the front end UI : to get the details of the customer 
+		2. We can also feed the satellite data of the land to he system for better results and training.
+		2. The service which will get the data from the UI and generate a CSV file and connect with the Microsoft Machine learning azure studio to start training , learning and predict the beneifts/loss of the loan if we provide .
+		
+	
+	We can either use 
+		Google Machine learning  studio 
+		Microsoft Azure Machine  learning studio 
+
+
+2. Spare charge investement : 
+	Rounding of the transaction they made and asked for that much donation for planing a tree . the donation can also allow for the tax regime.
+	
+  1 Pod on ocp :
+  
+	1. Api will hit the other api to get the transactions details for last 2 weeks.
+	2. Api will pick the charges and round it off to a charge and will ask the member to donate the money added to the actual transaction to round off. With a happy note of thank you for planting a tree.
+	

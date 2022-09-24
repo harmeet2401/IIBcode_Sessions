@@ -731,6 +731,16 @@ Comparator interface are the functional interface which has only one abstract fu
 
 QQQ. Functional interfaces :  part of java.util.function part of rt.jar
 
+Functional interfaces as a defination is an interface , annotated as @FuntionalInterface and can have only once abstract method .
+In order to create your own functional interface we just need to 	
+		1. create an interface 
+		2. Annotate it with the @FunctionalInterface
+		3. Add one astract method to the interface 
+		4. This interface can have many default and static methods defined in this interface 
+		
+		Note : we already know the concept of default function added to the interace . Agar we add one more function to the interfac then all classes in all package have to implement the function and define it. to overcome that they introduced the concep t of default method which is a method with access modifier default with definition added to the interface to be used by all classes implementing the interface.
+
+
 Four initial functional interfaces are 
 	Consumer 
 	predicate 
@@ -1043,8 +1053,11 @@ Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION
 		B. boxing and unboxing : 
 		Unboxing  : its represents the unwrapping of data type from wrapper class(Integer , Double , Character , Boolean etc ) to premitive types(int , long , double etc ).		
 		Boxing  : its represents the wrapping of premitive types(int , long , double etc ) to wrapper class(Integer , Double , Character , Boolean etc ).
-		
-		
+		example : we can convert from int array to List of integer 
+		Arrays.stream(arr)   ------------> IntStream
+                .boxed()     ------------> Stream<Integer>
+                .collect(Collectors.toList()); ------------> List<Integers>
+			
 		C. Some more NumericStream function : mapToObj , mapToLong , mapToDouble
 			mapToObj : is used to convert intstream to any object . we can use customize class also for the conversion . Matlab kissi  bhi class ke constructor ko cal krke value pass kro and create an  object from it.
 			
