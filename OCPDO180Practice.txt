@@ -1,6 +1,8 @@
 Practice for OCP guided labs : -------------------------
 
 1. Guided Exercise: Creating a MySQL Database Instance : to create this we need an image to create a container instance . We are gong to use POdman for that 
+	You should be able to start a database from a container image and store information inside the database.
+
  - podman run --name mysql-basic -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  -d registry.redhat.io/rhel8/mysql-80:1
  - podman ps --format "{{.ID}} {{.Image}} {{.Names}}"	
  - podman exec -it mysql-basic /bin/bash
@@ -10,8 +12,9 @@ Practice for OCP guided labs : -------------------------
 	# Select * from Projects;
 
 2. Guided Exercise: Exploring root and rootless containers : in ths we will be creating container using the id other than root .
+	You should be able to see the UIDs for processes running inside containers.
 	As a root user :
-	-sudo podman run --name asroot  -rm -ti registry.redhat.io/rhel8/ubi8:latest /bin/bash
+	-sudo podman run --name asroot  -rm -ti registry.access.redhat.com/ubi8:latest /bin/bash ---- will run the container and bashed inside the container.
 		# whoami
 		  root
 		# id 
@@ -32,9 +35,10 @@ Practice for OCP guided labs : -------------------------
 		student something something
 		
 3.  Creating containerised service 
+	You should be able to start and customize a container using a container image.
 	- podman run --name httpd-basic -p 8080:80 -d quay.io/redhattraining/httpd-parent:2.4 -- to run the apache server http 
 	- curl localhost:8080
-	- podman exec  -it httpd-basic /bin/bash
+	- podman exec  -it httpd-basic /bin/bash  ----- podman exec httpd-basic /bin/bash -c 'echo "Hello world-2" >	/var/www/html/index.html;'
 		# cd /var/www/html/
 		# vi index.html
 		# edit change the message 
@@ -45,12 +49,14 @@ Practice for OCP guided labs : -------------------------
 		exit 
 	- curl localhost:8080
 		Hello world
+	
+**** NOTE  : AGAR CONTAINER KE ANDR KOI COMMAND BASH KI RUN KRNI HAI HOST MACHINE(BASE) SE TO WE CAN USE "PODMAN EXEC CONTAINERNAME /BIN/BASH -c 'commandtorun'"
 		
 4. Guided Exercise: Managing a MySQL Container		
 	- podman run --name mysql -d registry.redhat.io/rhel8/mysql-80:1 ---- this will not start the mysql as it need env variblae(username , password , db name etc )
 	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
 	- podman ps -- to show the container created by the name of mysql
-	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container 
+	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container root directory
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command from hostmachine to container 
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
 	

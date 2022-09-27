@@ -16,6 +16,8 @@ Slack Channel
 
 https://w3.ibm.com/w3publisher/gbs-apac-red-hat-services/learning/red-hat-certification-award#Timeframe
 
+https://rhtapps.redhat.com/individualexamscheduler/
+
 ---------------------------------------------------------------------------------------------------
 Udemy link : 	
  1) https://ibm-learning.udemy.com/course/openshift-for-developers/   : Important for handon experience and steps  : done 
