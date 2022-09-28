@@ -52,15 +52,19 @@ Practice for OCP guided labs : -------------------------
 	
 **** NOTE  : AGAR CONTAINER KE ANDR KOI COMMAND BASH KI RUN KRNI HAI HOST MACHINE(BASE) SE TO WE CAN USE "PODMAN EXEC CONTAINERNAME /BIN/BASH -c 'commandtorun'"
 		
-4. Guided Exercise: Managing a MySQL Container		
+4. Guided Exercise: Managing a MySQL Container	
+	You should be able to create and manage a MySQL database container
+	
 	- podman run --name mysql -d registry.redhat.io/rhel8/mysql-80:1 ---- this will not start the mysql as it need env variblae(username , password , db name etc )
 	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
 	- podman ps -- to show the container created by the name of mysql
 	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container root directory
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command from hostmachine to container 
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
+	   or 
+	  podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items -e "select * from Projects;"'  ------ "-e" is very important to run any sql query from and here "items" db was writtern before -e instead of "items.project"
 	
-5. Guided Exercise: Create MySQL Container with Persistent Database
+5. Guided Exercise: Create MySQL Container with Persistent Database.
 you will create a container that stores the MySQL database data into a host directory.
 - SELinux : Processes and files are labeled with an SELinux context that contains additional information, such as an SELinux user, role, type, and, optionally, a level.
 	
@@ -68,10 +72,10 @@ you will create a container that stores the MySQL database data into a host dire
 	- sudo semanage fcontext -a -t container_file_t '/home/student/local/mysql(/.*)?' --- to create a policy for the folder(PV)
 	- sudo restorecon -R /home/student/local/mysql                                   --- to apply the above policy to folder 
 	- ls -ldZ /home/student/local/mysql --- just to check the SELinux policy applied
-	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as this the  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga 
+	- podman unshare chown 27:27 /home/student/local/mysql --to change UID for the folder to 27 as this is the  mounted path for mysql so mysql user have UID of 27 same user honge tbhi access hogga. and the mysql container will be runing using mysql user with UID as 27 and container will try to access mysql folder.
 	- podman login registry.redhat.io
 	- podman pull registry.redhat.io/rhel8/mysql-80:1
-	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1
+	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1   ------ -v is the option to attach the persistence volume to the container.
 	- podman ps 
 	- check the items folder created under /home/student/local/mysql folder 
 	- podman ps -a >> /tmp/my-containers -- to save the stopped container file to a flie 
@@ -83,8 +87,8 @@ you will create a container that stores the MySQL database data into a host dire
 	- podman login registry.redhat.io
 	- podman run --name mysqldb-port -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE -e MYSQL_USER -e MYSQL_PASSWORD -e MYSQL_ROOT_PASSWORD -p 13306:3306 -d registry.redhat.io/rhel8/mysql-80:1
 	- mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items < /home/student/DO180/labs/manage-networking/db.sql    --- "-h is important"
-	- podman exec mysqldb-port /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from Item;"'
-			OR
+	- podman exec mysqldb-port /bin/bash -c 'mysql -uuser1 -pmypa55 items -e "select * from Item;"'
+	  			OR
 	  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items -e "Select * from Item;"
 	
 	- podman exec -it mysqldb-port /bin/bash 
