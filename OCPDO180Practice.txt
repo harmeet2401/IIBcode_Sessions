@@ -94,6 +94,10 @@ you will create a container that stores the MySQL database data into a host dire
 	- podman exec -it mysqldb-port /bin/bash 
 		# mysql -uuser1 -pmypa55 items -e "Select * from Item"
 		
+		
+VVVVVVVVVIMP NOTE : jab mysql yan container commands run krni ho use portforward and use -e to run the query and if no port forward then using podman run exec for the container /bin/bash and use -c to pass the entire container command like mysql -uuser .........-e "select * from Item;".		
+
+
 7. 	Guided Exercise: Creating a Custom Apache Container Image
 	We will be able to run a apache container and then create an image from it , then tag it , then push it to quay.io
 	- podman run --name official-httpd -p 8180:80 quay.io/redhattraining/httpd-parent
