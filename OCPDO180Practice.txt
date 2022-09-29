@@ -197,6 +197,8 @@ You should be able to create a custom Apache container image built on a Red Hat 
 				</body>
 		   </html>
 		   
+	VVVVVVVVVIMP note : if you want to run commands in a single line use RUN command and && to separate the commands.	   
+		   
 11. Guided Exercise: Deploying a Database Server on OpenShift : Means we are going to deploy an app on OCP which will create all OCP resources : buildconfig , build , deploymentconfig , service , route etc . Using oc commands
 You should be able to create and deploy a MySQL database pod on OpenShift.		
     - oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
@@ -211,7 +213,15 @@ You should be able to create and deploy a MySQL database pod on OpenShift.
 	- oc port-forward podname 3306:3306
 		port-forward 3306:3306------>
 		port-forward 3306:3306------>
+		
+	Open a new terminal for below : ab port forward hogya hai bs you can run using mysql -uuser1 -pmypa55 -P3306 testdb -e "show databases;" NICHE SAARI COMMANDS UPR PORT FORWARD PR RIDIRECT HOJAENGI KYUNKI NICH MAI -P13306 use krra hun
 	- mysql -uuser1 -pmypa55 --protocol tcp -h 127.0.0.1	
+	- mysql -uuser1 -pmypa55 -P3306 testdb -e "show databases;"	
+	- mysql -uuser1 -pmypa55 -P3306 testdb -e "CREATE TABLE PROJECTS(ID INT NOT NULL , NAME VARCHAR(255) NULL);"	
+	- mysql -uuser1 -pmypa55 -P3306 testdb -e "INSERT INTO PROJECTS (ID,NAME) VALUES(1,'HARMEET SING');"
+	- mysql -uuser1 -pmypa55 -P3306 testdb -e "SELECT * FROM PROJECTS;"
+	  or i can write all sql queries in a db.sql file and run below command 
+	- mysql -uuser1 -pmypa55 -h 127.0.0.1 -P3306 items < db.sql
 	
 12. Guided Exercise: Exposing a Service as a Route : to create an internet accessible service by exposing the service.
 	We will be able to deploy a service on ocp using a an image in oc new-app command 

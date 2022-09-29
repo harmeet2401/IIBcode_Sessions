@@ -56,7 +56,7 @@ oc get -o yaml svc/hello-world >> svc.yaml -------------------------------------
 oc get -o yaml route/hello-world >> route.yaml ---------------------------------------------------------------- to export the yaml to a file for service 
 oc get -o yaml pv/pvaname >> py.yaml ------------------------------------------------------------------------------- to export the PV in a yaml format 
 oc create -f pv.yaml ------------------------------------------------------------------------------------------ this will create the pv using the yaml file we exported from above command 
-oc get -o pvc/pvcname >> pvc.yaml ----------------------------------------------------------------------------- to export the pvc in a yaml file 
+oc get -o yaml pvc/pvcname >> pvc.yaml ----------------------------------------------------------------------------- to export the pvc in a yaml file 
 oc create -f pvc.yaml : --------------------------------------------------------------------------------------- to create a persistent volume claim using the yaml and changing it to create new PVC
 oc new-app https://github.com/harmeet2401/MyApi.git --as-deployment-config--------------------------------- to create DC for my app 
 oc rollout latest dc/hello-world   :-------------------------------------------------------------------------- this will create a new deployemnt while keeping the old one up untill the new one comes up , 0 downtine.
