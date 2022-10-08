@@ -485,7 +485,7 @@ steps : if you json on your local
 
 steps : if you have yaml template on your local 
 1. oc create -f test.yaml ------------------------------------------------------- to create the resources if you have downloaded the template on your local as a yaml 
-2. oc process -f test.yaml ------------------------------------------------------ to create the resources in the test.yaml 
+2. oc process -f test.yaml ------------------------------------------------------ to create the resources in the test.yaml and create the resorce list 
 
 
 
@@ -670,10 +670,10 @@ CMD["date"]
 # podman run -name dbcmd dbcmd ls 
  output : ls output will comes out as it will override the cmd command 
  
-ENTRYPOINT []---------------------------------------------------------------------------------------------- it will allow you to override the command if given from the outside while runngin the container  
+ENTRYPOINT []---------------------------------------------------------------------------------------------- it will not allow you  to override the command if given from the outside while runngin the container it will append the command give from outside.
 Containerfile
 FROM ubi8/ubi:8
-CMD["date"]
+ENTRYPOINT["date"]
 
 # podman build -t dbent
 # podman run -name dbent dbent

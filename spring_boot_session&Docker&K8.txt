@@ -49,7 +49,7 @@ Its a protocol that allow app to communicate using a defined message structure .
 
 Soap defines does not impose any restriction on the transport , we can use either http and mq 
 
-A WSDL is create web service definition language that  contains :
+A WSDL is create web service definition language that  contains : this is in case of the soap service , for rest service swagger definitionsare widely used.
 
 	The End point 																							End point , request , response and format .
 	the operation (delete employee , get employee , update employee data )
@@ -67,7 +67,7 @@ like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this 
 
 rest contains  : rest APIcontains the format of message(request , response) , methods used for each resources : PUT , post , get , patch etc.
 	Message format  : The format of the message to exchange in between is Json , XML or any other format  
-	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP.)
+	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP., https etc )
 	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
 	
 start.sring.io  : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
@@ -81,6 +81,12 @@ Lab 1 ----------------- Create a hello world rest api service to respond as hell
 We need two things 
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
+DispatcherServletAutoConfiguration is the bean getting configured to make dispatcher servlet work.
+@Responsebody + jacksonHttpMessageConvertor is the one which helps in converting the java object beans to a json payloads.
+ErroMVCAutoconfiguration is the bean which creates the error message in case there is no explicit error mapping done by your apis
+Spring mvc , tomcat and json conversion are coming because of the spring-boot-starter-web which is the dependecnies we added.
+
+
 	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , post , get , patch  reqeust send on http url this controller will hanlde .
 	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody. @RestController interface is annotated as @ResponseBOdy.
 	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. 
@@ -93,6 +99,7 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
+    @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message .
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
@@ -107,7 +114,7 @@ DispatcherServlet is the one which is sitting on the front receives the input re
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
-Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queuss) etc
+Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
 Code for above templates : 
 a. 		new RestTemplate.getForEntity("http:localhost:8080/users",user.class)   --- we are calling the api or other webservice.
@@ -180,6 +187,11 @@ logging.level.org.springframework = debug
 
 
 Dispatcher servelet is the front end controller for spring mvc frame work who knows which controller to call after looking at the uri . when we hit the uri , the dispatcher servelet will take the uri call the controller run the method get the bean , call the jackson parser convert it to json and send the json response back to the browser or consumer.
+
+DispatcherServletAutoConfiguration is the bean getting configured to make dispatcher servlet work.
+@Responsebody + jacksonHttpMessageConvertor is the one which helps in converting the java object beans to a json payloads.
+ErroMVCAutoconfiguration is the bean which creates the error message in case there is no explicit error mapping done by your apis
+Spring mvc , tomcat and json conversion are coming because of the spring-boot-starter-web which is the dependecnies we added.
 
 Complete uri : http://localhost:8080/hello
 in above uri : / is mapped to dispatcher servelet and then it looks at the uri hello and send the control to the controller method which it knows.

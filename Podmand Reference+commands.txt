@@ -182,7 +182,7 @@ create template first and use the template to create application
 
 To create template
 
-oc create -f template.yaml   to create template
+oc create -f template.yaml   ----to create template and upload it to OC
 
 To list templates
 
