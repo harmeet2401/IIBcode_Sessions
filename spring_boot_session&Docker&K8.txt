@@ -100,7 +100,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
     @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
-	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message .
+	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
@@ -114,6 +114,9 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
+	@SpringBootApplication class : starter class 
+	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
+
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
 Code for above templates : 
