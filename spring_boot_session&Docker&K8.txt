@@ -116,6 +116,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
 	@SpringBootApplication class : starter class 
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
+	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
@@ -282,6 +283,8 @@ public class UserNotFouncException extends RuntimeException {
         super(message);
     }
 }
+
+JAVA KA IMPORTANT FUNDA : FOR A BEAN YOU CAN SET ALL THE ATTRIBUTE VALUE USING A PARAMTERISED CONSTRUCTOR AND NO NEED TO ADD SETTER AS WE ARE SETTING IT IN CONSTRUCTOR.
 
 Post that RUntimeexception we start getting exception 500 internal server error 
 
