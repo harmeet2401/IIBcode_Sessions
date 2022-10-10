@@ -614,54 +614,53 @@ URI versioning : in which we can create two uri's for external user , but this w
 Param versioning : in which we can send the query parameters in uri , this will also pollute the uri space 
 header versioning : in which we can send different header values to be picked up for different version response , header are never meant for versioning.
 MIME versioning : in this by sending the Accept header value as different version we can send differnt response .
+URI Versioning
 
-1.URI Versioning
+V1: http://localhost:8080/v1/person
 
-	V1: http://localhost:8080/v1/person
-	
-	@GetMapping("/v1/person")
-	
-	V2: http://localhost:8080/v2/person
-	
-	@GetMapping("/v2/person")
+@GetMapping("/v1/person")
 
-2.Request Param Versioning
+V2: http://localhost:8080/v2/person
 
-	V1: http://localhost:8080/person?version=1
-	
-	@GetMapping(path = "/person", params = "version=1")
-	
-	V2: http://localhost:8080/person?version=2
-	
-	@GetMapping(path = "/person", params = "version=2")
-	
-3. Header Versioning
+@GetMapping("/v2/person")
 
-	V1: http://localhost:8080/person/header
-	
-	HEADER - X-API-VERSION:1
-	
-	@GetMapping(path = "/person/header", headers = "X-API-VERSION=1")
-	
-	V2: http://localhost:8080/person/header
-	
-	HEADER - X-API-VERSION:2
-	
-	@GetMapping(path = "/person/header", headers = "X-API-VERSION=2")
+Request Param Versioning
 
-4. Content Negotiation Versioning
+V1: http://localhost:8080/person?version=1
 
-	V1: http://localhost:8080/person/accept
-	
-	HEADER - Accept:application/vnd.company.app-v1+json
-	
-	@GetMapping(path = "/person/accept", produces = "application/vnd.company.app-v1+json")
-	
-	V2: http://localhost:8080/person/accept
-	
-	HEADER - Accept:application/vnd.company.app-v1+json
-	
-	@GetMapping(path = "/person/accept", produces = "application/vnd.company.app-v2+json")
+@GetMapping(path = "/person", params = "version=1")
+
+V2: http://localhost:8080/person?version=2
+
+@GetMapping(path = "/person", params = "version=2")
+
+Header Versioning
+
+V1: http://localhost:8080/person/header
+
+HEADER - X-API-VERSION:1
+
+@GetMapping(path = "/person/header", headers = "X-API-VERSION=1")
+
+V2: http://localhost:8080/person/header
+
+HEADER - X-API-VERSION:2
+
+@GetMapping(path = "/person/header", headers = "X-API-VERSION=2")
+
+Content Negotiation Versioning
+
+V1: http://localhost:8080/person/accept
+
+HEADER - Accept:application/vnd.company.app-v1+json
+
+@GetMapping(path = "/person/accept", produces = "application/vnd.company.app-v1+json")
+
+V2: http://localhost:8080/person/accept
+
+HEADER - Accept:application/vnd.company.app-v1+json
+
+@GetMapping(path = "/person/accept", produces = "application/vnd.company.app-v2+json")
 
 Lab 9 : ----------- Version rest api
 
