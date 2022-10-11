@@ -726,9 +726,9 @@ spring.datasource.url=jdbc:h2:mem:testdb
 spring.data.jpa.repositories.bootstrap-mode=default
 spring.jpa.defer-datasource-initialization=true
 
-http://localhost:8080//h2-console
+http://localhost:8080/h2-console
 	
-Step 3 : create an sql file and run three insert queries to insert data to h2 in memory db
+Step 3 : create an sql file under src/main/resources and run three insert queries to insert data to h2 in memory db
 
 
 Step 4 : 

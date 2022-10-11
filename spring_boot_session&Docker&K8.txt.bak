@@ -689,7 +689,7 @@ add below dependency :
 This will allow spring to add basic authentication to your rest api .
 fire up your api in logs you will get the password in alpha numeric value and default username will be : user
 
-this will add authentication for all controllers
+this will add authentication for all controllers  
 
 username : user 
 Using generated security password: 0812eff5-00c0-4390-8271-35c6f688512e
@@ -728,7 +728,7 @@ spring.jpa.defer-datasource-initialization=true
 
 http://localhost:8080//h2-console
 	
-Step 3 : create an sql file and run three insert queries to insert data to h2 in memory db
+Step 3 : create an sql file under src/main/resources and run three insert queries to insert data to h2 in memory db
 
 
 Step 4 : 
