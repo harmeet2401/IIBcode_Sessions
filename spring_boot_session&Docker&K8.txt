@@ -589,10 +589,21 @@ Lab :------------------- Dynamic filtering
 
 We can use mappingjacksonValue is the class that help is sending a filtered bean value back as a response.
 
+
+In Controller class 1: 
+
+Bean bean = new Bean();	
 MappingjacksonValue mapping = new mappingjacksonValue(bean)
+SimpleBeanPropertyFilter filter = new SimpleBeanPropertyFilter();
+FilterProvider filterprovider = new SimpleFilterPRovider().addFilter("SomeBeanFilter",filter);.filterOutAllExcept("field1");
 mapping.setfiltering(filter);
 return mapping;
 
+In bean Class 2: 
+@JsonFilter("SomeBeanFilter")
+class Bean{
+
+}
 
 Verry important point always mention the @JsonFilter on top of the bean class to implement the dynamic filter occuring from controller.
 
