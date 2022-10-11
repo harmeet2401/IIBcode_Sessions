@@ -600,7 +600,7 @@ mapping.setfiltering(filter);
 return mapping;
 
 In bean Class 2: 
-@JsonFilter(()
+@JsonFilter("SomeBeanFilter")
 class Bean{
 
 }

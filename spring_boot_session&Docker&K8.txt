@@ -689,7 +689,7 @@ add below dependency :
 This will allow spring to add basic authentication to your rest api .
 fire up your api in logs you will get the password in alpha numeric value and default username will be : user
 
-this will add authentication for all controllers
+this will add authentication for all controllers  
 
 username : user 
 Using generated security password: 0812eff5-00c0-4390-8271-35c6f688512e
