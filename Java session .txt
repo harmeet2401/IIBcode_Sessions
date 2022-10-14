@@ -369,7 +369,7 @@ public class Sample {
 			Thses differnet featres we can keep it as a template in interface and fill the template when Implemented in sub class.
 			
 			- variables are final and static 
-			- functions ar abstract declared without body.
+			- functions are abstract declared without body. but no need to type the abstract keyword for thefunctions.
 			- we can not make a instance for an interface 
 				but we can create a references 
 				
@@ -580,9 +580,9 @@ B : correct
 								Hasmap Bucket
 							 ---------------------------------------------------	
 							|Array							 					|					
-							| 0 -->[GM,v]|pointer
+							| 0 -->[GM,gmobje]|pointer
 							| 1                              					|	
-							| 2 -->[IN,v]|pointer--->[US,v]|pointer     		|	
+							| 2 -->[IN,indiaobj]|pointer--->[US,usobje]|pointer |	
 							| 3	                             					|	
 							| 4                              					|	
 							| 5                              					|	
@@ -602,6 +602,13 @@ B : correct
 													|				
 											hashfunc() ---> returns 0
 											
+											
+		Issuse in hasmap : in java 7 the linked list on a single hashmap bucket index contains multiple elements . not when larger elements use Get function and if multiple get creates a hashvalue to same index there will be collision issue . 
+				1. So as a solution : Java 8 hash elements use balanced trees instead of linked lists after a certain threshold is reached. Which means HashMap starts with storing Entry objects in a linked list but after the number of items in a hash becomes larger than a certain threshold. The hash will change from using a linked list to a balanced tree.
+				2. The alternative String hash function added in Java 7 has been removed.
+		
+		
+		
 				It goes to the bucket at 0 index and using the equals functions will search the GM and retrun the value back.
 																													
         Case 3  : what happen in case of th Person objects or pojo object saving then we can either add the hashcode fnction to override and equals method to override . But by default all classes extends the functiosn fro objects class.																														
