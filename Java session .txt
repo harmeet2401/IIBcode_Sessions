@@ -687,6 +687,17 @@ B : correct
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Java 8 session : ------------------------------------------------- 
 
+Question : major changes took place while migrating from  java 7 to java 8 
+
+1. lambda expression  : Allow more readability and compact code . reduces number of lines of codes and reusablity of the code. Assigning a block of code to an object variable 
+2.  Java Optional Class : To hanlde the null point exception at runtime .
+	Optional<String> op = Optional.of("Testing")
+3. New Date and Time API : Localdate , LocalTime , LocalDateTime
+4. Unsigned Integer Arithmetic
+5. Stream API : used to create stresm of data and reduces the number of line of codes. increeased efficiency of program .
+6. Parallel Sorting 	
+7. Hashmap hashset fn is removed and hashmap bucket linked list is replaced by a balabced tree after a threashhold.
+
 ** IMP : BUILD YOUR KNOWLEDGE ON THEFUNCTIONS INTRODUCED IN JAVA 8 AND USE THEM AS NEEDED.
 
 1. couple of features were added to java 8 : 
