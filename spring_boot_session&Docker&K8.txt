@@ -99,6 +99,8 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
+				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
+						
     @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
