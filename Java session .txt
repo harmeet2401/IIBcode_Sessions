@@ -78,25 +78,29 @@ JAVA apis : application programming interfaces : which are the collections of pa
 			- Local variable : 
 				Those variable declared inside the method of the class . those variables should be initialized or else the compiler will complaint.
 				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000' , this is the unicode value for char when you will sout the char using unicode it will print the char a , b, c, ....
+			- Reference variable : Are the variable which are refrencesd to the heap memory .
+				Person alex  = new Person();
+				-----------
+					|
+					|
+					|
+				Reference variable .		
 		
-		Non-primitive data types are arrays , classes , string. These data types can be user defined means user can customize these data types to create new one.
+	b. Non-primitive data types are arrays , classes , string. These data types can be user defined means user can customize these data types to create new one.
 		
-	b.  Reference variable : Are the variable which are refrencesd to the heap memory .
-			Person alex  = new Person();
-			-----------
-				|
-				|
-				|
-			Reference variable .	
+	
 
 8. type casting  : Explicit casting from one data type to another .
+
+	String a = "";
+	
 
 9.Scope of variable : 				
 
 	Static variable : It is accessible by all objects in a class and have a single copy of it across the class. This get loaded to the JVM when the program runs
 	Instance variable : Which got initialized when the object or class gets instantiated. As it is on class level it can be accessed by all objects in the class
 	Local variable : Is accessible only inside the method block .
-	Block variabe : Whic is access only inside a block of code , like if  else block , for loop block etc . out side of these are not accessible 
+	Block variable : Which is access only inside a block of code , like if  else block , for loop block etc . out side of these are not accessible 
 				Example: 
 					if(x == false){
 							boolean y = true 
@@ -105,13 +109,21 @@ JAVA apis : application programming interfaces : which are the collections of pa
 					
 					Sout(y) -------------- this will not print y and throws compile error.
 					
+	Reference variable : Are the variable which are refrencesd to the heap memory .
+				Person alex  = new Person();
+				-----------
+					|
+					|
+					|
+				Reference variable .					
+					
 10. variable modifier .
 
 	Below access modifiers are used only for instance variables 
 		- public : public/protected/default final in i =0 ; 
 		- static : static final int i = 10; it wil have common copy for all objects and access to all.
-		- transient : transient static int i = 10 ;  its used for variables not be included as part if the serialized string or value used for transmitting data to other system 
-		- volatile : volatile int i =0 ; to make the variable thread safe .
+		- transient : transient static int i = 10 ;  its used for variables to be included as part of the serialized string or value used for transmitting data to other system 
+		- volatile : volatile int i =0 ; to make the variable thread safe. This can be used in case of the multithreading process.
 		
 	Below modifier is used only for local variables & instance variables. : 
 		- final keyword : final int i = 10 . this is telling the compiler the final value for i is 10 and no one can chnge the value for i later . if you are writting instance variable with final keyword you have to initialize it or else compile issue will be ther e.
@@ -120,7 +132,7 @@ JAVA apis : application programming interfaces : which are the collections of pa
 
 		Important point : always use equals in string comparisons 
 		++ and -- : always try to use it in suffix like : ++x or --x , if  you want the value incremented assinged it to x immediatley 
-			x++ and x-- will increament and decrement the valus but will be assigend to the variable on next set of code lines.
+			x++ and x-- will increament and decrement the values but will be assigend to the variable on next set of code lines.
 		
 	- below loc will give same results  : 
 		System.out.println(--x1);
@@ -140,6 +152,10 @@ JAVA apis : application programming interfaces : which are the collections of pa
 		ArrayList<int> alist = new ArrayList<int>(); // invalid
 		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
 		
+		Wrapper classes allow primitive data types to be accessed as objects and objects as a primitive data types.
+		The various wrapper classes for primitive data type are: Boolean, Byte, Character, Double, Float, Integer, Long and Short.
+		Wrapper classes make the primitive type data to act as objects.
+
 		Where Integer is the wrapper class.
 		These classes are ussed to wrap primitive data types value like : boolean , byte , char , int , long , short , double , float etc 
 		
@@ -161,9 +177,26 @@ JAVA apis : application programming interfaces : which are the collections of pa
 		This is the cool feature of java in which if we want to convert the primitive data type value to wrapper class just directly write it like tihs :
 		- Interger f = 100;   here the Integer is the wrapper class and 100 is an int value , java is converting it automaticaaly to wrapper which is now giving us the advantage to us all other functions that wrapper class provide.
 		- normal way to wrap a primitive value in wrapper class  
-			Byte b = new Byte(10);
-			Float b = new Float(10f);
+			Byte b = new Byte(10); ----------------------  this is called boxing converting from premitive data types to objects 
+			Float b = new Float(10f); 
 			Double b = new Double(10d);
+			
+public class Sample {
+   public static void main (String args[]){
+      Integer obj = new Integer("2526"); -------------- boxing 
+      int i = obj.intValue(); --------- unboxing 
+      System.out.println(i);
+   }
+}
+
+
+public class Sample {
+   public static void main (String args[]){
+      Integer obj = 2526; -------------- Autoboxing 
+      int i = obj --------- Autounboxing 
+      System.out.println(i);
+   }
+}
 
 13 . Q WHERE THE OBJECTS , METHOD , INSTANC VARIABLES , LOCAL VARIABLE RESIDES IN ?
 				
@@ -186,12 +219,12 @@ JAVA apis : application programming interfaces : which are the collections of pa
 	
 14. Modifiers of Methods : 	
 		public : access from all 
-		protected : restrict the access in same package 
-		private : can not acess.
-		default : can call it from same class only 
+		protected : can be acccess in Same class and in the samepackage by other classes. In sub classes (inherited one)
+		private : can be access only in the same class.
+		default : can be access in same class , in same package by the other classes.
 		static  : no need to create an insance/objects of the class in which this method is to access it . It will beloing to class.
 		final   : Can not override the method  in child class which inherit the base class that contain final method.
-		abstract : it is used only to declare the method without body .
+		abstract : it is used only to declare the method without body. As part of the abstract classes and in interfaces.
 		synchronised : only one thread can access this method at a time . Oher threads will wait for the release.
 		
 15. lambda : 
@@ -265,7 +298,8 @@ JAVA apis : application programming interfaces : which are the collections of pa
 17. lambda expression in java for loop to break use return statement in it .
 
 18. Constructor : 
-			- Constructor can not have return type and can not be static
+					
+			- A constructor can not have a return type , but can declared and defined with multiple input paamateres.
 			
 			- It is used to initialize the class variable .
 			
@@ -273,7 +307,7 @@ JAVA apis : application programming interfaces : which are the collections of pa
 			
 			- One amazing thing learned is in our pojo class or bean class we can add both the constructor parameterized and non parameterized
 				Paramterized will help in initializing the attaribute variable by passing the value in constructor.
-				Non-parameterized will help in initializing the variable by using the .(dot) opertaor by crating the object of the class.
+				Non-parameterized will help in initializing the variable by using the .(dot) opertaor by creating the object of the class.
 			
 			- this() function used in pojo class itself will call the constructor of the same class and this one will call the non-parameterized one
 			  this(1,"Meet","orlendo") this will call the 3 parameterized constructor in same pojo class.
