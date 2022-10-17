@@ -250,6 +250,8 @@ docker rm -f  $(docker ps -a -q)------------------------------------------------
 docker ps -q ------------------------------------------------------------------- to see the id of the running containr 
 docker ps -l ------------------------------------------------------------------- to see the id of the last running containr 
 docker ps -lq ------------------------------------------------------------------- to see the id of the last running containr 
+docker logs --tail 3 container-id ---------------------------------------------- to see the last three lines of the container logs 
+docker logs --tail l --follow container-id ------------------------------------- to follow the logs of the running containe.
 docker container prune---------------------------------------------------------- will remove all container in stopped state
 docker rmi image-id ------------------------------------------------------------ will remove the image with that image id.
 docker login ------------------------------------------------------------------- login to docker hub (user defined images always starts with username/imagename . docker push image-id will not work)
