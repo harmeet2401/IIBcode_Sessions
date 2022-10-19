@@ -1,0 +1,12 @@
+Snowflake : 
+accont id : rm32708.ap-south-1.aws
+User name : harmeet2401
+Pass word : Gogi@1234
+Schema : TPCDS_SF100TCL
+
+DBT creds : 
+User name : harmeet2401 or IBM id 
+Pass word : Gogi@1234
+
+
+rm32708.ap-south-1.aws
