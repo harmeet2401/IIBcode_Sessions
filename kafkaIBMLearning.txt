@@ -221,7 +221,7 @@ kafka-server-start.bat ..\..\config\server.properties
 kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic
 
 
-kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic magic-topic --partitions 3
 
 kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3 --replication-factor 2
 

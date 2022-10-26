@@ -1,0 +1,596 @@
+
+
+Properties of kafka :
+
+horizontal scalable , 
+fault tolerance 
+durable 
+highly available
+file system maiatainance for the data coming from producer and to the topic.s
+
+Together, these capabilities enable "exactly once semantics" in Kafka. Described as follow 
+
+Idempotent delivery ensures that messages are delivered exactly
+once to a particular topic partition during the lifetime of a single
+producer. which happend in ack 1 mechanism.
+
+Transactional delivery allows producers to send data to multiple
+partitions such that either all messages are successfully delivered, or
+none of them are.
+
+
+Transaction state is stored in a new internal topic__transaction_state.
+
+For example, transaction.state.log.min.isr controls the minimum ISR for this
+topic.
+
+For secure clusters, the transactional APIs require new ACLs which can be
+turned on with the bin/kafka-acls.sh. tool.
+
+KAFKA APIs
+
+consumer apis : to consumer the message 
+producer api  : to produce the message to the topic 
+connector api  : to make a connection for the external systems to kafka servers for data push and pull 
+				which may include 
+					source and sink connectors 
+Kstream apis : This api is writtern in java language or java maven projects or spring boot projects for transforming the data pulled from the topic .					
+
+Admin api : which will help managing / inspecting topics , broker and kafka objects 
+
+default 7 days retention policy 
+
+if we run the consumer api using a new topic name then kafka will auto create the topic with one partition and replication factor.
+
+Server.properties 
+contains
+	broker.id = 0 default one 
+	client port 
+	max buffer size
+	zookeeper connection string 
+	replication 
+
+zookeeper.properties "
+		We can mention the string which can contains multiple zookeeper node as we know cluster of it also exists .
+		leader and followers 
+		hostname1:port1,hostname2:port2,,,,,,
+		
+as we know zookeeper is he manager of fault tolerance and topic management(which topic goes to which broker ) , so the broker has to publish its ip or port to the zookeeper so that the controller will be able to connect with it 		
+
+---------------learned prop-------------------	
+
+https://docs.confluent.io/platform/current/installation/configuration/broker-configs.html
+	
+//server	
+1. advertise.listener : we can set that in server.properties files.
+2. advertise.host.name: this is deprecated , only use when advertise.listener is not set 
+2. advertise.port : we can set that in server.properties
+3. auto.create.topic.enable : this property will create the topic auto.	
+4. auto.leader.rebalance.enable : this enables the prop which will auto balance the leader allocation when the old leader goes down.
+						Enables auto leader balancing. A background thread checks the distribution of partition leaders at regular intervals, configurable by `leader.imbalance.check.interval.seconds`. If the leader imbalance exceeds `leader.imbalance.per.broker.percentage`, leader rebalance to the preferred leader for partitions is triggered.
+
+5. control.plane.listener.name : name of the listener used for communication between the controller and the broker .
+	Broker will use the control.plane.listener.name to locate the endpoint in listeners list, to listen for connections from the controller. 
+	On controller side, when it discovers a broker's published endpoints through zookeeper, it will use the control.plane.listener.name to find the endpoint, which it will use to establish connection to the broker.
+	For example,
+ if the broker's published endpoints on zookeeper are :
+"endpoints" : ["INTERNAL://broker1.example.com:9092","EXTERNAL://broker1.example.com:9093","CONTROLLER://broker1.example.com:9094"]
+and the controller's config is :
+listener.security.protocol.map = INTERNAL:PLAINTEXT, EXTERNAL:SSL, CONTROLLER:SSL
+control.plane.listener.name = CONTROLLER
+then controller will use "broker1.example.com:9094" with security protocol "SSL" to connect to the broker.
+6. background.threads : numberof threads to use for various backgroud tasks default 10 
+7. broker.id : the id for each broker node in a cluster 
+8. compression.type : give the compression type for a given topic .(zip,gzip , tar etc)	
+9. delete.topic.enable: this will make the admin tool to delete the topic if required .		
+9. leader.imbalance.check.interval.seconds : A background thread checks the distribution of partition leaders at regular intervals, configurable by `leader.imbalance.check.interval.seconds`
+10 : leader.imbalance.per.broker.percentage:  If the leader imbalance exceeds `leader.imbalance.per.broker.percentage`, leader rebalance to the preferred leader for partitions is triggered.
+
+
+
+//logs 
+11. log.dir : /tmp/kafka-logs
+12. log.flush.interval.messages : The number of messags that a topic keep before it is writtern(flush) to the disk.
+13. log.flush.interval.ms : the time interval for which the messages are kept before it is flush(writtern) to the disk
+				if not set then the value is taken fro log.flush.scheduler.inteval.ms
+14. log.flush.offset.check.interval.ms: last recovery point position.				
+15. log.flush.start.offset.check.interval.ms : frequency fro starting offset
+16. log.retention.bytes : the byte of data to be retained .
+17. log.retention.hours : the interval for which the logs will be retained in hours 
+18. log.retention.minutes : the interval for which the logs will be retained in minutes
+19. log.retention.ms : the interval for which the logs will be retained in ms 
+20. log.roll.hours/ms : the interval after which the new logs will roll out .
+21. log.roll.jitter.ms/hours : the max jitter to subtract from logrolltimemills();
+22. log.segment.bytes : the max file for single log file .
+23. log.segment.delete.ms : the time interval before we wait before deleting the logs file
+  . log.cleaner.backoff.ms : the amout of time to sleep when there are no logs to cleans 
+  . log.cleaner.dedupe.buffer.size : amount of mem used for duplication across all cleaner threads .
+  . log.cleaner.delete.retention.ms : how long are delete records are retained.
+ 
+
+//threads							
+25. min.insync.replicas : now in this  when the ack value is set to all , so the ack is suppose to be there for  all broker node in the cluster post replication occurs  . so this value should meet.
+26. num.io.threads : The number of threads the server use to execute the IO operations 
+27. num.network.thredas : the number of threads the server to receive the data forom network and send the data to the network .
+28. num.recovery.thread.per.data.dir : threads to log recover at startup and shutdown.
+29. num.replicas.alter.log.dir.threads : threads to move replicas between log dirs.
+30 num.replicas.fetchers : Number of thredas used to replicate messages from a source broker.
+
+//offset(part of partition)
+31. offset.commit.required.acks  :the number of ack required before commit.
+32. offset.commit.timeout.ms : offset commit will be delayed till all replicas of the the offset topic recieves the commit .	
+33. offset.load.buffer.size : batch size of reading message in offset segment while loading data in to the cache.	
+34. offset.retention.check.interval.ms : the freq to check for stale offsets.
+35. offset.retention.minutes: Offset will be expired from last commit + this retention periods				 
+36. offset.topic.num.partition : no of partition for offset commit topic .
+37. offset.topic.replication.factor : replication factor for offset topic .
+38. offset.topic.segment.bytes : the sizeof the offset topic message .
+
+//quota
+39. quota.max.request : Number of queued request allowed before blocking the network threads (num.io.threads.)
+
+//replicas (internal cluster nodes(leaders and follower) properties)
+40. replica.fetch.min.bytes : max size fo each fetch response.
+41. replica.fetch.wait.max.ms: the max time wait for response in terms of request send by replicas. 
+42. replicas.lag.time.max.ms: For this time if the follower hasn't sent any fetch request to leader , then leader will remov eit from ISR : internal sync (in which what ever is loaded in leader get replicated to follower)
+
+//generic
+43. request.timeout.ms: if the client does not get the response from kafka in this time then it can resend the request if it hasn't exhausted the retry.
+44. transaction.max.timeout.ms : the max time for clients transactions
+45. transactional.id.expiration.ms : max time before which the the transaction id is nt expired.
+  . default.replication.factor : which is 1 in out case.
+  . fetch.max.bytes : max bytes return to client for a fetch request , must be atleast 1024
+  . internal.broker.listener.name : name of the listener to communicate between brokers .
+
+//zookeeper :
+46. zookeeper.connection.timeout.ms : the max time with in which the client need to make a connection . if zookeeper doesn't respond it timed out
+47. zookeeper.max.inflight.requests : Max number of request that can be send to zookeeper unacknowledged before blocking the thread.
+48. zookeeper.session.timeout.ms : the connection session time ou t.
+49. zookeeper.set.acl : ask client to use secure acls.s
+
+//consumer groups :
+. group.initial.rebalance.delay.ms : the amount of time the group will wait to rebalance the group post adding a consumer 
+. group.max.session.timeout.ms : the maximum time out 
+. group.min.session.timeout.ms : the minimum time out 
+. group.max.size: the max number of consumer added to the group .
+
+
+//Topic level : 
+. message.max.bytes(max.message.bytes) : The maximun size of the record (message) which is allowed in kafka topic .
+							We can mention the size of the record .
+. cleanup.policy : the string which donates what will happen to sitting messages .		
+. compression.type : the type of file topic will create whil flushing the data to the diskc. ex  : zip , gzip .
+. delete.retention.ms : the time for which to retain the logs .
+. file.delete.delay.ms : the time for which to wait before deleting the file from file system.
+
+//followers(nodes) in clusters
+. follower.replication.throttled.replicas : Ti throttled the log replication on follower side .
+
+//leader node
+. leader.replication.throttled.replicas : to throttled the log replications on leader side.
+. maximum.timestamp.difference.max.ms : The max difference allowed between the time kafka receives the message and the time stamp assigned to the message when it was sent.
+. message.timestamp.type : ths can be createtime()(user defined ) or the logappended time ().
+. min.compaction.lag.ms : themin time for which the log sits in uncompacted.
+
+//producer config 
+. key.serializer : to mention the serializer for outgoing message.
+. ack : which are of hree categories : ack 0 , ack 1 and ack all .
+. bootstrap.server : the broker hostname and the port for it .
+. buffer.memory : The max amount of memory the producer can use to hold the message waiting to be sent to the server.
+. compression.type : the compression type is of topic level configs to compress the message sent to it .
+. retries : to retry number of send happen for a message to the servere.
+. ssl.key.password: the password for secure ssh connection with th kafka severe.
+. ssl.keystore.location : the location of the keystore on the servers.
+. ssl.keystore.password : for above key decryption.
+. batch.size : holding mutiple message into a batch size and send it to the servre.
+. client.id : to sedn the client id along with the message to the srever to track the source .
+. connection.max.idle.ms : to close he idle connections when sitting idle no message flowing .
+. max.block.ms : this time shows how long kafkaproducer.send will be in block state . No message is sending .	
+
+
+//Consumer config : 
+. receive.buffer.bytes : the size of the data to be received on the conusmer side.
+
+---------------learned prop-------------------	
+
+Listener: 
+	a uri that we listen on . This is just a URI advertise(published to zookeeper) from broker to the controller of producer and consumer to connect on .
+	A controller ask the zookeeper to tell the broker to connct to and bam we get the listenr url to connect on . if not set then default comes from java.net.http.getcanonicalhostname();
+	
+so as we know zookeeper will manage the administrative activities like holding metdata about the topic (how many partitions are thre which topicgoes to which broker ) and which partition replica is a leader .
+it will also help in bringing up a new leader in case the leader partition goes down  as it holds the info tha which partition is a leader 
+
+Controller : it is the leader broker and zookeeper knows that and help in assigning the partition to the different brokers. and monitor doe broker failure in cluster if fails bring up a new one 
+	
+
+
+-----------------------------------------Commands----------------------------------------------------------------------
+log.dirs=/tmp/kafka-logs
+
+1) Start Zoo Keeper  : as we know that zookeeper is the co-ordinator and will decide which topic goes to which broker.
+ zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+
+2)Start Kafka server or broker or node::
+
+kafka-server-start.bat ..\..\config\server.properties
+
+
+3) create a Topic
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic
+
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3 --replication-factor 2
+
+as we know that we have only one broker than its obvious that we can have only one replica factor
+
+*****************************************
+
+kafka-topics --zookeeper 127.0.0.1:2181 --create --topic first_topic --partitions 3 --replication-factor 1
+
+
+
+4)  Listig all Topics::
+kafka-topics.bat --zookeeper 127.0.0.1:2181 --list
+
+
+
+5) Start Producer: to  start producing/publishing  the messages to the topic partitions
+kafka-console-producer --broker-list 127.0.0.1:9092 --topic first_topic
+
+
+
+6) Start  Consumer
+
+kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning  
+
+--from-beginning : will read all the old messages.
+
+
+
+kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic --partition 0
+
+
+
+7) 
+
+Old messages read along with new one also 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 0
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 1
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning --partition 2
+
+
+New message read :
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 0
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 1
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic  --partition 2
+
+
+So if you want to check which partition got which messages do below :
+
+	1. open one producer , spun up the broker and zookeeper
+	2. open three consumer one for each partition and publish messages from the producer to the topics
+
+8) kafka-topics --zookeeper 127.0.0.1:2181 --topic first_topic --describe
+
+
+
+9) How to Increse No of Partition::
+
+kafka-topics --alter --zookeeper localhost:2181 --topic first_topic --partitions 5
+
+
+10) kafka-topics --zookeeper 127.0.0.1:2181 --topic first_topic --describe
+
+
+
+11)  ACKS : there are three types of acks : 
+(ack 0 ) : In which the producer does not wait for the ack from the leader broker in kafka cluster. 
+(ack 1) : In which the producer does wait for the ack from the leader node / broker in kafka cluster. In this case if there is any network issue between leader and the follower then replication will fail and leader will send the ack back to sender without ack fro followers. Which results in data lose. 
+(ack all) : in this when producer waits for the ack from the leader , leader node in turn waits for the ack from the follower  nodes to certify that the
+replication is done or else will not send the ack to the producer and leader will keep on retry as producer keep on retry after certain time interval.
+
+
+Kafka-console-producer --broker-list localhost:9092 --topic first_topic --producer-property acks=all
+
+
+
+10 ) *****************************
+Publishing DATA with Key::
+
+**********
+kafka-console-producer --broker-list localhost:9092 --topic first_topic --property "parse.key=true" --property "key.separator=:"
+
+>
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning 
+
+
+
+
+
+
+IF YOU WANT TO PRINT THE KEY ::
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 1
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 2
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 3
+
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --property print.key=true --property key.separator=":" --from-beginning --partition 4
+
+>kafka-console-consumer.bat  --bootstrap-server localhost:9092 --topic second_topic --property print.key=true --property key.separator=":" --from-beginning
+
+The default separator is space and we can also set the separator using code.
+
+11) CONSUMER group :: Consumer group always start reading from where it left , i mean if we shutdown the consumer group then it will read  the messages
+from topic which comes after it got shutdown , no need to use from-beginning
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --group mygroup 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic forth_topic --group pheonix 
+ 
+
+
+12 ) DEscribe ::
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group mygroup
+
+
+
+13 ) RESET OFFEST::::
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --to-earliest --execute --topic first_topic
+Kafka-consumer-groups –bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic:0
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group mygroup --reset-offsets --shift-by -2 --execute --topic first_topic:0,1 
+
+
+
+
+
+pushes the current-offset value to LAG(unred) : kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --to-earliest --execute --topic fifth_topic 
+Will minus 2 from current offset and assign it to LAG : kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic fifth_topic
+											kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic
+											kafka-consumer-groups –bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -3 --execute --topic sixth_topic
+
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0
+
+
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0,1
+kafka-consumer-groups  --bootstrap-server localhost:9092 --group pheonix --reset-offsets --shift-by -2 --execute --topic sixth_topic:0,1,2 
+
+
+shift means : 
+
+Current-offset = Current-offset-shift value 
+Lag value = shift value
+
+---------------------------
+kafka producer api is used for all trouble shooting.
+
+Kafka-producer in java need below things : 
+	properties objesct
+	prooducerconfig object
+	kafkaproducerobject
+	producerrecord object
+kafkaconsumer is similar which 
+	properties objesct
+	consumerconfig object
+	kafkaconsumerobject
+	consumerrecord object
+	
+Now how to read the topic partition from a specfic offset:
+	properties objesct
+	consumerconfig object
+	consumer.seek is
+	kafkaconsumerobject
+	consumerrecord object
+	
+------------------------------kafka connect 
+
+kafka connect is a third party tool /api to connect to other tools from kafka cluster.
+Kafka connectors are there to allow kafka connect to take the data from external app to push to kafka servere or take the data out of the kafka server to external App likes Mysql  , mongo db 
+
+kafka Sink connector : To get the data from kafka server to external source 
+kfka source connector : to send the data from external source to kafka server
+
+
+			pushes							pull
+Producer --------------->Kafka cluster <--------------------consumer 
+							|  /\
+							|  | 
+							|  |
+							|  |
+						    \/ |
+						kafka Connectors()	
+							|   /\
+						    |   |
+                            |   |
+                            |   |
+                            \/  |
+						Hadoop
+						elastic search 
+						Mysql
+						Mongo DB
+						
+
+Lab example : if we want to publish the log files generating on a server and send it to kafka 
+We need to use file source connectors (to send the data from external source to kafka server topics)
+
+We have following prop files in config folder : 
+	: connect-standalone.properties  ----- runs on a single machine ( sys goes down the setup goes down)
+		(this prop file will contain the message convertor for your message to be converted before sending it to kafka)
+		(this prop file contains the offsets where i need to maintain the data upto)
+		(this prop file contains the plugin path for the connector you will download for you external source (file connector plugin in pur case)
+		(if we want to connect to mysql then download the plugin for mysql and give path of that connector in this prop file)
+	
+	: connect-distributed.properties ------ Runs on distributed systems machine (one gos down other comes up.)
+
+For file source connector the prop file is already there in config folder .
+	
+	
+Lab # 1 : source connector 
+
+1. change the connector-file-source.properties file as per the file location.
+2.command to run :  C:\KafkaSetup\demo\kafka_2.13-2.4.0\bin\windows>kafka-console-consumer --bootstrap-server 127.0.0.1:9092, 127.0.0.1:9092,127.0.0.1:9094 --group demo --topic connect-test --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true
+3.command to consume : connect-standalone.bat ..\..\config\connect-standalone.properties ..\..\config\connect-file-source.properties	
+
+
+Lab # 2 : Sink - connector
+Now for the file sink connector : ------- means to send the data from kafka server to our system
+as we are sending the data from kafka(topic from where we want the data) server to our local system then we just need to run the app 
+
+1.change the connector-file-sink-properties
+2. create a file on your system to consume the data into from the topic .
+3. command : connect-standalone.bat ..\..\config\connect-standalone.properties ..\..\config\connect-file-sink.properties		
+
+
+convertor changed to string :
+#key.converter=org.apache.kafka.connect.json.JsonConverter
+#value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+
+NOTE  : The point is the sink connector will download the data is similar formatt and show it in file as it was pushed to the topic from file-source-connector.
+
+As shown below 
+
+C:\kafka_2.12-2.6.0\kafka_2.12-2.6.0\bin\windows>kafka-console-consumer --bootstrap-server localhost:9092 --group demo --topic connect-Topic --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true
+null    {"schema":{"type":"string","optional":false},"payload":"**********Samepl logs from Microservice"}
+null    ##################### end of logs
+null    **********Samepl logs from Microservice
+null    {"schema":{"type":"string","optional":false},"payload":"**********Samepl logs from Microser"}
+null    **********Samepl logs from Microser233
+
+lab TBD : ---- Run The mysql connector '
+
+Confluent kafka download 
+Then download connector
+
+
+Producer api ----------------------- -------------------------------------------------->   kafka server (TOPIC) <------------------------------------------------------------------------------- Consumer api
+																								/\			    |
+																								|			    |
+																								|			    |
+																								|			    \/
+									(File source connector , mysql source conn , mongo source )Connect api	    Connect api (for example : file sink connector , mysql sink connector , hadoop sink connector)
+																								 /\			    |
+																								 |			    |
+																								 |			    |
+																								 |			    \/
+																				Mysql db , mongo db , file 	    Hadoop , mysql db , file storage etc (then use that data for filter it )
+																				
+																				
+KAFKA STREAM API : the microservices that we created to use the topic names frm the app.yml and use  @StreamChannel annotation to act as a consumer and then send the data to next topic using @output stream use further .
+
+																			
+Producer api ----------------------- -------------------------------------------------->   kafka server (TOPIC) ------------------------------------------------------------------------- Consumer api																					(TOPIC B) 	Topic A			
+																						   |		/\			  
+																						   |		|			  
+																						   |		|			  
+																						   \/		|			  
+																						 					
+																						   |		 /\			  
+																						   |		 |			  
+																						   |		 |			  
+																						   \/		 |			  
+																						   KAfka Stream 
+
+command : 
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic streams-plaintext-input
+
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic streams-wordcount-output
+
+Strat Console Consumer 
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 ^    --topic streams-wordcount-output ^    --from-beginning ^    --formatter kafka.tools.DefaultMessageFormatter ^    --property print.key=true ^    --property print.value=true ^    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer ^    --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer																						   
+
+
+Kafka producer api for java : 
+https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html
+
+kafka consumer api : 
+https://kafka.apache.org/26/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
+
+Documents : 
+https://drive.google.com/drive/u/2/folders/1m9QuFOMn345lt613JqT48lk1H916H32Q
+
+kafka connectors : 
+https://www.confluent.io/hub/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.rmkt_tgt.kafka-connectors_mt.xct_rgn.india_lng.eng_dv.all_con.kafka-connectors&utm_term=kafka%20connectors&creative=&device=c&placement=&gclid=CjwKCAjwgISIBhBfEiwALE19SRtZcMlwCVv0djOo7B0o_ONVAh8jvI_qliK99Kp7CcCyYraoNzvqjRoC8nEQAvD_BwE
+
+
+Word count program : 
+https://github.com/apache/kafka/blob/0.10.2/streams/examples/src/main/java/org/apache/kafka/streams/examples/wordcount/WordCountDemo.java
+
+
+KStream api : 
+https://kafka.apache.org/23/javadoc/org/apache/kafka/streams/kstream/KStream.html
+
+filter feature for kafka
+:
+https://kafka.apache.org/20/javadoc/org/apache/kafka/streams/kstream/KStream.html
+
+
+so when we use the kstream it will pck the data from topic and update the Ktable in (key , value) format as we did saw in java program .
+
+Operations can be stateless (like filter as it doesn't depend upon the previous messages )and statefull(as it depends upon the old data like operations like join , exclusive etc) .
+ if the stream is the object name holding one record ('harmeet', 'engg')
+ Mapvalues --
+	effects the values only 
+	can be applied both on kstream and ktable 
+	output : ('harmeet','ENGG')
+	
+ Map ----
+	effects the key and value both 
+	is applied only using kstream.
+
+ Filter -
+	will filter using a predicate will filter all the records one by one if predicate is true
+ FilterNot -
+	It will do the opposite of above 
+	if the record contains a char do not filter or else filter others
+	
+	
+ FlatmapValues 
+	words = sentesnce.flatmapvalues(values ->Arrays.asList(value.split()))
+for example using above code: 
+		(meet , is an engg) ------ flatmapvalues -----> meet  , is
+														meet , an
+														meet , engg 
+														
+														
+sample data produced : 
+															
+				meet,red
+				meet,yellow
+				raj,red
+				raj,red
+				pinki,pink
+				
