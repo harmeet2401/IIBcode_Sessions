@@ -703,6 +703,11 @@ spring.security.user.name=username
 spring.security.user.password=Gogi!1234
 
 Lab 10 : ----------- Authentication implement
+
+NOTE : Constructor Injection:
+
+It is one of the kinds of Dependency Injection.
+Constructor Injection (Spring Container uses the parameterized constructor to create spring bean class object value to that object).
 		
 Lab 11 :------------  JPA (java persistent api) for sql		
 The Java Persistence API (JPA) is a specification of Java. It is used to persist data between Java object and relational database. JPA acts as a bridge between object-oriented domain models and relational database systems. It also include JDBC in int so that we can use JDBCTemplate to access Db other then h2

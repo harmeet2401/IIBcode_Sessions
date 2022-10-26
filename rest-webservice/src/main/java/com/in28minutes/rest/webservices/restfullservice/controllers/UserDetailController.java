@@ -1,10 +1,12 @@
 package com.in28minutes.rest.webservices.restfullservice.controllers;
 
 
+import com.in28minutes.rest.webservices.restfullservice.bean.Post;
 import com.in28minutes.rest.webservices.restfullservice.bean.User;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import com.in28minutes.rest.webservices.restfullservice.exceptionhanlders.UserNotCreatedException;
 import com.in28minutes.rest.webservices.restfullservice.exceptionhanlders.UserNotFoundException;
+import com.in28minutes.rest.webservices.restfullservice.serviceDAO.PostRepository;
 import com.in28minutes.rest.webservices.restfullservice.serviceDAO.UserRepository;
 import com.in28minutes.rest.webservices.restfullservice.serviceDAO.UserServiceDAO;
 import jakarta.validation.Valid;
@@ -13,6 +15,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,23 +27,20 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
-@RequestMapping(path = "/basepath")
-public class UserController {
-
-
+//@RequestMapping(path = "/basepath")
+public class UserDetailController {
     public MessageSource messageSource;
-
-    public UserController(MessageSource messageSource,UserRepository userRepository){
+    public PostRepository postRepository;
+    public UserRepository userRepository;
+    @Autowired
+    public UserServiceDAO userServiceDAO;
+    public UserDetailController(MessageSource messageSource,UserRepository userRepository,PostRepository postRepository){
 
         this.messageSource = messageSource;
         this.userRepository=userRepository;
+        this.postRepository=postRepository;
     }
 
-    @Autowired
-    public UserServiceDAO userServiceDAO;
-
-    @Autowired
-    public UserRepository userRepository;
 
     @GetMapping(path = "/users")
     public List<User> getAllUsers(){
@@ -124,6 +125,36 @@ public class UserController {
     public String sendInternationlizationMessage(){
         Locale locale= LocaleContextHolder.getLocale();
         return messageSource.getMessage("good.morning.message",null,null,locale);
+    }
+    @GetMapping(path = "/jpa/users/{id}/post")
+    public List<Post> getJpaAllPosts(@PathVariable int id){
+        User user = userRepository.findById(id).get();
+        if (user==null) {
+            throw new UserNotFoundException("User id not found for :- " + id);
+        }
+        return user.getPost();
+    }
+    @PostMapping(path = "/jpa/users/{userid}/post")
+    public ResponseEntity<Object> createJpaPost(@PathVariable int userid,@Valid @RequestBody Post post){
+        User user = userRepository.findById(userid).get();
+        if (user!=null) {
+            post.setUser(user);
+            postRepository.save(post);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userid}").buildAndExpand(user.getId()).toUri();
+            return ResponseEntity.created(location).body("!!! User Created !!!");
+        }
+        throw new UserNotFoundException("User id not found for :- " + userid);
+        //return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+    @GetMapping(path = "/jpa/users/{userid}/post/{postid}")
+    public Post getJpaPost(@PathVariable int userid , @PathVariable int postid){
+        User user= userRepository.findById(userid).get();
+        if (user!=null) {
+            Post post= postRepository.findById(postid).get();
+            return post;
+        }
+        throw new UserNotFoundException("User id not found for :- " + userid);
     }
 
 }

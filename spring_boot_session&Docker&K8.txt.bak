@@ -99,6 +99,8 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@RequestParam ---- > to get the value from url which is send like localhost:8080/test?name=harmeet , where harmeet is the requestparms
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
+				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
+						
     @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
@@ -117,6 +119,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@SpringBootApplication class : starter class 
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
+	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
@@ -726,7 +729,7 @@ spring.datasource.url=jdbc:h2:mem:testdb
 spring.data.jpa.repositories.bootstrap-mode=default
 spring.jpa.defer-datasource-initialization=true
 
-http://localhost:8080//h2-console
+http://localhost:8080/h2-console
 	
 Step 3 : create an sql file under src/main/resources and run three insert queries to insert data to h2 in memory db
 
@@ -828,7 +831,7 @@ cloud client 			 	cloud client
 			 |          |
 			 |          |
 			Sprig cloud server 
-			  Microservice 	3
+			  Microservice 3
 					|
                     |
                     |connects to Git repo
@@ -851,15 +854,16 @@ spring.cloud.config.server.git.default-label=main
 
 
 @application.yml for microservice1 connecting to spring cloud srever
-spring.application.name= limits-service
-spring.config.import= optional:configserver:http://localhost:8888
+spring.application.name=limits-service
+server.port = 8080
+spring.config.import=optional:configserver:http://localhost:8888
 limits-service.minimum=9
 limits-service.maximum=800			
 
 @application.yml for microservice2 connecting to spring cloud srever
 server.port=8081
-spring.application.name= startertestclass
-spring.config.import= optional:configserver:http://localhost:8888/
+spring.application.name=startertestclass
+spring.config.import=optional:configserver:http://localhost:8888/
 startertestclass.username=harmeet singh
 startertestclass.address= Plot no-988
 startertestclass.id= 0023N7744
@@ -867,11 +871,12 @@ startertestclass.dept= IT
 
 application.yml for microservice3
 spring.application.name=micro-service2
+server.port = 8082
 spring.config.import=optional:configserver:http://localhost:8888
 micro-service2.username=testname
 micro-service2.password=testpass
 micro-service2.dept=testdept
-micro-service2.address=testaddress
+micro-service2.address=testaddress	
 server.port=8082
 				
 				
@@ -1055,7 +1060,7 @@ Steps :
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
-2. Annotate main class with @EnableEurekaserver  , this i just like when we created the config server we annotate it as @EnableConfigServer ,
+2. Annotate main class with @EnableEurekaserver  , this is just like when we created the config server we annotate it as @EnableConfigServer ,
 		@EnableFeignClient is annotated the main class from where we are using the proxy .
 3.	Add name of the app 
 	eureka.client.register-with-eureak = false
