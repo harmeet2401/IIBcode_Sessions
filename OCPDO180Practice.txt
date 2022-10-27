@@ -411,3 +411,40 @@ Deploy the Nexus server container image to an OpenShift cluster.
 	- oc get route -o yaml
 
 23. Run the comprehensive-review lab carefully and it will help a lot.	
+
+Linux command to keep on your toes:
+man : to see the helping guide for any command 
+ls  : to list the files :
+ls -ltr 
+pwd : to see the dir
+sudo : to use the root user 
+cp  : to copy the files .
+mv : to move the files
+mkdir : to make a directory 
+rmdir : to remove a directory 
+rm : to remove a file 
+touch : to create an empty file 
+locate : to the locate a file 
+find : to find a string in a text 
+grep : to list the files or text which contains the source string provided.
+tail : to see the tail lines of a file 
+df : to see the disk space 
+du
+head : to see the top line of a file 
+diff : to see the differece made to the file 
+chmod : to change the read , write access to the file or folder 
+chmown  : to change the owner of the folder or file.
+jobs 
+kill : to kill the process 
+ping : to ping the servere 
+wget : to send an http request to the open api or webservices.
+echo : 
+zip  : zip file.zip note.txt ---- this will compress the note.txt into the file.zip file 
+unzip : unzip file.zip ------ to extract the data to the current directory .
+useradd : useradd John
+passwd: passwd 123456789
+apt-get : apt-get upgrade , apt-get install , apt-get update , apt-get check
+vi : vi filename.txt     ----- editor to edit the file linux 
+nano : nano filename.txt  ----- editor to edit the file in centos and RHEL flavour of linux 
+su : to run the command as a different user.
+
