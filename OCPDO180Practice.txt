@@ -291,7 +291,7 @@ You should be able to create an OpenShift application and access it through a we
 	- check the /home/student/DO180/labs/multicontainer-design/deploy/nodejs/Containerfile file 
 	- check the /home/student/DO180/labs/multicontainer-design/deploy/nodejs/nodejs-source/models/db.js node js script for api to access DB in mysql contains env for db mysql 
 	- cd ~/DO180/labs/multicontainer-design/deploy/nodejs
-	- ./build.sh  ----- script holds the podman build --layers=false -t do180/todonodejs --build-arg NEXUS_BASE_URL=${RHT_OCP4_NEXUS_SERVER} to build the todoapi image 
+	- ./build.sh  ----- script holds the podman build --layers=false -t do180/todonodejs --build-arg NEXUS_BASE_URL=${RHT_OCP4_NEXUS_SERVER} to build the todoapi image  
 	- podman images 
 	- ./run.sh edit to add below podman run command :  /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked
 		# In the same run.sh file, insert another podman run command at the appropriate line to run the todoapi container. The following screen shows the docker command to insert into the file.
