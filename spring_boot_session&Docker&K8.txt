@@ -80,6 +80,10 @@ get , put , post , delete : These methods will help in doing that
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 We need two things 
 
+Whats is a bean : 
+Serializable object , which has the getter and setter as the properties and also a zero paramter constructor to return the object instance.
+
+
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
 DispatcherServletAutoConfiguration is the bean getting configured to make dispatcher servlet work.
 @Responsebody + jacksonHttpMessageConvertor is the one which helps in converting the java object beans to a json payloads.
@@ -120,6 +124,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
+	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
@@ -702,6 +707,15 @@ we can mention below two properties in application.yml file.
 spring.security.user.name=username
 spring.security.user.password=Gogi!1234
 
+
+
+
+- Enhancing the basic security authentication in spring boot rest api 
+Steps : 
+	
+
+
+
 Lab 10 : ----------- Authentication implement
 
 NOTE : Constructor Injection:
@@ -772,6 +786,43 @@ we have an another approach ,
 
 
 Lab 11 :------------  JPA (java persistent api) for sql		
+
+Lab 11.1 :------------ IIIIIIIMMMMMMMPPPPPPP Mysql Db connections from spring boot rest api 
+Launch MySQL as Docker Container
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=social-media-user --env MYSQL_PASSWORD=dummypassword --env MYSQL_DATABASE=social-media-database --name mysql --publish 3306:3306 mysql:8-oracle
+
+
+mysqlsh commands
+mysqlsh
+\connect social-media-user@localhost:3306
+\sql
+use social-media-database
+select * from user_details;
+select * from post;
+\quit
+
+
+/pom.xml Modified
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency> 
+
+
+/src/main/resources/application.properties Modified
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:mysql://localhost:3306/social-media-database
+spring.datasource.username=social-media-user
+spring.datasource.password=dummypassword
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+NOTE : NO code changes are required the same userrepository and postrepository interfaces will be used to insert or get the data .
+
+The data.sql will not be triggered or run to insert the sample data when we are connecting to the real databse like mysql 
+
+Lab 11.1 :------------  Mysql Db connections from spring boot rest api  
 
 Lab 12 ----- Spring cloud-----------------------------------------------------------
 challanges  for monolithic approach 
