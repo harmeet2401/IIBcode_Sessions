@@ -80,6 +80,10 @@ get , put , post , delete : These methods will help in doing that
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 We need two things 
 
+Whats is a bean : 
+Serializable object , which has the getter and setter as the properties and also a zero paramter constructor to return the object instance.
+
+
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
 DispatcherServletAutoConfiguration is the bean getting configured to make dispatcher servlet work.
 @Responsebody + jacksonHttpMessageConvertor is the one which helps in converting the java object beans to a json payloads.
@@ -707,8 +711,20 @@ spring.security.user.password=Gogi!1234
 
 
 - Enhancing the basic security authentication in spring boot rest api 
-Steps : 
-	
+Steps : create an another class below 
+@Configuration
+public class SpringSecurityConfiguration {
+
+
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
+
+        httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
+        httpSecurity.httpBasic(Customizer.withDefaults());
+        httpSecurity.csrf().disable();
+        return httpSecurity.build();
+    }
+}
+
 
 
 
