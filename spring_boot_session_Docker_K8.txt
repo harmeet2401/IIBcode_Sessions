@@ -951,7 +951,7 @@ server.port=8082
 Now for the different region and single microservice how we will maintain the config files ?
 By adding below two props we can call for the specific file
 
-spring.profile.active=dev
+spring.profiles.active=dev
 spring.cloud.config.profile=dev
 
 Then the complete yaml file will be 

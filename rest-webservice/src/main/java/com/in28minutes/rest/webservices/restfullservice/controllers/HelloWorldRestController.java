@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 @RestController
 public class HelloWorldRestController {
     public Supplier<HelloworldBean> supplier = ()->{
-        return new HelloworldBean("Hello message from supplier bean");
+        return new HelloworldBean("He message from  bean devtools");
     };
 
 
