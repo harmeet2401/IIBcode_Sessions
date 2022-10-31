@@ -951,6 +951,8 @@ server.port=8082
 Now for the different region and single microservice how we will maintain the config files ?
 By adding below two props we can call for the specific file
 
+The applicationu.yaml file will be by the name of application-dev.yaml , application-prod.yaml . Using below two properties we can load one of the profiles in the main application.yaml
+
 spring.profiles.active=dev
 spring.cloud.config.profile=dev
 
