@@ -14,7 +14,7 @@ Practice for OCP guided labs : -------------------------
 2. Guided Exercise: Exploring root and rootless containers : in ths we will be creating container using the id other than root .
 	You should be able to see the UIDs for processes running inside containers.
 	As a root user :
-	-sudo podman run --name asroot  -rm -ti registry.access.redhat.com/ubi8:latest /bin/bash ---- will run the container and bashed inside the container.
+	-sudo podman run --name asroot -rm -ti registry.access.redhat.com/ubi8:latest /bin/bash ---- will run the container and bashed inside the container.
 		# whoami
 		  root
 		# id 
@@ -36,14 +36,14 @@ Practice for OCP guided labs : -------------------------
 		
 3.  Creating containerised service 
 	You should be able to start and customize a container using a container image.
-	- podman run --name httpd-basic -p 8080:80 -d quay.io/redhattraining/httpd-parent:2.4 -- to run the apache server http 
+	- podman run --name httpd-basic -p 8080:80 -d quay.io/redhattraining/httpd-parent:2.4 -- to run the apache server http listening on defult port 80 on container.
 	- curl localhost:8080
 	- podman exec  -it httpd-basic /bin/bash  ----- podman exec httpd-basic /bin/bash -c 'echo "Hello world-2" >	/var/www/html/index.html;'
 		# cd /var/www/html/
 		# vi index.html
 		# edit change the message 
 			or 
-		# echo "Hello world ">>	/var/www/html/index.html
+		# echo "Hello world" >>	/var/www/html/index.html
 		#  curl localhost:80
 			it will show you hello world 
 		exit 
@@ -156,7 +156,7 @@ You should be able to create a custom Apache container image built on a Red Hat 
 	  LABEL description='A custom Apache container based on UBI 8'
 	  RUN yum install -y httpd && yum clean all ------------------------------- yum commands run in linux system .
 	  RUN echo "Hello from Containerfile" > /var/www/html/index.html 
-	  EXPOSE 80
+	  EXPOSE 80  -------------------------------------------------------- this is the container port
 	  CMD ["httpd","-D","FOREGROUND"]
 	- podman build --layers=false -t do180/apache .
 	- podman images 
@@ -210,9 +210,9 @@ You should be able to create and deploy a MySQL database pod on OpenShift.
 	- oc describe svc servicename
 	- oc get pvc
 	- oc describe pvc pvcname 
-	- oc port-forward podname 3306:3306
-		port-forward 3306:3306------>
-		port-forward 3306:3306------>
+	- oc port-forward podname 13306:3306
+		port-forward 13306:3306------>
+		port-forward 13306:3306------>
 		
 	Open a new terminal for below : ab port forward hogya hai bs you can run using mysql -uuser1 -pmypa55 -P3306 testdb -e "show databases;" NICHE SAARI COMMANDS UPR PORT FORWARD PR RIDIRECT HOJAENGI KYUNKI NICH MAI -P13306 use krra hun
 	- mysql -uuser1 -pmypa55 --protocol tcp -h 127.0.0.1	
