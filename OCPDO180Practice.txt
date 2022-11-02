@@ -177,13 +177,13 @@ VVVVVVVVVIMP NOTE : jab mysql yan container commands run krni ho use portforward
 	
 9. Guided Exercise: Creating a Basic Apache Container Image
 You should be able to create a custom Apache container image built on a Red Hat Universal Base Image 8 image. using the builder file or containerfile or dockerfile
-
+		Yum is used in Red Hat Enterprise Linux (RHEL)
 	- Create the containerfile to build an apache images  : vim /home/student/DO180/labs/dockerfile-create/Containerfile
 	  
 	  FROM ubi8/ubi:8.3
 	  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
 	  LABEL description='A custom Apache container based on UBI 8'
-	  RUN yum install -y httpd && yum clean all ------------------------------- yum commands run in linux system .
+	  RUN yum clean update && yum install -y httpd && yum clean all ------------------------------- yum commands run in linux system .
 	  RUN echo "Hello from Containerfile" > /var/www/html/index.html 
 	  EXPOSE 80  -------------------------------------------------------- this is the container port
 	  CMD ["httpd","-D","FOREGROUND"]
