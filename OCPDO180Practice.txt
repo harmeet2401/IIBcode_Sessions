@@ -79,6 +79,7 @@ But I don´t know how the make this setting permanent.
 		Hello world
 	
 **** NOTE  : AGAR CONTAINER KE ANDR KOI COMMAND BASH KI RUN KRNI HAI HOST MACHINE(BASE) SE TO WE CAN USE "PODMAN EXEC CONTAINERNAME /BIN/BASH -c 'commandtorun'"
+and -e for the sql queries to run for the mysql db
 		
 4. Guided Exercise: Managing a MySQL Container	
 	You should be able to create and manage a MySQL database container
