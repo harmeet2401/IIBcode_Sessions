@@ -757,7 +757,7 @@ Step 2 : add below in app.yml
 2) To use data.sql, you need to add this to 
 spring.jpa.show-jpa=true
 spring.h2.console.enabled=true
-spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.url=jdbc:h2:mem:testdb                   ------------------ you can set the url here or else while runing a default url will appear to use.
 spring.data.jpa.repositories.bootstrap-mode=default
 spring.jpa.defer-datasource-initialization=true
 
@@ -1414,14 +1414,36 @@ Technique 1 :
 ------------------Lab 22------------------------------------------------------
 This lab will help in creating rest api connecting using JDBC and JPA to hibernate(H2 database) which is an in memory database.
 
-Dependecies required : 
+Step1 : Dependecies required : 
 	Spring web 
 	Spring data JPA 
 	Spring JDBC 
 	Spring hibernate (h2)
 
-------------------Lab 22------------------------------------------------------
+Step2 : app.yaml file 
 
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:testdb
+
+Step3 : create schema.sql (file name specific name) and data.sql (to insert the data . file name specfic). I know we can create table using @Entity for a bean but here is the approach to create table using schema.sql.
+
+Step 3 : 
+	Approach 1: when we execute query using jdbc we write lot of java code to do that.
+	Approach 2 : when we execute query using spring jdbc we will write small LOC.
+	Approach 3 : when we execute query using spring JPA we do creation of table using @Entity and run query using interface A (interface) extending JPArepository<>.
+	
+	We will work using two approaches , Approach 2 and Approach 3 
+	
+	Approach 2 : will execute the query using Spring jdbc
+	
+			Step 1 : create a class annotated as @Repository and using JDBCtemplate to call the function to update , insert and delete the data from Db
+					  write the insert query to a string variable.
+			Step 2 : create a class annotated as a @component so that it can be scanned by the spring boot which auto confoguration. and implements CommandLineRunner interface which is used to run an another fn of any class at springboot context start up.
+	
+
+
+------------------Lab 22------------------------------------------------------
+Note : CommandLineRunner Interface class is used to run any code function at the start of the spring boot application start up .
 -----------------Docker -------------------------------
 1. container : an isolated space or a process which runs your application which is dynamic version
 2. image : that contain the jar file for a java code , the runtime (jdk ) and run on top of the os stack . its a set of bytes .
