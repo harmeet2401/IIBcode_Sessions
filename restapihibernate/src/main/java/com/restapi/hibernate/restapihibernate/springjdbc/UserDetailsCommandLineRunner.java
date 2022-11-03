@@ -5,6 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ *
+ * THIS CLASS IS ONLY TO BE USD FOR TESTING PURPOSE . THIS CLASS
+ * DOESN'T SERVER ANY PURPOSE OF SETTING UP JDBCTEMPLATE
+ */
+
 @Component
 public class UserDetailsCommandLineRunner implements CommandLineRunner {
     @Autowired
