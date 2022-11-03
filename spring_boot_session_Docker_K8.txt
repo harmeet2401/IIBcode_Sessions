@@ -551,6 +551,7 @@ Url launch for hal browser : localhost:8080
 
 Url to launch Actuator : localhost:8080/applications
 						 localhost:8080/actuator
+						 localhost:8080/actuator/env : to see info about java version , utf-8 , port , tomcat config .
 {
 	"_links": {
 		"self": {
@@ -1409,6 +1410,17 @@ Technique 1 :
 				
 
 ------------------Lab 21------------------------------------------------------
+
+------------------Lab 22------------------------------------------------------
+This lab will help in creating rest api connecting using JDBC and JPA to hibernate(H2 database) which is an in memory database.
+
+Dependecies required : 
+	Spring web 
+	Spring data JPA 
+	Spring JDBC 
+	Spring hibernate (h2)
+
+------------------Lab 22------------------------------------------------------
 
 -----------------Docker -------------------------------
 1. container : an isolated space or a process which runs your application which is dynamic version
