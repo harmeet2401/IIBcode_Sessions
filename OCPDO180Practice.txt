@@ -66,7 +66,7 @@ But I don´t know how the make this setting permanent.
 	You should be able to start and customize a container using a container image.
 	- podman run --name httpd-basic -p 8080:80 -d quay.io/redhattraining/httpd-parent:2.4 -- to run the apache server http listening on defult port 80 on container.
 	- curl localhost:8080
-	- podman exec  -it httpd-basic /bin/bash  ----- podman exec httpd-basic /bin/bash -c 'echo "Hello world-2" >	/var/www/html/index.html;'
+	- podman exec  -it httpd-basic /bin/bash  ----- podman exec httpd-basic /bin/bash -c 'echo "Hello world-2" > /var/www/html/index.html;'
 		# cd /var/www/html/
 		# vi index.html
 		# edit change the message 

@@ -1373,6 +1373,43 @@ Bulkhead : ----------------
 LAB 20 : -----------Circuit breaker/failover/retry/rate limit  ----------------
 
 
+------------------Lab 21------------------------------------------------------ VVVVVVIIIIIIIMMMMMMMPPPPPPP
+
+We we load the value from the app.yaml file and make it production ready 
+
+Technique 1 : 
+	case 1 : using the main app.yaml file 
+		- To use @ConfigirationProperties and use prefix = "ticket-booking".
+		- then in app.yaml file mention the properties to get value for like this 
+				ticket-booking.url = http://localhost:8080/ticket/book/id
+				ticket-booking.username = defaultusername
+				ticket-booking.key = defaultkey
+		- To load the value create a class annotated as @ConfigirationProperties(prefix="ticket-booking") and @Component(to be managed by the spring boot).
+			mention three attributes or variable with getter and setter. 
+				private String url;
+				private String username;
+				private String key;
+				
+		- Create a controller for testing the values getting loaded.
+
+	case 2 : to overrid the these values in app.yaml file from app-dev.yaml file we can make use of the profile active to dev and mention above three in app-dev.yaml
+			app.yaml --- to allow dev values to override the value in here 
+				logging.level.org.springframework=debug
+				#spring.profiles.active=prod
+				spring.profiles.active=dev
+				ticket-booking.url = http://localhost:8080/ticket/book/id
+				ticket-booking.username = defaultusername
+				ticket-booking.key = defaultkey
+				
+			app-dev.yaml 
+				ticket-booking.url = http://localhost:8080/PNRvalue/book/id
+				ticket-booking.username = IRCTC
+				ticket-booking.key = 88wiins77j
+
+				
+
+------------------Lab 21------------------------------------------------------
+
 -----------------Docker -------------------------------
 1. container : an isolated space or a process which runs your application which is dynamic version
 2. image : that contain the jar file for a java code , the runtime (jdk ) and run on top of the os stack . its a set of bytes .
