@@ -696,7 +696,7 @@ Question : major changes took place while migrating from  java 7 to java 8
 4. Unsigned Integer Arithmetic
 5. Stream API : used to create stresm of data and reduces the number of line of codes. increeased efficiency of program .
 6. Parallel Sorting 	
-7. Hashmap hashset fn is removed and hashmap bucket linked list is replaced by a balabced tree after a threashhold.
+7. Hashmap hashset fn is removed and hashmap bucket linked list is replaced by a balanced tree after a threashhold.
 
 ** IMP : BUILD YOUR KNOWLEDGE ON THEFUNCTIONS INTRODUCED IN JAVA 8 AND USE THEM AS NEEDED.
 
@@ -968,7 +968,7 @@ QQQ. Stream Api
                 .collect(Collectors.toSet());
 
 5 flatmap method in stream api : flatmap is similar to map function is applied to convert from one type to another .
-And is applied to the stream in which each each element in the stream contains multiple elemenst 
+And is applied to the stream in which each element in the stream contains multiple elemenst 
 
 exmaple : below are the two example stream 
 

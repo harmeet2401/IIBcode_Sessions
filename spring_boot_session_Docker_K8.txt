@@ -1452,7 +1452,14 @@ Step 3 :
 			Step 1 : create a class annotated as @Repository and using JPArepository to call the function to update , insert and delete the data from Db
 					  write the insert query to a string variable.
 			Step 2 : create a class annotated as a @component so that it can be scanned by the spring boot which auto confoguration. and implements CommandLineRunner interface which is used to run an another fn of any class at springboot context start up.
-	
+			
+			Spring data JPA , : in this we can not only make use of the functin in the JPArepository but we can also create custom function in the interface which is extending JPArepository 
+			
+			@Repository
+			public interface UserDetailsRepository extends JpaRepository<User_details, Integer> {
+
+				List<User_details> findByName(String name);
+			}
 
 
 
