@@ -17,7 +17,11 @@ public class UserDetailsCommandLineRunner implements CommandLineRunner {
     private JDBCSpringService jdbcSpringService;
     @Override
     public void run(String... args) throws Exception {
-        jdbcSpringService.insert(new User_details(1,"CommandLineRunner","CommandLineRunner Class"));
-        jdbcSpringService.delete(3);
+        /*jdbcSpringService.insert(new User_details(1,"CommandLineRunner","CommandLineRunner Class"));
+        jdbcSpringService.insert(new User_details(2,"Bruno","Toronto"));
+        jdbcSpringService.insert(new User_details(3,"Spinner","USA"));
+        jdbcSpringService.insert(new User_details(4,"Robert","California"));
+        jdbcSpringService.insert(new User_details(5,"Charles","Texas"));
+        jdbcSpringService.delete(3);*/
     }
 }

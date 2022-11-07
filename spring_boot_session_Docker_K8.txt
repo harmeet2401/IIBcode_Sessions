@@ -1430,7 +1430,8 @@ Step3 : create schema.sql (file name specific name) and data.sql (to insert the 
 Step 3 : 
 	Approach 1: when we execute query using jdbc we write lot of java code to do that.
 	Approach 2 : when we execute query using spring jdbc we will write small LOC.
-	Approach 3 : when we execute query using spring JPA we do creation of table using @Entity and run query using interface A (interface) extending JPArepository<>.
+	Approach 3 : when we execute query using spring JPA we do creation of table using @EntityManager and run query using interface A (interface) extending JPArepository<>.
+	Approach 3 : when we execute query using spring DATA JPA we do creation of table using @Entity and run query using interface A (interface) extending JPArepository<>.
 	
 	We will work using two approaches , Approach 2 and Approach 3 
 	
@@ -1440,6 +1441,19 @@ Step 3 :
 					  write the insert query to a string variable.
 			Step 2 : create a class annotated as a @component so that it can be scanned by the spring boot which auto confoguration. and implements CommandLineRunner interface which is used to run an another fn of any class at springboot context start up.
 	
+	Approach 3 : Using the usual approach of EntityManager using JPA
+	
+			Step 1 : create a class annotated as @Repository and using JPArepository to call the function to update , insert and delete the data from Db
+					  write the insert query to a string variable.
+			Step 2 : create a class annotated as a @component so that it can be scanned by the spring boot which auto confoguration. and implements CommandLineRunner interface which is used to run an another fn of any class at springboot context start up.
+	
+	Approach 3 : Using the usual approach of EntityManager using Spring data JPA
+	
+			Step 1 : create a class annotated as @Repository and using JPArepository to call the function to update , insert and delete the data from Db
+					  write the insert query to a string variable.
+			Step 2 : create a class annotated as a @component so that it can be scanned by the spring boot which auto confoguration. and implements CommandLineRunner interface which is used to run an another fn of any class at springboot context start up.
+	
+
 
 
 ------------------Lab 22------------------------------------------------------

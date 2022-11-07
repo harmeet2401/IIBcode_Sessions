@@ -2,6 +2,7 @@ package com.restapi.hibernate.restapihibernate.springjdbc;
 
 import com.restapi.hibernate.restapihibernate.bean.User_details;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -26,18 +27,16 @@ public class JDBCSpringService {
                     """;
     public String selectquery =
             """
-                    SELECT * FROM USER_DETAILS;
+                    SELECT * FROM USER_DETAILS WHERE ID = ?;
                     """;
     public void insert(User_details details){
         jdbcTemplate.update(insertquery,details.getId(),details.getName(),details.getAddress());
     }
-    public User_details select(){
-        //User_details user_details = jdbcTemplate
-        return null;
-
+    public void delete(long id){
+        jdbcTemplate.update(deletequery,id);
     }
-    public void delete(int id){
-        jdbcTemplate.update(deletequery,id );
-
+    public User_details select(long id){
+        User_details user_details = jdbcTemplate.queryForObject(selectquery,new BeanPropertyRowMapper<>(User_details.class),id);
+        return  user_details;
     }
 }

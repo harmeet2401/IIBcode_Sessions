@@ -1,6 +1,17 @@
 package com.restapi.hibernate.restapihibernate.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name = "user_details")
 public class User_details {
+    User_details(){
+
+    }
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String address;
