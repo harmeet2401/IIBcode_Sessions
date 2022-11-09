@@ -649,6 +649,14 @@ curl -w "\n" 127.0.0.1:30080/todo/api/items/1
 
 
 ---------------------------------------------Podman command as similar as the docker commands.-------------------------------------------------------------------------------------------------------------------
+To change the default port of the apache server.
+Redhat/Centos. Edit the /etc/httpd/conf/httpd.conf file and change Listen 80. …
+Redhat/Centos. Edit the /etc/httpd/conf.d/s9s.conf file and change <VirtualHost *:80> …
+Ubuntu/Debian. Edit the /etc/apache2/ports.conf file and change Listen 80. …
+
+Ubuntu/Debian.
+Источник: https://aleron.net/useful-articles/best-answer-how-do-i-change-my-apache-server-port-number.html
+
 
 podman save localhost/testimage:tag -o testimage.tar ------------------------------------------------ used to save the image we created an tagged as a tar
 podman load -i testimage.tar ------------------------------------------------------------------------ to extract the image fro the tar

@@ -24,10 +24,6 @@ But I don´t know how the make this setting permanent.
 
 ---------------------------To reslve the issue of Nameservr---------------------
 
-
-
-
-
 1. Guided Exercise: Creating a MySQL Database Instance : to create this we need an image to create a container instance . We are gong to use POdman for that 
 	You should be able to start a database from a container image and store information inside the database.
 
@@ -88,6 +84,10 @@ and -e for the sql queries to run for the mysql db
 	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d registry.redhat.io/rhel8/mysql-80:1
 	- podman ps -- to show the container created by the name of mysql
 	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container root directory
+	
+	As copy is not working on windows we can use -v to mount the folder which contains the data.sql file below command 
+	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v C:/Users/IBMADMIN/sqlfiles:/data_sql -p 8080:80 -d registry.redhat.io/rhel8/mysql-80:1
+	
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command from hostmachine to container 
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
 	   or 

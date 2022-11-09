@@ -471,8 +471,7 @@ Command to run the Dockerfile to create image
 1. sudo podman build -t jboss-app .(dot)
 2. sudo podman images : ---- to see the images built 
 
-Q : run a container using above images for jboss and name the container as jboss-eap-app and expose the port of the container 8080, 9990 and 9999 to the host port 8080, 9990
-and 9999.
+Q : run a container using above images for jboss and name the container as jboss-eap-app and expose the port of the container 8080, 9990 and 9999 to the host port 8080, 9990 and 9999.
 
 Ans : command : sudo podman run -d --name jboss-eap-app -p 8080:8080 -p 9990:9990 -p 9999:9999 jboss-app
  
