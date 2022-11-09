@@ -86,7 +86,7 @@ and -e for the sql queries to run for the mysql db
 	- podman cp /home/student/DO180/labs/manage-lifecycle/db.sql mysql:/ --- to copy the esql file from hostmachine to container root directory
 	
 	As copy is not working on windows we can use -v to mount the folder which contains the data.sql file below command 
-	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v C:/Users/IBMADMIN/sqlfiles:/data_sql -p 8080:80 -d registry.redhat.io/rhel8/mysql-80:1
+	- podman run --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v C:/Users/IBMADMIN/sqlfiles:/data_sql -p 13306:3306 -d registry.redhat.io/rhel8/mysql-80:1
 	
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items < /data.sql' ----- "-c" is verry imp if to run a bash command from hostmachine to container 
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
@@ -105,6 +105,7 @@ you will create a container that stores the MySQL database data into a host dire
 	- podman login registry.redhat.io
 	- podman pull registry.redhat.io/rhel8/mysql-80:1
 	- podman run --name persist-db -v /home/student/local/mysql:/var/lib/mysql/data -e MYSQL_DATABASE=items -e MYSQL_PASSWORD=mypa55 -e MYSQL_USER=user1 -e MYSQL_ROOT_PASSWORD=r00tpa55 -d  registry.redhat.io/rhel8/mysql-80:1   ------ -v is the option to attach the persistence volume to the container.
+	- For Windows : podman run --name mysql-persist -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -v C:/Users/IBMADMIN/mysql:/var/lib/mysql/data -p 13307:3306 -d registry.redhat.io/rhel8/mysql-80:1
 	- podman ps 
 	- check the items folder created under /home/student/local/mysql folder 
 	- podman ps -a >> /tmp/my-containers -- to save the stopped container file to a flie 
@@ -205,15 +206,15 @@ You should be able to create a custom Apache container image built on a Red Hat 
 
 10. Lab: Creating Custom Container Images : Questions asking some commands. note : sed commands is used to replace a part of the string in a file 
 	- vi /home/student/DO180/labs/dockerfile-review/Containerfile
-	- FROM ubi8/ubi:8.3
-	  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
-	  ENV PORT 8080
-	  RUN yum install -y httpd && yum clean all 
-	  RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && chown -R apache:apache /etc/httpd/logs/ && chown -R apache:apache /run/httpd/
-	  USER apache 
-	  EXPOSE ${PORT}
-	  COPY ./src/ /var/www/html/
-	  CMD ["httpd", "-D", "FOREGROUND"]
+		- FROM ubi8/ubi:8.3
+		  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
+		  ENV PORT 8080
+		  RUN yum install -y httpd && yum clean all 
+		  RUN sed -ri -e "/^Listen 80/c\Listen ${PORT}" /etc/httpd/conf/httpd.conf && chown -R apache:apache /etc/httpd/logs/ && chown -R apache:apache /run/httpd/
+		  USER apache 
+		  EXPOSE ${PORT}
+		  COPY ./src/ /var/www/html/
+		  CMD ["httpd", "-D", "FOREGROUND"]
 	  
 	- podman build --layers=false -t do180/custom-apache .
 	- podman images 
