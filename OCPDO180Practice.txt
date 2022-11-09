@@ -77,7 +77,7 @@ But I don´t know how the make this setting permanent.
 **** NOTE  : AGAR CONTAINER KE ANDR KOI COMMAND BASH KI RUN KRNI HAI HOST MACHINE(BASE) SE TO WE CAN USE "PODMAN EXEC CONTAINERNAME /BIN/BASH -c 'commandtorun'"
 and -e for the sql queries to run for the mysql db
 		
-4. Guided Exercise: Managing a MySQL Container	
+4. Guided Exercise: Managing a MySQL Container	 :https://www.redhat.com/sysadmin/run-podman-windows
 	You should be able to create and manage a MySQL database container
 	
 	- podman run --name mysql -d registry.redhat.io/rhel8/mysql-80:1 ---- this will not start the mysql as it need env variblae(username , password , db name etc )
