@@ -446,7 +446,7 @@ d. composed of two major steps:
 
 VVVIMP : The based image used in S2I setup is Red Hat Enterprise Linux .
 
-																											pulls S2I asseble scripts as per the lanuage of the code from S2I registry		
+																											pulls S2I assemble scripts as per the lanuage of the code from S2I registry		
 																												 |
                                                                                                                  |pulls
                                                                                                                  |
@@ -531,3 +531,7 @@ Monolithic appriach has evrything in one box which made it difficult to implemen
 								
 									browser ----------------> html page front end (presentation tier )----------------> business layer (back end logic )----------------> database layer(persistence tier.)
 
+
+
+
+podman pull quay.io/harmeet_singh4/do180-custom-httpd

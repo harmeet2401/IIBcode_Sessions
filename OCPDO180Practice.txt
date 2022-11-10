@@ -331,12 +331,12 @@ You should be able to create an OpenShift application and access it through a we
 	- mysql -uuser1 -h 172.25.250.9 -pmypa55 -P30306 items < /home/student/DO180/labs/multicontainer-design/deploy/nodejs/networked/db.sql
 	- curl http://127.0.0.1:30080/todo/api/items/1
 
-16. Guided Exercise: Creating an Application on OpenShift : now we are going to creat above containers on OCP using oc command line interface
+16. Guided Exercise: Creating an Application on OpenShift : now we are going to create above containers on OCP using oc command line interface
 	- source /usr/local/etc/ocp4.config
 	- oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
 	- oc new-project ${RHT_OCP4_DEV_USER}-application
 	- cd /home/student/DO180/labs/multicontainer-application
-	- oc create -f todo-app.yml                                 ----------------- using the yaml template  file on local .
+	- oc create -f todo-app.yml                                 ----------------- using the yaml template file on local . will create the resources mentioned in the template 
 	- oc port-forward mysql 3306:3306
 	- mysql -uuser1 -pmypa55 -h 127.0.0.1 -P3306 items < db.sql
 	- oc expose svc todoapi 
@@ -433,8 +433,8 @@ Write a Containerfile that successfully containerizes a Nexus server
 Build a Nexus server container image and deploy it using Podman.
 Deploy the Nexus server container image to an OpenShift cluster.
 	-  cd  /home/student/DO180/labs/comprehensive-review
-	- curl -v 127.0.0.1:18081/nexus/ 2>&1  | grep -E 'HTTP|<title>'
- ===	GET /nexus/ HTTP/1.1  HTTP/1.1 200 OK
+	-  curl -v 127.0.0.1:18081/nexus/ 2>&1  | grep -E 'HTTP|<title>'
+    =  GET /nexus/ HTTP/1.1  HTTP/1.1 200 OK
 	- podman push localhost/nexus:latest quay.io/${RHT_OCP4_QUAY_USER}/nexus:latest
 	- envsubst < resources/nexus-deployment.yaml  | oc create -f -
 	- oc expose svc/nexus
@@ -473,7 +473,8 @@ zip  : zip file.zip note.txt ---- this will compress the note.txt into the file.
 unzip : unzip file.zip ------ to extract the data to the current directory .
 useradd : useradd John
 passwd: passwd 123456789
-apt-get : apt-get upgrade , apt-get install , apt-get update , apt-get check
+apt-get : apt-get upgrade , apt-get install , apt-get update , apt-get check this is for centos 
+sudo yum -y install && yum clean all --------- this is for RHEL linux 
 vi : vi filename.txt     ----- editor to edit the file linux 
 nano : nano filename.txt  ----- editor to edit the file in centos and RHEL flavour of linux 
 su : to run the command as a different user.

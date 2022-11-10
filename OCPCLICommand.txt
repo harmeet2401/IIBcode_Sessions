@@ -102,7 +102,7 @@ oc set build-hook bc/hello-world --post-commit --script="echo hello from post bu
 oc new-app ruby~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used ruby keyword with ~ tilda to specifically tell the ocp to use the ruby S2I scripts to build the ruby app.
 oc new-app -i ruby https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config----- used ruby keyword with ~ tilda to specifically tell the ocp to use the ruby S2I scripts to build the ruby app.
 oc new-app python~https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
-oc new-app -i python https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword with ~ tilda this fails for a ruby project as usualan dto specify builder image for python 
+oc new-app -i python https://gitlab.com/practical-openshift/labs.git --context-dir s2i/ruby --as-deployment-config---- used python keyword without ~ tilda as well this fails for a ruby project as usualan dto specify builder image for python 
 --------------------------------- is S2I is not mentioned using the -i or ~(tilda)
 new-app attempts to determine which language builder to use based on the presence of certain files in the root of the repository:
 
@@ -455,7 +455,7 @@ source /usr/local/etc/ocp4.config
 oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API}
 oc new-project ${RHT_OCP4_DEV_USER}-application
 cd /home/student/DO180/labs/multicontainer-application --------------- to see the yaml file a template 
-oc create  -f todo-app.yml--------------------------------------------  to publish the application template to oc  
+oc create -f todo-app.yml--------------------------------------------  to publish the application template to oc  
 oc port-forward mysql 3306:3306 -------------------------------------- host machine port forwarding to container port 
 cd /home/student/DO180/labs/multicontainer-application
 mysql -uuser1 -h 127.0.0.1 -pmypa55 -P3306 items < db.sql------------- to run the sql file for the db installed cntainer.
@@ -476,16 +476,16 @@ oc describe template mysql-persistent -n openshift -----------------------------
 oc process --parameters mysql-persistent -n openshift --------------------------------------------------- mysql-persistent is the template name 
 
 Simple : We can publish the template to the ocp using the file 
-steps : if you json on your local  
+steps : if you have json on your local  
 1. oc create -f test.json ------------------------------------------------------- will publish and create a template to ocp 
 2. oc get template nameoftemplate > template.yaml ------------------------------- download the template as a yaml to run it 
-3. oc create -f template.yaml  ------------------------------------------------------ to create resources using the template published to the OCP
+3. oc create -f template.yaml  ------------------------------------------------------ to create resources using the template file
 	or 
-   oc process quote-php-persistent  | oc create -f -  ------------------------------ quote-php-persistent is the template name 
+   oc process quote-php-persistent  | oc create -f -  ------------------------------ quote-php-persistent is the template name published to the OCP
 
 steps : if you have yaml template on your local 
 1. oc create -f test.yaml ------------------------------------------------------- to create the resources if you have downloaded the template on your local as a yaml 
-2. oc process -f test.yaml ------------------------------------------------------ to create the resources in the test.yaml and create the resorce list 
+2. oc process -f test.yaml | oc create -f - ------------------------------------------------------ to create the resources in the test.yaml and create the resorce list 
 
 
 
@@ -671,11 +671,11 @@ Containerfile
 FROM ubi8/ubi:8
 CMD["date"]
 
-# podman build -t dbcmd 
-# podman run -name dbcmd dbcmd
+# podman build -t dbcmd .
+# podman run -name dbcmd -d dbcmd
  output : date comes out 
  
-# podman run -name dbcmd dbcmd ls 
+# podman run -name dbcmd -d dbcmd ls 
  output : ls output will comes out as it will override the cmd command 
  
 ENTRYPOINT []---------------------------------------------------------------------------------------------- it will not allow you  to override the command if given from the outside while runngin the container it will append the command give from outside.
