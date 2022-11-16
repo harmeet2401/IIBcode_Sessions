@@ -1,8 +1,37 @@
 HELM : -----------------------------------
-1. As we know that there are many package manager for example : 
-apt  :  centos 
-yum  :  for RHEL linux 
-npm  :  is for nodejs 
+ 1. As we know that there are many package manager for example : 
+ apt  :  centos 
+ yum  :  for RHEL linux 
+ npm  :  is for nodejs 
 
-2. Each of the above package manager when used like apt-get httpd install/upgrade/uninstall , it will pull the liberaries/package(httpd) to create a service .
-3. JUST like above package manager HELM is a such package manager used to download the package using the charts . Charts contains the package values to be downloaded to create the Kuberenetes resources (like deplpyment , sevrice , route, build , configmap etc)
+ 2. Each of the above package manager when used like apt-get httpd install/upgrade/uninstall , it will pull the liberaries/package(httpd) to create a service .
+ 3. When ever we want to create kuberenetes resources we have to create the static yaml files with static values. We can not pass anything at deployment time, which is overcome by helm.
+ 
+HELM :
+
+1. JUST like above package manager HELM is a such package manager used to download the package using the charts . Charts contains the package values to be downloaded to create the Kuberenetes resources (like deplpyment , sevrice , route, build , configmap etc)
+
+	Example command : 
+	helm install apache bitnami/apache -namespace=web   - will create the dep,build,service,route etc on kuberenetes cluster
+	helm upgrade apache bitnami/apache -namespace=web   - will upgrad the dep,build,service,route etc on kuberenetes cluster
+	helm rollback apache 1 -namespace=web               - will Rollback to old version of apache
+	helm uninstall apache 								- will ununstall the dep,build,service,route etc on kuberenetes cluster
+	
+	Above comand bitnami/apache is the repository where the charts(yamls) lies. and will install apache by pulling the charts.
+2. 	HELM maintain the revision history for the resources created and help us in rollback the deployment .
+3.  HELM made it simple for the resources to be created on kuberenetes by pulling the charts from the repo and do the rest .
+4.  HELM will also allow to receive the dynamic values at deployment time from different files to replace the values in chart.yaml so that we can make the deploymentfor an app server independent	
+
+	it worked like this 
+		.below files which were static before will have some placeholder for the values now to receive dynamic values from values.yaml.
+			deployment.yaml
+			service.yaml
+			route.yaml
+			configmap.yaml
+		.Then HELM will use values.yaml which will be passing the valus to the placeholders in the above resources files.	
+		
+		
+						push values to				deployment.yaml
+		values.yaml ------------------------------>	service.yaml    --------------------------------------> Kuberenetes resources created.
+													route.yaml
+													configmap.yaml
