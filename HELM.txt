@@ -1,4 +1,8 @@
 HELM : -----------------------------------
+https://helm.sh/docs/intro/install/
+command to install : 1. install Chocolatey 
+					 2. choco install kuberenetes-helm
+					 
  1. As we know that there are many package manager for example : 
  apt  :  centos 
  yum  :  for RHEL linux 
@@ -35,3 +39,4 @@ HELM :
 		values.yaml ------------------------------>	service.yaml    --------------------------------------> Kuberenetes resources created.
 													route.yaml
 													configmap.yaml
+5. Its provides security 													
