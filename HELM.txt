@@ -1,0 +1,8 @@
+HELM : -----------------------------------
+1. As we know that there are many package manager for example : 
+apt  :  centos 
+yum  :  for RHEL linux 
+npm  :  is for nodejs 
+
+2. Each of the above package manager when used like apt-get httpd install/upgrade/uninstall , it will pull the liberaries/package(httpd) to create a service .
+3. JUST like above package manager HELM is a such package manager used to download the package using the charts . Charts contains the package values to be downloaded to create the Kuberenetes resources (like deplpyment , sevrice , route, build , configmap etc)
