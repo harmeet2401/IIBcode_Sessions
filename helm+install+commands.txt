@@ -1,50 +1,30 @@
 helm repo list
-
 helm repo add bitnami https://charts.bitnami.com/bitnami
-
 helm repo list
-
 helm repo remove bitnami
-
 helm repo add bitnami https://charts.bitnami.com/bitnami
-
 
 Search the repository:
-
 helm search repo mysql
-
 helm search repo database
-
 helm search repo database --versions
-
 
 Install a package:
 
 kubectl get pods
-
 (Below Two commands - In a Different Shell/Commandline window/tab)
-
 minikube ssh
-
 docker images
-
 helm install mydb bitnami/mysql
 helm install mydb-1 bitnami/mysql
 
 Check the cluster:
-
 kubectl get pods
-
 minikube ssh
-
 docker images
 
 To check the installation status:
-
 helm status mydb
-
-
-
 --------------------------------------------
 
 To Upgrade:
@@ -84,9 +64,15 @@ and it always need to send the root password to the upgrade command.
 .helm upgrade tomcat-release bitnami/tomcat --values values.yaml ----- we can upgrade using the values.yaml file.
 .helm status tomcat-release ------------------- to see the status of the deployed resources.
 ----------------------------------------------tomcat-----------------------------------------
+.helm install mysql-db bitnami/mysql --values values.yaml --dry-run ----------------------------------- this will do all the steps till creating the kube objects and valaidating it with the
+																										kubernetes schema and will no deploy it to the kubernetes
+																										It is used to debug the values and validate the templates rendered .
+																										it will give you the template with the real values replaced.
 
-
-
+.helm template mysql-db bitnami/mysql --values values.yaml --------------------------------------------- this command will also give us the template with replaced values but will not go for the 
+																										  validation of the templates created against the kubernetes cluster API. So need of active 
+																										  k8 cluster.
+																										  
 
 
 Note : 
@@ -97,44 +83,3 @@ values. You can also pass --reuse-values flag to use the existing values.yaml
 
 
 
------------------------Working session on my system ----------------
-C:\oc>helm install mydb bitnami/mysql
-NAME: mydb
-LAST DEPLOYED: Wed Nov 16 13:19:06 2022
-NAMESPACE: harmeet-singh4-dev
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-CHART NAME: mysql
-CHART VERSION: 9.4.3
-APP VERSION: 8.0.31
-
-** Please be patient while the chart is being deployed **
-
-Tip:
-
-  Watch the deployment status using the command: kubectl get pods -w --namespace harmeet-singh4-dev
-
-Services:
-
-  echo Primary: mydb-mysql.harmeet-singh4-dev.svc.cluster.local:3306
-
-Execute the following to get the administrator credentials:
-
-  echo Username: root
-  echo MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace harmeet-singh4-dev mydb-mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
-
-To connect to your database:
-
-  1. Run a pod that you can use as a client:
-
-       kubectl run mydb-harmeet-mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.31-debian-11-r10 --namespace harmeet-singh4-dev --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
-	  or 
-	  
-	   oc run mydb-harmeet-mysql-client --rm --tty -i --image  docker.io/bitnami/mysql:8.0.31-debian-11-r10 --namespace harmeet-singh4-dev --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
-	   
-	  
-  2. To connect to primary service (read/write):
-
-      mysql -h mydb-mysql.harmeet-singh4-dev.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"

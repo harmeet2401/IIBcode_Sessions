@@ -51,3 +51,48 @@ HELM :
 	- Generate the actual yaml from the template folder by using values.yaml file after replacing the values.
 	- Generate the kube objects or resources using the yaml file and validate against the kuberenetes schema.
 	- Generate the yaml and deplpoy it to the kuberenetes clusters api.
+	
+	
+10. output of an install command: 
+-----------------------Working session on my system ----------------
+C:\oc>helm install mydb bitnami/mysql
+NAME: mydb
+LAST DEPLOYED: Wed Nov 16 13:19:06 2022
+NAMESPACE: harmeet-singh4-dev
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: mysql
+CHART VERSION: 9.4.3
+APP VERSION: 8.0.31
+
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace harmeet-singh4-dev
+
+Services:
+
+  echo Primary: mydb-mysql.harmeet-singh4-dev.svc.cluster.local:3306
+
+Execute the following to get the administrator credentials:
+
+  echo Username: root
+  echo MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace harmeet-singh4-dev mydb-mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+       kubectl run mydb-harmeet-mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.31-debian-11-r10 --namespace harmeet-singh4-dev --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
+	  or 
+	  
+	   oc run mydb-harmeet-mysql-client --rm --tty -i --image  docker.io/bitnami/mysql:8.0.31-debian-11-r10 --namespace harmeet-singh4-dev --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
+	   
+	  
+  2. To connect to primary service (read/write):
+
+      mysql -h mydb-mysql.harmeet-singh4-dev.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"`	
+-----------------------Working session on my system ----------------	  
