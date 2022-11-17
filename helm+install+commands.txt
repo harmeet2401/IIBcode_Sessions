@@ -63,8 +63,38 @@ helm uninstall --namespace teamtwo mysql-release
 
 values.yaml 
 
-helm install mydb-test bitnami/mysql --values values.yaml   -----> this will use the value presents in values.yaml file to override it in chart bitnami/mysql
-helm install mydb-test bitnami/mysql --set root.rootPassword=test1234 ----> here we are passing the values in command.
+----------------------------------------------mysql----------------------------------------
+
+.helm install mydb-test bitnami/mysql --values values.yaml   -----> this will use the value presents in values.yaml file to override it in chart bitnami/mysql
+.helm install mydb-test bitnami/mysql --set root.rootPassword=test1234 ----> here we are passing the values in command.
+.helm repo update	------------------------ this will fetch any updates presents on the chart repo 
+.helm upgrade --namespace default mydb-test bitnami/mysql --set auth.passwor='test1234' . --------- after getting the update from the chart repo we need to upgrade the helm deployment 
+and it always need to send the root password to the upgrade command.
+.helm upgrade mydb-test bitnami/mysql --values values.yaml ----- we can upgrade using the values.yaml file.
+.helm status mydb ------------------- to see the status of the deployed resources.
+----------------------------------------------mysql----------------------------------------
+
+----------------------------------------------tomcat-----------------------------------------
+
+.helm install tomcat-release bitnami/tomcat --values values.yaml   -----> this will use the value presents in values.yaml file to override it in chart bitnami/mysql
+.helm install tomcat-release bitnami/tomcat --set root.rootPassword=test1234 ----> here we are passing the values in command.
+.helm repo update	------------------------ this will fetch any updates presents on the chart repo 
+.helm upgrade --namespace default tomcat-release bitnami/tomcat --set auth.passwor='test1234' . --------- after getting the update from the chart repo we need to upgrade the helm deployment 
+and it always need to send the root password to the upgrade command.
+.helm upgrade tomcat-release bitnami/tomcat --values values.yaml ----- we can upgrade using the values.yaml file.
+.helm status tomcat-release ------------------- to see the status of the deployed resources.
+----------------------------------------------tomcat-----------------------------------------
+
+
+
+
+
+Note : 
+1. when we get an update if there is a small change in the chart then helm while upgrading will create kubernetes template and compare it with the old template deployed and send only the 
+changes which are needed saving ample amount of time.
+2.  if you use --values while installing the charts to the cluster then while upgrading the chart you need to pass again the --values and values.yaml file or else it will use the default configuration
+values. You can also pass --reuse-values flag to use the existing values.yaml 
+
 
 
 -----------------------Working session on my system ----------------

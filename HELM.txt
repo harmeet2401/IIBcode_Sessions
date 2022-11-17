@@ -40,3 +40,14 @@ HELM :
 													route.yaml
 													configmap.yaml
 5. Its provides security 													
+
+6. Whenever we create a new release-installation the entire infomration is stored in the secrets created by the kuberenetes.
+7. when we uninstall the release-installation then the entire info in the secrets will be rmoved.
+7. We can not create a new release-installation with the name by which a release-installation has been existing in the same namespace .
+8.  We can create a new release-installation with the same name by which a release-installation has been existing in the different namespace.
+9.  What background steps takes place when we run helm install command :
+	- Pull the charts and its dependencies 
+	- parse the values.yaml file 
+	- Generate the actual yaml from the template folder by using values.yaml file after replacing the values.
+	- Generate the kube objects or resources using the yaml file and validate against the kuberenetes schema.
+	- Generate the yaml and deplpoy it to the kuberenetes clusters api.
