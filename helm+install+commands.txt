@@ -69,7 +69,7 @@ and it always need to send the root password to the upgrade command.
 																										It is used to debug the values and validate the templates rendered .
 																										it will give you the template with the real values replaced.
 
-.helm template mysql-db bitnami/mysql --values values.yaml --------------------------------------------- this command will also give us the template with replaced values but will not go for the 
+.helm template mysql-db bitnami/mysql --values values.yaml --------------------------------------------- this command will also give us the template with replaced 	values but will not go for the 
 																										  validation of the templates created against the kubernetes cluster API. So need of active 
 																										  k8 cluster.
 																										  
