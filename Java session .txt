@@ -760,7 +760,7 @@ examepl  : before java 8  ;
 			- After java 8 using lambda expressions.
 			
 			Runnable runnable2 = () -> {System.out.println("----Runnable interface run");}
-			new.Thread(runnable2).start ();
+			new.Thread(runnable2).start();
 			
 			So upr () ye brackets show the input parameter to run function of Runnable functional interface.
 			-> this shows the linked operator.

@@ -307,8 +307,8 @@ We can do that by :
 	
 	first 
 	
-	Container --> Collection of containers(Pod) 
-			---> Replication controller (maintains the count of the pods to be maintained in case on goes down.) 
+	pod : A collection of one or more containers.
+			---> Replication controller (maintains the count of the pods to be maintained in case pod goes down.) 
 				-- > Deployment controller ( Replication controller + rollbacks + upgrades etc)
  
 	Properties of Deployment configs : 
