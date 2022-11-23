@@ -948,7 +948,7 @@ QQQ. Stream Api
 	Streams : 
 		Elemnets can not be added or removed from the stream . only the fiteration can be applied by adding the Predicate 
 		Elements can be accessed only once .
-		It is traversed only once using the streams . means we cannot apply for loop or an loop to traverse the stream created twice 
+		It is traversed only once using the streams . means we cannot apply for loop or an loop to traverse the stream created twice.
 		Iteration for stream happened using internal iteration / internal stream api function .
 	
 		
@@ -1040,7 +1040,10 @@ System.out.println(StudentInstace.getstudents().stream()
 
 12. findAny() and findFirst()
 
-will find first elements from the stream .
+will find first elements from the stream . both of these functions are mostly used in combinatin with the filter functions
+
+findAny : it will return any of the element that matches to the predicate 
+findFirst : it will return the first element that matches to the predicate 
 
 13. Short circuiting : 	its the process in which a given function doesn't iterate through the whole stream to get the results .
 So all the functions below doens't iterate through the stream to get the results 
@@ -1191,7 +1194,12 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 			
 19. Optional			: used to represnt a Non-null values in java 8 or avoid NullPointerException
 
-	Optional.OfNullable(p1) -- this will return either a valid value or the optional.emmpty object back to handle the null value s
+	Optional<Person> ops = Optional.OfNullable(p1) -- this will return either a valid value or the optional.emmpty object back to handle the null value 
+		if(ops.isEmpty()){
+				sout("We can save the program to fall ina pit of null pointer and termination")
+		}else{
+				sout("it is not empty")
+		}
 	Optional.Of(p1) ---- this will either give you valid value of a null pointer exception in case of null value pass to it.
 	Optional.Empty() -- this will return optiona.empty object back .
 

@@ -50,8 +50,9 @@ HELM :
 	- parse the values.yaml file 
 	- Generate the actual yaml from the template folder by using values.yaml file after replacing the values.
 	- Generate the kube objects or resources using the yaml file and validate against the kuberenetes schema.
-	- Generate the yaml and deplpoy it to the kuberenetes clusters api.
-	
+	- Generate the yaml and deploy it to the kuberenetes clusters api.
+
+10. We know that the helm install command will create secrets for each deployment and that secret will help in rolling back to the old version if any.
 	
 10. output of an install command: 
 -----------------------Working session on my system ----------------

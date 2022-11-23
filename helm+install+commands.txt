@@ -70,15 +70,60 @@ and it always need to send the root password to the upgrade command.
 																										it will give you the template with the real values replaced.
 
 .helm template mysql-db bitnami/mysql --values values.yaml --------------------------------------------- this command will also give us the template with replaced 	values but will not go for the 
-																										  validation of the templates created against the kubernetes cluster API. So need of active 
-																										  k8 cluster.
+																										 validation of the templates created against the kubernetes cluster API. So no need of active 
+																										 k8 cluster.
+																										  
+.helm get notes mydb ----------------------------------------------------------------------------------- to get the release notes of the installation named mydb
+.helm get values mydb ---------------------------------------------------------------------------------- to get the value provided  to this installation mydb 
+.helm get values mydb --revision 1 --------------------------------------------------------------------- to get the values of release version 1																										  
+.helm get values mydb --revision 2 --------------------------------------------------------------------- to get the values of release version 2
+.helm get values mydb --all --------------------------------------------------------------------- to get the all values used for the installation
+.helm history mydb ------------------------------------------ will give you the history of the installation happend.
+exmaple 
+	as per below command 
+		1. helm install mywebserver bitnami/apache ----------- this will pull the charts of apache and create the kube objects and deploy it .
+		2. helm upgrade mywebserver bitnami/apache --set image.pullPolicy=test --------------- this upgrade wll fail bcse of invalid value for parameter pullPolicy
+		3. helm history mywebserver -------- this will pull the history of the installation done including the failed upgrade performed above 
+.helm rollback mywebserver 3 -------------- this will rollback to the revision versin 3 
+.helm uninstall mywebserver --keep-hostory ------- good option to uninstall and keep the history so that we can rollback anytime to any version .
+.helm uninstall mywebserver------ this will uninstall and remove all the history of the installation.
+.helm install webserver bitnami/apache --namespace mynewnamespace --create-namespace ----------- This will create a new namespace and create the installation in that new namespace		
+.helm ls --namespace mynewnamespace ------ this will show you all the installation in mynewnamespace
+.helm upgrade --install mywebserver bitnami/apache2 ------- this will check for the installation named mywebserver if present will upgrade it or else it will create a new webserevr.
+.helm install bitnami/apache2 --generate-name ------------- this will create a new installation with a random name.
+.helm install bitnami/apache2 --generate-name --name-template mywebserver-{{randomAlpha | 7}} ------------- this will create a new installation with a name using the template value i gave..
+.helm install bitnami/apache2 --wait --timeout 7m --------- this will allow helm to wait for 7minutes which is aso the timeout period so that all images and dependencies are pulled out . 
+.helm install bitnami/apache --atomic --wait 7m ---------- this will rollback to the previous successfully installatin if this installation fails after 7m
+.helm install bitnami/apache --force ---------- this will delete all pods of the cluster old deployment and will create new pods . this invlves downtime.
+
+-------------------------Practice assignment---------------------------------
+.helm install bitnami/apache --generate-name --name-template apache-{{randAlpha 3 | lower}} --dry-run
+.helm template bitnami/apache --generate-name --name-template apache-{{randAlpha 3 | lower}}
+.helm install bitnami/apache --generate-name --name-template apache-{{randAlpha 3 | lower}} ---- actual installation 
+.helm ls --- get the installation name use it below to get the notes.
+.helm get notes apache-abc
+.kubeclt get secrets
+.kubeclt get nodes
+.kubectl describe seceretnameyuwillget
+-------------------------Practice assignment---------------------------------
+
+-------------------------Commands to create Helm charts of your own---------------------------------
+.helm create firstchart --------------------- this command will create below files and folder
+	1. Chart.yaml :- this will contains the metadata about the charts 
+	2. charts folder : this folder will holds all the other charts on which this chart is dependent.
+	3. template folder : this folder will contains all the templates files which will be used to render the charts using the values.yaml file 
+	4. values.yaml : this file contains the defaults value to be used by the templates present in template folder.
+
+
+-------------------------Commands to create Helm charts of your own---------------------------------
+																										  
 																										  
 
 
 Note : 
 1. when we get an update if there is a small change in the chart then helm while upgrading will create kubernetes template and compare it with the old template deployed and send only the 
 changes which are needed saving ample amount of time.
-2.  if you use --values while installing the charts to the cluster then while upgrading the chart you need to pass again the --values and values.yaml file or else it will use the default configuration
+2.  if you use --values while installing the charts to the cluster then while upgrading the chart you need to pass again the --values and values.yaml file or else it will use the default configurationl
 values. You can also pass --reuse-values flag to use the existing values.yaml 
 
 
