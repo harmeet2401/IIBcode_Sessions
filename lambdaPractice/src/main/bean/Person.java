@@ -1,8 +1,10 @@
 package main.bean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Person implements  Comparable<Person>{
+public class Person implements  Comparable<Person> ,testinterface{
     private String name;
     private String address;
     private int id;
@@ -13,6 +15,8 @@ public class Person implements  Comparable<Person>{
         this.name = name;
         this.address = address;
         this.id = id;
+
+
     }
 
     /**
@@ -27,7 +31,9 @@ public class Person implements  Comparable<Person>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
+        List<Integer> list = new ArrayList<>();
         return id == person.id && Objects.equals(name, person.name) && Objects.equals(address, person.address);
+
     }
 
     @Override
@@ -62,5 +68,10 @@ public class Person implements  Comparable<Person>{
     @Override
     public int compareTo(Person o) {
         return name.compareTo(o.name);
+    }
+
+    @Override
+    public void c() {
+
     }
 }

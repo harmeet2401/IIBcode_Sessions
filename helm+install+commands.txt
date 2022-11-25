@@ -109,13 +109,18 @@ exmaple
 
 -------------------------Commands to create Helm charts of your own---------------------------------
 .helm create firstchart --------------------- this command will create below files and folder
-	1. Chart.yaml :- this will contains the metadata about the charts 
+	1. Chart.yaml :- this will contains the metadata about the charts.
 	2. charts folder : this folder will holds all the other charts on which this chart is dependent.
 	3. template folder : this folder will contains all the templates files which will be used to render the charts using the values.yaml file 
+				templates which may include : deployment.yaml , buildconfig.yaml , service.yaml with placeholders inside which will be replaced by the values from the values.yaml
 	4. values.yaml : this file contains the defaults value to be used by the templates present in template folder.
-
+	5. _helpers.tpl(inside template folder) which will have some functions which can be called in templates above. using syntax : include "firstcharts fullname"
 
 -------------------------Commands to create Helm charts of your own---------------------------------
+
+-------------------------Release note can be used in a good manner-----------------
+
+
 																										  
 																										  
 

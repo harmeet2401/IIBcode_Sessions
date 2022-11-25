@@ -53,6 +53,53 @@ HELM :
 	- Generate the yaml and deploy it to the kuberenetes clusters api.
 
 10. We know that the helm install command will create secrets for each deployment and that secret will help in rolling back to the old version if any.
+11. when ever we run : helm create firstcharts  . It will create two foder named template and chart , one Chart.yaml , one values.yaml
+	
+- chart.yaml file example :
+
+---------------------------------------------------------------------------------------------------
+apiVersion: v2
+name: firstcharts
+description: A Helm chart for Kubernetes
+icon: http:/www.harmeetcharts.com/home.jpg  # just to mention about the icon of the home page 
+keywords:
+home: 
+
+# The sources will be the set of the urls used to download the dependency charts and save it in charts folders.
+sources:
+  - http:/www.harmeetcharts1.com
+  - http:/www.harmeetcharts2.com
+  
+# maintainers actually refer to the author of this chart  
+maintainers: 
+  - name: harmeet1  
+    emails: harmeet23991@gmail.com
+  - name: harmeet2  
+    emails: harmeet23991@gmail.com
+
+# A chart can be either an 'application' or a 'library' chart.
+#
+# Application charts are a collection of templates that can be packaged into versioned archives
+# to be deployed.
+#
+# Library charts provide useful utilities or functions for the chart developer. They're included as
+# a dependency of application charts to inject those utilities and functions into the rendering
+# pipeline. Library charts do not define any templates and therefore cannot be deployed.
+type: application
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: 0.1.0
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application. Versions are not expected to
+# follow Semantic Versioning. They should reflect the version the application is using.
+# It is recommended to use it with quotes.
+appVersion: "1.16.0"
+---------------------------------------------------------------------------------------------------
+
+
 	
 10. output of an install command: 
 -----------------------Working session on my system ----------------

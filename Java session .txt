@@ -363,18 +363,22 @@ public class Sample {
 	- ambiguous arises and java doesnot support multiple inheritance and extends for two super class , nope not possible.
 	- if we use final keyword for a class make that class non extendable .
 	
-21. Interface : Are the abstract class which contains the abstract functions and promotes the abstraction features by not defining the method functions .
+21. Interface : Are the abstract class which contains the abstract functions and promotes the abstraction features by not defining the method defination .
 
 			we know human can be categories as Artists and musician , both have diffr eating style , walking , breathing level and eye colours .
 			Thses differnet featres we can keep it as a template in interface and fill the template when Implemented in sub class.
 			
 			- variables are final and static 
+			- We can not instantiate the interface and can not create objects of it.
 			- functions are abstract declared without body. but no need to type the abstract keyword for thefunctions.
 			- we can not make a instance for an interface 
 				but we can create a references 
-				
+					If Human class is implementing the interface(GenericLivingCreatureInterface) and giving the defination to its functions then below can be possible
 					GenericLivingCreatureInterface g = new Human(); --------------- possible , IF Human is a super class.
 					Human h = new GenericLivingCreatureInterface();  --------------not possible 
+				Another example ot it is 
+						List<Integer> list = new ArrayList<>(); in which ArrayList is implementing the List interface and to instantiate the List we have to give reference to its
+						implementation.
 			- we can multiple inheritance by multiple implements of interface 
 			
 			#IMP# : Imagine one interface is implemented in 1000 classes , adding a one more function in interface will break all 1000 classe 
@@ -389,7 +393,7 @@ public class Sample {
 				code : Interfacename.super.functionname()
 				
 22. abstract classes : 
-					- unlike interface , abstract classes can have functions with body . and withour body also .
+					- unlike interface , abstract classes can have functions with body . and without body also .
 					- even a one function in a class abstract then the clas is abstract
 					- We extends these.
 					
@@ -406,7 +410,7 @@ public class Sample {
 					------ in rest api or spring boot api , we don;t need to extends the bean class , we can import it and use it.
 
 24. Polymorphism : 
-				- One super class gots extends in two sub classes , overriding a functions of super class with two diff defination in two diff sub classes is polymorphism 
+				- One super(base) class gots extends in two sub classes , overriding a functions of super class with two diff defination in two diff sub classes is polymorphism 
 				- Runtime polymorphism: 
 					   overriding a mthod rule : 
 							name same 
@@ -473,7 +477,7 @@ public class Sample {
 	  - propagating the unhandled exceptions  : means the exception occured upstream or backword if not catched , similar to what we do in IIB .
 		
 	  - Throw and throws : 
-			Throw key word we can use to throw an exception like throw new NumberFormatException("Messge for it")
+			Throw key word we can use to throw an exception like throw new NumberFormatException("Messge for it") or the customised exception to the consumer
 			Throws we can use to throw multiple exceptions from downstream method to upstream .
 			
 	  - Custom exception or user define : 
@@ -963,6 +967,9 @@ QQQ. Stream Api
 
 4. map() method in stream api . is used to convert one type of stream to another 
  example 
+ public Function<Students,String> function1 = (s)->{
+	return s.getName();
+ };
  Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
                 .map(function1) // will give Stream<String>  so map is converting the Stream of students type to stream of string type 
                 .collect(Collectors.toSet());
@@ -971,7 +978,15 @@ QQQ. Stream Api
 And is applied to the stream in which each element in the stream contains multiple elemenst 
 
 exmaple : below are the two example stream 
+if Students class contains an attribute List<String> subjects = new ArrayList<>();
 
+public Function<Students,List<String>> function1 = (s)->{
+	return s.getSubjects();
+ };
+ Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
+                .map(function1) // will give Stream<String>  so flatmap is converting the Stream of students type to stream of List of string type
+                .collect(Collectors.toSet());
+				
 	Stream <List> : This means each element in this stream contains List , List , List , List .....
 	Stream<Arrays>: This emans each elements in this stream contains Array, Array, Array, Array, Array, ......
 	
@@ -990,7 +1005,7 @@ We an use Sort function which except a parameter sort(comparator function fnctio
 
 	- using sort function we can sort by selecting any field value as a comparator and help in sorting the values .
 	example : StudentInstace.getstudents().stream() /// stream function always pass the elements ONE BY ONE 
-                .sorted(Comparator.comparing(Students::getName).reversed())   // this will print the students in revred order
+                .sorted(Comparator.comparing(Students::getName).reversed())   // this will print the students in revred order as per the name
                 .collect(Collectors.toList());
 		 
 7. FIlter function which wants predicate functional interface that contains conditions to help filter out the elements		 
@@ -1049,6 +1064,7 @@ findFirst : it will return the first element that matches to the predicate
 So all the functions below doens't iterate through the stream to get the results 
 
 limit 
+skip
 allmatch
 anymatch
 noneMatch

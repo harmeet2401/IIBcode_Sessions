@@ -136,7 +136,9 @@ public class collectionsClass {
             System.out.println("Printing the linked list using for each method : -"+str);
         }
         linkedList.forEach(value-> System.out.println(value));
-
+        linkedList.stream()
+                        .limit(3)
+                                .
         System.out.println("--------------Linked List------------");
         System.out.println("--------------Vector------------");
         Vector<String> vec = new Vector<>();
