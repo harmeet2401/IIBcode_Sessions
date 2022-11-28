@@ -1160,7 +1160,7 @@ Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION
 				
 			- maxBy and minBy fn needs a comparator onbject and that comparator fn will need the function functional interface object (like a condition to use for )
 			
-			- averagingInt() and summingInt() . These two Collectors(dot) funtions will help is summing up and calculating average of the lements in the streams
+			- averagingInt() and summingInt() . These two Collectors(dot) funtions will help is summing up and calculating average of the elements in the streams
 				These fn will reduce one step or LOC .
 					earlier approach  : We create stream , then map , then sum or average .
 					now approiach  : we create stream , then collects(Collectors(dot)summingInt() or averagingInt)
@@ -1180,7 +1180,7 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 								
 								 Map<String, Integer> map  = StudentInstace.getstudents()
 								.stream()
-								.collect(groupingBy(Students::getName,Collectors.summingInt(Students::getNotebooks)));
+								.collect(Collectors.groupingBy(Students::getName,Collectors.summingInt(Students::getNotebooks)));
 								
 					
 						type3 : in which we will pass three paramters , one is input , 2nd is what is the data type or objects returned as a whole 
@@ -1188,7 +1188,8 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 									 Map<Integer, List<Students>> map  = StudentInstace.getstudents()
 									.stream()
 									.filter(students -> students.getMarks()>500)
-									.collect(groupingBy(Students::getNotebooks, LinkedHashMap::new,Collectors.toList()));
+									.collect(Collectors.groupingBy(Students::getNotebooks, LinkedHashMap::new,Collectors.toList()));
+									
 		        - partitioningBy() : its also kind of groupingBy 
 					It generate Map as an output.  will always create two Key and its value (key1 as true and key2 as false .)
 					The key will always be a boolean 

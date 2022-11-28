@@ -82,7 +82,8 @@ These are defined structure .
 
 	
 REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol . Methodology to make best use of HTTP protocol.
-
+CRUD : Create , read , update and delete
+Safe HTTP methods: get and update 
 The HTTP protocol is used to transfer HTML data from consumer to service provider or vice versa. HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
 like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this url we can send the html data which can be any form of data.
 
@@ -103,6 +104,9 @@ We need two things
 
 Whats is a bean : 
 Serializable object , which has the getter and setter as the properties and also a zero paramter constructor to return the object instance.
+
+
+Difference between spring boot and sping mvc(Model View controller) : https://www.interviewbit.com/blog/difference-between-spring-mvc-and-spring-boot/#:~:text=Difference%20Between%20Spring%20MVC%20and%20Spring%20Boot%20,the%20applica%20...%20%2012%20more%20rows%20
 
 
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
