@@ -78,11 +78,13 @@ public class streamapiexample {
         System.out.println(namelist);
         System.out.println(nameSet);
         System.out.println("-----------------------------------------------------");
-        System.out.println("Sorted by name list :  "+ StudentsService.getStudents().stream()
+        System.out.println("Sorted by name list :  "+ StudentsService.getStudents()
+                .stream()
                 .sorted(Comparator.comparing(Student::getName))
                 .collect(Collectors.toList()));
 
-        System.out.println("Reversed order Sorted by name list :  "+ StudentsService.getStudents().stream()
+        System.out.println("Reversed order Sorted by name list :  "+ StudentsService.getStudents()
+                .stream()
                 .sorted(Comparator.comparing(Student::getName).reversed())
                 .collect(Collectors.toList()));
 
@@ -107,7 +109,8 @@ public class streamapiexample {
         Function<Student,Integer> functionList = (student)->{
             return student.getBooks();
         };
-        Optional<Integer> totalbooks= StudentsService.getStudents().stream() //Stream<Student>
+        Optional<Integer> totalbooks= StudentsService.getStudents()
+                .stream() //Stream<Student>
                 .filter(student -> student.getStreamname().contains("CSE")) //Stream<Student>
                 .map(Student::getBooks)//Stream<Integer>
                 //.reduce(0,(b1,b2)->b1+b2)
