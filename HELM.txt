@@ -9,7 +9,7 @@ command to install : 1. install Chocolatey
  npm  :  is for nodejs 
 
  2. Each of the above package manager when used like apt-get httpd install/upgrade/uninstall , it will pull the liberaries/package(httpd) to create a service .
- 3. When ever we want to create kuberenetes resources we have to create the static yaml files with static values. We can not pass anything at deployment time, which is overcome by helm.
+ 3. When ever we want to create kuberenetes resources we have to create the static yaml files with static values. We can not pass anything at deployment time, which is overcome by helm.And used values.yaml file for that.
  
 HELM :
 
@@ -21,7 +21,7 @@ HELM :
 	helm rollback apache 1 -namespace=web               - will Rollback to old version of apache
 	helm uninstall apache 								- will ununstall the dep,build,service,route etc on kuberenetes cluster
 	
-	Above comand bitnami/apache is the repository where the charts(yamls) lies. and will install apache by pulling the charts.
+	In above comand bitnami/apache is the repository where the charts(yamls) lies. and will install apache by pulling the charts.
 2. 	HELM maintain the revision history for the resources created and help us in rollback the deployment .
 3.  HELM made it simple for the resources to be created on kuberenetes by pulling the charts from the repo and do the rest .
 4.  HELM will also allow to receive the dynamic values at deployment time from different files to replace the values in chart.yaml so that we can make the deploymentfor an app server independent	

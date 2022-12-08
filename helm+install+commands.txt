@@ -35,7 +35,7 @@ helm upgrade --namespace default mysql-release bitnami/mysql --set auth.rootPass
 
 -------
 helm list  ------------- to list the helm 
-helm list --namespace teamtwo - to list the helms in different namespace
+helm list --namespace teamtwo --- to list the helms in different namespace
 helm uninstall mysql-release
 helm uninstall --namespace teamtwo mysql-release
 
@@ -77,7 +77,7 @@ and it always need to send the root password to the upgrade command.
 .helm get values mydb ---------------------------------------------------------------------------------- to get the value provided  to this installation mydb 
 .helm get values mydb --revision 1 --------------------------------------------------------------------- to get the values of release version 1																										  
 .helm get values mydb --revision 2 --------------------------------------------------------------------- to get the values of release version 2
-.helm get values mydb --all --------------------------------------------------------------------- to get the all values used for the installation
+.helm get values mydb --all --------------------------------------------------------------------- to get all values used for the installation
 .helm history mydb ------------------------------------------ will give you the history of the installation happend.
 exmaple 
 	as per below command 
@@ -106,6 +106,14 @@ exmaple
 .kubeclt get nodes
 .kubectl describe seceretnameyuwillget
 -------------------------Practice assignment---------------------------------
+
+-------------------------Helm package---------------------------------
+.helm package firstchart ------------ this will package the chart if we want to share the charts to repo and use it in distributed manners and will create .tgz file.
+.hem package firstchart -u ---------- -u will download the latest dependencies and packaged it into the tar file
+
+	we can create .helmignore file just like .gitignore to ignore the files which user don't want to be part of the packaged tar file.
+-------------------------Helm package---------------------------------
+
 
 -------------------------Commands to create Helm charts of your own---------------------------------
 .helm create firstchart --------------------- this command will create below files and folder

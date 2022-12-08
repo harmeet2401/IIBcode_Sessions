@@ -57,6 +57,9 @@ lab Environment : --------------------------------------------------------------
 VVVVIMP   : PODMAN IS SIMILAR TO DOCKER CLI WHICH IS USED TO CREATE CONTAINERS ON LOCAL SYSTEM . SO ONLY CONTAINER  RELATED COMMANDS NO PODS GET
 			OC IS THE CLI TO CREATE CONTAINER INSIDE THE POD ON OCP CLUSTER . ONLY PODS RELATED COMMAND NO CONTAINER  COMMAND 
 
+What is an ingress ? :
+
+ans  https://kubernetes.io/docs/concepts/services-networking/ingress/
 
 git clone https://github.com/harmeet2401/DO180-apps
 

@@ -433,7 +433,7 @@ public class Sample {
 					- equals functions will compare the string values . Always use equals/equalsIgnoreCase for string compare.
 					- String objects are immutable means we can change the value but need to CHANGE THE REFERENCE VALUE.
 						String str1 = "test ";
-						str1 =str1.concat("jaav");
+						str1 =str1.concat("jaav");      or str1.concat("java") will not update the value if str1 , hme dubara se iski value str1 ko assign krni pdti hai 
 						sout(testjaav)
 						
 26. Stringbuffer and stringbuilder 	:  Strongest tool or classes to create string and can concatenate any data types value 
@@ -443,7 +443,7 @@ public class Sample {
 		Its thread safe. It means only one thread can access the object one at a time . Will released by one thread and picked by other thread.
 		
 		  StringBuffer strb = new StringBuffer("Welcome to java ");
-          strb.append("((");
+          strb.append("(("); ------------------------------------------------------------ this shows StringBuffer and StringBuilders are mutable as strb.append("java") can change the strb value. no need to assign it back to strb
           System.out.println(strb);
 
           StringBuilder stringBuilder = new StringBuilder("Welcome to java ");
