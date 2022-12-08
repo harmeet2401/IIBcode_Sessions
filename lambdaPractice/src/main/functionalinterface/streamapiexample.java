@@ -3,11 +3,9 @@ package main.functionalinterface;
 import main.bean.Student;
 import main.service.StudentsService;
 
-import java.net.Inet4Address;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,11 +15,36 @@ public class streamapiexample {
 
     static public Predicate<Student> predicate = (student)-> student.getBooks()>=30;
     static public Predicate<Student> predicate1 = (student) -> student.getStreamname().contains("CSE");
+    static Function<Student,Student> function = (s)->{
+        return s;
+    };
     public static void main(String[] args) {
 
-        Map<Integer,String> mapstudent = StudentsService.getStudents().stream()
+        System.out.println("------------Key,value for student object-----------");
+        Map<String,Student> mapobject = StudentsService.getStudents()
+                .stream()
+                .peek(System.out::println)
+                .collect(Collectors.toMap(Student::getName,(student)-> student));
+        System.out.println("Values ----------------"+ mapobject);
+        Map<String, List<Student>> mapobject1 = StudentsService.getStudents()
+                .stream()
+                .collect(Collectors.groupingBy(Student::getName,Collectors.toList()));
+        System.out.println("Values1 ----------------"+ mapobject1);
+        Map<Integer,String> mapstudent = StudentsService.getStudents()
+                .stream()
                 .collect(Collectors.toMap(Student::getId, Student::getName));
         System.out.println("Students data : "+ mapstudent);
+
+        Map<String,Integer> map = StudentsService.getStudents()
+                .stream()
+                .collect(Collectors.toMap(Student::getStreamname,
+                        Student::getBooks));
+        Map<String,Integer> mapgrp = StudentsService.getStudents()
+                .stream()
+                .collect(Collectors.groupingBy(Student::getStreamname,
+                        Collectors.summingInt(Student::getBooks)));
+
+
 
         //filter the students as per the condition
         Map<Integer,String> mapstudent1 = StudentsService.getStudents().stream()
@@ -37,7 +60,8 @@ public class streamapiexample {
                 .collect(Collectors.toList());
 
         // map method is just to convert from one type to another.
-        List<Integer> namelist =  StudentsService.getStudents().stream()
+        List<Integer> namelist =  StudentsService.getStudents()
+                .stream()
                 .map(Student::getId)
                 //.peek(System.out::println)
                 .map((id)->++id)

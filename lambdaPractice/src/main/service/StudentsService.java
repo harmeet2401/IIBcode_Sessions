@@ -21,7 +21,8 @@ public class StudentsService {
                     new Student("Drake","House 1900","ELEC",14,50),
                     new Student("Gevin","pot 90 wz 090","IT-1",15,60),
                     new Student("Zesi","pot 7788 yhhjj","I2",16,70),
-                    new Student("Steph","666 rtsg","CSE-2",17,39));
+                    new Student("Steph","666 rtsg","CSE-2",17,39),
+                    new Student("Alex","66 rtsg","CSE-1",20,90));
 
         return studentList;
     }
