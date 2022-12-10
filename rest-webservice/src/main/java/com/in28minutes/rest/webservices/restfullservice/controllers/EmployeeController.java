@@ -2,6 +2,8 @@ package com.in28minutes.rest.webservices.restfullservice.controllers;
 
 import com.in28minutes.rest.webservices.restfullservice.bean.Employee;
 import com.in28minutes.rest.webservices.restfullservice.serviceDAO.EmployeeUserDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +13,7 @@ import java.util.List;
 
 @RestController
 public class EmployeeController {
-
+    public Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     @Autowired
     public EmployeeUserDAO employeeUserDAO;
 
@@ -20,8 +22,18 @@ public class EmployeeController {
      */
     @GetMapping(path = "/employees")
     public List<Employee> getEmployees(){
-
+            logger.info("-----------Get all the employees for an organisation----------");
             return employeeUserDAO.supplier.get();
+    }
+
+    @GetMapping(path = "/log")
+    public String loggin(){
+        logger.trace("Log level: TRACE");
+        logger.info("Log level: INFO");
+        logger.debug("Log level: DEBUG");
+        logger.error("Log level: ERROR");
+        logger.warn("Log level: WARN");
+        return "Hey checkout the logs in the file";
     }
 
     /**

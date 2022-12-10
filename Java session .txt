@@ -1368,3 +1368,29 @@ DateTimeFormatter is widely used to parse of format LocalDate , LocalTime , Loca
 So everytime we need to convert a string date to LocalDate format we can parse the localdate object using parse method and pass the date and DateTimeFormatter.Codeorformatttouse.
 So everytime we need to convert a string date to LocalTime format we can parse the localTime object using parse method and pass the time and DateTimeFormatter.Codeorformatttouse.
 So everytime we need to convert a string date to LocalDateTime format we can parse the localDateTime object using parse method and pass the Datetime and DateTimeFormatter.Codeorformatttouse.
+
+31. Logger :  https://www.geeksforgeeks.org/spring-boot-logging/
+
+We Can activate log level as per below command.
+
+java -jar target/log-0.0.1-SNAPSHOT.jar –debug
+java -jar target/log-0.0.1-SNAPSHOT.jar –trace
+
+In Spring boot project we can set up the project my adding logging properties in application.yaml file. Below lines will activate the debug or trace logs and for color-coded log output can be seen in the console usinf ansi prop and we can send the logs to the file by using logging.file prop
+
+debug=true
+or
+trace=true
+spring.output.ansi.enabled=always
+logging.file.path=C:/Github/IIBcode_Sessions/rest-webservice/logs
+logging.file.name=C:/Github/IIBcode_Sessions/rest-webservice/logs/application.log
+
+slf4j be the package to be imported.
+
+Logger log = Loggerfactory.getLogger(Classname.class)
+
+		logger.trace("Log level: TRACE");
+        logger.info("Log level: INFO");
+        logger.debug("Log level: DEBUG");
+        logger.error("Log level: ERROR");
+        logger.warn("Log level: WARN");

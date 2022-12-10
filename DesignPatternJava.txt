@@ -1,0 +1,50 @@
+Design patterns in java -------------------- Really important.
+
+Design pattern helps in identify recurring problems and create a solution arround that problem.
+1. Design patterns helps in creating a solution arround the problem 
+2. This patterns can be re-used to be applied to any project which face this issue. As design pattern is a patterns(kind of  prob recurring)
+3. Design pattern make the project structure better.
+
+How to apply design pattern 
+1. First check the design pattern from the pattern catalog which can be appled to the problem occuring in the projects 
+2. In no pattern is there to solve issue. Document the issue (problem) , create a solution and keep it as a candidate pattern.
+3. If the above issue keeps on coming across the projects and is getting resolved by applying above candidate pattern then that candidate pattern will be added to the pattern catalog
+
+Types of Pattern catalog to choose pattern from .
+1. GOF pattern catalog : 
+	- Creational patterns : which is all related to the creation and instantiation of the class objects
+	- Structural patterns : Which is all realted to the class struture
+	- Behaviour patterns : which is all related to the calling heppens or communication between classes.
+	
+	a. Singleton Pattern : Its a creation la pattern which will allow only one object to be created for the  class and shared across all the classes.
+			for example : 
+					case 1 : in this case singleton pattern will allow only one object of PropertyReader class to be created to save memory.
+						Class 1 ----------------------|
+													  |
+													  PropertyReader class (which has  function to read/write values from the file) <---------------------> file
+						class 2 ----------------------|
+					Case 2: 
+						public static Logger log = LoggerFactory.getLogger(Classname.class)
+						
+						Above log object singleton will be used by all the classes to log message.
+					
+2. JEE pattern catalog : 
+	This catalog contains design patterns which are scattered across the different layers for java applications
+	for example  : 
+	
+				Presentation layer 					Intergation layer
+							|						|
+							|						|
+							Service Layer/Busines Layer
+										|
+										|
+							     Data Access layer
+								 
+				- Presentation layers : Contains patterns which will allow users to interact with the users like UI , GUI etc .
+				- integration layers : Contains patterns which will allow the Service layers / business layers to interact with other applications
+				- data access layer : Patterns for DB access. Where all CRUD operations will happens.
+				- Service/Business layers : which is used to transform the data and allow service to the consumer
+	
+	
+	
+	

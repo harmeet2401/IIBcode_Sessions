@@ -8,6 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class collectionsClass {
@@ -15,6 +16,7 @@ public class collectionsClass {
     //below are the instance variables
     int f ;
     int g;
+    public static Logger logger = null;
     static int sum = 0;
     static  String str1 = "";
 
@@ -36,6 +38,7 @@ public class collectionsClass {
 
     }
     private static void CollectionsMethods() {
+        logger.info("The messagefor loggig ");
         String str = "test";
         Optional<String> str2 = Optional.ofNullable(str);
         if(str2.isEmpty()){
