@@ -1,6 +1,7 @@
 package singletonclasses;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,8 @@ import java.util.Date;
  * 3. Create a public static method which will return the instance of this class
  *    only once using the above attribute.
  */
-public class DateUtil {
-    private static DateUtil dateUtil;
+public class DateUtil implements Serializable , Cloneable{
+    private static volatile DateUtil dateUtil; // volatile is to make the attribute thread safe
     //private static DateUtil dateUtil = new DateUtil();   ////--------------- EAGER instantiation
     /*static {
       dateUtil = new DateUtil();
@@ -35,12 +36,31 @@ public class DateUtil {
     }
 
     public static synchronized DateUtil getThreadSafeInstance(){
+        if (dateUtil == null) {
         synchronized(DateUtil.class)
-        {
-            if (dateUtil == null) {
+           {
                 dateUtil = new DateUtil();
             }
         }
         return dateUtil;
+    }
+
+    /**
+     * This function will help in resolving the de-serialise read issue jisme object read krte time new instance bnke change horra tha.
+     * This fn will return the original instance value when ObjectInputStream reads the object from the file or network .
+     * @return
+     */
+    protected Object  readResolve(){
+        return dateUtil;
+    }
+
+    /**
+     * This function will throw CloneNotSupportedException in case other class extends this singleton class and tries to clone it.
+     * @return
+     * @throws CloneNotSupportedException
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
     }
 }

@@ -45,12 +45,29 @@ Types of Pattern catalog to choose pattern from .
 									
 										 dateUtil = new DateUtil();
 										}
-				d. how to make the instantiaton of the private static attribute thread safe is by marking the block of code s static.
+				d. Issue 1 : How to make the instantiaton of the private static attribute thread safe is by marking the block of code s static.
 				
 						synchronized keyword to mark the function thread safe .
 						synchronized (DateUtil.class){ ---- block to mark piece of LOC 
 						
 						}
+				e. Issue 2 : serialisation and de-serialisation : Serialization in Java is a way of saving and sending objects as bytes, like a snapshot of their state
+					Like we can send the value of a variable and object to a file after serialisation. And then de-serialise it back while reading from the file or the network.
+					
+					
+					- First implement Serialisable interface in the class of which the objects will be serialised and writtern/read to/from the file.
+					- ObjectOutputStream(new FileOutputStream(new File(filepath))) is the class we can use to convert/serealize the object and send it as a byte to the file or to the network socket.
+					- ObjectInputStream(new FileInputStream(new File(filepath))) is the class we can use to convert/de-serealize the object from the file or the network socket back 
+
+				Issue : In singleton classes while serialisation and de-serialisation an issue occurs that jab ham singleton class ke object ko serialise krte hai ObjectOutputStream class use krke and file mai write krne ke baad usse read krte hai (de-serealize) to who read object same nhi hotta original vale se. Means de-serialisation creates a new instance of the singleton class.
+					To resolve the issue we use readResolve() function which will be called by ObjectInputStream while reading and will return the same instance as we created in singleton  class in  getInstance() method. Olaaaaaaaa !
+					
+				f. Issue 3 : Handle cloneable : For singleton to work 100% we have to take care of the cloneable issue . Means if some class extends our singleton class and wants to clone it then that class should get CloneNotSuportedException().
+
+					- Implements Cloneable interface 
+					- Override the Clone() method and throw CloneNotSuportedException().
+						olllllllllllllllaaaaa! this issue also resolved.
+				
 				
 
 									
