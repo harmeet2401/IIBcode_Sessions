@@ -68,7 +68,7 @@ Types of Pattern catalog to choose pattern from .
 					- Override the Clone() method and throw CloneNotSuportedException().
 						olllllllllllllllaaaaa! this issue also resolved.
 				
-				g. Reflection problem : Now we know our class is singleton and we can create only one instance . But reflection is the technique using which we can interate through the constructors of the singleton class and change the accessibility to public type by changing the flag and use it to create the new instance.
+				g. Issue 4 : Reflection problem : Now we know our class is singleton and we can create only one instance . But reflection is the technique using which we can interate through the constructors of the singleton class and change the accessibility to public type by changing the flag and use it to create the new instance.
 				Is reflection technique ne singleton pattern ko break krdiya  and allowed user to create new instance easily.
 				
 						Constructor[] constructors = DataUtil.class.getDeclaredConstructors();
