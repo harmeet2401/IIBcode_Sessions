@@ -68,8 +68,18 @@ Types of Pattern catalog to choose pattern from .
 					- Override the Clone() method and throw CloneNotSuportedException().
 						olllllllllllllllaaaaa! this issue also resolved.
 				
+				g. Reflection problem : Now we know our class is singleton and we can create only one instance . But reflection is the technique using which we can interate through the constructors of the singleton class and change the accessibility to public type by changing the flag and use it to create the new instance.
+				Is reflection technique ne singleton pattern ko break krdiya  and allowed user to create new instance easily.
 				
-
+						Constructor[] constructors = DataUtil.class.getDeclaredConstructors();
+						Loop through the constructors and setAccessibility(true)
+						then use that constructor to create new instance 
+						booooooooooommmmm hacked.
+						
+						
+				To resolve this issue , we have to use something which doesn't have constructors . So ENUM is one of the feature by java which has no constructors and help in creating the INSTANCE only by enumname.INSTANCE.
+				
+				As there is no constructors , we can not use reflection technique to loop through the constructors and set the accessibility flag true to start creating new instances.
 									
 				NOTE : IN NUTSHELL MAKE SURE TO INSTANTIATE THE CLASS TYPE PRIVATE ATTRIBUTE ONLY ONCE AND RETURN IT.
 					
