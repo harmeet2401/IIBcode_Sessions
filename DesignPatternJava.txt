@@ -133,7 +133,12 @@ Types of Pattern catalog to choose pattern from .
 	d. Template Method deisgn pattern : Its like creating a template method which will be same for all the implementing classes. 
 			Example , One interface or an abstract class with three fns (renderdata() , readdata(), processdata()).
 				out of above gave defination for the renderdata() function which will act as a template for all the other implementing classes. and other two funcstions to be deifned accordingly in implementing classes.
-	
+				
+	e. Adapter pattern :  Its like we will use a program between two modules , two apps or two cross platform application to transform the data which is required by the other apps .
+
+		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
+								transform it in json 
+								and feed it to app2
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
