@@ -87,11 +87,13 @@ Types of Pattern catalog to choose pattern from .
 	b. Factory Design pattrn : Its used to hide the Object creational process. 				
 		In nut shell we have to hide the object creation in factory class. its a normal java class with only operations is to instantiate the other class objects.
 		
-		
+		Order(test class)----
+							|
+							|
 						PizzaStore 
 							|
-			----------------PizzaFactory
-		Pizza 
+			----------------PizzaFactory(factory class with static method.)
+		Pizza(interface)
 		|
 		|- ChickenPizza
 		|
@@ -99,10 +101,36 @@ Types of Pattern catalog to choose pattern from .
 		|
 		|- CheesePizza
 		
-		In abve digram Pizza is the interface which will have three function , PreparePizza , backPizza and Cutpizza. And will have three implementations to define the functions of the interface with appropriate values.
+		- In abve digram Pizza is the interface which will have three function , PreparePizza , backPizza and Cutpizza. And will have three implementations to define the functions of the interface with appropriate values.
 		
 		
-		Pizzafactory is the normal java class which will hndle the object instantiation for the Pizza Interface.
+		- Pizzafactory is the normal java class which will hndle the object instantiation for the Pizza Interface. Which will contains a static method which will instantiate or create the objects and return back. As it is static we won't be needing the object creation for PizzaFactory class. directly do PizzaFactory.staticmethodname()
+		
+	c. Abstract Factory Design pattern : An abstract factory is the factory of factories . Means To create the object for factory classes we have Abstract factory class which knows how to do it. Now this abstract factory class should also be invoked to create downstream factory class which is done by Producer.
+	Its an abstract class with abstract method in it.
+	
+			ClientClass input ---|
+								 |
+								 |
+							 Producer 
+								|
+							VehicleAbstartctFactory (Factory of factories)
+								|
+					  ---------   ------------
+					  |						 |
+				FourWheelerfactory         TwoWheelerFactory	
+				
+				
+				
+				   ---------VehicleDAO(Interface)----
+				  |- audiar			                 |- hondaScooty
+				  |- audibus					     |- hondaBIke
+				
+				
+
+			in above diagram it shoes that PizzaFactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
+
+	d. Template Method deisgn pattern : 						
 	
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
