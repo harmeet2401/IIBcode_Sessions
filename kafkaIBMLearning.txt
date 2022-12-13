@@ -1,22 +1,16 @@
-
-
 Properties of kafka :
 
 horizontal scalable , 
 fault tolerance 
 durable 
 highly available
-file system maiatainance for the data coming from producer and to the topic.s
+file system maintainance for the data coming from producer and to the topics.
 
 Together, these capabilities enable "exactly once semantics" in Kafka. Described as follow 
 
-Idempotent delivery ensures that messages are delivered exactly
-once to a particular topic partition during the lifetime of a single
-producer. which happend in ack 1 mechanism.
+Idempotent delivery ensures that messages are delivered exactly once to a particular topic partition during the lifetime of a single producer. which happend in ack 1 mechanism.
 
-Transactional delivery allows producers to send data to multiple
-partitions such that either all messages are successfully delivered, or
-none of them are.
+Transactional delivery allows producers to send data to multiple partitions such that either all messages are successfully delivered, or none of them are.
 
 
 Transaction state is stored in a new internal topic__transaction_state.
@@ -207,7 +201,7 @@ Controller : it is the leader broker and zookeeper knows that and help in assign
 -----------------------------------------Commands----------------------------------------------------------------------
 log.dirs=/tmp/kafka-logs
 
-1) Start Zoo Keeper  : as we know that zookeeper is the co-ordinator and will decide which topic goes to which broker.
+1) Start ZooKeeper  : as we know that zookeeper is the co-ordinator and will decide which topic goes to which broker.
  zookeeper-server-start.bat ..\..\config\zookeeper.properties
 
 

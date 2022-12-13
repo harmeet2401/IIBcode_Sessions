@@ -82,7 +82,28 @@ Types of Pattern catalog to choose pattern from .
 				As there is no constructors , we can not use reflection technique to loop through the constructors and set the accessibility flag true to start creating new instances.
 									
 				NOTE : IN NUTSHELL MAKE SURE TO INSTANTIATE THE CLASS TYPE PRIVATE ATTRIBUTE ONLY ONCE AND RETURN IT.
-					
+				
+				
+	b. Factory Design pattrn : Its used to hide the Object creational process. 				
+		In nut shell we have to hide the object creation in factory class. its a normal java class with only operations is to instantiate the other class objects.
+		
+		
+						PizzaStore 
+							|
+			----------------PizzaFactory
+		Pizza 
+		|
+		|- ChickenPizza
+		|
+		|- VeggiePizza
+		|
+		|- CheesePizza
+		
+		In abve digram Pizza is the interface which will have three function , PreparePizza , backPizza and Cutpizza. And will have three implementations to define the functions of the interface with appropriate values.
+		
+		
+		Pizzafactory is the normal java class which will hndle the object instantiation for the Pizza Interface.
+	
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
