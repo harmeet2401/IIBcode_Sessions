@@ -130,7 +130,9 @@ Types of Pattern catalog to choose pattern from .
 
 			in above diagram it shoes that PizzaFactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
 
-	d. Template Method deisgn pattern : 						
+	d. Template Method deisgn pattern : Its like creating a template method which will be same for all the implementing classes. 
+			Example , One interface or an abstract class with three fns (renderdata() , readdata(), processdata()).
+				out of above gave defination for the renderdata() function which will act as a template for all the other implementing classes. and other two funcstions to be deifned accordingly in implementing classes.
 	
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
