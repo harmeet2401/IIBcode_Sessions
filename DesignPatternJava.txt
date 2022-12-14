@@ -175,8 +175,10 @@ Types of Pattern catalog to choose pattern from .
 												  on()
 												  off()
 												  
-												  
-												  
+	h. (Revisit)Decorator design patter : It is also a behavioural pattern which allow a decorator to be wrapped arround the wrapper class.example : 
+	new BufferReader(new FileReader());
+				      								  
+	i. Dependency Injections and Inversion of control patterns  :  We know that we can inject the instance of one class to the another class using spring framework dependency injection fetaure . Its also know as IOC(Invertion of control)												  
 												  
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
