@@ -13,7 +13,7 @@ How to apply design pattern
 Types of Pattern catalog to choose pattern from .
 1. GOF pattern catalog : 
 	- Creational patterns : which is all related to the creation and instantiation of the class objects
-	- Structural patterns : Which is all realted to the class struture
+	- Structural patterns : Which is all realted to the class struture.
 	- Behaviour patterns : which is all related to the calling heppens or communication between classes.
 	
 	a. Singleton Pattern : Its a creational pattern which will allow only one object to be created for the  class and shared across all the classes.
@@ -139,6 +139,21 @@ Types of Pattern catalog to choose pattern from .
 		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
 								transform it in json 
 								and feed it to app2
+    f. flywight design pattern : In this design pattern , the main problem which is resolved is creating multiple instances of the objectc again again.
+								To overcome that we can use Map<String, Object> map = new HashMap<>(). To cache the object in sthe hash table which is then returned everytime we need to invokve the method of the class for which the object is created.
+								Now the string type or the key should be unique so that same copy of the object can be retrived from the cache.
+								
+							Human (Interface)
+							beath(){}
+							eats()
+							weight()
+							
+
+					Girl 				Boy (implements HUman interface )
+
+			Note : Factory method along with map or hashmap act as flyweight design pattern . Which is used to overcome the issue of large number of objects creation which eats up the memory
+					
+								
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
