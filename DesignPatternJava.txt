@@ -139,7 +139,7 @@ Types of Pattern catalog to choose pattern from .
 		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
 								transform it in json 
 								and feed it to app2
-    f. flywight design pattern : In this design pattern , the main problem which is resolved is creating multiple instances of the objectc again again.
+    f. flywight design pattern : Its a structure design pattern .In this design pattern , the main problem which is resolved is creating multiple instances of the objectc again again.
 								To overcome that we can use Map<String, Object> map = new HashMap<>(). To cache the object in sthe hash table which is then returned everytime we need to invokve the method of the class for which the object is created.
 								Now the string type or the key should be unique so that same copy of the object can be retrived from the cache.
 								
@@ -152,8 +152,32 @@ Types of Pattern catalog to choose pattern from .
 					Girl 				Boy (implements HUman interface )
 
 			Note : Factory method along with map or hashmap act as flyweight design pattern . Which is used to overcome the issue of large number of objects creation which eats up the memory
-					
-								
+	g. Command design pattern : 
+		The command pattern encapsulates a request as an object, thereby letting us parameterize other objects with different requests, queue or log requests, and support undoable operations.	
+		
+				Person -----------------------------------------> RemoteControl class (pressButton())
+																	|
+																	|
+																	|
+																  Command (interface) execute()
+																	|
+																	|
+																	|
+													  -----------------------------
+													  |							  |
+													  |							  |
+													  |						      |
+												  OnCommand	execute()		OffCommand execute()
+												    |							  |
+												    |							  |
+												    \/						      |
+												 Televison <-----------------------
+												  on()
+												  off()
+												  
+												  
+												  
+												  
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
