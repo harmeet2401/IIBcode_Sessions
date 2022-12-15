@@ -624,9 +624,34 @@ class AirJet extends  AirPlane{
 
         }
 
+    }
 
 
+    public static void occurence() {
+        System.out.println("Hello world!");
+        String str = "abcdacdeffgh";
+        char[] ch = new char[20];
+        int occ = 0;
+        Map<Integer,Integer> map = new HashMap<>();
+        for (char c : ch) {
+            for(int i= 0; i<str.length();i++) {
+                if (c == str.charAt(i)) {
+                    occ = occ +1;
+                }else{
+                     continue;
+                }
+            }
+        }
+        for (int i : map.keySet())
+        {
+            System.out.println(i);
+
+        }
+        for (int j : map.values()){
+            System.out.println(j);
+        }
 
     }
+
 
 }

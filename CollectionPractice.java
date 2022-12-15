@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class AirPlane implements  Cloneable{
     public  AirPlane() throws IOException {
@@ -26,6 +29,14 @@ class AirJet extends  AirPlane{
     int g;
     static int sum = 0;
     static  String str1 = "";
+    public static  Supplier<List<Integer>> supplier = ()->{
+      List<Integer> list = new ArrayList<>();
+      list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(3);
+        return list;
+    };
 
     public static void main(String arg[])
     {
@@ -41,8 +52,10 @@ class AirJet extends  AirPlane{
         //stringUnicode();
         //charArrayToString();
        // longestSubstring();
-        byteCharArrayStringFunctions();
-
+        //byteCharArrayStringFunctions();
+        //reverseString();
+        //swapWithoutusingThird();
+        checkVowel();
     }
     private static void CollectionsMethods() {
         List li = new ArrayList();
@@ -330,11 +343,16 @@ class AirJet extends  AirPlane{
         int sum = 0;
         String numstr = num.toString();
         char[] a = numstr.toCharArray();
-        for (int i = 0; i < a.length; i++) {
+
+        for (char ch : a
+             ) {
+                sum = sum + Character.getNumericValue(ch);
+        }
+        /*for (int i = 0; i < a.length; i++) {
             System.out.println("print all the chars : "+a[i]);
             sum = sum + Character.getNumericValue(a[i]);
 
-        }
+        }*/
         System.out.println("SUM : "+sum);
     }
     private static void minutesToYearsDays(){
@@ -414,13 +432,18 @@ class AirJet extends  AirPlane{
 
 
     }
-    private static ArrayList<Integer> getCollectionArray(){
+
+    private static List<Integer> getCollectionArray(){
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the array collection");
         ArrayList<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i <5; i++) {
-            arrayList.add(in.nextInt());
-        }
+       arrayList.forEach((i)->
+       {
+           arrayList.add(1);
+           arrayList.add(2);
+           arrayList.add(3);
+       });
+
         return arrayList;
     }
     private static int[] getArray(){
@@ -430,28 +453,35 @@ class AirJet extends  AirPlane{
         int size = in.nextInt();
         int[] arr = new int[size];
         System.out.println("Enter the elements of the array");
-        for (int i = 0; i < size; i++) {
-            arr[i] = in.nextInt();
+        for (int i : arr) {
+            arr[i]=in.nextInt();
         }
         return arr;
     }
     private static void printGrid(){
-        for (int i = 0; i < 10 ; i++) {
-            for (int j = 0; j < 10 ; j++) {
+        int[] i = new int[10];
+        int[] j = new int[10];
+        for (int i1 : i) {
+
+            for (int i2 : j) {
                 System.out.print("-");
             }
             System.out.println("\n");
         }
         int num[] = getArray();
-        for (int i = 0; i < num.length ; i++) {
+
+        sum = Arrays.stream(num)
+                .sum();
+        /*for (int i1 : num) {
             sum = sum + num[i];
-        }
+        }*/
+
         float average = sum/num.length;
         System.out.println("Average : "+ average);
     }
     private static void arrayManipulation(){
         int index = 0;
-        ArrayList<Integer> num = getCollectionArray();
+        List<Integer> num = getCollectionArray();
         System.out.println("Remove specific array element to remove from array");
         Scanner in = new Scanner(System.in);
         int number = in.nextInt();
@@ -526,8 +556,10 @@ class AirJet extends  AirPlane{
         String name2 = new String("Stephen Edwin King");
 
         String str1 = "";
+        StringBuffer str = new StringBuffer();
         for (char c : arr) {
-            str1 = str1 + c;
+//            str1 = str1 + c;
+            str.append(c);
         }
         boolean r = str1.endsWith("cde");
         boolean d = str1.startsWith("abc");
@@ -626,7 +658,67 @@ class AirJet extends  AirPlane{
 
 
 
-
     }
+
+      public static void reverseString()
+      {
+          StringBuffer str = new StringBuffer("Harmeet Singh");
+          StringBuffer str1 = new StringBuffer(str.reverse());
+          System.out.println(str +" --   "+ str1);
+            if(str.equals(str1)){
+                System.out.println(" a palidrome");
+            }else {
+                System.out.println("Not a palidrome");
+
+            }
+
+            String name = "Meet";
+            char[] name1 = name.toCharArray();
+            String newname = "";
+          System.out.println("le : "+ name.length());
+          for (int i = name.length()-1; i >=0 ; i--) {
+              newname = newname + name1[i];
+          }
+          System.out.println(newname);
+
+      }
+
+      public static void swapWithoutusingThird(){
+        int a = 1;
+        int b = 2;
+        a = a+b;
+        b = a-b;
+        a = a-b;
+          System.out.println(a +"  "+b);
+      }
+      public static void checkVowel(){
+        Map<Integer,Character> vowelmap = new HashMap<>();
+        vowelmap.put(1,'a');
+          vowelmap.put(2,'e');
+          vowelmap.put(3,'i');
+          vowelmap.put(4,'o');
+          vowelmap.put(5,'u');
+         String arg = "harmeet";
+         char[] ar  = arg.toCharArray();
+          for(char ch : ar){
+              if(vowelmap.containsValue(ch)){
+                  System.out.println("Contains vowel");
+              }else{
+                  System.out.println("Contains no vowel");
+              }
+          }
+      }
+      String removeWhiteSpaces(String input) {
+          StringBuilder output = new StringBuilder();
+
+          char[] charArray = input.toCharArray();
+
+          for (char c : charArray) {
+              if (!Character.isWhitespace(c))
+                  output.append(c);
+          }
+
+          return output.toString();
+      }
 
 }
