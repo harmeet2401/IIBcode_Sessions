@@ -1394,3 +1394,23 @@ Logger log = Loggerfactory.getLogger(Classname.class)
         logger.debug("Log level: DEBUG");
         logger.error("Log level: ERROR");
         logger.warn("Log level: WARN");
+		
+Q : What is concurrent hashing.?
+A concurrent hash table (concurrent hash map) is an implementation of hash tables allowing concurrent access by multiple threads using a hash function.[1][2]
+
+Concurrent hash tables thus represent a key concurrent data structure for use in concurrent computing which allow multiple threads to more efficiently cooperate for a computation among shared data.[1]
+
+Q : Can we turn off Autoconfiguration.?
+We can disable it by using exclude attribute of @EnableAutoConfiguration and mention the class name to be excluded.
+@Configuration
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+public class MyConfiguration {
+}
+
+Q : Why is string immutable ?
+The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
+The reason of making string final is to destroy the immutability and to not allow others to extend it.
+The String objects are cached in the String pool, and it makes the String immutable. The cached String literals are accessed by multiple clients. 
+So, there is always a risk, where action performs by one client affects all other clients. For example,
+if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value.
+For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.		
