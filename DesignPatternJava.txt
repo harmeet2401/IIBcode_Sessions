@@ -192,10 +192,14 @@ Types of Pattern catalog to choose pattern from .
 				
 			For that Cloneable interface is used which allow clone method to be override so that a copy of the class (object) can be done. Which servers our purpose of creating a prototype.	
 			
-			Example  : Create a class 
+			Example 1  : Its a shallow copy means it will return the reference pointer to the objects so the cloned object an comes out to be same with same hashcode. 
+							This happens in case we have a object class as the attribute of the cloneable class . in that case default behaviour of clone method will do shallow copy of that attribute like MemberShip mem object . iska hashcode object same ajaega. 
+							Shallow means upr upr se copy not to the deep .
+			Create a class 
 					class Game implements Cloneable{
 					private int a ;
 					private int b;
+					private MemberShip mem;  -------------> attributes to be an object class itself. shallow copy happens means is class ka same ref (same hashcode) clone hojata hai.
 					
 					 @Override
 						protected Game clone() throws CloneNotSupportedException {
@@ -208,6 +212,37 @@ Types of Pattern catalog to choose pattern from .
 						// tostring just in case you print the object of this class it will print the attribute values.
 					
 					}
+					
+			Example 2  : Deep copy  to resolve the above issue . We can either setMembership with new instance inside the clone method or use a Copy constructor.
+						but copy constructor will keep on increasing in size once the class have 100 of attributes
+			Create a class 
+					class Game implements Cloneable{
+					private int a ;
+					private int b;
+					private MemberShip mem; 
+					 @Override
+						protected Game clone() throws CloneNotSupportedException {
+						 Game game = (Game) super.clone();-------------------------------------> this line is doing this.a = game.a;  in copy constructor both are same.
+																													this.b = game.b;
+						 game.setMembership(new MemberShip());
+							return
+					}
+					
+						OR
+					//Copy Constructor : means copy everything into the current class attributes from the current instance of this class.
+
+					Game(Game game)
+					{
+					this.a = game.a;
+					this.b = game.b;
+					this.mem = new MemberShip();
+					}
+					
+						
+						//getter and setter 
+						// tostring just in case you print the object of this class it will print the attribute values.
+					
+					}		
 	
 	k. Proxy Design Pattern : We know about the proxy servers which act as an internet or the placeholder for the actual url where the required files are.
 	

@@ -3,10 +3,22 @@ package prototypepattern;
 public class Game  implements  Cloneable{
     private int id;
     private String name;
+    private Membership membership;
 
     @Override
     protected Game clone() throws CloneNotSupportedException {
-        return (Game) super.clone();
+        Game game = (Game) super.clone();
+        game.setMembership(new Membership());
+        return game;
+    }
+
+    Game(){
+
+    }
+    Game(Game game){
+        this.id = game.id;
+        this.name = game.name;
+        this.membership= new Membership();
     }
 
     @Override
@@ -14,7 +26,16 @@ public class Game  implements  Cloneable{
         return "Game{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", membership=" + membership +
                 '}';
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 
     public int getId() {
