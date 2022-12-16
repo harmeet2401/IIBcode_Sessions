@@ -1417,3 +1417,7 @@ For the performance reason, caching of String objects was important, so to remov
 
 Q. What is KeySet and ValueSet .?
 These are used to iterate the hashmap as per the keys or as per the values.
+
+Q. What is Cloneable interface?
+
+Q. What is the Difference between comparator and Comparable ?

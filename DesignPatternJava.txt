@@ -184,9 +184,30 @@ Types of Pattern catalog to choose pattern from .
 			Three types of DI or IOC 
 				1. Field level DI  : in which we will declare the Class object and to instantiate it use @Autowired.
 				2. Setter Injection : in which we will annotate the setter of the object to be injected into the other class by creating the setter and getter for the dependency class.
+				3.  Constructor level DI : in which we can use the parameterize Constructor of the class where we need to inject the other class (annotated as @Component) and give the dependency class as a parameter and initialize it using this.object=object . Annotate the constructor with @Autowired
 			
 
 	j. Prototype Objects Design Patterns : In this the one existing object will be used to create another object quickly .
+				This case we can  have a prototype object ready with all data initialized and create a copy of it and do the work . No need to create a new object from the sctrach and do the initialization again.
+				
+			For that Cloneable interface is used which allow clone method to be override so that a copy of the class (object) can be done. Which servers our purpose of creating a prototype.	
+			
+			Example  : Create a class 
+					class Game implements Cloneable{
+					private int a ;
+					private int b;
+					
+					 @Override
+						protected Game clone() throws CloneNotSupportedException {
+							return (Game) super.clone();
+							
+							
+						}
+						
+						//getter and setter 
+						// tostring just in case you print the object of this class it will print the attribute values.
+					
+					}
 	
 	k. Proxy Design Pattern : We know about the proxy servers which act as an internet or the placeholder for the actual url where the required files are.
 	
