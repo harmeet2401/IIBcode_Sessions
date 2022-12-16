@@ -186,8 +186,20 @@ Types of Pattern catalog to choose pattern from .
 				2. Setter Injection : in which we will annotate the setter of the object to be injected into the other class by creating the setter and getter for the dependency class.
 			
 
-			
-												  
+	j. Prototype Objects Design Patterns : In this the one existing object will be used to create another object quickly .
+	
+	k. Proxy Design Pattern : We know about the proxy servers which act as an internet or the placeholder for the actual url where the required files are.
+	
+				client -------Sends download request---------------> Proxy Server ----------------------> Actual Server
+				Here proxy server will go to the actual server to get the required data or liberaries to be downalode.
+				In java we can create a proxyclass that will get the data for you .
+				So example : 
+				
+						Customer Interface 
+						|               |      
+				CustomerImp			CustomProxyImpl		
+						
+							Order bean 					  
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
@@ -206,5 +218,27 @@ Types of Pattern catalog to choose pattern from .
 				- Service/Business layers : which is used to transform the data and allow service to the consumer
 	
 	
+	Number of classes in JEE pattern 
 	
+		1. Model View Class(c)
+	-Data access layer	
+		2. IDAO(Interface for DB access)
+		3. IDAOImpl(implementations of IDAO)
+	-Service/Business layers	
+		4. IService(I)(interface to do the business logic)
+		5. IServiceImpl(to write the business logic by overriding the methods in above iterface)
+	-Presentation layers 	
+		6. Controller ()
+		
+	    7. Utility classes 
+		8. Validator class(C) : For validation of incoming request and so on.
+	
+	-integration layers : 
+		9. Service Producer or Service Consumer (mostly the rest apis consuming or sending the request )
+		
+	    10. View(C) : to show the data in excel sheet , pdf etc 
+
+   Type of Design patterns in JEE Layers : 
+a. Intercepting Filter design pattern : 
+	This design pattern will allow you to write a filter logic or prgram to authenticate , encrypt/decrypt, uncomporess etc before it reached the target system.
 	
