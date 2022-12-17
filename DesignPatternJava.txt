@@ -256,6 +256,24 @@ Types of Pattern catalog to choose pattern from .
 				CustomerImp			CustomProxyImpl		
 						
 							Order bean 					  
+							
+	l. Builder Design Pattern : This pattern is applied to the case where user wants to make the code more readable .
+					Example : A httpClient class which have some attributes like a , b, c, d and e . Let say while instantiating the object for the HttpClient class 
+					some attributes are not need that while initialization through the constructor those will be passed as null and will make the code ugly.
+					
+					
+					For that a builder class will be created which might be implementing the interface and help in instantiating the object which was done by the parameterize constructor above and set only those attribute which are needed and leave the rest(which were set null) as it is.
+					
+					Steps :
+					1. Create a client public static builder class as an inner class with the class for which we need to instantiate the object.
+					2. Create all the attributes in inner class which are same in above outer class.
+					3. Create the implementation method with parameter as the attribute value and return type as inner class.
+					4. Create a build method which will return this(instance) created in all above implemented method in outer class constructor.
+					5. Create the getter for all the attribute fields.
+						See the program 
+						
+					NOTE : BUILDET PATTERN MAKES USE OF THE PUBLIC STATIC INNER CLASS WITH SAME ATTRIBUTES OF THE OUTER CLASS AND USE IMPLEMENTATION METHOD FOR EACH ATTRIBUTE
+							TO RETURN INNER CLASS INSTANCE AND A BUILD METHOD WHICH WILL RETURN OUTER CLASS INSTANCE AS NEEDED.
 2. JEE pattern catalog : 
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
