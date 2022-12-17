@@ -289,7 +289,10 @@ Types of Pattern catalog to choose pattern from .
 													
 				So in above diagram facade is the class which will consume the actual single request from the client and hides the complexity of the system to get his order delivered.				
 
-				
+	n. Iterator pattern : Its just a feature to iterate through the collections(aggregator) elements. but we can do that using the Iterator clas 
+	
+	
+	
 2. JEE pattern catalog : 							
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
