@@ -1031,7 +1031,7 @@ StudentInstace.getstudents().stream() // Stream<Students>
                 })
                 .reduce(0,(n1,n2)->n1+n2);
 				
-9. min, max operation  we can do using the method reference of Integer class like Integer::max(a,b) and Integer::min(a,b).
+9. min, max operation we can do using the method reference of Integer class like Integer::max(a,b) and Integer::min(a,b).
 Always use reduce without default identity value
 
 10. Limit() and Skip() fn of stream api .		
@@ -1268,8 +1268,11 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 				- We can use the comparator interface itself to do the same .
 				
 				exmaple :  List<Students> list = StudentInstace.getstudents();
-							list.sort(Comparator.comparing(Students::getMarks).thenComparing(Comparator.comparing(Students::getMarks)));
-							list.forEach	(consumer)
+							list.sort(Comparator.comparing(Students::getMarks).thenComparing(Comparator.comparing(Students::getMarks)))
+							OR
+							list.stream()
+							.sorted(Comparator.comparing(Students::getname))
+							.collect(Collector.Tolist());
 		
 				- We can also chain the Comparator two or more  logics into one .
 					thenComparing() is the fn we can use to chain an another criteria for sorting the elements 
@@ -1416,8 +1419,26 @@ if one client performs an action and changes the string value from Pressure to P
 For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.		
 
 Q. What is KeySet and ValueSet .?
-These are used to iterate the hashmap as per the keys or as per the values.
+These are used to iterate the hashmap as per the keys or as per the values. 
 
 Q. What is Cloneable interface?
+this interface is used in prototype deign pattern to clone the instance of the objects. Its has a clone method which we can override to wither send the object instance or to send the an exception of clonentsupportedexception.
 
 Q. What is the Difference between comparator and Comparable ?
+
+Both are interface which can be used to compare objects on the basis of a an attributes . The main difference between the Comparator and Comparable interface is that you can use Comparator to compare two independent objects. The Comparable on the other hand is used to compare the current object(this) with another object.
+
+Comparator example : to compare two different objects 
+
+Steps : 
+	1. Create PersonComparator clas implements Comparator<Person> 
+	2. Override the Compare method asking two objects(p1,p2) as a paramaters; p1.getAge()-p2.getage().
+	3. then use this in test class create the object of Comparator<person> per = new PersonComparator();
+	
+Comparable	
+Steps : to compare current instance with the other object.
+	1. Make the Bean class (ex : Person) implements Comparable<Person>
+	2. overrde the compareTo method asking for one perons objects(p1) and compare the this.age-p1.getage().
+	3. Then use it in test class
+
+https://learnjava.co.in/difference-between-comparator-and-comparable/#:~:text=Basic%20difference%20between%20Comparator%20and%20Comparable%20The%20main,to%20compare%20the%20current%20object%20with%20another%20object.
