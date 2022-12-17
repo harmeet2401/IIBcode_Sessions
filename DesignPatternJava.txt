@@ -274,7 +274,23 @@ Types of Pattern catalog to choose pattern from .
 						
 					NOTE : BUILDET PATTERN MAKES USE OF THE PUBLIC STATIC INNER CLASS WITH SAME ATTRIBUTES OF THE OUTER CLASS AND USE IMPLEMENTATION METHOD FOR EACH ATTRIBUTE
 							TO RETURN INNER CLASS INSTANCE AND A BUILD METHOD WHICH WILL RETURN OUTER CLASS INSTANCE AS NEEDED.
-2. JEE pattern catalog : 
+							
+	m. Facade Deisgn Patter : 
+			This design will create an extra layer or a class which the client will use to make a single call . Then the facade layer and class will do the multiple network or java calls to the n number of classes. So it actually maked the system less cmplex for the client to invoke.
+			
+																							(below can be three methods ina single class namely OrderProcessing.)	
+													|--------------------------------------> CheckOrder
+													|
+			Client -----------------------------> Facade ---------------------------------->  placeorder
+													|
+													|--------------------------------------> deliverorders
+													
+													
+													
+				So in above diagram facade is the class which will consume the actual single request from the client and hides the complexity of the system to get his order delivered.				
+
+				
+2. JEE pattern catalog : 							
 	This catalog contains design patterns which are scattered across the different layers for java applications
 	for example  : 
 	
