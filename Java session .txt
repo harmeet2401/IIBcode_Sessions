@@ -699,7 +699,7 @@ Question : major changes took place while migrating from  java 7 to java 8
 3. New Date and Time API : Localdate , LocalTime , LocalDateTime
 4. Unsigned Integer Arithmetic
 5. Stream API : used to create stresm of data and reduces the number of line of codes. increeased efficiency of program .
-6. Parallel Sorting 	
+6. Parallel Sorting.
 7. Hashmap hashset fn is removed and hashmap bucket linked list is replaced by a balanced tree after a threashhold.
 
 ** IMP : BUILD YOUR KNOWLEDGE ON THEFUNCTIONS INTRODUCED IN JAVA 8 AND USE THEM AS NEEDED.
@@ -1442,3 +1442,24 @@ Steps : to compare current instance with the other object.
 	3. Then use it in test class
 
 https://learnjava.co.in/difference-between-comparator-and-comparable/#:~:text=Basic%20difference%20between%20Comparator%20and%20Comparable%20The%20main,to%20compare%20the%20current%20object%20with%20another%20object.
+
+
+Q. What is JVM shutdown hook ?
+
+Shutdown Hooks are a special construct that allows developers to plug in a piece of code to be executed when the JVM is shutting down. This comes in handy in cases where we need to do special clean up operations in case the VM is shutting down.
+
+public class ShutDownHook
+{
+  public static void main(String[] args)
+  {
+ 
+    Runtime.getRuntime().addShutdownHook(new Thread()
+    {
+      public void run()
+      {
+        System.out.println("Shutdown Hook is running !");
+      }
+    });
+    System.out.println("Application Terminating ...");
+  }
+}
