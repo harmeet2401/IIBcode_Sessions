@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileDownloadController {
     @GetMapping(value = "/download")
     public ResponseEntity<Object> downloadFile() throws IOException  {
-        String filename = "C://Users//IBMADMIN//Downloads//RestApiFileProcess//mysql.png";
+        String filename = "C://Users//IBMADMIN//Downloads//RestApiFileProcess//run.txt";
         File file = new File(filename);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         HttpHeaders headers = new HttpHeaders();
