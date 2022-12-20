@@ -641,6 +641,31 @@ Verry important point always mention the @JsonFilter on top of the bean class to
 
 Lab :------------------- Dynamic filtering 
 
+Lab 8.1 :-------------------MultipartFile to upload and download a the file ----------------------
+
+https://www.tutorialspoint.com/spring_boot/spring_boot_file_handling.htm#
+
+
+We can use @RequestParam("file") MultipartFile file as part of the POstMapping resource function.
+
+@PostMapping(path="/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String upload(@RequestParm(file) MultipartFile mfile)
+{
+	File file = new File(mfile)
+	OutBufferStream
+
+}
+
+In portman you have to select method : POST 
+1. Then in Body select form-data 
+2. Then Select file in value field 
+3. Browse the file 
+4. click on send
+
+
+
+Lab 8.1 :-------------------MultipartFile to upload and download a the file ----------------------
+
 
 
 

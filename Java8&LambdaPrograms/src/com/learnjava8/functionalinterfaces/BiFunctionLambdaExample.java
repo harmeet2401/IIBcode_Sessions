@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.learnjava8.bean.Students;
 import com.learnjava8.service.StudentInstace;
@@ -24,9 +26,25 @@ public class BiFunctionLambdaExample {
                     return  map;
             };
 
-
+public static Function<Students,String> f1 =
+        (students)->{
+                if(students.getName().contains("ar")){
+                  return students.getName().toLowerCase();
+                }
+                return null;
+        };
+    public static Function<Students,Students> f2 =(students)->{ return students;  };
     public static void main(String[] args) {
         List<Students> list = new StudentInstace().getstudents();
+
+        list.stream()
+                .collect(Collectors.toMap(f1,f2));
+
+        // above can be done as
+        Map<String , Students> map1 = new HashMap<>();
+        list.forEach(student -> map1.put(student.getName().toUpperCase(),student));
+        System.out.println(map1);
+
         filterStudents(list);
     }
     public static void filterStudents(List<Students> list){
