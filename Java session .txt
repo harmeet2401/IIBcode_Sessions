@@ -706,7 +706,9 @@ Question : major changes took place while migrating from  java 7 to java 8
 
 1. couple of features were added to java 8 : 
 				a. lambda functions : functional programming 
-				b. Immutability is added.
+				b. Immutability is added. which means will remove the error of getting the objects changed. Take String for exmaple which is part of the string pool buffer and 
+				doesn't allow other to access or change it at the same point of time. Which provides thread safe functionality.
+				And in java 8 using streams api we can apply changes to the new objects rather then the existing Collections.
 				c. Streams  : which include kafka streaming and all
 				d. optional etc 
 	
