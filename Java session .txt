@@ -995,12 +995,13 @@ QQQ. Stream Api
                 .collect(Collectors.toList());
 
 4. map() method in stream api . is used to convert one type of stream to another 
- example 
+ example it can also be used to perform some type of operation on the stream like below 
  public Function<Students,String> function1 = (s)->{
 	return s.getName();
  };
  Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
                 .map(function1) // will give Stream<String>  so map is converting the Stream of students type to stream of string type 
+				.map(String::toUpperCaseString) // this is not coverting the type to another type . it is performing the operation to the stream.
                 .collect(Collectors.toSet());
 
 5 flatmap method in stream api : https://www.javatpoint.com/flatmap-method-in-java-8
