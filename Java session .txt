@@ -532,7 +532,8 @@ B : correct
 		c. Vector : It is similar then arraylist , slower then array list and is thread safe means only one thread can access it one at a time.
 			its synchronised and increase the size of the array to 100% if one more elements is added. Its index based insertions.
 			
-		d. Hashset : It will remove the duplicate elements and it is not index based data strucure . We know it will remove the duplicate in case of string objects , but how it will find duplicate in case of POJO java objects as a primitive passed in it 
+		d. Hashset : https://javaconceptoftheday.com/how-hashset-works-internally-in-java/
+		It will remove the duplicate elements and it is not index based data strucure . We know it will remove the duplicate in case of string objects , but how it will find duplicate in case of POJO java objects as a primitive passed in it 
 			for exaple : Hashset<Person> newper = new Hashset<Person>();
 				Q. Here we used person and want to remove the duplicacy how ?
 				Ans. As  a dev first we have to find which attribute of person makes it duplicate . Same what we observed in Rule coding 
@@ -543,7 +544,10 @@ B : correct
 						Person per2 = new Person("beet","88277",9129);
 					
 				IMP : Generate the hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
-				
+
+		VERYIMPORTANT : Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing HashMap object with element you have specified as it’s key and constant called “PRESENT” as it’s value. This “PRESENT” is defined in the HashSet class as below.
+			Object PRESENT = new Object();
+			
 		e. Hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
 		For large amount of data hashmap is used as look up of elements at different index is pretty easy , just pass the key and ollllaaaa we got it.
 						
@@ -731,8 +735,8 @@ Question : major changes took place while migrating from  java 7 to java 8
 				   Intstream.rangeClosed(0,100).sum() ----> rangeClosed() is just ike we give range in loop , these functions will do the iterationa and all in the back .
 				   
 3. Lambda 
-
-Important point : Lambdafunctions are moslty used to provide defiintions to the functional interface (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
+Its an annonymous functions 
+Important point : Lambdafunctions are moslty used to provide defiintions to the functional interface(Single abstract method interfaces SAM) (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
 syntax : ()					-> 					{}       
 		 fn pramater 	   linked operator     fn body 
 These are equivalent to the functions without function name
@@ -742,7 +746,7 @@ These expressions have all three features that a normal functions has
 	Method body 
 	Method Return type 
 	
-Some of the existing funtional interfaces available are Runnable(which is for multi threading ) and Comparator(compare two parameter of any types) interfaces which are anotated with @FunctionalInterface
+Some of the existing funtional interfaces available prior to java 8 (java 8 se pehle ) Runnable(which is for multi threading ) and Comparator(compare two parameter of any types) interfaces which are anotated with @FunctionalInterface
 				
 Q. What is a runnable interface ?
 This is the interface which we implements in a class to allow multithreading to work .
@@ -930,7 +934,16 @@ QQQ. Stream Api
 		students.stream()
 		students.parallelStream() -----------> this will run all the other task like filter , collects etc in parallel.
 	Stream is nothing but a streamlined data of a collection on which we can do all the manipulations.	
+	Streams are lazy , no operation will be perfrmed untill the terminal operation is triggered.
 
+	STREAM KA MATLAB HAI SEQUENCE OF VALUES or ELEMENTS  THAT CAN BE ANY THING 
+	LIKE SO below are the example of the streams . Index nhi hotta but meri explaination ke liye : 
+	[1,2,3,4,5,5]   Stream.1 = 1 , Stream.2 = 2 etc for first stream.
+	
+	[String1,String2,String3,String4,String5,String6] Stream.1 = String1 , Stream.2 = String2 etc for second stream.
+	
+	[List<Integer>1,List<Integer>2,List<Integer>3,List<Integer>4] Stream.1 = List<Integer>1 , Stream.2 = List<Integer>2 etc for first stream.
+	
 	1.How stream API works?
 	
 	Example : 
@@ -938,6 +951,20 @@ QQQ. Stream Api
 					.filter(p) ------------------------------------> will create Stream<Students> filtered
 					.filter(p1)------------------------------------> will create Stream<Students> filtered
 					.collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
+					
+							Stream of Students 
+				|Student |Student |Student |Student |Student |Student |		 ------- Stream()
+				
+				|Student |Student |Student |Student |Student |		 ------- filter()
+				
+				     |Student |Student |Student |	 ------- filter()
+					 
+					 
+		Stream is nothing but a sequence of values or elements okay !
+		
+				
+				
+				
 					
 				
 2.Difference between Collections and streams 
@@ -976,7 +1003,8 @@ QQQ. Stream Api
                 .map(function1) // will give Stream<String>  so map is converting the Stream of students type to stream of string type 
                 .collect(Collectors.toSet());
 
-5 flatmap method in stream api : flatmap is similar to map function is applied to convert from one type to another .
+5 flatmap method in stream api : https://www.javatpoint.com/flatmap-method-in-java-8
+flatmap is similar to map function is applied to convert from one type to another .
 And is applied to the stream in which each element in the stream contains multiple elemenst 
 
 exmaple : below are the two example stream 
@@ -986,15 +1014,19 @@ public Function<Students,List<String>> function1 = (s)->{
 	return s.getSubjects();
  };
  Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
-                .map(function1) // will give Stream<String>  so flatmap is converting the Stream of students type to stream of List of string type
+                .flatmap(function1) // will give Stream<String>  so flatmap is converting the Stream of students type to stream of List of string type
                 .collect(Collectors.toSet());
 				
-	Stream <List> : This means each element in this stream contains List , List , List , List .....
+	Stream <List<String>> : This means each element in this stream contains List , List , List , List .....
 	Stream<Arrays>: This emans each elements in this stream contains Array, Array, Array, Array, Array, ......
 	
 	
 	Just like we had streams<String>
 			It contains Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,Str1 ,...
+			
+		Example : Before Flattening: [[1, 2, 3, 4], [7, 8, 9, 0], [5, 6], [12, 18, 19, 20, 17], [22]]
+		
+				  After Flattening: [1, 2, 3, 4, 7, 8, 9, 0, 5, 6, 12, 18, 19, 20, 17, 22]
 			
 6. We have some more functions in streams api : distinct , sorted and count 
 
