@@ -170,6 +170,8 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 										String username; ---> this will get usernameXXX 
 										String password; ----> this will get passwordXXX
 										}
+	@ControllerAdvice ----> this is a class level annotation which  will keep track of any exception comes from any controller inside the projects .
+	@ExceptionHandler(UserNotFoundException.class)	----> this is a method level annotation which will run the run if UserNOtFoundException is thrown from any controller.
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
