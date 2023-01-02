@@ -1001,7 +1001,7 @@ QQQ. Stream Api
  };
  Set<String> collect = StudentInstace.getstudents().stream() // will give Stream<Students>
                 .map(function1) // will give Stream<String>  so map is converting the Stream of students type to stream of string type 
-				.map(String::toUpperCaseString) // this is not coverting the type to another type . it is performing the operation to the stream.
+				.map(String::toUpperCaseString) // Stream<String> this is not coverting the type to another type . it is performing the operation to the stream.
                 .collect(Collectors.toSet());
 
 5 flatmap method in stream api : https://www.javatpoint.com/flatmap-method-in-java-8
