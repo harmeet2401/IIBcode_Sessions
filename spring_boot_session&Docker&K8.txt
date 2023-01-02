@@ -156,6 +156,20 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Value("${key.value}") ------> to load a value from the app.yaml file at runtime. eg key.value = 90	. 
 									@Value("${key.value}")
 									String value ;
+	@ConfigurationProperties ------> to load a value from the property file using the prefix .
+										@ConfigurationProperties(prefix = "ticket-booking") this is a class level annotation.
+
+									prop file looks like this : 
+										ticket-booking.username=usernameXXX
+										ticket-booking.password=passwordXXX
+										
+									code will look like this 
+										@ConfigurationProperties(prefix = "ticket-booking")
+										class a {
+										
+										String username; ---> this will get usernameXXX 
+										String password; ----> this will get passwordXXX
+										}
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
