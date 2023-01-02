@@ -31,7 +31,7 @@ Web service app : The app or technique using which we can provide services using
 				These service we can expose to other application to consumer the response . so a rest full api that is hosted on to a servers 
 				with Http protocol is an example of  it.
 				
-Parts of a web service (rest api )	:
+Parts of a web service (rest api)	:
 				Service Definition  : It contains the type of request and response required for the api (The format for it) can be a swagger 
 				Request  : Will involve the sample request 
 				Response : Will involve the sample response 
@@ -82,7 +82,7 @@ These are defined structure .
 
 	
 REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol . Methodology to make best use of HTTP protocol.
-CRUD : Create , read , update and delete
+CRUD : Create , read , update and delete this is mostly used in Db access layers.
 Safe HTTP methods: get and update 
 The HTTP protocol is used to transfer HTML data from consumer to service provider or vice versa. HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
 like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this url we can send the html data which can be any form of data.
@@ -92,7 +92,7 @@ rest contains  : rest APIcontains the format of message(request , response) , me
 	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP., https etc )
 	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
 	
-start.sring.io  : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
+start.sring.io or the STS tool suite   : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
 The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools . Used to create a project by adding the dep
 
 There are multiple methods for the rest api to send/retrive/update the data .
