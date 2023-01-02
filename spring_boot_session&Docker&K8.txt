@@ -153,6 +153,9 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
 	@ComponentScan ----------> this annotation will allow the component scanner to scan the entire project to instantiate and build the object for the beans add it to the list of beans in the classpth which will allow the autowiring to work.
 	@EnableAutoConfiguration ----> this will allow auto configure some of the bean creation which can be auto-injected at run time for more processing.
+	@Value("${key.value}") ------> to load a value from the app.yaml file at runtime. eg key.value = 90	. 
+									@Value("${key.value}")
+									String value ;
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
