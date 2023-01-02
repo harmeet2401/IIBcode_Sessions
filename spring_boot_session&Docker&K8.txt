@@ -97,7 +97,7 @@ The dependencies we select is JPA (java persistent api) for sql , H2 is for hybe
 
 There are multiple methods for the rest api to send/retrive/update the data .
 
-get , put , post , delete : These methods will help in doing that 
+get , put , post , delete , update , patch : These methods will help in doing that 
 
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 We need two things 
@@ -115,6 +115,7 @@ DispatcherServletAutoConfiguration is the bean getting configured to make dispat
 ErroMVCAutoconfiguration is the bean which creates the error message in case there is no explicit error mapping done by your apis
 Spring mvc , tomcat and json conversion are coming because of the spring-boot-starter-web which is the dependecnies we added.
 
+The @Controller is a common annotation which is used to mark a class as Spring MVC Controller while the @RestController is a special controller used in RESTFul web services and the equivalent of @Controller + @ResponseBody.
 
 	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , post , get , patch  reqeust send on http url this controller will hanlde .
 	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody. @RestController interface is annotated as @ResponseBOdy.
@@ -130,7 +131,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 						public String getUserName( @RequestParam String name)
 				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
 						
-    @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
+    @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to convert the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
@@ -150,6 +151,8 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
 	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
+	@ComponentScan ----------> this annotation will allow the component scanner to scan the entire project to instantiate and build the object for the beans add it to the list of beans in the classpth which will allow the autowiring to work.
+	@EnableAutoConfiguration ----> this will allow auto configure some of the bean creation which can be auto-injected at run time for more processing.
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
