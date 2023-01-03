@@ -146,7 +146,7 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
-	@SpringBootApplication class : starter class 
+	@SpringBootApplication class : starter class which inherits the, @SpringBootConfiguration,@EnableAutoConfiguration ,@ComponentScan.
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
@@ -171,7 +171,11 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 										String password; ----> this will get passwordXXX
 										}
 	@ControllerAdvice ----> this is a class level annotation which  will keep track of any exception comes from any controller inside the projects .
-	@ExceptionHandler(UserNotFoundException.class)	----> this is a method level annotation which will run the run if UserNOtFoundException is thrown from any controller.
+	@ExceptionHandler(UserNotFoundException.class)	----> this is a method level annotation which will run the run if UserNOtFoundException is thrown from any
+	controller.
+	@EnableEurekaServer - : The @EnableEurekaServer annotation is used to make your Spring Boot application acts as a Eureka Serve
+	@EnableFeignClient ---> 
+	
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
@@ -182,7 +186,7 @@ c.		new JmsTemplate.convertAndSend(orderNumber, messagePostProcessor -> {
 			message.set(messagePostProcessor);
 				return messagePostProcessor;
 					});
-d.		new KafkaTemplate().send("topicname ", message);   ----------- Just like that we can use kafkatemplate to send and consume the message.
+d.		new KafkaTemplate().send("topicname", message);   ----------- Just like that we can use kafkatemplate to send and consume the message.
 
 
 We can Autowire in Spring boot instead of creating an object or instantiate its objects .
@@ -235,7 +239,7 @@ Lab 2 ----------------- Create a hello world rest api service to respond as a be
 How to return a BEan(A bean is a class with separate attributes(variables)) in which the constructor will require a string parameter and display it as 
 JSON (which will be done by spring mvc in the back end)
 
-Spring-boot-Auto-configuration : helps in configuring the dispatcher server and also initialize the Jackson bean that converts the Bean to Json while sending a response back.
+Spring-boot-Auto-configuration : @EnableAutoConfiguration helps in configuring the dispatcher server and also initialize the Jackson bean that converts the Bean to Json while sending a response back.
 
 We can start the debug the level logs for spring boot started console .
 
@@ -352,7 +356,7 @@ that we can send an instance of our bean to the user when ever an exception come
 For that we need to make that class A extend ResponseEntityExcpetionHandler to be a Restcontroller and with annotation @ControllerAdvicer (which is used to share the feature 
 across all the controller).
 
-	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES  FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class  --- REEH
+	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class  --- REEH
 	----------------------------------------------------------------
     THATS COOL , I MEAN YOU JUST HAVE TO DEFINE THE @RestController AND @controllerAdviser to share the feature to all controllers .
 				You need to handle the exceptions whether it is generic or it is specific .
@@ -427,7 +431,7 @@ HATEOAS : --------------------------------------------------------
 INTERNATIONALIAION : ---------------------------------------
 This is the feature in which suppose you are getting data request or get request from different country or locale .
 So language is a barrier , in order to response with different data as per the locale we internationalize the response using property files.
-We can send an header Accept-language = en to send the message response in english or Accept-Language = sp to send the message in english
+We can send an header Accept-language = en to send the message response in english or Accept-Language = sp to send the message in spanish
 
 
 We just need to use MessageSource Class which helps in getting the values from messages.properties file for internationalization to work .
@@ -1214,6 +1218,7 @@ lab 14 ----------------------currency conversion/exchange microservices
 	
 	
 Lab 15 : -------------- naming srever (Eureka netflix server ) at port 8761-------------	
+Eureka naming server is an application that holds information about all client service applications. Each microservice registers itself with the Eureka naming server. The naming server registers the client services with their port numbers and IP addresses.
 Steps : 
 
 1. Add dep : Eureak server  , devtools , actuater 

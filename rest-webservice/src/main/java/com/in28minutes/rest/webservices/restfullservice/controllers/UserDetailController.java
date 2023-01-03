@@ -3,8 +3,6 @@ package com.in28minutes.rest.webservices.restfullservice.controllers;
 
 import com.in28minutes.rest.webservices.restfullservice.bean.Post;
 import com.in28minutes.rest.webservices.restfullservice.bean.User;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-import com.in28minutes.rest.webservices.restfullservice.exceptionhanlders.UserNotCreatedException;
 import com.in28minutes.rest.webservices.restfullservice.exceptionhanlders.UserNotFoundException;
 import com.in28minutes.rest.webservices.restfullservice.serviceDAO.PostRepository;
 import com.in28minutes.rest.webservices.restfullservice.serviceDAO.UserRepository;
@@ -15,16 +13,16 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 //@RequestMapping(path = "/basepath")
