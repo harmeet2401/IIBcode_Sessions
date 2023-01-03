@@ -5,7 +5,7 @@ Design pattern helps in identify recurring problems and create a solution arroun
 2. This patterns can be re-used to be applied to any project which face this issue. As design pattern is a patterns(kind of  prob recurring)
 3. Design pattern make the project structure better.
 
-How to apply design pattern 
+How to apply design pattern https://blog.knoldus.com/intellij-templates-java-design-patterns/
 1. First check the design pattern from the pattern catalog which can be appled to the problem occuring in the projects 
 2. In no pattern is there to solve issue. Document the issue (problem) , create a solution and keep it as a candidate pattern.
 3. If the above issue keeps on coming across the projects and is getting resolved by applying above candidate pattern then that candidate pattern will be added to the pattern catalog
@@ -68,7 +68,7 @@ Types of Pattern catalog to choose pattern from .
 					- Override the Clone() method and throw CloneNotSuportedException().
 						olllllllllllllllaaaaa! this issue also resolved.
 				
-				g. Issue 4 : Reflection problem : Now we know our class is singleton and we can create only one instance . But reflection is the technique using which we can interate through the constructors of the singleton class and change the accessibility to public type by changing the flag and use it to create the new instance.
+				g. Issue 4 : Reflection problem : Now we know our class is singleton and we can create only one instance . But reflection is the technique using which we can iterate through the constructors of the singleton class and change the accessibility to public type by changing the flag and use it to create the new instance.
 				Is reflection technique ne singleton pattern ko break krdiya  and allowed user to create new instance easily.
 				
 						Constructor[] constructors = DataUtil.class.getDeclaredConstructors();

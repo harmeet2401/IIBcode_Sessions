@@ -1219,6 +1219,7 @@ lab 14 ----------------------currency conversion/exchange microservices
 	
 Lab 15 : -------------- naming srever (Eureka netflix server ) at port 8761-------------	
 Eureka naming server is an application that holds information about all client service applications. Each microservice registers itself with the Eureka naming server. The naming server registers the client services with their port numbers and IP addresses.
+
 Steps : 
 
 1. Add dep : Eureak server  , devtools , actuater 
@@ -1265,26 +1266,33 @@ Steps :
 LAB 17 : ------------- load balancing the currency-exchange-service ----------------- using naming server ----------	
 
 LAB 18 : ---------------Api gateway :------ 
-to contain the common features like authentication , authorization , logging etc.
-so all the api hit will go through this api gateway containing the common feature .
+1. To contain the common features like authentication , authorization , logging etc.
+2. Allow easy routing to the apis by encapsulating the common fetaures line (auth, authorization , loggin etc ).
+3. so all the api hit will go through this api gateway containing the common feature .
+4. It will act as a proxy . Which will receive a client request and we will do the authentication and send the request to the actual api using the naming server.
 
 Steps : 
 1. Add the dep 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
 
 DevTools
 Actuator
 Config Client
-Eureka Discovery Client
+Eureka Discovery Client.
 Gateway (Spring Cloud Routing)
 
 2. now how it works ?
-		Apigatewayurl/micro registered name on naming server / url of the micro to hit 
+		Apigatewayurl/micro registered name on naming server / url of the micro to hit .
 		
 		example : http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/{from}/to/{to}
 		
 		This will tell the api gateway to talk to eureka client with name CURRENCY-EXCHANGE find it and hit it with currency-exchange/from/{from}/to/{to} url
 		
-			for that add :  spring.cloud.gateway.discovery.locator.enabled=true=true
+			for that add :  spring.cloud.gateway.discovery.locator.enabled=true
 							spring.cloud.gateway.discovery.locator.lowerCaseServiceID=true # to make the CURRENCY-EXCHANGE in lowercase 
 	
 
@@ -1372,6 +1380,32 @@ Custom Routes
 
 LAB 18 : ---------------Api gateway CUSTOM ROUTES MEANS USE URL AS PER YOUR NEED . THE API GATEWAY WILL MAPP IT TO THE RIGHT ONE IN BACK END  :------ 
 
+LAB 19 : ------------------Spring boot interceptor -------------------------------------
+This interceptor will be calld for each request that comes to the rest api .
+In most programming paradigms, interceptors are an essential part that enables programmers to control the execution by intercepting it. Spring framework also supports a variety of interceptors for different purposes.
+
+Spring RestTemplate allows us to add interceptors that implement ClientHttpRequestInterceptor interface. The intercept(HttpRequest, byte[], ClientHttpRequestExecution) method of this interface will intercept the given request and return the response by giving us access to the request, body and execution objects.
+
+https://www.baeldung.com/spring-rest-template-interceptor#:~:text=Spring%20RestTemplate%20allows%20us%20to%20add%20interceptors%20that,access%20to%20the%20request%2C%20body%20and%20execution%20objects.
+
+ClientHttpRequestInterceptor.java is the interface we an used to intercept each incoming request .
+
+public class RestTemplateHeaderModifierInterceptor
+  implements ClientHttpRequestInterceptor {
+
+    @Override
+    public ClientHttpResponse intercept(
+      HttpRequest request, 
+      byte[] body, 
+      ClientHttpRequestExecution execution) throws IOException {
+ 
+        ClientHttpResponse response = execution.execute(request, body);
+        response.getHeaders().add("Foo", "bar");
+        return response;
+    }
+}
+
+LAB 19 : ------------------Spring boot interceptor -------------------------------------
 
 LAB 19 : --------------------------------------Global filters :
 Logging framework

@@ -3,7 +3,8 @@ package factorypattern;
 /**
  * This class will act as a factory and will do the prepare , bake and cutting of the
  * pizza.
- * Means the objects creation for prepare , bake and cut
+ * Means the objects creation for veggie , chicken and cheese pizza to prepaed on the type needed
+ * by the order.
  */
 public class PizzaFactory {
     public static Pizza CreationPizza(String type){

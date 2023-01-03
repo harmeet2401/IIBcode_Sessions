@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  *                          .SINGLETON DESIGN PATTERN.
  * 1. First make the constructor private so that no one instantiate this class again
- * 2. Create a private static attribute of this class type
+ * 2. Create a private static attribute of this class type.
  * 3. Create a public static method which will return the instance of this class
  *    only once using the above attribute.
  */
