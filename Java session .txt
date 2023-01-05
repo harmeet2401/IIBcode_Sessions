@@ -71,10 +71,10 @@ JAVA apis : application programming interfaces : which are the collections of pa
 	
 7. variables and data types  :
 
-	a.  Primitive data type variable  : like : char , int , short , long , double . All these have different storage size. These are not user defined and can not be changed.
-			variables : Instance variable and Local variable
+	a.  Primitive data type variable  : like : char , int , short , long , double . All these have different storage size. These are not user defined and can not be changed. These are built in datatypes.
+			Variables : Instance variable and Local variable.
 			- Instance variable : 
-				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created,
+				Those variables which reside inside the class level. and is get initialized whenever the instance of that class is created.
 			- Local variable : 
 				Those variable declared inside the method of the class . those variables should be initialized or else the compiler will complaint.
 				default value for int, byte , long , short =  0 , boolean is false ,  float , double  = 0.0 and for char = '\u0000' , this is the unicode value for char when you will sout the char using unicode it will print the char a , b, c, ....
@@ -93,7 +93,12 @@ JAVA apis : application programming interfaces : which are the collections of pa
 8. type casting  : Explicit casting from one data type to another .
 
 	String a = "";
-	
+
+8.1 Anonymous Inner class : 
+
+8.2	Immutable object  : Meaning of Immutability in Java In simple words, immutability means not modifiable. An object is considered as immutable if its state cannot change after its creation. Because they cannot change state after their creation so they cannot corrupt by the thread interference and are very useful in concurrent applications.
+
+	All wrapper classes are immutable . wrapper classes like Byte , Character , String , Integer , Long , Double etc 
 
 9.Scope of variable : 				
 
