@@ -1438,8 +1438,41 @@ Logger log = Loggerfactory.getLogger(Classname.class)
         logger.error("Log level: ERROR");
         logger.warn("Log level: WARN");
 		
-Q : What is concurrent hashing.?
-A concurrent hash table (concurrent hash map) is an implementation of hash tables allowing concurrent access by multiple threads using a hash function.[1][2]
+31. OAuth2.0 in spring boot : 
+	OAuth 2.0 architecture consists of an OAuth Service or a server which generates a token for the consumer to get authenticate 
+	https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+	
+	
+App/Consumer -------Request Resource(1)/Authorozation grant request(1)-------------->    
+				|														             | 
+				| 																	 |	User(Resource Owner) (By using the application name , Client Id and uri it will Autheticate and generate a grante )
+				|																	 |
+		        |<-----------------Authorozation Grant send back(2)------------------- 	
+				| 
+				| 
+				| 
+				|----------------Access TOken Request using Grant(3)------------------>
+				|																	  |
+				|																	  |   Authorization Service or OAuth Server (Validating the Authorization grant it will generate the access token) 
+				|                                                                     |
+                |<---------------Access token sent back(4)-----------------------------
+                |
+				|
+                |
+                |---------------Using Access Token send resource request(5)------------>  Resource server or api or controller
+				|																	  |
+                |                                                                     |
+                |<--------------Resource response sent back(6)------------------------|
+
+
+Important points : 	
+1. To start using OAuth from the user resource owner the consumer and application have to register itself with basic details like, Appname , application id and Redirect url etc .
+2. Once your application is registered, the service will issue client credentials in the form of a client identifier and a client secret. 
+				
+				
+		
+Q : What is conc|urrent hashing.?
+A concurrent has|h table (concurrent hash map) is an implementation of hash tables allowing concurrent access by multiple threads using a hash function.[1][2]
 
 Concurrent hash tables thus represent a key concurrent data structure for use in concurrent computing which allow multiple threads to more efficiently cooperate for a computation among shared data.[1]
 

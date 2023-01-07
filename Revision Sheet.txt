@@ -126,7 +126,7 @@ Wrapper classes : which is used for user defined data types :
 		ArrayLIst<Boolean> arr = new ArrayLIst<Boolean>();
 		ArrayLIst<Person> arr = new ArrayLIst<Person>();
 -----------------------
-Stringbuffer and stringbuilder are immutable classes we can use these classes to append or concatenate the strings easily 
+Stringbuffer and stringbuilder are immutable classes we can use these classes to append or concatenate the strings easily.
 Stringbuffer str = new Stringbuffer("String to be test");
 Stringbuilder str = new Stringbuilder("String to be test");
 ----------------------
