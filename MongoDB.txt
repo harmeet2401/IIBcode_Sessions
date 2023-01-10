@@ -1,0 +1,40 @@
+
+Mongo Db : its a Data base . Which is a no sql Database and helps in providing a way to store data in no schema based constraints.
+
+Just like we have Tables in sql db , we have Collections in mongo db 
+Just like we rows in tables in sql db , we have documents in mongo db 
+
+1. the documents can be stored irrespective of the schema . 
+	For example " 
+							DB : Shop 
+					Collections : Users 
+					Documents :  1. { "name" : "Max" , "products": "sadwitch"}
+					Documents :  2. { "name" : "Max" , "products": "sadwitch", "itemmodel":"model1"}
+					Documents :  3. { "name" : "Max" , "products": "sadwitch", "id":90}
+					Documents :  4. { "name" : "Max" , "products": "sadwitch", "itemmodel":"model1","id":90}
+					
+	No schema based means we don't need to stick to the number of fields value to be part of the documents which in case of sql tables columns as needed to be filled .
+
+2. Documents are json format .
+3. Provide flexibility to the documents it can grow more and more as per the fields in the documents.
+4. As we know in sql the Normalised means the data is scattered across tables we used ralations to get that data. Mongos documents which is in json helps in adding nested objects
+		which actually shows a kind of relationship between the data in collections.
+		Like Items is the nested object inside.
+		
+{
+  "name": "Max",
+  "products": "sadwitch",
+  "itemmodel": "model1",
+  "id": 90,
+  "items": [
+    {
+      "product_id": 90,
+      "product_number": 90,
+      "product_expiry_date": "12/09/2022"
+    }
+  ]
+}
+5. A better querying mechanism to speed up the process of getting the data from a single collection.
+
+
+6. Mongo Db ecosystem : We will use community edition 
