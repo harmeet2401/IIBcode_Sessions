@@ -36,5 +36,23 @@ Just like we rows in tables in sql db , we have documents in mongo db
 }
 5. A better querying mechanism to speed up the process of getting the data from a single collection.
 
-
+NOte : ultimately the data stored will end up in the file directory on your system or on the device where the mongodb isrunning.
+		
 6. Mongo Db ecosystem : We will use community edition 
+
+7. Just dwnload the msi from mongodb.com community edition and that will install server , client shell(to interact  with mongodb)and compass(gui) to interact with the db 
+
+Command to start and stop the mongo service.
+	net stop MongoDb 
+	net start MongoDb
+	
+Once install run the client shell and there you can run all the mongoDb commands.
+
+location for the shell : c:/Program Files/MongoDb/Server/5.0/bin/mongo.exe
+
+8. Install MongoDB shell : in case mongo shell is not present in above installer. Download it from mongodb shell 
+
+while installing it ask for this folder : C:\Users\IBMADMIN\AppData\Local\Programs\mongosh\
+
+Click on mongosh and enter the mongodb connection sting for mongodb server which will hold the DB ----> collection ---> documents  or run mongosh command on cmd
+connection string for example : mongodb://localhost:27017
