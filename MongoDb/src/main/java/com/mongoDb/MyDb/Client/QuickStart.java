@@ -72,9 +72,17 @@ public class QuickStart {
             System.out.println(movie);
             System.out.println("------------Insert the data ------------------");
             MongoCollection<Flower> collection_flower = database.getCollection("Flower", Flower.class);
-            Flower flower = new Flower("rose", false, 25.4f, Arrays.asList(new String[] {"red", "green"}));
+            //Flower flower = new Flower("rose", false, 25.4f, Arrays.asList(new String[] {"red", "green"}));
+            List<Flower> list = Arrays.asList(new Flower("rose", false, 25.4f, Arrays.asList(new String[] {"red", "green"})),
+                    new Flower("lavender", false, 25.4f, Arrays.asList(new String[] {"red", "green"})),
+                    new Flower("lilly", true, 25.4f, Arrays.asList(new String[] {"red", "green"})),
+                    new Flower("jasmine", false, 25.4f, Arrays.asList(new String[] {"red", "green"})),
+                    new Flower("sunfower", false, 25.4f, Arrays.asList(new String[] {"red", "green"}))
+
+            );
             // insert the instance
-            collection_flower.insertOne(flower);
+            //collection_flower.insertOne(flower);
+            collection_flower.insertMany(list);
             // return all documents in the collection
             List<Flower> flowers = new ArrayList<>();
             collection_flower.find().into(flowers);
