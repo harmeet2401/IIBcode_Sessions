@@ -1,0 +1,6 @@
+COmmand mongodb : 
+
+show dbs ---------------------------------------- will show the db under the server.
+use shop  --------------------------------------- this will select the existing db or else will create that on the fly
+db.products.insertOne({name:"A box",price:19.00}) ---------------- this command will insert the data with the json objects db means the current db selected , products is the collection name and insertOne is the function to insert the data. If products doesn't exists then it will create it.
+db.products.find() ------------------------------ this will select all the documents inside the products collections. Just alike the select * 
