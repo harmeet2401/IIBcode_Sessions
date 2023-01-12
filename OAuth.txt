@@ -23,3 +23,13 @@ OAuth  : open authorization :
 2. Auth server : which will grant a authorization access token for the third party client app which is going o access the data on behalf oof the user.
 3. Client app : which is a thidr party app 
 4. Resource server : where the data is residing and exposed using the restfull api.											
+
+5. spring security OAuth project : github.com/spring-projects/spring-security-oauth/  (deprecated but we can use it)
+	This contais : 		
+			1. Authorization server
+			2. Resource Servr
+			3. Client support.
+			
+	spring OAuth security prject 5 : which is the new project :  https://github.com/spring-projects-experimental/spring-authorization-server/	
+						
+   
