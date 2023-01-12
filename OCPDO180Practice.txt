@@ -92,6 +92,28 @@ and -e for the sql queries to run for the mysql db
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
 	   or 
 	  podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items -e "select * from Projects;"'  ------ "-e" is very important to run any sql query from and here "items" db was writtern before -e instead of "items.project"
+	  
+	  
+4.1 To build an image ot run jboss eap service in which the internal tomcat server will be there .
+https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html-single/using_the_red_hat_jboss_enterprise_application_platform_docker_image/index
+
+In order to get the jar to be run we have to copy the zip file to the cantainer folder .
+Create a folder using root access unzip the content and push the folder to the nearby folder which will be used in docker file.
+
+
+FROM registry.access.redhat.com/jboss-eap-7-tech-preview/eap70
+MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
+ENV $JBOSS_HOME /opt/eap
+RUN $JBOSS_HOME/bin/add-user.sh adminUser StrongPassword#1 --silent
+COPY */jboss_eap_xxx */jboss_eap_xxx
+EXPOSE 9990 9991 9999
+CMD ["/opt/eap/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]   ------------- really important.
+
+
+podman build --layers=false -t do180/jboss-eap .
+podman images 
+podman run --name nameoftehcontainer  -p 12000:9990 -p 12001:9991 -p 12009:9999 -d do180/jboss-eap
+
 	
 5. Guided Exercise: Create MySQL Container with Persistent Database.
 you will create a container that stores the MySQL database data into a host directory.

@@ -1,4 +1,4 @@
-OAuth  : open authorization : 
+OAuth  : open authorization :  https://www.tutorialspoint.com/spring_boot/spring_boot_oauth2_with_jwt.htm
 
 	Resource Owner 
 		A user  ----------------------> client Application -----------------------------> Resource data (Exposed using a rest full api ) 
@@ -32,4 +32,21 @@ OAuth  : open authorization :
 			
 	spring OAuth security prject 5 : which is the new project :  https://github.com/spring-projects-experimental/spring-authorization-server/	
 						
+	
+	
+ process of Oauth : 
+
+Note : Before that the Client application need to be registered on the authorization server and a client id , client secret will be returnred
+1. First the user will send a request to the client app.
+2. Second the client app will send the request along with client id and client secrect to the Authorization server to get the access token 
+3. Then the client app using the access token hits the actual resource server to get the data needed by the user or the consumer.
+4. The resource server or the api will verify the access token from the Authorization server if the access token is not fake and is valid. Then process the request and sends a response back.
+
+
+ Token type: 
+	Identifier : alpha numeric 
+	Self contained the authorization information : encoded  if you decode it it will give you a json object 
+			- header section 
+			- payload section 
+			- access token 
    
