@@ -484,15 +484,20 @@ Steps to print the resources from the template . Ye resources ko deploy nhi kreg
 
 
 Steps to deploy the file generated from oc process and use oc create to do the rest of the thing 
-1. oc process template -o yaml -p MESSAGE="The new value will be send">> process.yaml
-2. oc create -f process.yaml ----- this will upload a template to the ocp
-3. oc get templates --- get the template 
-4. oc new-app templatename 
+1. oc create -f localyamlfile/jsonfile ------ will upload it to ocp .
+2. oc get template 
+3. oc process template -o yaml -p MESSAGE="The new value will be send" > process.yaml ---- MESSAGE ki value replaced huye yaml dikhega means processed.
+4. oc create -f process.yaml ----- this will depoy all the resources to OCP . upr first command se bs ye difference hai ki isne process yaml ko use kiya create krne ke liye.
 
+Steps to deploy and create template using process command using local template yaml/json file 
+1. oc process -o yaml -f folder/template_example.yaml > processed_yaml.yaml ------- ye firse aapko yaml dedega values replaced means processed.
+
+
+Step to deploy using oc new-app usng the yaml file on the local 
+1.oc new-app -f foldr/template_yaml.yaml -p MESSAGE="The value if passed" ------- is command mai server template ke naam ki jgah local yaml file rkhdi hai 
 
 
 . Above two commands will show you yaml or json and in those file all the paramaterized values will be replaced by the default value for those paramaters. means in files mai paramater ki values set hojaegi means , template ko process krdiya . oc process se hm syntact vegera test kr skte hai 
-
 
 
 oc get -o yaml template/templatename-created. ---- this will get the template in a yaml file.
