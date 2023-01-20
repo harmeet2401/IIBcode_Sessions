@@ -97,6 +97,14 @@ Types of Pattern catalog to choose pattern from .
 	b. Factory Design pattrn : Its used to hide the Object creational process. 				
 		In nut shell we have to hide the object creation in factory class. its a normal java class with only operations is to instantiate the other class objects.
 		Factory design or class ko factory ki trah hi smjho in which the cars or machines ate etting manufactured . The dealer don;t give a damn what is happening in the actory . So the object or car  creation is all hidden
+		example of existing java class : We know that the driver is used to create a connection with the database . So DriverManager is a class or an interface which contains the getConnection function which takes a string and give a connction back .
+		
+				Connection con = DriverManager.getConnection(String string);    Now Oracle, sql, mongo etc . 
+				Now what ever the string we will pass it to the getConnection() the particular connection will be return .
+				
+				So DriverManager is the factory class which hides the connection creation 
+				
+				
 		Order(test class)----
 							|
 							|
@@ -116,9 +124,12 @@ Types of Pattern catalog to choose pattern from .
 		
 		- Pizzafactory is the normal java class which will hndle the object instantiation for the Pizza Interface. Which will contains a static method which will instantiate or create the objects and return back. As it is static we won't be needing the object creation for PizzaFactory class. directly do PizzaFactory.staticmethodname()
 		
+		NOTE : INTERFACE HERE IS THE MOST IMPORTANT PART . MEANS IN NUTSHELL IN FACTORY CLASS THE INTERFACE INSTANCE OF ANY THREE IMPL IS RETURNED ON THE BASIS OF THE INPUT STRING OR INPUT GIVEN TO THE FACTORY CLASS. METHOD IN FACTORY CLASS ARE STATIC MEANS WE CAN DIRECTLY CALL THESE FUNCTIONS USING FACTORY CLASS NAME.
+		
+		
 	c. Abstract Factory Design pattern : An abstract factory is the factory of factories . Means To create the object for factory classes we have Abstract factory class which knows how to do it. Now this abstract factory class should also be invoked to create downstream factory class which is done by Producer.
 	Its an abstract class with abstract method in it.
-	
+	Java Example class : JAXP java api for XML parsing . to read write the 
 			ClientClass input ---|
 								 |
 								 |
@@ -139,6 +150,12 @@ Types of Pattern catalog to choose pattern from .
 				
 
 			in above diagram it shoes that PizzaFactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
+
+
+		The abstractfactory class is the abstract class with one abstract method returning the other factory normal class (which has one static method)
+
+		NOTE : ABSTRACTFACTORY CLASS IS THE ABSTRACT CLASS WHICH WILL HAVE ONE METHOD TO RETURN THE OTHER FACTORY CLASS OBJECTS. DONO FACTORY CLASS EXTENDS KRENGE ABSTRACTFACTORY CLASSKO AND USS FUNCTION KO OVERRIDE KRKE INPUT BASE PR SBSE PEHLE INTERFACE KA INSTANCE RETURN HOGGA .
+		FIR EK PRODUCER CLASS JISME SE HM ABSTRACTFACTORY CLASS US KRKE FACTORY CLASSES KA INSTANCE DENGE
 
 	d. Template Method deisgn pattern : Its like creating a template method which will be same for all the implementing classes. 
 			Example , One interface or an abstract class with three fns (renderdata() , readdata(), processdata()).
