@@ -27,6 +27,15 @@ Types of Pattern catalog to choose pattern from .
 						public static Logger log = LoggerFactory.getLogger(Classname.class)
 						
 						Above log object singleton will be used by all the classes to log message.
+					
+					CASE 3 : in case one class need datasource object of DataSource Class to get the connection to the Database . We can make DataSource class as 
+					singleton to send only one instance of it and not creating multiple instances while updating the data.
+					
+					
+						class 1 -----------------------------------------> 
+						class 2 ----------------------------------------->DataSource class -------------->Connection pool
+						class 3 ----------------------------------------->
+						class 4 ----------------------------------------->
 						
 			Ques: How to make a singleton design pattern 
 			Ans : step sto follow : 
@@ -46,9 +55,10 @@ Types of Pattern catalog to choose pattern from .
 										 dateUtil = new DateUtil();
 										}
 				d. Issue 1 : How to make the instantiaton of the private static attribute thread safe is by marking the block of code s static.
-				
-						synchronized keyword to mark the function thread safe .
-						synchronized (DateUtil.class){ ---- block to mark piece of LOC 
+						- Mark the variable which is threaf vulnerable as volatile to make it thread safe.
+						- synchronized keyword to mark the function thread safe .
+						---- block to mark piece of LOC  make good use of it as it is expensive one so only wrap arround the LOC which is needed to be.
+						synchronized (DateUtil.class){ 
 						
 						}
 				e. Issue 2 : serialisation and de-serialisation : Serialization in Java is a way of saving and sending objects as bytes, like a snapshot of their state
@@ -86,7 +96,7 @@ Types of Pattern catalog to choose pattern from .
 				
 	b. Factory Design pattrn : Its used to hide the Object creational process. 				
 		In nut shell we have to hide the object creation in factory class. its a normal java class with only operations is to instantiate the other class objects.
-		
+		Factory design or class ko factory ki trah hi smjho in which the cars or machines ate etting manufactured . The dealer don;t give a damn what is happening in the actory . So the object or car  creation is all hidden
 		Order(test class)----
 							|
 							|
