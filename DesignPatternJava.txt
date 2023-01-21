@@ -162,6 +162,8 @@ Types of Pattern catalog to choose pattern from .
 				out of above gave defination for the renderdata() function which will act as a template for all the other implementing classes. and other two funcstions to be deifned accordingly in implementing classes.
 				
 	e. Adapter pattern :  Its like we will use a program between two modules , two apps or two cross platform application to transform the data which is required by the other apps .
+	
+	Get temprature example in degree cecius is the example for it.
 
 		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
 								transform it in json 
@@ -182,7 +184,7 @@ Types of Pattern catalog to choose pattern from .
 	g. Command design pattern : 
 		The command pattern encapsulates a request as an object, thereby letting us parameterize other objects with different requests, queue or log requests, and support undoable operations.	
 		
-				Person -----------------------------------------> RemoteControl class (pressButton())
+				Person -----------------------------------------> RemoteControl class (pressButton()) its the invoker
 																	|
 																	|
 																	|
@@ -202,9 +204,43 @@ Types of Pattern catalog to choose pattern from .
 												  on()
 												  off()
 												  
-	h. (Revisit)Decorator design patter : It is also a behavioural pattern which allow a decorator to be wrapped arround the wrapper class.example : 
+	h. Decorator design patter : It is also a behavioural pattern which allow a decorator to be wrapped arround the wrapper class.example : 
 	new BufferReader(new FileReader());
+	
+	
 				      								  
+    Its the design pattern in which the IMPL class knows how to add new functionality to the base class of the interface . Like the name specifid its a Decorator means it will decorate the object with something new .
+
+
+				
+				
+					Client ----------------------------->    VeggiePizzadDecorator  
+					
+					
+															 CheezePizzaDecorator 
+															 
+															 
+								Pizza (Interface)					PizzaDecorator(It will implement Pizza interface) with Pizza as the Object 
+										|
+									    |
+										|			  
+								    PlainPizza (this is the IMPPPL of PIzza interface)
+
+
+			 public static void main(String[] args) {
+					//Pizza pizza = new PlainPizza();
+					Pizza pizza = new CheesePizzaDecorator(new VeggiePizzaDecorator(new PlainPizza()));
+					pizza.bake();
+					//VeggiePizzaDecorator veggiePizzaDecorator = new VeggiePizzaDecorator(new PizzaDecorator());
+				}
+			
+			above syntax shows that the one decorator can be wrapped inside other decorator constructor. As all the decorator are implementing or extending the Pizza interface indirectly 
+			
+			now the pizza object has wrapped the object call heirarchy means , pizza.bake() har ek decorator mai hai par jab bhi ye line execute hoggi , jvm will run bake PlainPizza ka pehle , then bake veggiePizzaDecorator ka and then bake CheesePizzaDecorator ka.
+			
+			
+			NOTE : YE DESIGN PATTERN AAPKO FUNCTIONS KO WRAP KRNE KA TARIKA BTATI HAI USING DECORATOR , WHICH ARE NOTHING BUT THE BASE IMPLEMENTATION OF THE INTERFACE .
+										
 	i. Dependency Injections and Inversion of control patterns  :  We know that we can inject the instance of one class to the another class using spring framework dependency       	injection fetaure . Its also know as IOC(Invertion of control)	
 			In lemen term dependency injection is to inject the class dependency at runtime by creating the instance of the dependency class and using it dynamically with in the main class which need DI. We know that @Autowired is the annotation for the field level DI which inject the instance of the class created at runtime by the Spring container at runtime while scanning @Component , @Repository , @Service etc. The main annotation needed is @component to come up as part of the scan list of classes for the spring container. In case of an interface to be injected . We need to make the implementing class for the interface as @Component
 			Or else  @Component can be done on all classes to be insjected.
