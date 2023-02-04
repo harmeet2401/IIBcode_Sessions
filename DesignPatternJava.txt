@@ -1,5 +1,35 @@
 Design patterns in java -------------------- Really important.
+SOLID principle : 
 
+	S : The single responsbility : it means the classes we will write should have only one single reason to get changed. There should not be much reasons
+		get changed 
+	O : The open/closed principle : means one class should not be open for modification , rather that it should be open for the Extension .
+
+		For example : Employee class is a more abstract one 
+					Manager Class will be used to add more functionality by extending the Employee class 
+						Director class will be used to add more functionality by extending the Manager class. 
+				So in above design all two classes Employee and Manager are not modified . These classes were extended to get some more functionalities
+				added.
+	L : The Liskiv substitution principle : This principle involves the relationship "is a" . In which the downstream class act as a substitution class for
+		the base class . Which inheritence actual do that olaaaa.
+			
+				For example : Employee class is a more abstract one 
+					Manager Class will be used to add more functionality by extending the Employee class 
+						Director class will be used to add more functionality by extending the Manager class. 
+				In above example Manager act as a substitute class for the Employee and serve the purpose of subsitution in it.
+
+	I : The interface segragation principle : This principle will help in breaking down the interfaces into smaller more interfaces and doesn't allow 
+		client to depend upon only one interface for the implementation.
+				For example : Interface Vehicle  (methods : speed() , model() , company() , fourwheeler() , twowheeler())
+							Class FourWheeler implements Vehicle which will force this class to implements all methods including twowheeler().
+								Class TwoWheeler implements Vehicle which will force this class to implements all methods including fourwheeler().
+				
+				To resolve above issue we can break vehicle into two interfaces FourWheelerVehicle and TwoWheelerVehicle 
+							FourWheelerVehicle (methods : speed() , model() , company() , fourwheeler())
+							TwoWheelerVehicle (methods : speed() , model() , company() , twowheeler())
+						Now any class implementation will have granular methods to be implement
+	D : Dependency inversion principle : It focuses on the approach where the higher 
+								classes are not dependent on the lower classes instead depend upon the abstraction of the lower classes
 Design pattern helps in identify recurring problems and create a solution arround that problem.
 1. Design patterns helps in creating a solution arround the problem 
 2. This patterns can be re-used to be applied to any project which face this issue. As design pattern is a patterns(kind of  prob recurring)
