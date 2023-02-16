@@ -142,7 +142,7 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Autowired : ---- >this annotation is used to inject the class instant (object into the other class and use it ). For this to happen the class to be autowired need to part of the classpath bean list . which can happen by annotating the class as @component which will tell componentscanner during bean creation . we can also annotate it as @Service  , @Repository which in lower stage are @component anootated interfaces.
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
-	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test
+	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
