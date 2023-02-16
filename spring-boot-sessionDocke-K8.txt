@@ -175,6 +175,14 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	controller.
 	@EnableEurekaServer - : The @EnableEurekaServer annotation is used to make your Spring Boot application acts as a Eureka Serve
 	@EnableFeignClient ---> 
+	@Getter --------> It is the annotation provided by lombok spring boot to generate getters of the attaributes
+	@Setter --------> It is the annotation provided by lombok spring boot to generate setters of the attaributes
+	@AllArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with all attributes in input parameters.
+	@NoArsgConstructor --------> It is the annotation provided by lombok spring boot to initialize the attributes with default values.s
+	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
+	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
+	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
+	
 	
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
