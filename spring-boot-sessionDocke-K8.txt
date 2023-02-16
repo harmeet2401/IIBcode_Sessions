@@ -182,8 +182,57 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
 	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
 	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
+	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Like one customer can have many orders 
+					    So the Customer class will have List<Orders> orders annotated as @OneToMany(mappedby=cust).
+					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
 	
+	Difference between Lazyfetch and eagerfetch : 
+	https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
 	
+	Answer : For example we have a University and a Student entity . Now University hve 
+		Class University {
+		
+		private String id;
+		private String name;
+		private String location;
+		private List<Student> students;		
+		
+		
+		}
+		
+	  a. Eager fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values which will return a big result set .It will give you the students records by default.
+	  @Entity
+	  Class University {
+		
+		@Id
+		@GeneratedValue
+		private String id;
+		private String name;
+		private String location;
+		
+		@OneToMany(fetch=FetchType.eager)
+		private List<Student> students;		
+		
+		
+		}
+		
+		
+	  b. Lazy fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values only when it is needed , like calling getStudents() method of University entity. It will not give you the students records by default.
+	  
+	  @Entity
+	  Class University {
+		
+		@Id
+		@GeneratedValue
+		private String id;
+		private String name;
+		private String location;
+		
+		@OneToMany(fetch=FetchType.lazy)
+		private List<Student> students;		
+		
+		
+		}
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
