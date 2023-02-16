@@ -200,7 +200,7 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 		
 		}
 		
-	  a. Eager fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values which will return a big result set .It will give you the students records by default.
+	  a. Eager fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values which will return a big result set .It will give you the students records by default. This will cause serious performance issue. Because of big result set 
 	  @Entity
 	  Class University {
 		
@@ -217,7 +217,7 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 		}
 		
 		
-	  b. Lazy fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values only when it is needed , like calling getStudents() method of University entity. It will not give you the students records by default.
+	  b. Lazy fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values only when it is needed , like calling getStudents() method of University entity. It will not give you the students records by default.This will not cause serious performance issue. Because of small result set 
 	  
 	  @Entity
 	  Class University {
