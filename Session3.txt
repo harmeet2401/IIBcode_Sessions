@@ -215,7 +215,7 @@ volumes:
 	docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
 
 ----------------------------------------------------------Practice-------------------------------------------------------- MESOS , DOCKER , RKT
-https://innersource.accenture.com/users/sujal.kumar.mitra/repos/working-with-containers/browse
+New command for dockers great help  : https://innersource.accenture.com/users/sujal.kumar.mitra/repos/working-with-containers/browse
 sudo service docker status ----------------------------------------------------- after installation  will tell the running docker engine service status 
 sudo service docker stop
 sudo service docker start
