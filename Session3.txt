@@ -215,6 +215,7 @@ volumes:
 	docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
 
 ----------------------------------------------------------Practice-------------------------------------------------------- MESOS , DOCKER , RKT
+https://innersource.accenture.com/users/sujal.kumar.mitra/repos/working-with-containers/browse
 sudo service docker status ----------------------------------------------------- after installation  will tell the running docker engine service status 
 sudo service docker stop
 sudo service docker start
@@ -261,6 +262,10 @@ docker push dockerhub-username/imagename----------------------------------------
 docker pull reponame/imagename
 docker file:-------------------------------------------------------------------- all steps we did , we can write line by line in docker file and just run the yaml file(best way to create image)
 docker container run alpine ls -ltr -------------------------------------------- this will run the command inside the container from command itself . Means this will run the ls -ltr inside alpihe which is looing for CMD command in its image.
+docker container ls -a ----------------------------------- this will shows the container existed in recent to old container. as per the time
+docker container ls -aq --------------------------------- this will shows the container ID existed in recent to old container. as per the time
+docker container ls -l  --------------------------------- this will shows the container which existed last .
+docker conatiner ls -la -------------------------------- this will shows the container ID which existed last.
 docker pull alpine --------------------------- pull the image ad then inspect it docker inspect alpine.
 FROM ubuntu---------- -----------------------------------------------------------means we need base image
 RUN apt-get update
