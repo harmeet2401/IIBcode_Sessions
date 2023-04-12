@@ -323,6 +323,7 @@ docker ps ----------------------------------------------------------------------
 docker stop container-id	------------------------------------------------------- on master , it will create a new container auto in other slave. thats what swram is
 docker network -------------------------------------------------------------------- now above swarm kept containers on different computers.. then we use docker network
 docker nework create -d overlay my-overlay----------------------------------------- create a netwrokd
+docker container inspect webserver | grep -i Image -------------------------------- this will fetch the number of line which contains Image as keyword from the container inspect json values.
 docker service create --name website --replicas 3 --network my-overlay --publish 80:80 hshar/webapp------------------- publishing network
 docker service rm service id  ----------------------------------------------------- docker service  ls to get the id 
 docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
