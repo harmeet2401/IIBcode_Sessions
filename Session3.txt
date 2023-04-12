@@ -260,6 +260,8 @@ docker tag imagename dockerhub-username/imagename ------------------------------
 docker push dockerhub-username/imagename---------------------------------------- push the image to docker hub
 docker pull reponame/imagename
 docker file:-------------------------------------------------------------------- all steps we did , we can write line by line in docker file and just run the yaml file(best way to create image)
+docker container run alpine ls -ltr -------------------------------------------- this will run the command inside the container from command itself . Means this will run the ls -ltr inside alpihe which is looing for CMD command in its image.
+docker pull alpine --------------------------- pull the image ad then inspect it docker inspect alpine.
 FROM ubuntu---------- -----------------------------------------------------------means we need base image
 RUN apt-get update
 RUN apt-get install apache2 ----------------------------------------------------- to run command on base image on which we will be installing apache2
