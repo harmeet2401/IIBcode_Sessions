@@ -1,5 +1,35 @@
 Design patterns in java -------------------- Really important.
+SOLID principle : 
 
+	S : The single responsbility : it means the classes we will write should have only one single reason to get changed. There should not be much reasons
+		get changed 
+	O : The open/closed principle : means one class should not be open for modification , rather that it should be open for the Extension .
+
+		For example : Employee class is a more abstract one 
+					Manager Class will be used to add more functionality by extending the Employee class 
+						Director class will be used to add more functionality by extending the Manager class. 
+				So in above design all two classes Employee and Manager are not modified . These classes were extended to get some more functionalities
+				added.
+	L : The Liskiv substitution principle : This principle involves the relationship "is a" . In which the downstream class act as a substitution class for
+		the base class . Which inheritence actual do that olaaaa.
+			
+				For example : Employee class is a more abstract one 
+					Manager Class will be used to add more functionality by extending the Employee class 
+						Director class will be used to add more functionality by extending the Manager class. 
+				In above example Manager act as a substitute class for the Employee and serve the purpose of subsitution in it.
+
+	I : The interface segragation principle : This principle will help in breaking down the interfaces into smaller more interfaces and doesn't allow 
+		client to depend upon only one interface for the implementation.
+				For example : Interface Vehicle  (methods : speed() , model() , company() , fourwheeler() , twowheeler())
+							Class FourWheeler implements Vehicle which will force this class to implements all methods including twowheeler().
+								Class TwoWheeler implements Vehicle which will force this class to implements all methods including fourwheeler().
+				
+				To resolve above issue we can break vehicle into two interfaces FourWheelerVehicle and TwoWheelerVehicle 
+							FourWheelerVehicle (methods : speed() , model() , company() , fourwheeler())
+							TwoWheelerVehicle (methods : speed() , model() , company() , twowheeler())
+						Now any class implementation will have granular methods to be implement
+	D : Dependency inversion principle : It focuses on the approach where the higher 
+								classes are not dependent on the lower classes instead depend upon the abstraction of the lower classes
 Design pattern helps in identify recurring problems and create a solution arround that problem.
 1. Design patterns helps in creating a solution arround the problem 
 2. This patterns can be re-used to be applied to any project which face this issue. As design pattern is a patterns(kind of  prob recurring)
@@ -27,6 +57,15 @@ Types of Pattern catalog to choose pattern from .
 						public static Logger log = LoggerFactory.getLogger(Classname.class)
 						
 						Above log object singleton will be used by all the classes to log message.
+					
+					CASE 3 : in case one class need datasource object of DataSource Class to get the connection to the Database . We can make DataSource class as 
+					singleton to send only one instance of it and not creating multiple instances while updating the data.
+					
+					
+						class 1 -----------------------------------------> 
+						class 2 ----------------------------------------->DataSource class -------------->Connection pool
+						class 3 ----------------------------------------->
+						class 4 ----------------------------------------->
 						
 			Ques: How to make a singleton design pattern 
 			Ans : step sto follow : 
@@ -46,9 +85,10 @@ Types of Pattern catalog to choose pattern from .
 										 dateUtil = new DateUtil();
 										}
 				d. Issue 1 : How to make the instantiaton of the private static attribute thread safe is by marking the block of code s static.
-				
-						synchronized keyword to mark the function thread safe .
-						synchronized (DateUtil.class){ ---- block to mark piece of LOC 
+						- Mark the variable which is threaf vulnerable as volatile to make it thread safe.
+						- synchronized keyword to mark the function thread safe .
+						---- block to mark piece of LOC  make good use of it as it is expensive one so only wrap arround the LOC which is needed to be.
+						synchronized (DateUtil.class){ 
 						
 						}
 				e. Issue 2 : serialisation and de-serialisation : Serialization in Java is a way of saving and sending objects as bytes, like a snapshot of their state
@@ -86,7 +126,15 @@ Types of Pattern catalog to choose pattern from .
 				
 	b. Factory Design pattrn : Its used to hide the Object creational process. 				
 		In nut shell we have to hide the object creation in factory class. its a normal java class with only operations is to instantiate the other class objects.
+		Factory design or class ko factory ki trah hi smjho in which the cars or machines ate etting manufactured . The dealer don;t give a damn what is happening in the actory . So the object or car  creation is all hidden
+		example of existing java class : We know that the driver is used to create a connection with the database . So DriverManager is a class or an interface which contains the getConnection function which takes a string and give a connction back .
 		
+				Connection con = DriverManager.getConnection(String string);    Now Oracle, sql, mongo etc . 
+				Now what ever the string we will pass it to the getConnection() the particular connection will be return .
+				
+				So DriverManager is the factory class which hides the connection creation 
+				
+				
 		Order(test class)----
 							|
 							|
@@ -106,9 +154,12 @@ Types of Pattern catalog to choose pattern from .
 		
 		- Pizzafactory is the normal java class which will hndle the object instantiation for the Pizza Interface. Which will contains a static method which will instantiate or create the objects and return back. As it is static we won't be needing the object creation for PizzaFactory class. directly do PizzaFactory.staticmethodname()
 		
+		NOTE : INTERFACE HERE IS THE MOST IMPORTANT PART . MEANS IN NUTSHELL IN FACTORY CLASS THE INTERFACE INSTANCE OF ANY THREE IMPL IS RETURNED ON THE BASIS OF THE INPUT STRING OR INPUT GIVEN TO THE FACTORY CLASS. METHOD IN FACTORY CLASS ARE STATIC MEANS WE CAN DIRECTLY CALL THESE FUNCTIONS USING FACTORY CLASS NAME.
+		
+		
 	c. Abstract Factory Design pattern : An abstract factory is the factory of factories . Means To create the object for factory classes we have Abstract factory class which knows how to do it. Now this abstract factory class should also be invoked to create downstream factory class which is done by Producer.
 	Its an abstract class with abstract method in it.
-	
+	Java Example class : JAXP java api for XML parsing . to read write the 
 			ClientClass input ---|
 								 |
 								 |
@@ -130,11 +181,19 @@ Types of Pattern catalog to choose pattern from .
 
 			in above diagram it shoes that PizzaFactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
 
+
+		The abstractfactory class is the abstract class with one abstract method returning the other factory normal class (which has one static method)
+
+		NOTE : ABSTRACTFACTORY CLASS IS THE ABSTRACT CLASS WHICH WILL HAVE ONE METHOD TO RETURN THE OTHER FACTORY CLASS OBJECTS. DONO FACTORY CLASS EXTENDS KRENGE ABSTRACTFACTORY CLASSKO AND USS FUNCTION KO OVERRIDE KRKE INPUT BASE PR SBSE PEHLE INTERFACE KA INSTANCE RETURN HOGGA .
+		FIR EK PRODUCER CLASS JISME SE HM ABSTRACTFACTORY CLASS US KRKE FACTORY CLASSES KA INSTANCE DENGE
+
 	d. Template Method deisgn pattern : Its like creating a template method which will be same for all the implementing classes. 
 			Example , One interface or an abstract class with three fns (renderdata() , readdata(), processdata()).
 				out of above gave defination for the renderdata() function which will act as a template for all the other implementing classes. and other two funcstions to be deifned accordingly in implementing classes.
 				
 	e. Adapter pattern :  Its like we will use a program between two modules , two apps or two cross platform application to transform the data which is required by the other apps .
+	
+	Get temprature example in degree cecius is the example for it.
 
 		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
 								transform it in json 
@@ -155,7 +214,7 @@ Types of Pattern catalog to choose pattern from .
 	g. Command design pattern : 
 		The command pattern encapsulates a request as an object, thereby letting us parameterize other objects with different requests, queue or log requests, and support undoable operations.	
 		
-				Person -----------------------------------------> RemoteControl class (pressButton())
+				Person -----------------------------------------> RemoteControl class (pressButton()) its the invoker
 																	|
 																	|
 																	|
@@ -175,9 +234,43 @@ Types of Pattern catalog to choose pattern from .
 												  on()
 												  off()
 												  
-	h. (Revisit)Decorator design patter : It is also a behavioural pattern which allow a decorator to be wrapped arround the wrapper class.example : 
+	h. Decorator design patter : It is also a behavioural pattern which allow a decorator to be wrapped arround the wrapper class.example : 
 	new BufferReader(new FileReader());
+	
+	
 				      								  
+    Its the design pattern in which the IMPL class knows how to add new functionality to the base class of the interface . Like the name specifid its a Decorator means it will decorate the object with something new .
+
+
+				
+				
+					Client ----------------------------->    VeggiePizzadDecorator  
+					
+					
+															 CheezePizzaDecorator 
+															 
+															 
+								Pizza (Interface)					PizzaDecorator(It will implement Pizza interface) with Pizza as the Object 
+										|
+									    |
+										|			  
+								    PlainPizza (this is the IMPPPL of PIzza interface)
+
+
+			 public static void main(String[] args) {
+					//Pizza pizza = new PlainPizza();
+					Pizza pizza = new CheesePizzaDecorator(new VeggiePizzaDecorator(new PlainPizza()));
+					pizza.bake();
+					//VeggiePizzaDecorator veggiePizzaDecorator = new VeggiePizzaDecorator(new PizzaDecorator());
+				}
+			
+			above syntax shows that the one decorator can be wrapped inside other decorator constructor. As all the decorator are implementing or extending the Pizza interface indirectly 
+			
+			now the pizza object has wrapped the object call heirarchy means , pizza.bake() har ek decorator mai hai par jab bhi ye line execute hoggi , jvm will run bake PlainPizza ka pehle , then bake veggiePizzaDecorator ka and then bake CheesePizzaDecorator ka.
+			
+			
+			NOTE : YE DESIGN PATTERN AAPKO FUNCTIONS KO WRAP KRNE KA TARIKA BTATI HAI USING DECORATOR , WHICH ARE NOTHING BUT THE BASE IMPLEMENTATION OF THE INTERFACE .
+										
 	i. Dependency Injections and Inversion of control patterns  :  We know that we can inject the instance of one class to the another class using spring framework dependency       	injection fetaure . Its also know as IOC(Invertion of control)	
 			In lemen term dependency injection is to inject the class dependency at runtime by creating the instance of the dependency class and using it dynamically with in the main class which need DI. We know that @Autowired is the annotation for the field level DI which inject the instance of the class created at runtime by the Spring container at runtime while scanning @Component , @Repository , @Service etc. The main annotation needed is @component to come up as part of the scan list of classes for the spring container. In case of an interface to be injected . We need to make the implementing class for the interface as @Component
 			Or else  @Component can be done on all classes to be insjected.

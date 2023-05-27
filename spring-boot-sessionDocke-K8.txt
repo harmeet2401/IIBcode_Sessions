@@ -1,5 +1,26 @@
 Spring boot --------------------------------------------------------------------------------------- UDEMY ------------------------------------------------------------------------
 
+Microservices Design Patterns:
+    Integration Pattern:
+	  Aggregator : 
+	  API Gateway
+	Chained or Chain of Responsibility
+	Asynchronous Messaging
+	2. Database or Shared Data
+	Event Sourcing
+	Branch
+	Command Query Responsibility Segregator
+	Circuit Breaker 
+	Decomposition : breaking the bigger service to smaller pieces . and connecting those using different design pattern 
+	
+ 1. Decomposition Pattern : in which we are de-coupling the services on the basis of the business unit
+ 2. Integration  : in this case we have to call and connect the de-coupled servuise uing the api -gateway or aggregator technique
+ 3. Database service pattern : to Distribute the data on multiple instances in case we neeed to scale up and down .
+ 4. Cross-cutting pattern : This pattern moslt solve the problem of multiple configuration available for different services on different ENV like , dev , QA , UAT , St and prod .
+	To overcome that we include external sentralised repo to collate all configurtion and load those configuration at runtime for each region .
+ 5. Observatory pattern : In which we need to centralsed the logs generated from differnt services called from the api gateway on different machines.
+ 
+
 START.SPRING.IO ----- TO CREATE PROJECTS 
 DOCS.SPRING.IO ----- TO TAKE REFERENCE FOR ANY FEATURE THAT SPRING / SPRING BOOT PROVIDES.
 
@@ -10,7 +31,7 @@ Web service app : The app or technique using which we can provide services using
 				These service we can expose to other application to consumer the response . so a rest full api that is hosted on to a servers 
 				with Http protocol is an example of  it.
 				
-Parts of a web service (rest api )	:
+Parts of a web service (rest api)	:
 				Service Definition  : It contains the type of request and response required for the api (The format for it) can be a swagger 
 				Request  : Will involve the sample request 
 				Response : Will involve the sample response 
@@ -61,7 +82,8 @@ These are defined structure .
 
 	
 REST : --------- REpresentational State transfer method/methodology. is developed to make best use of the HTTP protocol . Methodology to make best use of HTTP protocol.
-
+CRUD : Create , read , update and delete this is mostly used in Db access layers.
+Safe HTTP methods: get and update 
 The HTTP protocol is used to transfer HTML data from consumer to service provider or vice versa. HTTP is hyper text transfer language used to tranfer HTML data. means the data which is send across the HTML page using HTTP proocol 
 like we hit the url http://www.localhost.com:8080/Users/user/1/ID  ---> on this url we can send the html data which can be any form of data.
 
@@ -70,12 +92,12 @@ rest contains  : rest APIcontains the format of message(request , response) , me
 	Transport : Only HTTP protocol. Where as the soap request can be transported using any  messaging service (MQ , kafka , HTTP., https etc )
 	Rest full definition : WADL web application definition language / Swagger that contains the end point , operation  , request structure and response structure .
 	
-start.sring.io  : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
+start.sring.io or the STS tool suite   : to initialize your rest-full service by selecting the package and dependencies you need for building an api.	
 The dependencies we select is JPA (java persistent api) for sql , H2 is for hybernate , web , devtools . Used to create a project by adding the dep
 
 There are multiple methods for the rest api to send/retrive/update the data .
 
-get , put , post , delete : These methods will help in doing that 
+get , put , post , delete , update , patch : These methods will help in doing that 
 
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 We need two things 
@@ -84,12 +106,16 @@ Whats is a bean :
 Serializable object , which has the getter and setter as the properties and also a zero paramter constructor to return the object instance.
 
 
+Difference between spring boot and sping mvc(Model View controller) : https://www.interviewbit.com/blog/difference-between-spring-mvc-and-spring-boot/#:~:text=Difference%20Between%20Spring%20MVC%20and%20Spring%20Boot%20,the%20applica%20...%20%2012%20more%20rows%20
+
+
 DispatcherServlet is the one which is sitting on the front receives the input request and sends the control to the desired controller method as per uri.
 DispatcherServletAutoConfiguration is the bean getting configured to make dispatcher servlet work.
 @Responsebody + jacksonHttpMessageConvertor is the one which helps in converting the java object beans to a json payloads.
 ErroMVCAutoconfiguration is the bean which creates the error message in case there is no explicit error mapping done by your apis
 Spring mvc , tomcat and json conversion are coming because of the spring-boot-starter-web which is the dependecnies we added.
 
+The @Controller is a common annotation which is used to mark a class as Spring MVC Controller while the @RestController is a special controller used in RESTFul web services and the equivalent of @Controller + @ResponseBody.
 
 	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , post , get , patch  reqeust send on http url this controller will hanlde .
 	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody. @RestController interface is annotated as @ResponseBOdy.
@@ -105,7 +131,7 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 						public String getUserName( @RequestParam String name)
 				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
 						
-    @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to conver the mesage to json format for a bean response.						
+    @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to convert the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
@@ -116,15 +142,97 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 	@Autowired : ---- >this annotation is used to inject the class instant (object into the other class and use it ). For this to happen the class to be autowired need to part of the classpath bean list . which can happen by annotating the class as @component which will tell componentscanner during bean creation . we can also annotate it as @Service  , @Repository which in lower stage are @component anootated interfaces.
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
-	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test
+	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
-	@SpringBootApplication class : starter class 
+	@SpringBootApplication class : starter class which inherits the, @SpringBootConfiguration,@EnableAutoConfiguration ,@ComponentScan.
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
 	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
+	@ComponentScan ----------> this annotation will allow the component scanner to scan the entire project to instantiate and build the object for the beans add it to the list of beans in the classpth which will allow the autowiring to work.
+	@EnableAutoConfiguration ----> this will allow auto configure some of the bean creation which can be auto-injected at run time for more processing.
+	@Value("${key.value}") ------> to load a value from the app.yaml file at runtime. eg key.value = 90	. 
+									@Value("${key.value}")
+									String value ;
+	@ConfigurationProperties ------> to load a value from the property file using the prefix .
+										@ConfigurationProperties(prefix = "ticket-booking") this is a class level annotation.
+
+									prop file looks like this : 
+										ticket-booking.username=usernameXXX
+										ticket-booking.password=passwordXXX
+										
+									code will look like this 
+										@ConfigurationProperties(prefix = "ticket-booking")
+										class a {
+										
+										String username; ---> this will get usernameXXX 
+										String password; ----> this will get passwordXXX
+										}
+	@ControllerAdvice ----> this is a class level annotation which  will keep track of any exception comes from any controller inside the projects .
+	@ExceptionHandler(UserNotFoundException.class)	----> this is a method level annotation which will run the run if UserNOtFoundException is thrown from any
+	controller.
+	@EnableEurekaServer - : The @EnableEurekaServer annotation is used to make your Spring Boot application acts as a Eureka Serve
+	@EnableFeignClient ---> 
+	@Getter --------> It is the annotation provided by lombok spring boot to generate getters of the attaributes
+	@Setter --------> It is the annotation provided by lombok spring boot to generate setters of the attaributes
+	@AllArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with all attributes in input parameters.
+	@NoArsgConstructor --------> It is the annotation provided by lombok spring boot to initialize the attributes with default values.s
+	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
+	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
+	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
+	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Like one customer can have many orders 
+					    So the Customer class will have List<Orders> orders annotated as @OneToMany(mappedby=cust).
+					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
+	
+	Difference between Lazyfetch and eagerfetch : 
+	https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
+	
+	Answer : For example we have a University and a Student entity . Now University hve 
+		Class University {
+		
+		private String id;
+		private String name;
+		private String location;
+		private List<Student> students;		
+		
+		
+		}
+		
+	  a. Eager fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values which will return a big result set .It will give you the students records by default. This will cause serious performance issue. Because of big result set 
+	  @Entity
+	  Class University {
+		
+		@Id
+		@GeneratedValue
+		private String id;
+		private String name;
+		private String location;
+		
+		@OneToMany(fetch=FetchType.eager)
+		private List<Student> students;		
+		
+		
+		}
+		
+		
+	  b. Lazy fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values only when it is needed , like calling getStudents() method of University entity. It will not give you the students records by default.This will not cause serious performance issue. Because of small result set 
+	  
+	  @Entity
+	  Class University {
+		
+		@Id
+		@GeneratedValue
+		private String id;
+		private String name;
+		private String location;
+		
+		@OneToMany(fetch=FetchType.lazy)
+		private List<Student> students;		
+		
+		
+		}
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
@@ -135,7 +243,7 @@ c.		new JmsTemplate.convertAndSend(orderNumber, messagePostProcessor -> {
 			message.set(messagePostProcessor);
 				return messagePostProcessor;
 					});
-d.		new KafkaTemplate().send("topicname ", message);   ----------- Just like that we can use kafkatemplate to send and consume the message.
+d.		new KafkaTemplate().send("topicname", message);   ----------- Just like that we can use kafkatemplate to send and consume the message.
 
 
 We can Autowire in Spring boot instead of creating an object or instantiate its objects .
@@ -191,7 +299,7 @@ Lab 2 ----------------- Create a hello world rest api service to respond as a be
 How to return a BEan(A bean is a class with separate attributes(variables)) in which the constructor will require a string parameter and display it as 
 JSON (which will be done by spring mvc in the back end)
 
-Spring-boot-Auto-configuration : helps in configuring the dispatcher server and also initialize the Jackson bean that converts the Bean to Json while sending a response back.
+Spring-boot-Auto-configuration : @EnableAutoConfiguration helps in configuring the dispatcher server and also initialize the Jackson bean that converts the Bean to Json while sending a response back.
 
 We can start the debug the level logs for spring boot started console .
 
@@ -308,7 +416,7 @@ that we can send an instance of our bean to the user when ever an exception come
 For that we need to make that class A extend ResponseEntityExcpetionHandler to be a Restcontroller and with annotation @ControllerAdvicer (which is used to share the feature 
 across all the controller).
 
-	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES  FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class  --- REEH
+	ThIS IS USED TO SEND THE RESPONSE IN ANY KIND OF EXCEPTION COMES FOR WHICH WE ARE CREATING ResponseEntityExcpetionHandler class  --- REEH
 	----------------------------------------------------------------
     THATS COOL , I MEAN YOU JUST HAVE TO DEFINE THE @RestController AND @controllerAdviser to share the feature to all controllers .
 				You need to handle the exceptions whether it is generic or it is specific .
@@ -383,7 +491,7 @@ HATEOAS : --------------------------------------------------------
 INTERNATIONALIAION : ---------------------------------------
 This is the feature in which suppose you are getting data request or get request from different country or locale .
 So language is a barrier , in order to response with different data as per the locale we internationalize the response using property files.
-We can send an header Accept-language = en to send the message response in english or Accept-Language = sp to send the message in english
+We can send an header Accept-language = en to send the message response in english or Accept-Language = sp to send the message in spanish
 
 
 We just need to use MessageSource Class which helps in getting the values from messages.properties file for internationalization to work .
@@ -551,7 +659,6 @@ Url launch for hal browser : localhost:8080
 
 Url to launch Actuator : localhost:8080/applications
 						 localhost:8080/actuator
-						 localhost:8080/actuator/env : to see info about java version , utf-8 , port , tomcat config .
 {
 	"_links": {
 		"self": {
@@ -619,6 +726,55 @@ Verry important point always mention the @JsonFilter on top of the bean class to
 
 
 Lab :------------------- Dynamic filtering 
+
+Lab 8.1 :-------------------MultipartFile to upload and download a the file ----------------------
+
+https://www.tutorialspoint.com/spring_boot/spring_boot_file_handling.htm#
+
+
+We can use @RequestParam("file") MultipartFile file as part of the POstMapping resource function.
+
+@PostMapping(path="/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String upload(@RequestParm(file) MultipartFile mfile)
+{
+	File file = new File(mfile)
+	OutBufferStream
+
+}
+
+
+To download the file we need to read the file for directory and then use InputStreamResource to deserialize it and make it as part of the ResponseEntity and send it back to the consmer.
+@GetMapping(value = "/download")
+    public ResponseEntity<Object> downloadFile() throws IOException  {
+        String filename = "C://Users//IBMADMIN//Downloads//RestApiFileProcess//run.txt";
+        File file = new File(filename);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        ResponseEntity<Object>
+                responseEntity = ResponseEntity.ok().headers(headers).contentLength(
+                file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
+
+        return responseEntity;
+    }
+	
+	
+	
+	
+In portman you have to select method : POST 
+1. Then in Body select form-data 
+2. Then Select file in value field 
+3. Browse the file 
+4. click on send
+
+
+
+Lab 8.1 :-------------------MultipartFile to upload and download a the file ----------------------
 
 
 
@@ -757,7 +913,7 @@ Step 2 : add below in app.yml
 2) To use data.sql, you need to add this to 
 spring.jpa.show-jpa=true
 spring.h2.console.enabled=true
-spring.datasource.url=jdbc:h2:mem:testdb                   ------------------ you can set the url here or else while runing a default url will appear to use.
+spring.datasource.url=jdbc:h2:mem:testdb
 spring.data.jpa.repositories.bootstrap-mode=default
 spring.jpa.defer-datasource-initialization=true
 
@@ -1124,6 +1280,8 @@ lab 14 ----------------------currency conversion/exchange microservices
 	
 	
 Lab 15 : -------------- naming srever (Eureka netflix server ) at port 8761-------------	
+Eureka naming server is an application that holds information about all client service applications. Each microservice registers itself with the Eureka naming server. The naming server registers the client services with their port numbers and IP addresses.
+
 Steps : 
 
 1. Add dep : Eureak server  , devtools , actuater 
@@ -1170,26 +1328,33 @@ Steps :
 LAB 17 : ------------- load balancing the currency-exchange-service ----------------- using naming server ----------	
 
 LAB 18 : ---------------Api gateway :------ 
-to contain the common features like authentication , authorization , logging etc.
-so all the api hit will go through this api gateway containing the common feature .
+1. To contain the common features like authentication , authorization , logging etc.
+2. Allow easy routing to the apis by encapsulating the common fetaures line (auth, authorization , loggin etc ).
+3. so all the api hit will go through this api gateway containing the common feature .
+4. It will act as a proxy . Which will receive a client request and we will do the authentication and send the request to the actual api using the naming server.
 
 Steps : 
 1. Add the dep 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
 
 DevTools
 Actuator
 Config Client
-Eureka Discovery Client
+Eureka Discovery Client.
 Gateway (Spring Cloud Routing)
 
 2. now how it works ?
-		Apigatewayurl/micro registered name on naming server / url of the micro to hit 
+		Apigatewayurl/micro registered name on naming server / url of the micro to hit .
 		
 		example : http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/{from}/to/{to}
 		
 		This will tell the api gateway to talk to eureka client with name CURRENCY-EXCHANGE find it and hit it with currency-exchange/from/{from}/to/{to} url
 		
-			for that add :  spring.cloud.gateway.discovery.locator.enabled=true=true
+			for that add :  spring.cloud.gateway.discovery.locator.enabled=true
 							spring.cloud.gateway.discovery.locator.lowerCaseServiceID=true # to make the CURRENCY-EXCHANGE in lowercase 
 	
 
@@ -1277,6 +1442,32 @@ Custom Routes
 
 LAB 18 : ---------------Api gateway CUSTOM ROUTES MEANS USE URL AS PER YOUR NEED . THE API GATEWAY WILL MAPP IT TO THE RIGHT ONE IN BACK END  :------ 
 
+LAB 19 : ------------------Spring boot interceptor -------------------------------------
+This interceptor will be calld for each request that comes to the rest api .
+In most programming paradigms, interceptors are an essential part that enables programmers to control the execution by intercepting it. Spring framework also supports a variety of interceptors for different purposes.
+
+Spring RestTemplate allows us to add interceptors that implement ClientHttpRequestInterceptor interface. The intercept(HttpRequest, byte[], ClientHttpRequestExecution) method of this interface will intercept the given request and return the response by giving us access to the request, body and execution objects.
+
+https://www.baeldung.com/spring-rest-template-interceptor#:~:text=Spring%20RestTemplate%20allows%20us%20to%20add%20interceptors%20that,access%20to%20the%20request%2C%20body%20and%20execution%20objects.
+
+ClientHttpRequestInterceptor.java is the interface we an used to intercept each incoming request .
+
+public class RestTemplateHeaderModifierInterceptor
+  implements ClientHttpRequestInterceptor {
+
+    @Override
+    public ClientHttpResponse intercept(
+      HttpRequest request, 
+      byte[] body, 
+      ClientHttpRequestExecution execution) throws IOException {
+ 
+        ClientHttpResponse response = execution.execute(request, body);
+        response.getHeaders().add("Foo", "bar");
+        return response;
+    }
+}
+
+LAB 19 : ------------------Spring boot interceptor -------------------------------------
 
 LAB 19 : --------------------------------------Global filters :
 Logging framework
@@ -2086,6 +2277,38 @@ kubectl delete hpa hello-world-rest-api ---------------- will delete the hpa hor
 
 lab : 10 :------------ Auto scaing  -------------
 
+lab : 11 :-------------------JIB lib used to create a docker image out of the project --------------------
+
+clean compile install -f pom.xml
+
+pom.xml -------------
+<properties>  
+  <maven.build.timestamp.format>yyyyMMdd-HHmmssSSS</maven.build.timestamp.format>
+</properties>  
+
+<build>  
+  ...
+  <plugins>
+    ...
+    <plugin>
+      <groupId>com.google.cloud.tools</groupId>
+      <artifactId>jib-maven-plugin</artifactId>
+      <version>2.5.2</version>
+      <configuration>
+        <to>
+          <image>hk/jib:${maven.build.timestamp.format}</image>
+        </to>
+      </configuration>
+    </plugin>
+    ...
+  </plugins>
+  ...
+</build>
+
+
+Command to create docker image : ./mvnw compile jib:dockerBuild --- example command
+
+lab : 11 :-------------------JIB lib used to create a docker image out of the project --------------------
 
 	
 ----------------------Kuberenetes-------------------------------------------------------------------	

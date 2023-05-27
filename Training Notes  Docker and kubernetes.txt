@@ -1,0 +1,315 @@
+Docker and kubernetes : 
+
+1. CM : Configuration management 
+2. Infra automation : It is one way of writing Script for 	Managing the infrastructure.
+		- Manage configuration 
+		- Automation provisioning of infra
+		- Assist deployment 
+	Infrastructure code is written using :
+		- A high level language or 
+		- Any descriptive language      
+
+ - We can create : -
+	Raw infra like compute , storage , network , subnet etc . And it is going to communicate through APIs.
+ - Ansible , terraform , docker are immutable. Means these  tools will skip the installation , change to the target server software if its already existing.
+
+
+CM : Chef , puppet , SaltStack , Ansible 
+Orchestration: Kubernetes , openshift 
+Containerization : Docker 
+
+
+Example : 
+Ansible ---- Push command to install Nginx --------------------->Target VM 
+<--------pull the updates---
+   
+ Register for terraform training.
+
+3. Vendor and certification 
+Vendor :  To go for the certification 
+Hashicorp is for terraform 
+CNCF is for Kubernetes (IMP)
+
+4. Docker architecture : 
+
+Docker , CRIO or containant these are the container runtime which will allow you to run the container . JUst like we have Java run time.
+
+in case we make the VM upgarde , in order to avoid the downtime , we can shift all the container using kubernetes to another VM with higher resources and then apply the upgrade.
+
+Docker client ------Build/push/pull-----> Docker host(Docker daemon )-------------> docker client 
+					
+Docker images : Its a recipe or the packaged file which will contains the base image , port binding and pre-requisite lib required for running the container.Its read only. 
+
+Docker Containers : The running instance of images
+Docker registry : Where we will save the images
+Docker compose : which is used to create multiple containers.
+
+FROM : To get the base image 
+RUN : TO run a command inside the container 
+ENTRYPOINT : TO create a task in which we can run anything 
+CMD : Its similar to CMD with addition feature to get arguments override when needed when given while running the container using docker run command.
+COPY : to copy the file to the images packages.
+ADD : from remote to here 
+ENV : env variables
+EXPOSE : to expose the port for documentation which port is open.
+
+5. Kubernetes : https://kubernetes.io/docs/concepts/overview/components/
+
+Its used for orchestration of containers in docker .
+Advantages : 
+	Rollouts and rollback of new deployment and to old deployment 
+	Service Discovery and load balancing : Means we can expose the container app using the service or route . Also can apply load balancing . Ryt now K8 doesn't have its own load balancing tools. then We can use Azure / Aws load balancing or OCP load balancing.
+	Storage orchestration : It has ephemeral storage for each container. Persistent volume and PVC allow container to get allocated storage and use that mounted volume.
+	Self healing : It bring the pods up when any ever there is any error in the pod . This is the actual orchestration. Mean maitaining the container or pods.
+	Secrets and configuration management : Deploy the pods secrets and configuration without rebuilding the image.
+	Batch Execution : K8 can manage your batch and CI workload , replacing cotainer. Cronjobs can also be applied.
+	Horizontal : Autoscaling feature with CPU and memory utilization .
+	IPV4/IPV6 dual stack : Both versions are supported.
+	
+
+K8 Components : 
+		1. Control plane(Master) : Its the brain of the cluster	. No pod will be running .
+			- API servers : To interact with K8 using the command. or Api calls.
+			- ETCD : persistent storage of you cluster and store key store values and help you to recover to the last stable state.
+			- (Cloud controller)Manager : To manage the pods across the cluster . 
+				
+
+		2. Worked node : these are your applicaion nodes where your pods might be running.
+	
+			- kubelet : Captain takes details from API server and comes to scheduler to decide pod will go to which node.
+			- Kubeproxy : Update the N/W details.and this will contains the service allow the internal pods and enduser to access the apps. Cluster IP is used for internal pods communications and service is used by end users to access the apps.
+			- Container Runtime  : Which is used run the container.
+
+KubeCTL : CLI for k8 for interacting with the nodes in K8 cluster.
+
+	Objects in K8 : 
+	Deployment config : Which contains image , label , DC name etc.
+	Replica Set 
+	Taints and Toleration  : This also for scheduling the pods to the worked nodes. 
+	Affinity : is the set of rules to tell the scheduler about where to place the pods.
+	Labels : For identification and metadata purpose 
+	Init Container : It is used to run a pre-requiste task before we want our main app container to run .
+If init container fails then main container will not start .
+	Kubectl : Its the CLI to interact with the api server.
+	LimitRange : To limit the Quota
+	Logging : get the k8 logs.
+			Always set the PVC and PV to store the logs in it 
+	NameSpace : Namespace is unique for each node.
+			So the K8 cluster can have many namespace . Like dev-k8-sales,uat-k8-sales and sit-k8-sales. We can restrict the traffic using the namespace.
+	RBAC : Role based access control : means we can restrict the user access to the objects i the k8 cluster.
+	KubeAdm : 
+	Helm charts : We can create a template mention the k8 objects , get it verified from k8 object verification , get it replaced by the value from values.yaml file and then create k8 objects and deploying it to the cluster.
+
+6. Kubernets API : Apis exposed to allow developer to interact with K8.
+	 For each k8 object on the top of the yaml for that object you will see the apiversions which is diff for diff k8 objects. 
+
+7. K8 Annotations : Cluster to cluster communication .
+8. k8 Namespace : default , kube-node-lease , kube-public , kube-system.
+9. Services : To allow access to the pods and load pods.Its created when ever we create a new aplication using K8. Which will allow pod to pod communication using the private IP .
+ 
+We can also create a load balancer in which the backend pool will contains the private IPS of the pods in the cluster. node-pod is also used .
+We can use ingress load balancer from cloud provider to access the cluster pods.s
+	
+For creating load balancer always deploy your K8 as a PAAS and use the services provided by the cloud provider and filter the traffic as required.
+
+Route is not part of kubernetes its provided by open shift platform.
+
+10. StatefulSets : used to manage stateful applications. Not recommended as we need proper configuration is required.
+
+Deployment or ReplicaSet may be better suited to your stateless needs.
+
+11. Daemon sets : Ensure all or some pods are run on newly added node in the cluster. Because Daemon set is meant to place atleast one pods in each nodes in the cluster . Which is best used for logging purpose.
+
+12. Cron jobs : Which runs under a scheduled jobs .
+	Means in yaml file we can mention the scheduler : ***?** and rest of the spec values.
+
+13. Ingress : 
+
+client ----> ingres managed LB(cloud providers.) ---> ingress ---> routing rule ------> Service ------> pod
+			
+
+routing rule above is third party ingress controller which will redirect the request to the service in the cluster. 
+We can use helm to create the ingress controller.
+
+14. Storage : 
+
+When ever we create spec in yaml for the storage for mount to happen , the provisioner shows which cloud provider is giving you the storage to use.
+
+Persistent Volume : Which will persist 
+Projected volumes : secrets, configuration etc 
+Ephemeral volumes : which is the additional or default volumes which get destroyed when the pods del.
+
+PVC : which is used to claim the storage .
+
+Dynamic Volume provisioning will help in provisioning the volume automatically.
+
+Acc123$$
+
+docker container run --rm --env SOME_VAR=ValueWithoutSpaces -it alpine sh
+
+docker container run --rm --env SOME_VAR_ONE=ValueOne --env SOME_VAR_TWO="Value With Spaces" --env SOME_VAR_THREE=ValueThree -it alpine sh
+
+
+docker container run --rm --detach --name webserver --publish 80:80 --volume /root/my-web-app:/usr/share/nginx/html:ro nginx:alpine
+
+15. Bind mount : it is used to bind the mount folder of container with the folder on host server. that will help in sharing the file from host server to container server.
+
+16. Volume creation : this will allow to create a volume and allow multiple container to access that volume by mounting it.
+	
+docker volume create my-volume 
+docker volume ls
+docker inspect colume my-volume
+	: [
+		"MountPoint" : "/var/bar/cmm"
+		"CreateDate" :"728-9920-992"
+		]
+docker container run --name alpine-one -it --mount source=my-alpine-volume,target=/custom_directory alpine sh : - This will create the /custom_directory folder inside the container which will be mounted to the mount point you can see inside the inspect of volume you created.
+
+It means now folder /custom_directory is equal to /var/bar/cmm and can mount and unmount it.
+
+
+17. For two containers to communicate with each other they can communicatetwo e using the private IP address , but if we they try to communicate with each other using the container name and DNS name it won't work as the default network is bridge and bridge network won't allow container communication.
+
+So for that we have to create a network and allow add all the containers to be in the same network 
+docker network create my-network 
+docker network ls 
+docker inspect network my-network 
+docker network connect my-network pod1
+docker network connect my-network pod2
+
+then do a sh inside the pod1 and try to ping the pod2
+
+docker image tag python-flask-app:1.0 harmeetysingh/python-flask-app:1.0
+docker image tag python-flask-app:1.0 harmeetysingh/python-flask-app:latest	
+
+docker push harmeetysingh/python-flask-app:1.0
+docker push harmeetysingh/python-flask-app:latest
+
+Kuberente cheat sheet for command s: 
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-getting-started-strong-
+
+Whenever we create a deployment we create below objects : 
+
+pod 
+replicaset 
+clusterIP
+service
+deployment		
+
+kubectl create deployment --image=imagename
+kubectl get deployment 
+kubectl get pods
+kubectl get rs
+kubectl get service 
+kubectl get pods -o wide
+kubectl get nodes ------------- to get the nodes of the cluster
+kubectl describe pod podname
+kubectl describe deploy deploymentname
+kubectl delete deploy deploymentname
+kubectl exec -it k8s-bootcamp-pod -- bash
+kubectl port-forward --address 172.36.7.2 pod/k8s-bootcamp-pod 8000:8080
+kubectl delete -f k8s-bootcamp-pod.yml : -- to delete all the resources created using the yaml file.
+kubectl apply -f k8s-bootcamp-service.yml : ---- inorder to create resources using the yaml file we can use kubectl apply command . For any creating any resource/object in k8.
+curl http://<pod-ip>:<container-port>
+kubectl apply -f service.yaml :---- this will create a service and the port mentioned in the service.yaml file is the port of the container/pod.
+
+kubectl expose deployment/k8s-bootcamp-deploy --name=k8s-bootcamp-svc --type=NodePort --port=8080 : if we want to expose the deployment using a service.
+
+Once the service is create all the pods can access eachother using their exposed service. So before allowing all pods to talk to each other expose the service you created.
+
+kubectl apply -f k8s-bootcamp-pod.yml
+kubectl get all --show-labels
+kubectl get pods --show-labels
+kubectl label pods k8s-bootcamp-pod role=frontend type=webapp: this will apply two more labels to the pod
+kubeclt get pods --show-labels.
+kubectl label pods k8s-bootcamp-pod role- type-  : it will unlebel the podkubectl scale deployment/k8s-bootcamp-deploy --replicas=10 --- to change the replicaset.
+
+once you create the service you can hit the deployment using 
+
+	host-ip:svc nodeport(which is mapped to the container port)
+
+ROlling update : 
+
+kubectl set image deployment/k8s-bootcamp-deploy k8s-bootcamp-container=nginx --record
+kubectl rollout status deployment/k8s-bootcamp-deploy : ---- check the rollout status and see if the new pods comes up.
+kubectl rollout history deployment/k8s-bootcamp-deploy : --- check the history of the roll out deployment.
+
+kubectl set image deployment/k8s-bootcamp-deploy k8s-bootcamp-container=nginx:1.14.2 --record :---- to rollout a new update app
+
+kubectl rollout undo deployment/k8s-bootcamp-deploy : ---- to undo the rollout
+kubectl rollout undo deployment/k8s-bootcamp-deploy --to-revision=1 : ----- will revert back to revision 1
+
+kubectl create namespace development : --- to create a namespace.
+kubectl run nginx-pod --image=nginx:alpine --namespace=development : ----- to run the pod  inside a namespace using the image.
+
+kubectl get pods -n development : ----- to get the pods in namespace : development
+kubectl get all -n development : ------- get all the resources in namespace development
+
+Diff between replicationController and replicaset 
+
+- ReplicationController is part of the api version v1 and doesn't required selector 
+kubectl apply -y my-webserver-rc.yaml
+kubectl get pods -n development 
+kubectl get all -n development 
+kubectl delete pod podname -n development :---- to delete the pod from a namespace 
+kubectl scale rc nginx-rc --replicas=5 -n development :------- to scale up the replicaset 
+
+kubectl get pods -n development --------- to see the pods increased in number after the replicaset is added to 5
+
+- ReplicaSet, which is part of the latest apps/v1 API, makes use of the selector property mandatory. It gives more flexibility in terms of selecting the pods based on matching expressions. It is used by the Deployment object internally to maintain the desired state.
+
+kubectl apply -f my-webserevr-rs.yaml : ----- to create the replicaset 
+kubectl apply -f my-webserver-svc.yml : ----- to expose the replicaset which is part of the service.
+kubectl delete all --all -n development
+
+Helm is used to create resources using the template writtern in yaml language : 
+
+We have values.yaml which is used to override the values in the actual template file containing the resources .
+helm3 repo add stable https://charts.helm.sh/stable :----- to add the repo
+
+helm3 --debug install apache-deploy bitnami/apache --set service.type=NodePort --set service.nodePorts.http=31001
+
+helm3 list : ---------- to list the deployment done 
+
+kubectl get pods --namespace default -l app.kubernetes.io/name=apache :-------- to check the pods deployed using above helm file command.
+
+helm3 uninstall apache-deploy :-------- to uninstall the deployment made.
+
+Creating my-sql deployment using MYSQL Image : 
+kubectl create secret generic mysql-secret --from-literal=password=667335424 -n development :--------------- to pass the password as it is mondatory to give that
+
+The Secrets store data in the base64 format, whereas the ConfigMaps store data in a plain text. For sensitive data like keys, passwords, database connection string etc. always use the Secrets.
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: development
+  labels:
+    app: mysql
+data:
+  password: <YOUR-BASE64-ENCODED-VALUE> # REPLACE HERE
+
+
+kubectl describe secret mysql-secret -n development  : -- to describbe the secrets in namespace development 
+
+A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator. It is a cluster resource. PVs are volume plugins like Volumes, but have a lifecycle independent of any individual pod that uses the PV. To create a new PersistentVolume with the name of mysql-pv of type hostPath apply the configuration given in mysql-pv.yml file -
+
+PV :-- persistent volumes are the storage provided by the administrator for pods to share .
+
+A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources
+
+
+kubectl exec -n development -it mysql-pod -- bash :----- to bash inside the container using kubectl 
+
+To delete the resources which are created using below yaml files :
+
+kubectl delete -f mysql-secret.yml
+kubectl delete -f mysql-pvc.yml
+kubectl delete -f mysql-pv.yml
+
+Docker compose  :which is used to create multiple images and run multiple containers using Dockerfile.
+Docker Compose is a tool you can use to centrally manage the deployments of many different Docker containers. It’s an important tool for any application that needs multiple microservices, as it allows each service to easily be in a separately managed container.
+
+docker-compose up -d : -------------------- to run the multiple containers in detached mode.
+ Above command will look for the docker file create and image and also run the container using that image which is mentioned in the docker-compose.yaml file.

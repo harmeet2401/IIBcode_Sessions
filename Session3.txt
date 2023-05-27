@@ -117,12 +117,14 @@ now to keep container running after exit use below command
 creat a folder 
 create a html file
 create a Dockerfile : 
-FROM ubuntu
-RUN apt-get update
+FROM ubuntu ----------------------- fetch the base image 
+RUN apt-get update ---------------- run a command inside the container 
 RUN apt-get -y install apache2
-ADD .  /var/www/html
-ENTRYPOINT apachectl -D FOREGROUND
-ENV name Devops Intellipaat
+ADD .  /var/www/html ------------- will add the file from local as well as from remote reposiroty 
+ENTRYPOINT apachectl -D FOREGROUND ------------ Run the command inside the container and will not ge override if another command is sent while running the comtainer 
+CMD ["some command"] -------------------------- simlar to ENTRYPOINT but can get override if another command is sent while running the container using a docker run command
+#above two command will get concatnate : apachectl -D FOREGROUND some command
+ENV name Devops Intellipaat--------------- to set the ENV variable value
 
 run command : 	
 docker build -t harmeet2401/mytestimage .
@@ -215,6 +217,7 @@ volumes:
 	docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6
 
 ----------------------------------------------------------Practice-------------------------------------------------------- MESOS , DOCKER , RKT
+New command for dockers great help  : https://innersource.accenture.com/users/sujal.kumar.mitra/repos/working-with-containers/browse
 sudo service docker status ----------------------------------------------------- after installation  will tell the running docker engine service status 
 sudo service docker stop
 sudo service docker start
@@ -260,6 +263,12 @@ docker tag imagename dockerhub-username/imagename ------------------------------
 docker push dockerhub-username/imagename---------------------------------------- push the image to docker hub
 docker pull reponame/imagename
 docker file:-------------------------------------------------------------------- all steps we did , we can write line by line in docker file and just run the yaml file(best way to create image)
+docker container run alpine ls -ltr -------------------------------------------- this will run the command inside the container from command itself . Means this will run the ls -ltr inside alpihe which is looing for CMD command in its image.
+docker container ls -a ----------------------------------- this will shows the container existed in recent to old container. as per the time
+docker container ls -aq --------------------------------- this will shows the container ID existed in recent to old container. as per the time
+docker container ls -l  --------------------------------- this will shows the container which existed last .
+docker conatiner ls -la -------------------------------- this will shows the container ID which existed last.
+docker pull alpine --------------------------- pull the image ad then inspect it docker inspect alpine.
 FROM ubuntu---------- -----------------------------------------------------------means we need base image
 RUN apt-get update
 RUN apt-get install apache2 ----------------------------------------------------- to run command on base image on which we will be installing apache2
@@ -316,6 +325,7 @@ docker ps ----------------------------------------------------------------------
 docker stop container-id	------------------------------------------------------- on master , it will create a new container auto in other slave. thats what swram is
 docker network -------------------------------------------------------------------- now above swarm kept containers on different computers.. then we use docker network
 docker nework create -d overlay my-overlay----------------------------------------- create a netwrokd
+docker container inspect webserver | grep -i Image -------------------------------- this will fetch the number of line which contains Image as keyword from the container inspect json values.
 docker service create --name website --replicas 3 --network my-overlay --publish 80:80 hshar/webapp------------------- publishing network
 docker service rm service id  ----------------------------------------------------- docker service  ls to get the id 
 docker service create --name db --replicas 1 --network my-overlay hshar/mysql:5.6

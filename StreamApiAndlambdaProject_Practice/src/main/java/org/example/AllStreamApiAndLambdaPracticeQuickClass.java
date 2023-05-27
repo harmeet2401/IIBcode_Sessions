@@ -244,7 +244,7 @@ public class AllStreamApiAndLambdaPracticeQuickClass {
 
         System.out.println(" Collect Mapping functions counting same to above but more LOC  : " +list.stream()
                 .filter(student -> student.getGrade()>10)
-                .map(student -> student)
+                //.map(student -> student)
                 .collect(toMap(Student::getName,Student::getActivities)));
         // note : in nutshell mapping function is equals to map + collect
 
@@ -317,7 +317,22 @@ public class AllStreamApiAndLambdaPracticeQuickClass {
         System.out.println("Student name as key and object as value : " + list.stream()
                 .collect(Collectors.toMap(student -> student.getName().toLowerCase(),
                         student -> student)));
+            Stream.Builder<Student> studentBuilder = Stream.builder();
+
+            List<Student> list1 = StudentInstanceClass.getStudents();
+        for (Student student : list1) {
+            studentBuilder.add(student);
+        }
+        Stream<Student> studentStream = studentBuilder.build();
+        studentStream.forEach(System.out::println);
 
 
+        Student[] students = StudentInstanceClass.getStudents().stream().toArray(Student[]::new);
+        for (Student student : students) {
+            System.out.println("Array conversion :  "+ student);
+        }
+
+        System.out.println("Grouping by the initial of the student names :  "+        list.stream()
+                .collect(groupingBy(student -> new Character(student.getName().charAt(0)))));
     }
 }

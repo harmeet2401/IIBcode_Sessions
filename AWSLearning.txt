@@ -164,10 +164,11 @@ Important point : 	infra as a service ----- > platform as a service -- > softwar
 											   AWS DynamoDB
 											   AWS Aurora 
 											   AWS Athena 
+											   K8 service
 												etc
 IAAS : In which the underlying machine , operating system is provided by the vendor. and user just have to use that to install or run all its stuffs. Like install java , Data base and place you build jar files and run that . Maintain the backups and availability.
 
-PAAS : In which the underlying machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
+PAAS : In which the underly	ing machine , operating system and the application is provided by the vendor. For example RDS service in which you just have to spin up the service and database is up and running , you don't have to install db setup and maintain the version .and os for it .
 No Need to Maintain the backups and availability.
 
 SAAS : Its a software as a service in which the vendor will give you the setup and service to just use . eg: gmail , FB , etc 

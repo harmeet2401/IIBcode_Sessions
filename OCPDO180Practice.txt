@@ -92,6 +92,28 @@ and -e for the sql queries to run for the mysql db
 	- podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 -e "select * from items.Projects;"'  ------ "-e" is very important to run any sql quesry from hostmachine to container.
 	   or 
 	  podman exec mysql /bin/bash -c 'mysql -uuser1 -pmypa55 items -e "select * from Projects;"'  ------ "-e" is very important to run any sql query from and here "items" db was writtern before -e instead of "items.project"
+	  
+	  
+4.1 To build an image ot run jboss eap service in which the internal tomcat server will be there .
+https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html-single/using_the_red_hat_jboss_enterprise_application_platform_docker_image/index
+
+In order to get the jar to be run we have to copy the zip file to the cantainer folder .
+Create a folder using root access unzip the content and push the folder to the nearby folder which will be used in docker file.
+
+
+FROM registry.access.redhat.com/jboss-eap-7-tech-preview/eap70
+MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
+ENV $JBOSS_HOME /opt/eap
+RUN $JBOSS_HOME/bin/add-user.sh adminUser StrongPassword#1 --silent
+COPY */jboss_eap_xxx */jboss_eap_xxx
+EXPOSE 9990 9991 9999
+CMD ["/opt/eap/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]   ------------- really important.
+
+
+podman build --layers=false -t do180/jboss-eap .
+podman images 
+podman run --name nameoftehcontainer  -p 12000:9990 -p 12001:9991 -p 12009:9999 -d do180/jboss-eap
+
 	
 5. Guided Exercise: Create MySQL Container with Persistent Database.
 you will create a container that stores the MySQL database data into a host directory.
@@ -121,8 +143,7 @@ you will create a container that stores the MySQL database data into a host dire
 	  			OR
 	  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items -e "Select * from Item;"
 	
-	- podman exec -it mysqldb-port /bin/bash 
-		# mysql -uuser1 -pmypa55 items -e "Select * from Item"
+	- podman exec -it mysqldb-port /bin/bash -c  'mysql -uuser1 -pmypa55 items -e "Select * from Item"';
 		
 		
 VVVVVVVVVIMP NOTE : jab mysql yan container commands run krni ho use portforward and use -e to run the query and if no port forward then using podman run exec for the container /bin/bash and use -c to pass the entire container command like mysql -uuser .........-e "select * from Item;".		
@@ -181,7 +202,7 @@ You should be able to create a custom Apache container image built on a Red Hat 
 		Yum is used in Red Hat Enterprise Linux (RHEL)
 	- Create the containerfile to build an apache images  : vim /home/student/DO180/labs/dockerfile-create/Containerfile
 	  
-	  FROM ubi8/ubi:8.3
+	  FROM ubi8/ubi:8.3 ----------------------------------------- this is the base image with OS as Centos
 	  MAINTAINER 'Harmeet Singh' 'Harmeet.singh4@ibm.com'
 	  LABEL description='A custom Apache container based on UBI 8'
 	  RUN yum clean update && yum install -y httpd && yum clean all ------------------------------- yum commands run in linux system .
@@ -442,10 +463,54 @@ Deploy the Nexus server container image to an OpenShift cluster.
 
 23. Run the comprehensive-review lab carefully and it will help a lot.	
 
+24. TO create new app using the template json file .
+
+Steps to deploy using the template file json or yaml : 
+1. oc create -f <filename> --------- filename can be  json or a yaml . This will upload the template to the ocp 
+2. oc get templates --------- to get the templates.
+3. oc new-app templatename --------- this will create all the resources on the ocp .
+4. oc status
+
+Steps to deploy using the template file json or yaml and passing the parameter value using -p 
+1. oc create -f yamlfile/jsonfile
+2. oc get templates
+3. oc new-app nameofthetemplate -p MESSAGE="the value have been changed." ---- using thsi you can change the value of the paramaters
+
+
+Steps to print the resources from the template . Ye resources ko deploy nhi krega . bs process krke aapko dikhaega
+1. oc process templatename  -------- this will print the resorces and the template in standard output screen in json format 
+2. oc process templatename -o yaml  -------- this will print the resorces and the template in standard output screen in yamls format 
+3. oc process templatename -o yaml -p MESSAGE="The value is changed check in the processed template yaml file"  --- ye yaml degga new value of MESSAGE ke saath.
+
+
+Steps to deploy the file generated from oc process and use oc create to do the rest of the thing 
+1. oc create -f localyamlfile/jsonfile ------ will upload it to ocp .
+2. oc get template 
+3. oc process template -o yaml -p MESSAGE="The new value will be send" > process.yaml ---- MESSAGE ki value replaced huye yaml dikhega means processed.
+4. oc create -f process.yaml ----- this will depoy all the resources to OCP . upr first command se bs ye difference hai ki isne process yaml ko use kiya create krne ke liye.
+
+Steps to deploy and create template using process command using local template yaml/json file 
+1. oc process -o yaml -f folder/template_example.yaml > processed_yaml.yaml ------- ye firse aapko yaml dedega values replaced means processed.
+
+
+Step to deploy using oc new-app usng the yaml file on the local 
+1.oc new-app -f foldr/template_yaml.yaml -p MESSAGE="The value if passed" ------- is command mai server template ke naam ki jgah local yaml file rkhdi hai 
+
+
+. Above two commands will show you yaml or json and in those file all the paramaterized values will be replaced by the default value for those paramaters. means in files mai paramater ki values set hojaegi means , template ko process krdiya . oc process se hm syntact vegera test kr skte hai 
+
+
+oc get -o yaml template/templatename-created. ---- this will get the template in a yaml file.
+
+oc new-app -f pahtothetemplatejsonfile.json/.yaml 
+oc new-app ruby-helloworld-sample -p ADMIN_USERNAME=admin,ADMIN_PASSWORD=mypassword ---- this is used in ase we want to send a parameters to the template.
+oc new-app --template=mysql-persistent -p MYSQL_USER=dev -p MYSQL_PASSWORD=$P4SSD -p MYSQL_DATABASE=bank -p VOLUME_CAPACITY=10Gi
+
+
 Linux command to keep on your toes:
 man : to see the helping guide for any command 
 ls  : to list the files :
-ls -ltr 
+ls -ltr : will list in reverse chronological  order or time the folder created . Means newest file at the bottom
 pwd : to see the dir
 sudo : to use the root user 
 cp  : to copy the files .
