@@ -1,0 +1,60 @@
+AWS Devloper associates:
+
+1.Advantages of Cloud : 
+
+	On demand provisioning of infra 
+	Avoid undifferentiated heavy lifting : We can spin up the db in small time interval.
+	No Upfront cost .
+
+	This course will help in developing apps ready for the cloud.
+Q1.Why AWS : ?
+leading client of AWS .
+example : Netflix run their services on AWS.
+
+#1 Create AWS account 
+
+meet14764@gmail.com
+Gogi@12345
+
+#2 Creating an IAM user.
+Identity and access management. This will help in managing the access to the specific AWS resources.
+Authentication : Is it the right user.
+Authorization : Means if the user have right authorization access to specific resurces.
+Root user can do anything.
+Now we will create an IAM group named as developer and will create an IAM user and add it to the IAM group .
+Then we will use the newly created IAM user to do the stuff.
+
+Steps : To create an IAM group
+1. Search for IAM 
+2. Left side click on user groups 
+3. clikc on create group : enter the name of the group 
+4. Select the access as AdministratorAccess 
+5. Select finish
+
+steps to create a IAM user user and add it to the above IAM group 
+1. Select user from left side
+2. click on create user 
+3. select : you want to create an iam user 
+4. select : you want to create custom password
+5. select the group you want the user to add in .
+6. Select create user.
+
+Now use this link we copied form the console user page : 
+https://860574603717.signin.aws.amazon.com/console
+user name : meet101
+password: Gogi@12345
+
+change change the password to : Gogi@667335424
+
+
+#3 Sevices which can be spin up in different regions based on our requirements.
+For example : 
+IAM service is a global service.
+Compute serices are region specific which means we can switch the region from the console and sping the compute service in that particular region . Or may be we can select the region whihle selecting and cofiguring the service.
+
+Availibility region :------------> Availibility Zones -----------> Data center 
+
+
+#4 EC2 compute service : 
+
+
