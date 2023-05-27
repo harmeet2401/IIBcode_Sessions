@@ -56,5 +56,23 @@ Availibility region :------------> Availibility Zones -----------> Data center
 
 
 #4 EC2 compute service : 
+Elastic computing clould.
+
+1. This is the service which will help to provision a virtual serveres and deploy applications there .
+Features of EC2 service : 
+	- Will allow user to control the lifecycle of the EC2 instance and it application 
+	- Will allow to load balancing and autoscale the instance as per the traffic and utilization 
+	- Allows to attach or detach the storage device and allow backup features .
+	- Allows network connectivity which will help in creating a microservice architecture in case needed.
+	
+	
+	
+Steps to launch an ec2 instanec: 
+1. select the ec2 instance 
+2. Select the AMI Amazon Machine Image which is the precooked image with all operating system and webserver required.
+3. Select the storage to attach
+4 Select the security or create the security griup needed as a fireewall.
+5. Create a keypair to connect to the instance .
+6 Click on launch.
 
 
