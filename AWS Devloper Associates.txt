@@ -89,6 +89,10 @@ echo "Hello World : $(whoami)" > /var/www/html/index.html
 echo "Hello World : $(hostname)" > /var/www/html/index.html
 echo "Hello World : $(ls -ltr)" > /var/www/html/index.html
 
+curl http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
+
+curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html -- running the curl in silent mode.
+
  
 curl http://169.254.169.254/latest/meta-data
 curl http://169.254.169.254/latest/meta-data/ami-id
@@ -120,3 +124,17 @@ Need to run it from EC2 instance  :
 curl http://169.254.169.254/latest/dynamic
 curl http://169.254.169.254/latest/dynamic/instance-identity
 curl http://169.254.169.254/latest/dynamic/instance-identity/document
+
+#7 JSON Viewer Plugin : you  can install the json viewer plugin in your chrome to format the payload in json .
+#8 More on security group : its like a firewall we can change it to allow the data comes into the Ec2 instance or gors out.
+	- Default is deny in and our going data.
+	- Security groups are stateful means that  : 
+		- if the inbound rule is allowed for a specific request then the outgoing response for that request is automacially allowed.
+		- if the outbound rule is allowed for a specific request then the incominfg response for that request is automacially allowed.
+#9. Understanding the Private and pubic IP address.
+
+Public IP addresses are accessible from the internet 
+Private IP addresses are accessible with in the network and not allowed from outside world 
+When the EC2 restarted the public ip address changes.
+
+ping command uses ICMP as the protocol. So if you are going to png th EC2 instance you have to open the ICMP port in your security group for ping to work 		
