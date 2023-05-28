@@ -75,4 +75,48 @@ Steps to launch an ec2 instanec:
 5. Create a keypair to connect to the instance .
 6 Click on launch.
 
+EC2 INstance Types : 
 
+Commands to install tomcat  ;
+
+sudo su
+yum update -y
+yum install httpd
+systemctl start httpd
+systemctl enable httpd
+echo "Hello World" > /var/www/html/index.html
+echo "Hello World : $(whoami)" > /var/www/html/index.html
+echo "Hello World : $(hostname)" > /var/www/html/index.html
+echo "Hello World : $(ls -ltr)" > /var/www/html/index.html
+
+ 
+curl http://169.254.169.254/latest/meta-data
+curl http://169.254.169.254/latest/meta-data/ami-id
+curl http://169.254.169.254/latest/meta-data/hostname
+curl http://169.254.169.254/latest/meta-data/instance-id
+curl http://169.254.169.254/latest/meta-data/instance-type
+ 
+curl http://169.254.169.254/latest/dynamic
+curl http://169.254.169.254/latest/dynamic/instance-identity
+curl http://169.254.169.254/latest/dynamic/instance-identity/document
+ 
+curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
+	- 
+now you have to update the security group and add an inbound rules to take traffic on port 80 for tomcat to start listen.
+
+#5 EC2 instance metadat service : which is used to get the metadata about the ec2 instance . Like ID type etc
+Need to run below curl command from your EC2 instance 
+We can do it using : curl http://169.254.169.254/latest/meta-data
+curl http://169.254.169.254/latest/meta-data
+curl http://169.254.169.254/latest/meta-data/ami-id
+curl http://169.254.169.254/latest/meta-data/hostname
+curl http://169.254.169.254/latest/meta-data/instance-id
+curl http://169.254.169.254/latest/meta-data/instance-type
+ 
+
+
+#6 Dynamic data service : to get the dynamic data of the EC2 instance : 
+Need to run it from EC2 instance  : 
+curl http://169.254.169.254/latest/dynamic
+curl http://169.254.169.254/latest/dynamic/instance-identity
+curl http://169.254.169.254/latest/dynamic/instance-identity/document
