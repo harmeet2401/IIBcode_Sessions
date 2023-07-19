@@ -117,13 +117,19 @@ curl http://169.254.169.254/latest/meta-data/hostname
 curl http://169.254.169.254/latest/meta-data/instance-id
 curl http://169.254.169.254/latest/meta-data/instance-type
  
-
+curl -s http://169.254.169.254/latest/meta-data > /var/www/html/index.html
 
 #6 Dynamic data service : to get the dynamic data of the EC2 instance : 
 Need to run it from EC2 instance  : 
 curl http://169.254.169.254/latest/dynamic
 curl http://169.254.169.254/latest/dynamic/instance-identity
 curl http://169.254.169.254/latest/dynamic/instance-identity/document
+
+
+using this url from inside the ec2 instance we can get any object we need  http://169.254.169.254/latest/
+
+To get the user data : 
+curl http://169.254.169.254/latest/user-data
 
 #7 JSON Viewer Plugin : you  can install the json viewer plugin in your chrome to format the payload in json .
 #8 More on security group : its like a firewall we can change it to allow the data comes into the Ec2 instance or gors out.
@@ -137,4 +143,79 @@ Public IP addresses are accessible from the internet
 Private IP addresses are accessible with in the network and not allowed from outside world 
 When the EC2 restarted the public ip address changes.
 
-ping command uses ICMP as the protocol. So if you are going to png th EC2 instance you have to open the ICMP port in your security group for ping to work 		
+ping command uses ICMP as the protocol. So if you are going to png th EC2 instance you have to open the ICMP port in your security group for ping to 		
+
+Issue : Public ip address will change all the time when a restart occures. 
+Note : reboot the ec2 will not change the ip address public one .
+Resolution : To Resolve this we use elastic IP address. 
+To get the contant ip address.
+
+10. ELASTIC IP ADDRESS : 
+We can create an elastic IP address just like we can create a public ip address in azure.
+
+This will keep constant and will act as a link .
+Steps create and elastic ip address : 
+	a. On left side search for the elastic ip 
+	b. Create one .
+	c. go to your elastic ip instance and click on action and associate the elastic ip created to the ec2 instance available..
+
+- Can be switched from one ec2 to another ec2 instance.
+- Action ---> netwroking -> disassociate 
+- Yu will get charged for elastic ip when not used. very big diadvantage.
+- you will not be chanrged when elastic ip is associated to an EC2.
+- go to elastic ip --> action --> release the elastic ip address.
+
+NOTE POINTS : 
+An Elastic IP address doesn’t incur charges as long as all the following conditions are true:
+
+The Elastic IP address is associated with an EC2 instance.
+
+The instance associated with the Elastic IP address is running.
+
+The instance has only one Elastic IP address attached to it.
+
+The Elastic IP address is associated with an attached network interface, such as a Network Load Balancer or NAT gateway.
+
+If you stop/terminate an EC2 instance, do not forget to release the Elastic IP address attached to it.
+
+11. How to create a tomcat server using user-data feature of ec2 instance which act as a bootstrap .
+
+Below steps are used to create a tomcat server .
+BOOTSTRAP is nothing but the step in which software is patched and installed at ec2 instance or system start ups.
+
+curl http://169.254.169.254/latest/dynamic/user-data : once you configure the user data you can get that fro ec2 instance inside.
+
+Steps : 
+		- Do all the steps for creating the ec2 instance 
+		- just on one step you will see the user data field to enter the scipt to add the tomcat server.
+		
+		When ever you enter the user data script do keep in mind to mention the script language which it is . Like for below itts a bash file.
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
+ One disadvantage of using user data is , if we are installing many software then it will add up the time required to boot up the server. To resolve that we can use custom AMI option 
+		
+
+12. Launch template : 
+
+These are are the templates we can wither create it from scratch or from the running instanxe of service EC2.
+Its like a snapshot we can create and then use this template to spin up a ec2 instance without entering any configuration points like AMI , linux verion security group etc .
+
+steps : 
+	Right click on the ec2 instance 
+	Action ---> create template from instance
+	Go to launch templates 
+	click on the template created 
+	then action run instance form the template and done.
+	
+	
+	
+ 
+13. How to create a customized AMI
+	This we can create it from the running or stopped EC2 instance .
+	Then release an another version of  launch template removing the user data which was in it before because it was in the config of EC2 jisko use krke template bnaya tha.
+	Select the AMI created.
+	Now the AMI itself will have theinstalled softwares needed and ollaaa will time down the boot time with no user data.
