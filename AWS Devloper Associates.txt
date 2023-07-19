@@ -216,6 +216,6 @@ steps :
  
 13. How to create a customized AMI
 	This we can create it from the running or stopped EC2 instance .
-	Then release an another version of  launch template removing the user data which was in it before because it was in the config of EC2 jisko use krke template bnaya tha.
+	Then release an another version of  launch template removing the user data which was in it before because it was in the config of EC2 jisko use krke template bnaya tha and selecting the new AMI i ccreated.
 	Select the AMI created.
 	Now the AMI itself will have theinstalled softwares needed and ollaaa will time down the boot time with no user data.
