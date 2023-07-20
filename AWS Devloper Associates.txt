@@ -247,3 +247,11 @@ run command : ssh -i "mykeypairtomcat.pem" ec2-user@ec2-3-111-42-207.ap-south-1.
 17. For connecting to the windows instance . We need private key and password to RDP.
 19. For SSH and RDP to work both the ports should be open in the ec2 instance for the access to work , SSH opens on port 22 and RDP opens on 3389
  note : while connecting on SSH or RDP if we are getting timeout then for sure check your inbound rules on your Ec2 instance.
+20. Important EC2 scenarios.
+	- When we stopped the EC2 , volume still in use and will charge for it.
+	- So for that just terminate the instance to remove the elastic volumes also.
+	- We can change the instanvce type by stopping the instance is stopped . can not change the instance if its not stopped.
+	- To get the billing for a specific environment , project or business we can use tags for it.
+	- To protect your EC2 instance from getting terminate . Just go to instance setting and click "change termination protection" and enable it.
+		: then try to terminate the instance . you won't be able to.
+	
