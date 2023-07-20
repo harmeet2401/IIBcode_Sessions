@@ -264,4 +264,7 @@ run command : ssh -i "mykeypairtomcat.pem" ec2-user@ec2-3-111-42-207.ap-south-1.
 		: We can change the scurity group of EC2 anytime.
 		: When you get a timeout while connecting to your EC2 instance check the security group values .
 		: When the lot of software install using user data is slowing it , we can create an AMI from the running ec2 instance which doesn't have the user data values but all the softwares were already installed on that AMI. That will speed up the process.
-	
+
+21. VPC : virtual private connections : 
+A default VPC is already created and it containe the number of subnet equal to the number of availability zones in a Availability region (Mumbai in our case.)
+To create a EC2 instance in a spcific AZ select the subnet while selecting rest of the option for ec2 instances.	
