@@ -242,3 +242,8 @@ AMIs :
  just open a cmd from the folder where pem key is present 
 
 run command : ssh -i "mykeypairtomcat.pem" ec2-user@ec2-3-111-42-207.ap-south-1.compute.amazonaws.com 
+
+16. In case the private key permission issue is there . Give permission to 0400 to the pem file.
+17. For connecting to the windows instance . We need private key and password to RDP.
+19. For SSH and RDP to work both the ports should be open in the ec2 instance for the access to work , SSH opens on port 22 and RDP opens on 3389
+ note : while connecting on SSH or RDP if we are getting timeout then for sure check your inbound rules on your Ec2 instance.
