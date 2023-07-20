@@ -253,5 +253,14 @@ run command : ssh -i "mykeypairtomcat.pem" ec2-user@ec2-3-111-42-207.ap-south-1.
 	- We can change the instanvce type by stopping the instance is stopped . can not change the instance if its not stopped.
 	- To get the billing for a specific environment , project or business we can use tags for it.
 	- To protect your EC2 instance from getting terminate . Just go to instance setting and click "change termination protection" and enable it.
-		: then try to terminate the instance . you won't be able to.
+		: then try to terminate the instance . you won't be able to terminate it.
+	        : We can also enable it while spinning up or configuration the Ec2 instance.
+		: Termination protection will not save Ec2 from termination in below three cases : 
+				a. Auto scale group termination means ramp down 
+				b. OS shutdown means some one goes into the ec2 and shutdown fro there
+				c. spot instance shutdown.
+		: We can not change the AMI for the running EC2 instance.
+		: We can create the EC2 instance from the template  of VMs running on your on premises . VM import export tool of AWS
+		: We can change the scurity group of EC2 anytime.
+		: When you get a timeout while connecting to your EC2 instance check the security group values .
 	
