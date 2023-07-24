@@ -268,3 +268,10 @@ run command : ssh -i "mykeypairtomcat.pem" ec2-user@ec2-3-111-42-207.ap-south-1.
 21. VPC : virtual private connections : 
 A default VPC is already created and it containe the number of subnet equal to the number of availability zones in a Availability region (Mumbai in our case.)
 To create a EC2 instance in a spcific AZ select the subnet while selecting rest of the option for ec2 instances.	
+
+22. Billing dashboard : 
+	We can check that from the right username option.
+	if a normal user is not able to see the dashbaord then we need to login as a root user and give permission for IAM roles and user to ee it.
+steps : 
+	- Go to your Account in root access 
+	- Go to IAM rules and activate the access
