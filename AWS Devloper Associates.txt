@@ -275,3 +275,12 @@ To create a EC2 instance in a spcific AZ select the subnet while selecting rest 
 steps : 
 	- Go to your Account in root access 
 	- Go to IAM rules and activate the access
+
+We can also restrict the billing or maintain the charges we want to spend.
+	First go to billing preference and active all the options.
+Two Service are there for it : 
+	a. Cloud Watch : in which we can set a trigger email if our expense crosses a certain amount. We create an alarm.
+`	b. AWS budget : which is newly added service to send a SNS simple notification budget email . 
+
+In both the services we can set up triggers for certain threashhold is crossed.
+
