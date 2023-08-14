@@ -288,7 +288,10 @@ In both the services we can set up triggers for certain threashhold is crossed.
 	- Its a managed service which will distribute the load to the backedn load balancers and help in handling more load in prod.
 	- this service can be public and private load balancer 
 	- It can autoscale as per the load coming .
-	- A health check feature is there which allows the lB to send a health check ping to the backend ec2 instance to send the traffic only if the instance is alive.
+	- A health check feature is there which allows the lB to send a health check ping to the backend ec2 instance to send the traffic only if the instance 
+is alive.
+	- The WAS cloud prov will not scale the backend EC2 instance. When we say that LB will get auto scale it means on ly LB will scale in or out.
+	- Later on we will learn autoscale groups to scale the EC2 instances .
 
 24. Netrwork layers and protocol they used :
 	Layer					Protocols 											
@@ -296,14 +299,18 @@ In both the services we can set up triggers for certain threashhold is crossed.
 	Transport Layer  : ------------------- TCP TLS or UDP 
 	Network layer : ---------------------- IP 
 
-Application layer : where http or https is used basicaly help our website to get compiled , developed and seen as a gui page on it. Http https and other protocols are used for it.
+Application layer : where http or https is used basicaly help our website to get compiled , developed and seen as a gui page on it. Http https and other protocols are used for it. 
 Transport layer : which will allow the bits and bit to transfered as it is with reliability . 	TP (Transmission protocol) which make sure that all bytes reached to the destination side . TLS which is the secure was to send the data in encrypted work . UDP which doesn't give the surety that the package all bytes will get received on the destination side.
 Network layer : Whwre the actual package or data get exchanged ower the IP protocol.
 
 
 25. Types of LB : 
-	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended by AWS
-	Applicatio layer LB : Which support  app layer protocols http https and SMTP
+	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended by AWS. It can load balance only EC2 instaces.
+	Applicatio layer LB : Which support  app layer protocols http https and SMTP. Can load balance the following 
+			- AWS Ec2 instances 
+			- Containerised applications : (Aamazon ECS)
+			- Web Applications (Using IP )
+			- Lambdas(Which is serverless units)
 	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
 	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
 
