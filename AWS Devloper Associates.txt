@@ -290,5 +290,16 @@ In both the services we can set up triggers for certain threashhold is crossed.
 	- It can autoscale as per the load coming .
 	- A health check feature is there which allows the lB to send a health check ping to the backend ec2 instance to send the traffic only if the instance is alive.
 
+24. Netrwork layers and protocol they used :
+	Layer					Protocols 											
+	Application layer : =----------------- Http Https smtp ftp etc  
+	Transport Layer  : ------------------- TCP TLS or UDP 
+	Network layer : ---------------------- IP 
+
+Application layer : where http or https is used basicaly help our website to get compiled , developed and seen as a gui page on it. Http https and other protocols are used for it.
+Transport layer : which will allow the bits and bit to transfered as it is with reliability . 	TP (Transmission protocol) which make sure that all bytes reached to the destination side . TLS which is the secure was to send the data in encrypted work . UDP which doesn't give the surety that the package all bytes will get received on the destination side.
+Network layer : Whwre the actual package or data get exchanged ower the IP protocol.
+
+
 
 
