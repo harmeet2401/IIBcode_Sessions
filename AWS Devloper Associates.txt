@@ -305,22 +305,36 @@ Network layer : Whwre the actual package or data get exchanged ower the IP proto
 
 
 25. Types of LB : 
-	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended by AWS. It can load balance only EC2 instaces.
+	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended 			by AWS. It can load balance only EC2 instaces.
 	Applicatio layer LB : Which support  app layer protocols http https and SMTP. Can load balance the following 
 			- AWS Ec2 instances 
 			- Containerised applications : (Aamazon ECS)
-			- Web Applications (Using IP )
+			- Web Applications (Using IP ) Application Load Balancer
 			- Lambdas(Which is serverless units)
 	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
 	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
-
 		Gateway Load Balancer helps you easily deploy, scale, and manage your third-party virtual appliances. It gives you one gateway for distributing 		traffic across multiple virtual appliances while scaling them up or down, based on demand. This decreases potential points of failure in your 			network and increases availability.
 
 Steps to create Classic Load Balancer : 
 	- Search for load balancer fro mthe left panel 
 	- select the classic one from the list .
-	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn , select the AV Zones to allow cross zone load balancing in case instances are in diff zones in one region .
+	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn , select the AV Zones to allow cross zone 		load balancing in case instances are in diff zones in one region .
 	- Select if the LB is private ir public load balancer (internet facing).
 	- Select the heathcheck values like threashhold, timeout etc.
+
+Steps to create Classic Load Balancer : 
+	- Search for load balancer fro mthe left panel 
+	- select the application one from the list .
+	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn ,  cross zone load balancing is the 			default function in case instances are in diff zones in one region .
+	- Select if the LB is private ir public load balancer (internet facing).
+	- Select the heathcheck values like threashhold, timeout etc.
+	- Select the instance type to be load balanced between : (IP , AWS instances or Lambdas). For this we have to create the target group . This group will 		have the instaces running.
+
+NOte point : If we want to restrict the traffic to the back end instances only for the LB then 
+
+Listners in LB : 
+	We can add many listners 
+		- Like Http:80 , Http:8080 or Http:443 jis port pr hit chahiye vo daalo and fixed response or custom response can be exchanged.
+		- Go to LB , click on listners then add the listne add the protocol and port and response code aloing with the pyalod to send back , send it to 			the target group etc .
 	
 
