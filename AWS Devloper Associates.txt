@@ -305,5 +305,8 @@ Network layer : Whwre the actual package or data get exchanged ower the IP proto
 	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended by AWS
 	Applicatio layer LB : Which support  app layer protocols http https and SMTP
 	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
+	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
+
+		Gateway Load Balancer helps you easily deploy, scale, and manage your third-party virtual appliances. It gives you one gateway for distributing 		traffic across multiple virtual appliances while scaling them up or down, based on demand. This decreases potential points of failure in your 			network and increases availability.
 	
 
