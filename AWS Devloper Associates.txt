@@ -301,5 +301,9 @@ Transport layer : which will allow the bits and bit to transfered as it is with 
 Network layer : Whwre the actual package or data get exchanged ower the IP protocol.
 
 
-
+25. Types of LB : 
+	Classic LB : Which support layer 7(App layer protocols http and https) and layer 4(transport layer tcp tls and tranmission protocols). not recommended by AWS
+	Applicatio layer LB : Which support  app layer protocols http https and SMTP
+	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
+	
 
