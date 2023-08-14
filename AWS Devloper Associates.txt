@@ -308,5 +308,12 @@ Network layer : Whwre the actual package or data get exchanged ower the IP proto
 	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
 
 		Gateway Load Balancer helps you easily deploy, scale, and manage your third-party virtual appliances. It gives you one gateway for distributing 		traffic across multiple virtual appliances while scaling them up or down, based on demand. This decreases potential points of failure in your 			network and increases availability.
+
+Steps to create Classic Load Balancer : 
+	- Search for load balancer fro mthe left panel 
+	- select the classic one from the list .
+	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn , select the AV Zones to allow cross zone load balancing in case instances are in diff zones in one region .
+	- Select if the LB is private ir public load balancer (internet facing).
+	- Select the heathcheck values like threashhold, timeout etc.
 	
 
