@@ -233,7 +233,7 @@ Steps :
 14. AWS market AMI : AMIS from diff vendor	
 
 AMIs : 
-	COpy from one region to other regin . because if we want to use my custom api in other region like tokyo . then we have to copy the Custom api from mumbai to tokyo in order to spin the ec2 .
+	COpy from one region to other regin . because if we want to use my custom ami in other region like tokyo . then we have to copy the Custom ami from mumbai to tokyo in order to spin the ec2 .
 	We can also make the AMI public : available to all.
 	Change the permission . We can search of the account number and add him/her to the AMI persmission 
 	
@@ -283,4 +283,12 @@ Two Service are there for it :
 `	b. AWS budget : which is newly added service to send a SNS simple notification budget email . 
 
 In both the services we can set up triggers for certain threashhold is crossed.
+
+23. Elastic load balancer : 
+	- Its a managed service which will distribute the load to the backedn load balancers and help in handling more load in prod.
+	- this service can be public and private load balancer 
+	- It can autoscale as per the load coming .
+	- A health check feature is there which allows the lB to send a health check ping to the backend ec2 instance to send the traffic only if the instance is alive.
+
+
 
