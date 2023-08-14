@@ -336,5 +336,12 @@ Listners in LB :
 	We can add many listners 
 		- Like Http:80 , Http:8080 or Http:443 jis port pr hit chahiye vo daalo and fixed response or custom response can be exchanged.
 		- Go to LB , click on listners then add the listne add the protocol and port and response code aloing with the pyalod to send back , send it to 			the target group etc .
-	
+
+Target groups : 
+	Which will allow to group together the instances and tell the LB to dictribute the load among these .
+	Propeties of target grou p : 
+			- Deregistration delay : The amount of time LB to wait for the registration to act upon so that the inflight transaction get complete.
+			- Slow start duration : The time period to halt for before the traffic goes to the group.
+			- Load Balancing algorythm : Roud robin or Least outstanding requests
+			- StickyNess : If this is on, that means one user request to the lB with be sticked to one specifc EC2 instance at the backedn.
 
