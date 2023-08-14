@@ -345,3 +345,11 @@ Target groups :
 			- Load Balancing algorythm : Roud robin or Least outstanding requests
 			- StickyNess : If this is on, that means one user request to the lB with be sticked to one specifc EC2 instance at the backedn.
 
+26. MIcroservice based architecture : 
+
+Micro service A : 
+#!/bin/bash
+curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
+mkdir /var/www/html/a
+echo “Microservice A” > /var/www/html/a/test.html
+
