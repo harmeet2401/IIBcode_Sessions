@@ -367,3 +367,14 @@ echo “Microservice b” > /var/www/html/b/test.html
 NOTE : WHENEVER YOU WANT TO ADD A TARGET GROUP YOU CAN ADD A NEW LISTENER or EITHER ADD THE RULES TO THE LISTENER WHICH CAN LISETNER TO 
 		PATH , HTTP HEADER , HTTP METHODS , QUERY STRING AND HOST HEADERS
 
+27. Autoscaling group 
+So this is the feature in which we will create a target group act as an autoscaling group which will scale in (Decrease ) or scale out(increase) when ever the load increases. 
+ITS THE RESPONSIBILITY OF THE ELB TO MAINTAIN THE DESIRED NUMBER OF INSTANCE IN THE GROUP AS POSSIBLE.
+ Steps : 
+	- From the left panel search for the Autoscaling group 
+	- Fill in the instances to be part of the existing target group 
+	- Fill in the details which is easy to fill. Like health check period , CPU utilisation threashold value , instance count to scale upto ext
+
+
+
+
