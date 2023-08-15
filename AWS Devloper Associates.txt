@@ -336,6 +336,10 @@ Listners in LB :
 	We can add many listners 
 		- Like Http:80 , Http:8080 or Http:443 jis port pr hit chahiye vo daalo and fixed response or custom response can be exchanged.
 		- Go to LB , click on listners then add the listne add the protocol and port and response code aloing with the pyalod to send back , send it to 			the target group etc .
+		- IIMMPPP : we can add multiple listner rules to also route the request to a specific target group from the load balancer.
+			Steps : Create a seperate target group and add the instance .
+				Then go to the LB and add the target group with a rule (Path) so that whenever some hits the LB with the end point it will route 				the request to the new taget griup
+				
 
 Target groups : 
 	Which will allow to group together the instances and tell the LB to dictribute the load among these .
