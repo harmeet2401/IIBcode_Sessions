@@ -311,6 +311,7 @@ Network layer : Whwre the actual package or data get exchanged ower the IP proto
 			- Containerised applications : (Aamazon ECS)
 			- Web Applications (Using IP ) Application Load Balancer
 			- Lambdas(Which is serverless units)
+			- We can edit the listener rule sto route the request also aprt from the default action t=hat LB do.
 	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
 	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
 		Gateway Load Balancer helps you easily deploy, scale, and manage your third-party virtual appliances. It gives you one gateway for distributing 		traffic across multiple virtual appliances while scaling them up or down, based on demand. This decreases potential points of failure in your 			network and increases availability.
@@ -322,7 +323,7 @@ Steps to create Classic Load Balancer :
 	- Select if the LB is private ir public load balancer (internet facing).
 	- Select the heathcheck values like threashhold, timeout etc.
 
-Steps to create Classic Load Balancer : 
+Steps to create Application Load Balancer : 
 	- Search for load balancer fro mthe left panel 
 	- select the application one from the list .
 	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn ,  cross zone load balancing is the 			default function in case instances are in diff zones in one region .
@@ -356,4 +357,13 @@ Micro service A :
 curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
 mkdir /var/www/html/a
 echo “Microservice A” > /var/www/html/a/test.html
+
+Micro service b : 
+#!/bin/bash
+curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/www/html/index.html
+mkdir /var/www/html/b
+echo “Microservice b” > /var/www/html/b/test.html
+
+NOTE : WHENEVER YOU WANT TO ADD A TARGET GROUP YOU CAN ADD A NEW LISTENER or EITHER ADD THE RULES TO THE LISTENER WHICH CAN LISETNER TO 
+		PATH , HTTP HEADER , HTTP METHODS , QUERY STRING AND HOST HEADERS
 
