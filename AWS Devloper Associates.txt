@@ -375,6 +375,6 @@ ITS THE RESPONSIBILITY OF THE ELB TO MAINTAIN THE DESIRED NUMBER OF INSTANCE IN 
 	- Fill in the instances to be part of the existing target group 
 	- Fill in the details which is easy to fill. Like health check period , CPU utilisation threashold value , instance count to scale upto ext
 
-
+We can create dynamic scalling policies in which we can mention that under what condition the scale will in or out .
 
 
