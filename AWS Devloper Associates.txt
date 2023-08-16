@@ -313,6 +313,9 @@ Network layer : Whwre the actual package or data get exchanged ower the IP proto
 			- Lambdas(Which is serverless units)
 			- We can edit the listener rule sto route the request also aprt from the default action t=hat LB do.
 	Network Layer LB : which support Transport layer procols and IP protocols. (TCP TLS and IP protocol.)
+			- AWS Ec2 instances 
+			- Containerised applications : (Aamazon ECS)
+			- Web Applications (Using IP ) Application Load Balancer
 	Gateway LB : There is a fourth type of Load Balancer as well - Gateway Load Balancer (used to Deploy, scale, and run third-party virtual appliances).
 		Gateway Load Balancer helps you easily deploy, scale, and manage your third-party virtual appliances. It gives you one gateway for distributing 		traffic across multiple virtual appliances while scaling them up or down, based on demand. This decreases potential points of failure in your 			network and increases availability.
 
@@ -394,4 +397,12 @@ Couple of questions on Autoscaling group :
 	5. Prevent frequent scale-in and scale-out : Same above go till advanced setting and select he Cool Down period.
 	6. How to prevent newly instnace to scale - in : Same above go till advanced setting and select the check box : Enable instance scale in protection.
 
-	
+28. Network load balancer : 
+	a. Works on the network layer protocol : TCP , UDP etc
+	b. Is used for high performance in which millions of request comes.
+	c. We can also assign elastic/Static IP address to this LB.
+	It can load balanced : 
+			-AWS Ec2 instances 
+			- Containerised applications : (Aamazon ECS)
+			- Web Applications (Using IP ) Application Load Balancer
+
