@@ -377,4 +377,21 @@ ITS THE RESPONSIBILITY OF THE ELB TO MAINTAIN THE DESIRED NUMBER OF INSTANCE IN 
 
 We can create dynamic scalling policies in which we can mention that under what condition the scale will in or out .
 
+Scaling policies : 
+	1. Target tracking scaling : Modify the instance count bsed on the trget values . Like Maintain the CPU utilisation to 70 %
+	2. Simple scaling : Means increase the instance by one is the cpu utilisation > 80 % and decrease if its less than 60%.
+	3. Step scaling : This is more complex scaling like increase the instance by 1 if the cpu utilisation is between 60 - 80 %.etc
 
+VVVVVIIMPP:	
+	How the autoscaling group comes to know that CPU utilisation is 80% and now increase the EC2 instances . Its done by CLOUD WATCH ALARMS.
+	Whenever you create the Autscaling group and the scaling policy rule it will set the CLoud ALARM ALSO to start monitoring the CPU utilisation etc.
+
+Couple of questions on Autoscaling group : 
+	1. How to change the instance type of instance in ASG : Just create the new version of the Launch template and make it use in the ASG griup.
+	2. How to roll out new Security group : Same answer as abve 
+`	3. Perform an action before an instanc is added : IN ASG instance management we can add the lifecycle hooks To trigger befroe adding the instance.
+	4. how to create a termination policy which instance to terminate in case scale-in happens : Go tp ASG details --> At the bottom ---> Advanced setting --> open and select the termination policies : (oldest one, newest one, etc ).
+	5. Prevent frequent scale-in and scale-out : Same above go till advanced setting and select he Cool Down period.
+	6. How to prevent newly instnace to scale - in : Same above go till advanced setting and select the check box : Enable instance scale in protection.
+
+	
