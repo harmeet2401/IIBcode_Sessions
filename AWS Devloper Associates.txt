@@ -397,12 +397,18 @@ Couple of questions on Autoscaling group :
 	5. Prevent frequent scale-in and scale-out : Same above go till advanced setting and select he Cool Down period.
 	6. How to prevent newly instnace to scale - in : Same above go till advanced setting and select the check box : Enable instance scale in protection.
 
-28. Network load balancer : 
+28. Network load balancer : Its not part of the free-tier
 	a. Works on the network layer protocol : TCP , UDP etc
 	b. Is used for high performance in which millions of request comes.
 	c. We can also assign elastic/Static IP address to this LB.
-	It can load balanced : 
+	d. It can load balanced : 
 			-AWS Ec2 instances 
 			- Containerised applications : (Aamazon ECS)
 			- Web Applications (Using IP ) Application Load Balancer
+	e. Its doesn't have any security group configured : So in case you hit the network LB and not getting response back then check the backend instances and 
+		see if they are in healthy state. As Every lb tries to poll the instance at a healthcheck you have configured while creating the lb.
+	f. We can protect the NLB deletion 
+	g. Cross zone LB can be enabled.
+	h. We  can access logs also it will allow to save the logs in S3
+
 
