@@ -436,6 +436,20 @@ Imp points for lambda :
 	2. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
 	3. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
 	4. Monitoring : You can see the events triggered and request and matrices and view X-ray traces. etc
- 
+ 	5. Lambda versioning L In this we can release diff version of lambdas to the user . Click on Acvtio on the right and click publish new version then sequence vice version will be published 
+	6.Aliases : Now for a scenario like 	
+		QA(Consumer of lambdas) ---> using v1 
+		PROD(Consumer of lambdas) ---> using the v1
+	If a change comes to the lambda then you have to ask the consumer app to change the version and use it again.
+	To Overcome that we used Alias and attach a particular version of lambda to it
+
+	Example  :
+		
+		QA(Consumer of lambdas) ---> using QA Alias which is pointing to V2 version of lambda (its inside on lambda now)
+		PROD(Consumer of lambdas) ---> using PROD Alias which is pointing to V1 version of lambda (its inside on lambda now)
+
+	Now when V2 got tested on QA we just have to change the verison of the PROD alias to v2 in lambda and ollaaa done. No need to tell the consumer to change the version evrytime.
+
+
 		***Lambda for java :The Hello class has a function named handleRequest that takes an event object and a context object. This is the handler 			function that Lambda calls when the function is invoked. The Java function runtime gets invocation events from Lambda and passes them to the 			handler. In the function configuration, the handler value is example.Hello::handleRequest.
 
