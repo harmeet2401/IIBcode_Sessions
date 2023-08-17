@@ -410,5 +410,23 @@ Couple of questions on Autoscaling group :
 	f. We can protect the NLB deletion 
 	g. Cross zone LB can be enabled.
 	h. We  can access logs also it will allow to save the logs in S3
+29. Serverless services in AWS : 
+	1. Serverless doesn't mean it doens't have any server. Somehow the service will run on some compute box or server.
+	2. It provide flexible infrastrcuture 
+	3. Highly avaiable 
+	4. Pay as per the hit or use. If the server less service is sitting idle it means no expense is there.
+30. AWS Lambda : 
+	1. Its a serverless service :
+	2. We can create our business logic in lambdas and allow cloud provide to take care of the request and load coming in and increase the infra needed to support the incoming request 
+	3. Pay as you use : 
+			- Number od request 
+			- Duration of request 
+			- Memory your lambda uses.
+	Steps to create the Lambda : 
+		- Left side search for lambda 
+		- Create lambda function : Select the language java 
+		- create function
+		- Open the lambda function create an event which will be a json or a payload input to the lambda function
+		- In lambda function you can just write the code play with the input event payload to send a response back or sysout something etc.
 
 
