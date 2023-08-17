@@ -429,11 +429,13 @@ Couple of questions on Autoscaling group :
 		- Open the lambda function create an event which will be a json or a payload input to the lambda function
 		- In lambda function you can just write the code play with the input event payload to send a response back or sysout something etc.
 		- You can change the code in fn editor and run it and deploy the fun and see the results.
-		- there are two input parameters to a lambda one is event and other is context (this will shows the various funtion name , time and other details of the function which is being used.)
+		- there are two input parameters to a lambda one is event and other is context (this will shows the various funtion name , time and other 				details of the function which is being used.)
 
 Imp points for lambda : 
 	1. We can allocate the memory to the lambd a: max is : 3 GB 
 	2. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
 	3. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
-
+	4. Monitoring : You can see the events triggered and request and matrices and view X-ray traces. etc
+ 
+		***Lambda for java :The Hello class has a function named handleRequest that takes an event object and a context object. This is the handler 			function that Lambda calls when the function is invoked. The Java function runtime gets invocation events from Lambda and passes them to the 			handler. In the function configuration, the handler value is example.Hello::handleRequest.
 
