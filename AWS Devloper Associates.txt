@@ -428,5 +428,12 @@ Couple of questions on Autoscaling group :
 		- create function
 		- Open the lambda function create an event which will be a json or a payload input to the lambda function
 		- In lambda function you can just write the code play with the input event payload to send a response back or sysout something etc.
+		- You can change the code in fn editor and run it and deploy the fun and see the results.
+		- there are two input parameters to a lambda one is event and other is context (this will shows the various funtion name , time and other details of the function which is being used.)
+
+Imp points for lambda : 
+	1. We can allocate the memory to the lambd a: max is : 3 GB 
+	2. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
+	3. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
 
 
