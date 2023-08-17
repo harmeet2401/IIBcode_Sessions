@@ -416,9 +416,9 @@ Couple of questions on Autoscaling group :
 	3. Highly avaiable 
 	4. Pay as per the hit or use. If the server less service is sitting idle it means no expense is there.
 30. AWS Lambda : 
-	1. Its a serverless service :
-	2. We can create our business logic in lambdas and allow cloud provide to take care of the request and load coming in and increase the infra needed to support the incoming request 
-	3. Pay as you use : 
+	-. Its a serverless service :
+	-. We can create our business logic in lambdas and allow cloud provide to take care of the request and load coming in and increase the infra needed to support the incoming request 
+	-. Pay as you use : 
 			- Number od request 
 			- Duration of request 
 			- Memory your lambda uses.
@@ -432,12 +432,12 @@ Couple of questions on Autoscaling group :
 		- there are two input parameters to a lambda one is event and other is context (this will shows the various funtion name , time and other 				details of the function which is being used.)
 
 Imp points for lambda : 
-	1. We can allocate the memory to the lambd a: max is : 3 GB 
-	2. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
-	3. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
-	4. Monitoring : You can see the events triggered and request and matrices and view X-ray traces. etc
- 	5. Lambda versioning L In this we can release diff version of lambdas to the user . Click on Acvtio on the right and click publish new version then sequence vice version will be published 
-	6.Aliases : Now for a scenario like 	
+	a. We can allocate the memory to the lambd a: max is : 3 GB 
+	b. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
+	c. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
+	d. Monitoring : You can see the events triggered and request and matrices and view X-ray traces. etc
+ 	e. Lambda versioning L In this we can release diff version of lambdas to the user . Click on Acvtio on the right and click publish new version then 			sequence vice version will be published 
+	f.Aliases : Now for a scenario like 	
 		QA(Consumer of lambdas) ---> using v1 
 		PROD(Consumer of lambdas) ---> using the v1
 	If a change comes to the lambda then you have to ask the consumer app to change the version and use it again.
@@ -448,8 +448,12 @@ Imp points for lambda :
 		QA(Consumer of lambdas) ---> using QA Alias which is pointing to V2 version of lambda (its inside on lambda now)
 		PROD(Consumer of lambdas) ---> using PROD Alias which is pointing to V1 version of lambda (its inside on lambda now)
 
-	Now when V2 got tested on QA we just have to change the verison of the PROD alias to v2 in lambda and ollaaa done. No need to tell the consumer to change the version evrytime.
+	Now when V2 got tested on QA we just have to change the verison of the PROD alias to v2 in lambda and ollaaa done. No need to tell the consumer to 		change the version evrytime.
 
+	g. Functional Concurrency : Its means how many number of Lambda functions instances can server request in parallel at a given time. We can contolr it  			by using the Regional Quota which is 1000 max . Which means if we created 20 lambda functions in a region then these 20 can have 1000 function 			instances running in parallel at max 
+		Iska matlab hai lambda fn1,fn2,fn3,fn4,fn5,fn6,fn7,.......fn20 har ek lambda function ke 50 instances max yan conbination mai run krskte hai 			taaki total 1000 max hojaye which is the limit.
+
+	h. Reserved Concurrency : Now as per fn concurrency we can have 1000 instance of lambda fn running in a region . agar hme kissi particulatr region ke 			lambda function ko jada or reserved quota de ki Prod-lambda-fn ke 500 instances chlenge , UAT-lambda ke 300 and Dev-labmfda-function ke 200. So 		uske liye ham Rserved concurrency use krte hai  . Means ham quota reserved krre hai pehle se hi prod ke liye and baki ke left over quota lelenge.
 
 		***Lambda for java :The Hello class has a function named handleRequest that takes an event object and a context object. This is the handler 			function that Lambda calls when the function is invoked. The Java function runtime gets invocation events from Lambda and passes them to the 			handler. In the function configuration, the handler value is example.Hello::handleRequest.
 
