@@ -509,4 +509,7 @@ Command CLI : aws lambda invoke --invocation-type EVENT --function-name my-funct
 	end users -------1.Send request  ------------------> Edge locations cache ----------2. Request reach---------------> Server.
 
 		<----------4. response to user ---------------                      <------3. Response from server---------
+	Lambda@edge is used in some cases as below : 
+			- A/B testing 
+			- To support multiple devices etc 
 
