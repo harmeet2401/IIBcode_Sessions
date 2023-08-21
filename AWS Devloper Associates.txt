@@ -533,5 +533,25 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	2. Minimize the function side bundle 
 	3. Avoid using the recursive code.
 	4. Avoid bundling all the liberaries in the .jar file in case of a java project. Create separate liberaries to save the liberaries used and keep the classic to be executed for business logic in the .jar file.
+	5. Use environment variable for all operations like getting value on a high visibiluty level.
+
+41. Lambda scenarios QUESTIONS :
+	Q1. DOes the lambda fun scale up or scale out ? 
+	Ans : Lambda fn scale out which means it will increase the number of instance of a lambda function when the number of requests increase.
+	Q2. How to enable logging in lambda fn ?
+	Ans : We can directly use console.log or system.log to print the logs of the fun and make sure lambda execution role have the right permission to send the logs to the cloudwatch logs 
+	Q3. how to enable tracing in lambda ?
+	Ans : We can simply enable the tracing in lambda feature 
+	       Make sure lambda execution role have the right permission .
+	Q4. How to make lambda fn run faster ?
+	Ans : Increase the memory allocated. As we can not increase the number of CPU alloacted.
+	Q5. How to create temparary files using the lambda fn ?
+	Ans. You can create a file inside the lambda fn code and place it in /temp directory.
+	Q6. How to send multiple request headers in an array from Application load balancer to the Lambda function ?
+	Ans. We can enable multi-level headers in ALB.
+	Q7. You are creating thumbnails using the lambda functions from the events coming from the S3 bucket which holds all the images. Every time we change the version of the lambda fn we need to make change in the uri mentioned in S3 buekct and redeploy it. How to avoid it?
+	Ans . By creating an alias like thumbnail and assign that thumbnail to the S3 bucket . This alias will be poiting to the changed version and will not need to change that in S3 bucket .
+	Q8. How to increase the CPU allocated.
+	Ans . We can increase the allocated memory which will evntually increase the CPU assigned.
 		
 
