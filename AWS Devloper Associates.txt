@@ -553,5 +553,14 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	Ans . By creating an alias like thumbnail and assign that thumbnail to the S3 bucket . This alias will be poiting to the changed version and will not need to change that in S3 bucket .
 	Q8. How to increase the CPU allocated.
 	Ans . We can increase the allocated memory which will evntually increase the CPU assigned.
-		
+
+
+42. AWS API Gateway : 
+	. HOw to expose our lambda funtion to the outside world.
+	Ans : 
+		-We can use AWS API Gateway to act as a front door integrated with the lambda fn and allow all the features like : publish , monitoring , 			maintining and security of the api as well.
+		- An API Gateway is the serverless service we don;t need to probision any serverf for the api gateway tp run .
+		- It can support HTTPS(one way send the request and get the response.) and websocket as well which means creating a chat bot etc to make a 			contuous session.
+		- Its pay as use service means pay as per the number of requests and the duration of the request to the api gatwway.
+	
 
