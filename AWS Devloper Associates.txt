@@ -513,3 +513,17 @@ Command CLI : aws lambda invoke --invocation-type EVENT --function-name my-funct
 			- A/B testing 
 			- To support multiple devices etc 
 
+38. Versioning of lambda funtions : We can publish diff version og lambda fun easily .
+	A version of a lambda fn is immutable means once its published we can not change it , inorder to push new changes you have to publish a new version .
+	Version will contains : 	
+		- All dependencies 
+		- Lambda runtime 
+		- Diff layers added
+39. Alias of Lambda fn : We already know we can create a alias of the version and give that alias or pointer to the consumer to ease down there headache to change the version again and again if we push the version .
+
+	Alias points to a version -----------------------------> version 2...etc
+Imp : Weighted alias  we can create two alias pointed to two differnet version with weightage mentioned. This helps in testing in Blue/Green mode.
+
+
+		
+
