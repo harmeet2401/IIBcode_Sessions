@@ -524,6 +524,14 @@ Command CLI : aws lambda invoke --invocation-type EVENT --function-name my-funct
 	Alias points to a version -----------------------------> version 2...etc
 Imp : Weighted alias  we can create two alias pointed to two differnet version with weightage mentioned. This helps in testing in Blue/Green mode.
 
-
+39. Creating layers of Lambda : zip with Other liberaries , dependencies , jars etc .
+	- We can create a terraform script to write the layer which will be pointing to the liberaries used and can be used by multiple lambda functions.
+	- /opt is the directory whwre the liberaries will be downloaded in lambda functon.
+	- Max size of lambda fn bundle is 3 MB .
+40. Best practices to create lambda fn : 
+	1. Initialize the Client sdk and data base connection outside of the lambda fn handler 
+	2. Minimize the function side bundle 
+	3. Avoid using the recursive code.
+	4. Avoid bundling all the liberaries in the .jar file in case of a java project. Create separate liberaries to save the liberaries used and keep the classic to be executed for business logic in the .jar file.
 		
 
