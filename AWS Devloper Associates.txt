@@ -590,3 +590,6 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 
 
 
+	Steps to change the INtegration end for an API GATEWAY : EASY 
+		- GO to the integration request and switch to the lambda . Before that create an another lambda for the integration to wrk .
+
