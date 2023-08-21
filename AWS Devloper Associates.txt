@@ -562,5 +562,21 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 		- An API Gateway is the serverless service we don;t need to probision any serverf for the api gateway tp run .
 		- It can support HTTPS(one way send the request and get the response.) and websocket as well which means creating a chat bot etc to make a 			contuous session.
 		- Its pay as use service means pay as per the number of requests and the duration of the request to the api gatwway.
-	
+		- It can also traform the data or request or event payload before sending it to the lambda or any other sevrice.
+
+	Now as api gateway will be an api in front of teh lambda we have some types of it :
+		- REST API GATEWAY : which is fully equiped API type of gateway and provide wide variety of features like security , monitoring etc 
+				     Provide integration with AWS X-Ray for tracing and AWS WAF for a firewall.
+		- HTTP API GATEWAY : Which is also the REST FULL TYPE api but with less feature as above api type .
+				     Automated deployment is the another feature it provides.
+		- WEB SOCKET API : Its for continuous session .
+
+	Steps to create Api gateway : 
+		- From left select the aapi gateway 
+		- select create REST API 
+		- Select create a resource enter the end point 
+		- Select create a method on that resource (GET , PUT , POST etc )
+		- Create the integration point : Lambda , AWS service or mock or HTTP uri etc 
+		- create api and then test it.
+		
 
