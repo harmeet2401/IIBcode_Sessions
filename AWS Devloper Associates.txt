@@ -456,4 +456,24 @@ Imp points for lambda :
 	h. Reserved Concurrency : Now as per fn concurrency we can have 1000 instance of lambda fn running in a region . agar hme kissi particulatr region ke 			lambda function ko jada or reserved quota de ki Prod-lambda-fn ke 500 instances chlenge , UAT-lambda ke 300 and Dev-labmfda-function ke 200. So 		uske liye ham Rserved concurrency use krte hai  . Means ham quota reserved krre hai pehle se hi prod ke liye and baki ke left over quota lelenge.
 
 		***Lambda for java :The Hello class has a function named handleRequest that takes an event object and a context object. This is the handler 			function that Lambda calls when the function is invoked. The Java function runtime gets invocation events from Lambda and passes them to the 			handler. In the function configuration, the handler value is example.Hello::handleRequest.
+31. Execution context in lambda fn : 
+	-Its the temprary run time env whic is used to excute the lambda fn. Which is common for all code inside the lambda functions.
+	-When ever the lambda fn start first time it will take some more time as compared to the subsequent hits . The delayed start is called COLD START.
+
+32. Provisioned Concurrency : 
+	-As we saw that the there is a COLD START whic means there is a latency first time when the fn is initialised.
+	- Provisioned concurrency is the feature to solve it. This feature will keep on running the lambda irrespective of any requests coming to the lambda or 	not. Its more expensive then the Functional and reserved concurrency.
+33. Lambda fn throttling :  when the number of requests coming to the lambda is more than the allowed request on a lambda funtions.
+34. Synchronous invocation of lambda fn : It means when an event goes to the lambda fn it get invoked and waits for the response and return it with the statuscode : 
+	Command CLI : aws lambda invoke --function-name my-function --paylod '{key:value1}' response.json 
+	Explaining the command : 	
+	--function-name : its the lambda fn name 
+	-- payload : its the request we send to the lambda function 
+	-- respone.json is tge file wwhich will save the response coming from the lambda fn.
+
+	Once we run above command it will send below response back : 
+		{
+			"ExecutedVersion":$LATEST,
+			"STATUSCODE": 200
+		}
 
