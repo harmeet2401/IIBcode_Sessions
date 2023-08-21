@@ -483,18 +483,30 @@ Some of the AWS service which use the synchronous lambda fn call :
 	AWS LEX : whic is used for machine learning process.
 35. Asynchronous Lambda invocation : It means when an event goes to the lambda fn from AWS service or from any consumer client it invoked the lambda fn and will not waits for the response and return it with the statuscode .
 When the events triggered by the client to hit the lambda if the invocation is successfull it will send the succesfull event response to the SNS Queue or we can call an another lambda etc.
-If the invocation failed for exampe in case of faillure the lambda will try to process 2 times and if throttler errors comes then lambda will try to process it exponentially upto 6 hours called exponential back offs .
+If the invocation failed for exampe in case of faillure the lambda will try to process 2 times and if throttler errors comes then lambda will try to process it exponentially upto 6 hours called exponential back offs . After 6 hours the events will be sent to the dead letter queue.
 If after all the reties then these events will be sent in dead letter queue.
 Command CLI : aws lambda invoke --invocation-type EVENT --function-name my-function --paylod '{key:value1}' response.json 
 	Explaining the command : 	
-	--function-name : its the lambda fn name 
+	-- function-name : its the lambda fn name 
 	-- payload : its the request we send to the lambda function 
 	-- respone.json is tge file wwhich will save the response coming from the lambda fn.
-
 
 	a. in Async call there are three values to focus on : 
 		- Maximum age of events : The maximum amount of time to keep unprocessed events in the queue.
 		- Retry attempts : The maximum number of times to retry when the function returns an error.
 		- dead letter queue : You can send unprocessed events from an asynchronous invocation to an Amazon SQS queue or an Amazon SNS topic also if not then the unprocessed events will be sent to dead letter quee.
 
+36. Lambda fn context : 
+	- It give information about the lambda fn invocation , lambda fn and execution environment.
+
+37. Lambda@Edge :
+	-Now what are the edge locations: Now as we know that cloudfrint is the service which is used to provide service on global base.
+	-NOw there are chances that request might comes from distant location and may cause latency . So Cloud front creates some edge locations which act as a 
+	cache and allow faster response back to the user in case the location is nearer to the end users. 
+	-Now below diagram shows the request from end user to the server to download some videos. which will go through the edge locartions or the cache.
+	- Lambda@Edge will come at 4 places marked 1 --- 4 points . And can customise the request/response at any point of time .
+
+	end users -------1.Send request  ------------------> Edge locations cache ----------2. Request reach---------------> Server.
+
+		<----------4. response to user ---------------                      <------3. Response from server---------
 
