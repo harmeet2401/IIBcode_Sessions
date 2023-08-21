@@ -578,5 +578,15 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 		- Select create a method on that resource (GET , PUT , POST etc )
 		- Create the integration point : Lambda , AWS service or mock or HTTP uri etc 
 		- create api and then test it.
-		
+
+
+	client ---------------------------> Mthod request --------------------> INtegration request ---------------> Mock End point
+	       <---------------------------> Mthod response <------------------- INtegration response <------------
+
+		a. Method request : Which will contain the Authorization , request validator and api key or any other feature. Query params etc 
+		b. Integration request  : Which will contains the request before it goes to the integrated end 
+		C. Method response : Which will contain the method status code in response. 
+		d. Integration response  : Which will contains the response before it goes to the user back.
+
+
 
