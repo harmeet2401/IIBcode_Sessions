@@ -694,11 +694,25 @@ Note : we can validate : resquest body , query params and headers as well
 48. API Gateway Two types of integrations : 
 	a. Custom integration : Which is th default one jisme aapko Method request , integration request , integrattion response and method response milta hai and aap 		integration request mai custom khud ka mapping daal skte ho and same as in integration response. 
 	b. Proxy integration : Which we can select while creating the api gateway . In this integration you won't be able to set the custom transformation on the incoming 		request and outgoign response. AWS Api gateway will FIXED A STANDARD SET OF FORMAT for the request going to the  integrated service and STANDARD SET of 		format will be sent back to the consumer .
+		You just need to check a box while adding a method under resource.
 		Example : if your request is :	{ "id ": 2} ---> Integration request (this will convert it into a standard format like this )
 						{ "body":{"id":2} , headers :{"header1":"headervalue1"},"queryString":{"query1":"queryvalue1"} }
 
-
-			   if your sponse is :	{ "id ": 2,"responsemessage":"ok"} ---> Integration response (this will convert it into a standard format like this )
+			   if your response is :{ "id ": 2,"responsemessage":"ok"} ---> Integration response (this will convert it into a standard format like this )
 						{ "body":{"id":2,"responsemessage":"ok"} , statusCode :200, etc.... }
-			
+				statuscode and body is mondatory to be sent back from the lambda
+49. API Gateway api key and usage limit :
+	- We can create an api key and usage plan .
+	- On the left side of the api gateway click on USAGE PLAN and enter the throttler value : rate , burst .
+	- Enter the Quota for the month , year etc . means kitni requests aa skti hai ek month mai.
+	- now hme isse consumer se link krna hogga
+	- then add the api stage jo dev haia hmare paas and then add then create and add api key olaaa done.
+	- now go to the api gateway method and check the box API key required as true. and deploy the api gateway to dev stage
+	- Ab jab bhi uss mthod ko call jaegi X-API-KEY header paas krna pdega.
+
+NOte : we can export the api gateway swagger from  two options swagger or openapi 3
+	export as openapi 3 
+	export as openapi 3  + API Gateway extension
+	export as openapi 3  + postman extension
+	
 
