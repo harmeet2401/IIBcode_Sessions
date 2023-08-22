@@ -584,9 +584,9 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	       <---------------------------> Mthod response <------------------- INtegration response <------------
 
 		a. Method request : Which will contain the Authorization , request validator and api key or any other feature. Query params etc 
-		b. Integration request  : Which will contains the request before it goes to the integrated end 
+		b. Integration request  : Which will contains the request before it goes to the integrated end and transformation fo the request.
 		C. Method response : Which will contain the method status code in response. 
-		d. Integration response  : Which will contains the response before it goes to the user back.
+		d. Integration response  : Which will contains the response before it goes to the user back. and can be changed in the api gateway.
 
 
 43. API Gateway mapping template : 
@@ -683,3 +683,10 @@ Note : we can validate : resquest body , query params and headers as well
 	- Select an option Gateway Response on th eleft hand side.
 	- Select the code to send back .
 	- Select the response body and add template and customise it.	
+
+47. API gateway deployment : 
+	- Till now we were testing the api gateway using the TEST button.
+	- Now we can deploy the api gateway by  creating the STAGE of it , which will provide me the uri to the resource created.
+	- First click on Action on api gateway and  "Deploy api" ,enter the deployment name then 
+	- Go to left side click on stage and click on deployment saved above and use the uri and enjoy.
+	- Then use the uri comes to hit the resource method accordingly .
