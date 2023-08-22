@@ -599,8 +599,8 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	- NOTE : Mapping template actually add the respoective body or headers as per in the api gateway.
 		--> select --> When there are no templates defined (recommended) 
 			--> add templet ---> application/json (means json payload in the event of lambda will be sent)
-	- now when you test it , it may ask you for the querystring and header which you ucan add and see if those are getting fetched in the mapping code we added in the integration mapping request teamplet  in API Gateway and then check the same in the lambda . because that request will be input parameter (event) to the lambda
-
+	- now when you test it , it may ask you for the querystring and header which you ucan add and see if those are getting fetched in the mapping code we added in the 	integration mapping request teamplet  in API Gateway and then check the same in the lambda . because that request will be input parameter (event) to the lambda
+-------------------------------
 Event logged in lambd a: 
 {
   "body-json": {},
@@ -637,5 +637,18 @@ Event logged in lambd a:
     "resource-path": "/hello-world"
   }
 }
-	
+---------------------------------
+Lambda code would look like this : 
+---------------------------------------code------------------
+export const handler = async (event) => {
+  console.log("Query1 :"+event.params.querystring.query1);
+  console.log("Context : "+ event.context);
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify('Hello world from Lambda Funtion '+ event.params.querystring.query1)
+  };
+  return response;
+};
+---------------------------------------code------------------
+
 
