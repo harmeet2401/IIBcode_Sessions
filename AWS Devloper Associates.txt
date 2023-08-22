@@ -675,3 +675,11 @@ export const handler = async (event) => {
 	- Create an json schema model (you can take help from the link given in it JSON SCHEMA very good )
 	- Attach it to the Method Request step of api gateway .
 	- Turn on the validation on Request Validator very impand olaaa test it.
+Note : we can validate : resquest body , query params and headers as well 
+		three options comes : - Validate body 
+				      - Validate body and query params
+				      - Validate body , query parms and headers
+46.Customise the response code and response body in Api gateway : 
+	- Select an option Gateway Response on th eleft hand side.
+	- Select the code to send back .
+	- Select the response body and add template and customise it.	
