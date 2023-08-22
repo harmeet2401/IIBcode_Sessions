@@ -652,3 +652,21 @@ export const handler = async (event) => {
 ---------------------------------------code------------------
 
 
+44. POST method in API Gateways.
+	- We can add another method in the resource we created as POST in api gateway. 
+	- Attach the POST method to the same lambda fn . Beauty of lambda 
+	- Enter the request body format and enter the request body in json if request type is application/json.
+	- Then test it ollaaaa play with it now. 
+	- You will see the request payload will be the event value inside lambda fn.
+
+	Lambda code : ------------
+	export const handler = async (event) => {
+	  //console.log("Query1 :"+event.params.querystring.query1);
+	  //console.log("Context : "+ event.context);
+	  const response = {
+	    statusCode: 200,
+	    body: JSON.stringify(event)
+	  };
+	  return response;
+	};
+
