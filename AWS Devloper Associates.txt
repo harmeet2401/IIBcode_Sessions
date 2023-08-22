@@ -669,4 +669,9 @@ export const handler = async (event) => {
 	  };
 	  return response;
 	};
-
+ 
+45. Validation of the incoming request to the api gateway :
+	- On the left hand side you will see model opton .
+	- Create an json schema model (you can take help from the link given in it JSON SCHEMA very good )
+	- Attach it to the Method Request step of api gateway .
+	- Turn on the validation on Request Validator very impand olaaa test it.
