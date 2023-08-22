@@ -589,7 +589,53 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 		d. Integration response  : Which will contains the response before it goes to the user back.
 
 
-
+43. API Gateway mapping template : 
+	- We can change the mapping template to change the outgoing request so that it can be get in the lambda fn and use it.
+	- Go to your method in api gateway --> INtegration request ---> add a mapping template and add the values in it.
+	- Currently the console.log(event) in lambda will be printing empty . because we are not sending anything in body.
+	- Once you add the mapping template in integrarton request you will be able to see the body in the lambda console logs .
 	Steps to change the INtegration end for an API GATEWAY : EASY 
 		- GO to the integration request and switch to the lambda . Before that create an another lambda for the integration to wrk .
+	- NOTE : Mapping template actually add the respoective body or headers as per in the api gateway.
+		--> select --> When there are no templates defined (recommended) 
+			--> add templet ---> application/json (means json payload in the event of lambda will be sent)
+	- now when you test it , it may ask you for the querystring and header which you ucan add and see if those are getting fetched in the mapping code we added in the integration mapping request teamplet  in API Gateway and then check the same in the lambda . because that request will be input parameter (event) to the lambda
+
+Event logged in lambd a: 
+{
+  "body-json": {},
+  "params": {
+    "path": {},
+    "querystring": {
+      "query1": "query-value1",
+      "query2": "query-value2"
+    },
+    "header": {
+      "header1=header-value1": "",
+      "header2=header-value2": ""
+    }
+  },
+  "stage-variables": {},
+  "context": {
+    "account-id": "860574603717",
+    "api-id": "rjiuj07e7h",
+    "api-key": "test-invoke-api-key",
+    "authorizer-principal-id": "",
+    "caller": "860574603717",
+    "cognito-authentication-provider": "",
+    "cognito-authentication-type": "",
+    "cognito-identity-id": "",
+    "cognito-identity-pool-id": "",
+    "http-method": "GET",
+    "stage": "test-invoke-stage",
+    "source-ip": "test-invoke-source-ip",
+    "user": "860574603717",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203",
+    "user-arn": "arn:aws:iam::860574603717:root",
+    "request-id": "8925ed24-47bb-41c5-a3d1-721e3e6930f5",
+    "resource-id": "ld8s49",
+    "resource-path": "/hello-world"
+  }
+}
+	
 
