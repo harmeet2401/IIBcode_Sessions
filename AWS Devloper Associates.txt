@@ -568,7 +568,7 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 		- REST API GATEWAY : which is fully equiped API type of gateway and provide wide variety of features like security , monitoring etc 
 				     Provide integration with AWS X-Ray for tracing and AWS WAF for a firewall.
 		- HTTP API GATEWAY : Which is also the REST FULL TYPE api but with less feature as above api type .
-				     Automated deployment is the another feature it provides.
+				     Automated deployment is the another feature it provides. Quick and have low latency 
 		- WEB SOCKET API : Its for continuous session .
 
 	Steps to create Api gateway : 
@@ -715,4 +715,25 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	export as openapi 3  + API Gateway extension
 	export as openapi 3  + postman extension
 	
+50. HTTP API GATEWAY : 
+	- Which is also the REST FULL TYPE api but with less feature as above api type .
+	- Automated deployment is the another feature it provides. Quick and have low latency.
+	- It has some thing as Payload versions 1.0 and 2.0
+		. Means Agar hmne ek rest api gateway bnaya with version 1.o ith proxy integration setting . To usko hm direclty migrate kr skte hai HTTP api gateway mai.
+		  2.0 version bs hm new api gateway bnane ke liye us krte hai http api gateway mai.
+		. It support sthe payload going to the integrated service and reponse comming back.
+
+    Steps to create http api gateway : This will work as a proxy integration setup . Means aws api gateway ka khud ka request jaega aage and response bhi standar format mai aega.
+	- Go to api gateway sleect http api gateway 
+	- Enter the integration target --> select lambda --> version 2.0
+	- Enter the stage byt default $default is there 
+	- enter the mthod mapping to the resource create which will be pointing to the target.
+	- Next and then create .
+	- It will automatically deplpy to the default stage , get the uri and play with it.
+	- As we are using version 2.0 
+		in the lambda we don't need to creat ethe response structure : Code
+	export const handler = async (event) => {
+	  return event;
+	};
+	- We can go tto the routes and add new route for POST and PUT and integrate with the new target or the existing target.
 
