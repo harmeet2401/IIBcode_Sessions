@@ -865,6 +865,24 @@ Sign up triggers :
 
 64. S3 service  : Its a global service .Object storage . Key value pair storage system , Provide 11 9's availability . Replicates teh data across multiple AZs in a single region .
 		 Can store binary , text , media anything that is a object.
-		 Bucket is the fundamental container of the S3. and its region related.
+		 Bucket is the fundamental container of the S3. and its region related. Max size of object 5 TB
+65. s3 versioning: We can turn on the versiomning on bucket level . Uske baad agar same name ki file ko upload kroge to vo override nhi hoegi uska new version bnjaega
+		   Help in avoiding accidental delete.	
+		   We can only suspend the versioning means aane vaalie sabhi files ka ek version hi rehga , but jinka 2 version bnchukka hai 2 hi rahega. Suspend mean rukna 
 
-		
+66. Enable oggin for s3 : enable at the bucket level , create a temp/ dir and give permission to s3 log delivery group.
+67. Public access to all object in bucket is off by default . So we can turn it on by two ways : 
+					- Go to bucket : public access blocked turn it off
+					- And cretae a bucket policy to all anonymous access to all the object in the bucket level. We can click on policy example to 						copyand paste the anonymous policy access to all object
+						{
+						    "Version": "2012-10-17",
+						    "Statement": [
+						        {
+						            "Sid": "PublicReadGetObject",
+						            "Effect": "Allow",
+						            "Principal": "*",
+						            "Action": "s3:GetObject",
+						            "Resource": "arn:aws:s3:::tesbucket1/*"
+						        }
+						    ]
+						}
