@@ -815,3 +815,28 @@ Note : Stages are the env deployment we did for the api gateway . We can also us
 	- Again launch the hosted login page and enter the username and password then you will get the code back in the call back url : https://localhost/?code=f5981887-867b-42c6-a1fb-c76739510cab
 	- Ab hm kya krskte hai   ? ki upr jo code milla hai ham Localshost ki jgan apni back end api ka url daalskte the jiske paas ye code jaega for example : 
 		http://myauthorizationApi/?code=f5981887-867b-42c6-a1fb-c76739510cab. Iss code ko lekr ham user ko verfiy kr authorise  kr lette and user ko un service pr access miljata 
+
+59. Type of trigger in USer POOL :
+Authentication events triggers :
+	- Pre Authentication lambda trigger : to custom authenticate the user 
+	- Post authentication lambda trigger 
+	- Pre - token generating lambda trigger : TO create a custom token fom the lambda back as a code shown in above .
+Sign up triggers : 
+	- Pre Sign lambda trigger 
+	- Post confirmation of the account lambda trigger.s
+
+60. AWS Cognito Identity pool : 
+	- Its the pool of identity provides so that we can authorise the user to some of the aws services.
+61. Very IMportant : 
+	Various scenarios : where to use user pool and Identity pool 
+
+	Maintain your own registry of hunder of users for your web application  :  USer pool 
+	Maintain your own registry of thausand of users for your mobile application  :  USer pool 
+	Create Sign up and sign pages   : user pool 
+	Create password reset pages : user pool
+	Guest access or anonymous access to your AWS resources : Identity pool 
+	Graant authentication to the mobilde apps or web apps without needing ti maintain your own user registeru : Identity pool 
+	GIve access to AWS services based on Social IDs : Identity pool 
+	GIve access to AWS services based on corporate ids(SAML) : Identity pool 
+	
+	
