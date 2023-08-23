@@ -736,4 +736,5 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	  return event;
 	};
 	- We can go tto the routes and add new route for POST and PUT and integrate with the new target or the existing target.
-
+	- we can create metrics ,logging , stages . can export the api same as rest api gateway.
+	- we can also import using the defination file if we have like rest api gateway 1.0 file.
