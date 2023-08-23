@@ -770,7 +770,8 @@ Note : Stages are the env deployment we did for the api gateway . We can also us
 			- Web identity Federation : Give access on the basis of social IDs.
 				. Open ID(Google , facebook , microsoft)
 
-55. AWS Cognito :  Login pages , MFA , DB creation etc 
+55. AWS Cognito :  Provides USER POOL (identity feedrations) for authentication sign in sign out pages and IDENTITY POOL for authectication over AWS Sevices.
+			Amazon Cognito user pools let you add registration and sign-in to your apps. With Amazon Cognito identity pools, you can provide AWS credentials 			for access to your cloud resources.
 	- This service will provide way to create sign in sign put pages with multiple factor authentications for web apps and mobile apps.
 	- Allow you to integrate you login pages with web idetity federattion (web identity feredration) which is google , facebook , microsoft and also with corporate identityt federation 
 	- Allow you to create your own data base with without worrying about the sclaing and operations 
