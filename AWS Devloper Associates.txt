@@ -397,7 +397,7 @@ Couple of questions on Autoscaling group :
 	5. Prevent frequent scale-in and scale-out : Same above go till advanced setting and select he Cool Down period.
 	6. How to prevent newly instnace to scale - in : Same above go till advanced setting and select the check box : Enable instance scale in protection.
 
-28. Network load balancer : Its not part of the free-tier
+28. Network load balancer : Its not part of the free-tier. 
 	a. Works on the network layer protocol : TCP , UDP etc
 	b. Is used for high performance in which millions of request comes.
 	c. We can also assign elastic/Static IP address to this LB.
@@ -415,7 +415,7 @@ Couple of questions on Autoscaling group :
 	2. It provide flexible infrastrcuture 
 	3. Highly avaiable 
 	4. Pay as per the hit or use. If the server less service is sitting idle it means no expense is there.
-30. AWS Lambda : 
+30. AWS Lambda : Serverless service .
 	-. Its a serverless service :
 	-. We can create our business logic in lambdas and allow cloud provide to take care of the request and load coming in and increase the infra needed to support the incoming request 
 	-. Pay as you use : 
@@ -460,7 +460,7 @@ Imp points for lambda :
 	-Its the temprary run time env whic is used to excute the lambda fn. Which is common for all code inside the lambda functions.
 	-When ever the lambda fn start first time it will take some more time as compared to the subsequent hits . The delayed start is called COLD START.
 
-32. Provisioned Concurrency : 
+32. Provisioned Concurrency : Fixed lambda instances.
 	-As we saw that the there is a COLD START whic means there is a latency first time when the fn is initialised.
 	- Provisioned concurrency is the feature to solve it. This feature will keep on running the lambda irrespective of any requests coming to the lambda or 	not. Its more expensive then the Functional and reserved concurrency.
 33. Lambda fn throttling :  when the number of requests coming to the lambda is more than the allowed request on a lambda funtions.
@@ -496,10 +496,10 @@ Command CLI : aws lambda invoke --invocation-type EVENT --function-name my-funct
 		- Retry attempts : The maximum number of times to retry when the function returns an error.
 		- dead letter queue : You can send unprocessed events from an asynchronous invocation to an Amazon SQS queue or an Amazon SNS topic also if not then the unprocessed events will be sent to dead letter quee.
 
-36. Lambda fn context : 
+36. Lambda fn context : invoccation info
 	- It give information about the lambda fn invocation , lambda fn and execution environment.
 
-37. Lambda@Edge :
+37. Lambda@Edge : Edge locaions pr . Make it easy for the user nearer to the edge locations
 	-Now what are the edge locations: Now as we know that cloudfrint is the service which is used to provide service on global base.
 	-NOw there are chances that request might comes from distant location and may cause latency . So Cloud front creates some edge locations which act as a 
 	cache and allow faster response back to the user in case the location is nearer to the end users. 
@@ -539,7 +539,7 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	Q1. DOes the lambda fun scale up or scale out ? 
 	Ans : Lambda fn scale out which means it will increase the number of instance of a lambda function when the number of requests increase.
 	Q2. How to enable logging in lambda fn ?
-	Ans : We can directly use console.log or system.log to print the logs of the fun and make sure lambda execution role have the right permission to send the logs to the cloudwatch logs 
+	Ans : We can directly use console.log or system.log to print the logs of the fun and make sure lambda execution role have the right permission to send the logs to the cloudwatch logs : for loging . Lamvda ka direct log isme jata hai , It should have execution role access .
 	Q3. how to enable tracing in lambda ?
 	Ans : We can simply enable the tracing in lambda feature 
 	       Make sure lambda execution role have the right permission .
@@ -555,7 +555,7 @@ Imp : Weighted alias  we can create two alias pointed to two differnet version w
 	Ans . We can increase the allocated memory which will evntually increase the CPU assigned.
 
 
-42. AWS API Gateway : 
+42. AWS API Gateway : Front end api for transformation , authetication and trasformation before it reaches to the target (lambda , AWS sevice , HTTP web servce etc)
 	. HOw to expose our lambda funtion to the outside world.
 	Ans : 
 		-We can use AWS API Gateway to act as a front door integrated with the lambda fn and allow all the features like : publish , monitoring , 			maintining and security of the api as well.
@@ -670,7 +670,7 @@ export const handler = async (event) => {
 	  return response;
 	};
  
-45. Validation of the incoming request to the api gateway :
+45. Validation of the incoming request to the api gateway : Schema create krke kr skte hai and method req mai mapping add kr skte hai 
 	- On the left hand side you will see model opton .
 	- Create an json schema model (you can take help from the link given in it JSON SCHEMA very good )
 	- Attach it to the Method Request step of api gateway .
@@ -684,14 +684,14 @@ Note : we can validate : resquest body , query params and headers as well
 	- Select the code to send back .
 	- Select the response body and add template and customise it.	
 
-47. API gateway deployment : 
+47. API gateway deployment : (Stage create kr skte hai dev , uat and prod. Rest mai manual krna pdta hai and HTTP mai auto deplpy hotta hai ) 
 	- Till now we were testing the api gateway using the TEST button.
 	- Now we can deploy the api gateway by  creating the STAGE of it , which will provide me the uri to the resource created.
 	- First click on Action on api gateway and  "Deploy api" ,enter the deployment name then 
 	- Go to left side click on stage and click on deployment saved above and use the uri and enjoy.
 	- Then use the uri comes to hit the resource method accordingly .
 
-48. API Gateway Two types of integrations : 
+48. API Gateway Two types of integrations : (Proxy(res/req change nhi kr skte) and custom integration(res/req change kr skte hai))
 	a. Custom integration : Which is th default one jisme aapko Method request , integration request , integrattion response and method response milta hai and aap 		integration request mai custom khud ka mapping daal skte ho and same as in integration response. 
 	b. Proxy integration : Which we can select while creating the api gateway . In this integration you won't be able to set the custom transformation on the incoming 		request and outgoign response. AWS Api gateway will FIXED A STANDARD SET OF FORMAT for the request going to the  integrated service and STANDARD SET of 		format will be sent back to the consumer .
 		You just need to check a box while adding a method under resource.
@@ -701,7 +701,7 @@ Note : we can validate : resquest body , query params and headers as well
 			   if your response is :{ "id ": 2,"responsemessage":"ok"} ---> Integration response (this will convert it into a standard format like this )
 						{ "body":{"id":2,"responsemessage":"ok"} , statusCode :200, etc.... }
 				statuscode and body is mondatory to be sent back from the lambda
-49. API Gateway api key and usage limit :
+49. API Gateway api key and usage limit : Kitna hits aega api gatewya ko from kis consumer se with with api key 
 	- We can create an api key and usage plan .
 	- On the left side of the api gateway click on USAGE PLAN and enter the throttler value : rate , burst .
 	- Enter the Quota for the month , year etc . means kitni requests aa skti hai ek month mai.
@@ -715,7 +715,7 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	export as openapi 3  + API Gateway extension
 	export as openapi 3  + postman extension
 	
-50. HTTP API GATEWAY : 
+50. HTTP API GATEWAY : Same as REST API gateway but with simpler approach 
 	- Which is also the REST FULL TYPE api but with less feature as above api type .
 	- Automated deployment is the another feature it provides. Quick and have low latency.
 	- It has some thing as Payload versions 1.0 and 2.0
@@ -738,13 +738,13 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	- We can go tto the routes and add new route for POST and PUT and integrate with the new target or the existing target.
 	- we can create metrics ,logging , stages . can export the api same as rest api gateway.
 	- we can also import using the defination file if we have like rest api gateway 1.0 file.
-51. Api gateway endpoint types : 
+51. Api gateway endpoint types : Api gateway end point wich is given to user to consume.
 	 Three type os end point : ENd poijt means jab bhi user api gateway ko access krega iska end point use krke depending upon the type the request will be routed .
 		- Edge end point : Which is used in case of allowing the user request to be directed to the edge locations , there are 204 edge location arround the world 			. The request will be routed to the nearest edge location region with low latency depending upon the location of the user request coming.
 		- Regional end point : This is for the user to be in specific region , for example if all the users are in india , then while creating the api you can 			  select the private end point .
 		- Private end point : Which will be accessed from the Private vpc space. only . 
 
-52. Type of integration target to an API GATEWAY : 
+52. Type of integration target to an API GATEWAY : Back end service to which api gateway connected to .
 	- Lambda : using the proxy and custom integration technique.
 	- HTTP/HTTPS web service . Hm apni ek service ke agge bhi isko lga skte hai.
 	- Mock service : A mock service to respond with a mock response.
@@ -753,10 +753,25 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 
 Note : Stages are the env deployment we did for the api gateway . We can also use STAGE VARUABLES , which is the aliasvariable of lambda poiting to differnet lambda version . This is used in case we want prod to point to diff lambda version and UAT to another versio n and so on.
 
-53. caching in API Gateway : 
+53. caching in API Gateway : To cache the response and decrease the response time and dec billing .
 	- To speed up the process. 
 	- api gateway REST API type will only have the cache options 
 	- We can go to the stage of api gateway and enable the cache ----> mention the TTL (Time to live) for cache ---> cache capacity .
 	- We can check cachehitcount and cachehitmiss to check the cache access .
 	- For cache insertion a key used to do that . We can use custom headers , url , path params , query parameters etc as the key and value will be the payload 		   getting in respnse. Isko configure krne ke liye hm jab method ke andar querystring yan header mention krte hai uske saamne check box hai enable caching ka 		   click on that .
 	NOte : will save the number of hit to the lambda and less billing will be there as lambda charge u accroding to the hit made.
+
+54. Identity federation : GIve access to user to specific services.
+	1. Identity federation is the external authentication system used to provide access to the user to the resource . Resource can be anythign like Aws service , database , sharedrive etc .
+		Two type of Identity Federation
+			- Corporate Identity Federation : Give access on the basis of corporate IDs	
+				. SAML(XML) base protocl for the authentication to work 
+				. Federate with corporate identity system.
+			- Web identity Federation : Give access on the basis of social IDs.
+				. Open ID(Google , facebook , microsoft)
+
+55. AWS Cognito :  Login pages , MFA , DB creation etc 
+	- This service will provide way to create sign in sign put pages with multiple factor authentications for web apps and mobile apps.
+	- Allow you to integrate you login pages with web idetity federattion (web identity feredration) which is google , facebook , microsoft and also with corporate identityt federation 
+	- Allow you to create your own data base with without worrying about the sclaing and operations 
+	- Allow you to sync data across platform , devices and applications.
