@@ -752,3 +752,11 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	- VPC Link : TO a private VPC connaction .
 
 Note : Stages are the env deployment we did for the api gateway . We can also use STAGE VARUABLES , which is the aliasvariable of lambda poiting to differnet lambda version . This is used in case we want prod to point to diff lambda version and UAT to another versio n and so on.
+
+53. caching in API Gateway : 
+	- To speed up the process. 
+	- api gateway REST API type will only have the cache options 
+	- We can go to the stage of api gateway and enable the cache ----> mention the TTL (Time to live) for cache ---> cache capacity .
+	- We can check cachehitcount and cachehitmiss to check the cache access .
+	- For cache insertion a key used to do that . We can use custom headers , url , path params , query parameters etc as the key and value will be the payload 		   getting in respnse. Isko configure krne ke liye hm jab method ke andar querystring yan header mention krte hai uske saamne check box hai enable caching ka 		   click on that .
+	NOte : will save the number of hit to the lambda and less billing will be there as lambda charge u accroding to the hit made.
