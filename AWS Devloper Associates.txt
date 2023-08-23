@@ -839,4 +839,28 @@ Sign up triggers :
 	GIve access to AWS services based on Social IDs : Identity pool 
 	GIve access to AWS services based on corporate ids(SAML) : Identity pool 
 	
-	
+
+62. Authorization with API Gateway : Read carefully and go through this again
+	Four features to do that : 
+		-open : no authorization 
+		-IAM Authorization : In this go to the API gateway --> resource click on resource / hello-world and selecte the authorization to AWS_IAM
+				    Then API gateway will check if the user have the required access to invoke the api gateway 
+		- AWS Cognito user pool : For this go to the api gateway ---> click on left Authorizers ---> select AWS cognito user pool -->Select the existing userpool 		   jo hmne bnaya or create a new one. enter the header in which we will nter yhe token code.
+		    . Now the first sign in to the user pool get the token and provide it back to theabove setup .
+
+		- Lambda Authorization : In this we will using a lambda to verify the tokecn and return a policy and iam role back to api gateway 
+					. Then the api gateway will verify the policy and role and grant the access to either invoke or no invoke.
+			
+
+63. Very impo : 
+	Scenrios based question in API GATEWAY : 
+	1. How to create seperate dev , test , qa env for APIGateway and lambda  : -> It can be achived by create separate stage for api gateways and create alias for each 		env for each diff version of lambda.
+	2. How to expose an api to the soap backend web service :  We will be receicing the json so we can achive it by using the custom integration and use mapping template in the integrattion request in api gateway to transfor the request from json to soap based and send it to the target soap web sevice.
+	3. You want to release a breaking change in the api gateway , but you don't want o impact the existing client fuctionality : We can achive it by deploying the API gateway to a new stage .
+	4. What happen if the lambda integrated with api gateway take 5 mins to respnd : API gateway will geenrate timeout error.
+	5. Can an api gateway client invalidate a cache entry ? : yes by using header cache-control:max-age=0. USer who makes this request to api gateway with this header should have execute-api:InvalidateCache policy attached to it.
+	6. How to create customise plan for you customer like basic (these many request shold come ) , premium (itni request api gateway pr aa aksti hai ) : We can create usage plan to achive that . In which we can mention the max request and bulk throttler etc.
+	7. You are creating API Gateway and expose it to exising aws user . which Authorization type youwil use : AWS_IAM
+	8. You are creating API Gateway and expose it to set of user and provide them with teh sign in and sign up features. . which Authorization type youwil use : Cognito user pool 
+
+		
