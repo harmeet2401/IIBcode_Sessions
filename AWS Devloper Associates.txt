@@ -794,4 +794,24 @@ Note : Stages are the env deployment we did for the api gateway . We can also us
 			|
 	Authentication (User pool / Corporate Ids / SAML / Social IDs) ----Authorization---------Used to loging to the web pages 
 			
-	
+58. Steps to create a USER POOL in Aws Cognito : User pool or list bnane ke lie Sign in page bnta hai cognito ki help se
+	- go to aws cognito select the "create user pool for sign page"
+	- Enter the details like attributes required for sign process(username,email etc )
+	- Cognito password policy , what the password should be some checks
+	- MFA requirements : yes or no
+	- User Account recovery option 
+	- Enable user self registration means khud sign kro user name , email and sub kuch daalke
+	- Attribute verification and user account confirmation
+	- Required attributes
+	- Configure how your user pool will send email to the users . send email with cognito default 
+	- Choose an IAM role for Cognito to use to send SMS messages with Amazon SNS.
+	- Enter the user pool name
+	- App client details which is the app sits at the back of this ui page 
+			Initial app client
+			Configure an app client. App clients are single-app platforms in your user pool that have permissions to call unauthenticated API operations. A 			user pool can have multiple app clients.
+	- You can customise the UI page logo as well.
+	- Once create go to the app client setting and click on "View hosted ui".
+	- Enter the sign up details . Go to user in user pool click on the newly created user and action ----> confirm account.
+	- Again launch the hosted login page and enter the username and password then you will get the code back in the call back url : https://localhost/?code=f5981887-867b-42c6-a1fb-c76739510cab
+	- Ab hm kya krskte hai   ? ki upr jo code milla hai ham Localshost ki jgan apni back end api ka url daalskte the jiske paas ye code jaega for example : 
+		http://myautheticationApi/?code=f5981887-867b-42c6-a1fb-c76739510cab. Iss code ko lekr ham user ko verfiy kr autheticate kr lette .
