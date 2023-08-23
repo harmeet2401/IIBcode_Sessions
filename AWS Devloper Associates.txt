@@ -814,4 +814,4 @@ Note : Stages are the env deployment we did for the api gateway . We can also us
 	- Enter the sign up details . Go to user in user pool click on the newly created user and action ----> confirm account.
 	- Again launch the hosted login page and enter the username and password then you will get the code back in the call back url : https://localhost/?code=f5981887-867b-42c6-a1fb-c76739510cab
 	- Ab hm kya krskte hai   ? ki upr jo code milla hai ham Localshost ki jgan apni back end api ka url daalskte the jiske paas ye code jaega for example : 
-		http://myautheticationApi/?code=f5981887-867b-42c6-a1fb-c76739510cab. Iss code ko lekr ham user ko verfiy kr autheticate kr lette .
+		http://myauthorizationApi/?code=f5981887-867b-42c6-a1fb-c76739510cab. Iss code ko lekr ham user ko verfiy kr authorise  kr lette and user ko un service pr access miljata 
