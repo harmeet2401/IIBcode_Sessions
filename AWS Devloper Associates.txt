@@ -863,4 +863,8 @@ Sign up triggers :
 	7. You are creating API Gateway and expose it to exising aws user . which Authorization type youwil use : AWS_IAM
 	8. You are creating API Gateway and expose it to set of user and provide them with teh sign in and sign up features. . which Authorization type youwil use : Cognito user pool 
 
+64. S3 service  : Its a global service .Object storage . Key value pair storage system , Provide 11 9's availability . Replicates teh data across multiple AZs in a single region .
+		 Can store binary , text , media anything that is a object.
+		 Bucket is the fundamental container of the S3.
+
 		
