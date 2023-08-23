@@ -775,3 +775,22 @@ Note : Stages are the env deployment we did for the api gateway . We can also us
 	- Allow you to integrate you login pages with web idetity federattion (web identity feredration) which is google , facebook , microsoft and also with corporate identityt federation 
 	- Allow you to create your own data base with without worrying about the sclaing and operations 
 	- Allow you to sync data across platform , devices and applications.
+56. AWS user poool : Service with auto scaleble user directory . All about the authentication. Means Ke user ko login access hai ke nhi 
+	- We can integrate the user pool woth the Application load balancer and Api gateway.
+	- Its all about creating sign pages with own user pool.
+57. Aws Identity pool : Its all about authorization . Means kis kis resource pr access milega user ko .
+		- Identity provider will be connected to the Authentication (Identity) providers to grant access to the resources for the users in user pool .
+		- can be connected to the 	
+				.user pool
+				. Social ids (face book , google , microsoft etc )
+				. SAML protocol 
+				. Corporate identity provides (which is the corporate ids.)
+
+
+	Authorization (Identity poll ) ---------Grant access on----------------> AWS service (EC2 instance , AS dynamo db , vms etc)
+			|
+		Connected to 	
+			|
+	Authentication (User pool / Corporate Ids / SAML / Social IDs) ----Authorization---------Used to loging to the web pages 
+			
+	
