@@ -865,6 +865,6 @@ Sign up triggers :
 
 64. S3 service  : Its a global service .Object storage . Key value pair storage system , Provide 11 9's availability . Replicates teh data across multiple AZs in a single region .
 		 Can store binary , text , media anything that is a object.
-		 Bucket is the fundamental container of the S3.
+		 Bucket is the fundamental container of the S3. and its region related.
 
 		
