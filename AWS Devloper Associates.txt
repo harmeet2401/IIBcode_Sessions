@@ -738,3 +738,17 @@ NOte : we can export the api gateway swagger from  two options swagger or openap
 	- We can go tto the routes and add new route for POST and PUT and integrate with the new target or the existing target.
 	- we can create metrics ,logging , stages . can export the api same as rest api gateway.
 	- we can also import using the defination file if we have like rest api gateway 1.0 file.
+51. Api gateway endpoint types : 
+	 Three type os end point : ENd poijt means jab bhi user api gateway ko access krega iska end point use krke depending upon the type the request will be routed .
+		- Edge end point : Which is used in case of allowing the user request to be directed to the edge locations , there are 204 edge location arround the world 			. The request will be routed to the nearest edge location region with low latency depending upon the location of the user request coming.
+		- Regional end point : This is for the user to be in specific region , for example if all the users are in india , then while creating the api you can 			  select the private end point .
+		- Private end point : Which will be accessed from the Private vpc space. only . 
+
+52. Type of integration target to an API GATEWAY : 
+	- Lambda : using the proxy and custom integration technique.
+	- HTTP/HTTPS web service . Hm apni ek service ke agge bhi isko lga skte hai.
+	- Mock service : A mock service to respond with a mock response.
+	- AWS Services : Can be connected to 100+ services 
+	- VPC Link : TO a private VPC connaction .
+
+Note : Stages are the env deployment we did for the api gateway . We can also use STAGE VARUABLES , which is the aliasvariable of lambda poiting to differnet lambda version . This is used in case we want prod to point to diff lambda version and UAT to another versio n and so on.
