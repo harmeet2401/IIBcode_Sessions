@@ -901,10 +901,18 @@ Sign up triggers :
 		- Its used to monitor the api calls , events and any kind of changes made to the aws services or resurces.
 		- The cloud trail can send logs to a S3 bucket or to the cloud watch as confgured.
 		- We can also set up the NS service to send a notification when a log file is delivered.
+		- its chargeable  . Not part of free tier.
+		- The events logs will be either pushed to the S3 bucket or to the cloud watch . The s3 bucket will have events in json format.
 
 	Two types of cloud trails : 	
 		- Multi region cloud trails : It will send the resources changes events from all AWS regions 
 						Logs will be sent to the cloud watch 
 		- One Region cloud trails : It will send the resources changes events from one region 
 						Logs will be sent to the S3 bucket.
+70. AWS Cnfig : .It maintains the inventory of all AWS resources.
+		.Maitain the changes occured to the config of aws resources.etc
+		.88 Config rules are also there available in AWS config against which the AWS resource will be checked and maintains in S3 bucket about the config changes 		hapend.
+
+		. Once you create the AWS config rules , it will create a governance and rule against which resources will be checked and marked as compliant and non-			compliant. Like which security groups are not attached , cloud watch log groups which are not encrypted etc etc .
+		. Resource inventory will also be created in AWS config
 	
