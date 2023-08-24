@@ -871,6 +871,11 @@ Sign up triggers :
 		   We can only suspend the versioning means aane vaalie sabhi files ka ek version hi rehga , but jinka 2 version bnchukka hai 2 hi rahega. Suspend mean rukna 
 
 66. Enable oggin for s3 : enable at the bucket level , create a temp/ dir and give permission to s3 log delivery group.
+66. S3  encryption : 
+	Server-side encryption with Amazon S3 managed keys (SSE-S3) : managed by S3  
+	Server-side encryption with AWS Key Management Service keys (SSE-KMS) : By key management service 
+	Dual-layer server-side encryption with AWS Key Management Service keys (DSSE-KMS)
+
 67. Public access to all object in bucket is off by default . So we can turn it on by two ways : 
 					- Go to bucket : public access blocked turn it off
 					- And cretae a bucket policy to all anonymous access to all the object in the bucket level. We can click on policy example to 						copyand paste the anonymous policy access to all object
@@ -886,3 +891,20 @@ Sign up triggers :
 						        }
 						    ]
 						}
+68. Aws X-Ray : For trace logs
+		- its the service to capture trace logs from each of the service in microservice architecture , so that a single transaction can be tracked.
+		- The trace logs is not directly pushed to the AWS  X-ray . We use AWS X-Daemon to get the raw data from the aws service and sent the data in batch to the 		AWS x-ray service .
+		- TO get the logs from the aws service we need to install the AWS SDK so that it can capture the traces 
+		- A single X-AWS-TRACE-ID is sent to each of the aws service present in the microservice architecture.
+		- Because of the X_ray the performance of the service degrade which can be overcome by capturing some segment of the messages from each aws service.
+69. AWS CloudTrail : AWS Resources ke changes ko monitor krta hai logs s3 or cloud watch mai dalta hai .
+		- Its used to monitor the api calls , events and any kind of changes made to the aws services or resurces.
+		- The cloud trail can send logs to a S3 bucket or to the cloud watch as confgured.
+		- We can also set up the NS service to send a notification when a log file is delivered.
+
+	Two types of cloud trails : 	
+		- Multi region cloud trails : It will send the resources changes events from all AWS regions 
+						Logs will be sent to the cloud watch 
+		- One Region cloud trails : It will send the resources changes events from one region 
+						Logs will be sent to the S3 bucket.
+	
