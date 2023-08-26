@@ -915,4 +915,31 @@ Sign up triggers :
 
 		. Once you create the AWS config rules , it will create a governance and rule against which resources will be checked and marked as compliant and non-			compliant. Like which security groups are not attached , cloud watch log groups which are not encrypted etc etc .
 		. Resource inventory will also be created in AWS config
+71. COntent delivery network : This network have many edge location .this is used in case we need to send the traffic arround the globe.\
+			- if your app is in us-east-1 region and reqs are coming from russia. then the first request will have high latency as compared to the second one 			because the second request will be fetched from the Edge locaiton that might have cached it before. CDN helps in doing that .
+			Cloud front is the service which get the requests and send it to the edge location to get cached and then secnd time will get the response from 			the edge location in case nearer to the user.
+72. AWS Cloud front :- if your app is in us-east-1 region and reqs are coming from russia. then the first request will have high latency as compared to the second one 			because the second request will be fetched from the Edge locaiton that might have cached it before. CDN helps in doing that .
+			Cloud front is the service which get the requests and send it to the edge location to get cached and then secnd time will get the response from 			the edge location in case nearer to the user.
+			Can integrates with AWS Sheild and AWS WAF. Its the contect distribution system
+		Cloud front can send the data to the edge location . Origins locations can S3 , EC2 or external website means jha se user ko data chahiye . Need to define 		the cached rule. For how much time.
+		The cahed default time is 24 hours(TTL).
+		We use path patterns to configure the behaviour of the Cloudfront for exzmaple for *.php , *.jsp do this that.
+		We can secure the Clouffront data fetch from the users 
+			- By creating Signed Urls
+			- By using OAI  : create a use for Cloud front and attached it to the origin
+			- Signed Cookies can also be send back to the user to get the content back.
+
+	Architecture of how user will get the data from cloudfront using signed cookies (used for https http content retrieval and Signed URLs from the video streaming data)
+					Asked for the signed URls or signed cookies (1)
+			----------------------------------------------------------------------------------> Appication 			
+			| |--------------------------------------------------------------------------------	|
+			| \/		Send the cookies or signed url back(2)					|
+										Cf se mamgta hai(3)		|
+			User ----------------------------->Cloud Front<----------------------------------------	|
+				Use cookies and urls		|
+					(4)			|	
+								|		(5)Get the data 
+								|---------------------------------------------------> S3 buckets (where the videos or data is presnt.)
 	
+73. AWS SHield : is to protect from DDOS attacks
+74. AWS WAF (Web application firewall) : to protect from not allowed IPs and cross scripting and sql injections.
