@@ -1057,7 +1057,7 @@ Sign up triggers :
 			
 77. Instance proffile : This is auto matically created in case we create a role and attach it to the aws sevice to talk to the s3 bucket for exmaple .
 			- This profile is nothing but a container used to pass the creds to the S3 bucket for verification.
-78. How to give access to the group of users in Dev account to Prod account ?
+78. How to give ROLE access to the group of users in Dev account to Prod account ?
 			-Don't allow direct access to the users in prod account
 			-instead create a role whic is called assume role and attache it to the group of users using the policy which access the STS api to give the 				token and switch role any time they want .
 			- After above configuration the user in the dev account won't be able to see the service in aws prod acc. They have to switch the role and ollaaaa
@@ -1067,3 +1067,13 @@ Sign up triggers :
 			Policy Name in which the role we have mentioned : DEVS3Policy
 			Role AWS Service to AWS Service : also add the STS service for the target secret fetch 
 		
+79. How to create ROLE using the Fidelity external user directory and get access to the AWS services. CUSTOMER IDENTIYT FEDERATION
+		Isme hmari AID use hongi to get authentication to the aws services.
+
+									
+	SAML2.0 compatible External Dir <------------------------USER -------------------------------------------------------------------> IAM Role and policy 
+				------gives valid user id -------     <-- get the required permission------------------------------------ 
+								      ---------------Send that permissoin out to access services---------> AWS services	
+						
+80. How to give ROLE access to the Web third party api .  WEB IDENTITY FEDERATION
+			Means getting authentication on the basis of web ids like facebook id , gmail id or etc all are open ID which are openly available.
