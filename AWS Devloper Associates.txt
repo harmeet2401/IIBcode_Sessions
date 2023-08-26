@@ -1062,7 +1062,6 @@ Sign up triggers :
 			-instead create a role whic is called assume role and attache it to the group of users using the policy which access the STS api to give the 				token and switch role any time they want .
 			- After above configuration the user in the dev account won't be able to see the service in aws prod acc. They have to switch the role and ollaaaa
 			here they can see.
-
 			Account id : 860574603717
 			Role name : PRODs3Role
 			Policy Name in which the role we have mentioned : DEVS3Policy
