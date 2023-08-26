@@ -1082,7 +1082,6 @@ Sign up triggers :
 						
 80. How to give ROLE access to the Web third party api .  WEB IDENTITY FEDERATION
 			Means getting authentication on the basis of web ids like facebook id , gmail id or etc all are open ID which are openly available.
-
 81. IAM Scenario based questions : 
 		q1. How to rotate access key without impacting the exsiting setting: Create a new Access key , use this new access key , test and verufy and then deactive the old access key.
 		q2. How are multiple permissions reslved in policies : By default in policy the permission is deny . rest agar deny likha hai to deny or agar allow likha hai to allow.
