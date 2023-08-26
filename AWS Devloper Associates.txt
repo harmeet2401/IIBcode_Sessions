@@ -976,13 +976,53 @@ Sign up triggers :
 						    ]
 						}
 
-*****HM POLICIES BNAKE USKO KISSI BHI RESOURCE PR ATTACH KR SKTE HAI . US POLICY KE ANDR USER MENTIO HOTTA HAI ALONG WITH THE OPERATION HE CAN DO.
+*****HM POLICIES BNAKE USKO KISSI BHI RESOURCE PR ATTACH KR SKTE HAI . US POLICY KE ANDR USER MENTIOn HOTTA HAI ALONG WITH THE OPERATION HE CAN DO.
+	WE CAN ATTACH A POLICY WHILE CREATING A GROUP OR A USER AS WELL.
+	BOTH SAARI POLICIES ALREADY AVAILABLE HAI.
+	
 
 73. AWS SHield : is to protect from DDOS attacks
 74. AWS WAF (Web application firewall) : to protect from not allowed IPs and cross scripting and sql injections.
 75. Best architecture to store static data and allow it to get accessed from any where .
-		- By using the S3 bucket that holds the static data like images , logos , fixed default response .
+		- By using the S3 bucket that holds the static data like images , logos , fixed default response  and TTL to allow cahe clearance.
 		- Then associate above s3 with a cloud front so that it can be accessed from any where in the world.
 		- thsi provide high performance . low latecny , cache feature etc.
-
+		- Invalidation fewture of CF will remove the object from cache at emergency.
 	Note : Don't use EC2 instance to store the static data , unwanted load will be there on it.
+
+	NOTE : .WHEN ALL REQUEST COMING FROM THE SINGLE LOCATION NO NEED TO USE CF
+	       .WHEN ALL REQUEST COMES FROM THE COMPANIES VPN NO NEED TO USE CF AS SINGLE LOCATION IS SENDING THE REQUEST
+	       .WE CAN ALSO WIDE LIST THE COUNTRIES TO RECEIVE REQUEST FROM ITS CALLED CF GEO RESTRICTION
+
+76. IAM  : Identities accessed management.
+	We have resources in AWs . Unko access krna , unpr actions krna like shutting down the Ec2 , termination etc . For all these acction and access IAM provide a 		feature to create users provide then the authentication (Is the user login access) and provide the authentication (which is the type of access on the aws service.).
+
+		Four pillors of IAM : 
+				1. Group : I have already seen this . Create a group and create a policy also .
+				2. Users : I have already seen this . Create a group add it to the group which already have a policy.
+				3. Policies : Kind of json payload consists of Principal(To whom the access is for ) , Resource means aws service and what access . Some 				of them are from AWS. Ham khud ki policies bhi bna skte hai .
+					- Managed policies : 
+						a. AWS managed : jo ham sleect kr skte hai 
+						b. Customer mamaged : jo hm create krte hai policies mai jaake and attach krte hai 
+					- Inline Policies : JO ham directly user yan group ke andr jaake bna skte hai. Policy generator hotta hai uske through .
+								Iske liye Policies section mai jana jruri nhi .
+				4. Roles : 
+
+	Lab1 : Created a user first. Then created group with AmazonEc2FullAccess policy attached to it. Then we added the user into the group.
+		When you tried to login using new user it will not able to see rest of the services except the EC2 services.
+		https://860574603717.signin.aws.amazon.com/console
+		operation_user1
+		Gogi@12345
+
+	    NOw to give acces to the user to other resources. 
+		Two options: EASY Login as a root or as a user who have admin access.
+			- Either go to the group in which the user is there and attach another policy to give access to it
+			- Either go to the user itself and attach the policy there to give access.
+
+	Lab2. To create custom policy : Hm khud ki policy bna skte hai .		
+			- Go to plicies . click on create policies .
+			- Import Aws Managed policies 
+			- Edit the json  to remove the ELB access for example and save it with your defined name.
+			- Go to the group where we can attach our new policy  and ollaaaaaaa.
+	Lab3. TO create inline policies : 
+			- Go to the 
