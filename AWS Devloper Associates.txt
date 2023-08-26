@@ -1006,8 +1006,15 @@ Sign up triggers :
 						b. Customer mamaged : jo hm create krte hai policies mai jaake and attach krte hai 
 					- Inline Policies : JO ham directly user yan group ke andr jaake bna skte hai. Policy generator hotta hai uske through .
 								Iske liye Policies section mai jana jruri nhi .
-				4. Roles : 
+				4. Roles : Its a secure feature in IAM . Above 3 features were used to privide access to group / users so that they can access the AWS 					Access.NOW AB AGAR HME AWS SERVICE1/web api/third party apps -------------> AWS SERVICE2 COMMUNICATE KRVANA HO TO HME POLICY KO ROLE MAI 				DAALKE AWS SERVICE OF ATTACH KRNA HOGA. ISKE LIYE BS ROLE BNAO BNATE TIME USME POLIYC BNANE KA STEP AEGA ENTER THE POLICY YOU WANT TO 					KEEP IN THE ROLE AND OLLAAAA ROLE CREATED 
+				NOW WE CAN ATTACH THE ROLE TO ANY AWS SERVICE 
 
+				EXAMPLE 
+						EC2 (ROLE TO READ S3 BUCKETS) ----------------------> S3
+						 EC2 INSTANCE KE ANDAR SE 
+							DIRECT COMAND 			
+							: aws s3 ls will work 
+						
 	Lab1 : Created a user first. Then created group with AmazonEc2FullAccess policy attached to it. Then we added the user into the group.
 		When you tried to login using new user it will not able to see rest of the services except the EC2 services.
 		https://860574603717.signin.aws.amazon.com/console
@@ -1025,4 +1032,26 @@ Sign up triggers :
 			- Edit the json  to remove the ELB access for example and save it with your defined name.
 			- Go to the group where we can attach our new policy  and ollaaaaaaa.
 	Lab3. TO create inline policies : 
-			- Go to the 
+			- Go to the user or the group in IAM.
+			- Go to permission 
+			- Select create inlin epolicy 
+			- import the json policy for EC2FullAccess and edit it to remove all except the LoadBalancer one.
+			- Next and create ollaaaaa done. Saare user is group mai Load balancer dekh skte hai.
+
+	
+	Lab4. TO connect to Aws service using Access key and secret key for a user fro command line . Unsecure way 
+		. Go to the user get the access key and secret key .
+		. open the EC2 instance connect it.
+			command : aws configure
+					eneter the access key 
+					enter the secret key 
+					done 
+			command : aws s3 ls : ------ will give you all the bucket inside s3
+
+	Lab5 : To connect or read s3 from ec2 instance .
+			- go to IAM --> roles 
+			- Select the aws service from where the action need to be performed ex : ec2
+			- Select the policy in this case like : s3fullaccess or s3readonlyaccess.
+			- create the policy
+			
+		. 
