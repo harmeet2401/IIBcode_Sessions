@@ -1063,3 +1063,8 @@ Sign up triggers :
 			- After above configuration the user in the dev account won't be able to see the service in aws prod acc. They have to switch the role and ollaaaa
 			here they can see.
 
+			Account id : 860574603717
+			Role name : PRODs3Role
+			Policy Name in which the role we have mentioned : DEVS3Policy
+			Role AWS Service to AWS Service : also add the STS service for the target secret fetch 
+		
