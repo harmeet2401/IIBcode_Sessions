@@ -1052,6 +1052,14 @@ Sign up triggers :
 			- go to IAM --> roles 
 			- Select the aws service from where the action need to be performed ex : ec2
 			- Select the policy in this case like : s3fullaccess or s3readonlyaccess.
-			- create the policy
+			- create the policy.
+			- Go to the EC2 instance and click on action --> modify IAM role and select the role created done.
 			
-		. 
+77. Instance proffile : This is auto matically created in case we create a role and attach it to the aws sevice to talk to the s3 bucket for exmaple .
+			- This profile is nothing but a container used to pass the creds to the S3 bucket for verification.
+78. How to give access to the group of users in Dev account to Prod account ?
+			-Don't allow direct access to the users in prod account
+			-instead create a role whic is called assume role and attache it to the group of users using the policy which access the STS api to give the 				token and switch role any time they want .
+			- After above configuration the user in the dev account won't be able to see the service in aws prod acc. They have to switch the role and ollaaaa
+			here they can see.
+
