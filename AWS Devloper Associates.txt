@@ -1001,11 +1001,16 @@ Sign up triggers :
 				1. Group : I have already seen this . Create a group and create a policy also .
 				2. Users : I have already seen this . Create a group add it to the group which already have a policy.
 				3. Policies : Kind of json payload consists of Principal(To whom the access is for ) , Resource means aws service and what access . Some 				of them are from AWS. Ham khud ki policies bhi bna skte hai .
+
+				.Identity Based policies : Which attached to IAM users and group
 					- Managed policies : 
 						a. AWS managed : jo ham sleect kr skte hai 
 						b. Customer mamaged : jo hm create krte hai policies mai jaake and attach krte hai 
 					- Inline Policies : JO ham directly user yan group ke andr jaake bna skte hai. Policy generator hotta hai uske through .
 								Iske liye Policies section mai jana jruri nhi .
+				.Resource Based Policies : Which are attached with resources directly : 
+					- Only Inline policies are there .
+					
 				4. Roles : Its a secure feature in IAM . Above 3 features were used to privide access to group / users so that they can access the AWS 					Access.NOW AB AGAR HME AWS SERVICE1/web api/third party apps -------------> AWS SERVICE2 COMMUNICATE KRVANA HO TO HME POLICY KO ROLE MAI 				DAALKE AWS SERVICE OF ATTACH KRNA HOGA. ISKE LIYE BS ROLE BNAO BNATE TIME USME POLIYC BNANE KA STEP AEGA ENTER THE POLICY YOU WANT TO 					KEEP IN THE ROLE AND OLLAAAA ROLE CREATED 
 				NOW WE CAN ATTACH THE ROLE TO ANY AWS SERVICE 
 
@@ -1077,3 +1082,11 @@ Sign up triggers :
 						
 80. How to give ROLE access to the Web third party api .  WEB IDENTITY FEDERATION
 			Means getting authentication on the basis of web ids like facebook id , gmail id or etc all are open ID which are openly available.
+
+81. IAM Scenario based questions : 
+		q1. How to rotate access key without impacting the exsiting setting: Create a new Access key , use this new access key , test and verufy and then deactive the old access key.
+		q2. How are multiple permissions reslved in policies : By default in policy the permission is deny . rest agar deny likha hai to deny or agar allow likha hai to allow.
+		q3. Which Region IAM users are created : Its globally created .
+		q4. Identity federeation : 	IAM user and  groups 
+		    corporate identityt federation : using the SAML2.0 compatible external user id list which will be used for authorization 
+		    Open ID (web identity federation ) : using the openally available ID like facebook , gmail etc .
