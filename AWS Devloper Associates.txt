@@ -918,7 +918,7 @@ Sign up triggers :
 71. COntent delivery network : This network have many edge location .this is used in case we need to send the traffic arround the globe.\
 			- if your app is in us-east-1 region and reqs are coming from russia. then the first request will have high latency as compared to the second one 			because the second request will be fetched from the Edge locaiton that might have cached it before. CDN helps in doing that .
 			Cloud front is the service which get the requests and send it to the edge location to get cached and then secnd time will get the response from 			the edge location in case nearer to the user.
-72. AWS Cloud front :- if your app is in us-east-1 region and reqs are coming from russia. then the first request will have high latency as compared to the second one 			because the second request will be fetched from the Edge locaiton that might have cached it before. CDN helps in doing that .
+72. AWS Cloud front(Global content delivery network) :- if your app is in us-east-1 region and reqs are coming from russia. then the first request will have high latency as compared to the second one because the second request will be fetched from the Edge locaiton that might have cached it before. CDN helps in doing that .
 			Cloud front is the service which get the requests and send it to the edge location to get cached and then secnd time will get the response from 			the edge location in case nearer to the user.
 			Can integrates with AWS Sheild and AWS WAF. Its the contect distribution system
 		Cloud front can send the data to the edge location . Origins locations can S3 , EC2 or external website means jha se user ko data chahiye . Need to define 		the cached rule. For how much time.
@@ -929,7 +929,7 @@ Sign up triggers :
 			- By using OAI  : create a use for Cloud front and attached it to the origin
 			- Signed Cookies can also be send back to the user to get the content back.
 
-Architecture of how user will get the data from cloudfront using signed cookies (used for https http content retrieval and Signed URLs from the video streaming data)
+- Cookies/Signedurls Architecture of how user will get the data from cloudfront using signed cookies (used for https http content retrieval and Signed URLs from the video streaming data)
 					Asked for the signed URls or signed cookies (1)
 			----------------------------------------------------------------------------------> Appication 			
 			| |--------------------------------------------------------------------------------	|
@@ -942,7 +942,7 @@ Architecture of how user will get the data from cloudfront using signed cookies 
 								|---------------------------------------------------> S3 buckets (where the videos or data is presnt.)
 
 
-OAI used architecture :
+- OAI used architecture :
 		OAi is used when we want to set that only cloudfront can access the S3 bucket for data access.
 		For that we need to create a user OAI Origin access identity and then mention that in the policy and attach it to the S3 bucket .
 					{
@@ -960,7 +960,7 @@ OAI used architecture :
 						}
 
 
-VVVVVVR IMP : 	POLICY : A policy will look like a json payload that contains the permission and to whom the permission is given to (user). We can attach this policy on the AWS service so that particular user present in the policy payload have the desired permission on aws service.
+-VVVVVVR IMP : 	POLICY : A policy will look like a json payload that contains the permission and to whom the permission is given to (user). We can attach this policy on the AWS service so that particular user present in the policy payload have the desired permission on aws service.
 		For that the USer mentionedin the policy should be created first .
 		Example of a policy : 
 						{
@@ -980,3 +980,9 @@ VVVVVVR IMP : 	POLICY : A policy will look like a json payload that contains the
 
 73. AWS SHield : is to protect from DDOS attacks
 74. AWS WAF (Web application firewall) : to protect from not allowed IPs and cross scripting and sql injections.
+75. Best architecture to store static data and allow it to get accessed from any where .
+		- By using the S3 bucket that holds the static data like images , logos , fixed default response .
+		- Then associate above s3 with a cloud front so that it can be accessed from any where in the world.
+		- thsi provide high performance . low latecny , cache feature etc.
+
+	Note : Don't use EC2 instance to store the static data , unwanted load will be there on it.
