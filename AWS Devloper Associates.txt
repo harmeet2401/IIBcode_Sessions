@@ -929,7 +929,7 @@ Sign up triggers :
 			- By using OAI  : create a use for Cloud front and attached it to the origin
 			- Signed Cookies can also be send back to the user to get the content back.
 
-	Architecture of how user will get the data from cloudfront using signed cookies (used for https http content retrieval and Signed URLs from the video streaming data)
+Architecture of how user will get the data from cloudfront using signed cookies (used for https http content retrieval and Signed URLs from the video streaming data)
 					Asked for the signed URls or signed cookies (1)
 			----------------------------------------------------------------------------------> Appication 			
 			| |--------------------------------------------------------------------------------	|
@@ -940,6 +940,43 @@ Sign up triggers :
 					(4)			|	
 								|		(5)Get the data 
 								|---------------------------------------------------> S3 buckets (where the videos or data is presnt.)
-	
+
+
+OAI used architecture :
+		OAi is used when we want to set that only cloudfront can access the S3 bucket for data access.
+		For that we need to create a user OAI Origin access identity and then mention that in the policy and attach it to the S3 bucket .
+					{
+					"Version": "2012-10-17",
+					   "Statement": [
+					     {
+					 "Sid": "PublicReadGetObject",
+					"Effect": "Allow",
+					"Principal": "AWS":
+					"arn:aws:iam:cloudfront:usercloudfront OAI/", ------------------- this place contains the users to whom the access is given to 
+						            "Action": "s3:GetObject",  --------------- Kya operation vo kr skta hai 
+						            "Resource": "arn:aws:s3:::tesbucket1/*"  ---------------- Kiss aws service pr diya hai 
+						        }
+						    ]
+						}
+
+
+VVVVVVR IMP : 	POLICY : A policy will look like a json payload that contains the permission and to whom the permission is given to (user). We can attach this policy on the AWS service so that particular user present in the policy payload have the desired permission on aws service.
+		For that the USer mentionedin the policy should be created first .
+		Example of a policy : 
+						{
+						    "Version": "2012-10-17",
+						    "Statement": [
+						        {
+						            "Sid": "PublicReadGetObject",
+						            "Effect": "Allow",
+						            "Principal": "*", ------------------- this place contains the users to whom the access is given to 
+						            "Action": "s3:GetObject",  --------------- Kya operation vo kr skta hai 
+						            "Resource": "arn:aws:s3:::tesbucket1/*"  ---------------- Kiss aws service pr diya hai 
+						        }
+						    ]
+						}
+
+*****HM POLICIES BNAKE USKO KISSI BHI RESOURCE PR ATTACH KR SKTE HAI . US POLICY KE ANDR USER MENTIO HOTTA HAI ALONG WITH THE OPERATION HE CAN DO.
+
 73. AWS SHield : is to protect from DDOS attacks
 74. AWS WAF (Web application firewall) : to protect from not allowed IPs and cross scripting and sql injections.
