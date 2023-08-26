@@ -28,7 +28,7 @@ Steps : To create an IAM group
 1. Search for IAM 
 2. Left side click on user groups 
 3. clikc on create group : enter the name of the group 
-4. Select the access as AdministratorAccess 
+4. Select the policy as AdministratorAccess 
 5. Select finish
 
 steps to create a IAM user user and add it to the above IAM group 
@@ -205,7 +205,7 @@ curl -s http://169.254.169.254/latest/dynamic/instance-identity/document > /var/
 
 12. Launch template : 
 
-These are are the templates we can wither create it from scratch or from the running instanxe of service EC2.
+These are are the templates we can wither create it from scratch or from the running instance of service EC2.
 Its like a snapshot we can create and then use this template to spin up a ec2 instance without entering any configuration points like AMI , linux verion security group etc .
 
 steps : 
@@ -225,17 +225,18 @@ AMI contains the OS and Soaftware you want on the EC2 instances.
 	our AMIs are stored in Amazon s3 bucket on region level.
 	So we can run the instance in any AZ in the region .
 Steps : 
-	This we can create it from the running or stopped EC2 instance .
-	Then release an another version of  launch template removing the user data which was in it before because it was in the config of EC2 jisko use krke template bnaya tha and selecting the new AMI i ccreated.
-	Select the AMI created.
-	Now the AMI itself will have theinstalled softwares needed and ollaaa will time down the boot time with no user data.
+	-This we can create it from the running or stopped EC2 instance .
+	-Can create it by click on the running uinstance and action ---> create image . now if the running instance have the desired softwares we can use it in releasing 		a new version of template and use to run more instance easily with more speed as the ned template will not have any user data.
+	-Then release an another version of  launch template removing the user data which was in it before because it was in the config of EC2 jisko use krke template 			bnaya tha and selecting the new AMI i created.
+	-Select the AMI created.
+	-Now the AMI itself will have theinstalled softwares needed and ollaaa will time down the boot time with no user data.
 	
 14. AWS market AMI : AMIS from diff vendor	
 
 AMIs : 
-	COpy from one region to other regin . because if we want to use my custom ami in other region like tokyo . then we have to copy the Custom ami from mumbai to tokyo in order to spin the ec2 .
-	We can also make the AMI public : available to all.
-	Change the permission . We can search of the account number and add him/her to the AMI persmission 
+	-Copy from one region to other regin . because if we want to use my custom ami in other region like tokyo . then we have to copy the Custom ami from mumbai to 			tokyo in order to spin the ec2 .
+	-We can also make the AMI public : available to all.
+	-Change the permission . We can search of the account number and add him/her to the AMI persmission 
 	
 15. EC2 connect key pair : download the pem(RSA) : which is the private key usd for SSH to your instance.
 
