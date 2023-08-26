@@ -435,8 +435,8 @@ Couple of questions on Autoscaling group :
 		- there are two input parameters to a lambda one is event and other is context (this will shows the various funtion name , time and other 				details of the function which is being used.)
 
 Imp points for lambda : 
-	a. We can allocate the memory to the lambd a: max is : 3 GB 
-	b. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins
+	a. We can allocate the memory to the lambd a: max is : 3 GB , by default the memory is 128 MB , Ephemeral space is 512 mb.
+	b. We can allocate the time out for lambda : means if lambda doesn't send a response back with x mins it will throw an error max time is : 15 mins , by default 		is 3 secs.
 	c. We can assign a role , bydefault a role is created by lambda . The dafault role has permission on cloudwatch logs to create logs in it.
 	d. Monitoring : You can see the events triggered and request and matrices and view X-ray traces. etc
  	e. Lambda versioning L In this we can release diff version of lambdas to the user . Click on Acvtio on the right and click publish new version then 			sequence vice version will be published 
