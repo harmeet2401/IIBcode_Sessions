@@ -291,7 +291,7 @@ In both the services we can set up triggers for certain threashhold is crossed.
 	- It can autoscale as per the load coming .
 	- A health check feature is there which allows the lB to send a health check ping to the backend ec2 instance to send the traffic only if the instance 
 is alive.
-	- The WAS cloud prov will not scale the backend EC2 instance. When we say that LB will get auto scale it means on ly LB will scale in or out.
+	- The AWS cloud prov will not scale the backend EC2 instance. When we say that LB will get auto scale it means on ly LB will scale in or out.
 	- Later on we will learn autoscale groups to scale the EC2 instances .
 
 24. Netrwork layers and protocol they used :
@@ -324,13 +324,15 @@ Steps to create Classic Load Balancer :
 	- Search for load balancer fro mthe left panel 
 	- select the classic one from the list .
 	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn , select the AV Zones to allow cross zone 		load balancing in case instances are in diff zones in one region .
+	- No Need to create a target group . Instance can be added directly to the Classic LB
 	- Select if the LB is private ir public load balancer (internet facing).
 	- Select the heathcheck values like threashhold, timeout etc.
 
 Steps to create Application Load Balancer : 
 	- Search for load balancer fro mthe left panel 
 	- select the application one from the list .
-	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn ,  cross zone load balancing is the 			default function in case instances are in diff zones in one region .
+	- Enter the details for LB name , Select the security group , Selecte the instances to be added in the backedn as a target group ,  cross zone load balancing is 		the default function in case instances are in diff zones in one region .
+	- We have to create a target group and attach it to the LB.
 	- Select if the LB is private ir public load balancer (internet facing).
 	- Select the heathcheck values like threashhold, timeout etc.
 	- Select the instance type to be load balanced between : (IP , AWS instances or Lambdas). For this we have to create the target group . This group will 		have the instaces running.
