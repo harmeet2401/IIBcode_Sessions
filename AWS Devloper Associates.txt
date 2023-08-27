@@ -1177,4 +1177,4 @@ Long polling is the feature in wich we can send a polling interval if we keep mo
 
 VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE PUBLISH A MESSAGE IN THE TOPIC (GOT TO THE SNS TOPIC ENTER THE MESSAGE BODY) IT WILL BE SEND TO THE QUUEE. WE CAN ALSO ASK LAMBDA TO SUBSCRIBE TO THE TOPIC . SO WHENEVER WE PUBLISH A MESSAGE IT WILL GO AS PART OF THE EVENT IN THE LAMBDA
 
-88. Amazon MQ = SNS+SQS and tradiction prortocol , and if we want to migrate the =messaging app to cloud with out any code change we use amazon mq
+88. Amazon MQ = SNS+SQS and tradiction prortocol , You have multiple applications in your enterprise using the AMQP message broker. You would like to migrate them to AWS but don't want to do much code changes
