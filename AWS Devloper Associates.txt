@@ -1108,7 +1108,7 @@ Sign up triggers :
 	Amazon SQS : Its the queing service 
 			Two Types : 
 				.Standard Q : NO guranteed to get the messages in queue.	
-					     Throughput is high 
+					     Throughput is unlimited 
 
 					Lifecycle of a Standard Quee : 
 
@@ -1116,14 +1116,14 @@ Sign up triggers :
 					AMazon SQS ----If any delay periods set on Q(15 mins) ------> It will delay to put the message to the Queue 
 						  -----> If there is no delay period set-----> It will directly go into the READY state
 						  -----> From Ready state -------> Consumer consumer the message 
-						 -------> A visibility expire period start for consumer(max 12h) ---> If that get expired and consumer couoldn't process and send 							s deletion request back to the queue 
+						 -------> A visibility expire period start for consumer(max 12h) during this period other consumer won't be able to see 				the message because first consumer have already consumer it and have some time to process and delete it from q -----------> If that get 							expired and consumer couoldn't process and send a deletion request back to the queue 
 						 --------> then it will retry the processing ----> this will go for a limited number of time.----> if not processed then 
 						--------> message will be kept in ready state for other consumers -----> For a period of retention preiod(max : 14 days)
 						---------> if not processed then pushed to the dead letter queue.
 
 	
 				.FIFO Q : -  Guranteed to get the messages in queue.	
-				           Throughput is less . 300 messages pr second in maximun.
+				           Throughput is high . 300 messages pr second in maximun.
 					   if you send the date in batch then 10 messages per operaton and 3000 messages per second
 
 	-Simplest scenario of Message processing from a SQS
@@ -1133,8 +1133,19 @@ Sign up triggers :
 		- Third the csonumer process the message successfully , then send a deletion request back to the Q aloing with the receipt ID to delet the message from 		the Q. No no other consumer will see that message.
 
  	- From access prospective : 
-		- How to allo w the application runing on the ec2 instance to access Q : By creating a policy of SQS access inside a role and attach the role to the Ec2 instance 
-		- How to allow other AWS account to access the Q : By creating an Access Queue policy (resource policy containing the aws account need access to.)
+		- How to allo w the application runing on the ec2 instance to access Q : By creating a policy of SQS access inside a role and attach the role to the Ec2 			instance 
+		- How to allow other AWS account to access the Q : By creating an Access Queue policy (resource policy containing the aws account need access to.) means 			insise resource and go to the permission
 83. AUTOSCALING OF EC2 using CLoud watch : Easy. Cloud watch alarm kissi pr lga ke Ec2 ko bda skte hai.
 		- Hme pta hai ki hm autscale group bnake Ec2 ko scale in , out krskte hai . PR auto scale ka trigger kha se atta hai . Cloud watch se . Kyunki hm jab bhi 			Auto scale group bnate hai ek cloud watch alarm bn jata hai moniting the CPU threashold bla bla bla . and triggers wher the threashold reaches.
 		- Vaese hi Queue mai bhi kr skte hai . Ham Ec2 ko scale kr skte hai by creating a Cloud watch alarm jo Amazon SQS ki Queue mai message dekhkr Ec2 ke 			instance bda degga.
+
+84. How to communicate with teh SQS from the EC2 instance : 
+		- First create an IAM role which willcontains the policy to access the SQS . 
+		- Go to the EC2 instance and attach that role to it.
+		- run command aws configure to set the region where the queue is.
+		- Command to execute : aws sqs list-queues : to get the list of queues 
+			aws sqs receive-message --queue-uri
+			aws sqs send-message 
+			aws sqs delete-message 
+			
+	
