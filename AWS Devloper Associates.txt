@@ -1147,5 +1147,33 @@ Sign up triggers :
 			aws sqs receive-message --queue-uri
 			aws sqs send-message 
 			aws sqs delete-message 
-			
+
+	Note : if you are assigning the role to the EC2 instance from CLI assign the trust role to the ec2 first so that it can assume the role assigned.
+
+85. How to SQS check that the incoming message is duplicate or not .
+	- Content based duplication : SQS create s deduplication ID using the body the message. If you message body is diff all the time then SQS will generate the Dedup ID and confirms if the message is duplicate or not..
+	- Explicitly sending the deuplication id from the producer . This can be done by hitting the MessageDuplication api with dedup id in the parmetere.
+
+86. SQS Api :
+	CreateQueues, DeleteQueues : create of delete the Q
+	ReceiveMessage	: TO get the message from Q max number of message is 10
+	DeleteMessage  : To delet ethe message from teh Q using the Receipt handle you get from the receivemessage call
+	ChangeMessageVisibility : The visibility time 
+	SendMessage : Post a message.
+	SendMessageBatch: Send 10 message in one time.
+	ChangeMessageVisibilityBatch
+
+Long polling is the feature in wich we can send a polling interval if we keep more time then then the SQS poll the q and if the message is not received it will wait for the exlicit time metntioned and then go for the second api call.
+
+87. Amazon SNS : Simple notification service : Its a pUB sub pardigm 
+	In this service multiple users subscribe to a SNS topic and when ever a published place a data in topic all the subscriber will receive an email .
+-Application-to-application (A2A)
+ Amazon SNS is a managed messaging service that lets you decouple publishers from subscribers. This is useful for application-to-application messaging for microservices, 
+ distributed systems, and serverless applications. APP LIKE LAMBDA , EMAIL , WEB API , SQS ETC CAN SUBSCRIBE TO THE TOPIC TO RECEIVE THE EMAILS.
+
+
+-Amazon SNS lets you send push notifications to mobile apps, text messages to mobile phone numbers, and plain-text emails to email addresses. You can fan out messages 
+ with a topic, or publish to mobile endpoints directly. 
+
+VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE PUBLISH A MESSAGE IN THE TOPIC (GOT TO THE SNS TOPIC ENTER THE MESSAGE BODY) IT WILL BE SEND TO THE QUUEE. WE CAN ALSO ASK LAMBDA TO SUBSCRIBE TO THE TOPIC . SO WHENEVER WE PUBLISH A MESSAGE IT WILL GO AS PART OF THE EVENT IN THE LAMBDA
 	
