@@ -1092,3 +1092,42 @@ Sign up triggers :
 		q4. Identity federeation : 	IAM user and  groups 
 		    corporate identityt federation : using the SAML2.0 compatible external user id list which will be used for authorization 
 		    Open ID (web identity federation ) : using the openally available ID like facebook , gmail etc .
+
+82. Amamzon SQS and Amazon SNS serivce : 
+		- Both of above service act as a service to decoupled the architecture and provide asunchronous activity between the service and decreases the downtime.
+		- Synchronous : Service1 ----> Service 2 email notofication ----> mail box . Highly coupled. Serice 1 , serivce 3 ke response ka wait kregi and also agar 			service 2 down jaati hai to service 1 bhi down jaegi .
+		- Asynch  : service 1 ---> Queue -----> service2 email notification ----> mail box . Loosely coupled . Service 2 queue mai message daalke agge bd jaegi 			and apne baaki kaam kregi . Downtime nhi hogga and more availability.
+			=Two types of Asyn model 	
+				. Pull model : 			Pull the message from Q			  
+					service 1 ---> Queue ------------------------> AWS Service 
+						   	     -------------------> Ec2 insance 
+
+				. Push model :			Push the message to all consuming srvices
+					service 1 ---> TOpic -----------------------------------------------> AWS Service 
+							      ----------------------------------------------> Ec2 insance 
+	Amazon SQS : Its the queing service 
+			Two Types : 
+				.Standard Q : NO guranteed to get the messages in queue.	
+					     Throughput is high 
+
+					Lifecycle of a Standard Quee : 
+
+
+					AMazon SQS ----If any delay periods set on Q ------> It will delay to put the message to the Queue 
+						  -----> If there is no delay period set-----> It will directly go into the READY state
+						  -----> From Ready state -------> Consumer consumer the message 
+						 -------> A visibility expire period start for consumer ---> If that get expired and consumer couoldn't process and send 							s deletion request back to the queue 
+						 --------> then it will retry the processing ----> this will go for a limited number of time.----> if not processed then 
+						--------> message will be kept in ready state for other consumers -----> For a period of retention preiod(4 days etc)
+						---------> if not processed then pushed to the dead letter queue.
+
+	
+				.FIFO Q : -  Guranteed to get the messages in queue.	
+				           Throughput is less . 300 messages pr second in maximun.
+					   if you send the date in batch then 10 messages per operaton and 3000 messages per second
+
+	-Simplest scenario of Message processing from a SQS
+		Producer --------------> Q -------------------->consumer
+		- First the producer puts the message into the queue and receives a receipt ID .(ABCDEFGJ).
+		- Seccnd the consumer polls the Q to see if any message is there , consumed the message and get a handle receipt ID(XDF).
+		- Third the csonumer process the message successfully , then send a deletion request back to the Q aloing with the receipt ID to delet the message from 		the Q. No no other consumer will see that message.
