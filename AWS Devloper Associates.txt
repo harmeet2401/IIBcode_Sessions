@@ -1113,12 +1113,12 @@ Sign up triggers :
 					Lifecycle of a Standard Quee : 
 
 
-					AMazon SQS ----If any delay periods set on Q ------> It will delay to put the message to the Queue 
+					AMazon SQS ----If any delay periods set on Q(15 mins) ------> It will delay to put the message to the Queue 
 						  -----> If there is no delay period set-----> It will directly go into the READY state
 						  -----> From Ready state -------> Consumer consumer the message 
-						 -------> A visibility expire period start for consumer ---> If that get expired and consumer couoldn't process and send 							s deletion request back to the queue 
+						 -------> A visibility expire period start for consumer(max 12h) ---> If that get expired and consumer couoldn't process and send 							s deletion request back to the queue 
 						 --------> then it will retry the processing ----> this will go for a limited number of time.----> if not processed then 
-						--------> message will be kept in ready state for other consumers -----> For a period of retention preiod(4 days etc)
+						--------> message will be kept in ready state for other consumers -----> For a period of retention preiod(max : 14 days)
 						---------> if not processed then pushed to the dead letter queue.
 
 	
@@ -1131,3 +1131,10 @@ Sign up triggers :
 		- First the producer puts the message into the queue and receives a receipt ID .(ABCDEFGJ).
 		- Seccnd the consumer polls the Q to see if any message is there , consumed the message and get a handle receipt ID(XDF).
 		- Third the csonumer process the message successfully , then send a deletion request back to the Q aloing with the receipt ID to delet the message from 		the Q. No no other consumer will see that message.
+
+ 	- From access prospective : 
+		- How to allo w the application runing on the ec2 instance to access Q : By creating a policy of SQS access inside a role and attach the role to the Ec2 instance 
+		- How to allow other AWS account to access the Q : By creating an Access Queue policy (resource policy containing the aws account need access to.)
+83. AUTOSCALING OF EC2 using CLoud watch : Easy. Cloud watch alarm kissi pr lga ke Ec2 ko bda skte hai.
+		- Hme pta hai ki hm autscale group bnake Ec2 ko scale in , out krskte hai . PR auto scale ka trigger kha se atta hai . Cloud watch se . Kyunki hm jab bhi 			Auto scale group bnate hai ek cloud watch alarm bn jata hai moniting the CPU threashold bla bla bla . and triggers wher the threashold reaches.
+		- Vaese hi Queue mai bhi kr skte hai . Ham Ec2 ko scale kr skte hai by creating a Cloud watch alarm jo Amazon SQS ki Queue mai message dekhkr Ec2 ke 			instance bda degga.
