@@ -1178,3 +1178,47 @@ Long polling is the feature in wich we can send a polling interval if we keep mo
 VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE PUBLISH A MESSAGE IN THE TOPIC (GOT TO THE SNS TOPIC ENTER THE MESSAGE BODY) IT WILL BE SEND TO THE QUUEE. WE CAN ALSO ASK LAMBDA TO SUBSCRIBE TO THE TOPIC . SO WHENEVER WE PUBLISH A MESSAGE IT WILL GO AS PART OF THE EVENT IN THE LAMBDA
 
 88. Amazon MQ = SNS+SQS and tradiction prortocol , You have multiple applications in your enterprise using the AMQP message broker. You would like to migrate them to AWS but don't want to do much code changes
+
+89. CLoud Watch : service used to visualize logs , create alarms and trigger events in case of any monitroing is applied on the web service like ALB etc.
+   - CLoud watch metrics : Defalt metrics is already there . to get detailed metrics used paid services.
+	
+		ELB : Http400error metircs, Load , number of request coming etc 
+		EC2:
+		Dynamo DB: ProvisionedReadCapacityunit , ProvisionedWriteCapacity unit.
+		Lambda  : Concurrentevent , 
+		Api GAteways : failurerequest metrics , successrequest etc
+  - Cloud watch dashboard : Hm koi bhi service select kr skte hai and uska metric selcect krke dashboard bna skte hai . Good widget
+  - Cloud watch alarm : Ham kissi bhi service ko select krke uske metrics ko select krke uspr alarm set kr skte hai . Example : we can selct the Ec2 instance and select 	CPU utilization should not be more than 80 % and if it goes we can confgure a topic to which the cloud watch alram will place the message and message will be 		broadcasted to all receipient.
+  - Cloud wathc logs and insight : 
+		- Hme apni services ko set up kr skte ha ki vo saare logs clooud wathc pr daale us logs mai kitne request ayi , errro rresponse sab dikhega .
+		- Cloud watch mai jaake dekh skte hai .
+		- Cloud wathc insights means logs ke andr hi ham QUERY lgake data set fetch and organised kr skte hai logs ka.
+  - cloud watch events : Its for resources . Means that we can set an event on certain action to be taken for an event of a resourece. Like agar mera EC2 delete hua hai 	mai ek eevnt generate krunga cloud watch se and send it to Kinesis stream , Lambda , API gate way , Autoscaling krdao etc etc.
+	Like we can send email on stage change in a CICD pipleine. When the stage changes from build to deploy we can trigger a event to the SNS topic to send an email 		to the approvers and get the pipeline approed.
+  - Container insight : TO get logs about anything happening with the containers. The Service installed in containers will help is capturing the loggs of whatever is h 
+        happening inside the container.
+
+  - Namespace , Metrics and Dimension : 
+		Key terms used in cloud watch : 
+	Namespace : Its a cntainer for a metrics : agar hme metrics from many services ko ek jgah rkhna hai to Namespace bnao.
+	Metrics : We know that particular value of a parameter at a certain time interval
+	Dimension  : Key value pair assigned to a metric value.
+ - PUTMETRICDATA Api : Api used by servuce to push custom metrics to the cloud watch .
+ vvvvimp poits : 
+		Region specific 
+		not available for oS level metric , fo that need to install agent 
+		For Ec2 metric is generated every 5 mins.
+
+- VVVVVVIMPPPPP : How to push logs from the EC2 instance running on your on premises.
+	1. First approach : Install a unified cloud watch agent : Multi OS agent 
+
+	2. Second approach : Install a simple cloud watch agent for linux based systems.
+	  . For creating a role need to create an IAM user : 
+
+	For Ec2 to publish the logs  :  For EC2 of the approaches you have to create a IAM role : CloudWatchAgentIamRole and attach it to the EC2 instance so that it can 	publish the logs to the cloud watch service
+
+	For on-premises instances L You have to create a IAM user and configure a AmazonCloudwatchAgent profile(aws_access_key_id and aws_secret_access_key) on the 		instace.
+
+- AWS EventBRige : We know tha Aws events in Cloud watch is specifically to give direction to the events occured on the aws Service only .
+	AWS EventBridge help in doing the same on Custom applications , AWS Service and third party services.
+
