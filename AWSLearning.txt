@@ -1066,6 +1066,7 @@ Network Reachability-1.1
 			-AWS kinesis video Streams
 			-AWS kinesis Firehose  : Just to read and write the data directly to the storage service , we can use kinesis firehose. No need to write the program and code.
 			-AWS kinesis data analytics
+
 			
 			
 Note : Whenever we place a record to the shard using kinessis api and lib we get shard id and sequence id .
@@ -1099,7 +1100,13 @@ out put :
 }
 
 data is not in the format we pushed as base64 and is not decoded back to normal text format .
-				
+Amazon Kinesis Data Streams - Process Data Streams
+
+Amazon Kinesis Firehose - Data ingestion for streaming data : S3, Elasticsearch etc
+
+Amazon Kinesis Analytics - Run queries against streaming data
+
+Amazon Kinesis Video Streams - Monitor video streams
 			
 		
 70. AWS Athena : 
