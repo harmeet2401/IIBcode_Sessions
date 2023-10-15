@@ -1,1 +1,9 @@
 It is used to install or create infra on AWS or any other cloud provider .
+Instll Terraform cli 
+Install Aws cli : aws configur eto configure the aws account to want to work on and its resources.
+Once aws cli is install . You can go to your account -- > IAM -- > users --- > Top right corner select admin accont --> secret access keys and then generate and use it 
+
+Command aws configure  : 
+    - > access key id 
+    - > secert access key 
+      els e
