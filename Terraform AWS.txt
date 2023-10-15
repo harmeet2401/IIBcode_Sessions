@@ -11,6 +11,21 @@ Command aws configure  :
 1. Terraform workflow and command : 
     a. Terraform init : initial the directory where wrote the terraform scripts and downloaf the providers and liberaries needed.
     b. Terraform validate  : Validate the syntax of the terraform script we wrote 
-    c. Terraform Plan : Which will tell you what is about to be created and how.
+    c. Terraform Plan : Which will tell you what is about to be created/update/destroy and how.
     d. Terraform apply : which will create the resources to the aws cloud  .
     e. Terraform destroy : which will destroy the resource on aws cloud.
+2. Terraform code files are terraform configuration files.
+Note : We should be running the above commands in the working directory where the tf files rae thre.
+
+3. tf anatomy : 
+
+        <Block Type> <Block label1 >  <Block label2> {
+                Argument identifier = Arguments values.
+
+            }
+
+Example : resource is the block type and so on as other values.
+        resource "aws_instance" "ec2demo" {
+                    AMI = "ami-uuwjjjjss"
+                    PROCESSOR = "AMDreon"
+                }
