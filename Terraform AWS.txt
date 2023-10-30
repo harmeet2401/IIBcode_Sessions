@@ -1,6 +1,12 @@
 AWS root user : 
 meet1992jan@gmail.com
 Gogi@12345
+Access key  : AKIASJIKHFY3WWOWHXE2
+
+Use this repo for code to create resources : 
+https://github.com/stacksimplify/hashicorp-certified-terraform-associate/tree/main/02-Terraform-Basics
+
+https://github.com/stacksimplify/terraform-on-aws-ec2/tree/main/02-Terraform-Basics
 
 It is used to install or create infra on AWS or any other cloud provider .
 Instll Terraform cli 
@@ -33,3 +39,10 @@ Example : resource is the block type and so on as other values.
                     AMI = "ami-uuwjjjjss"
                     PROCESSOR = "AMDreon"
                 }
+4. To run the teaaform script below steps is pre-requisite : 
+        - Default vpc should be there 
+        - AMI for the EC2 you want to create shold be in the region avaialbe 
+        - Verify your creds you configure for aws login in $HOME/.aws/configure  : C:\Users\harmeet.y.singh\.aws\credentials.
+
+
+
