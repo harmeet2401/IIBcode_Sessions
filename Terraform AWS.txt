@@ -39,10 +39,30 @@ Example : resource is the block type and so on as other values.
                     AMI = "ami-uuwjjjjss"
                     PROCESSOR = "AMDreon"
                 }
+
+        - Blocks  : like resources , variable , data etc 
+        - Provisioners blocks : Like tags etc 
+        - Block labels : which is like resources "aws_instance" "ec2demo"  ----> two lables are there.
+        - Arguments : Which is inside the blocks.
+                    like AMI , Processor ,etc
+    
 4. To run the teaaform script below steps is pre-requisite : 
         - Default vpc should be there 
         - AMI for the EC2 you want to create shold be in the region avaialbe 
         - Verify your creds you configure for aws login in $HOME/.aws/configure  : C:\Users\harmeet.y.singh\.aws\credentials.
+
+5.  Arguments , meta arguments and Attributes  and labels 
+    - Labels  :     
+        The second labels can be anything . The first label should ne hashicorps standard based. like aws_instance is a valid one and aws_instance_demo is not a valid one .
+    - Arguments :         
+        These are used to configure the resources and are eith required or optional .
+        Always look for the documentation to check for the rquired and optional fields.
+    - Attributes : 
+        Attributes really points to the configuration assigned by the underlying provider to the resource we create using the arguments .
+        These attributes can also be used in other resources in case we need it in format : resource_type.resource_name.attribute_name.
+        For example for above ec2 
+                aws_instance.ec2demo.publicip : This is the attribute we can use after creattion of ec2 instances.
+    
 
 
 
