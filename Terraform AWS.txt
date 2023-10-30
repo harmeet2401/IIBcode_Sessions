@@ -1,3 +1,7 @@
+AWS root user : 
+meet1992jan@gmail.com
+Gogi@12345
+
 It is used to install or create infra on AWS or any other cloud provider .
 Instll Terraform cli 
 Install Aws cli : aws configur eto configure the aws account to want to work on and its resources.
