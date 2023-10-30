@@ -70,8 +70,16 @@ Example : resource is the block type and so on as other values.
 6. Blocks in TF : 
         1. Fundamental blocks: 
                 - Terraform block : In which we mention the hashicoop version and plugin needed.
+                        Only constants value to be used inside it liek version number , etc 
                 - Providers block : to tell which cloud provider and region and etc 
+                        same only constants to be used like provider name : aws , region etc 
+            NOte : Above two blocks can be part of single file name it as terraform.tf or any name 
+            NOte : Terraform.tf file we can also mention the terraform state file store location. Like we did in using the bucket on cloud provider.
+                    Agar ye backend nhi doge to vo local directory mai bnadegga state file.
+                    name of the file : terraform.tfstate
+
                 - Resource blocks : To create a specific resoutce.
+            Note : resource block should be part of different file as per the codeing standards.
 
         2. Variable blocks : 
                 - Input variable blocks : TO create a vraibles 
@@ -79,6 +87,6 @@ Example : resource is the block type and so on as other values.
                 - local values blocks: with in the same modules or tf file.
         3. Refernece blocks :
                 - data blocks : which is used to get referenced values form the provider for a specific resource.
-                - Module blocks : which is used to call an existing resources or bundle from providers and use it.
+                - Module blocks : which is used to call an existing resources or bundle from providers and use it. It is used to pull the resources from the terraform registery just like we pull an image from the docker registry.
 
 
