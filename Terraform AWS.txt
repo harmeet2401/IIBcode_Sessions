@@ -67,4 +67,18 @@ Example : resource is the block type and so on as other values.
         example : depends-on is a meta-arguments which controls the behavioud that one resource depends upon the other.
                 For-each : which is a code level loop .
 
+6. Blocks in TF : 
+        1. Fundamental blocks: 
+                - Terraform block : In which we mention the hashicoop version and plugin needed.
+                - Providers block : to tell which cloud provider and region and etc 
+                - Resource blocks : To create a specific resoutce.
+
+        2. Variable blocks : 
+                - Input variable blocks : TO create a vraibles 
+                - output values blocks : to create an output variable to be used further 
+                - local values blocks: with in the same modules or tf file.
+        3. Refernece blocks :
+                - data blocks : which is used to get referenced values form the provider for a specific resource.
+                - Module blocks : which is used to call an existing resources or bundle from providers and use it.
+
 
