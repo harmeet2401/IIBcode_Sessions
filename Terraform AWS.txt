@@ -63,6 +63,8 @@ Example : resource is the block type and so on as other values.
         For example for above ec2 
                 aws_instance.ec2demo.publicip : This is the attribute we can use after creattion of ec2 instances.
     
-
+    - Meta-arguments : As above arguments and attribute are aws resource level things. Meta-arguments is used for terraform purpose to control the code behaviour .
+        example : depends-on is a meta-arguments which controls the behavioud that one resource depends upon the other.
+                For-each : which is a code level loop .
 
 
