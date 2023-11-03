@@ -105,4 +105,6 @@ Example : resource is the block type and so on as other values.
         - block label1  : which is the resource type like aws_vpc , aws_instance , aws_s3 , aws_iam_policy etc 
         - block label2 : which should be unique like a variable in java to be used anywhwre in the module scope.
         - Inside block : we have arguments , meta-arguments etc
+                Argument reference or arguments are input to the resource . like ami , tags , type etc 
+                Attribute references or attributes are the properties jo output niklta hai resource bnne ke baad . We can use these attributes as an output and use it a                   ny where using resourcetype.resource_name.attributename . arn tagsall , private_dns  , instance_state. etc 
 
