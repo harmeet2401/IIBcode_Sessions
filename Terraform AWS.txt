@@ -100,5 +100,9 @@ Example : resource is the block type and so on as other values.
         correct way ke liye do "aws configure" and enter the region , accesskey and secretkey from your aws console managment. 
         after which the in .aws/credentials have the profile , accesskey and secretkey 
 
-
+8. resource block :
+        - Need resource keyword
+        - block label1  : which is the resource type like aws_vpc , aws_instance , aws_s3 , aws_iam_policy etc 
+        - block label2 : which should be unique like a variable in java to be used anywhwre in the module scope.
+        - Inside block : we have arguments , meta-arguments etc
 
