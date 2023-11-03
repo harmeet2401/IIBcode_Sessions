@@ -89,4 +89,8 @@ Example : resource is the block type and so on as other values.
                 - data blocks : which is used to get referenced values form the provider for a specific resource.
                 - Module blocks : which is used to call an existing resources or bundle from providers and use it. It is used to pull the resources from the terraform registery just like we pull an image from the docker registry.
 
+7. Terraform block and setting blocks : 
+    - terraform block will contains the terraform version and the required_providers which is used to communicate with the providers and root modules .
+    - TERRAFORM REGISTRY is there just like the git repo which contains the providers and the modules we can download to work .
+
 
