@@ -89,13 +89,13 @@ Example : resource is the block type and so on as other values.
                 - data blocks : which is used to get referenced values form the provider for a specific resource.
                 - Module blocks : which is used to call an existing resources or bundle from providers and use it. It is used to pull the resources from the terraform registery just like we pull an image from the docker registry.
 
-7. Terraform block and setting blocks : 
+7. terraform block and providers blocks : 
     - terraform block will contains the terraform version and the required_providers which is used to communicate with the providers and root modules .
     - TERRAFORM REGISTRY is there just like the git repo which contains the providers and the modules we can download to work .
              : Providers on hashicoprt/terraform registry we can download.
                 hashicorp/aws : Lifecycle management of AWS resources, including EC2, Lambda, EKS, ECS, VPC, S3, RDS, DynamoDB, and more. This provider is maintained                     internally by the HashiCorp AWS Provider team.
 
-     - c1-versions.tf mai terraform block and provider bloack likhne ke baad jab hm isse jaake provider ko us-east-1 mai kaam krne ke liye authentication chahiye jo ham static way mai de skte hai in provider bloack like arguments "access_key" and "secret_key" jo shi way nhi hai .
+     - c1-versions.tf mai terraform block and provider bloack likhne ke baad jab hm isse jaake provider ko us-east-1 mai kaam krne ke liye authentication chahiye jo ham         static way mai de skte hai in provider bloack like arguments "access_key" and "secret_key" jo shi way nhi hai .
 
         correct way ke liye do "aws configure" and enter the region , accesskey and secretkey from your aws console managment. 
         after which the in .aws/credentials have the profile , accesskey and secretkey 
