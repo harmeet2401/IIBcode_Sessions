@@ -108,3 +108,11 @@ Example : resource is the block type and so on as other values.
                 Argument reference or arguments are input to the resource . like ami , tags , type etc 
                 Attribute references or attributes are the properties jo output niklta hai resource bnne ke baad . We can use these attributes as an output and use it a                   ny where using resourcetype.resource_name.attributename . arn tagsall , private_dns  , instance_state. etc 
 
+    Some imp commands : 
+            terraform init
+            terraform plan 
+            terraform apply -auto-approve
+            terraform plan -destroy  : to check  the plan for destroy 
+            terraform destroy 
+        - terraform.tfstate : it contains the provider and resources create with version . really important file.
+
