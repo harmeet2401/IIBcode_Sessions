@@ -122,9 +122,12 @@ Example : resource is the block type and so on as other values.
 Which we can used for multiple ways : 
                         1. To print the values in the console ,console after we ran the terraform apply. output values tf mai daalne ke baad vo console output pr dikhte                         hai jab koi resource bn jata hai aws cloud pr.
 
-10. variables in tf : 
+11. variables in tf : 
         three types :     
                 input variables   : Which we can write as variable and use it like var.etc
                 output values 
                 local values 
+12. Pem key assigned to the ec2 instance can also be used to login to ec2 linux : ssh -i abc.pem ec2-user@ipaddressofec2instance
+
+13. Terraform loop , list .
         
