@@ -114,12 +114,17 @@ Example : resource is the block type and so on as other values.
             terraform apply -auto-approve
             terraform plan -destroy  : to check  the plan for destroy 
             terraform destroy 
-        - terraform.tfstate : it contains the provider and resources create with version . really important file. For now ye file local mai bnti hai . Pr hm isse remove aws cloud mai store kr skte hai . This file create a biding file for the resources between local tf files and rrmote cloud. help in updating .
+        - terraform.tfstate : it contains the provider and resources create with version . really important file. For now ye file local mai bnti hai . Pr hm isse remove             aws cloud mai store kr skte hai . This file create a biding file for the resources between local tf files and rrmote cloud. help in updating .
             Desired state is the tf files we have and current state if the resource which are available in cloud aws,
+        
+9. Data Source  : Which is used to get the attribute references for the resource already there in aws cloud . and used that in terraform . This actually shoes the values which is out of terraform like in aws cloud. 
+10. Output values : Output values are the return values from the terraform modules and have several uses. Jo modules
+Which we can used for multiple ways : 
+                        1. To print the values in the console ,console after we ran the terraform apply. output values tf mai daalne ke baad vo console output pr dikhte                         hai jab koi resource bn jata hai aws cloud pr.
 
-9. variables in tf : 
+10. variables in tf : 
         three types :     
-                input variables     
+                input variables   : Which we can write as variable and use it like var.etc
                 output values 
                 local values 
         
