@@ -121,6 +121,9 @@ Example : resource is the block type and so on as other values.
 10. Output values : Output values are the return values from the terraform modules and have several uses. Jo modules
 Which we can used for multiple ways : 
                         1. To print the values in the console ,console after we ran the terraform apply. output values tf mai daalne ke baad vo console output pr dikhte                         hai jab koi resource bn jata hai aws cloud pr.
+                        2. We can also generate data or variable like List , map or legacy splat(kind of list ) and latest splat(List ). Means output jab hm likhte hai                         aws resources job bnega uski newly bnni props ko use krke new values bna skate hai and use kr skte hai khi bhi inside the project .
+                            
+
 
 11. variables in tf : 
         three types :     
