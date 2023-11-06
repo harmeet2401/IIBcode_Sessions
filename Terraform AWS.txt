@@ -122,7 +122,27 @@ Example : resource is the block type and so on as other values.
 Which we can used for multiple ways : 
                         1. To print the values in the console ,console after we ran the terraform apply. output values tf mai daalne ke baad vo console output pr dikhte                         hai jab koi resource bn jata hai aws cloud pr.
                         2. We can also generate data or variable like List , map or legacy splat(kind of list ) and latest splat(List ). Means output jab hm likhte hai                         aws resources job bnega uski newly bnni props ko use krke new values bna skate hai and use kr skte hai khi bhi inside the project .
-                            
+                            Example dekho
+                                            for_loop_advanced_map = {
+                                              "0" = "174.129.75.9"
+                                              "1" = "3.87.175.8"
+                                            }
+                                            for_loop_list = [
+                                              "174.129.75.9",
+                                              "3.87.175.8",
+                                            ]
+                                            for_loop_map = {
+                                              "i-05c95e06819a3f935" = "3.87.175.8"
+                                              "i-0be9bf6d28a6a7551" = "174.129.75.9"
+                                            }
+                                            latest_splat = [
+                                              "174.129.75.9",
+                                              "3.87.175.8",
+                                            ]
+                                            legacy_splat = [
+                                              "174.129.75.9",
+                                              "3.87.175.8",
+                                            ]
 
 
 11. variables in tf : 
