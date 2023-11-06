@@ -129,5 +129,7 @@ Which we can used for multiple ways :
                 local values 
 12. Pem key assigned to the ec2 instance can also be used to login to ec2 linux : ssh -i abc.pem ec2-user@ipaddressofec2instance
 
-13. Terraform loop , list .
+13. Terraform loop , list and loop with map and legacy splat.
+
+NOTE : WHENEVER YOU WANT TO CHECK WHICH ARGUMENT TO REFER TO CREATE A RESOURCE : YOU CAN CNTRL + SPACE TO GET THE ARGUMENT MAKE SURE HASHICOPR TERRAFORM PLUG IN SHOULD BE THERE IN VS STUDIO
         
