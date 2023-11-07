@@ -163,5 +163,17 @@ NOTE : WHENEVER YOU WANT TO CHECK WHICH ARGUMENT TO REFER TO CREATE A RESOURCE :
                 Ans : 1. For that first create a data source to get the availability zones present in your region . Which will be a list of values.
                       2. Second we can assign those list of Azs to for_each function as a set to be loop through .
                       3. Then assign each.key to the availability_zones argument of the ec2 instance resource terrafrom.
+15. toSet , toMap function : which can be used to convert the data to set and map data structure .
+16. Create a utility project to be used in the project 
+    Subnets are the availability zone in an AWS availability region's vPC . 
+    Problem Q : How to check which az support my type of ec2 instance . like t3.micro pr t2.micro ?
+    Ans : # Determine which Availability Zones support your instance type
+aws ec2 describe-instance-type-offerings --location-type availability-zone  --filters Name=instance-type,Values=t3.micro --region us-east-1 --output table
 
+    Now upr commands se hme pta lgaa ki kis region mai t3.micro instance type offerings hai . So usko ham using data source in terraform mai offering nikaal skte hai .Easy . That data source will give you list of azs which have that particular offering of instance type jo ham data source ke arguments mai denge.
+
+Using Terraform : 
+        data source : aws_ec2_instance_type_offerings
+                
+        
         
