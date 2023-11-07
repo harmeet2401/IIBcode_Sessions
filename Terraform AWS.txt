@@ -155,4 +155,13 @@ Which we can used for multiple ways :
 13. Terraform loop , list and loop with map and legacy splat.
 
 NOTE : WHENEVER YOU WANT TO CHECK WHICH ARGUMENT TO REFER TO CREATE A RESOURCE : YOU CAN CNTRL + SPACE TO GET THE ARGUMENT MAKE SURE HASHICOPR TERRAFORM PLUG IN SHOULD BE THERE IN VS STUDIO
+
+14. For_ezch Meta-argument function : 
+        - For_each function will loop through the values which should be eirther set of Strings and map objects.
+    We can take a lab for example : 
+                Q. We need to create 2 instances of Ec2 one in diff aZ and other in another az . ?
+                Ans : 1. For that first create a data source to get the availability zones present in your region . Which will be a list of values.
+                      2. Second we can assign those list of Azs to for_each function as a set to be loop through .
+                      3. Then assign each.key to the availability_zones argument of the ec2 instance resource terrafrom.
+
         
