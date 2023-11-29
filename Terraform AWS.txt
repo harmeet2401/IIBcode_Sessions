@@ -171,6 +171,7 @@ NOTE : WHENEVER YOU WANT TO CHECK WHICH ARGUMENT TO REFER TO CREATE A RESOURCE :
 aws ec2 describe-instance-type-offerings --location-type availability-zone  --filters Name=instance-type,Values=t3.micro --region us-east-1 --output table
 
     Now upr commands se hme pta lgaa ki kis region mai t3.micro instance type offerings hai . So usko ham using data source in terraform mai offering nikaal skte hai .Easy . That data source will give you list of azs which have that particular offering of instance type jo ham data source ke arguments mai denge.
+output will give you the values at the time of plan with + sign and can be shown without + when applied.
 
 Using Terraform : 
         data source : aws_ec2_instance_type_offerings
