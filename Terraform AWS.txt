@@ -205,5 +205,5 @@ Using Terraform :
                     }
     - terraform.tfvars : So this file can be used to override/assign the values to the variables mentioned in he generic variables. like 
                 aws_region = "eu-west-1"
-
+    - vpc.auto.tfvars : So this file can be used to auto load at the time terraform start up and we can override / initialise the vpc related variables. 
         
