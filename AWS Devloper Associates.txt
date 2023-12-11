@@ -1234,7 +1234,7 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 			 : Warm standby - Db bring up with minimal infra.
 			 : Keeping coninuous snapshot and backup of the data at a regular interval.
 
-	- Usecase 2 : To reduce the load on the master DB when two apps comes on it for reading the databases.
+	- Usecase 1 : To reduce the load on the master DB when two apps comes on it for reading the databases.
 
 			High load on below architecture : 
 
@@ -1254,8 +1254,18 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 
 		ab Application 1 araam se master mai data dalegi and Reporting app araam se read replica mai se data nikalegi.
 
+	Upr architecture mai ek issue aa skta hai : which is data master mai dalgya but vo read replica mai copy honne mai either time lettta hai yan immediately aajata hai.
+	
 
+	- Different types databases : 
+		Various things to be discussed to select a DB : 
+			Schema fixed chahiye ? same schema , table , columns etc 
+			Schema fixed nhi chahiye doucument level chahiye ?
+			Latency kitni hai 
+			Transaction limit kitni hai 
+			Storage kitni chahiye 
+			etc 
 
-
+		a. relation databases : With fixed schema with columns , tables etc . Have high transaction limits as compared to other.
 	
 		 
