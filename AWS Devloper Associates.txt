@@ -1269,5 +1269,11 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 		a. relation databases : With fixed schema with columns , tables etc . Have high transaction limits as compared to other.
 			- Amazon RDS : which is used for OLAT : Online analytical transactions which is mostly in case of e-commerce , ERP , banking etc 
 					This Aws managed service support oracle , postgre , mysql , sql server etc 
-			- Amazon Redhift : which is used in case OLAP : online analytical processing fo petabyte of data. This managed servuce is used mostl for lareg 					amount of data.
+					Store data row wise. make it easy to update and delete the data.
+			- Amazon Redhift : which is used in case OLAP : online analytical processing fo petabyte of data. This managed servuce is used mostl for lareg 					amount of data. Store data column wise allow high compression of data 
+
+		b. Document DB : Where the data is stored as a document (json payload) , provide felxibility means kuch json fields mai data hogga kuch mai nh ibhi ho 				skta. Allow horizontal increase in data storage . Example : AWS Managed Dynamo DB. Are highly scallable and can include million of trasaction 				per sec. Data to be store example : user profile , user details . etc 
+		c. Key -value pair DB : In which the key is to given to get the value . Value can be json , object and file etc .
+ Are highly scallable and can include million of trasaction 				per sec
+
 		 
