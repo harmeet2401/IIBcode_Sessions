@@ -1222,3 +1222,40 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 - AWS EventBRige : We know tha Aws events in Cloud watch is specifically to give direction to the events occured on the aws Service only .
 	AWS EventBridge help in doing the same on Custom applications , AWS Service and third party services.
 
+90. Databases: 
+	- Usercase 1 : To keep high availability and durability for databases.
+		How to increase availability or durability : To keep a stand by Db in another region in case of disaster recovvery 
+							   : to keep transaction logs and snapshot in another region and multiple copies pf the files to increase the 			durability.
+		RTO : Recovery time objective is the minimum time period at which the recovery can take place.
+		RPO : Recovery point objective is the minimum point of recovery where the recovery can take place.
+	
+		To get minimum of those we need to with keep 
+			 : Hot standby ready which means a running DB on another location will pick up the load whenever needed on failover 
+			 : Warm standby - Db bring up with minimal infra.
+			 : Keeping coninuous snapshot and backup of the data at a regular interval.
+
+	- Usecase 2 : To reduce the load on the master DB when two apps comes on it for reading the databases.
+
+			High load on below architecture : 
+
+
+			Application 1			Reporting App
+			   |				|
+  			   |				|
+			Master DB ----------------------
+
+
+			Low load on below architecture
+
+			Application 1			Reporting App
+			   |				|
+  			   |				|
+			Master DB ------Async copy ---- Read Replica(Which is a read replica may be in same region/zone)
+
+		ab Application 1 araam se master mai data dalegi and Reporting app araam se read replica mai se data nikalegi.
+
+
+
+
+	
+		 
