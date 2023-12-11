@@ -144,6 +144,9 @@ Which we can used for multiple ways :
                                               "3.87.175.8",
                                             ]
 
+                We can use this output variables in another project also like . As we know output variable new bne resources ki value print krte hai . 
+                So hm data.terraform_remote_state use krenge (means jo bna huaa hai )
+            example : data.terraform_remote_state.vpc.outputs.vpc_id  ---- iske liye hme output krna pdega vpc_id jha bnri hai .
 
 11. variables in tf : 
         three types :     
