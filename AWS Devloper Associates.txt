@@ -1267,5 +1267,7 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 			etc 
 
 		a. relation databases : With fixed schema with columns , tables etc . Have high transaction limits as compared to other.
-	
+			- Amazon RDS : which is used for OLAT : Online analytical transactions which is mostly in case of e-commerce , ERP , banking etc 
+					This Aws managed service support oracle , postgre , mysql , sql server etc 
+			- Amazon Redhift : which is used in case OLAP : online analytical processing fo petabyte of data. This managed servuce is used mostl for lareg 					amount of data.
 		 
