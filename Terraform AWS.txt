@@ -176,5 +176,31 @@ output will give you the values at the time of plan with + sign and can be shown
 Using Terraform : 
         data source : aws_ec2_instance_type_offerings
                 
-        
+
+17. Local variable , generic variables and terraform.tfvars .
+    - Local variables : The local variables are used when we need to replace a complex expression with a variable. means hm iski help se complex expression ko variable se replace krke use kr skte hai .
+    Example  
+            locals {
+                  owners = var.business_divsion    --------------- isme ye value variables se lerri hai 
+                  environment = var.environment --------------- isme ye value variables se lerri hai 
+                  name = "${var.business_divsion}-${var.environment}" --------------- isme ye value variables se lerri hai 
+                  #name = "${local.owners}-${local.environment}"
+                  common_tags = {
+                    owners = local.owners --------------- isme ye value local jo upr set kiya hai usse lerri hai 
+                    environment = local.environment--------------- isme ye value local jo upr set kiya hai usse lerri hai 
+                  }
+
+                instance_ids = concat(aws_instance.blue.*.id, aws_instance.green.*.id)  ----- isme dekho hmne concat use krke ek instanxe_ids krke local variable bnaya hai usko hm khin bhi use kr skte hai 
+
+                } 
+    - Generic variables : Which we declared in .tf file with type , description and default value mentioned 
+            example : 
+                   variable "aws_region" {
+                      description = "Region in which AWS Resources to be created"
+                      type = string
+                      default = "us-east-1"  
+                    }
+    - terraform.tfvars : So this file can be used to override/assign the values to the variables mentioned in he generic variables. like 
+                aws_region = "eu-west-1"
+
         
