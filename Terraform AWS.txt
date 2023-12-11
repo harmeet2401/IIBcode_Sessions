@@ -206,4 +206,15 @@ Using Terraform :
     - terraform.tfvars : So this file can be used to override/assign the values to the variables mentioned in he generic variables. like 
                 aws_region = "eu-west-1"
     - vpc.auto.tfvars : So this file can be used to auto load at the time terraform start up and we can override / initialise the vpc related variables. 
-        
+    - ec2instance.tfvars : So this file can be used to auto load at the time terraform start up and we can override / initialise the ec2instance related variables. 
+18. Terraform modules : Which are presnet in terraform hashicorp registry
+        AWS VPC module : 
+        AWS Securoty group module :
+        AWS EC2 instance module : 
+        Meta-Arguments : depends_on
+        Terraform null_resource:
+        Terraform File Provisioner:  
+        Terraform Remote-exec provisioner: 
+        Terraform Local-exec provisioner :
+
+Note : The bastion hosts is the aws resource which provide secure access to Linux instances located in the private and public subnets of your virtual private cloud (VPC).
