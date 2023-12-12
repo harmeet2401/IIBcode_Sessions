@@ -1281,3 +1281,15 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 		 e. In -memory Db : In memory Db are much faste in retrieving data may be in micro secs.
 					Example : Amazon Elasticcache = Redis + memcache
 						Redis is used for peristing of data  and memcache is used for cache retieival of data
+
+91. RDS data base : 
+		1. its for relational db 
+		2. FOr schema based use cases.
+		3. Proivide auto sclaing and backup at regular intervals.
+		4. Provides horizontal scaling of storage as needed.
+		5. Can take snapshot on the go.
+		6. We can not SSH and login inside the EC2 instamnce on which the Data base is installed. so no custom software be installed.
+		7. We need to maintain the users auth , schema and tables for the database you have in RDS	
+		8. RDS Amazon will take care of the DB Patching.
+		9. We need to make the configs ok.
+		
