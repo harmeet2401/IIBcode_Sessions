@@ -1226,8 +1226,8 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 	- Usercase 1 : To keep high availability and durability for databases.
 		How to increase availability or durability : To keep a stand by Db in another region in case of disaster recovvery 
 							   : to keep transaction logs and snapshot in another region and multiple copies pf the files to increase the 			durability.
-		RTO : Recovery time objective is the minimum time period at which the recovery can take place.
-		RPO : Recovery point objective is the minimum point of recovery where the recovery can take place.
+		RTO : Recovery time objective is the max time period at which the recovery can take place.
+		RPO : Recovery point objective is the max point of recovery where the recovery can take place.
 	
 		To get minimum of those we need to with keep 
 			 : Hot standby ready which means a running DB on another location will pick up the load whenever needed on failover 
@@ -1270,10 +1270,14 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 			- Amazon RDS : which is used for OLAT : Online analytical transactions which is mostly in case of e-commerce , ERP , banking etc 
 					This Aws managed service support oracle , postgre , mysql , sql server etc 
 					Store data row wise. make it easy to update and delete the data.
-			- Amazon Redhift : which is used in case OLAP : online analytical processing fo petabyte of data. This managed servuce is used mostl for lareg 					amount of data. Store data column wise allow high compression of data 
+			- Amazon Redhift : which is used in case OLAP : online analytical processing fo petabyte of data. This managed servuce is used mostl for lareg 					amount of data. Store data column wise allow high compression of data . These column values can be pushed to different nodes in the 					cluster and allow distribution of data easily.
 
 		b. Document DB : Where the data is stored as a document (json payload) , provide felxibility means kuch json fields mai data hogga kuch mai nh ibhi ho 				skta. Allow horizontal increase in data storage . Example : AWS Managed Dynamo DB. Are highly scallable and can include million of trasaction 				per sec. Data to be store example : user profile , user details . etc 
 		c. Key -value pair DB : In which the key is to given to get the value . Value can be json , object and file etc .
- Are highly scallable and can include million of trasaction 				per sec
+ 			Are highly scallable and can include million of trasaction per sec.
 
-		 
+		 d. Graph db : is used for analytical data . Amazon neptune . It is used in scenarions such as social networking sites data analysis .
+
+		 e. In -memory Db : In memory Db are much faste in retrieving data may be in micro secs.
+					Example : Amazon Elasticcache = Redis + memcache
+						Redis is used for peristing of data  and memcache is used for cache retieival of data
