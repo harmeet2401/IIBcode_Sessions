@@ -185,7 +185,10 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Like one customer can have many orders 
 					    So the Customer class will have List<Orders> orders annotated as @OneToMany(mappedby=cust).
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
-	
+	@scheduled : --------------------- Which is used to create a cron scheduler in spring boot . jusy mention the cron expression on top of the function to run.
+	@cacheable : --------------------- which is used to make a return value from a function cacheable and will be retrived from the cache using the key which was 
+mentioned in the key in the @cacheable()
+	@Qualifier : -------------------- Which is used to avoid ambiguity in spring boot project if two bean with same name exists , so we used this annotation to make component scanner to take the bean.
 	Difference between Lazyfetch and eagerfetch : 
 	https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
 	
