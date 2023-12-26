@@ -1292,4 +1292,10 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 		7. We need to maintain the users auth , schema and tables for the database you have in RDS	
 		8. RDS Amazon will take care of the DB Patching.
 		9. We need to make the configs ok.
+
+ COsts for RDS databae depends on : 
+			data storage provisioned
+			For how long the Db will be running 
+			For Number of IOPS provisioned 
+			For Number of IOPS provisioned and used if it outside of the AZs or not.
 		
