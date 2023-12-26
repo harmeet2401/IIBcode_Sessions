@@ -1292,6 +1292,7 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 		7. We need to maintain the users auth , schema and tables for the database you have in RDS	
 		8. RDS Amazon will take care of the DB Patching.
 		9. We need to make the configs ok.
+		10. RDS supported DB engine : MariaDB , Aurora(Mysql compatible) ,Aurora(PostgreSQL compatible), Mysql , MIcrosoft SQL server , PostgreSQL , IBM Db2 t, Oracle etc 
 
  COsts for RDS databae depends on : 
 			data storage provisioned
@@ -1333,3 +1334,5 @@ CREATE TABLE Persons (
 Insert into Persons(PersonID,LastName,FirstName,Address,City) values(1,"Singh","Harmeet","Armenia","New Jersey");
 select * from Persons;
 EC2 to RDS connection and db creation : ----------------------------------------------------------------
+
+If the Db is stop will i be billed  : yes for storage , IOPS , Snapshot create and back up took as per the frequency .
