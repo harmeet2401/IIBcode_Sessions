@@ -1299,3 +1299,37 @@ VVVIMP NOTE : WE CAN ALSO MAKE A SQS QUEUE TO SUBSCRIBE TO A SNS TOPIC . WHEN WE
 			For Number of IOPS provisioned 
 			For Number of IOPS provisioned and used if it outside of the AZs or not.
 		
+EC2 to RDS connection and db creation : ----------------------------------------------------------------
+host : mydatabaseid.czhkdgiw052l.us-east-1.rds.amazonaws.com
+
+databaseidentifier : mydatabaseid
+username : admin
+password : Gogi12345
+
+
+mysql --version 
+mysql --host=mydatabaseid.czhkdgiw052l.us-east-1.rds.amazonaws.com --user=admin --password 
+
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+
+
+Show databases;
+create database mysampledb;
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+Insert into Persons(PersonID,LastName,FirstName,Address,City) values(1,"Singh","Harmeet","Armenia","New Jersey");
+select * from Persons;
+EC2 to RDS connection and db creation : ----------------------------------------------------------------
