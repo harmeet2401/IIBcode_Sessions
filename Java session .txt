@@ -1057,7 +1057,7 @@ We an use Sort function which except a parameter sort(comparator function fnctio
 
 8. reduce function of stream api . it is also a terminal function means the end operation . Collect is also a terminal operations.
 
-This function is used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values.
+This function is used in case we neeed to reduce the set of value to a single value that you are looking for. example a list of integeres to a a sum or to a single values. This reduce will ask for binaryOPerator functional interface object . two input parameters with same data types and out put will be same.
 
 Exmaple of map , filter and reduce 
 StudentInstace.getstudents().stream() // Stream<Students>
@@ -1071,6 +1071,12 @@ StudentInstace.getstudents().stream() // Stream<Students>
                     System.out.println("Notebooks for each student "+ notebooks);
                 })
                 .reduce(0,(n1,n2)->n1+n2);
+
+	Reduce first iteration will be 0 assign hogga n1 ko and n2 ko notebookr values.then plus hogga 
+	Reduce second iteration will be upr ka result  assign hogga n1 ko and n2 ko notebookr new values.then plus hogga
+
+	this will go on.
+
 				
 9. min, max operation we can do using the method reference of Integer class like Integer::max(a,b) and Integer::min(a,b).
 Always use reduce without default identity value
