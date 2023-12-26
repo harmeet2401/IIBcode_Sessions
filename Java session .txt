@@ -1185,8 +1185,8 @@ Note : WE CAN ITERATE THE STREAM ONLY ONCE , OR ELSE IT WILL CREATE AN EXCEPTION
 			
 			mapTodouble : this will convert the instream to double stream 
 			
-17. Terminal functions : which is used to collect the end elemenst post all operations in a stream .
-		exmaple of terminal functions : 
+17. Terminal functions : which is used to collect the end elemenst post all operations in a stream . Terminal functions actually kick start the stream processing.
+		example of terminal functions : 
 			max() , min() , sum () , reduce() , average() , collects () etc 
 			
 	Main focus on collect method () .
@@ -1239,6 +1239,11 @@ VVVVIMP  	- groupingBy () : this function will help in grouping the data on a ba
 					
 					Type 1 : with single paramater only predicate 
 					Type 2 : with two paramater (predicate , downstreamcollection .)
+
+	- NOTE  : 
+		Reduction terminal operations : which is the special kind of operation in nutshell which will eventually combine the data into a new collections or form 		at the end.
+			not a reduction : allmatch , anymatch , FindAny, FindFirst : these fn are not reduction bcse all these function may or may not traverse the entire stream .
+			A reduction : Min , max , count , sum , collect , reduce. These fn iterate all the values of a stream to a common collection or a value at the end.
 					
 					
 18. Parallel streams : 					
