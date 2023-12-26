@@ -1118,6 +1118,7 @@ of() - this funtion will help in creating the stream of values . The values can 
 iterate()-  this function will iterate value to infinite values 
 generate() - this function will also generate stream of infinite value and ask for a Supplier<> functional interface objects .
 Stream.of : used to generate or initialize a stream.
+File.lines() ---- Will return the Stream<String> stream . We can use it for further play .
 
 15. NumericStreams : 
 
