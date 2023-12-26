@@ -1336,3 +1336,5 @@ select * from Persons;
 EC2 to RDS connection and db creation : ----------------------------------------------------------------
 
 If the Db is stop will i be billed  : yes for storage , IOPS , Snapshot create and back up took as per the frequency .
+In Multi Azs : A standby DB will be spin up in differnt Az and synchronous replications will be done on regular basis.
+		
