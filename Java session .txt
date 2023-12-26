@@ -965,7 +965,7 @@ QQQ. Stream Api
 				     |Student |Student |Student |	 ------- filter()
 					 
 					 
-		Stream is nothing but a sequence of values or elements okay !
+		Stream is nothing but a sequence of values or elements okay ! it doesn't hold data. And can be processed only once.
 		
 				
 				
@@ -988,6 +988,7 @@ QQQ. Stream Api
 		Elements can be accessed only once .
 		It is traversed only once using the streams . means we cannot apply for loop or an loop to traverse the stream created twice.
 		Iteration for stream happened using internal iteration / internal stream api function .
+		It can be eagrly or lazily traverse through the data.
 	
 		
 3.How to debug a stream operation applied to a collections ?
@@ -1116,7 +1117,7 @@ findany
 of() - this funtion will help in creating the stream of values . The values can be infinite.
 iterate()-  this function will iterate value to infinite values 
 generate() - this function will also generate stream of infinite value and ask for a Supplier<> functional interface objects .
-
+Stream.of : used to generate or initialize a stream.
 
 15. NumericStreams : 
 
