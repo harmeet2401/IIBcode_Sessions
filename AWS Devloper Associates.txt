@@ -1398,11 +1398,23 @@ Architecture like this can be achieved  :
 94. Route 53 : 
 	Ek example se batata hun.
 	1. First we buy a domain name for our web site like scribe.com
-	2. Second We set up the Website host (means the target site may be as a node js app or react js website present in S3 bucket) jo load hoggi. ye Domain name ke piche hogga 
+	2. Second We set up the Website host (means the target site may be as a node js app or react js website present in S3 bucket) jo load hoggi. ye Domain name ke 			piche hogga 
 	3. Then we need to route the request from the domain name we purchased to the web host server(s3 , ec2 or a linux box) usinf DNS resolver .
-
-	So  above steps ko achieve krne keliye route 53 use krte hai 
+	********So  above steps ko achieve krne keliye route 53 use krte hai 
 		route 53 = Domain regitser + DNS resolver.
+	For that we need to create below resources in route 53 
+		First : Hosted zones which will contains all the records (records or kuch nhi bs routing rules hotte hai jaese in28minutes.com hit krunga to vo kis IP 				pr jaega yan kis hosted server pr jaega )
+		Second : Records (jo mane upr btaya hai ki routing logics hai).
+			Example : A type record (route to a IP) , AAA(route to a IPV6 address ) , CNAME(to aonther name www.example.com) , NS(naming server DNS)
+ Note : -----------
+	- Agar request route krni hai kisi aws resource pr then , alias records use kro . Direct name record nhi use kr skte.
+	- Route 53 can also route the request on global level. Matlat example ek user request kiya route 53 domain name pr ------> Route 53 routing policy ki help se ham iski request particular load balancer pr daalskte hai jo us-east-1 mai hai and then different  request sent to ap-south-1 . 
+		. Routing policies : 
+				-Domain name route to specific IP
+				-Canary deployment isme percentage basis pr route krte hai request to two diffwrent locations 
+				-Geolocation policy : Location bases pr request route krta hai.
+				-Failover policy : Agar ek region instance bnd hai Load balancer ka to dusre pr bhejega 
+				-GeaProximity : Jo close hogga to the user us location pr bhejega to reduce the response time and request travel time.
 
 
 
