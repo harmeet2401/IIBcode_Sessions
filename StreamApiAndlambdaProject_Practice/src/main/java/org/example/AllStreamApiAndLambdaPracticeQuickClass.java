@@ -356,5 +356,40 @@ public class AllStreamApiAndLambdaPracticeQuickClass {
                 LinkedHashMap::new // Ham LinkedHashMap create krre hai jo keys ko khud hi sort krdegga
         ));
         System.out.println("LinkedHashmap :------" +linkedHashMap);
+
+         /**
+         * Collectors.GroupingBy :
+         * Will group as per the keys
+         */
+        Stream<String> stages = Stream.of("Toronto","Quebec","Siria","Siria");
+        Function<String,Integer> fn = (s)->{
+            return s.length();
+        };
+        Map<Integer, List<String>> map2 = stages.collect(Collectors.groupingBy(fn));
+        System.out.println("Grouping by : ----------"+map2);
+
+        /**
+         * Collectors.GroupingBy :
+         * Will group as per the keys
+         * gara mujhe duplicacy remove krni ho
+         */
+        Stream<String> stage = Stream.of("Toronto","Quebec","Siria","Siria");
+        Function<String,Integer> fn1 = (s)->{
+            return s.length();
+        };
+        Map<Integer, Set<String>> map3 = stage.collect(Collectors.groupingBy(fn1,Collectors.toSet()));
+        System.out.println("Grouping by with set: ----------"+map3);
+
+        /**
+         * Collectors.GroupingBy :
+         * Will group as per the keys
+         * gara mujhe duplicacy remove krni ho and mujhe map nhi TreeMap chahiye jo keys ko sort krdegga
+         */
+        Stream<String> stag = Stream.of("Toronto","Quebec","Siria","Siria");
+        Function<String,Integer> fn3 = (s)->{
+            return s.length();
+        };
+        Map<Integer, Set<String>> map4 = stag.collect(Collectors.groupingBy(fn3,TreeMap::new,Collectors.toSet()));
+        System.out.println("Grouping by with set as treemap: ----------"+map3);
     }
 }
