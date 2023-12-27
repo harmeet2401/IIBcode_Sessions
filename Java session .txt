@@ -1072,6 +1072,8 @@ StudentInstace.getstudents().stream() // Stream<Students>
                 })
                 .reduce(0,(n1,n2)->n1+n2);
 
+	Very important feature : Above reduce will break the stream into two parts and process the two notebooks streams parallely and will add at the end. 
+
 	Reduce first iteration will be 0 assign hogga n1 ko and n2 ko notebookr values.then plus hogga 
 	Reduce second iteration will be upr ka result  assign hogga n1 ko and n2 ko notebookr new values.then plus hogga
 
