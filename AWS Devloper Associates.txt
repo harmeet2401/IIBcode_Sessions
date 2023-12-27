@@ -1386,3 +1386,12 @@ Structutre :
 		- Aws kinesis analytics : To create analyse the data and create analytical graph , charts etc 
 		- Aws Kinesis Video streaming : Like we can send the video camrea stream to the aws kinesis videos stream and check for any unwanted activities.
 
+
+Architecture like this can be achieved  :
+
+1. Fron IOT/Websites---> kinesis data stream -----------> Kinesis Firehose -------pushed data to storage-----> (redshift , s3 etc )------> Kinesis analytics applied (on Data)----generated real time analysis.
+
+2. From IOT / websited ----> Kinesis Firehose -------pushed data to storage-----> (redshift , s3 etc )------> Kinesis analytics applied (on Data)----generated real time analysis.
+
+3. Videos -----> Aws Kinesis Video Streams -----> Aws AI services ----> Generates alerts and predictions etc
+
