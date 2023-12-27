@@ -391,5 +391,22 @@ public class AllStreamApiAndLambdaPracticeQuickClass {
         };
         Map<Integer, Set<String>> map4 = stag.collect(Collectors.groupingBy(fn3,TreeMap::new,Collectors.toSet()));
         System.out.println("Grouping by with set as treemap: ----------"+map3);
+
+        /**
+         * PartitioningBy isme map hi bnega but keys fixed rehti hai jiske keys "TRUE" or "FALSE" Rhega
+         * Ye predicate ke base pr partition krta hai . Ek trah ka groupingBy hi hai ye.
+         */
+        Stream<String> nam = Stream.of("Alan","Jirag","Mariya","Santa","Jirag");
+        Map<Boolean, List<String>> collect = nam.collect(Collectors.partitioningBy((s) -> s.length() > 4));
+        System.out.println("Partitioing by :  ------"+ collect);
+
+        /**
+         * PartitioningBy isme map hi bnega but keys fixed rehti hai jiske keys "TRUE" or "FALSE" Rhega
+         * Ye predicate ke base pr partition krta hai . Ek trah ka groupingBy hi hai ye.
+         * Agar hme duplicacy remove krni ho
+         */
+        Stream<String> na = Stream.of("Alan","Jirag","Mariya","Santa","Jirag");
+        Map<Boolean, Set<String>> collec = na.collect(Collectors.partitioningBy((s) -> s.length() > 4,Collectors.toSet()));
+        System.out.println("Partitioing by with set to remove duplicates in list of values.:  ------"+ collec);
     }
 }
