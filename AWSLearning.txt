@@ -1108,6 +1108,18 @@ Amazon Kinesis Analytics(flink) - Run queries against streaming data and create 
 
 Amazon Kinesis Video Streams - Monitor video streams
 
+	Q. how we can update shared count or reshareding ?
+	- Either the shared will split into two shareds 
+	- Either the two shared will merged into one shared.
+	- Number of consumer to the number of shared should be equal .
+	Q. Kinesis Stream Api : 
+	- Put record 
+	- Put records 
+	- Get Record
+	- List stream , delete stream , create stream and describe stream
+	- list stream consumer 
+	- regitsre stream consumer 
+	- update share count , merge share , spplit shared etc 
 			
 		
 70. AWS Athena : 
