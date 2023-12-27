@@ -1337,4 +1337,33 @@ EC2 to RDS connection and db creation : ----------------------------------------
 
 If the Db is stop will i be billed  : yes for storage , IOPS , Snapshot create and back up took as per the frequency .
 In Multi Azs : A standby DB will be spin up in differnt Az and synchronous replications will be done on regular basis.
-		
+
+92. Dynamo Db : Used for No Sql based scrnarios. This Db doesn't contains Relational structure like tables and columns.
+We can use it with key value pair structure and helps to get the documents out of the collections.
+		. Can provide high throughput of single digit response for a million Transaction.s
+
+Structutre : 
+	. Complex strcuture of stored data which is a json payload .
+	{
+		id: 1,
+		"Address":"test",
+
+		}
+	. In Above payload or documents ID is primary key and it is only needed to be populated. for example 
+	. Multiple number of attributes can be there like address , mobile nu,mber etc 
+	. So we one document can have three attributes m other can have 4 or may be less.Schema less structure.
+	. 400 KB of max size 
+	. For bigger size document payload store it in s3 and save the reference of it in Dynamo.
+	. data types in DynamoDb : 	
+		Scaler : String , int , null etc 
+		Documents : List or map . Pr isme list can have mixed of data values. like 
+				"datavalues" : ["test" , 22 , "ijjs"]
+			   "Map" : { "key1" : 22 , 22 : "value"     } 
+        	Set : which is a collections of values but all are unique.
+	. Primary keys in Dynamo  : 
+		Two types : 
+				- Primary key (hash key) which is the partition key that decides which partition the data will be saved . As dynamo save the data in 						diff partitions.
+				- Primary key : Partition key + sort key : This combination can help in storing data in same partition and will be sorted as per the 						sort key .
+				 Always take primary key which have less cardinality like 1 or two values.
+				 We can assign random values to primary key for uniquenes..
+			
