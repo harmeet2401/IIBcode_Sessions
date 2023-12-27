@@ -1412,7 +1412,7 @@ Architecture like this can be achieved  :
 		. Routing policies : 
 				-Domain name route to specific IP
 				-Canary deployment isme percentage basis pr route krte hai request to two diffwrent locations 
-				-Geolocation policy : Location bases pr request route krta hai.
+				-Geolocation policy : Location bases pr request route krta hai. Gealocation set krte hai record bnate time
 				-Failover policy : Agar ek region instance bnd hai Load balancer ka to dusre pr bhejega 
 				-GeaProximity : Jo close hogga to the user us location pr bhejega to reduce the response time and request travel time.
 				-Weighted : Distributed or route the traffic as per the load weighted assigned to it.
