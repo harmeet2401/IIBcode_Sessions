@@ -1366,4 +1366,16 @@ Structutre :
 				- Primary key : Partition key + sort key : This combination can help in storing data in same partition and will be sorted as per the 						sort key .
 				 Always take primary key which have less cardinality like 1 or two values.
 				 We can assign random values to primary key for uniquenes..
-			
+         . Local secondary index : 
+			Example we have : CustomerId(Prim key) , OrderStatus, OrderCreationDt , OrderPrice.
+					Table creeate krke hm CustomerId + OrderPrice  li composite ki but kisis or combination se data fetch krne ke liye index bnalo.
+				As we can create composite primary key (primary col + sort key). Iss index ko hm add kr skte hai jab table create krre ho jisse ham	 		query faster kr skte hai . Means agar mujhe below two columns use krke data query krni hai to kr skta hun 
+			LSI : Local Secondary index ---- CustomerId + OrderCreationDt
+							 CustomerID + OrderStatus
+
+          . Global secondary index : Example we have : CustomerId(Prim key) , OrderStatus, OrderCreationDt , OrderPrice.
+					Ham CustomerId se data fetch kr skte hai .
+					Bt agar mujhe data quickly kisi or colum yan attribute value se uthana hai to ham 
+					GSI bna skte hai jo ki single attrbute value of combination bhi ho skta hai .
+					Example : OrderStatus 
+					Example : OrderStatus + OrderPrice . or ham isme ye bhi mention kr skte hai kon kon si attribute results mai vaapis aengi.
