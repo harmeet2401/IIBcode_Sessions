@@ -39,4 +39,32 @@ public class SteamCollectionsExample {
         System.out.println("Map created : "+map);
 
     }
+    publiv void parallelProcessing(){
+        /**
+         * Classic example of how the parallel processing will work
+         * In below example the above educate stream will be break down by two threads
+         * will get appended and at the end two string builder examples will be appeneded
+         * at the end.
+         */
+
+        Instant start = Instant.now();
+        Stream<String> educate = Stream.of("ed","u","ca","te");
+        StringBuilder endStr = educate.collect(()->new StringBuilder(),
+                (sb,st)->sb.append(st),
+                (sb1,sb2)->sb1.append(sb2));
+        System.out.println(endStr);
+        Instant end = Instant.now();
+        Duration timeElapsed = Duration.between(start, end);
+        System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
+
+        Instant start1 = Instant.now();
+        Stream<String> honesty = Stream.of("ho","n","es","ty");
+        String endStr2 = honesty
+                .collect(Collectors.joining(""));
+
+        System.out.println(endStr2);
+        Instant end1 = Instant.now();
+        Duration timeElapsed1 = Duration.between(start1, end1);
+        System.out.println("Time taken: "+ timeElapsed1.toMillis() +" milliseconds");
+    }
 }
