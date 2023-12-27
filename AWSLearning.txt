@@ -1104,9 +1104,10 @@ Amazon Kinesis Data Streams - Process Data Streams
 
 Amazon Kinesis Firehose - Data ingestion for streaming data : S3, Elasticsearch etc
 
-Amazon Kinesis Analytics - Run queries against streaming data
+Amazon Kinesis Analytics(flink) - Run queries against streaming data and create analytically charts  graph and visual on it,.
 
 Amazon Kinesis Video Streams - Monitor video streams
+
 			
 		
 70. AWS Athena : 
