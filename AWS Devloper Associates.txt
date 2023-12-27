@@ -1395,3 +1395,14 @@ Architecture like this can be achieved  :
 
 3. Videos -----> Aws Kinesis Video Streams -----> Aws AI services ----> Generates alerts and predictions etc
 
+94. Route 53 : 
+	Ek example se batata hun.
+	1. First we buy a domain name for our web site like scribe.com
+	2. Second We set up the Website host (means the target site may be as a node js app or react js website present in S3 bucket) jo load hoggi. ye Domain name ke piche hogga 
+	3. Then we need to route the request from the domain name we purchased to the web host server(s3 , ec2 or a linux box) usinf DNS resolver .
+
+	So  above steps ko achieve krne keliye route 53 use krte hai 
+		route 53 = Domain regitser + DNS resolver.
+
+
+
