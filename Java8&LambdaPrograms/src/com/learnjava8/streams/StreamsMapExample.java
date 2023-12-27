@@ -55,6 +55,31 @@ public class StreamsMapExample {
         return collect;
     }
 
+    public static void mergerArgumentToMap(){
+         /**
+         * What if we want to create a Treemap or LinkedHasmap other then map above
+         * For that we can use supplier in the same function .
+         * Supplier hme new object bnake degga
+         */
+            Stream<String> cities = Stream.of("Toronto","Quebec","Siria","Siria");
+            TreeMap<String,Integer> treeMap = cities.collect(Collectors.toMap(
+                    (s)->s,//key
+                    (s)->s.length(),//value
+                (l1,l2)->l1+l2,// what to do incase of duplicate keys . Ham values ko add krre hai agar keys duplicate hai
+                    ()->new TreeMap<>() // Ham treeMap create krre hai jo keys ko khud hi sort krdegga
+            ));                         // TreeMap::new
+        System.out.println("Treemap :------" +treeMap);
+        Stream<String> countries = Stream.of("Toronto","Quebec","Siria","Siria");
+        LinkedHashMap<String,Integer> linkedHashMap = countries.collect(Collectors.toMap(
+                (s)->s,//key
+                (s)->s.length(),//value
+                (l1,l2)->l1+l2,// what to do incase of duplicate keys . Ham values ko add krre hai agar keys duplicate hai
+                LinkedHashMap::new // Ham LinkedHashMap create krre hai jo keys ko khud hi sort krdegga
+        ));
+        System.out.println("LinkedHashmap :------" +linkedHashMap);
+
+    }
+
 
 
 }
