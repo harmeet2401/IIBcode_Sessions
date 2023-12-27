@@ -1380,3 +1380,9 @@ Structutre :
 					Example : OrderStatus 
 					Example : OrderStatus + OrderPrice . or ham isme ye bhi mention kr skte hai kon kon si attribute results mai vaapis aengi.
 93. Processing streaming of data.
+	Aws Kinesis : Is used to process data stream , to create analytics on stream data , Store the data stream or video stream the data 
+		- Aws Kinesis Data Stream : Is used to stream the data or process teh data coming from the different source like iot devices , hardware devices etc 
+		- Aws Kinesis Forehouse : is used to store the data stream 
+		- Aws kinesis analytics : To create analyse the data and create analytical graph , charts etc 
+		- Aws Kinesis Video streaming : Like we can send the video camrea stream to the aws kinesis videos stream and check for any unwanted activities.
+
