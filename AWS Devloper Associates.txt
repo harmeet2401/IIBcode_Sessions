@@ -1379,3 +1379,4 @@ Structutre :
 					GSI bna skte hai jo ki single attrbute value of combination bhi ho skta hai .
 					Example : OrderStatus 
 					Example : OrderStatus + OrderPrice . or ham isme ye bhi mention kr skte hai kon kon si attribute results mai vaapis aengi.
+93. Processing streaming of data.
