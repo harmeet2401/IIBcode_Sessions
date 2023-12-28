@@ -1461,3 +1461,10 @@ Architecture like this can be achieved  :
 
 	
 
+96. AWS Elastic beanstalk : 
+	This service will allow to 
+		: deploy web application on docker containers.
+		: Support docker-compose.yaml for your multiple containes deployment 
+		: Support custom compose file like docklerrun.aws.json for containers deployment 
+		: if you select single container using beanstalk one ec2 will be spin up 
+		: if you select multiple containers using beanstalk at the end AWS ECS will be used.
