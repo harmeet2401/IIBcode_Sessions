@@ -1418,3 +1418,39 @@ Architecture like this can be achieved  :
 				-Weighted : Distributed or route the traffic as per the load weighted assigned to it.
 				-Latency : Which region will provide the least latency the route 53 will route the traffic to that instance.
 
+95. Container orchestration : 
+		Docker is the popular tech.
+		Container orchestrating tools : 
+				Kubernetes , AWS ECS(ELastic container service) , AWS fargate and AWS EKS(Elastic kubernets services)
+	Description of each service above : 
+		Kuberenets : We already know.
+		Aws ECS : isme ec2 instance bnte hai jispr container deploy hotte hai using AWS ECS
+				JContainer 1 Container 2 	
+					|
+					|
+				     AWS ECS 
+					|
+					|
+				     Cluster 
+			Ec2 instance1  Ec2 instance2  Ec2 instance3
+
+		AWS Fargate : Ye ECS ka serverless versio hai jisme EC2 instance ko manage krne ki koi jrurat nhi hai 
+			iska architecture i know.
+			JContainer 1 Container 2 	
+					|
+					|
+				     AWS ECS 
+					|
+					|
+				     Cluster 
+			S		|
+				     Service
+					|
+				      tasks
+					|
+					COntainers
+
+
+
+
+
