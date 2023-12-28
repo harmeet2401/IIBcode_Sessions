@@ -1452,5 +1452,7 @@ Architecture like this can be achieved  :
 
 
 
+	IAM roles need for teh task to perform the pull and push of image and logs to cloud watch : 
 
+		IAM Execution role : which will be created by the aws fargate auto to be attached to the task definition.
 
