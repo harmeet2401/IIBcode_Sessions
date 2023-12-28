@@ -1424,7 +1424,7 @@ Architecture like this can be achieved  :
 				Kubernetes , AWS ECS(ELastic container service) , AWS fargate and AWS EKS(Elastic kubernets services)
 	Description of each service above : 
 		Kuberenets : We already know.
-		Aws ECS : isme ec2 instance bnte hai jispr container deploy hotte hai using AWS ECS
+		Aws ECS : isme ec2 instance bnte hai jispr container deploy hotte hai using AWS ECS. Hm ec2 mai login krke dekh skte hai .
 				JContainer 1 Container 2 	
 					|
 					|
@@ -1434,7 +1434,7 @@ Architecture like this can be achieved  :
 				     Cluster 
 			Ec2 instance1  Ec2 instance2  Ec2 instance3
 
-		AWS Fargate : Ye ECS ka serverless versio hai jisme EC2 instance ko manage krne ki koi jrurat nhi hai 
+		AWS Fargate : Ye ECS ka serverless versio hai jisme EC2 instance ko manage krne ki koi jrurat nhi hai . Ec2 are not visible its aws managed and is not allowed for user ssh/rdp login
 			iska architecture i know.
 			JContainer 1 Container 2 	
 					|
