@@ -1490,16 +1490,39 @@ VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR S
 
 	QQ. Subnets internet se baat kaese kr paate hai ? private and public subnets kya ha ?
 	Ans . Iska answer se pehle we got to know what is route tables : routes table subnets ko attach hotte hai and usme destination Ips and target resource likha 			hotta hai . So is rules ke hisaab se route table requests ko route krta hai agge.
-		Route tables example : 
+		-Route tables example : 
 			Destination 			Target
 			10.0.0.0/16			local
 			0.0.0.0/0			NAT-Gateways
 
 			Destination ka matlab hai us IP pr ayi request target pr route ki jaegi.
 		
-	      Public subnet : Soo public subnet ke route table mai ek rule hotta hai jisme vo destination internet gateway pr b]hejra hotta hai jisse pta lgta hai ke ye 			public subnet hai jo internet se baat kr skta hai.
-	      Private Subnet : private subnet ke attached route table mai internet gateway ka route nhi hotta , NAT gateway ka hotta hai . Network Address Translation 					(NAT) service which allow private subnet resources to connect outside VPC , but outside of VPC se koi connections inside nhi aaskta. ye 					kuch update download krne ke liye hotta hai by services in private subnet
-					 - nategateway service spin up kr skte hai 
+	      - Public subnet : Soo public subnet ke route table mai ek rule hotta hai jisme vo destination internet gateway pr b]hejra hotta hai jisse pta lgta hai ke 			ye 			public subnet hai jo internet se baat kr skta hai.
+	      - Private Subnet : private subnet ke attached route table mai internet gateway ka route nhi hotta , NAT gateway ka hotta hai . Network Address Translation 					(NAT) service which allow private subnet resources to connect outside VPC , but outside of VPC se koi connections inside nhi 							aaskta. ye kuch update download krne ke liye hotta hai by services in private subnet
+					 - nategateway service spin up kr skte hai . ye NAT gateway resource public subnet mai hi bnta hai.
 					 - Ec2 lekar usme natgateway ami daalke chla skte hau 
 					 - Egress only internet gateways services : for IPv6.
 
+			Summary : private subnet ke resources ko internet se baat krne ke liye nat gateway ko bhejna pdega request ----> nat fir IGway ko bhejega which 			will talk to internet.
+
+			 ***** private -----> NAT ------> IGway----> internet.
+	      - NACL network acces control list : Hme pta hai ki resources pr network restriction lgane ke liye hm securoty group use krte hai jo attach hotti hai .
+				Pr kya hm traffic ko subnet mai ghusnne pr bhi rok skte hau ? yes Using NACL similar to Security group as it is.
+			ye ek firewall ki trahn kaam krta hai.
+
+			Default rule is : allows all in or out
+
+	      - VPC flow logs : VPC ke andar aati or jaati traffic ka logs . Hm isko create kr skte hai .
+				Example : Ham VPC flow logs uske liye jo traffic ACCEPT hua hai yan REJECT hua hai.
+				Is logs ko hm S3 and cloud watch mai daalskte hai. ye feature hm vpc flow logs bnate time setup kr skte ha.
+
+	      - VPC Peering : To establish connection between two VPC in same account , same region , or differnt account or differnet regions.
+			Easy just go to Peering connection from the VPC from where you want to send the requst to the target one .
+				Done with the request get that approved .
+			Add the route rule in the route table of the source VPC with incoming IPs for which to send the request to the target VPC.
+
+	      - VPC to On prem connections : 
+			two ways : 
+				1. AWS managed VPN : Isme VPN ki through connection bnta hau data encrypted form ia jata hai. AWS side pr VPN gateway bnalo and on prem 					pr customer gateway bnalo ollaa connecion done. Isme data internet pr transfer hotta hai isliye encrypted hotta hai .
+
+				2. Direct Connect : Dedicated connection from AWS to onprem . its private network , internet pr nhi jara hai so no encryption . Ye 						direct connection kaafi time letta hai request approve honne ke liye. Once approved the data transfer is quick,.
