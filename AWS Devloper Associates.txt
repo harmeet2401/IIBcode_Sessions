@@ -1468,3 +1468,24 @@ Architecture like this can be achieved  :
 		: Support custom compose file like docklerrun.aws.json for containers deployment 
 		: if you select single container using beanstalk one ec2 will be spin up 
 		: if you select multiple containers using beanstalk at the end AWS ECS will be used.
+
+97. Aws VPCloud : 
+	Example dekho : On prem mai jaese hmari company ka network hotta hai usme jo data base yan online portal hai vo ham externally access nhi kr skte . 
+			So usko connect krne ke liye hme company netwrk mai jaake krna pdta hai 
+	AWS VPC example : ON cloud aws VPC ussi network ka kaam krta hai jo onprem pr company ntwrk krta hai . Simple.
+
+VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR SKTE HAI . OLLAAAA WHICH WILL BE RESTRICTED FROM THE OUTSIDE.
+
+	Subnets : ye vpc ke andar hotte hai jo hme pta hai . 
+		- Public Subnet : For the resources which can be accessed from the internet 
+		- Private subnet : For resources which can not be accessed from the internet but from the public subnet which is the same vpc 
+	Aws ke andr ---> Region ---- region ke andr ---> VPC ----> vpc ke andr Zones -----> or each zone mai subnet bnta hai 
+	
+-------------------AWS--------------------------------------------------------------
+			Regiom : us-east-1
+   --------------VPC------------------------------------------------------
+       --Subnet1(zone:us-east-1a)----- ----Subnet1(zone:us-east-1a)---	
+		Api gateway 			Database	
+		
+
+
