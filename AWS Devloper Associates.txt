@@ -1526,3 +1526,7 @@ VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR S
 				1. AWS managed VPN : Isme VPN ki through connection bnta hau data encrypted form ia jata hai. AWS side pr VPN gateway bnalo and on prem 					pr customer gateway bnalo ollaa connecion done. Isme data internet pr transfer hotta hai isliye encrypted hotta hai .
 
 				2. Direct Connect : Dedicated connection from AWS to onprem . its private network , internet pr nhi jara hai so no encryption . Ye 						direct connection kaafi time letta hai request approve honne ke liye. Once approved the data transfer is quick,.
+
+	      - VPC endpoint : Ye maane agar hme VPC se kissi or service se connect krna hai kissi or region mai to hm VPC end points use kr skte hai .
+				- Gateway endpoint is used to connect to s3 and dynamco
+				- Interface  endpoint is used to connect to all other service except s3 and dyanamo.
