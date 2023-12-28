@@ -1477,7 +1477,7 @@ Architecture like this can be achieved  :
 VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR SKTE HAI . OLLAAAA WHICH WILL BE RESTRICTED FROM THE OUTSIDE.
 
 	Subnets : ye vpc ke andar hotte hai jo hme pta hai . 
-		- Public Subnet : For the resources which can be accessed from the internet 
+		- Public Subnet : For the resources which can be accessed from the internet.
 		- Private subnet : For resources which can not be accessed from the internet but from the public subnet which is the same vpc 
 	Aws ke andr ---> Region ---- region ke andr ---> VPC ----> vpc ke andr Zones -----> or each zone mai subnet bnta hai 
 	
@@ -1488,4 +1488,9 @@ VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR S
 		Api gateway 			Database	
 		
 
+	QQ. Subnets internet se baat kaese kr paate hai ? private and public subnets kya ha ?
+	Ans . Iska answer se pehle we got to know what is route tables : routes table subnets ko attach hotte hai and usme destination Ips and target resource likha hotta hai . So is rules ke hisaab se route table requests ko route krta hai agge.
+	      Public subnet : Soo public subnet ke route table mai ek rule hotta hai jisme vo destination internet gateway pr b]hejra hotta hai jisse pta lgta hai ke ye public subnet hai jo internet se baat kr skta hai.
+	      Private Subnet : private subnet ke attached route table mai internet gateway ka route nhi hotta , NAT gateway ka hotta hai . Network Address Translation (NAT) service which allow private subnet resources to connect outside VPC , but outside of VPC se koi connections inside nhi aaskta.
+	
 
