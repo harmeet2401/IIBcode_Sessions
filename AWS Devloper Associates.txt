@@ -1530,3 +1530,14 @@ VVVVIM  : TO HM APNA EK VPC BNAKE USME SAARI RESURCES OR SERVICE BNAKE KAAM KR S
 	      - VPC endpoint : Ye maane agar hme VPC se kissi or service se connect krna hai kissi or region mai to hm VPC end points use kr skte hai .
 				- Gateway endpoint is used to connect to s3 and dynamco
 				- Interface  endpoint is used to connect to all other service except s3 and dyanamo.
+
+98. CI CD tool or services or resources in AWS  
+ CI  : continuous integration  : Starts from code commit--- > unit test ---> code build 
+ CD : Continuous Deploy/Delivery : Code deploy -----> Automated integration test ---> Apptoval from QA ---> Code deploy to production.
+
+	1. Code Commit : Which is the private code version service : (GIT)
+	2. CodePipeline : Which is used to create the CI/CD pipelines for the code to build deploy or so 
+	3. CodeBuild : which is used to build you application and create the package needed.
+	4. CodeDeploy : Which is used to deploy the build app to resources (EC2 , ECS and lambda etc ).
+
+
