@@ -259,6 +259,7 @@ public class Sample {
 		synchronised : only one thread can access this method at a time . Oher threads will wait for the release.
 		
 15. lambda : 
+Lambda expressions were introduced in Java 8 as a way to provide a concise syntax for writing anonymous functions, also known as "closures" or "function literals." Lambda expressions enable you to treat functionality as a method argument or create instances of functional interfaces more easily and concisely.
 		Now Let's convert regular incrementByOne method to Lambda expression step by step.
 		
 		This is original method,
