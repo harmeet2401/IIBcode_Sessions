@@ -177,7 +177,9 @@ public class OuterClass {
 		
 	- you can either use & or &&  , | or || both will work in same manners
 
-12. Wrapper classes : 	 In collections we use wrapper classes as we can not use primitive data types in collections to store data .
+12. Wrapper classes :	
+In Java, wrapper classes are classes that allow primitive data types to be treated as objects. Java provides wrapper classes for each of the primitive data types, allowing them to be used in situations where an object is required instead of a primitive type. Wrapper classes also provide utility methods for converting between primitive types and strings, as well as for performing various operations on the values they wrap.
+		In collections we use wrapper classes as we can not use primitive data types in collections to store data .
 		ArrayList<int> alist = new ArrayList<int>(); // invalid
 		ArrayList<Integer> alist = new ArrayList<Integer>(); // valid
 		
