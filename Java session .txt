@@ -475,12 +475,26 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 		Its thread safe. It means only one thread can access the object one at a time . Will released by one thread and picked by other thread.
 		
 		  StringBuffer strb = new StringBuffer("Welcome to java ");
-          strb.append("(("); ------------------------------------------------------------ this shows StringBuffer and StringBuilders are mutable as strb.append("java") can change the strb value. no need to assign it back to strb
+          strb.append("(("); ------------------------------------------------------------ this shows StringBuffer and StringBuilders are mutable as strb.append("java") 
+can change the strb value. no need to assign it back to strb
           System.out.println(strb);
 
           StringBuilder stringBuilder = new StringBuilder("Welcome to java ");
           stringBuilder.append("@@");
           System.out.println(stringBuilder);
+Both StringBuilder and StringBuffer are classes in Java used to create mutable (modifiable) sequences of characters. They are similar in functionality, but there are some differences between them, primarily related to their performance characteristics and thread safety:
+
+Mutability:
+	Both StringBuilder and StringBuffer are mutable, meaning you can modify the contents of the sequence of characters they represent.
+Thread Safety:
+	StringBuilder is not thread-safe, meaning it's not synchronized and should not be used in multithreaded environments where multiple threads may access or modify 	it concurrently.
+	StringBuffer is thread-safe, meaning it's synchronized and can be safely accessed and modified by multiple threads concurrently without causing data corruption 	or inconsistency.
+Performance:
+	StringBuilder is faster and more efficient than StringBuffer in single-threaded environments because it's not burdened by the overhead of synchronization.
+	StringBuffer, being synchronized, incurs some performance overhead due to the cost of acquiring and releasing locks to ensure thread safety. Therefore, it may 		be slower than StringBuilder.
+Synchronization:
+	StringBuilder methods are not synchronized, so they are not suitable for use in scenarios where thread safety is required.
+	StringBuffer methods are synchronized, ensuring that they can be safely accessed and modified by multiple threads concurrently. This makes StringBuffer suitable 	for use in multithreaded environments where thread safety is a concern.
 
 27. Exception handling : 
 
