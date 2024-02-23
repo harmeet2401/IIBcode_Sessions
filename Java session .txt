@@ -94,7 +94,31 @@ JAVA apis : application programming interfaces : which are the collections of pa
 
 	String a = "";
 
-8.1 Anonymous Inner class : 
+8.1 Anonymous Inner class : In java annonymous ineer class is the no named class local inside another class which is used to implements an interface . These annonymous innner classes are declared inside another class and is not used anywhwre by referenec or instantiation.
+public class OuterClass {
+    
+    // Method with an anonymous inner class
+    public void doSomething() {
+        
+        // Creating an anonymous inner class that implements the Runnable interface
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Inside the anonymous inner class");
+            }
+        };
+        
+        // Using the anonymous inner class
+        Thread thread = new Thread(runnable);
+        thread.start();
+    }
+    
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        outer.doSomething();
+    }
+}
+
 
 8.2	Immutable object  : Meaning of Immutability in Java In simple words, immutability means not modifiable. An object is considered as immutable if its state cannot change after its creation. Because they cannot change state after their creation so they cannot corrupt by the thread interference and are very useful in concurrent applications.
 
