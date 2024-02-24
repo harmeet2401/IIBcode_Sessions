@@ -182,9 +182,60 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
 	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
 	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
-	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Like one customer can have many orders 
-					    So the Customer class will have List<Orders> orders annotated as @OneToMany(mappedby=cust).
+	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Used to show one to many rleation between 						    two entities Like one customer can have many orders. 
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
+				Example : An Auhtor can have many books. but many book can have only one author.
+					class Author {
+						@GeneratedValue(Id)
+						provate int authid
+						@ColumnName(Name ="author_name")	
+						private String name ;
+						@OneTomany(fetch=FetchType.eager/lazy)
+						Private List<Books> lbooks;
+					}
+
+					class Books {
+						@GeneratedValue(sequency = sequenceName,Id = )
+						private int bookid;
+						@ManyToOne((fetch=FetchType.eager/lazy))
+						private Author author;
+						}
+	@ManyToOne : ---------------------- which is used for data mapping incase we have ManytoOne relationship occuring . Used to show Many to one rleation between 						    two entities Like one customer can have many orders. 
+					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
+				Example : A student can have many courses. So one to many 
+					class Author {
+						@GeneratedValue(Id)
+						provate int authid
+						@ColumnName(Name ="author_name")	
+						private String name ;
+						
+					}
+
+					class Books {
+						@GeneratedValue(sequency = sequenceName,Id = )
+						private int bookid;
+						@ManyToOne((fetch=FetchType.eager/lazy))
+						private Author author;
+						}
+
+	@ManyToMany : ---------------------- which is used for data mapping incase we have ManytoMany relationship occuring . Used to show Many to Many rleation between 						    two entities Like one customer can have many orders. 
+					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
+				Example : A student can have many courses. and many courses can be opted by multiple students.
+					class Students {
+						@GeneratedValue(Id)
+						provate int studentid
+						@Column(Name="student_name")	
+						private String name ;
+						@ManyToMany(fetch=FetchType.lazy/eager)
+						private List<Courses> courses
+					}
+
+					class Courses {
+						@GeneratedValue(sequency = sequenceName,Id = )
+						private int courseId;
+						@ManyToMany((fetch=FetchType.eager/lazy))
+						private List<Student> students;
+						}
 	@scheduled : --------------------- Which is used to create a cron scheduler in spring boot . jusy mention the cron expression on top of the function to run.
 	@cacheable : --------------------- which is used to make a return value from a function cacheable and will be retrived from the cache using the key which was 
 mentioned in the key in the @cacheable()
