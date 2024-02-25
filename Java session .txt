@@ -1,4 +1,28 @@
-Java Course ----------------------------------------
+Now, we can sort a list of Person objects based on their age simply by calling Collections.sort()
+ class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    @Override
+    public int compareTo(Person otherPerson) {
+        // Compare persons based on their age
+        return Integer.compare(this.age, otherPerson.age);
+    }
+}
+ Course ----------------------------------------
 1. java is iteroperable or can be run on multiple platform using the JVM(java virtual machine) on the target system .
 2. Platform independent : Java bytecode created by the java compiler .
 	The byte code we can run it on the jvm in target system .
@@ -1597,4 +1621,74 @@ public class ShutDownHook
     });
     System.out.println("Application Terminating ...");
   }
+}
+
+Q. differnce between comparable and comparator?
+Sure, here's an explanation with an example for both Comparable and Comparator interfaces in Java:
+
+Comparable Interface:
+
+The Comparable interface allows objects to be compared based on their natural ordering. Let's say we have a class Person:
+
+public class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    @Override
+    public int compareTo(Person otherPerson) {
+        // Compare persons based on their age
+        return Integer.compare(this.age, otherPerson.age);
+    }
+}
+
+Now, we can sort a list of Person objects based on their age simply by calling Collections.sort():
+
+List<Person> people = new ArrayList<>();
+people.add(new Person("Alice", 30));
+people.add(new Person("Bob", 25));
+people.add(new Person("Charlie", 35));
+
+Collections.sort(people);
+
+for (Person person : people) {
+    System.out.println(person.getName() + ": " + person.getAge());
+}
+
+
+Comparator interface :
+The Comparator interface allows for custom sorting logic to be defined separately from the class being sorted. Let's say we want to sort Person objects by name
+import java.util.Comparator;
+
+public class NameComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person p1, Person p2) {
+        return p1.getName().compareTo(p2.getName());
+    }
+}
+
+
+Now, we can sort a list of Person objects by name using this comparator
+
+List<Person> people = new ArrayList<>();
+people.add(new Person("Alice", 30));
+people.add(new Person("Bob", 25));
+people.add(new Person("Charlie", 35));
+
+Collections.sort(people, new NameComparator());
+
+for (Person person : people) {
+    System.out.println(person.getName() + ": " + person.getAge());
 }
