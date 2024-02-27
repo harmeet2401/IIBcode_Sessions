@@ -1,2 +1,3 @@
 Steps to deploy the spring boot application to eks in google cloud.
 Steps to do that : https://codelabs.developers.google.com/codelabs/cloud-springboot-kubernetes/#4
+GCP image  repository : https://console.cloud.google.com/artifacts/docker/leafy-analyst-355306/us-central1/codelabrepo/hello-java?project=leafy-analyst-355306
