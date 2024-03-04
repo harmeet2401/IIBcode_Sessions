@@ -1692,3 +1692,27 @@ Collections.sort(people, new NameComparator());
 for (Person person : people) {
     System.out.println(person.getName() + ": " + person.getAge());
 }
+
+Q. How to enable and disable the autoconfiguration in spring boot ?
+Answer : By default the autoconfiguration is enabled in spring boot and the user can disable it by using annotation or by using the spring properties.
+
+1. Annotation used : @EnableAutoConfiguration
+	 Example :
+@SpringBootApplication
+@EnableAutoConfiguration(exclude = {MyAutoConfiguration.class})
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+
+2. Property useed : spring.autoconfigure.exclude = myAutonconfigurationclass.class
+Example : spring.autoconfigure.exclude=com.example.MyAutoConfiguration
+
+3. Property used for conditional exclusion  : spring.autoconfigure.condition.Somecondition=false.
+spring.autoconfigure.condition.someCondition=false
+
+
+
+
+
