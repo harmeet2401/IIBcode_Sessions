@@ -556,8 +556,18 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 						String str1 = "test ";
 						str1 =str1.concat("jaav");      or str1.concat("java") will not update the value if str1 , hme dubara se iski value str1 ko assign krni pdti hai 
 						sout(testjaav)
+
+VVVVVVVVIMP : In Java, the string constant pool is a special area in the Java heap memory where String literals are stored. When you create a String using a string literal (e.g., "hello"), Java checks the string constant pool to see if an equivalent string already exists. If it does, Java returns a reference to the existing string rather than creating a new one. This process is called STRING INTERNING.
+
+Here's how the string constant pool works:
+
+- String Interning: When you create a string using a string literal, Java checks if the string already exists in the string constant pool.
+- Reuse of Existing Strings: If an equivalent string is found, Java returns a reference to that string. This helps in conserving memory by avoiding duplicate string objects.
+- Creation of New Strings: If the string does not exist in the string constant pool, Java creates a new string object and adds it to the pool for future reference.
+- Immutable Strings: Strings in the string constant pool are immutable, meaning their values cannot be changed after they are created. This ensures thread safety and prevents unintended modification of shared strings.
+
 						
-26. Stringbuffer and stringbuilder 	:  Strongest tool or classes to create string and can concatenate any data types value 
+26. Stringbuilder and Stringbuffer 	:  Strongest tool or classes to create string and can concatenate any data types value 
 		stringBuilder.append("@@"); ----------------- the parameter can be int , float , double , short , string .
 			
 		These are not immutable classes , we can do as many chanes as we can.
