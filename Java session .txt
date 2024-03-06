@@ -185,9 +185,17 @@ public class OuterClass {
 }
 
 
-8.2	Immutable object  : Meaning of Immutability in Java In simple words, immutability means not modifiable. An object is considered as immutable if its state cannot change after its creation. Because they cannot change state after their creation so they cannot corrupt by the thread interference and are very useful in concurrent applications.
+8.2	Immutable object  : Meaning of Immutability in Java In simple words, 
+immutability means not modifiable. An object is considered as immutable if its state cannot change after its creation. Because they cannot change state after their creation so they cannot corrupt by the thread interference and are very useful in concurrent applications.
 
 	All wrapper classes are immutable . wrapper classes like Byte , Character , String , Integer , Long , Double etc 
+	String is also immutable and immutability means its state can not be changed by multiple threads all at the same time.In other words once an object of a 
+String class is created in the java string pool it can not be changed. Means whenever a thread tried to update the value of state of the string object it will create a 
+new string object without changing the existing string object .
+So jab bhi ham string concatination and substring krte hai usme original string intact rehti hai 
+
+	String a = "testing immutability"
+	reference object is there n left hand side but the object will be saved in the java string pool which is a special heap memory.
 
 9.Scope of variable : 				
 
