@@ -922,7 +922,7 @@ examepl  : before java 8  ;
 			new.Thread(runnable2).start();
 			
 			So upr () ye brackets show the input parameter to run function of Runnable functional interface.
-			-> this shows the linked operator.
+			-> this shows the lambda operator.
 			{  sout  } this shows the body of the run method.
 			
 Q. what is a comparator Interface ?
@@ -949,7 +949,7 @@ In order to create your own functional interface we just need to
 		3. Add one astract method to the interface 
 		4. This interface can have many default and static methods defined in this interface 
 		
-		Note : we already know the concept of default function added to the interace . Agar we add one more function to the interfac then all classes in all package have to implement the function and define it. to overcome that they introduced the concep t of default method which is a method with access modifier default with definition added to the interface to be used by all classes implementing the interface.
+		Note : we already know the concept of default function added to the interface . Agar we add one more function to the interfac then all classes in all package have to implement the function and define it. to overcome that they introduced the concep t of default method which is a method with access modifier default with definition added to the interface to be used by all classes implementing the interface.
 
 
 Four initial functional interfaces are 
