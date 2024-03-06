@@ -122,24 +122,42 @@ JAVA apis : application programming interfaces : which are the collections of pa
 
 Example 1 : Here we need to create one interface and then create an anonymous class for that interface without instantiating it and then calling it.
 
-interface Greeting {
+import java.util.Comparator;
+
+interface Greeting{
     void greet();
 }
-
-public class Main {
+public class anonymousInnerclass {
     public static void main(String[] args) {
-        // Creating an anonymous inner class that implements the Greeting interface
+        /**
+         * This is used sort the objects in natural order using the defined values.
+         */
+        Comparable comparable = new Comparable() {
+            @Override
+            public int compareTo(Object o) {
+                return 0;
+            }
+        };
+
+        /**
+         * This is used for sorting in order basis of comparing object using customized fields comparison.
+         */
+        Comparator comparator = new Comparator() {
+            @Override
+            public int compare(Object o, Object t1) {
+                return 0;
+            }
+        };
         Greeting greeting = new Greeting() {
             @Override
             public void greet() {
-                System.out.println("Hello, world!");
+                System.out.println("Hello from anonymous class");
             }
         };
-        
-        // Calling the greet method of the anonymous inner class
         greeting.greet();
     }
 }
+
 
 Example 2 : For existing interfaces in java , Comparator , Comparable, Runnable etc
 public class OuterClass {
