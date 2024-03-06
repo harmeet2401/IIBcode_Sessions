@@ -1130,6 +1130,8 @@ Collector.MaxBy(Comparator.comparing(Student::getMarks))----------- this will gi
 Q. Function of comparator interface used in sorted function of stream api 
 ANS : If you don't pass the parameter it will sort the students as per the natural order.
 list.stream().sorted( ? ).collect(Collector.toList())
+Comparator.naturalOrder()
+Comparator.reverseOrder()
 Comapartor.comparing(Student::getMarks)
 Comapartor.comparing(Student::getMarks).reversed()
 
