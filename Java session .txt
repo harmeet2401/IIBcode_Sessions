@@ -1042,7 +1042,7 @@ QQQ  : Method references
 					
 					
 				There are some cases it is difficult to apply method reference .	   
-	2. So in nutshell in JAVA8 we can use classname::method references and get the work done 
+	2. So in nutshell in JAVA8 we can use classname/object::method references and get the work done 
 	
 	if we have create a Class test and it has a method with input paramters or not . 
 	
@@ -1113,8 +1113,50 @@ QQQ. Stream Api
 					 
 		Stream is nothing but a sequence of values or elements okay ! it doesn't hold data. And can be processed only once.
 		
-				
-				
+Q. Functions of Collectors interface and Comparator interface passed as a paramter to the collect() terminal fn of stream api ?
+Ans : list.stream().collect( ? )
+Collector.toSet()
+Collector.toMap(key,value)
+Collector.toList()
+Collector.summingInt()
+Collector.Average()
+Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.)
+Collector.joining('delimiter','Start char','end char')
+Collector.partitionBy(Parttion as true and false.)
+
+Comapartor.comparing(Student::getMarks)
+Comapartor.comparing(Student::getMarks).reversed()
+
+
+Q. How to convert from arrayList to linkedHashmap :
+
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a list
+        List<String> list = Arrays.asList("apple", "banana", "cherry", "date");
+
+        // Convert the list to a LinkedHashMap using Stream API
+        LinkedHashMap<String, Integer> linkedHashMap =
+                list.stream()
+                    .collect(Collectors.toMap(
+                            // Key mapper: Use the list element itself as the key
+                            Function.identity(),
+                            // Value mapper: Use the length of the string as the value
+                            String::length,
+                            // Merge function: If there are duplicate keys, retain the first occurrence
+                            (v1, v2) -> v1,
+                            // Supplier: Create a LinkedHashMap
+                            LinkedHashMap::new
+                    ));
+
+        // Print the LinkedHashMap
+        System.out.println(linkedHashMap);
+    }
+}
+
 				
 					
 				
