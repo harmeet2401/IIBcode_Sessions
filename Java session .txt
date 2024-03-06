@@ -1016,7 +1016,9 @@ NOte : --- operators function intefaces are used in case both the input and out 
 	interface name : Supplier 
 	It is used to return something and it doesn't required any paramters .
 	The syntax for lambda would be (no input params)->{}
-	
+
+Note : In Java, the diamond operator <> is used with generics to denote TYPE INFERENEC. It was introduced in Java 7 as part of the Project Coin enhancements.
+
 QQQ  : Method references	
 
 	1. Method references are just a shortcut way to write lambda expressions 
