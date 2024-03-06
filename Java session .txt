@@ -682,24 +682,7 @@ B : correct
 						
 		c. Vector : It is similar then arraylist , slower then array list and is thread safe means only one thread can access it one at a time.
 			its synchronised and increase the size of the array to 100% if one more elements is added. Its index based insertions.
-			
-		d. Hashset : https://javaconceptoftheday.com/how-hashset-works-internally-in-java/
-		It will remove the duplicate elements and it is not index based data strucure . We know it will remove the duplicate in case of string objects , but how it will find duplicate in case of POJO java objects as a primitive passed in it 
-			for exaple : Hashset<Person> newper = new Hashset<Person>();
-				Q. Here we used person and want to remove the duplicacy how ?
-				Ans. As  a dev first we have to find which attribute of person makes it duplicate . Same what we observed in Rule coding 
-					for example we can use Id and name both to be part of duplicate check. 
-					We have to override the equal and hashcode method of Object class which Person class extends by default . the default equals method says all person objects are Different .
-					exmaple :  below two objects are different , if we do per1==per2 it will be false as it is point to a different memory space .
-						Person per1 = new Person("beet","88277",9129);
-						Person per2 = new Person("beet","88277",9129);
-					
-				IMP : Generate the hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
-
-		VERYIMPORTANT : Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing HashMap object with element you have specified as it’s key and constant called “PRESENT” as it’s value. This “PRESENT” is defined in the HashSet class as below.
-			Object PRESENT = new Object();
-			
-		e. Hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
+		d. Hashmap : its a key value pair data structure . its not index based insertion data str. Its faster then any other data strc we discusse .
 		For large amount of data hashmap is used as look up of elements at different index is pretty easy , just pass the key and ollllaaaa we got it.
 						
 			Verry verry important : 
@@ -771,7 +754,22 @@ B : correct
 				It goes to the bucket at 0 index and using the equals functions will search the GM and retrun the value back.
 																													
         Case 3  : what happen in case of th Person objects or pojo object saving then we can either add the hashcode fnction to override and equals method to override . But by default all classes extends the functiosn fro objects class.																														
-																													
+						
+		e. Hashset : https://javaconceptoftheday.com/how-hashset-works-internally-in-java/
+		It will remove the duplicate elements and it is not index based data strucure . We know it will remove the duplicate in case of string objects , but how it will find duplicate in case of POJO java objects as a primitive passed in it 
+			for exaple : Hashset<Person> newper = new Hashset<Person>();
+				Q. Here we used person and want to remove the duplicacy how ?
+				Ans. As  a dev first we have to find which attribute of person makes it duplicate . Same what we observed in Rule coding 
+					for example we can use Id and name both to be part of duplicate check. 
+					We have to override the equal and hashcode method of Object class which Person class extends by default . the default equals method says all person objects are Different .
+					exmaple :  below two objects are different , if we do per1==per2 it will be false as it is point to a different memory space .
+						Person per1 = new Person("beet","88277",9129);
+						Person per2 = new Person("beet","88277",9129);
+					
+				IMP : Generate the hashcode and equals and  generating the hashcode and equals we could able to see the duplicate removed.
+
+		VERYIMPORTANT : Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing HashMap object with element you have specified as it’s key and constant called “PRESENT” as it’s value. This “PRESENT” is defined in the HashSet class as below.
+			Object PRESENT = new Object();																								
 		f. Linkedhashset : 	Aswe saw the elements entered in hashset while retrieving it the elements are in different order.
 			To remove that use Linkedhashset and ollla ||||.
 		
