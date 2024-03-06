@@ -1123,6 +1123,7 @@ Collector.Average()
 Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.)
 Collector.joining('delimiter','Start char','end char')
 Collector.partitionBy(Parttion as true and false.)
+Collectors.counting() -- will give you count of the elements.
 
 Comapartor.comparing(Student::getMarks)
 Comapartor.comparing(Student::getMarks).reversed()
