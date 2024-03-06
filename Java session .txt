@@ -119,6 +119,29 @@ JAVA apis : application programming interfaces : which are the collections of pa
 	String a = "";
 
 8.1 Anonymous Inner class : In java annonymous ineer class is the no named class local inside another class which is used to implements an interface . These annonymous innner classes are declared inside another class and is not used anywhwre by referenec or instantiation.
+
+Example 1 : Here we need to create one interface and then create an anonymous class for that interface without instantiating it and then calling it.
+
+interface Greeting {
+    void greet();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating an anonymous inner class that implements the Greeting interface
+        Greeting greeting = new Greeting() {
+            @Override
+            public void greet() {
+                System.out.println("Hello, world!");
+            }
+        };
+        
+        // Calling the greet method of the anonymous inner class
+        greeting.greet();
+    }
+}
+
+Example 2 : For existing interfaces in java , Comparator , Comparable, Runnable etc
 public class OuterClass {
     
     // Method with an anonymous inner class
