@@ -251,6 +251,18 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 	- you can either use & or &&  , | or || both will work in same manners
 
 12. Wrapper classes :	
+
+Wrapper classes in Java are classes that encapsulate primitive data types within an object. They provide a way to treat primitive data types as objects. The Java programming language provides a set of predefined wrapper classes for each primitive data type:
+
+Byte: Represents a byte value (byte).
+Short: Represents a short value (short).
+Integer: Represents an integer value (int).
+Long: Represents a long value (long).
+Float: Represents a float value (float).
+Double: Represents a double value (double).
+Character: Represents a character value (char).
+Boolean: Represents a boolean value (boolean).
+
 In Java, wrapper classes are classes that allow primitive data types to be treated as objects. Java provides wrapper classes for each of the primitive data types, allowing them to be used in situations where an object is required instead of a primitive type. Wrapper classes also provide utility methods for converting between primitive types and strings, as well as for performing various operations on the values they wrap.
 		In collections we use wrapper classes as we can not use primitive data types in collections to store data .
 		ArrayList<int> alist = new ArrayList<int>(); // invalid
@@ -267,7 +279,7 @@ In Java, wrapper classes are classes that allow primitive data types to be treat
 		boolean									Boolean
 		byte									Byte 
 		char									Character
-		int										Integer
+		int								   	Integer
 		long									Long
 		short									Short
 		double									Double
@@ -275,11 +287,14 @@ In Java, wrapper classes are classes that allow primitive data types to be treat
 
 	Notes 	We can understand it like this : we can declared the wrapper class object as this Boolean b = new Boolean(false) ; ------> in this , the constructor is used to hold the primitive data value.
 	
-	****BOXING AND UNBOXING : 
-		The automatic adaptation of primitive data types into its corresponding Wrapper type is known as boxing, and reverse operation is known as unboxing
-	**** AUTOBOXING AND AUTOUNBOXING : Autoboxing is the process by which a primitive type is automatically encapsulated (boxed) into its equivalent type wrappers whenever an object of the type is needed	
-		This is the cool feature of java in which if we want to convert the primitive data type value to wrapper class just directly write it like tihs :
-		- Interger f = 100;   here the Integer is the wrapper class and 100 is an int value , java is converting it automaticaaly to wrapper which is now giving us the advantage to us all other functions that wrapper class provide.
+	
+****BOXING AND UNBOXING : 
+The automatic adaptation of primitive data types into its corresponding Wrapper type is known as boxing, and reverse operation is known as unboxing.
+	
+**** AUTOBOXING AND AUTOUNBOXING : 
+Autoboxing is the process by which a primitive type is automatically encapsulated (boxed) into its equivalent type wrappers whenever an object of the type is needed	
+This is the cool feature of java in which if we want to convert the primitive data type value to wrapper class just directly write it like tihs :
+- Interger f = 100;   here the Integer is the wrapper class and 100 is an int value , java is converting it automaticaaly to wrapper which is now giving us the advantage to us all other functions that wrapper class provide.
 		- normal way to wrap a primitive value in wrapper class  
 			Byte b = new Byte(10); ----------------------  this is called boxing converting from premitive data types to objects 
 			Float b = new Float(10f); 
@@ -306,9 +321,9 @@ public class Sample {
 				
 		HEAP MEMORY (garbage collectable memory)-----								STACK MEMORY--------
         						
-		Objects 																	Methods 
+		Objects 												Methods 
 													
-		instances variable 															Local variables 
+		instances variable 											Local variables 
 			
 		
 			
@@ -352,6 +367,7 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 		(int num) -> {
 			return ++num
 		}
+		'->' this is the lambda operator.
 		This is the modified version of incrementByOne using lambda expression. If you want to simplify further, parameter’s data type is optional, so Let's remove those
 		
 		So method will be looks like this now.
@@ -435,8 +451,8 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 					no of seats available is common to all tickets going to each pessenger . which will have an updated count . mean 90 is available for all .
 			
 			2. Static blocks : which will be run at the verry first step , sbse pehle run hogga 
-			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocksare executed sequentially.
-			Important  : STATIS MEMBERS CAN BE CALLED BY THE STATIC MEMBER ONLY (MEMBSR CAN BE ANYTHING , CLASS , FUNCTION , VARIABLE ETC )
+			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocks are executed sequentially.
+			Important  : STATIc MEMBERS CAN BE CALLED BY THE STATIC MEMBER ONLY (MEMBSR CAN BE ANYTHING , CLASS , FUNCTION , VARIABLE ETC )
 20. Inheritance : 			
 
 	- Wecan use extends the super class 
@@ -496,7 +512,7 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 			- two interfaces have same fnction : how to call the functions then post implementation		
 				
 				code : Interfacename.super.functionname()
-				
+
 22. abstract classes : 
 					- unlike interface , abstract classes can have functions with body . and without body also .
 					- even a one function in a class abstract then the clas is abstract
