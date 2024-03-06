@@ -1124,7 +1124,12 @@ Collector.groupingBy(key,value or the fields which willbe the key or give custom
 Collector.joining('delimiter','Start char','end char')
 Collector.partitionBy(Parttion as true and false.)
 Collectors.counting() -- will give you count of the elements.
+Collector.MinBy(Comparator.comparing(Student::getMarks))----------- this will give a min marks across the students
+Collector.MaxBy(Comparator.comparing(Student::getMarks))----------- this will give a max marks across the students
 
+Q. Function of comparator interface used in sorted function of stream api 
+ANS : If you don't pass the parameter it will sort the students as per the natural order.
+list.stream().sorted( ? ).collect(Collector.toList())
 Comapartor.comparing(Student::getMarks)
 Comapartor.comparing(Student::getMarks).reversed()
 
