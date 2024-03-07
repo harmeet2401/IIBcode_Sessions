@@ -1,0 +1,155 @@
+Filtering and Summing:
+Given a list of integers, filter out the even numbers and then calculate the sum of the remaining numbers.
+
+Mapping and Collecting:
+Given a list of strings, convert each string to uppercase and then collect them into a new list.
+
+Sorting and Limiting:
+Given a list of names, sort them in alphabetical order and then limit the result to the first 5 names.
+
+Grouping and Counting:
+Given a list of student objects with attributes like name, age, and grade, group the students by their grade and then count the number of students in each grade.
+
+Finding Max Value:
+Given a list of integers, find the maximum value using Stream API.
+
+Checking for Presence:
+Given a list of strings, check if the list contains a specific string using Stream API.
+
+Removing Duplicates:
+Given a list of integers, remove duplicate elements using Stream API.
+
+Flattening Nested Lists:
+Given a list of lists of integers, flatten it into a single list using Stream API.
+
+Mapping Object Properties:
+Given a list of student objects, create a new list containing only the names of the students.
+
+Checking Predicate:
+Given a list of integers, check if all elements satisfy a specific condition using Stream API.
+
+
+Answer 1 
+list.stream.filter(i->i%2!==0).reduce((a,b)->a+b)
+list.stream.filter(i->i%2!==0).collect(Collectors.summingInt())
+
+list.stream().filter(i->i%2!=0).mapToint(Integer::new).sum() : correct 
+
+Answer 2 
+list.stream.map(String::uppertCase).collect(Collectors.toList()) : correct
+
+Answer 3 
+list.stream.sorted(Comparator.naturalOrder()).limit(5) : correct
+
+Answer 4 
+list.stream.collect(Collectors.groupingBy(Student::getGrade()))
+.forEach((k)-> System.out.println(k.getKey + "= "+ k.getValues.size()))
+
+public class Main {
+    public static void main(String[] args) {
+        List<Student> students = ...; // Populate the list of students
+
+        // Group students by grade and count the number of students in each grade
+        Map<String, Long> studentsByGradeCount = students.stream()
+                .collect(Collectors.groupingBy(Student::getGrade, Collectors.counting()));
+
+        // Print the result
+        studentsByGradeCount.forEach((grade, count) -> System.out.println("Grade: " + grade + ", Count: " + count));
+    }
+}
+
+
+
+Answre 5 
+list.stream().max(Integer::CompareTo);
+list.stream().map(INteger::max(a,b))
+
+Answer 6 
+String a  = "check"
+
+boolean a = list.stream().anymatch(s->s.equals(a))
+
+Answer 7 
+list.stream().collect(Collectors.toSet());
+list.stream().distinct().collect(Collectors.toList())
+
+Answer 8 
+List<List<Integer>> list = ArrayList<List<Integer>>
+example : [[1,2,3],[3,4,5],[6,7,8]]
+Answer will be [1,2,3,4,5,6,7,8]
+
+list.stream().flatMap(List::new).collect(Collectors.Tolist)
+
+Answer 9 
+list.stream().map(Students::getname).collect(Collectors.toList)
+
+Answer 10 
+
+list.stream().allmatch(i->i>0)
+
+------------------------------------------------------------------------
+Filtering and Mapping:
+Given a list of strings, filter out strings containing the letter "a" and then convert the remaining strings to uppercase.
+Answer :List<String> list = new ArrayList<String>(); 
+list.stream().filter(s-> !s.contains("a")).map(String::UpperCase)
+
+Partitioning:
+Given a list of integers, partition the list into two parts: one containing even numbers and the other containing odd numbers.
+Answer : List<Integer> list = new ArrayList<Integer>();
+
+list.stream().collect(Collectors.partitionBy(i->i%2==0))
+
+Finding Minimum Value:
+Given a list of doubles, find the minimum value using Stream API.
+Answer List<Double> list = new ArrayList<Double>();
+
+Optional<Double> min = numbers.stream().min(Double::compare);
+list.stream().mapToInt(Integer::new).min()
+
+Checking for Absence:
+Given a list of strings, check if the list does not contain any string longer than 10 characters using Stream API.
+Answer List<String> list
+
+list.stream().noneMatch((s)-> s.length()>10)
+
+
+Removing Nulls:
+Given a list of strings that may contain null values, remove all null values using Stream API.
+Answer List<String> list.
+
+strings.stream().filter(Objects::nonNull).collect(Collectors.toList());
+strings.stream().filter((s)-> !s==null).collect(Collectors.toList())
+
+
+Mapping and Summarizing:
+Given a list of products with price attributes, calculate the total price of all products using Stream API.
+Answer List<Product> list 
+
+list.stream().mapToint(products -> products.getPrice()).sum();
+
+
+Grouping and Mapping:
+Given a list of employee objects with attributes like department and salary, group the employees by department and calculate the average salary for each department using Stream API.
+Answer : 
+list.stream().collect(Collectors.groupingBy(employee::getDepartment,Collectors.averageInt(Employee::getSalary)))
+
+
+Sorting and Distinct:
+Given a list of integers, remove duplicate elements, sort them in descending order, and then limit the result to the first 3 elements using Stream API.
+Answer 
+List<Integer> list = new ArrayList<Integer>();
+
+list.stream().sorted(Comaparator.reverseOrder()).distinct().limit(3).collect(Collectors.toList())
+
+
+Finding Maximum Length:
+Given a list of strings, find the length of the longest string using Stream API.
+Answer 
+list.stream().collect(Collectors.MaxBy(Comparator.comparing(s.length())))
+list.stream().mapToint(String::length).max()
+
+Checking Predicate Negation:
+Given a list of integers, check if none of the elements are negative using Stream API.
+Answer :
+
+list.stream().noneMatch(i->i<0)
