@@ -45,7 +45,22 @@ Types of Pattern catalog to choose pattern from .
 	- Creational patterns : which is all related to the creation and instantiation of the class objects
 	- Structural patterns : Which is all realted to the class struture.
 	- Behaviour patterns : which is all related to the calling heppens or communication between classes.
-	
+
+Singleton pattern  -----------> To allow only one instance of the objet to be created
+factory pattern -----------> Create an objec of another class depending upon the value given
+abstractfactory pattern -------> its the factory of factories. Create object of factories classes depend upon a value given
+template pattern ---------> Create an interface and take that as a template for all the implementations
+adapter pattern --------> To allo two cross platform application to talk to each other
+flyweight pattern ------> This design resolve multiple instance of object creation by saving the object in cache and reply with same object if key exists.
+Command pattern -------> To encapsulate the request as an object.
+Decorator pattern ------> Will wrap the requst with under line value . like new BufferRead(new FileReader()).
+Dependedncy Injection pattern ------> Autowiring and injecting the object instance to another class.
+builder pattern -------> to use the builder to create and initiailize the fileds of a class instead of using the constructor
+Proxy pattern ---------> To keep a proxy wall or connection to make . Increase security . This proxy can be part of a organisation firewall for making widelisted calls.
+prototype pattern --------> This design is related to cloning the object . Shallow and deep copy 
+facade pattern ------> This will keep a facade module infront of a complex module to allow easy user iteraction .Client have to press one button of facade module, rest it will take
+iterator pattern-----> For iterating the collection classes(aggregators).
+
 	a. Singleton Pattern : Its a creational pattern which will allow only one object to be created for the  class and shared across all the classes.
 			for example : 
 					case 1 : in this case singleton pattern will allow only one object of PropertyReader class to be created to save memory.
@@ -216,26 +231,26 @@ Types of Pattern catalog to choose pattern from .
 	c. Abstract Factory Design pattern : An abstract factory is the factory of factories . Means To create the object for factory classes we have Abstract factory class which knows how to do it. Now this abstract factory class should also be invoked to create downstream factory class which is done by Producer.
 	Its an abstract class with abstract method in it.
 	Java Example class : JAXP java api for XML parsing . to read write the 
-			ClientClass input ---|
+					    ClientClass input ---|
 								 |
 								 |
 							 Producer 
 								|
 							VehicleAbstartctFactory (Factory of factories)
 								|
-					  ---------   ------------
-					  |						 |
-				FourWheelerfactory         TwoWheelerFactory	
+					              ---------------------
+					              |			 |
+				          FourWheelerfactory         TwoWheelerFactory	
 				
 				
 				
 				   ---------VehicleDAO(Interface)----
-				  |- audiar			                 |- hondaScooty
-				  |- audibus					     |- hondaBIke
+				  |- audiar			    |- hondaScooty
+				  |- audibus			    |- hondaBIke
 				
 				
 
-			in above diagram it shoes that PizzaFactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
+			in above diagram it shoes that FourWheelerfactory and TwoWheelerFactory will be created by an abstractFactory which will be produced by producer.
 
 
 		The abstractfactory class is the abstract class with one abstract method returning the other factory normal class (which has one static method)
@@ -254,9 +269,7 @@ Types of Pattern catalog to choose pattern from .
 		App1 (send XML) --------> Adapter program  --------------> App2(which data to be in json format.)
 								transform it in json 
 								and feed it to app2
-    f. flywight design pattern : Its a structure design pattern .In this design pattern , the main problem which is resolved is creating multiple instances of the objectc again again.
-								To overcome that we can use Map<String, Object> map = new HashMap<>(). To cache the object in sthe hash table which is then returned everytime we need to invokve the method of the class for which the object is created.
-								Now the string type or the key should be unique so that same copy of the object can be retrived from the cache.
+    f. flywight design pattern : Its a structure design pattern .In this design pattern , the main problem which is resolved is creating multiple instances of the objectc again again.To overcome that we can use Map<String, Object> map = new HashMap<>(). To cache the object in sthe hash table which is then returned everytime we need to invokve the method of the class for which the object is created.Now the string type or the key should be unique so that same copy of the object can be retrived from the cache.
 								
 							Human (Interface)
 							beath(){}
@@ -330,11 +343,11 @@ Types of Pattern catalog to choose pattern from .
 	i. Dependency Injections and Inversion of control patterns  :  We know that we can inject the instance of one class to the another class using spring framework dependency       	injection fetaure . Its also know as IOC(Invertion of control)	
 			In lemen term dependency injection is to inject the class dependency at runtime by creating the instance of the dependency class and using it dynamically with in the main class which need DI. We know that @Autowired is the annotation for the field level DI which inject the instance of the class created at runtime by the Spring container at runtime while scanning @Component , @Repository , @Service etc. The main annotation needed is @component to come up as part of the scan list of classes for the spring container. In case of an interface to be injected . We need to make the implementing class for the interface as @Component
 			Or else  @Component can be done on all classes to be insjected.
-			Three types of DI or IOC 
+			Four types of DI or IOC 
 				1. Field level DI  : in which we will declare the Class object and to instantiate it use @Autowired.
 				2. Setter Injection : in which we will annotate the setter of the object to be injected into the other class by creating the setter and getter for the dependency class.
 				3.  Constructor level DI : in which we can use the parameterize Constructor of the class where we need to inject the other class (annotated as @Component) and give the dependency class as a parameter and initialize it using this.object=object . Annotate the constructor with @Autowired
-			
+				4. Method level DI : in which we can create a get method of the object and get the new instance form it.
 
 	j. Prototype Objects Design Patterns : In this the one existing object will be used to create another object quickly .
 				This case we can  have a prototype object ready with all data initialized and create a copy of it and do the work . No need to create a new object from the sctrach and do the initialization again.
@@ -342,7 +355,7 @@ Types of Pattern catalog to choose pattern from .
 			For that Cloneable interface is used which allow clone method to be override so that a copy of the class (object) can be done. Which servers our purpose of creating a prototype.	
 			
 			Example 1  : Its a shallow copy means it will return the reference pointer to the objects so the cloned object an comes out to be same with same hashcode. 
-							This happens in case we have a object class as the attribute of the cloneable class . in that case default behaviour of clone method will do shallow copy of that attribute like MemberShip mem object . iska hashcode object same ajaega. 
+			This happens in case we have a object class as the attribute of the cloneable class . in that case default behaviour of clone method will do shallow copy of that attribute like MemberShip mem object . iska hashcode object same ajaega. 
 							Shallow means upr upr se copy not to the deep .
 			Create a class 
 					class Game implements Cloneable{
