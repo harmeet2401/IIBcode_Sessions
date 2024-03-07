@@ -392,8 +392,7 @@ mentioned in the key in the @cacheable()
 		
 		
 		}
-		
-		
+			
 	  b. Lazy fetch : Means whenever a query is ran for university data to get retrived, it will retrieve its childs entity all values only when it is needed , like calling getStudents() method of University entity. It will not give you the students records by default.This will not cause serious performance issue. Because of small result set 
 	  
 	  @Entity
@@ -409,6 +408,21 @@ mentioned in the key in the @cacheable()
 		private List<Student> students;		
 		
 		
+		}
+
+	@ApiModel :------------------------ Used to provide more info or metadata to the model 
+					In Spring Boot, @ApiModel is not a built-in annotation. However, it is often used in combination with other frameworks 							such as Swagger or Springfox to provide additional metadata about your model classes.
+		import io.swagger.annotations.ApiModel;
+		import io.swagger.annotations.ApiModelProperty;
+		@ApiModel(description = "Details about the user")
+		public class User {
+		    @ApiModelProperty(notes = "The unique ID of the user")
+		    private Long id;
+		    @ApiModelProperty(notes = "The name of the user")
+		    private String name;
+		    @ApiModelProperty(notes = "The email address of the user")
+		    private String email;
+		    // Getters and setters
 		}
 
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
