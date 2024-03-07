@@ -2,7 +2,7 @@ Design patterns in java -------------------- Really important.
 SOLID principle : 
 
 	S : The single responsbility : it means the classes we will write should have only one single reason to get changed. There should not be much reasons
-		get changed 
+		get changed.It should encapsulate one and only one aspect of the application's functionality.
 	O : The open/closed principle : means one class should not be open for modification , rather that it should be open for the Extension .
 
 		For example : Employee class is a more abstract one 
