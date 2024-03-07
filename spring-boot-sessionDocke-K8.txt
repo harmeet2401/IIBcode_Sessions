@@ -179,7 +179,8 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
-	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .
+	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .@Transactional supports various attributes to customize transactional behavior, such as readOnly, propagation, isolation, timeout, and rollbackFor(on certain exception), among others. This annotation can be on method and class level(class level will make all public method of the class as transactional.)
+
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
 	@GeneratedValue --- this will outogenerate the value for the variable and is mostly used on integer variables.
@@ -188,6 +189,38 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
 	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
+	Example : 
+		- MyConfiguration.java annotated as @configuration which tells the spring container that it contains beans which needs to be part of bean list required for autowiring
+		import org.springframework.context.annotation.Bean;
+		import org.springframework.context.annotation.Configuration;
+		
+		@Configuration
+		public class MyConfiguration {
+		
+		    @Bean
+		    public MyBean myBean() {
+		        return new MyBean();
+		    }
+		}
+
+		- MyService.java is class annotated as @service which in turn depends on the MyBean instance which will get autiowired and no need to add the @component to the MyBean Class kyunki uska bean @Bean krke bnaliya container ne. ollaaa
+			import org.springframework.beans.factory.annotation.Autowired;
+			import org.springframework.stereotype.Service;
+			
+			@Service
+			public class MyService {
+			
+			    private final MyBean myBean;
+			
+			    @Autowired
+			    public MyService(MyBean myBean) {
+			        this.myBean = myBean;
+			    }
+			
+			    // Other methods go here
+			}
+
+
 	@ComponentScan ----------> this annotation will allow the component scanner to scan the entire project to instantiate and build the object for the beans add it to the list of beans in the classpth which will allow the autowiring to work.
 	@EnableAutoConfiguration ----> this will allow auto configure some of the bean creation which can be auto-injected at run time for more processing.
 	@Value("${key.value}") ------> to load a value from the app.yaml file at runtime. eg key.value = 90	. 
