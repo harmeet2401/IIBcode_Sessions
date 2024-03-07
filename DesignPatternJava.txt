@@ -73,7 +73,26 @@ Types of Pattern catalog to choose pattern from .
 					- Then create the private static variable of same class type so that we can instantiate it back .
 					- then create a public static method to return the above private static class variable back . Check is added to check if private static attribute is null or not.
 					
-				a. lazy instantiation : with in the method . to instantiate private static attribute. PREFFERED
+				a. lazy instantiation : with in the method . to instantiate private static attribute. PREFFEREDy
+							public class Singleton {
+							    // Private static variable to hold the single instance of the class
+							    private static Singleton instance;
+							    // Private constructor to prevent instantiation from outside the class
+							    private Singleton() {}
+							    // Public static method to get the single instance of the class
+							    public static Singleton getInstance() {
+							        // Lazy initialization: create the instance only if it's null
+							        if (instance == null) {
+							            instance = new Singleton();
+							        }
+							        return instance;
+							    }
+							    // Other methods of the class
+							    public void showMessage() {
+							        System.out.println("Hello, I am a singleton object!");
+							    }
+							}
+
 				b. eager instantiation : eg : private static DateUtil dateUtil = new DateUtil(); ----- on class level.
 										   public static DateUtil getInstance(){
 											return dateUtil;
@@ -85,7 +104,7 @@ Types of Pattern catalog to choose pattern from .
 										 dateUtil = new DateUtil();
 										}
 				d. Issue 1 : How to make the instantiaton of the private static attribute thread safe is by marking the block of code s static.
-						- Mark the variable which is threaf vulnerable as volatile to make it thread safe.
+						- Mark the variable which is thread vulnerable as volatile to make it thread safe.
 						- synchronized keyword to mark the function thread safe .
 						---- block to mark piece of LOC  make good use of it as it is expensive one so only wrap arround the LOC which is needed to be.
 						synchronized (DateUtil.class){ 
@@ -120,7 +139,44 @@ Types of Pattern catalog to choose pattern from .
 				To resolve this issue , we have to use something which doesn't have constructors . So ENUM is one of the feature by java which has no constructors and help in creating the INSTANCE only by enumname.INSTANCE.
 				
 				As there is no constructors , we can not use reflection technique to loop through the constructors and set the accessibility flag true to start creating new instances.
-									
+				ENUM ----------
+						// Define an enum called Color
+					public enum Color {
+					    RED("FF0000"),
+					    GREEN("00FF00"),
+					    BLUE("0000FF");
+					
+					    // Private field to hold the color code
+					    private String code;
+					
+					    // Private constructor to initialize the color code
+					    private Color(String code) {
+					        this.code = code;
+					    }
+					
+					    // Public method to get the color code
+					    public String getCode() {
+					        return code;
+					    }
+					}
+
+			Main Class-----------------------
+					public class Main {
+					    public static void main(String[] args) {
+					        // Create objects using the Color enum
+					        Color red = Color.RED;
+					        Color green = Color.GREEN;
+					        Color blue = Color.BLUE;
+					
+					        // Access methods and fields of the enum instances
+					        System.out.println("Red code: " + red.getCode());     // Output: FF0000
+					        System.out.println("Green code: " + green.getCode()); // Output: 00FF00
+					        System.out.println("Blue code: " + blue.getCode());   // Output: 0000FF
+					    }
+					}
+
+
+
 				NOTE : IN NUTSHELL MAKE SURE TO INSTANTIATE THE CLASS TYPE PRIVATE ATTRIBUTE ONLY ONCE AND RETURN IT.
 				
 				
