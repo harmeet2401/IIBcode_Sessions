@@ -1119,7 +1119,9 @@ Collector.toSet()
 Collector.toMap(key,value)
 Collector.toList()
 Collector.summingInt()
-Collector.Average()
+Collector.averageint()
+Collector.averageDouble()
+Collector.summingDouble()
 Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.) . give map wiht key and values as list of values/object
 Collector.joining('delimiter','Start char','end char')
 Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object
