@@ -137,9 +137,46 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
 	@ExtendWith ------>is a repeatable annotation that is used to register extensions for the annotated test class or test method. Is used for JUNIT test => 5 
-	@Runwith  -------- is used for junit test < version junit 5 	
+	@Runwith  -------- is used for junit test < version junit 5 , @RunWith(JUnit4.class) specifies that JUnit 4's default test runner (JUnit4) should be used to run the tests in the MyTestClass class.
 	@SpringBootTest(webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT) -----> in order to test the controller 
 	@Autowired : ---- >this annotation is used to inject the class instant (object into the other class and use it ). For this to happen the class to be autowired need to part of the classpath bean list . which can happen by annotating the class as @component which will tell componentscanner during bean creation . we can also annotate it as @Service  , @Repository which in lower stage are @component anootated interfaces.
+	Autowiring can be done by four ways :
+			1. Autowired on field level  example : 
+				@Autowired
+				public classObject object
+			2. Constructor level autowired
+				public class human{
+					private classObject object;
+					@Autowired
+					public human(classObject object)
+						{
+							this.object = object;
+						}
+						}
+			3. Setter level autowired
+					@Component
+					public class MyComponent {
+					
+					    private MyDependency dependency;
+					
+					    @Autowired
+					    public void setDependency(MyDependency dependency) {
+					        this.dependency = dependency;
+					    }
+					}
+			4. Method level autowired
+					@Component
+					public class MyComponent {
+					
+					    private MyDependency dependency;
+					
+					    @Autowired
+					    public void init(MyDependency dependency) {
+					        this.dependency = dependency;
+					    }
+}
+
+
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
 	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .
