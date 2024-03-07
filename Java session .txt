@@ -1839,5 +1839,34 @@ spring.autoconfigure.condition.someCondition=false
 
 
 
+Q. Nested loop in stream api :
+import java.util.List;
+public class Employee {
+    private String name;
+    private List<Task> tasks;
+    // constructor, getters, setters
+}
+public class Task {
+    private String name;
+    private List<Subtask> subtasks;
+    // constructor, getters, setters
+}
+public class Subtask {
+    private String name;
+    // constructor, getters, setters
+}
+-----------------------------------
+
+import java.util.List;
+public class Main {
+    public static void main(String[] args) {
+        List<Employee> employees = ...; // Retrieve list of employees
+
+        employees.stream()
+                 .flatMap(employee -> employee.getTasks().stream()) // Flatten tasks
+                 .flatMap(task -> task.getSubtasks().stream())     // Flatten subtasks
+                 .forEach(subtask -> System.out.println(subtask.getName()));
+    }
+}
 
 
