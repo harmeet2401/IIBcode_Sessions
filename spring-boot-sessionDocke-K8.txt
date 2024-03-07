@@ -240,9 +240,26 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 										String username; ---> this will get usernameXXX 
 										String password; ----> this will get passwordXXX
 										}
-	@ControllerAdvice ----> this is a class level annotation which  will keep track of any exception comes from any controller inside the projects .
+	@ControllerAdvice ----> this is a class level annotation which  will keep track of any exception comes from any controller inside the projects. For global exception handling.
 	@ExceptionHandler(UserNotFoundException.class)	----> this is a method level annotation which will run the run if UserNOtFoundException is thrown from any
 	controller.
+			import org.springframework.web.bind.annotation.ControllerAdvice;
+			import org.springframework.web.bind.annotation.ExceptionHandler;
+			import org.springframework.web.bind.annotation.ResponseBody;
+			import org.springframework.http.HttpStatus;
+			import org.springframework.http.ResponseEntity;
+			
+			@ControllerAdvice
+			public class GlobalExceptionHandler {
+			
+			    @ExceptionHandler(Exception.class)
+			    @ResponseBody
+			    public ResponseEntity<String> handleException(Exception ex) {
+			        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+			                             .body("An error occurred: " + ex.getMessage());
+			    }
+			}
+
 	@EnableEurekaServer - : The @EnableEurekaServer annotation is used to make your Spring Boot application acts as a Eureka Serve
 	@EnableFeignClient ---> 
 	@Getter --------> It is the annotation provided by lombok spring boot to generate getters of the attaributes
@@ -254,58 +271,94 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
 	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Used to show one to many rleation between 						    two entities Like one customer can have many orders. 
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
-				Example : An Auhtor can have many books. but many book can have only one author.
-					class Author {
-						@GeneratedValue(Id)
-						provate int authid
-						@ColumnName(Name ="author_name")	
-						private String name ;
-						@OneTomany(fetch=FetchType.eager/lazy)
-						Private List<Books> lbooks;
-					}
-
-					class Books {
-						@GeneratedValue(sequency = sequenceName,Id = )
-						private int bookid;
-						@ManyToOne((fetch=FetchType.eager/lazy))
-						private Author author;
+				Example :       import javax.persistence.*;
+						import java.util.List;
+						@Entity
+						public class Author {
+						    @Id
+						    @GeneratedValue(strategy = GenerationType.IDENTITY)
+						    private Long id;
+						    private String name;
+						    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+						    private List<Book> books;
+						    // Getters and setters
 						}
+						
+						@Entity
+						public class Book {
+						    @Id
+						    @GeneratedValue(strategy = GenerationType.IDENTITY)
+						    private Long id;
+						    private String title;
+						    @ManyToOne
+						    @JoinColumn(name = "author_id")
+						    private Author author;
+						    // Getters and setters
+						}
+In the Author entity, the @OneToMany annotation is used to define the one-to-many relationship with the Book entity. The mappedBy attribute specifies the field name in the Book entity that maps to the Author entity. The cascade attribute specifies that if an author is deleted, all associated books should also be deleted (cascade delete).In the Book entity, the @ManyToOne annotation is used to define the many-to-one relationship with the Author entity. The @JoinColumn annotation specifies the column name (author_id) in the Book table that references the id column in the Author table.
+
 	@ManyToOne : ---------------------- which is used for data mapping incase we have ManytoOne relationship occuring . Used to show Many to one rleation between 						    two entities Like one customer can have many orders. 
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
-				Example : A student can have many courses. So one to many 
-					class Author {
-						@GeneratedValue(Id)
-						provate int authid
-						@ColumnName(Name ="author_name")	
-						private String name ;
+				Example : import javax.persistence.*;
+						import java.util.List;
+						@Entity
+						public class Author {
+						    @Id
+						    @GeneratedValue(strategy = GenerationType.IDENTITY)
+						    private Long id;
+						    private String name;
+						    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+						    private List<Book> books;
+						    // Getters and setters
+						}
 						
-					}
-
-					class Books {
-						@GeneratedValue(sequency = sequenceName,Id = )
-						private int bookid;
-						@ManyToOne((fetch=FetchType.eager/lazy))
-						private Author author;
+						@Entity
+						public class Book {
+						    @Id
+						    @GeneratedValue(strategy = GenerationType.IDENTITY)
+						    private Long id;
+						    private String title;
+						    @ManyToOne
+						    @JoinColumn(name = "author_id")
+						    private Author author;
+						    // Getters and setters
 						}
 
 	@ManyToMany : ---------------------- which is used for data mapping incase we have ManytoMany relationship occuring . Used to show Many to Many rleation between 						    two entities Like one customer can have many orders. 
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
 				Example : A student can have many courses. and many courses can be opted by multiple students.
-					class Students {
-						@GeneratedValue(Id)
-						provate int studentid
-						@Column(Name="student_name")	
-						private String name ;
-						@ManyToMany(fetch=FetchType.lazy/eager)
-						private List<Courses> courses
+					import javax.persistence.*;
+					import java.util.Set;
+					@Entity
+					public class Student {
+					    @Id
+					    @GeneratedValue(strategy = GenerationType.IDENTITY)
+					    private Long id;
+					    private String name;
+					    @ManyToMany
+					    @JoinTable(
+					        name = "student_course",
+					        joinColumns = @JoinColumn(name = "student_id"),
+					        inverseJoinColumns = @JoinColumn(name = "course_id")
+					    )
+					    private Set<Course> courses;
+					    // Getters and setters
 					}
 
-					class Courses {
-						@GeneratedValue(sequency = sequenceName,Id = )
-						private int courseId;
-						@ManyToMany((fetch=FetchType.eager/lazy))
-						private List<Student> students;
-						}
+					import javax.persistence.*;
+					import java.util.Set;
+					@Entity
+					public class Course {
+					    @Id
+					    @GeneratedValue(strategy = GenerationType.IDENTITY)
+					    private Long id;
+					    private String name;
+					    @ManyToMany(mappedBy = "courses")
+					    private Set<Student> students;
+					    // Getters and setters
+					}
+
+
 	@scheduled : --------------------- Which is used to create a cron scheduler in spring boot . jusy mention the cron expression on top of the function to run.
 	@cacheable : --------------------- which is used to make a return value from a function cacheable and will be retrived from the cache using the key which was 
 mentioned in the key in the @cacheable()
