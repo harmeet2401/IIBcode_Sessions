@@ -1120,9 +1120,9 @@ Collector.toMap(key,value)
 Collector.toList()
 Collector.summingInt()
 Collector.Average()
-Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.)
+Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.) . give map wiht key and values as list of values/object
 Collector.joining('delimiter','Start char','end char')
-Collector.partitionBy(Parttion as true and false.)
+Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object
 Collectors.counting() -- will give you count of the elements.
 Collector.MinBy(Comparator.comparing(Student::getMarks))----------- this will give a min marks across the students
 Collector.MaxBy(Comparator.comparing(Student::getMarks))----------- this will give a max marks across the students
