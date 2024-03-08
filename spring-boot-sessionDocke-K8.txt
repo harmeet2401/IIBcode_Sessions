@@ -297,6 +297,8 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
 	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
 	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
+	@OneTomany,@ManyToOne and @ManyToMany : These annotation when we used in pojo or beans used for api response then we can mention the 
+		FetchType = FetchType.Lazy/Eager. below descriptions is for same annotation used in entitied classes.
 	@OneToMany : ---------------------- which is used for data mapping incase we have Onetomany relationship occuring . Used to show one to many rleation between 						    two entities Like one customer can have many orders. 
 					    So the Order class will have a  Customer cust variable annotated as @ManyToOne(fetch=FetchType.Lazy,optional=false)
 				Example :       import javax.persistence.*;
