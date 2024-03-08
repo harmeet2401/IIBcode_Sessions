@@ -118,12 +118,14 @@ REst and its status code for response :
 400 Bad Request: The server cannot process the request due to a client error in the request.
 401 Unauthorized: The client must authenticate itself to get the requested response.
 403 Forbidden: The server understood the request but refuses to authorize it.
+404 Notfound : The resource trying to access does not exists.
 
 - 5xx Server Error:
 500 Internal Server Error: A generic error message indicating that something went wrong on the server.
 501 Not Implemented: The server does not support the functionality required to fulfill the request.
+502 Bad Gateway: This happend in case the api we created act as a gateway or proxy trying to get response from upstream service.
 503 Service Unavailable: The server is currently unable to handle the request due to temporary overloading or maintenance of the server.
-
+504 Gateway Timeout : This happend in case the api we created act as a gateway or proxy trying to get response from upstream service did not received yet the response.
 
 Lab 1 ----------------- Create a hello world rest api service to respond as hello world when get method is used for it.
 We need two things 
