@@ -1,25 +1,11 @@
-Spring boot --------------------------------------------------------------------------------------- UDEMY ------------------------------------------------------------------------
+Spring boot --------------------------------------------------------------------------------------- UDEMY ---------------------------------------------------------------
 
-Microservices Design Patterns:
-    Integration Pattern:
-	  Aggregator : 
-	  API Gateway
-	Chained or Chain of Responsibility
-	Asynchronous Messaging
-	2. Database or Shared Data
-	Event Sourcing
-	Branch
-	Command Query Responsibility Segregator
-	Circuit Breaker 
-	Decomposition : breaking the bigger service to smaller pieces . and connecting those using different design pattern 
-	
- 1. Decomposition Pattern : in which we are de-coupling the services on the basis of the business unit
- 2. Integration  : in this case we have to call and connect the de-coupled servuise uing the api -gateway or aggregator technique
- 3. Database service pattern : to Distribute the data on multiple instances in case we neeed to scale up and down .
- 4. Cross-cutting pattern : This pattern moslt solve the problem of multiple configuration available for different services on different ENV like , dev , QA , UAT , St and prod .
-	To overcome that we include external sentralised repo to collate all configurtion and load those configuration at runtime for each region .
- 5. Observatory pattern : In which we need to centralsed the logs generated from differnt services called from the api gateway on different machines.
- 
+Rest operations : 
+GET - TO GET A RESOURCE VALUE
+PUT - TO UPDATE AN OBJECT 
+POST - TO CREATE AN OBJECT 
+DELETE - TO DELET AN OBJECT 
+PATCH - TO UPDATE A PART OF THE OBJECT LIKE UPDATE/DELETE A FIELDS VALUE FOR THE OBJECT ALREADT CREATED.
 
 START.SPRING.IO ----- TO CREATE PROJECTS 
 DOCS.SPRING.IO ----- TO TAKE REFERENCE FOR ANY FEATURE THAT SPRING / SPRING BOOT PROVIDES.
