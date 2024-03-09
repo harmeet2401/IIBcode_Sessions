@@ -1209,6 +1209,35 @@ public class Main {
                 .collect(Collectors.toSet());
 
 5 flatmap method in stream api : https://www.javatpoint.com/flatmap-method-in-java-8
+/**
+		 * loop inside loop is like stream inside the stream.
+		 * Flatmap ka kaam hai elements ko combine krna
+		 * below code mai map jo Stream of list return krra hai usko
+		 * flatmap combine krra hai
+		 */
+		List<Integer> list1 = Arrays.asList(1, 2, 3);
+		List<Integer> list2 = Arrays.asList(4, 5, 6);
+		List<List<Integer>> pairs = list1.stream()
+			//	.map(i->list2.stream().map(j->Arrays.asList(i,j)))
+				.flatMap(i->list2.stream().map(j->Arrays.asList(i,j)))
+				.peek(System.out::println)
+				.collect(Collectors.toList());
+		System.out.println(pairs);
+output : 
+[1, 4] ------------ > ye each list map return krra hai jisko lekr flatmap combine krra hai 
+[1, 5]
+[1, 6]
+[2, 4]
+[2, 5]
+[2, 6]
+[3, 4]
+[3, 5]
+[3, 6]
+[[1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6], [3, 4], [3, 5], [3, 6]]  ----------- Flatmap combine krke ToList ko detta hai and ollla .
+
+Process finished with exit code 0
+
+
 flatmap is similar to map function is applied to convert from one type to another .
 And is applied to the stream in which each element in the stream contains multiple elemenst 
 
