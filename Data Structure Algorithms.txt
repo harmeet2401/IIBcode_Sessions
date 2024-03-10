@@ -46,7 +46,7 @@ Backtracking: A technique to solve problems incrementally by making choices and 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Explaination and practice :
 
-1. Bubble Sort : ------------------------------------------
+1. Bubble Sort : ----------------- Works on the comparison of two elements at a time and swap
 Here's a step-by-step explanation of Bubble Sort:
 
 1. Start from the beginning of the array.
@@ -84,7 +84,7 @@ public class BubbleSort {
     }
 }
 
-2. Insertion sort : ---------------------------------------------
+2. Insertion sort : --------------------- Works on keeping a key value starting from 1st index and swap 
 
 Here's a step-by-step explanation of Bubble Sort:
 1. Start from the second element (index 1) and iterate through the entire list.
@@ -100,7 +100,7 @@ public class InsertionSort {
             int key = arr[i];
             int j = i - 1;
             // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
-            while (j >= 0 && arr[j] > key) { -------> key left se bdi hai ke nhi 
+            while (j >= 0 && arr[j] > key) { -------> key left se choti hai ke nhi 
                 arr[j + 1] = arr[j];    -----------> swap
                 j = j - 1; -------------------- to iterate back and compare right element to left 
             }
@@ -118,7 +118,7 @@ public class InsertionSort {
     }
 }
 
-3. Selection sort : ----------------------------------------
+3. Selection sort : ---------------- Works on the minimum value and swap the value using it.
 Here's how it works:
 1. Find the minimum element in the unsorted subarray. -------------- this is immmpppp first sbse chota first 
 2. Compare the right side side element to minimum element and if minimum index value is greater then ritgh element then swap it. 
@@ -153,3 +153,167 @@ public class SelectionSort {
         }
     }
 }
+
+4. Merge Sort : 
+
+Here's how Merge Sort works:
+
+1.Divide: Split the array into two halves.
+2.Conquer: Recursively sort each half.
+3.Merge: Merge the sorted halves to produce the final sorted array.
+
+public class MergeSort {
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSort(arr, left, mid);      // Sort the left half
+            mergeSort(arr, mid + 1, right); // Sort the right half
+            merge(arr, left, mid, right);   // Merge the sorted halves
+        }
+    }
+
+    public static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        
+        for (int i = 0; i < n1; i++) {
+            L[i] = arr[left + i];
+        }
+        for (int j = 0; j < n2; j++) {
+            R[j] = arr[mid + 1 + j];
+        }
+        
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k++] = L[i++];
+            } else {
+                arr[k++] = R[j++];
+            }
+        }
+        
+        while (i < n1) {
+            arr[k++] = L[i++];
+        }
+        
+        while (j < n2) {
+            arr[k++] = R[j++];
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6, 7};
+        int n = arr.length;
+        System.out.println("Original array:");
+        printArray(arr);
+        mergeSort(arr, 0, n - 1);
+        System.out.println("\nSorted array:");
+        printArray(arr);
+    }
+
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+4. Quick Sort :--------------------  Works on the pivot element and arrange smaller value on left and larger values on right
+It works as follows:
+
+1.Choose a Pivot: Choose a pivot element from the array. The pivot element is used to partition the array into two sub-arrays.
+2.Partitioning: Rearrange the elements in the array such that all elements less than the pivot are placed before it, and all elements greater than the pivot are placed after it. After this partitioning step, the pivot is in its final sorted position.
+3.Recursion: Recursively apply the above steps to the sub-arrays on the left and right of the pivot until the entire array is sorted.
+
+public class QuickSort {
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+
+            // Recursively sort elements before partition and after partition
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+
+                // Swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // Swap arr[i+1] and arr[high] (pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 80, 30, 90, 40, 50, 70};
+        int n = arr.length;
+        quickSort(arr, 0, n - 1);
+        System.out.println("Sorted array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+Searching algos --------------------------------------------------------------------------------------------
+1. Binary Search (requires a sorted array) :
+
+Here's how it works:
+
+1.Initialize: Set the left boundary low to 0 and the right boundary high to the length of the array minus one.
+2.Midpoint calculation: Calculate the midpoint index mid as (low + high) / 2.
+3.Comparison: Compare the target value with the element at the midpoint.
+4.If the target value is equal to the element at the midpoint, return the midpoint index.
+5.If the target value is less than the element at the midpoint, search the left half of the array (set high = mid - 1).
+6.If the target value is greater than the element at the midpoint, search the right half of the array (set low = mid + 1).
+7.Repeat: Repeat steps 2-3 until the target value is found or the search interval is empty (low > high).
+
+public class BinarySearch {
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (arr[mid] == target) {
+                return mid; // Element found
+            } else if (arr[mid] < target) {
+                low = mid + 1; // Search right half
+            } else {
+                high = mid - 1; // Search left half
+            }
+        }
+        
+        return -1; // Element not found
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 4, 10, 40};
+        int target = 10;
+        int result = binarySearch(arr, target);
+        if (result != -1) {
+            System.out.println("Element found at index " + result);
+        } else {
+            System.out.println("Element not found");
+        }
+    }
+}
+
