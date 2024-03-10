@@ -46,4 +46,73 @@ Backtracking: A technique to solve problems incrementally by making choices and 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Explaination and practice :
 
-Bubble Sort : 
+1. Bubble Sort : ------------------------------------------
+Here's a step-by-step explanation of Bubble Sort:
+
+1. Start from the beginning of the array.
+2. Compare the first two elements. If the first element is greater than the second element, swap them.
+3. Move to the next pair of elements, and repeat the comparison and swap process until the end of the array.
+4. After the first pass, the largest element will be at the end of the array.
+5. Repeat the process for the remaining elements, excluding the last sorted element.
+6. Continue until no more swaps are needed, indicating that the array is sorted.
+
+the time complexity of Bubble Sort is O(n^2). used only for theoritical purpose
+It's called "Bubble" sort because the larger elements bubble up to the end of the array with each iteration.
+
+public class BubbleSort {
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap arr[j] and arr[j + 1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        bubbleSort(arr);
+        System.out.println("Sorted array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+2. Insertion sort : ---------------------------------------------
+
+Here's a step-by-step explanation of Bubble Sort:
+1. Start from the second element (index 1) and iterate through the entire list.
+2. For each element, compare it with the elements to its left in the sorted portion of the array and check if its greater than or not.
+3. Insert the element into the correct position in the sorted portion by shifting elements to the right until the correct position is found.
+The time complexity of Insertion Sort is O(n^2) in the worst-case scenario, where n is the number of elements in the array.
+
+public class InsertionSort {
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
+            while (j >= 0 && arr[j] > key) { -------> key left se bdi hai ke nhi 
+                arr[j + 1] = arr[j];    -----------> swap
+                j = j - 1; -------------------- to iterate back and compare right element to left 
+            }
+            arr[j + 1] = key;-----------> swap
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6};
+        insertionSort(arr);
+        System.out.println("Sorted array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
