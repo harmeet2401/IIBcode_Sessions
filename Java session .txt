@@ -1193,7 +1193,11 @@ chs.Charat(index)
 chs.subSequence(1,3) --- like substring
 chs.length()---> get the length
 					
-				
+
+Q. How to run loops in stream api ike for(i=0;i<892;i++) this one is replaced by what in ?
+IntStream.range(0, str.length() / 2)  ----- this will make a loop from 0 to half a length of a strgin.
+IntStream.range(0,100).------------------- this will make a loop of 0 to 100
+
 2.Difference between Collections and streams 
 
 	NOTE  : ANYTHING WHICH IS A LIST OR A COLLECTIONS (ARRAYLIS , HASHSET , TREEMAP , HASHMAP , LINKEDLIST , ARRAYS, LIST  ETC ) WE CAN CONVERT THOSE TO STREAM AND USE ALL THE STREAM API FUNCTION TO PLAY ARROUND
