@@ -1137,6 +1137,15 @@ Comparator.reverseOrder()
 Comapartor.comparing(Student::getMarks)
 Comapartor.comparing(Student::getMarks).reversed()
 
+Q. Various functions of map in stream ?
+Answer : 
+map(Function<t>,return type <H>)  ------------ > Convert or drill to a single object 
+mapToObject(Function<t>,return type <H>) ---------> to cast mostly it is used
+mapToInt(Function<t>,return type <H>) ----------> to cast to int mostly it is used
+mapToDouble(Function<t>,return type <H>)----------> to cast to Double mostly it is used
+mapToFloat(Function<t>,return type <H>)----------> to cast to float mostly it is used
+maptoLong(Function<t>,return type <H>)----------> to cast to Long mostly it is used
+
 
 Q. How to convert from arrayList to linkedHashmap :
 
