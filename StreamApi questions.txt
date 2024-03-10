@@ -153,3 +153,107 @@ Given a list of integers, check if none of the elements are negative using Strea
 Answer :
 
 list.stream().noneMatch(i->i<0)
+----------------------------------------------------------------------------------------------------
+
+Given a list of integers, filter out the even numbers and then double each of them.
+list.stream().filter(i->i%2!=0).map(j->2*j).collect(Collectors.toList()).
+
+Count the number of strings in a list that have length greater than 5.
+List<String> list = new arrayList<String>();
+list.stream().filter(s->s.length()>5).collect(Collectors.counting())
+list.stream().filter(s->s.length()>5).count()
+
+
+Find the minimum and maximum values in a list of integers.
+
+Asnwer : we can only use the min and max only without giving the comparator also.
+list.stream().mapToInt(Integer::new).max(Comaparator.naturalOrder());
+list.stream().mapToInt(Integer::new).min(Comaparator.naturalOrder());
+
+Given two lists of integers, create a stream of pairs where each pair contains one element from each list.
+List<Integer> list1 = Arrays.asList(1, 2, 3);
+List<Integer> list2 = Arrays.asList(4, 5, 6);
+
+This actually kind of loop inside a loop means stream inside a stream 
+
+List<List<Integer>> pairs = list1.stream()
+                                .flatMap(i -> list2.stream().map(j -> Arrays.asList(i, j)))
+                                .collect(Collectors.toList());
+								
+System.out.println(pairs); // Output: [[1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6], [3, 4], [3, 5], [3, 6]]
+
+--------------------------------
+Find the Maximum Number in a List:
+
+Write a Java program to find the maximum number in a list of integers.
+
+list.stream().MapToint(Integer::new).max(Comparator.naturalOrder());
+
+
+Calculate the Average of Numbers in a List:
+
+Write a Java program to calculate the average of numbers in a list of integers.
+list.stream().MapToFloat(Float::new).collect(Collectors.AverageInt());
+
+
+Check if a String is Palindrome:
+
+Write a Java program to check if a given string is a palindrome or not.
+str = "radar"
+boolean isPalindrome = IntStream.range(0, str.length() / 2)   -------------------------- > / operator will give the remainder which is 1 
+				.allMatch(i -> str.charAt(i) == str.charAt(str.length() - i - 1));
+
+		if (isPalindrome) {
+			System.out.println(str + " is a palindrome.");
+		} else {
+			System.out.println(str + " is not a palindrome.");
+	}
+
+
+
+Find the First Non-Repeated Character in a String:
+Answer : FIrst save the character occurences in map along with the character key Map<String,Integer>
+Str.tocharArray (). Then we can use String.ValueOf(ch) to convert the char to string.
+public static void firstNonRepeatingChar(){
+		String str = "upinderkaur";
+		Map<String , Integer> map = new LinkedHashMap<>();
+		for (char c : str.toCharArray()) {
+			String strBuild = String.valueOf(c);
+			if(map.get(strBuild)!=null){
+			if(str.contains(strBuild)){
+				map.put(strBuild,map.get(strBuild)+1);
+			}
+			}else{
+				map.put(strBuild,1);
+			}
+		}
+		map.entrySet().forEach(System.out::println);
+		System.out.println("The first char which is non repeatable  "+map.entrySet().stream().filter(e->e.getValue()==1).findFirst().get());
+}
+
+
+Remove Duplicates from a List:
+list.stream().collect(Collector.ToSet()) to remove the duplocacy
+list.stream().distinct().Collect(Collector.tolist());
+
+
+Write a Java program to sort a list of strings based on their lengths, shortest to longest.
+List<Integer> li = list
+				.stream()
+				.map(String::length)
+				.sorted(Comparator.naturalOrder())
+				.collect(Collectors.toList());
+
+
+
+Write a Java program to calculate the factorial of a given number using Java Streams.
+int n  = 6;
+		IntStream.rangeClosed(1, n)
+				.reduce(1, (a, b) -> a * b);
+
+
+
+Write a Java program to generate the Fibonacci series using Java Streams.
+Stream<Long> fibonacciStream = Stream.iterate(new long[]{0, 1}, f -> new long[]{f[1], f[0] + f[1]})
+                                            .map(f -> f[0])
+                                            .limit(count);
