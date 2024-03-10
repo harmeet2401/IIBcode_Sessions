@@ -145,7 +145,7 @@ list.stream().sorted(Comaparator.reverseOrder()).distinct().limit(3).collect(Col
 Finding Maximum Length:
 Given a list of strings, find the length of the longest string using Stream API.
 Answer 
-list.stream().collect(Collectors.MaxBy(Comparator.comparing(s.length())))
+list.stream().map(String::length).sorted(Comparator.reverseOrder()).findFirst();
 list.stream().mapToint(String::length).max()
 
 Checking Predicate Negation:
@@ -167,8 +167,8 @@ list.stream().filter(s->s.length()>5).count()
 Find the minimum and maximum values in a list of integers.
 
 Asnwer : we can only use the min and max only without giving the comparator also.
-list.stream().mapToInt(Integer::new).max(Comaparator.naturalOrder());
-list.stream().mapToInt(Integer::new).min(Comaparator.naturalOrder());
+list.stream().mapToInt(Integer::new).max();
+list.stream().mapToInt(Integer::new).min();
 
 Given two lists of integers, create a stream of pairs where each pair contains one element from each list.
 List<Integer> list1 = Arrays.asList(1, 2, 3);
@@ -187,14 +187,13 @@ Find the Maximum Number in a List:
 
 Write a Java program to find the maximum number in a list of integers.
 
-list.stream().MapToint(Integer::new).max(Comparator.naturalOrder());
+list.stream().MapToint(Integer::new).max();
 
 
 Calculate the Average of Numbers in a List:
 
 Write a Java program to calculate the average of numbers in a list of integers.
-list.stream().MapToFloat(Float::new).collect(Collectors.AverageInt());
-
+Double f = list.stream().mapToInt(Integer::new).average().getAsDouble();
 
 Check if a String is Palindrome:
 
