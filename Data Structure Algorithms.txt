@@ -91,7 +91,8 @@ Here's a step-by-step explanation of Bubble Sort:
 2. For each element, compare it with the elements to its left in the sorted portion of the array and check if its greater than or not.
 3. Insert the element into the correct position in the sorted portion by shifting elements to the right until the correct position is found.
 The time complexity of Insertion Sort is O(n^2) in the worst-case scenario, where n is the number of elements in the array.
-
+However, in the best-case scenario (when the array is already sorted), the time complexity is O(n).
+Why it is called insertion sort because a key value is inserted to the right position in the array.
 public class InsertionSort {
     public static void insertionSort(int[] arr) {
         int n = arr.length;
@@ -110,6 +111,42 @@ public class InsertionSort {
     public static void main(String[] args) {
         int[] arr = {12, 11, 13, 5, 6};
         insertionSort(arr);
+        System.out.println("Sorted array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+3. Selection sort : ----------------------------------------
+Here's how it works:
+1. Find the minimum element in the unsorted subarray. -------------- this is immmpppp first sbse chota first 
+2. Compare the right side side element to minimum element and if minimum index value is greater then ritgh element then swap it. 
+
+The time complexity of Selection Sort is O(n^2) in all cases, regardless of the input data, because it always compares and swaps elements. Even if the array is already sorted, it still performs the same number of comparisons as in the worst-case scenario. The number of comparisons is approximately (n^2)/2, and the number of swaps is approximately n.
+
+public class SelectionSort {
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n - 1; i++) {
+            // Find the minimum element in the unsorted array
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            // Swap the found minimum element with the first element
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        selectionSort(arr);
         System.out.println("Sorted array:");
         for (int num : arr) {
             System.out.print(num + " ");
