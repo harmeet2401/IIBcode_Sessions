@@ -1118,10 +1118,14 @@ Ans : list.stream().collect( ? )
 Collector.toSet()
 Collector.toMap(key,value)
 Collector.toList()
+
+---------------All these functions need one parameter like Student::getNoteBooks which is an integer. Compile issue if no input -----------------------------
 Collector.summingInt()
 Collector.averageint()
 Collector.averageDouble()
 Collector.summingDouble()
+----------------All these functions need one parameter like Student::getNoteBooks which is an integer. Compile issue if no input -----------------------------
+
 Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.) . give map wiht key and values as list of values/object
 Collector.joining('delimiter','Start char','end char')
 Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object
@@ -1140,11 +1144,14 @@ Comapartor.comparing(Student::getMarks).reversed()
 Q. Various functions of map in stream ?
 Answer : 
 map(Function<t>,return type <H>)  ------------ > Convert or drill to a single object 
+
+----- Ye maps use krne ke baad aap direct average(),min,max,sum terminal functions use kr skte ho-----------
 mapToObject(Function<t>,return type <H>) ---------> to cast mostly it is used
 mapToInt(Function<t>,return type <H>) ----------> to cast to int mostly it is used
 mapToDouble(Function<t>,return type <H>)----------> to cast to Double mostly it is used
 mapToFloat(Function<t>,return type <H>)----------> to cast to float mostly it is used
 maptoLong(Function<t>,return type <H>)----------> to cast to Long mostly it is used
+----- Ye maps use krne ke baad aap direct average(),min,max,sum terminal functions use kr skte ho-----------
 
 
 Q. How to convert from arrayList to linkedHashmap :
