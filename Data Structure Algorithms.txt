@@ -17,11 +17,11 @@ Graphs: A non-linear data structure consisting of nodes (vertices) and edges tha
 
 Algorithms:
 
-Sorting Algorithms:
+Sorting Algorithms: BISMQ
 
 Bubble Sort
-Selection Sort
 Insertion Sort
+Selection Sort
 Merge Sort
 Quick Sort
 
@@ -42,3 +42,8 @@ Greedy Algorithms: Algorithms that make locally optimal choices at each step wit
 Divide and Conquer: A problem-solving strategy that involves breaking a problem into smaller subproblems, solving them recursively, and then combining their solutions.
 
 Backtracking: A technique to solve problems incrementally by making choices and backtracking when a solution cannot be found.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Explaination and practice :
+
+Bubble Sort : 
