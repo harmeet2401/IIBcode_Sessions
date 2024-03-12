@@ -107,7 +107,7 @@ Q4.Situation based question on Kubernetes
 
 Q5. DB Question like join , groupingBY and partition. Query.
 
-Q7. Read about kafka.
+Q7. Read about kafka. done 
 
 Q8. How to calculate the time complexity of java code.
 
