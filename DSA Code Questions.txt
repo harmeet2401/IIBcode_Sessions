@@ -1,4 +1,11 @@
-Given an array of integers, find the maximum sum of any contiguous subarray of the array.
+1. Given an array of integers, find the maximum sum of any contiguous subarray of the array.
+Kadane's Algorithm  for maximum sum of subarray
+Steps : 
+    - First maXEndingHere and maxSoFar ko first element ko lo
+    - iterate through each element starting from second element(index 1) 
+        - Update maxEndingHere = Maximum of element iterated and sum of maxEnding and element iterated
+        - update maxSofar = Maximum of maxEndingHere and maxSoFar
+
 
 public class MaximumSubarraySum {
     public static int maxSubarraySum(int[] nums) {
