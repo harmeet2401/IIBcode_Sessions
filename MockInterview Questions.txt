@@ -1,0 +1,289 @@
+Product {
+
+id 
+name
+category  : 
+
+HashCode (){
+
+}
+
+
+
+}
+
+
+find all the 
+
+list.stream().filter(p -> p.getcategory().eqaual("elec")).collect(Collectors.toList())
+
+list.stream().collect(Collectors.toMap(product::id,product->product))
+
+Map<String , List<Product>> map = list.stream().collect(Collectors.groupingBY(product::getca`tegory)) 
+
+list.stream().MaptoObject(product::getcategory).collect(Collectors.groupingBy(Object::new))
+
+String a = "aba" ;
+StringBuilder str = new StringBuilder();
+for (int i = a.length()-1 ; i >= 0  ; i--){
+	str.append(s.charAt(i));
+}
+if(a.equalsIgnore(str.toString())){ 
+ System.out.print("its a palidrome")
+}
+
+O(2n)
+Zookeeper
+Kafka cluster --- > node ---> topics(). 
+
+Revise kafka logics.
+
+Db questions.
+
+----------------------------
+Q. Read about kafka.
+Q. HashCode and equal contract principle?
+The hashCode() and equals() methods in Java are fundamental to working with objects, particularly when dealing with collections like HashMap, HashSet, etc. Understanding the contract between these methods is crucial for correctly using these collections.
+
+hashCode() Method:
+The hashCode() method returns an integer hash code value for the object. This value is typically used to improve the performance of hash-based collections like HashMap, HashSet, etc.
+The general contract of hashCode() method is:
+If two objects are equal according to the equals() method, then they must return the same hash code value.
+It is not required that if two objects have different hash code values, then they must be unequal. However, it is generally desirable for performance reasons.
+The hashCode() method should be overridden in a class whenever equals() is overridden.
+
+equals() Method:
+The equals() method is used to compare two objects for equality. It returns true if the objects are considered equal, and false otherwise.
+The general contract of equals() method is:
+It is reflexive: For any non-null reference value x, x.equals(x) should return true.
+It is symmetric: For any non-null reference values x and y, x.equals(y) should return true if and only if y.equals(x) returns true.
+It is transitive: For any non-null reference values x, y, and z, if x.equals(y) returns true and y.equals(z) returns true, then x.equals(z) should return true.
+It is consistent: For any non-null reference values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, provided no information used in equals() comparison on the objects is modified.
+For any non-null reference value x, x.equals(null) should return false.
+
+
+Q. DSA Coding question in java.
+Q. DB Question like join , groupingBY and partition. Query.
+ 
+Q1.How are Kubernetes and Docker related?
+Kubernetes and Docker are both technologies that are widely used in modern software development and deployment, especially in the context of containerization.
+
+Docker is a platform and a set of tools designed to make it easier to create, deploy, and run applications using containers. Containers allow developers to package an application and its dependencies into a standardized unit that can run virtually anywhere, providing consistency across environments. Docker Engine was one of the first container runtimes supported by Kubernetes, and it is still widely used with Kubernetes clusters.
+
+Kubernetes : Kubernetes, often abbreviated as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It provides features such as automatic scaling, self-healing, service discovery, and load balancing, making it easier to manage and scale containerized applications in production environments.
+
+
+Q2.What is the difference between deploying applications on hosts and containers?
+
+Environment Isolation:
+
+Hosts: Traditional deployment on hosts involves running applications directly on physical or virtual machines (hosts). Each application typically runs within its own environment on a dedicated host, isolated from other applications.
+
+Containers: Containers provide lightweight and isolated runtime environments for applications. Multiple containers can run on the same host, each with its own filesystem, process space, and network stack. Containers offer stronger isolation compared to traditional processes running on a host, but they share the same underlying operating system kernel.
+
+Resource Utilization:
+
+Hosts: Deploying applications on hosts can lead to underutilization of resources, as each application typically requires dedicated resources on the host machine, even if it doesn't fully utilize them.
+
+Containers: Containers allow for better resource utilization, as multiple containers can share the same underlying host resources. Container orchestration platforms like Kubernetes can automatically schedule and manage containers across a cluster of hosts, optimizing resource allocation based on application requirements.
+
+Deployment Consistency:
+
+Hosts: Deploying applications on hosts can lead to deployment inconsistencies, as different hosts may have different configurations, dependencies, or environments, potentially leading to issues with portability and scalability.
+
+Containers: Containers provide consistency in deployment, as they encapsulate the application and its dependencies into a single unit that can be deployed across different environments without modification. Containers ensure that the application runs consistently regardless of the underlying host environment.
+
+Isolation and Security:
+
+Hosts: Deploying applications on hosts provides strong isolation between applications, as each application runs on its own host. However, managing security updates, vulnerabilities, and access control on individual hosts can be challenging.
+
+Containers: Containers offer isolation between applications using lightweight virtualization. Each container has its own isolated filesystem and runtime environment, reducing the risk of interference between applications. However, containers share the same underlying kernel, which may pose security risks if not properly configured or managed.
+
+Scalability and Agility:
+
+Hosts: Scaling applications deployed on hosts may require provisioning and configuring additional hosts, which can be time-consuming and complex.
+
+Containers: Containers enable rapid scaling and agility, as new instances of containers can be spun up or down dynamically based on workload demands. Container orchestration platforms like Kubernetes provide automated scaling and management capabilities, allowing applications to scale seamlessly in response to changes in demand.
+
+
+
+
+
+Q3.Explain the working of the master node in Kubernetes?
+
+Q4.Situation based question on KubernetesWhat Spring Boot features help develop Microservices Applications?
+
+5.Why Spring Boot is preferred over any other framework?
+
+6.Situation based question on Spring boot
+
+7.Situation based question on AWS
+
+8.Situation based question on Angular
+What is difference java 11 and 17 
+
+what is switch function? The new switch function in 177
+
+Kafka - how many topic in Kafka, consumer side, how will you handle production and the Kafka report You have to find out if any file is missing.
+
+15 to 20 Min questions in Kafka side only, other spring boot and JAVA
+1) can we override static method and explain?
+
+2) related marker interface one question
+
+3) shallow copy and deep copy
+
+4) some questions related to spring boot
+ 
+ 
+Microservice Architecture Pattern --> Explain the same in the project
+Kafka Architecture --> producer / Consumer
+if there are two microservice with different consumer if one consumer consumes messages and other not what can be the issue in production ?
+Lagging in Kafka how will you handle ?
+Benefits of microservice architecture --> why you used different schemas in database of architecture.
+CI/CD piple jenkins pattern build questions.
+AWS project related questions --> where you used ? how and architecture?
+Scaling kafka consumers when and what scenarios?
+2 coding questions
+
+Product list --> group by type and list 
+
+remove duplicates from List of products without using hashset
+ 
+ 
+introduction
+
+describe past project
+
+Overall tech stack details
+
+JPMC project tech stack
+
+soap vs rest
+
+how do you authenticate in your existing application
+
+authentication vs authorization
+
+oauth vs jwt
+
+how to logs the exception in spring/springboot application
+
+Transaction, propagation & isolation
+
+describe advice concept in spring
+
+For Monetary applications, which one to prefer soap or rest?and why?
+Introduction
+
+2. Describe past project
+
+3. Overall tech stack details
+
+4. JPMC project tech stack
+
+5. What do mean by String Immutability  and tell me output of below code .
+
+              Ex:
+
+                             String name = "Dilip"
+
+                                    name = "Kumar";
+
+                             System.out.println (name);
+
+6. What is the contract between equals() and hashCode() ?
+
+7. Internal functionality of HashMap ?
+
+8. How to handle Transaction. What are the attributes of Transactional ?
+
+    Could you please explain all attributes and what is the use of those attributes .
+
+9.  What is Normalization. How you can de-normalize the data/table .
+
+10. Did you worked on Function and Procedure. If worked, Then how we can trigger Procedures from Java ?
+
+Note :- Most of the questions from Transaction and DB quires .
+1)How to use Swagger to convert application.yml to a Object class
+
+2)In case you have written a function for authentication filter, how does it get called before invoking a service call
+
+Ans: The authentication filter class should implement javax.servlet.Filter 
+
+3)spring boot actuator implementation and how to check health of the application using this.
+
+4)Resource Id, client Id JPMC ADFS authentication process.Process of on boarding FID.
+
+5) Worked on any JPMC automation projects
+
+6) Asked about micro service experience.
+
+7 ) Asked about deployment process ,service now process and how we coordinate with L2 team
+ 
+[Yesterday 8:19 PM] Sachdev, Raunak
+Questions
+[Yesterday 8:21 PM] Sachdev, Raunak
+1)find employee with role / Make use of optional KeyWord to deal with exceptions
+
+Employee
+
+id
+
+name
+
+role
+ 
+Employee A(1, Empl, Associate2)
+
+Employee B(2, Emp2, Associate)
+
+Employee C(3, Emp3, Associate2)
+ 
+2)Replace the employee with Role-Associate to SDE
+
+2 inputs, old role and new
+ 
+3)How @Transactional will behave if save() of parent is caliing 2 children 
+
+and one of child method fails. Can you achieve Isolation?
+ 
+4)Write class A having HAS A relation with Class B
+
+Then write JUNIT w.r.t B
+ 
+5)find student who are passed in all subject
+
+Result Table
+
+Student, Subject, Pass/Fail
+
+Student1, Sub1, F
+
+Student1, Sub2, P
+
+Student2, Sub1, P
+
+Student2, Sub2, F
+
+Student1, Sub3, F
+
+Student3, Sub1, P
+ 
+ 
+Questions on project
+ 
+Questions on AWS, what service used and why?
+ 
+CAP theorem and discussion, possibilites around it.
+ 
+ 
+Record class
+ 
+java 8 to 17. issues faced and how resolved
+
+why upgraded
+ 
+question on java 17.. google
+ 
+kafka and microservice architecture.. thouroughly
