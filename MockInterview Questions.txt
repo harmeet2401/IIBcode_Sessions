@@ -41,6 +41,11 @@ Revise kafka logics.
 Db questions.
 
 ----------------------------
+
+Q. As you are going to explain quartz as the framework used along with spring scheduler : read abou it. ?
+
+Q. Read about interceptor and how to fetch the value from the JWT tokem from it.?
+
 Q. HashCode and equal contract principle?
 The hashCode() and equals() methods in Java are fundamental to working with objects, particularly when dealing with collections like HashMap, HashSet, etc. Understanding the contract between these methods is crucial for correctly using these collections.
 
@@ -102,6 +107,28 @@ Containers: Containers enable rapid scaling and agility, as new instances of con
 
 
 Q3.Explain the working of the master node in Kubernetes?
+In Kubernetes, the master node, also known as the control plane, is responsible for managing the cluster and coordinating its components.
+Components : 
+Api server :
+The API server is the central management point of the Kubernetes control plane.
+It exposes the Kubernetes API, which allows users and external components to interact with the cluster.
+All administrative tasks, such as creating, updating, and deleting resources (pods, services, deployments, etc.), are performed through the API server.
+
+ETCD:
+tcd is a distributed key-value store used by Kubernetes to store all cluster configuration data and state.
+It serves as the source of truth for the entire cluster and maintains a consistent and reliable representation of the cluster's state.
+The master node interacts with etcd to read/write cluster configuration, store operational data, and maintain consensus among cluster members.
+
+Kube scheduler :
+The scheduler is responsible for scheduling pods onto nodes in the cluster.
+It evaluates various factors such as resource requirements, node capacity, and affinity/anti-affinity rules to determine the optimal placement of pods.
+The scheduler continuously monitors the cluster state and schedules pods as needed to maintain the desired workload distribution.
+
+Contoller manager :
+The controller manager is a collection of controllers that monitor the cluster state and perform automated tasks to maintain the desired state.
+Controllers include the Node Controller (manages nodes), ReplicaSet Controller (ensures desired pod replicas), Deployment Controller (manages deployments), Service Controller (manages services), and others.
+Each controller watches specific resources and takes corrective actions to reconcile the current state with the desired state.
+Cloud controller manager
 
 Q4.Situation based question on Kubernetes
 
@@ -111,22 +138,60 @@ Q7. Read about kafka. done
 
 Q8. How to calculate the time complexity of java code.
 
-Q8. What is cognitive complexity or types of complexity in java code?
+Q8. What is cognitive and cyclometric complexity  in java code?
+
+Cyclomatic Complexity is a software metric used to measure the complexity of a program by counting the number of linearly independent paths through the program's source code.
+It is based on the control flow of the program and is calculated using a graph-based approach, where the nodes represent the decision points in the code (such as if statements, loops, and switch statements) and the edges represent the possible transitions between decision points.
+The formula to calculate cyclomatic complexity is: M = E - N + 2P, where E is the number of edges, N is the number of nodes, and P is the number of connected components (regions) of the graph.
+A higher cyclomatic complexity value indicates a higher degree of complexity and suggests that the code may be more difficult to understand, test, and maintain.
+Cognitive Complexity:
+
+Cognitive Complexity is a software metric introduced by SonarQube to measure the complexity of code based on how difficult it is for a human to understand the code.
+Unlike Cyclomatic Complexity, which is purely based on the control flow of the program, Cognitive Complexity considers additional factors such as nesting depth, logical operators, and the presence of complex structures that may increase the cognitive load on developers.
+Cognitive Complexity aims to provide a more accurate reflection of the mental effort required to comprehend the code and make it more maintainable and readable.
+It is not directly calculated from the source code like Cyclomatic Complexity, but rather is assessed based on a set of rules and heuristics that evaluate various aspects of the code structure and organization.
+
+Best Practices:
+Keep methods short and focused, with a single responsibility.
+Refactor complex logic into smaller, more modular components.
+Avoid excessive nesting and deeply nested control structures.
+Use descriptive variable names and comments to clarify intent.
+Simplify boolean expressions and refactor complex conditions.
+Use meaningful abstractions and design patterns to improve code readability and maintainability.
 
 Q9. What Spring Boot features help develop Microservices Applications?
 
+Spring boot dependency injection feature and integrated web server names tomcat allow it to help develop microservice architecture.
+Spring bootable capability will allow to create a microservice which needs to run on a continuous basis
+Some of these are listed below :
+Emebedded server
+Spring data jpa
+Spring cloud 
+spring security
+spring actuator
+Externalized app properties 
+Autoconfiguration.
+
 5.Why Spring Boot is preferred over any other framework?
+Emebedded server
+Spring data jpa
+Spring cloud 
+spring security
+spring actuator
+Externalized app properties 
+Autoconfiguration.
 
 6.Situation based question on Spring boot
 
 7.Situation based question on AWS
 
 8.Situation based question on Angular
-What is difference java 11 and 17 
 
-what is switch function? The new switch function in 177
+9. What is difference java 11 and 17 
 
-Kafka - how many topic in Kafka, consumer side, how will you handle production and the Kafka report You have to find out if any file is missing.
+10. what is switch function? The new switch function in 177
+
+10. Kafka - how many topic in Kafka, consumer side, how will you handle production and the Kafka report You have to find out if any file is missing.
 
 15 to 20 Min questions in Kafka side only, other spring boot and JAVA
 1) can we override static method and explain?
@@ -134,57 +199,88 @@ Kafka - how many topic in Kafka, consumer side, how will you handle production a
 2) related marker interface one question
 
 3) shallow copy and deep copy
+Its used in prototype pattern. When we tried to make a clone of the object we use either copy constructur or cloneable interface to do that.
+
+Shallow copy : Will restrict the copy nested objects for easy fetch gives higher perf .
+Deep copy . Will fetch all the objects from the chilc objects as well.
 
 4) some questions related to spring boot
  
  
-Microservice Architecture Pattern --> Explain the same in the project
-Kafka Architecture --> producer / Consumer
+Microservice Architecture Pattern --> Explain the same in the project : done 
+
+Kafka Architecture --> producer / Consumer : done
+
 if there are two microservice with different consumer if one consumer consumes messages and other not what can be the issue in production ?
+
 Lagging in Kafka how will you handle ?
+
 Benefits of microservice architecture --> why you used different schemas in database of architecture.
+
 CI/CD piple jenkins pattern build questions.
+
 AWS project related questions --> where you used ? how and architecture?
+
 Scaling kafka consumers when and what scenarios?
-2 coding questions
 
-Product list --> group by type and list 
+2 coding questions : done 
 
-remove duplicates from List of products without using hashset
+Product list --> group by type and list : done
+
+remove duplicates from List of products without using hashset ; done 
  
  
-introduction
+introduction : done 
 
-describe past project
+describe past project : done 
 
-Overall tech stack details
+Overall tech stack details : done java , spring boot, aws , kafka 
 
-JPMC project tech stack
+JPMC project tech stack : no
 
-soap vs rest
+soap vs rest : op protocol vs methodology (architecture)
 
-how do you authenticate in your existing application
+how do you authenticate in your existing application : using interceptor and basic authentication . Interceptor ke liye read kro.
 
-authentication vs authorization
+authentication vs authorization : Explain
 
-oauth vs jwt
+oauth vs jwt : Will read 
 
-how to logs the exception in spring/springboot application
+how to logs the exception in spring/springboot application : log4j read about it please.
 
-Transaction, propagation & isolation
+Transaction, propagation & isolation : @Transaction(isolation , propgation and rollbackfor.)
 
-describe advice concept in spring
+Q. Describe advice concept in spring:
+		There are several types of advice in Spring AOP:
+		
+		- Before Advice:
+		
+		Before advice is executed before a join point, typically before the method is invoked. It can be used, for example, for logging or security checks before a method is called.
+		- After Returning Advice:
+		
+		After returning advice is executed after a join point completes successfully (i.e., without throwing an exception). It can be used, for example, to log the return value of a method.
+		- After Throwing Advice:
+		
+		After throwing advice is executed if a join point throws an exception. It can be used, for example, to handle exceptions or log error messages.
+		- After (Finally) Advice:
+		
+		  After (finally) advice is executed regardless of the outcome of the join point (i.e., whether it completes successfully or throws an exception). It can be used for clean-up tasks, such as closing resources.
+
+		- Around Advice:
+		
+		Around advice is the most powerful type of advice, as it can intercept the join point and control the behavior before, after, or instead of the method invocation. It can be used to implement custom behavior, such as performance monitoring or caching.
+
 
 For Monetary applications, which one to prefer soap or rest?and why?
 Introduction
 
-2. Describe past project
+2. Describe past project : done 
 
-3. Overall tech stack details
+3. Overall tech stack details : done 
 
-4. JPMC project tech stack
+4. JPMC project tech stack : no
 
-5. What do mean by String Immutability  and tell me output of below code .
+5. What do mean by String Immutability  and tell me output of below code . done .
 
               Ex:
 
@@ -194,39 +290,40 @@ Introduction
 
                              System.out.println (name);
 
-6. What is the contract between equals() and hashCode() ?
+6. What is the contract between equals() and hashCode() ? : done 
 
-7. Internal functionality of HashMap ?
+7. Internal functionality of HashMap ? : done
 
-8. How to handle Transaction. What are the attributes of Transactional ?
+8. How to handle Transaction. What are the attributes of Transactional ? : done 
 
     Could you please explain all attributes and what is the use of those attributes .
 
-9.  What is Normalization. How you can de-normalize the data/table .
+9.  What is Normalization. How you can de-normalize the data/table . : read 
 
-10. Did you worked on Function and Procedure. If worked, Then how we can trigger Procedures from Java ?
+10. Did you worked on Function and Procedure. If worked, Then how we can trigger Procedures from Java ? read 
 
 Note :- Most of the questions from Transaction and DB quires .
-1)How to use Swagger to convert application.yml to a Object class
 
-2)In case you have written a function for authentication filter, how does it get called before invoking a service call
+1)How to use Swagger to convert application.yml to a Object class : read about it
+
+2)In case you have written a function for authentication filter, how does it get called before invoking a service call. : Using interceptor read 
 
 Ans: The authentication filter class should implement javax.servlet.Filter 
 
-3)spring boot actuator implementation and how to check health of the application using this.
+3)spring boot actuator implementation and how to check health of the application using this. done 
 
-4)Resource Id, client Id JPMC ADFS authentication process.Process of on boarding FID.
+4)Resource Id, client Id JPMC ADFS authentication process.Process of on boarding FID. no 
 
-5) Worked on any JPMC automation projects
+5) Worked on any JPMC automation projects no
 
-6) Asked about micro service experience.
+6) Asked about micro service experience. good 
 
 7 ) Asked about deployment process ,service now process and how we coordinate with L2 team
  
 [Yesterday 8:19 PM] Sachdev, Raunak
 Questions
 [Yesterday 8:21 PM] Sachdev, Raunak
-1)find employee with role / Make use of optional KeyWord to deal with exceptions
+1)find employee with role / Make use of optional KeyWord to deal with exceptions : done 
 
 Employee
 
@@ -248,13 +345,13 @@ Employee C(3, Emp3, Associate2)
  
 3)How @Transactional will behave if save() of parent is caliing 2 children 
 
-and one of child method fails. Can you achieve Isolation?
+and one of child method fails. Can you achieve Isolation? : done 
  
 4)Write class A having HAS A relation with Class B
 
-Then write JUNIT w.r.t B
+Then write JUNIT w.r.t B : read 
  
-5)find student who are passed in all subject
+5)find student who are passed in all subject : done 
 
 Result Table
 
@@ -272,10 +369,6 @@ Student1, Sub3, F
 
 Student3, Sub1, P
  
- 
-Questions on project
- 
-Questions on AWS, what service used and why?
  
 CAP theorem and discussion, possibilites around it.
  
