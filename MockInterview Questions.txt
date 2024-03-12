@@ -103,18 +103,17 @@ Containers: Containers enable rapid scaling and agility, as new instances of con
 
 Q3.Explain the working of the master node in Kubernetes?
 
-Q4.Situation based question on KubernetesWhat Spring Boot features help develop Microservices Applications?
+Q4.Situation based question on Kubernetes
 
-
-Q5. DSA Coding question in java.
-
-Q6. DB Question like join , groupingBY and partition. Query.
+Q5. DB Question like join , groupingBY and partition. Query.
 
 Q7. Read about kafka.
 
 Q8. How to calculate the time complexity of java code.
 
 Q8. What is cognitive complexity or types of complexity in java code?
+
+Q9. What Spring Boot features help develop Microservices Applications?
 
 5.Why Spring Boot is preferred over any other framework?
 
