@@ -125,18 +125,150 @@ public class MaximumSubarraySum {
 }
 
 Linked List:
+head ("1") | current.next -----> ("2") | current.next.next -----> ("3") | current.next.next.next -----> ("4") | current.next.next.next.next -----> null
+
+output wll :  ("1") | current.next <---- ("2") | current.next.next <----- ("3") | current.next.next.next <----- head ("4") | current.next.next.next.next 
+ 
+Iterate through the list:
+Start from the head of the linked list and traverse through each node.
+
+Change next pointers:
+For each node, change its next pointer to point to the previous node instead of the next node.
+
+Update pointers:
+Maintain references to the previous node, current node, and next node to keep track of the nodes while traversing the list.
+
+Set new head:
+Once the end of the list is reached, set the new head of the reversed list to the last node (previous node).
 
 1.Reverse a linked list.
+LinkedList<Integer> list = new LinkedList<>();
+        list.add(5);
+        list.add(2);
+        list.add(1);
+        list.add(4);
+        System.out.println(list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+
+OR 
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class ReverseLinkedList {
+    public static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode nextNode = null;
+
+        while (current != null) {
+            nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+        return prev; // New head of the reversed list
+    }
+
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.println("Original list:");
+        printList(head);
+
+        // Reverse the linked list
+        ListNode reversedHead = reverseList(head);
+
+        System.out.println("Reversed list:");
+        printList(reversedHead);
+    }
+}
+
+
 2.Detect a cycle in a linked list.
+if the last node of the list pointing to the head then its a cycle
+Floyd's cycle detection algorithm :
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+public class CycleDetection {
+    public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false; // If the list is empty or has only one node, there's no cycle
+        }
+
+        ListNode slow = head;
+        ListNode fast = head.next; // Start fast pointer one step ahead
+
+        while (fast != null && fast.next != null) {
+            if (slow == fast) {
+                return true; // If slow and fast pointers meet, there's a cycle
+            }
+            slow = slow.next; // Move slow pointer one step forward
+            fast = fast.next.next; // Move fast pointer two steps forward
+        }
+
+        return false; // If fast pointer reaches the end of the list, there's no cycle
+    }
+
+    public static void main(String[] args) {
+        // Create a sample linked list with a cycle: 1 -> 2 -> 3 -> 4 -> 5 -> 3 (cycle)
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        head.next.next.next.next.next = head.next.next; // Create cycle
+
+        // Check if the linked list has a cycle
+        boolean hasCycle = hasCycle(head);
+        if (hasCycle) {
+            System.out.println("The linked list has a cycle.");
+        } else {
+            System.out.println("The linked list does not have a cycle.");
+        }
+    }
+}
+
+
 3.Find the middle element of a linked list.
 4.Merge two sorted linked lists.
 5.Remove duplicates from a sorted linked list.
-6.Stacks and Queues:
-7.Implement a stack using an array and its basic operations.
-8.Implement a queue using two stacks.
-9.Evaluate a postfix expression using a stack.
-10.Implement a min stack that supports push, pop, top, and retrieving the minimum element in constant time.
-11.Implement a circular queue.
+
+Stacks and Queues:
+1.Implement a stack using an array and its basic operations.
+2.Implement a queue using two stacks.
+3.Evaluate a postfix expression using a stack.
+4.Implement a min stack that supports push, pop, top, and retrieving the minimum element in constant time.
+5.Implement a circular queue.
 
 Trees:
 
@@ -154,7 +286,7 @@ Graphs:
 4.Find the connected components in an undirected graph.
 5.Check if a graph is bipartite.
 
-Sorting and Searching:
+Sorting and Searching: done
 
 1.Implement various sorting algorithms like bubble sort, selection sort, insertion sort, merge sort, and quick sort.
 2.Search for an element in a sorted array using binary search.
@@ -163,6 +295,27 @@ Sorting and Searching:
 Dynamic Programming:
 
 1.Calculate the Fibonacci sequence using dynamic programming.
+Funda : Next element is the sum of two elements before it.
+public static int fibonacci(int n) {
+        // Create an array to store Fibonacci numbers
+        int[] fib = new int[n + 1];
+
+        // Base cases
+        fib[0] = 0;
+        fib[1] = 1;
+
+        // Calculate Fibonacci numbers using dynamic programming
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];  -----> sum of two element before it.
+        }
+        for (int i : fib) {
+            System.out.print(" " + i);
+        }
+
+        // Return the nth Fibonacci number
+        return fib[n];
+    }
+
 2.Find the longest common subsequence (LCS) of two strings.
 3.Compute the edit distance (minimum number of operations) to transform one string into another.
 4.Calculate the minimum path sum in a grid (dynamic programming approach).
@@ -170,8 +323,39 @@ Dynamic Programming:
 Miscellaneous:
 
 1.Find all permutations of a string.
-2.Implement a priority queue using a heap.
-3.Implement a trie data structure.
-4.Design and implement an LRU cache.
-5.Design and implement a simple text editor (undo and redo operations).
+import java.util.ArrayList;
+import java.util.List;
+
+public class StringPermutations {
+    public static List<String> findPermutations(String str) {
+        List<String> permutations = new ArrayList<>();
+        backtrack(permutations, "", str);
+        return permutations;
+    }
+
+    private static void backtrack(List<String> permutations, String currentPerm, String remainingChars) {
+        if (remainingChars.length() == 0) {
+            permutations.add(currentPerm);
+            return;
+        }
+
+        for (int i = 0; i < remainingChars.length(); i++) {
+            char ch = remainingChars.charAt(i);
+            String newPerm = currentPerm + ch;
+            String newRemaining = remainingChars.substring(0, i) + remainingChars.substring(i + 1);
+            backtrack(permutations, newPerm, newRemaining);
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = "abc";
+        List<String> allPermutations = findPermutations(str);
+
+        System.out.println("All permutations of \"" + str + "\":");
+        for (String permutation : allPermutations) {
+            System.out.println(permutation);
+        }
+    }
+}
+
 
