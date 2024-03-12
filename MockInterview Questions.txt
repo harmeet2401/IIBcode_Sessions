@@ -49,18 +49,28 @@ Q. Read about interceptor and how to fetch the value from the JWT tokem from it.
 There are two ways by which we can intercept the request coming from consumer on internet and allow a better authentication and authorization process : 
 
 	1. Filters intercept requests before they reach the DispatcherServlet, making them ideal for coarse-grained tasks such as:
-	Its part of javax.servlet.Filter 
-	Authentication
-	Logging and auditing
-	Image and data compression
-	Any functionality we want to be decoupled from Spring MVC
+		Steps : 
+			1. Create a class which implements either javax.servlet.Fiter or jakarta.servlet.Filter and overide the doFilter(req , res , chain ) and it 
+				return the chain.doFilter(req,res)
+			2. Then register the ABC class implented Filter interface  by creating a configuration class annotated as @configuration , iss class which assi 				kissi vi class da bean 	create kr skde han which need explicit instantiation and add it to classpath.
+
+		Uses : 
+		Authentication
+		Logging and auditing
+		Image and data compression
+		Any functionality we want to be decoupled from Spring MVC
 	
 	
-	2. HandlerIntercepors, on the other hand, intercepts requests between the DispatcherServlet and our Controllers. This is done within the Spring MVC framework, providing access to the Handler and ModelAndView objects. This reduces duplication and allows for more fine-grained functionality such as:
-	
-	Handling cross-cutting concerns such as application logging
-	Detailed authorization checks
-	Manipulating the Spring context or model
+	2. HandlerIntercepors, on the other hand, intercepts requests between the DispatcherServlet and our Controllers. This is done within the Spring MVC framework, 		providing access to the Handler and ModelAndView objects. This reduces duplication and allows for more fine-grained functionality such as:
+
+		Steps :
+			1. Create a class which implements either HandlerInterceptor and overide the prehandle(),posthandle() and afterCompletion and it 
+				return the chain.doFilter(req,res)
+			2.  Then register the ABC class implented HandlerInterceptor interface  by creating a configuration class annotated as @configuration , iss class 			which assi kissi vi class da bean 	create kr skde han which need explicit instantiation and add it to classpath.
+		Uses :
+		Handling cross-cutting concerns such as application logging
+		Detailed authorization checks
+		Manipulating the Spring context or model
 
 
 
