@@ -58,57 +58,43 @@ public class RotateArray {
 }
 
 
-Merge two sorted arrays into a single sorted array.
-Find the majority element in an array (element that appears more than n/2 times).
-Find the subarray with the maximum sum (Kadane's algorithm).
-Linked List:
+3. Merge two sorted arrays into a single sorted array.
+public static void MergeTwoSortedArr(int[] arr1,int[] arr2)
+    {
 
-Reverse a linked list.
-Detect a cycle in a linked list.
-Find the middle element of a linked list.
-Merge two sorted linked lists.
-Remove duplicates from a sorted linked list.
-Stacks and Queues:
+        int arrout[] = new int[arr1.length+arr2.length];
+        // merge both the arrays and sort it.
+        for (int i = 0; i < arr1.length; i++) {
+           arrout[i] = arr1[i];
+        }
+        int j = arrout.length/2;
+        for (int i1 = 0; i1 < arr1.length; i1++) {
+            arrout[j] = arr2[i1];
+            j++;
+        }
+        Arrays.stream(arrout).sorted().forEach(n->System.out.print(n+" "));
 
-Implement a stack using an array and its basic operations.
-Implement a queue using two stacks.
-Evaluate a postfix expression using a stack.
-Implement a min stack that supports push, pop, top, and retrieving the minimum element in constant time.
-Implement a circular queue.
-Trees:
+    }
 
-Implement a binary search tree (BST) and its basic operations (insertion, deletion, searching).
-Find the height of a binary tree.
-Traverse a binary tree in preorder, inorder, and postorder.
-Check if a binary tree is balanced.
-Find the lowest common ancestor (LCA) of two nodes in a binary tree.
-Graphs:
+4.Find the majority element in an array (element that appears more than n/2 times).
+   public static void findEleNby2Times(int[] args) {
+        int occ = args.length/2;
+        Map<Integer,Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < args.length; i++) {
+            if(map.get(args[i])!=null){
+                map.put(args[i],map.get(args[i])+1);
+            }else{
+                map.put(args[i],1);
+            }
+        }
+        System.out.println("\n");
+        map.entrySet().stream().forEach(System.out::println);
+        System.out.println("\n");
+        map.entrySet().stream().filter(e->e.getValue()==occ).collect(Collectors.toList());      
+        
+    }
 
-Implement depth-first search (DFS) and breadth-first search (BFS) traversal algorithms.
-Detect a cycle in a directed and undirected graph.
-Find the shortest path between two nodes in a weighted graph (Dijkstra's algorithm).
-Find the connected components in an undirected graph.
-Check if a graph is bipartite.
-Sorting and Searching:
-
-Implement various sorting algorithms like bubble sort, selection sort, insertion sort, merge sort, and quick sort.
-Search for an element in a sorted array using binary search.
-Find the kth smallest/largest element in an array.
-Dynamic Programming:
-
-Calculate the Fibonacci sequence using dynamic programming.
-Find the longest common subsequence (LCS) of two strings.
-Compute the edit distance (minimum number of operations) to transform one string into another.
-Calculate the minimum path sum in a grid (dynamic programming approach).
-Miscellaneous:
-
-Find all permutations of a string.
-Implement a priority queue using a heap.
-Implement a trie data structure.
-Design and implement an LRU cache.
-Design and implement a simple text editor (undo and redo operations).
-
-Given an array of integers, find the maximum sum of any contiguous subarray of the array.
+4. Find the subarray with the maximum sum (Kadane's algorithm).
 Kadane's Algorithm  for maximum sum of subarray
 Steps : 
     - First maXEndingHere and maxSoFar ko first element ko lo
@@ -118,6 +104,7 @@ Steps :
 
 
 public class MaximumSubarraySum {
+    int[] nums = {5,5,1,1,2,22};
     public static int maxSubarraySum(int[] nums) {
         int maxEndingHere = nums[0];
         int maxSoFar = nums[0];
@@ -136,3 +123,55 @@ public class MaximumSubarraySum {
         System.out.println("Maximum subarray sum: " + maxSum);
     }
 }
+
+Linked List:
+
+1.Reverse a linked list.
+2.Detect a cycle in a linked list.
+3.Find the middle element of a linked list.
+4.Merge two sorted linked lists.
+5.Remove duplicates from a sorted linked list.
+6.Stacks and Queues:
+7.Implement a stack using an array and its basic operations.
+8.Implement a queue using two stacks.
+9.Evaluate a postfix expression using a stack.
+10.Implement a min stack that supports push, pop, top, and retrieving the minimum element in constant time.
+11.Implement a circular queue.
+
+Trees:
+
+1.Implement a binary search tree (BST) and its basic operations (insertion, deletion, searching).
+2.Find the height of a binary tree.
+3.Traverse a binary tree in preorder, inorder, and postorder.
+4.Check if a binary tree is balanced.
+5.Find the lowest common ancestor (LCA) of two nodes in a binary tree.
+
+Graphs:
+
+1.Implement depth-first search (DFS) and breadth-first search (BFS) traversal algorithms.
+2.Detect a cycle in a directed and undirected graph.
+3.Find the shortest path between two nodes in a weighted graph (Dijkstra's algorithm).
+4.Find the connected components in an undirected graph.
+5.Check if a graph is bipartite.
+
+Sorting and Searching:
+
+1.Implement various sorting algorithms like bubble sort, selection sort, insertion sort, merge sort, and quick sort.
+2.Search for an element in a sorted array using binary search.
+3.Find the kth smallest/largest element in an array.
+
+Dynamic Programming:
+
+1.Calculate the Fibonacci sequence using dynamic programming.
+2.Find the longest common subsequence (LCS) of two strings.
+3.Compute the edit distance (minimum number of operations) to transform one string into another.
+4.Calculate the minimum path sum in a grid (dynamic programming approach).
+
+Miscellaneous:
+
+1.Find all permutations of a string.
+2.Implement a priority queue using a heap.
+3.Implement a trie data structure.
+4.Design and implement an LRU cache.
+5.Design and implement a simple text editor (undo and redo operations).
+
