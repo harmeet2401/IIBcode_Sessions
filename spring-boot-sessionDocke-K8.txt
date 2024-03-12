@@ -144,7 +144,16 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
 				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
-						
+      @PostAuthorize("returnObject.owner == authentication.name").------- below code will allow only owner whose name is authentiction.name ye property hai kuch naam 			hogga . Isko class level pr bhi set kr skte hai
+		import org.springframework.security.access.prepost.PostAuthorize;
+		public class MyService {
+		    @PostAuthorize("returnObject.owner == authentication.name")
+		    public MyObject findObjectById(Long id) {
+		        // Implementation to fetch MyObject by id
+		        return myObject;
+		    }
+		}
+
     @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to convert the mesage to json format for a bean response.						
 	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
 	@RequestBody ----- > to map the incoming request to the bean write .
