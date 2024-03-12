@@ -46,6 +46,24 @@ Q. As you are going to explain quartz as the framework used along with spring sc
 
 Q. Read about interceptor and how to fetch the value from the JWT tokem from it.?
 
+There are two ways by which we can intercept the request coming from consumer on internet and allow a better authentication and authorization process : 
+
+	1. Filters intercept requests before they reach the DispatcherServlet, making them ideal for coarse-grained tasks such as:
+	Its part of javax.servlet.Filter 
+	Authentication
+	Logging and auditing
+	Image and data compression
+	Any functionality we want to be decoupled from Spring MVC
+	
+	
+	2. HandlerIntercepors, on the other hand, intercepts requests between the DispatcherServlet and our Controllers. This is done within the Spring MVC framework, providing access to the Handler and ModelAndView objects. This reduces duplication and allows for more fine-grained functionality such as:
+	
+	Handling cross-cutting concerns such as application logging
+	Detailed authorization checks
+	Manipulating the Spring context or model
+
+
+
 Q. HashCode and equal contract principle?
 The hashCode() and equals() methods in Java are fundamental to working with objects, particularly when dealing with collections like HashMap, HashSet, etc. Understanding the contract between these methods is crucial for correctly using these collections.
 
