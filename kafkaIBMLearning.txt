@@ -394,7 +394,7 @@ Kafka-producer in java need below things :
 	prooducerconfig object
 	kafkaproducerobject
 	producerrecord object
-kafkaconsumer is similar which 
+kafka-consumer is similar which 
 	properties objesct
 	consumerconfig object
 	kafkaconsumerobject
