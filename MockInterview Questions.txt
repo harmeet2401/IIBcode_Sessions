@@ -268,9 +268,21 @@ JPMC project tech stack : no
 
 soap vs rest : op protocol vs methodology (architecture)
 
-how do you authenticate in your existing application : using interceptor and basic authentication . Interceptor ke liye read kro.
+how do you authenticate in your existing application : using interceptor and basic authentication . Interceptor ke liye read kro. : done 
 
-authentication vs authorization : Explain
+authentication vs authorization : done 
+	1. authentication using the interceptor which urls are widelisted . We can also use spring security for the same. We can also intercept the request get the token 			coming in the header which can contain the user ID assigned to each consumer and then we can extract the from the token and hit the external api to get 		the details.
+	2. authorization is the process in which which resource the api or service uri is allowed to acess.  @PostAuthorize("returnObject.owner == authentication.name").
+		below code will allow only owner whose name is authentiction.name ye property hai kuch naam hogga . Isko class level pr bhi set kr skte hai 
+		import org.springframework.security.access.prepost.PostAuthorize;
+		public class MyService {
+		    @PostAuthorize("returnObject.owner == authentication.name")
+		    public MyObject findObjectById(Long id) {
+		        // Implementation to fetch MyObject by id
+		        return myObject;
+		    }
+		}
+
 
 oauth vs jwt : Will read 
 
