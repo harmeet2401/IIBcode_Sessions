@@ -41,7 +41,6 @@ Revise kafka logics.
 Db questions.
 
 ----------------------------
-Q. Read about kafka.
 Q. HashCode and equal contract principle?
 The hashCode() and equals() methods in Java are fundamental to working with objects, particularly when dealing with collections like HashMap, HashSet, etc. Understanding the contract between these methods is crucial for correctly using these collections.
 
@@ -61,10 +60,6 @@ It is transitive: For any non-null reference values x, y, and z, if x.equals(y) 
 It is consistent: For any non-null reference values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, provided no information used in equals() comparison on the objects is modified.
 For any non-null reference value x, x.equals(null) should return false.
 
-
-Q. DSA Coding question in java.
-Q. DB Question like join , groupingBY and partition. Query.
- 
 Q1.How are Kubernetes and Docker related?
 Kubernetes and Docker are both technologies that are widely used in modern software development and deployment, especially in the context of containerization.
 
@@ -106,12 +101,20 @@ Hosts: Scaling applications deployed on hosts may require provisioning and confi
 Containers: Containers enable rapid scaling and agility, as new instances of containers can be spun up or down dynamically based on workload demands. Container orchestration platforms like Kubernetes provide automated scaling and management capabilities, allowing applications to scale seamlessly in response to changes in demand.
 
 
-
-
-
 Q3.Explain the working of the master node in Kubernetes?
 
 Q4.Situation based question on KubernetesWhat Spring Boot features help develop Microservices Applications?
+
+
+Q5. DSA Coding question in java.
+
+Q6. DB Question like join , groupingBY and partition. Query.
+
+Q7. Read about kafka.
+
+Q8. How to calculate the time complexity of java code.
+
+Q8. What is cognitive complexity or types of complexity in java code?
 
 5.Why Spring Boot is preferred over any other framework?
 
