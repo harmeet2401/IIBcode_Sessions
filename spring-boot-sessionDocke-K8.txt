@@ -131,8 +131,9 @@ Spring mvc , tomcat and json conversion are coming because of the spring-boot-st
 
 The @Controller is a common annotation which is used to mark a class as Spring MVC Controller while the @RestController is a special controller used in RESTFul web services and the equivalent of @Controller + @ResponseBody.
 
-	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , post , get , patch  reqeust send on http url this controller will hanlde .
-	@Controller :  this annotation will tell mvc that this class will handles incoming requests . This interface is not annotated as @ResponseBody. @RestController interface is annotated as @ResponseBOdy.
+	@RestController ---- > to tell the spring mvc that this controller is going to handle the rest http request : that contains all request mapping functions . When 		you go inside @RestController the interface is annotated as @Component and @ResponseBody. When we say it will handle all rest request means all put , 			post , get , patch  reqeust send on http url this controller will hanlde .
+	@Controller :  this annotation will tell mvc that this class will handles incoming requests . @Controller is a stereotype annotation used to mark a class as a 			Spring MVC controller component.It is typically used to create web controllers that handle web requests and generate a response, often in the form of a 		view (HTML page) rendered by a templating engine like Thymeleaf or JSP.
+
 	@RequestMapping --- >  This annotation will allow to mention the method and uri for which the controller will react. 
 	@RequestMapping(method='Get/Post/PUT/DELETE/PATCH',Path="/hellow-world"
 	getCarddetailsfn()
@@ -144,7 +145,7 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 			Example  :  @GetMapping(path = "/uname")
 						public String getUserName( @RequestParam String name)
 				when hit the controller with uri http://localhost:8080/uname?name=HarmeeetSingh  . Then HarmeetSingh will be assigned to the variable name
-      @PostAuthorize("returnObject.owner == authentication.name").------- below code will allow only owner whose name is authentiction.name ye property hai kuch naam 			hogga . Isko class level pr bhi set kr skte hai
+      @PostAuthorize("returnObject.owner == authentication.name").------- Its is part of spring security dependency.Below code will allow only owner whose name is authentiction.name ye property hai kuch naam 			hogga . Isko class level pr bhi set kr skte hai
 		import org.springframework.security.access.prepost.PostAuthorize;
 		public class MyService {
 		    @PostAuthorize("returnObject.owner == authentication.name")
@@ -155,7 +156,9 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 		}
 
     @ResponseBody -------> is inherited by the @RestController which also include jacksonHttpMessageConvertor to convert the mesage to json format for a bean response.						
-	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500).
+	@ResponseEntity ----- > to modulate the outgoing response from the controller function. We can use any bean to frmulate the outgoing message . We can also set the http response code as 201(created) , internalservererror(500). exmaple : return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body("Internal Server Error");
+
 	@RequestBody ----- > to map the incoming request to the bean write .
 	@Pathvariables ----- > to bind the value frm url to a variable url like : localhost:8080/test/2/ , so the path = /test/{id} . So 2 will be mapped to id 
 	@SpringbootTest --- > Annotation that can be specified on a test class that runs Spring Boot based tests. Which is further annotated as @ExtendWith
@@ -202,7 +205,33 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 
 	@JsonIgnore : --------- to ignore the mapping of the variable in bean . it will not only ignore the incoming value map , but also ignore the outgoing value map in json/xml etc 
 	@JsonProperty : ------- to assign the name of the variable when it comes out as json. 
-	@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .@Transactional supports various attributes to customize transactional behavior, such as readOnly, propagation, isolation, timeout, and rollbackFor(on certain exception), among others. This annotation can be on method and class level(class level will make all public method of the class as transactional.)
+	
+			@Transactional ------- it is used in test class , and it will rollback the trransactions happaned on DB after each @test and help in allowing the one transaction to complete first completely to avoid collision .@Transactional supports various attributes to customize transactional behavior, such as readOnly, propagation, isolation, timeout, and rollbackFor(on certain exception), among others. This annotation can be on method and class level(class level will make all public method of the class as transactional.)
+			
+			- readOnly:
+			
+			When set to true, indicates that the transaction is read-only and no modification operations (e.g., INSERT, UPDATE, DELETE) are allowed within 				the transaction.Setting this attribute to true can optimize database access by allowing the underlying data source to apply certain 					optimizations for read-only transactions.
+
+			- propagation:
+			
+			Specifies the propagation behavior of the transaction when the annotated method is called within the context of an existing transaction.
+			There are several propagation values available (e.g., REQUIRED, REQUIRES_NEW, NESTED), each defining a different behavior for transaction 				propagation.
+			
+			- isolation:
+			
+			Defines the isolation level of the transaction, which determines how the transaction interacts with concurrent transactions accessing the same 				data. Common isolation levels include READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, and SERIALIZABLE.
+			
+			- timeout:
+			
+			Specifies the timeout for the transaction in seconds.
+			If the transaction takes longer than the specified timeout value to complete, it will be automatically rolled back.
+			
+			- rollbackFor (or noRollbackFor):
+			
+			Specifies which exceptions should trigger a rollback of the transaction.
+			You can specify one or more exception types for which the transaction should be rolled back if they occur during the execution of the annotated 			method.
+			Conversely, you can use noRollbackFor to specify exception types for which the transaction should not be rolled back.
+
 
 	@PersistenceContext ---------- which is the collection of managed beans just like application context. 
 	@Scope ----------------------- this annotation is used to specify the component as a singleton or prototype. Same object or diff object , i saw this using hashcode code.
