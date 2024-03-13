@@ -284,9 +284,25 @@ authentication vs authorization : done
 		}
 
 
-oauth vs jwt : Will read 
+- oauth vs jwt :
+OAuth (Open Authorization) and JWT (JSON Web Token) are both commonly used in authentication and authorization systems.
+1. JWT(Json Web token) : JWT is a compact, self-contained way of transmitting information between parties as a JSON object. It is commonly used for authentication and as a way to securely transmit information between parties.
+2. OAuth : It is typically used for delegated authorization scenarios, such as when you want to allow a third-party application (like a mobile app) to access certain resources (like user data) on your behalf without sharing your credentials.
 
-how to logs the exception in spring/springboot application : log4j read about it please.
+
+how to logs the exception in spring/springboot application : log4j or slf4J 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MyClass {
+    private static final Logger logger = LoggerFactory.getLogger(MyClass.class);
+
+    public void myMethod() {
+        logger.info("This is an info message");
+        logger.error("This is an error message");
+    }
+}
+
 
 Transaction, propagation & isolation : @Transaction(isolation , propgation and rollbackfor.)
 
@@ -338,15 +354,91 @@ Introduction
 
     Could you please explain all attributes and what is the use of those attributes .
 
-9.  What is Normalization. How you can de-normalize the data/table . : read 
+9.  What is Normalization. How you can de-normalize the data/table . : 
+Normalization typically involves dividing a database into multiple tables and defining relationships between them using foreign keys. There are several normal forms, each with its own set of rules.
 
-10. Did you worked on Function and Procedure. If worked, Then how we can trigger Procedures from Java ? read 
+First Normal Form (1NF): Ensures that each column contains atomic (indivisible) values, and there are no repeating groups of columns.
+Second Normal Form (2NF): Ensures that non-key attributes are fully functionally dependent on the primary key.
+Third Normal Form (3NF): Ensures that non-key attributes are not transitively dependent on the primary key.
+
+
+10. Did you worked on Function and Procedure. If worked, Then how we can trigger Procedures from Java ?  
+yes i worked on it and to call a procedure form java utility 
+we need 
+	- Driver connection to the database 
+	- prepare a execute statement using 
+import java.sql.*;
+
+public class DatabaseProcedureCallExample {
+
+    public static void main(String[] args) {
+        // JDBC URL, username, and password of the database
+        String url = "jdbc:mysql://localhost:3306/mydatabase";
+        String user = "username";
+        String password = "password";
+
+        // JDBC variables for managing connection and executing SQL queries
+        Connection connection = null;
+        CallableStatement callableStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // Establishing connection to the database
+            connection = DriverManager.getConnection(url, user, password);
+
+            // Prepare the call to the stored procedure
+            callableStatement = connection.prepareCall("{call getEmployeeDetails(?)}");
+
+            // Set the parameter value for the stored procedure
+            callableStatement.setInt(1, 123); // Assuming employee ID is 123
+
+            // Execute the stored procedure
+            resultSet = callableStatement.executeQuery();
+
+            // Process the results
+            while (resultSet.next()) {
+                // Retrieve data from the result set
+                String employeeName = resultSet.getString("employee_name");
+                int employeeAge = resultSet.getInt("employee_age");
+
+                // Process the retrieved data as needed
+                System.out.println("Employee Name: " + employeeName);
+                System.out.println("Employee Age: " + employeeAge);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close JDBC resources in finally block to ensure they're released
+            try {
+                if (resultSet != null) resultSet.close();
+                if (callableStatement != null) callableStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
 
 Note :- Most of the questions from Transaction and DB quires .
 
-1)How to use Swagger to convert application.yml to a Object class : read about it
+1)How to use Swagger to convert application.yml to a Object class : done about it
+We can create java classes using swagger codegen after setting up the swagger of your api.
+So  Swagger Codegen from its GitHub repository: https://github.com/swagger-api/swagger-codegen
 
-2)In case you have written a function for authentication filter, how does it get called before invoking a service call. : Using interceptor read 
+We can create the swagger document using the swagger openapi document dep
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+hit http://localhost:8080/swagger-ui.html ----> to get the ui of the api swagger 
+hit http://localhost:8080/v3/api-docs -----> tp get the yaml out showing the contracts.
+
+
+2)In case you have written a function for authentication filter, how does it get called before invoking a service call. : Using interceptor done
 
 Ans: The authentication filter class should implement javax.servlet.Filter 
 
@@ -389,7 +481,52 @@ and one of child method fails. Can you achieve Isolation? : done
  
 4)Write class A having HAS A relation with Class B
 
-Then write JUNIT w.r.t B : read 
+In Java, a "HAS A" relationship typically refers to composition, where one class contains an instance of another class as a member variable. Here's how you can write a class A that has a composition relationship with class B:
+
+class A {
+private int value;
+
+	private A(int value){
+		this.value = value;
+	}
+
+	public int getValue()
+	{
+		return value;
+	}
+
+}
+-------------------------------
+class B
+{
+	private A a ; 
+	private B()
+	{
+		a = new A(10);
+	}
+
+	public static printValue(){
+			sout("Value of "- + a.getValue())
+		}
+		psvm (){
+			B b = new B();
+			b.printValue();
+		}
+}
+
+Then write JUNIT w.r.t B : done 
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TestClassB {
+    @Test
+    public void testGetValue() {
+        A a = new A(5);
+        assertEquals(5, a.getValue());
+    }
+}
+
  
 5)find student who are passed in all subject : done 
 
