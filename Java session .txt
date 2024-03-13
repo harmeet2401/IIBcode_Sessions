@@ -1140,7 +1140,6 @@ Comparator.naturalOrder()
 Comparator.reverseOrder()
 Comapartor.comparing(Student::getMarks)
 Comapartor.comparing(Student::getMarks).reversed()
-
 Q. Various functions of map in stream ?
 Answer : 
 map(Function<t>,return type <H>)  ------------ > Convert or drill to a single object 
