@@ -81,7 +81,7 @@ hashCode() Method:
 The hashCode() method returns an integer hash code value for the object. This value is typically used to improve the performance of hash-based collections like HashMap, HashSet, etc.
 The general contract of hashCode() method is:
 If two objects are equal according to the equals() method, then they must return the same hash code value.
-It is not required that if two objects have different hash code values, then they must be unequal. However, it is generally desirable for performance reasons.
+It is not required that if two objects have different hash code values, then they must be unequal.which occurs when hash collision occurs due to finite hashcode (32 bits) available. sometime has ode fn for two unequal object generate same hashindex and results in collision However, it is generally desirable for performance reasons.
 The hashCode() method should be overridden in a class whenever equals() is overridden.
 
 equals() Method:
