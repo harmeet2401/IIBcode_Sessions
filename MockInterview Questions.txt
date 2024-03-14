@@ -217,6 +217,9 @@ Autoconfiguration.
 
 8. difference between java 8 and java 11 ?
 
+-HTTP CLIENT :
+Java 11 introduced a new HttpClient API in the java.net.http package for making HTTP requests.
+
 -  String methods addes :
  Java 11 introduced several new methods to the String class like isBlank(), strip(), stripLeading(), and stripTrailing() for improved string manipulation.
 
