@@ -240,11 +240,45 @@ Java 11 includes Java Flight Recorder (JFR) in the OpenJDK, enabling low-overhea
 
 9. What is difference java 11 and 17 
 
+Below added in java 17:
+
 - SEALED CLASSES :
 Sealed classes restrict which other classes or interfaces may extend or implement them.
 
 public sealed class Shape permits Circle, Square, Triangle {
-    // Class definition
+    // Common properties and methods
+}
+
+final class Circle extends Shape {
+    private final double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Circle-specific methods
+}
+
+final class Square extends Shape {
+    private final double sideLength;
+
+    public Square(double sideLength) {
+        this.sideLength = sideLength;
+    }
+
+    // Square-specific methods
+}
+
+final class Triangle extends Shape {
+    private final double base;
+    private final double height;
+
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    // Triangle-specific methods
 }
 
 - PATTERN MATCHIMG FOR SWITCH :
@@ -278,6 +312,15 @@ Removes the experimental AOT and JIT compiler Graal as well as the jdk.aot and j
 
 
 10. what is switch function? The new switch function in 177
+
+In java 17 the old switch function is enhanced to provide more readability and concise code.
+
+String result = Switch(dayofweek)
+       {
+         case 1 -> "first week";
+         case 2 -> "second week";
+         default -> "last week";
+        }
 
 10. Kafka - how many topic in Kafka, consumer side, how will you handle production and the Kafka report You have to find out if any file is missing.
 
