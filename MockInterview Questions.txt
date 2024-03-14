@@ -215,6 +215,26 @@ Autoconfiguration.
 
 8.Situation based question on Angular
 
+8. difference between java 8 and java 11 ?
+
+-  String methods addes :
+ Java 11 introduced several new methods to the String class like isBlank(), strip(), stripLeading(), and stripTrailing() for improved string manipulation.
+
+String str = "  Hello World  ";
+System.out.println(str.isBlank());  // Output: false
+System.out.println(str.strip());   // Output: Hello World
+
+- TLS1.3 support :
+Java 11 adds support for TLS 1.3, the latest version of the Transport Layer Security protocol, for improved security.
+
+- Epsilon Garbage Collector :
+Java 11 introduced the Epsilon garbage collector, a no-op garbage collector useful for performance testing and zero-overhead scenarios.
+
+- Flight Recorder :
+Java 11 includes Java Flight Recorder (JFR) in the OpenJDK, enabling low-overhead performance monitoring and profiling.
+
+
+
 9. What is difference java 11 and 17 
 
 10. what is switch function? The new switch function in 177
