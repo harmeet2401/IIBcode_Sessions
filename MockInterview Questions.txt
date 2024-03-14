@@ -1,4 +1,4 @@
-Product {
+⁸ {
 
 id 
 name
@@ -337,8 +337,38 @@ b) Method lookup : In java, method resolution (determining which method to call)
 c) Compile time binding :
 Method overriding in Java relies on dynamic (runtime) binding, where the appropriate method implementation is determined at runtime based on the actual type of the object. However, static methods are bound at compile time based on the reference type, so there's no dynamic dispatch involved.
 
+example :
+class Parent {
+    static void static Method() {
+        System.out.println("Parent's static method");
+    }
+}
 
-2) related marker interface one question
+class Child extends Parent {
+    static void static Method() {
+        System.out.println("Child's static method");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent.staticMethod(); // Calls Parent's static method
+        Child.staticMethod();  // Calls Child's static method
+        Parent obj = new Child();
+        obj.staticMethod();    // Calls Parent's static method
+    }
+}
+example above, even though the object obj is of type Child, the call obj.staticMethod() still invokes the Parent class's static method because static methods are bound at compile time based on the reference type (Parent), not on the runtime type of the object (Child).
+
+2) related marker interface one question?
+ans : Marker interfaces are also known as "tagging interfaces" or "empty interfaces." They provide a way to categorize or classify classes based on certain characteristics without adding any additional methods or fields.
+
+public interface SerializableMarker {
+    // This interface doesn't contain any methods or fields
+    // It's used solely for marking purposes
+}
+
+
 
 3) shallow copy and deep copy
 Its used in prototype pattern. When we tried to make a clone of the object we use either copy constructur or cloneable interface to do that.
@@ -353,9 +383,27 @@ Microservice Architecture Pattern --> Explain the same in the project : done
 
 Kafka Architecture --> producer / Consumer : done
 
-if there are two microservice with different consumer if one consumer consumes messages and other not what can be the issue in production ?
+Q. if there are two microservice with different consumer if one consumer consumes messages and other not what can be the issue in production ?
 
-Lagging in Kafka how will you handle ?
+ans : there is a possibility that the 2nd consumer application is down and the consumer which is bound to read messages from the partition is not working.
+
+To resolve this we can use the orchestration tool to maintain the desired state and keep the consumption of message in progress.
+
+
+Q. Lagging in Kafka how will you handle ?
+
+- Increase consumer parallelism :
+If a single consumer instance is unable to keep up with the message throughput, you can increase consumer parallelism by adding more consumer instances within the consumer group. This allows for better distribution of message processing across multiple consumers.
+
+- Adjust consumer comfigurartion :
+fetch.max.bytes, fetch.max.wait.ms, max.poll.records, and max.partition.fetch.bytes based on your application's requirements and the expected message throughput.
+
+- Increase partition :
+Increasing the number of partitions for a Kafka topic allows for better parallelism and distribution of messages across consumers. However, this should be done with caution, as changing the number of partitions can have implications for message ordering and data retention.
+
+- Scale Kafka cluster :
+if the Kafka cluster itself is the bottleneck, consider scaling it horizontally by adding more brokers or vertically by upgrading hardware resources such as CPU, memory, and storage.
+
 
 Benefits of microservice architecture --> why you used different schemas in database of architecture.
 
@@ -363,7 +411,6 @@ CI/CD piple jenkins pattern build questions.
 
 AWS project related questions --> where you used ? how and architecture?
 
-Scaling kafka consumers when and what scenarios?
 
 2 coding questions : done 
 
@@ -377,8 +424,6 @@ introduction : done
 describe past project : done 
 
 Overall tech stack details : done java , spring boot, aws , kafka 
-
-JPMC project tech stack : no
 
 soap vs rest : op protocol vs methodology (architecture)
 
@@ -589,10 +634,10 @@ Employee C(3, Emp3, Associate2)
 
 2 inputs, old role and new
  
-3)How @Transactional will behave if save() of parent is caliing 2 children 
-
-and one of child method fails. Can you achieve Isolation? : done 
+3)How @Transactional will behave if save() of parent is caliing 2 children and one of child method fails. Can you achieve Isolation? : chat gpt one more time
  
+Overall, when invoking save() methods of multiple child objects within the same transactional method, Spring ensures that the entire set of database operations is treated as a single unit of work. If any operation fails, the entire transaction is rolled back to maintain data consistency and integrity.
+
 4)Write class A having HAS A relation with Class B
 
 In Java, a "HAS A" relationship typically refers to composition, where one class contains an instance of another class as a member variable. Here's how you can write a class A that has a composition relationship with class B:
