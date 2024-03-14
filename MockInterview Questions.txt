@@ -326,6 +326,17 @@ String result = Switch(dayofweek)
 
 15 to 20 Min questions in Kafka side only, other spring boot and JAVA
 1) can we override static method and explain?
+ans :
+ No we cannot override the static method.
+When you declare a static method in a class, it's tied directly to the class's definition in memory. As a result, it doesn't make sense to override a static method in a subclass because the method belongs to the class, not to any instance of the class.
+
+a) Inheritance vs hiding : when a subclass declares a static method with the same signature as a static method in the superclass, it doesn't override the superclass's static method. Instead, it hides it. This means that the subclass's static method is only associated with the subclass itself, and the superclass's static method remains unaffected.
+
+b) Method lookup : In java, method resolution (determining which method to call) is based on the type of the reference variable, not on the runtime type of the object. Since static methods are associated with the class, not with the object, there's no polymorphic behavior to override.
+
+c) Compile time binding :
+Method overriding in Java relies on dynamic (runtime) binding, where the appropriate method implementation is determined at runtime based on the actual type of the object. However, static methods are bound at compile time based on the reference type, so there's no dynamic dispatch involved.
+
 
 2) related marker interface one question
 
