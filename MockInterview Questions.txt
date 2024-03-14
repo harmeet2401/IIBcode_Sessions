@@ -240,6 +240,43 @@ Java 11 includes Java Flight Recorder (JFR) in the OpenJDK, enabling low-overhea
 
 9. What is difference java 11 and 17 
 
+- SEALED CLASSES :
+Sealed classes restrict which other classes or interfaces may extend or implement them.
+
+public sealed class Shape permits Circle, Square, Triangle {
+    // Class definition
+}
+
+- PATTERN MATCHIMG FOR SWITCH :
+Enhances the switch statement to use pattern matching for more concise and readable code.
+
+String result = switch (obj) {
+    case String s -> "String: " + s;
+    case Integer i -> "Integer: " + i;
+    default -> "Unknown object";
+};
+
+- FOREIGN FUNCTION AND MEMORY API :
+Introduces an API for interacting with native code and memory, including foreign function handles, function pointers, and direct memory access.
+
+var functionHandle = FunctionHandle.ofAddress(handle, MethodType.methodType(int.class, int.class));
+int result = (int) functionHandle.invokeExact(42);
+
+- STRONG ENCAPSULATION JDK INTERNALS :
+Enhances encapsulation of JDK internals by enforcing stronger encapsulation for critical internal APIs.
+
+- NEW MACOS RENDERING PIPELINE :
+Introduces a new rendering pipeline for macOS, replacing the deprecated CGL-based pipeline with a Metal-based pipeline
+
+- DEPRECATION OF RMI ACTIVATION FOR REMOVAL :
+Deprecates RMI Activation for removal in a future release, marking it as a deprecated module.
+
+- REMOVAL OF EXPERIMENTAL AOT AND JIT :
+
+Removes the experimental AOT and JIT compiler Graal as well as the jdk.aot and jdk.internal.vm.compiler modules.
+
+
+
 10. what is switch function? The new switch function in 177
 
 10. Kafka - how many topic in Kafka, consumer side, how will you handle production and the Kafka report You have to find out if any file is missing.
