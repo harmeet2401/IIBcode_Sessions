@@ -182,6 +182,111 @@ Q4.Situation based question on Kubernetes
 
 Q5. DB Question like join , groupingBY and partition. Query.
 
+
+Certainly! Here are some questions along with sample SQL queries to illustrate the concepts of database joins, grouping by, and partition by:
+
+1. **Database Joins:**
+   - *Question*: What are the different types of database joins?
+     *Answer*: There are four main types of database joins:
+       - INNER JOIN: Returns rows when there is a match in both tables.
+       - LEFT JOIN (or LEFT OUTER JOIN): Returns all rows from the left table and matching rows from the right table.
+       - RIGHT JOIN (or RIGHT OUTER JOIN): Returns all rows from the right table and matching rows from the left table.
+       - FULL OUTER JOIN: Returns all rows when there is a match in either table.
+
+   - *Question*: How would you optimize a query involving multiple joins for performance?
+     *Answer*: Some optimization techniques for queries involving multiple joins include:
+       - Ensuring proper indexing on join columns.
+       - Using selective WHERE clauses to filter data early in the query execution.
+       - Limiting the number of columns selected to only those needed.
+       - Considering denormalization if appropriate to reduce the number of joins.
+
+   - *Question*: Can you provide an example of a self-join?
+     *Answer*: Sure! Here's an example of a self-join to find employees who share the same manager:
+       ```sql
+       SELECT e1.Name AS Employee, e2.Name AS Manager
+       FROM Employees e1
+       JOIN Employees e2 ON e1.ManagerId = e2.EmployeeId;
+       ```
+
+2. **Grouping By:**
+   - *Question*: How do you use the GROUP BY clause along with aggregate functions like SUM, AVG, COUNT, etc.?
+     *Answer*: Here's an example of using GROUP BY with SUM to find the total sales amount for each product category:
+       ```sql
+       SELECT ProductCategory, SUM(SalesAmount) AS TotalSales
+       FROM Sales
+       GROUP BY ProductCategory;
+       ```
+
+   - *Question*: What is the purpose of the HAVING clause?
+     *Answer*: The HAVING clause is used in combination with the GROUP BY clause to filter groups based on aggregate conditions. Here's an example:
+       ```sql
+       SELECT ProductCategory, SUM(SalesAmount) AS TotalSales
+       FROM Sales
+       GROUP BY ProductCategory
+       HAVING SUM(SalesAmount) > 10000;
+       ```
+
+3. **Partition By:**
+   - *Question*: What is database partitioning, and why is it used?
+     *Answer*: Database partitioning involves dividing a large table or index into smaller, more manageable parts. It's used for performance optimization, data management, and scalability.
+
+   - *Question*: Can you explain the concept of range partitioning and provide an example?
+     *Answer*: Range partitioning divides data based on a range of values. Here's an example of creating a range partitioned table:
+       ```sql
+       CREATE TABLE Orders (
+           OrderId INT,
+           OrderDate DATE,
+           ...
+       ) PARTITION BY RANGE (YEAR(OrderDate)) (
+           PARTITION p0 VALUES LESS THAN (2010),
+           PARTITION p1 VALUES LESS THAN (2011),
+           PARTITION p2 VALUES LESS THAN (2012),
+           ...
+       );
+       ```
+
+These queries and explanations should help illustrate how to use joins, grouping by, and partition by in SQL databases.
+
+Q. What is an anagram and java code for it ?
+twonstrijgs are anagram of each other if each character is used exactly once and all
+
+import java.util.Arrays;
+
+public class AnagramChecker {
+    public static boolean areAnagrams(String str1, String str2) {
+        // Remove spaces and convert strings to lowercase
+        str1 = str1.replaceAll("\\s", "").toLowerCase();
+        str2 = str2.replaceAll("\\s", "").toLowerCase();
+        
+        // If lengths are different, they can't be anagrams
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        
+        // Convert strings to char arrays and sort them
+        char[] charArray1 = str1.toCharArray();
+        char[] charArray2 = str2.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+        
+        // Compare sorted arrays
+        return Arrays.equals(charArray1, charArray2);
+    }
+    
+    public static void main(String[] args) {
+        String str1 = "listen";
+        String str2 = "silent";
+        
+        if (areAnagrams(str1, str2)) {
+            System.out.println(str1 + " and " + str2 + " are anagrams.");
+        } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams.");
+        }
+    }
+}
+
+
+
 Q7. Read about kafka. done 
 
 Q8. How to calculate the time complexity of java code.
