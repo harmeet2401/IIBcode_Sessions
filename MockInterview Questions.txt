@@ -761,7 +761,32 @@ Employee C(3, Emp3, Associate2)
  
 3)How @Transactional will behave if save() of parent is caliing 2 children and one of child method fails. Can you achieve Isolation? : chat gpt one more time
  
-Overall, when invoking save() methods of multiple child objects within the same transactional method, Spring ensures that the entire set of database operations is treated as a single unit of work. If any operation fails, the entire transaction is rolled back to maintain data consistency and integrity.
+Q. Overall, when invoking save() methods of multiple child objects within the same transactional method, Spring ensures that the entire set of database operations is treated as a single unit of work. If any operation fails, the entire transaction is rolled back to maintain data consistency and integrity.
+answer : 
+When using `@Transactional` in Spring, the behavior depends on the transaction propagation and isolation level configured. By default, the propagation is `REQUIRED`, which means that if a method with `@Transactional` annotation is called within another method with an existing transaction, it will join that transaction. 
+
+Regarding isolation, Spring offers several isolation levels such as `READ_UNCOMMITTED`, `READ_COMMITTED`, `REPEATABLE_READ`, and `SERIALIZABLE`. The isolation level determines the degree to which one transaction must be isolated from the effects of concurrently running transactions.
+
+Now, let's address your scenario where the `save()` method of a parent class is calling two children, and one of the child methods fails. Here's how it can be handled:
+
+1. **Rollback behavior**: If one of the child methods fails and an exception is thrown, the transaction will be marked for rollback by default. This means that any changes made by the parent or the successfully executed child method will be rolled back.
+
+2. **Isolation level**: You can configure the isolation level of the transaction to achieve the desired level of isolation. For example, if you want to achieve `SERIALIZABLE` isolation, you can set it as follows:
+
+   ```java
+   import org.springframework.transaction.annotation.Transactional;
+   import org.springframework.transaction.annotation.Isolation;
+   
+   @Transactional(isolation = Isolation.SERIALIZABLE)
+   public void save() {
+       // Logic to save parent and call children
+   }
+   ```
+
+   With `SERIALIZABLE` isolation, transactions are executed serially, meaning that the effects of concurrent transactions are not visible to each other. This can prevent certain concurrency issues, but it may also lead to performance implications due to increased locking.
+
+In summary, by using `@Transactional` with appropriate propagation and isolation settings, you can control the transactional behavior to achieve the desired level of data consistency and isolation in your application.
+
 
 4)Write class A having HAS A relation with Class B
 
