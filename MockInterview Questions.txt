@@ -42,7 +42,27 @@ Db questions.
 
 ----------------------------
 
-Q. As you are going to explain quartz as the framework used along with spring scheduler : read abou it. ?
+Q. As you are going to explain about the scribe project ? using spring scheduler and the rest api?
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyScheduledTask {
+
+    @Scheduled(fixedRate = 5000) // Executes every 5 seconds
+    public void executeTask() {
+        System.out.println("Executing scheduled task...");
+        // Your task logic goes here
+    }
+
+    @Scheduled(cron = "0 0 12 * * ?") // Executes every day at 12:00 PM
+    public void executeDailyTask() {
+        System.out.println("Executing daily scheduled task...");
+        // Your task logic goes here
+    }
+}
+
 
 Q. Read about interceptor and how to fetch the value from the JWT tokem from it.?
 
