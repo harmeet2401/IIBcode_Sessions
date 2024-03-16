@@ -42,6 +42,126 @@ Db questions.
 
 ----------------------------
 
+Q. Check string is anagram ?
+
+import java.util.Arrays;
+
+public class AnagramChecker {
+    public static boolean areAnagrams(String str1, String str2) {
+        // Remove spaces and convert strings to lowercase
+        str1 = str1.replaceAll("\\s", "").toLowerCase();
+        str2 = str2.replaceAll("\\s", "").toLowerCase();
+
+        // Check if lengths are equal
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        // Convert strings to char arrays and sort them
+        char[] charArray1 = str1.toCharArray();
+        char[] charArray2 = str2.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+
+        // Compare sorted char arrays
+        return Arrays.equals(charArray1, charArray2);
+    }
+
+    public static void main(String[] args) {
+        String str1 = "listen";
+        String str2 = "silent";
+
+        if (areAnagrams(str1, str2)) {
+            System.out.println(str1 + " and " + str2 + " are anagrams.");
+        } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams.");
+        }
+    }
+}
+
+Q. Reverse a string ?
+public class ReverseString {
+    public static String reverse(String str) {
+        StringBuilder reversed = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed.append(str.charAt(i));
+        }
+        return reversed.toString();
+    }
+
+    public static void main(String[] args) {
+        String original = "hello";
+        System.out.println("Original string: " + original);
+        System.out.println("Reversed string: " + reverse(original));
+    }
+}
+
+Q. Write a program to check for palidrome ?
+
+public class PalindromeCheck {
+    public static boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left++) != str.charAt(right--)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String palindrome = "radar";
+        System.out.println("Is \"" + palindrome + "\" a palindrome? " + isPalindrome(palindrome));
+    }
+}
+
+Q. Fibonacci series ?
+
+public class FibonacciSeries {
+    public static void printFibonacci(int n) {
+        int prev = 0, next = 1;
+        System.out.print(prev + " " + next + " ");
+        for (int i = 2; i < n; i++) {
+            int sum = prev + next;
+            System.out.print(sum + " ");
+            prev = next;
+            next = sum;
+        }
+    }
+
+    public static void main(String[] args) {
+        int count = 10; // Number of terms in the series
+        System.out.println("Fibonacci series up to " + count + " terms:");
+        printFibonacci(count);
+    }
+}
+
+Q. Anagram check using java code ?
+An two strings are anagram only if all chars are used to create a new words and each char is used exactly once .
+
+import java.util.Arrays;
+
+public class AnagramChecker {
+    public static boolean areAnagrams(String str1, String str2) {
+        char[] charArray1 = str1.toCharArray();
+        char[] charArray2 = str2.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+        return Arrays.equals(charArray1, charArray2);
+    }
+
+    public static void main(String[] args) {
+        String str1 = "listen";
+        String str2 = "silent";
+        if (areAnagrams(str1, str2)) {
+            System.out.println(str1 + " and " + str2 + " are anagrams.");
+        } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams.");
+        }
+    }
+}
+
 Q. As you are going to explain about the scribe project ? using spring scheduler and the rest api?
 
 import org.springframework.scheduling.annotation.Scheduled;
