@@ -963,7 +963,7 @@ Question : major changes took place while migrating from  java 7 to java 8
 Its an annonymous functions 
 Important point : Lambdafunctions are moslty used to provide defiintions to the functional interface(Single abstract method interfaces SAM) (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
 syntax : ()					-> 					{}       
-		 fn pramater 	   linked operator     fn body 
+		 fn pramater 	   lambda operator     fn body 
 These are equivalent to the functions without function name
 These are the anonymus funtions 
 These expressions have all three features that a normal functions has 
