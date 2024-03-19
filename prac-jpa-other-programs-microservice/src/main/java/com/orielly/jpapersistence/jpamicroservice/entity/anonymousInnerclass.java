@@ -5,7 +5,7 @@ import java.util.Comparator;
 interface Greeting{
     void greet();
 }
-public class anonymousInnerclass {
+ public class  anonymousInnerclass {
     public static void main(String[] args) {
         /**
          * This is used sort the objects in natural order using the defined values.
