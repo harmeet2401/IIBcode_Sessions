@@ -527,6 +527,7 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 			
 			2. Static blocks : which will be run at the verry first step , sbse pehle run hogga 
 			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocks are executed sequentially.
+			4. Static innert nested class : which is used to call and access the static member of outer class.
 			Important  : STATIc MEMBERS CAN BE CALLED BY THE STATIC MEMBER ONLY (MEMBSR CAN BE ANYTHING , CLASS , FUNCTION , VARIABLE ETC )
 20. Inheritance : 			
 
