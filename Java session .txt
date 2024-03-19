@@ -1180,11 +1180,11 @@ QQQ. Stream Api
 					.collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
 					
 							Stream of Students 
-				|Student |Student |Student |Student |Student |Student |		 ------- Stream()
+				|Student |Student |Student |Student |Student |Student |		 ------- Stream<Student>
 				
-				|Student |Student |Student |Student |Student |		 ------- filter()
+				|Student |Student |Student |Student |Student |		 ------- filter() ---- Stream<Student>
 				
-				     |Student |Student |Student |	 ------- filter()
+				     |Student |Student |Student |	 ------- filter() --------------- Stream<Student>
 					 
 					 
 		Stream is nothing but a sequence of values or elements okay ! it doesn't hold data. And can be processed only once.
@@ -1192,7 +1192,7 @@ QQQ. Stream Api
 Q. Functions of Collectors interface and Comparator interface passed as a paramter to the collect() terminal fn of stream api ?
 Ans : list.stream().collect( ? )
 Collector.toSet()
-Collector.toMap(key,value)
+Collector.toMap(key,value) ------------- > Key ek dekke , value agar nhi dette to List<Object> aega it will create Map<key,List<Object>>. Agar value dogge using the Object::getMethod it will create Map<key,value>
 Collector.toList()
 
 ---------------All these functions need one parameter like Student::getNoteBooks which is an integer. Compile issue if no input -----------------------------
@@ -1204,7 +1204,7 @@ Collector.summingDouble()
 
 Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.) . give map wiht key and values as list of values/object
 Collector.joining('delimiter','Start char','end char')
-Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object
+Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object. Ask for a predicate partitioning the collections.
 Collectors.counting() -- will give you count of the elements.
 Collector.MinBy(Comparator.comparing(Student::getMarks))----------- this will give a min marks across the students
 Collector.MaxBy(Comparator.comparing(Student::getMarks))----------- this will give a max marks across the students
@@ -1266,12 +1266,12 @@ char ch = 'a'
 2. Characters : its a non premitive datatypes and are also known as wrapper classes to wrap the primitive data types which allow use of other utility functions provided by the wrapper classes.
 char ch = 'a';
 Character ch = new Character(ch);
-3. CharSequence chs is the interface which is implemented by the classes like , String , Stringbuilder and stringbuffer to implement various operation on sequence of characters . Its can contain a single to a sequence of characters.
+3. CharSequence chs is the interface which is implemented by the classes like , String , Stringbuilder and Stringbuffer to implement various operation on sequence of characters . Its can contain a single to a sequence of characters.
 
 CharSequence ch  = "a";
 CharSequence chs = "radar";
 
-chs.Charat(index)
+chs.charAt(index)
 chs.subSequence(1,3) --- like substring
 chs.length()---> get the length
 					
