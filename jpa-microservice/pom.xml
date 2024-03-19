@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.orielly.jpapersistence</groupId>
-    <artifactId>jpa-microservice</artifactId>
+    <artifactId>prac-jpa-other-programs-microservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>jpa-microservice</name>
     <description>Demo project for Spring Boot</description>
