@@ -223,12 +223,77 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 
 	Below access modifiers are used only for instance variables 
 		- public : public/protected/default final in i =0 ; 
-		- static : static final int i = 10; it wil have common copy for all objects and access to all.
+		- static : Fuor ways to use this 
+			. variable : When a variabe is declared as static, a single copy of that variable will be shared among all the instances of the class. And will be initialised when the class is loaded in to the mem.
+					or ek class mem mai tab load hotti hai jab uska object bnta ha .
+			   Example : 
+				Class Person{
+						public static final int i = 10; it wil have common copy for all objects and access to all.
+						public Person(){
+								i++; // this static variable will get incremented when an object of the class will be created.
+
+							}
+						}
+			. static Method : When a method is declared with static keyword then that method will be bound to the class defination at compile time and then can be called using the class name directly.
+					oor static method can call only static memebrs only . like static variable hi use hogga or static method hi call kr skte ho 
+					class Boy
+					{
+					    public static int i ; //it wil have common copy for all objects and access to all.
+					    public Boy(int i){
+					        this.i = i;
+					    }
+					    public static int getvalue(){
+					        return i;  --------------------> i is static called from the static members. 
+					    }
+					}
+					class Person {
+					    public static void main(String[] args) {
+					        System.out.println(Boy.getvalue());
+					    }
+					
+					}	
+			. static block : These are the block of code get executes way before the class is loaded into the memory.
+					static {
+						  System.out.println("hello from the static block");
+						}
+
+			. static nested classes : These are the nested static class which is under outer class used to access the outer class static members.
+				package com.orielly.jpapersistence.jpamicroservice.entity;
+
+						public class Vehicle {
+						    public static int i = 10;
+						    
+						    public Vehicle(){
+						        this.i = 100;
+						    }
+						    public static class FourWheeler{
+						        public static void increaseValue(){
+						            System.out.println(Vehicle.i);
+						        }
+						    }
+						
+						    public static void main(String[] args) {
+						        Vehicle v = new Vehicle();
+						        System.out.println(i);
+						    }
+						}
+
+
+
+
 		- transient : transient static int i = 10 ;  its used for variables to be included as part of the serialized string or value used for transmitting data to other system 
 		- volatile : volatile int i =0 ; to make the variable thread safe. This can be used in case of the multithreading process.
-		
-	Below modifier is used only for local variables & instance variables. : 
-		- final keyword : final int i = 10 . this is telling the compiler the final value for i is 10 and no one can chnge the value for i later . if you are writting instance variable with final keyword you have to initialize it or else compile issue will be ther e.
+		- final keyword : 
+			Three types of usages are there : It usually allow you to impose immutability to the members of the class.
+			. Final variable  : If it is applied to a variable means that the value of that variable can not be changed after it got initialised.
+				public final int i = 0;
+			. Final Method : if the final keyword is used with the method then the method itself can not be overridden by the sub class extending it.
+				public final int get(){ // this method couldn't get override by the subclass methods.
+				} 
+			. Final Class  : if the class is final it means the class will be forbidden to get extend  into the subclass. It means it will not allow it to be part of inheritance.
+				public final class A{ // will not be allowed to be extended.
+
+				}
 		
 11. Operators in java : 
 
