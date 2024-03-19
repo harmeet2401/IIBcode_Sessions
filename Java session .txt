@@ -197,7 +197,7 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 	String a = "testing immutability"
 	reference object is there n left hand side but the object will be saved in the java string pool which is a special heap memory.
 
-9.Scope of variable : 				
+9.Scope/Types of variable : 				
 
 	Static variable : It is accessible by all objects in a class and have a single copy of it across the class. This get loaded to the JVM when the program runs
 	Instance variable : Which got initialized when the object or class gets instantiated. As it is on class level it can be accessed by all objects in the class
@@ -301,12 +301,22 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 		++ and -- : always try to use it in suffix like : ++x or --x , if  you want the value incremented assinged it to x immediatley 
 			x++ and x-- will increament and decrement the values but will be assigend to the variable on next set of code lines.
 		
-	- below loc will give same results  : 
-		System.out.println(--x1);
+	- below loc will give same results  :  isme value pehle hi increment/decrement hojati hai  
+	System.out.println(--x1);
         System.out.println(x1);
 		
-	- below loc will give diffe results : 
-		System.out.println(x1--);
+	- below loc will give diffe results : prefix mai value baad mai increment/decrement hotti hai . For loop ka example dekho 
+			fo(int i = 0 ; i <10 ; i++){
+				Sout(i);
+				}
+			pehle iteration mai value print hoggi 0 and then 1  , 2  , 3 .......
+
+			fo(int i = 0 ; i <10 ; ++i){
+				Sout(i);
+				}
+			pehle iteration mai value print hoggi 1 and then  , 2  , 3 .......
+			
+	System.out.println(x1--);
         System.out.println(x1);
 		
 	- conditional operators :  example 
