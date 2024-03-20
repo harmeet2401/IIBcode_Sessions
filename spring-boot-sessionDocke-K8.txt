@@ -487,6 +487,15 @@ mentioned in the key in the @cacheable()
 		    // Getters and setters
 		}
 
+junit annotations for method level :
+
+@Beforeeach : this annotation is used for junit test cases and to set up something before running each test case
+@Aftereach : this annotation is used for junit test cases and to set up something after running each test case.
+
+@AfterAll : this annotation is used for junit test cases and to set up something after running all the test cases. Method annotated with this should be static
+@BeforeAll : this annotation is used for junit test cases and to set up something before running all the test cases. Method annotated with this should be static.
+
+
 Jdbc Template : So just like RestTemplate we used to access the API to get the response objects , we have JDBCTemplate(to access db) , JMSTemplate(to access message queues) etc
 
 Code for above templates : 
