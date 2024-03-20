@@ -197,7 +197,7 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 	String a = "testing immutability"
 	reference object is there n left hand side but the object will be saved in the java string pool which is a special heap memory.
 
-9.Scope of variable : 				
+9.Scope/Types of variable : 				
 
 	Static variable : It is accessible by all objects in a class and have a single copy of it across the class. This get loaded to the JVM when the program runs
 	Instance variable : Which got initialized when the object or class gets instantiated. As it is on class level it can be accessed by all objects in the class
@@ -223,12 +223,77 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 
 	Below access modifiers are used only for instance variables 
 		- public : public/protected/default final in i =0 ; 
-		- static : static final int i = 10; it wil have common copy for all objects and access to all.
+		- static : Fuor ways to use this 
+			. variable : When a variabe is declared as static, a single copy of that variable will be shared among all the instances of the class. And will be initialised when the class is loaded in to the mem.
+					or ek class mem mai tab load hotti hai jab uska object bnta ha .
+			   Example : 
+				Class Person{
+						public static final int i = 10; it wil have common copy for all objects and access to all.
+						public Person(){
+								i++; // this static variable will get incremented when an object of the class will be created.
+
+							}
+						}
+			. static Method : When a method is declared with static keyword then that method will be bound to the class defination at compile time and then can be called using the class name directly.
+					oor static method can call only static memebrs only . like static variable hi use hogga or static method hi call kr skte ho 
+					class Boy
+					{
+					    public static int i ; //it wil have common copy for all objects and access to all.
+					    public Boy(int i){
+					        this.i = i;
+					    }
+					    public static int getvalue(){
+					        return i;  --------------------> i is static called from the static members. 
+					    }
+					}
+					class Person {
+					    public static void main(String[] args) {
+					        System.out.println(Boy.getvalue());
+					    }
+					
+					}	
+			. static block : These are the block of code get executes way before the class is loaded into the memory.
+					static {
+						  System.out.println("hello from the static block");
+						}
+
+			. static nested classes : These are the nested static class which is under outer class used to access the outer class static members.
+				package com.orielly.jpapersistence.jpamicroservice.entity;
+
+						public class Vehicle {
+						    public static int i = 10;
+						    
+						    public Vehicle(){
+						        this.i = 100;
+						    }
+						    public static class FourWheeler{
+						        public static void increaseValue(){
+						            System.out.println(Vehicle.i);
+						        }
+						    }
+						
+						    public static void main(String[] args) {
+						        Vehicle v = new Vehicle();
+						        System.out.println(i);
+						    }
+						}
+
+
+
+
 		- transient : transient static int i = 10 ;  its used for variables to be included as part of the serialized string or value used for transmitting data to other system 
 		- volatile : volatile int i =0 ; to make the variable thread safe. This can be used in case of the multithreading process.
-		
-	Below modifier is used only for local variables & instance variables. : 
-		- final keyword : final int i = 10 . this is telling the compiler the final value for i is 10 and no one can chnge the value for i later . if you are writting instance variable with final keyword you have to initialize it or else compile issue will be ther e.
+		- final keyword : 
+			Three types of usages are there : It usually allow you to impose immutability to the members of the class.
+			. Final variable  : If it is applied to a variable means that the value of that variable can not be changed after it got initialised.
+				public final int i = 0;
+			. Final Method : if the final keyword is used with the method then the method itself can not be overridden by the sub class extending it.
+				public final int get(){ // this method couldn't get override by the subclass methods.
+				} 
+			. Final Class  : if the class is final it means the class will be forbidden to get extend  into the subclass. It means it will not allow it to be part of inheritance.
+				public final class A{ // will not be allowed to be extended.
+
+				}
 		
 11. Operators in java : 
 
@@ -236,12 +301,22 @@ So jab bhi ham string concatination and substring krte hai usme original string 
 		++ and -- : always try to use it in suffix like : ++x or --x , if  you want the value incremented assinged it to x immediatley 
 			x++ and x-- will increament and decrement the values but will be assigend to the variable on next set of code lines.
 		
-	- below loc will give same results  : 
-		System.out.println(--x1);
+	- below loc will give same results  :  isme value pehle hi increment/decrement hojati hai  
+	System.out.println(--x1);
         System.out.println(x1);
 		
-	- below loc will give diffe results : 
-		System.out.println(x1--);
+	- below loc will give diffe results : prefix mai value baad mai increment/decrement hotti hai . For loop ka example dekho 
+			fo(int i = 0 ; i <10 ; i++){
+				Sout(i);
+				}
+			pehle iteration mai value print hoggi 0 and then 1  , 2  , 3 .......
+
+			fo(int i = 0 ; i <10 ; ++i){
+				Sout(i);
+				}
+			pehle iteration mai value print hoggi 1 and then  , 2  , 3 .......
+			
+	System.out.println(x1--);
         System.out.println(x1);
 		
 	- conditional operators :  example 
@@ -452,6 +527,7 @@ Lambda expressions were introduced in Java 8 as a way to provide a concise synta
 			
 			2. Static blocks : which will be run at the verry first step , sbse pehle run hogga 
 			3. Static methods , will be called using the class name and not by creating a clas instance. Multiple static blocks are executed sequentially.
+			4. Static innert nested class : which is used to call and access the static member of outer class.
 			Important  : STATIc MEMBERS CAN BE CALLED BY THE STATIC MEMBER ONLY (MEMBSR CAN BE ANYTHING , CLASS , FUNCTION , VARIABLE ETC )
 20. Inheritance : 			
 
@@ -887,7 +963,7 @@ Question : major changes took place while migrating from  java 7 to java 8
 Its an annonymous functions 
 Important point : Lambdafunctions are moslty used to provide defiintions to the functional interface(Single abstract method interfaces SAM) (interfaces which contains only exact one abstract fuction ) and then using the interface object to call the overriden fucntion to use that.
 syntax : ()					-> 					{}       
-		 fn pramater 	   linked operator     fn body 
+		 fn pramater 	   lambda operator     fn body 
 These are equivalent to the functions without function name
 These are the anonymus funtions 
 These expressions have all three features that a normal functions has 
@@ -1104,11 +1180,11 @@ QQQ. Stream Api
 					.collect(Collectors.toMap(Students::getName,Students::getActivities));------------------------------------> will create Map<string , List<Activities>>
 					
 							Stream of Students 
-				|Student |Student |Student |Student |Student |Student |		 ------- Stream()
+				|Student |Student |Student |Student |Student |Student |		 ------- Stream<Student>
 				
-				|Student |Student |Student |Student |Student |		 ------- filter()
+				|Student |Student |Student |Student |Student |		 ------- filter() ---- Stream<Student>
 				
-				     |Student |Student |Student |	 ------- filter()
+				     |Student |Student |Student |	 ------- filter() --------------- Stream<Student>
 					 
 					 
 		Stream is nothing but a sequence of values or elements okay ! it doesn't hold data. And can be processed only once.
@@ -1116,7 +1192,7 @@ QQQ. Stream Api
 Q. Functions of Collectors interface and Comparator interface passed as a paramter to the collect() terminal fn of stream api ?
 Ans : list.stream().collect( ? )
 Collector.toSet()
-Collector.toMap(key,value)
+Collector.toMap(key,value) ------------- > Key ek dekke , value agar nhi dette to List<Object> aega it will create Map<key,List<Object>>. Agar value dogge using the Object::getMethod it will create Map<key,value>
 Collector.toList()
 
 ---------------All these functions need one parameter like Student::getNoteBooks which is an integer. Compile issue if no input -----------------------------
@@ -1128,7 +1204,7 @@ Collector.summingDouble()
 
 Collector.groupingBy(key,value or the fields which willbe the key or give custom keys.) . give map wiht key and values as list of values/object
 Collector.joining('delimiter','Start char','end char')
-Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object
+Collector.partitionBy(Parttion as true and false.)  give map wiht key and values as list of values/object. Ask for a predicate partitioning the collections.
 Collectors.counting() -- will give you count of the elements.
 Collector.MinBy(Comparator.comparing(Student::getMarks))----------- this will give a min marks across the students
 Collector.MaxBy(Comparator.comparing(Student::getMarks))----------- this will give a max marks across the students
@@ -1190,12 +1266,12 @@ char ch = 'a'
 2. Characters : its a non premitive datatypes and are also known as wrapper classes to wrap the primitive data types which allow use of other utility functions provided by the wrapper classes.
 char ch = 'a';
 Character ch = new Character(ch);
-3. CharSequence chs is the interface which is implemented by the classes like , String , Stringbuilder and stringbuffer to implement various operation on sequence of characters . Its can contain a single to a sequence of characters.
+3. CharSequence chs is the interface which is implemented by the classes like , String , Stringbuilder and Stringbuffer to implement various operation on sequence of characters . Its can contain a single to a sequence of characters.
 
 CharSequence ch  = "a";
 CharSequence chs = "radar";
 
-chs.Charat(index)
+chs.charAt(index)
 chs.subSequence(1,3) --- like substring
 chs.length()---> get the length
 					
