@@ -240,6 +240,10 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 	@Component which we use for service classes to manipulate the data coming from bean , this class can be autowired as it is annotated as a @component or a @Service
 	@ResponseStatus ----------> this annotation is used to annotate the class to throw the httpstatus code for an action.like : @ResponseStatus(HttpStatus.NOT_FOUND)
 	@EnableConfigServer ------> this annotation is used to config the server to connect with the git hub or any version where we can centralised the config values.
+	@EnableEurekaServer ----> this annotatin is used to enable the naming server which is used for registering application and help in maintaining the load balancing using 	ribbon.  example : A ----> calling -----> B 
+				if 5 instances for B are there then we can use ribbon(for load balancing) + feign(to simplify the client web call)
+				Then jab naming server up aega . Other services one by one up aake naming server pr register hojaengi and then ribbon jab load balancing krega 
+				pehle naming server se puchega and then request send krdegga 
 	@Bean -------------------> is a method level annotation and should not be used in any class. And also this annotation tells that it returns a bean that is to be managed by the spring container and registered with spring application context or BeanFactory. This method returns a bean of the Customer.
 	Example : 
 		- MyConfiguration.java annotated as @configuration which tells the spring container that it contains beans which needs to be part of bean list required for autowiring
@@ -313,11 +317,15 @@ The @Controller is a common annotation which is used to mark a class as Spring M
 			}
 
 	@EnableEurekaServer - : The @EnableEurekaServer annotation is used to make your Spring Boot application acts as a Eureka Serve
-	@EnableFeignClient ---> Used to create a client required for web socket connection, so that a call to external api can be invoked.
+	@EnableFeignClient ---> Used to create a client required for web socket connection, so that a call to external api can be invoked. This annotation will be on a class acting as a proxy class and will contains a similar method calling other web api or service .
+		Example : if A  ---- calling ---> B 
+			 So ek proxy class A service project mai hoggi annotated as @EnableFeignClient and usme ek function hogga calling B on a url.
+			 fir above function use hogga in A controller class calling other service.
+			
 	@Getter --------> It is the annotation provided by lombok spring boot to generate getters of the attaributes
 	@Setter --------> It is the annotation provided by lombok spring boot to generate setters of the attaributes
 	@AllArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with all attributes in input parameters.
-	@NoArsgConstructor --------> It is the annotation provided by lombok spring boot to initialize the attributes with default values.s
+	@NoArgsConstructor --------> It is the annotation provided by lombok spring boot to initialize the attributes with default values.s
 	@RequiredArgsConstructor --------> It is the annotation provided by lombok spring boot to generate constructor with only required attribute will be input paramters
 	@Data --------------------------->@Data is equivalent to @Getter + @Setter + @RequiredArgsConstructor + @ToString + @EqualsAndHashCode
 	@Value -------------------------->@Value is equivalent to @Getter + @FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE) + @AllArgsConstructor + @ToString + @EqualsAndHashCode
