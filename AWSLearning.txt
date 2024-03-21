@@ -296,11 +296,10 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 				
 	a. : On demand instances : 
 		If you just need to have EC2 Instances running for a short duration of time, consider choosing either On-Demand or Spot Instances.
-		On-Demand Instances let you pay for compute capacity by the hour or second (minimum of 60 seconds) with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.		
-		
-		*With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances.
+		On-Demand Instances let you pay for compute capacity by the hour or second (minimum of 60 seconds) with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.
 
 	b. spot instance : 
+		-*With Spot Instances, you can't shut down the Instance. You can only reboot or terminate the instance. Hence you would need to opt for On-demand instances. You are willing to pay maximum price on spot . The price fluctuates as per the demands and if the price goes beyond the maximum amount you paid. Then the instance will be terminated or hibernated.
 		-A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price.
 		-Because Spot Instances enable you to request unused EC2 instances at steep discounts, you can lower your Amazon EC2 costs significantly. The hourly price for a Spot Instance is called a Spot price.
 		-here we can get an EC2 component at much lower cost then on-demand pricing.
