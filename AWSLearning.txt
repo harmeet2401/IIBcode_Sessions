@@ -314,6 +314,7 @@ EACH CATEGORIES HAVE ITS OWN TYPES OF INSTANCES .
 	c. 	Reserved instances 
 		- As the name says , you are willing to reserve an instance for a year or so , then only you will get a billing discount.
 		- this is a billing discount feature on the basis of the reservation of instance.
+		- These instances work on regional level. means if you reserved an instance in us-west-1 in west verginia and spun up an instance in another region in eas-asia then the discount will be not be applied on it.
 		- we can pay , partial , entire or no payment at the starting. But obviousely giving an upfront payment will provide a better discount.
 		- Offering classes of instances in reserved category 
 			: standard - here we can change the size of the instance(instance size) with in the term commited .
