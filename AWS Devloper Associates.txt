@@ -17,12 +17,14 @@ meet14764@gmail.com
 Gogi@12345
 
 #2 Creating an IAM user.
-Identity and access management. This will help in managing the access to the specific AWS resources.
-Authentication : Is it the right user.
-Authorization : Means if the user have right authorization access to specific resurces.
-Root user can do anything.
-Now we will create an IAM group named as developer and will create an IAM user and add it to the IAM group .
-Then we will use the newly created IAM user to do the stuff.
+-Provide centraised access , shared access , multifactor authenticatio, identity federation(use creds stored in facebook , gmail , google and active dir) etc.
+-Identity and access management. This will help in managing the access to the specific AWS resources.
+-Authentication : Is it the right user.
+-Authorization : Means if the user have right authorization access to specific resurces.
+-Root user can do anything.
+- Allow to right password rotation policies.
+-Now we will create an IAM group named as developer and will create an IAM user and add it to the IAM group .
+-Then we will use the newly created IAM user to do the stuff.
 
 Steps : To create an IAM group
 1. Search for IAM 
@@ -1014,11 +1016,11 @@ Sign up triggers :
 				.Resource Based Policies : Which are attached with resources directly : 
 					- Only Inline policies are there .
 					
-				4. Roles : Its a secure feature in IAM . Above 3 features were used to privide access to group / users so that they can access the AWS 					Access.NOW AB AGAR HME AWS SERVICE1/web api/third party apps -------------> AWS SERVICE2 COMMUNICATE KRVANA HO TO HME POLICY KO ROLE MAI 				DAALKE AWS SERVICE OF ATTACH KRNA HOGA. ISKE LIYE BS ROLE BNAO BNATE TIME USME POLIYC BNANE KA STEP AEGA ENTER THE POLICY YOU WANT TO 					KEEP IN THE ROLE AND OLLAAAA ROLE CREATED 
-				NOW WE CAN ATTACH THE ROLE TO ANY AWS SERVICE 
+				4. Roles : Its a secure feature in IAM . Above 3 features were used to privide access to group / users so that they can access the AWS 					Access.NOW AB AGAR HME AWS SERVICE1/web api/third party apps -------------> AWS SERVICE2 COMMUNICATE KRVANA HO TO HME POLICY KO ROLE MAI 				DAALKE AWS SERVICE KO ATTACH KRNA HOGA. ISKE LIYE BS ROLE BNAO BNATE TIME USME POLICY BNANE KA STEP AEGA ENTER THE POLICY YOU WANT TO 					KEEP IN THE ROLE AND OLLAAAA ROLE CREATED 
+				NOW WE CAN ATTACH THE ROLE TO ANY AWS SERVICE / USER AND OTHER SERVICES
 
 				EXAMPLE 
-						EC2 (ROLE TO READ S3 BUCKETS) ----------------------> S3
+						EC2/USER/SERVICE(JAVA APPS) (ROLE TO READ S3 BUCKETS) ----------------------> S3
 						 EC2 INSTANCE KE ANDAR SE 
 							DIRECT COMAND 			
 							: aws s3 ls will work 
