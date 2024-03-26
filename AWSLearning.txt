@@ -473,11 +473,16 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		-In this we can also create IAM groups and add that user as part of the group.
 	While attaching the policy , we will get an option to create a permission in dialog box and then from dialog box we can select the service or resource and then the corresponding permission for that resource or service to be given to the newly created user.
 		
-20. AWS command line interface : the CLI tool to interact with the AWS console to do all those things that we did using the management console.
+20. AWS command line interface : 
+			the CLI tool to interact with the AWS console to do all those things that we did using the management console.
 			-download the installerand run it
 			-then use command : aws configure 
+			-Or you can create a user in aws , attach any policy to it and generate the access key for it and use it in configuring the CLI either from your windows machine , EC2 instance , any other VMs etc
 			-then enter the access key ID and secret access key  we downloade using the clouduser 
 			-Then you can run any AWS command to interact with management console.
+		Command : aws configure 
+			  aws configure list
+			  aws s3 ls -----> this will return some s3 bucket in case the user access key you used have policy permission to see / update or create buckets.
 	
 	Authentication : The way AWS ask for the Access key ID and secret access key to allow user to get into the managementconsole is called Authentication 
 	
@@ -941,7 +946,7 @@ Classic example :
 		for example 
 				AWS console ------------->		
 				AWS SDK ----------------->			
-												AWS ACCount --------------> will be recorded in Cloud trail
+				AWS ACCount --------------> will be recorded in Cloud trail
 				AWS CLI ----------------->
 				AWS API ----------------->
 
