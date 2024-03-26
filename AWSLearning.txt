@@ -483,7 +483,11 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		Command : aws configure 
 			  aws configure list
 			  aws s3 ls -----> this will return some s3 bucket in case the user access key you used have policy permission to see / update or create buckets.
-	
+			  aws s3 mb s3://testbucket
+			  touch test.txt
+			  vi test.txt ----> insert something as a text 
+			  aws s3 cp test.txt s3://testbucket  ---> to upload the file
+			  aws s3 ls s3://testbucket ---> will show you the files in the bucket.
 	Authentication : The way AWS ask for the Access key ID and secret access key to allow user to get into the managementconsole is called Authentication 
 	
 	Authorization : Now the user get autheticated and logged in to console , now to acccess any service in AWS the user must be authorized to access it .For that the policies/permission Root user gave to the sub-user will authorize it further.
