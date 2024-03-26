@@ -400,7 +400,7 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 	
 	instance EC2				EBS storage volume   ##
 	-----------					-----------------
-	Host machine1				HOst machine 2
+	Host machine1				Host machine 2
 	-----------					-----------------
 
 
@@ -728,6 +728,11 @@ Common services to all types :
 		: Classic LB - Old verion of lb
 		: Application LB - that works on the application layer
 		: network LB - that works on the network layer. 
+		: Gateway LB : used to load balance the workload for third party virtual appliances . Like appliances purchased from AWS market place etc 
+
+Q. How to find out the orginating request IP address using a load balancer ?
+Ans: using X-Forwarded-For is the http header which contains the originated IP address of the client which tried to access the application in target pool of a load balancer.
+
 38. Autoscaling : 
 			-set the lauch configuration - AMI ID , security group , intance type etc 
 			-Autoscaling group - Will contains the Min , max number of EC2 instances to be maintained.
@@ -750,6 +755,14 @@ NOte : cloud watch service in AWS :  this service is used to store logging data 
 			
 	Using Route 53 : 
 			Client request --->hits a url ----> Route 53 Service --> Hosted Zone in 53 service ---> map the ip ---> make the request reach the destination .
+
+Classic example : 
+
+	-Create an ec2 instance with tomcat installed on it and add some value in its index.html
+	-Then create an application load balancer and a target group(contains the instance created) with one listener rule of routing request to port 80 of target group.
+	-Then go to route 53 and in hosted zone ---> add a record create a map for the application load balancer ip address and check Alias and select the ALB and save it. 
+	-ollaaaa hit the url you added as a record in hosted zone and it will go to ALB and then to the backend Ec2 instance for workload processing.
+
 
 40. Amazon Cloudfront service : AWS Shield is another service which also uses Edage locations.
 	-its a web service that will help is distributing the static or dynamic web data across the globe.
