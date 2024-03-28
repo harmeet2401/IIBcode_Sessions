@@ -725,8 +725,35 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 												| replication happens constantly.
 				app(testing team)-----------------------------------------> DB instance replica 1(us-east-1B/us-east-1b/us-west-1a)
 							using for read purpose
+	Example question : Differenec between AWS backup and DB snapshots?
+		- AWS Backup : This is already there by default (daily-back up policy is there.)
+			       Have a retention period means only 35 days old data can be recoverred.
+			       Have point in time recovery solutions.
+			       Backup is done for both the data and the transaction logs at that moment
+			       Can be used for Disaster recovery.
+				
+		- DB Snapshot : This is snapshot initiated manually by human or person
+				Have a point in time recovery. 
+				Create a backup of data only.
+				No retention period.
+				Is not deleted untill its is deleted manually.
+				Used to back it up at a known state.
 
+	Exmaple question : how the encryption work in DB ?
+			Can be enabled only while creating the RDS.
+			Encryption is done sing KMS aws services.
+			If enable nhi kiya then create a snapshot of the DB at that moment , encrypt it and then create an instance using that snapshot.
+32.1 RDS PROXY : 
+	Its a serverless service in AWS which helps in creating connection pool between the client application and the RDS actual instance.
 
+	Client apps ----------------> RDS Proxy -------------------------> RDS instance.
+
+	It get autoscaled when needed.
+	It detects the failover of the actual rds instace and switch the client requests to the standby RDS instance automatically.
+	It is needed in case apps which open/close the db connection infrequently. Used by apps which have many open connections but idle
+
+	NOTE : ye client app or actual RDS instance ke bheech mai betha hotta hai.
+	
 
 
 33. DynamoDB its a nosql database and  its json schema based just like mongoDB
