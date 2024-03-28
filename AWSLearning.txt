@@ -680,9 +680,9 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 			 Run an ec2 instance linux with t3 micro free tier.
 			 create a new security group ec2-sg.
 			 Add in user data 
-				!#/bin/bash
-				sudo yum update -t
-				sudo yum install mysql 
+				#!/bin/bash  
+				yum update -y
+				yum install mysql -y 
 			Add an inbound rule in rds-sg to allow incoming request from ec2 on port 3326 which is the default port of mysql.
 			Add the security group(ec2-sg) in the inbound rule in the rds-sg inbound section and save.
 	
