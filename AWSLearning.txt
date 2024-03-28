@@ -673,6 +673,21 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 		-its is cluster based architecture.
 		-once you create Aurora db it will create a cluster and Db under  it.
 
+	Example quesion : How to connect from ec2 instance to RDS database ?
+		Answer : Create RDS instance mention the username and password.
+			 Create new security group rds-sg for rds instance while creating the rds instance.
+			 Save it and run it 
+			 Run an ec2 instance linux with t3 micro free tier.
+			 create a new security group ec2-sg.
+			 Add in user data 
+				!#/bin/bash
+				sudo yum update -t
+				sudo yum install mysql 
+			Add an inbound rule in rds-sg to allow incoming request from ec2 on port 3326 which is the default port of mysql.
+			Add the security group(ec2-sg) in the inbound rule in the rds-sg inbound section and save.
+	
+			 
+
 		
 33. DynamoDB its a nosql database and  its json schema based just like mongoDB
 		- its just like the mongoDb service in which the tables are collections  . its a PAAS
