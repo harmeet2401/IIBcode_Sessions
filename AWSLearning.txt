@@ -618,7 +618,16 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 	
 	
 	NOTE : FOR AN ACCESS RELATED , COMMON TECHNIQUE IS THERE IN WHICH WE CREATE THE POLICY AND ATTACH IT TO EITHER THE USER , OR THE RESOURCES TO WHICH THE ACCESS ANDPERMISSION NEED TO BE PROVIDED.
-	
+
+	Example question : How to create a role (contains s3 all permission) and then attach it to ec2 instance so that we can create / update and list the s3 buckets ?
+	Answer : Create and Iam role in IAM section 
+		 In permission tab select the policy with AmazonS3FullAccess and add it to the role.
+		 Save the role.
+		 Then spin up an ec2 instance and while creating in advanced section of ec2 instance attach the role and ollaaaa done.
+		 Connect to the ec2 instance ssh it and then run 
+			aws s3 ls 
+			aws s3 mb s3://mybucket900299
+			aws s3 cp s3://mybucket893993 filename.txt
 	
 30. Amazon Galcier : Service 
 	-low cost storage 
