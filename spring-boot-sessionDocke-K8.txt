@@ -2111,10 +2111,22 @@ steps :
 ---------------------------------images creating using pom for java -----------------
 
 
+-------------------------docker image using pom.xml -------------------------------------
+maven command to build an image using the pom.xml : spring-boot:build-image Dskiptests
+add below snippet under maven plugin 
+
+<configuration>
+<image>inmyrepository/1.0.0.release-version:latest</image>
+<fetchpolicy>Pull_if_notpresent</fetchpolicy>
+</configuration>
+
+
+-------------------------docker image using pom.xml -------------------------------------
+
 -------------------------docker compose -------------------------------------
 docker-compose up 
 
-----------compose file 
+-------------------------docker compose -------------------------------------
 
 Some terms :
 
