@@ -685,10 +685,50 @@ Note : We have EBS (ELASTIC BLOCK STORAGE VOLUME) BELOW ONE IS ANOTHER VOLUME TY
 				yum install mysql -y 
 			Add an inbound rule in rds-sg to allow incoming request from ec2 on port 3326 which is the default port of mysql.
 			Add the security group(ec2-sg) in the inbound rule in the rds-sg inbound section and save.
-	
-			 
+			SSH into the Ec2 instance run command : 
+				mysql -u admin -p -h endpointcopyitfromtheRDSproperties
+				enter the password
+				<mysql> connected and then do what ever you want.
+			 	-- Create table
+					CREATE TABLE employees (
+					    employee_id INT PRIMARY KEY,
+					    first_name VARCHAR(50),
+					    last_name VARCHAR(50),
+					    department VARCHAR(50),
+					    salary DECIMAL(10, 2)
+					);
+					
+					-- Insert data
+					INSERT INTO employees (employee_id, first_name, last_name, department, salary) 
+					VALUES 
+					    (1, 'John', 'Doe', 'Engineering', 60000.00),
+					    (2, 'Jane', 'Smith', 'Marketing', 55000.00),
+					    (3, 'Alice', 'Johnson', 'HR', 50000.00),
+					    (4, 'Bob', 'Williams', 'Finance', 65000.00);
+	Example question : Difference between multi-az and read / write replicas?
+		Multi -az : In multi az a stand by db instance will be present in another AZ and will come up and running in case of disaster recovery.
+			    Its created in the different AZ and will failover  to new instance in another AZ.
 
-		
+			app -----> DB instance 1 (us-east-1a)  ----------------> Back up instance (us-east-1b)
+
+			app------------------->db instance 1 (X down) 
+			  |
+		          |-------------------------------------------------------------Backup instance (us-east-1b) becomes active
+
+		Read replicas : Its a replicated instance of the running instance in another AZ , same AZ or in another AR.
+				Its used for performance and scaling in case needed.
+				The replica can be for read and write purposes both.
+				Used to take the heavy load off from the primary instance. Its not used for failover 
+
+
+				app-------------------------------------------------------> DB Instance 1 (us-east-1a)
+												| replication happens constantly.
+				app(testing team)-----------------------------------------> DB instance replica 1(us-east-1B/us-east-1b/us-west-1a)
+							using for read purpose
+
+
+
+
 33. DynamoDB its a nosql database and  its json schema based just like mongoDB
 		- its just like the mongoDb service in which the tables are collections  . its a PAAS
 		- Works in combination of the collections and documents which is in json . in dynamoDb the table and item combination is there .
